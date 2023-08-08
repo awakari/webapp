@@ -5,6 +5,8 @@ function handleAuthGoogle(response) {
     // Extract the user email from the decoded token
     const userEmail = decodedToken.email;
     // show main content
+    const divLogin = document.getElementById("login");
+    divLogin.style.display = "none";
     const divMain = document.getElementById("main");
     divMain.style.display = "block";
 }

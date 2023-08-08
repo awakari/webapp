@@ -8,5 +8,12 @@ function handleAuthGoogle(response) {
     const divLogin = document.getElementById("login");
     divLogin.style.display = "none";
     const divMain = document.getElementById("main");
-    divMain.style.display = "block";
+    divMain.style.display = "flex";
+}
+
+function logout() {
+    const divLogin = document.getElementById("login");
+    divLogin.style.display = "flex";
+    const divMain = document.getElementById("main");
+    divMain.style.display = "none";
 }

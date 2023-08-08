@@ -48,7 +48,6 @@
 
         <hr class="w-full border-slate-500" style="margin-top: 1rem; margin-bottom: 1rem" />
 
-        <script src="https://accounts.google.com/gsi/client"></script>
         <div id="g_id_onload"
              data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
              data-context="signin"
@@ -56,7 +55,17 @@
              data-callback="handleAuthGoogle"
              data-auto_prompt="false">
         </div>
-        <script src="script.js"></script>
+        <script src="script.js" async defer></script>
+        <script src="https://accounts.google.com/gsi/client"></script>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="filled_black"
+             data-text="continue_with"
+             data-size="large"
+             data-logo_alignment="left"
+             data-width="200">
+        </div>
 
         <p class="text-center mt-3 text-[14px]">By clicking continue, you agree to our
             <a href="/tos.html" class="text-gray-600">Terms of Service</a> and <a href="/privacy.html" class="text-gray-600">Privacy Policy</a>.

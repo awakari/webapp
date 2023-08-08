@@ -1,3 +1,11 @@
+google.accounts.id.initialize({
+    client_id: '131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc.apps.googleusercontent.com',
+    callback: handleAuthGoogle
+});
+const parent = document.getElementById('g_id_onload');
+google.accounts.id.renderButton(parent, { theme: 'filled_black' });
+
+
 function handleAuthGoogle(response) {
     const credential = response.credential;
     // Decode the JWT token

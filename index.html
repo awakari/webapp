@@ -49,7 +49,7 @@
         <hr class="w-full border-slate-500" style="margin-top: 1rem; margin-bottom: 1rem" />
 
         <script src="https://accounts.google.com/gsi/client"></script>
-        <script src="script.js"></script>
+        <script src="script.js" async defer></script>
         <div id="g_id_onload"
              data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
              data-context="signin"
@@ -66,6 +66,17 @@
              data-logo_alignment="left"
              data-width="200">
         </div>
+        <script>
+            function handleAuthGoogle(response) {
+                const credential = response.credential;
+                // Decode the JWT token
+                const decodedToken = jwt_decode(credential);
+                // Extract the user email from the decoded token
+                const userEmail = decodedToken.email;
+                // TODO request to issue a client certificate by the email
+                alert(userEmail)
+            }
+        </script>
         <p class="text-center mt-3 text-[14px]">By clicking continue, you agree to our
             <a href="/tos.html" class="text-gray-600">Terms of Service</a> and <a href="/privacy.html" class="text-gray-600">Privacy Policy</a>.
         </p>

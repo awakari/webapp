@@ -7,13 +7,13 @@ function handleAuthGoogle(response) {
     // show main content
     const divLogin = document.getElementById("login");
     divLogin.style.display = "none";
-    const divMain = document.getElementById("main");
+    const divMain = document.getElementById("subscriptions");
     divMain.style.display = "flex";
 }
 
 function logout() {
     const divLogin = document.getElementById("login");
     divLogin.style.display = "flex";
-    const divMain = document.getElementById("main");
+    const divMain = document.getElementById("subscriptions");
     divMain.style.display = "none";
 }

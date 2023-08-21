@@ -55,40 +55,26 @@
 <div id="subscriptions" class="flex-1 flex flex-col items-center" style="display: flex">
 
     <!-- section body top nav -->
-    <nav aria-label="top bar" class="flex-none flex justify-between h-12 w-[360px]">
-        <!-- top bar left -->
-        <ul aria-label="top bar left" aria-orientation="horizontal" class="flex items-center">
-            <li class="ml-2">
-                <p class="text-lg">Subscriptions</p>
-            </li>
-        </ul>
-        <!-- to bar right  -->
-        <ul aria-label="top bar right" aria-orientation="horizontal" class="px-2 flex items-center">
-            <!-- add buttons -->
-            <li class="h-10 w-10 ml-1">
-                <button title="New Subscription" class="h-10 w-10 rounded-md overflow-hidden border border-indigo-700 shadow-2xl hover:bg-indigo-300 text-indigo-600">
-                    <img class="ml-1 py-1" src="sub-new.svg" />
-                </button>
-            </li>
-            <li class="h-10 w-10 ml-1">
-                <button title="New Message" class="h-10 w-10 rounded-md overflow-hidden border border-teal-700 shadow-2xl hover:bg-teal-300 text-teal-700">
-                    <img class="ml-1 py-2" src="msg-new.svg"/>
-                </button>
-            </li>
-            <li class="h-10 w-10 ml-1">
-                <button type="button" title="Exit" class="h-10 w-10 text-sm focus:outline-none text-gray-500 py-3 px-3 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
-                    <svg class="fill-current w-6 h-6 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
-                    </svg>
-                </button>
-            </li>
-        </ul>
+    <nav class="flex-none justify-between h-8 w-[320px]">
+        <span class="flex space-x-2">
+            <button title="New Subscription" class="h-8 w-40 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700">
+                <p>+ Subscription</p>
+            </button>
+            <button title="New Message" class="h-8 w-32 rounded-md border border-teal-700 shadow-2xl hover:bg-teal-200 text-teal-700">
+                <p>+ Message</p>
+            </button>
+            <button type="button" title="Exit" class="px-2 h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                    <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                </svg>
+            </button>
+        </span>
     </nav>
 
     <!-- main content -->
     <main class="flex-grow flex min-h-0">
-
         <section class="p-2">
+            <p>Subscriptions</p>
             <div class="space-y-2">
                 <div class="p-2 shadow-sm border hover:bg-gray-100">
                     <span class="flex space-x-2">
@@ -98,12 +84,12 @@
                             </span>
                             <span class="flex space-x-2">
                                 <p class="truncate w-[256px]">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Enabled subscription
                                 </p>
                             </span>
                         </span>
                         <span class="flex">
-                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-red-400 h-8 w-8 rounded-md border border-red-400 hover:bg-red-100 flex items-center">
+                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-gray-400 h-8 w-8 rounded-md border border-gray-400 hover:bg-gray-200 flex items-center">
                                 <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
                                     <path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                 </svg>
@@ -119,12 +105,12 @@
                             </span>
                             <span class="flex space-x-2">
                                 <p class="truncate w-[256px] text-slate-500">
-                                    Disabled subscription
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
                             </span>
                         </span>
                         <span class="flex">
-                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-red-400 h-8 w-8 rounded-md border border-red-400 hover:bg-red-100 flex items-center">
+                            <button type="button" title="Delete" class="ml-1 text-sm text-gray-400 h-8 w-8 rounded-md border border-gray-400 hover:bg-gray-200 flex items-center">
                                 <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
                                     <path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                 </svg>
@@ -140,57 +126,31 @@
 <div id="messages" class="flex-1 flex flex-col items-center" style="display: flex">
 
     <!-- section body top nav -->
-    <nav aria-label="top bar" class="flex-none flex justify-between h-12 w-[360px]">
-        <!-- top bar left -->
-        <ul aria-label="top bar left" aria-orientation="horizontal" class="flex items-center">
-            <li class="ml-2">
-                <p class="text-lg">Messages</p>
-            </li>
-        </ul>
-
-        <!-- to bar right  -->
-        <ul aria-label="top bar right" aria-orientation="horizontal" class="px-2 flex items-center">
-            <!-- back button -->
-            <li class="h-10 w-10 ml-1">
-                <button type="button" title="Back to Subscriptions" class="h-10 w-10 text-sm focus:outline-none text-gray-500 py-3 px-3 rounded-md border border-gray-500 hover:bg-gray-100 flex items-center">
-                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
-                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
-                    </svg>
-                </button>
-            </li>
-            <!-- add subscription -->
-            <li class="h-10 w-10 ml-1">
-                <button title="New Subscription" class="h-10 w-10 rounded-md overflow-hidden border border-indigo-700 shadow-2xl hover:bg-indigo-300 text-indigo-600">
-                    <img class="ml-1" src="sub-new.svg" />
-                </button>
-            </li>
-            <!-- edit subscription -->
-            <li class="h-10 w-10 ml-1">
-                <button type="button" title="Edit" class="focus:outline-none text-blue-500 text-sm h-10 w-10 rounded-md border border-blue-500 hover:bg-blue-200 flex items-center">
-                    <img class="ml-1 py-2" src="sub-edit.svg" />
-                </button>
-            </li>
-            <!-- add message -->
-            <li class="h-10 w-10 ml-1">
-                <button title="New Message" class="h-10 w-10 rounded-md overflow-hidden border border-teal-700 shadow-2xl hover:bg-teal-300 text-teal-700">
-                    <img class="ml-1 py-1" src="msg-new.svg"/>
-                </button>
-            </li>
-            <!-- exit -->
-            <li class="h-10 w-10 ml-1">
-                <button type="button" title="Exit" class="h-10 w-10 text-sm focus:outline-none text-gray-500 py-3 px-3 rounded-md border border-gray-500 hover:bg-gray-100 flex items-center">
-                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
-                    </svg>
-                </button>
-            </li>
-        </ul>
+    <nav class="flex-none justify-between h-8 w-[320px]">
+        <span class="flex space-x-2">
+            <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                </svg>
+            </button>
+            <button type="button" title="Edit" class="focus:outline-none text-blue-700 h-8 w-28 rounded-md border border-blue-700 hover:bg-blue-200">
+                <p>Edit...</p>
+            </button>
+            <button title="New Message" class="h-8 w-32 rounded-md border border-teal-700 shadow-2xl hover:bg-teal-200 text-teal-700">
+                <p>+ Message</p>
+            </button>
+            <button type="button" title="Exit" class="px-2 h-8 w-8 text-sm text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                    <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                </svg>
+            </button>
+        </span>
     </nav>
 
     <!-- main content -->
     <main class="flex-grow flex min-h-0">
-
         <section class="p-3">
+            <p>Messages</p>
             <div class="space-y-2">
                 <div class="p-2 shadow-sm border hover:bg-gray-100">
                     <span class="flex space-x-2">
@@ -199,7 +159,7 @@
                                 <p class="font-mono text-xs text-slate-500">547857e3-adfc-48a5-a49e-110cfdedbaab</p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="truncate w-[290px]">
+                                <p class="truncate w-[256px]">
                                     Unread message
                                 </p>
                             </span>
@@ -208,7 +168,7 @@
                             </span>
                         </span>
                         <span class="flex">
-                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-red-400 h-8 w-8 rounded-md border border-red-400 hover:bg-red-100 flex items-center">
+                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-gray-400 h-8 w-8 rounded-md border border-gray-400 hover:bg-gray-200 flex items-center">
                                 <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
                                     <path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                 </svg>
@@ -223,7 +183,7 @@
                                 <p class="font-mono text-xs text-slate-500">547857e3-adfc-48a5-a49e-110cfdedbaab</p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="truncate w-[290px] text-slate-500">
+                                <p class="truncate w-[256px] text-slate-500">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
                             </span>
@@ -231,8 +191,8 @@
                                 <p class="font-mono text-xs text-slate-500">19:39:10, 2023-08-21</p>
                             </span>
                         </span>
-                        <span class="flex right-0">
-                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-red-400 h-8 w-8 rounded-md border border-red-400 hover:bg-red-100 flex items-center">
+                        <span class="flex">
+                            <button type="button" title="Delete" class="ml-1 text-sm focus:outline-none text-gray-400 h-8 w-8 rounded-md border border-gray-400 hover:bg-gray-200 flex items-center">
                                 <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
                                     <path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
                                 </svg>

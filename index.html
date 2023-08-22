@@ -56,26 +56,28 @@
 <div id="subscriptions" class="flex-1 flex flex-col items-center" style="display: flex">
 
     <!-- section body top nav -->
-    <nav class="flex-none justify-between h-8 w-[320px]">
+    <nav class="flex-none justify-between h-10 w-[320px] py-2">
         <span class="flex space-x-2">
-            <button title="New Subscription" class="h-8 w-40 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700">
-                <p>+ Subscription</p>
-            </button>
-            <button title="New Message" class="h-8 w-32 rounded-md border border-teal-700 shadow-2xl hover:bg-teal-200 text-teal-700">
-                <p>+ Message</p>
-            </button>
-            <button type="button" title="Exit" class="px-2 h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
-                <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                    <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
-                </svg>
-            </button>
+            <p class="text-lg"><b>Subscriptions</b></p>
+            <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
+                <button title="New Subscription" class="h-8 w-8 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700 items-center">
+                    <img src="sub-new.svg" alt="New Subscription" class="px-1"/>
+                </button>
+                <button title="New Message" class="h-8 w-8 rounded-md border border-teal-700 shadow-2xl hover:bg-teal-200 text-teal-700 items-center">
+                    <img src="msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
+                </button>
+                <button type="button" title="Exit" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+                </button>
+            </span>
         </span>
     </nav>
 
     <!-- main content -->
     <main class="flex-grow flex min-h-0">
         <section class="p-2">
-            <p>Subscriptions</p>
             <div class="space-y-2">
                 <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
@@ -126,100 +128,137 @@
 
 <hr/>
 <div id="sub_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
-    <p>New Subscription</p>
-    <form>
-        <span class="flex">
-            <table>
-                <tr>
-                    <td><label for="sub_descr">Description</label></td>
-                    <td><input type="text" id="sub_descr" class="border w-full focus:shadow-md outline-none ml-2"/></td>
-                </tr>
-                <tr>
-                    <td><label for="sub_enabl">Enabled</label></td>
-                    <td><input type="checkbox" id="sub_enabl" checked="checked" class="ml-2"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><label for="sub_cond">Condition</label></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <textarea id="sub_cond" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none ml-2">{
-  "not": false,
-  "tc": {
-    "key": "",
-    "term": "Tesla Model S",
-    "exact": false
-  }
-}</textarea>
-                    </td>
-                </tr>
-            </table>
+
+    <!-- section body top nav -->
+    <nav class="flex-none justify-between h-10 w-[320px] py-2">
+        <span class="flex space-x-2">
+            <p class="text-lg"><b>New Subscription</b></p>
+            <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
+                <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                    </svg>
+                </button>
+                <button type="button" title="Exit" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+                </button>
+            </span>
         </span>
-        <span class="flex space-x-32">
-            <button type="reset" title="Cancel" class="h-8 w-24 focus:outline-none text-gray-500 px-6 py-1 rounded-md border border-gray-500 hover:bg-gray-200 flex text-center">
-                <p>Cancel</p>
-            </button>
-            <button type="submit" title="Edit" class="h-8 w-24 focus:outline-none text-green-700 px-6 py-1 rounded-md border border-green-700 hover:bg-green-200 flex text-center">
-                <p>Submit</p>
+    </nav>
+
+    <main>
+    <form class="space-y-2 py-2">
+        <span class="flex space-y-2">
+            <label for="sub_descr" class="flex w-full">
+                Description
+                <input type="text" id="sub_descr" class="border w-full focus:shadow-md outline-none ml-2" />
+            </label>
+        </span>
+        <label for="sub_cond">
+            Condition
+            <textarea id="sub_cond" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none">{
+    "not": false,
+    "tc": {
+        "key": "",
+        "term": "Tesla Model S",
+        "exact": false
+    }
+}</textarea>
+        </label>
+        <span class="flex space-y-2">
+            <label for="sub_enabl">
+                <input type="checkbox" id="sub_enabl" checked="checked"/>
+                Enabled
+            </label>
+        </span>
+        <span class="items-center flex ml-28 py-2">
+            <button type="button" title="Create" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center">
+                <img src="check.svg" class="h-6 w-6 ml-2" alt="Create"/>
+                <p>Create</p>
             </button>
         </span>
     </form>
+    </main>
 </div>
 
 <hr/>
 <div id="msg_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
-    <p>New Message</p>
-    <form>
-        <span class="flex-col">
-            <label for="msg_attrs">Attributes</label>
-            <textarea id="msg_attrs" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none ml-2">{
+    <!-- section body top nav -->
+    <nav class="flex-none justify-between h-10 w-[320px] py-2">
+        <span class="flex space-x-2">
+            <p class="text-lg"><b>New Message</b></p>
+            <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
+                <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                    </svg>
+                </button>
+                <button type="button" title="Exit" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+                </button>
+            </span>
+        </span>
+    </nav>
+
+    <main>
+        <form class="space-y-2 py-2">
+            <label for="msg_attrs">
+                Attributes
+                <textarea id="msg_attrs" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">{
     "subject": {
        "ce_string": "Tesla price"
     }
 }</textarea>
-            <label for="sub_cond">Data</label>
-            <textarea id="msg_text_data" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none ml-2">Tesla model S is now available at lower price</textarea>
-        </span>
-        <span class="flex space-x-32">
-            <button type="reset" title="Cancel" class="h-8 w-24 focus:outline-none text-gray-500 px-6 py-1 rounded-md border border-gray-500 hover:bg-gray-200 flex text-center">
-                <p>Cancel</p>
-            </button>
-            <button type="submit" title="Edit" class="h-8 w-24 focus:outline-none text-green-700 px-6 py-1 rounded-md border border-green-700 hover:bg-green-200 flex text-center">
-                <p>Submit</p>
-            </button>
-        </span>
-    </form>
+            </label>
+            <label for="msg_txt_data">
+                Text
+                <textarea id="msg_txt_data" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">Tesla model S is now available at lower price</textarea>
+            </label>
+            <span class="items-center flex ml-28 py-2">
+                <button type="button" title="Send" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center">
+                    <img src="send.svg" class="h-8 w-8 ml-2" alt="Send"/>
+                    <p>Send</p>
+                </button>
+            </span>
+        </form>
+    </main>
 </div>
 
 <hr/>
 <div id="messages" class="flex-1 flex flex-col items-center" style="display: flex">
 
     <!-- section body top nav -->
-    <nav class="flex-none justify-between h-8 w-[320px]">
+    <nav class="flex-none justify-between h-10 w-[320px] py-2">
         <span class="flex space-x-2">
-            <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
-                <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
-                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
-                </svg>
-            </button>
-            <button type="button" title="Edit" class="focus:outline-none text-blue-700 h-8 w-28 rounded-md border border-blue-700 hover:bg-blue-200">
-                <p>Edit...</p>
-            </button>
-            <button title="New Message" class="h-8 w-32 rounded-md border border-teal-700 shadow-2xl hover:bg-teal-200 text-teal-700">
-                <p>+ Message</p>
-            </button>
-            <button type="button" title="Exit" class="px-2 h-8 w-8 text-sm text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
-                <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                    <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
-                </svg>
-            </button>
+            <p class="text-lg"><b>Subscription Inbox</b></p>
+            <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
+                <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                    </svg>
+                </button>
+                <button title="Edit Subscription" class="h-8 w-8 rounded-md border border-blue-700 shadow-2xl hover:bg-blue-200 text-blue-700 items-center">
+                    <img src="sub-edit.svg" alt="Edit Subscription" class="px-1"/>
+                </button>
+                <button title="New Message" class="h-8 w-8 rounded-md border border-teal-700 shadow-2xl hover:bg-teal-200 text-teal-700 items-center">
+                    <img src="msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
+                </button>
+                <button type="button" title="Exit" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+                </button>
+            </span>
         </span>
     </nav>
 
     <!-- main content -->
     <main class="flex-grow flex min-h-0">
         <section class="p-3">
-            <p>Messages</p>
             <div class="space-y-2">
                 <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">

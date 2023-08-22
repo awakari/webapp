@@ -21,7 +21,7 @@
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="script.js"></script>
 </head>
-<body>
+<body class="bg-gray-100">
 
 <div id="login" class="max-w-[280px] mx-auto" style="display: flex">
     <div class="flex flex-col items-center mt-[10vh]">
@@ -52,6 +52,7 @@
     </div>
 </div>
 
+<hr/>
 <div id="subscriptions" class="flex-1 flex flex-col items-center" style="display: flex">
 
     <!-- section body top nav -->
@@ -76,7 +77,7 @@
         <section class="p-2">
             <p>Subscriptions</p>
             <div class="space-y-2">
-                <div class="p-2 shadow-sm border hover:bg-gray-100">
+                <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
                         <span>
                             <span class="flex space-x-2">
@@ -97,7 +98,7 @@
                         </span>
                     </span>
                 </div>
-                <div class="p-2 shadow-sm border hover:bg-gray-100">
+                <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
                         <span>
                             <span class="flex space-x-2">
@@ -123,6 +124,74 @@
     </main>
 </div>
 
+<hr/>
+<div id="sub_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
+    <p>New Subscription</p>
+    <form>
+        <span class="flex">
+            <table>
+                <tr>
+                    <td><label for="sub_descr">Description</label></td>
+                    <td><input type="text" id="sub_descr" class="border w-full focus:shadow-md outline-none ml-2"/></td>
+                </tr>
+                <tr>
+                    <td><label for="sub_enabl">Enabled</label></td>
+                    <td><input type="checkbox" id="sub_enabl" checked="checked" class="ml-2"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><label for="sub_cond">Condition</label></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="sub_cond" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none ml-2">{
+  "not": false,
+  "tc": {
+    "key": "",
+    "term": "Tesla Model S",
+    "exact": false
+  }
+}</textarea>
+                    </td>
+                </tr>
+            </table>
+        </span>
+        <span class="flex space-x-32">
+            <button type="reset" title="Cancel" class="h-8 w-24 focus:outline-none text-gray-500 px-6 py-1 rounded-md border border-gray-500 hover:bg-gray-200 flex text-center">
+                <p>Cancel</p>
+            </button>
+            <button type="submit" title="Edit" class="h-8 w-24 focus:outline-none text-green-700 px-6 py-1 rounded-md border border-green-700 hover:bg-green-200 flex text-center">
+                <p>Submit</p>
+            </button>
+        </span>
+    </form>
+</div>
+
+<hr/>
+<div id="msg_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
+    <p>New Message</p>
+    <form>
+        <span class="flex-col">
+            <label for="msg_attrs">Attributes</label>
+            <textarea id="msg_attrs" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none ml-2">{
+    "subject": {
+       "ce_string": "Tesla price"
+    }
+}</textarea>
+            <label for="sub_cond">Data</label>
+            <textarea id="msg_text_data" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none ml-2">Tesla model S is now available at lower price</textarea>
+        </span>
+        <span class="flex space-x-32">
+            <button type="reset" title="Cancel" class="h-8 w-24 focus:outline-none text-gray-500 px-6 py-1 rounded-md border border-gray-500 hover:bg-gray-200 flex text-center">
+                <p>Cancel</p>
+            </button>
+            <button type="submit" title="Edit" class="h-8 w-24 focus:outline-none text-green-700 px-6 py-1 rounded-md border border-green-700 hover:bg-green-200 flex text-center">
+                <p>Submit</p>
+            </button>
+        </span>
+    </form>
+</div>
+
+<hr/>
 <div id="messages" class="flex-1 flex flex-col items-center" style="display: flex">
 
     <!-- section body top nav -->
@@ -152,7 +221,7 @@
         <section class="p-3">
             <p>Messages</p>
             <div class="space-y-2">
-                <div class="p-2 shadow-sm border hover:bg-gray-100">
+                <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
                         <span>
                             <span class="flex space-x-2">
@@ -176,7 +245,7 @@
                         </span>
                     </span>
                 </div>
-                <div class="p-2 shadow-sm border hover:bg-gray-100">
+                <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
                         <span>
                             <span class="flex space-x-2">

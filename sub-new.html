@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0ed3cf">
+    <meta name="msapplication-TileColor" content="#0ed3cf">
+    <meta name="theme-color" content="#0ed3ff">
+
+    <title>Awakari Web</title>
+
+    <link href="tailwind.output.css" rel="stylesheet">
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
+    <script src="script.js"></script>
+</head>
+<body class="bg-gray-100">
+
+<div id="sub_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
+
+    <!-- section body top nav -->
+    <nav class="flex-none justify-between h-10 w-[320px] py-2">
+        <span class="flex space-x-2">
+            <p class="text-lg"><b>New Subscription</b></p>
+            <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
+                <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                    </svg>
+                </button>
+                <button type="button" title="Exit" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
+                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+                </button>
+            </span>
+        </span>
+    </nav>
+
+    <main>
+    <form class="space-y-2 py-2">
+        <span class="flex">
+            <label for="sub_descr" class="flex w-full">
+                Description
+                <input type="text" id="sub_descr" class="border w-full focus:shadow-md outline-none ml-2" />
+            </label>
+        </span>
+        <span class="flex" style="padding-bottom: 0.5rem">
+            <label for="sub_enabl">
+                Enabled
+                <input type="checkbox" id="sub_enabl" checked="checked" class="ml-7" style="accent-color: dimgrey"/>
+            </label>
+        </span>
+        <span>
+            <label for="sub_cond">
+                Condition
+                <textarea id="sub_cond" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none">{
+    "not": false,
+    "tc": {
+        "key": "",
+        "term": "Tesla Model S",
+        "exact": false
+    }
+}</textarea>
+            </label>
+        </span>
+        <span class="items-center flex ml-28 py-2">
+            <button type="button" title="Submit" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center">
+                <p class="ml-5">Submit</p>
+            </button>
+        </span>
+    </form>
+    </main>
+</div>
+
+</body>
+</html>

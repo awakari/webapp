@@ -2,7 +2,7 @@ ingress:
   hosts:
     - host: demo.awakari.cloud
       paths:
-        - path: /web
+        - path: /web(/|$)(.*)
           pathType: ImplementationSpecific
   tls:
     - secretName: secret-api-tls-server

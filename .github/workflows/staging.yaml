@@ -64,5 +64,5 @@ jobs:
       - name: Helm Upgrade
         run: |
           helm upgrade --install ${COMPONENT} helm/package/${COMPONENT}-0.0.0.tgz \
-            --values helm/api/values-demo-0.yaml \
+            --values helm/webapp/values-demo-0.yaml \
             --set podAnnotations.commit=$(git rev-parse --short HEAD)

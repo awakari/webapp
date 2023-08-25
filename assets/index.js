@@ -6,10 +6,10 @@ function handleAuthGoogle(response) {
     const userEmail = decodedToken.email;
     sessionStorage.setItem("userEmail", userEmail)
     // go to subscriptions list
-    window.location.assign("/subs.html")
+    window.location.assign("/web/subs.html")
 }
 
 function logout() {
     sessionStorage.removeItem("userEmail")
-    window.location.assign("/")
+    window.location.assign("/web")
 }

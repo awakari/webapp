@@ -6,7 +6,7 @@ const templateSub = (sub) => `
                                 <p class="font-mono text-xs text-slate-500">${sub.id}</p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="truncate w-[256px] ">
+                                <p class="truncate w-[256px] ${sub.data.enabled ? "" : "text-slate-500"}">
                                     ${sub.data.description}
                                 </p>
                             </span>

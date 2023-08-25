@@ -51,26 +51,28 @@ function loadSubs() {
 }
 
 function deleteSub(id) {
-    let userEmail = sessionStorage.getItem("userEmail")
-    let optsReq = {
-        method: "DELETE",
-        headers: {
-            "X-Awakari-User-Id": userEmail,
-        },
-        cache: "default",
+    if (confirm(`Confirm delete subscription ${id}?`)) {
+        let userEmail = sessionStorage.getItem("userEmail")
+        let optsReq = {
+            method: "DELETE",
+            headers: {
+                "X-Awakari-User-Id": userEmail,
+            },
+            cache: "default",
+        }
+        fetch(`/v1/subscriptions/${id}`, optsReq)
+            .then(resp => {
+                if (!resp.ok) {
+                    throw new Error(`Request failed with status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                alert("Deleted subscription: " + data.id)
+                window.location.assign("/web/subs.html")
+            })
+            .catch(err => {
+                alert(err)
+            })
     }
-    fetch(`/v1/subscriptions/${id}`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            alert("Deleted subscription: " + data.id)
-            window.location.assign("/web/subs.html")
-        })
-        .catch(err => {
-            alert(err)
-        })
 }

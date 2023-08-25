@@ -1,5 +1,5 @@
 const templateSub = (sub) => `
-                <div class="p-2 shadow-sm border hover:bg-white">
+                <div class="p-2 shadow-sm border hover:bg-white hower:cursor-pointer">
                     <span class="flex space-x-2">
                         <span>
                             <span class="flex space-x-2">

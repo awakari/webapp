@@ -46,6 +46,6 @@ function loadSubs() {
             }
         })
         .catch(err => {
-            console.error("Error: ", err)
+            alert(err)
         })
 }

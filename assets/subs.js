@@ -39,9 +39,10 @@ function loadSubs() {
             return resp.json();
         })
         .then(data => {
-            let listHtml = document.getElementById("subs_list").innerHTML
+            let listHtml = document.getElementById("subs_list")
+            listHtml.innerHTML = ""
             for (const sub of data) {
-                listHtml += templateSub(sub)
+                listHtml.innerHTML += templateSub(sub)
             }
         })
         .catch(err => {

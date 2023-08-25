@@ -10,6 +10,8 @@ function handleAuthGoogle(response) {
 }
 
 function logout() {
-    sessionStorage.removeItem("userEmail")
-    window.location.assign("/web")
+    if (confirm("Confirm exit?")) {
+        sessionStorage.removeItem("userEmail")
+        window.location.assign("/web")
+    }
 }

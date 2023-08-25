@@ -5,7 +5,6 @@ function createSub() {
         enabled: document.getElementById("sub_enabl").checked,
         cond: JSON.parse(document.getElementById("sub_cond").value),
     }
-    console.log(payload)
     let optsReq = {
         method: "POST",
         headers: {

@@ -42,6 +42,7 @@ function loadSubs() {
             let listHtml = document.getElementById("subs_list")
             listHtml.innerHTML = ""
             for (const sub of data) {
+                console.log(sub.data.enabled)
                 listHtml.innerHTML += templateSub(sub)
             }
         })

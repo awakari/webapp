@@ -17,7 +17,8 @@ function createSub() {
     fetch("/v1/subscriptions", optsReq)
         .then(resp => {
             if (!resp.ok) {
-                return resp.text().then(errMsg => throw new Error(`Request failed ${resp.status}/${errMsg}`));
+                resp.text().then(errMsg => console.error(errMsg))
+                return throw new Error(`Request failed ${resp.status}`);
             }
             return resp.json();
         })

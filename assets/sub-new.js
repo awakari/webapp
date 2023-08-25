@@ -11,8 +11,8 @@ function createSub() {
         headers: {
             "X-Awakari-User-Id": userEmail,
             "Content-Type": "application/json",
-            body: JSON.stringify(payload)
         },
+        body: JSON.stringify(payload)
     }
     fetch("/v1/subscriptions", optsReq)
         .then(resp => {

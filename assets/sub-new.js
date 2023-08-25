@@ -18,7 +18,7 @@ function createSub() {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))
-                return throw new Error(`Request failed ${resp.status}`);
+                throw new Error(`Request failed ${resp.status}`);
             }
             return resp.json();
         })

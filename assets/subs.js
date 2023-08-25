@@ -6,7 +6,7 @@ const templateSub = (sub) => `
                                 <p class="font-mono text-xs text-slate-500">${sub.id}</p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="truncate w-[256px] ${sub.data.enabled ? "" : "text-slate-500"}">
+                                <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">
                                     ${sub.data.description}
                                 </p>
                             </span>
@@ -42,7 +42,6 @@ function loadSubs() {
             let listHtml = document.getElementById("subs_list")
             listHtml.innerHTML = ""
             for (const sub of data) {
-                console.log(sub.data.enabled)
                 listHtml.innerHTML += templateSub(sub)
             }
         })

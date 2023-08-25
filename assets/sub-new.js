@@ -22,7 +22,7 @@ function createSub() {
             return resp.json();
         })
         .then(data => {
-            alert("Created subscription id: " + data.id)
+            alert("Created subscription: " + data.id)
             window.location.assign("/web/subs.html")
         })
         .catch(err => {

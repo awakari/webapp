@@ -1,13 +1,13 @@
 const templateSub = (sub) => `
-                <div class="p-2 shadow-sm border hover:bg-white hower:cursor-pointer">
+                <div class="p-2 shadow-sm border hover:bg-white hover:cursor-pointer" onclick="loadInbox('${sub}')">
                     <span class="flex space-x-2">
                         <span>
                             <span class="flex space-x-2">
                                 <p class="font-mono text-xs text-slate-500">${sub.id}</p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="truncate w-[256px]">
-                                    ${JSON.stringify(sub.data)}
+                                <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">
+                                    ${sub.data.description}
                                 </p>
                             </span>
                         </span>
@@ -39,20 +39,20 @@ function loadSubs() {
             return resp.json();
         })
         .then(data => {
-            let listHtml = document.getElementById("subs_list")
-            listHtml.innerHTML = ""
+            let listHtml = document.getElementById("subs_list");
+            listHtml.innerHTML = "";
             for (const sub of data) {
-                listHtml.innerHTML += templateSub(sub)
+                listHtml.innerHTML += templateSub(sub);
             }
         })
         .catch(err => {
-            alert(err)
+            alert(err);
         })
 }
 
 function deleteSub(id) {
     if (confirm(`Confirm delete subscription ${id}?`)) {
-        let userEmail = sessionStorage.getItem("userEmail")
+        let userEmail = sessionStorage.getItem("userEmail");
         let optsReq = {
             method: "DELETE",
             headers: {
@@ -67,12 +67,16 @@ function deleteSub(id) {
                 }
                 return resp.json();
             })
-            .then(data => {
-                alert("Deleted subscription: " + data.id)
-                window.location.assign("/web/subs.html")
+            .then(_ => {
+                alert(`Deleted subscription ${id}`);
+                window.location.assign("/web/subs.html");
             })
             .catch(err => {
-                alert(err)
+                alert(err);
             })
     }
+}
+
+function loadInbox(id) {
+    window.location.assign(`/web/inbox.html?id=${id}`);
 }

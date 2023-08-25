@@ -20,8 +20,9 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="/web/script.js"></script>
+    <script src="/web/inbox.js"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100" onload="loadInbox()">
 
 <div id="messages" class="flex-1 flex flex-col items-center" style="display: flex">
 

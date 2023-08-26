@@ -20,8 +20,9 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="/web/index.js"></script>
+    <script src="/web/msg-new.js"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100" onload="genNewMsgAttrs()">
 
 <div id="msg_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
     <!-- section body top nav -->
@@ -29,11 +30,6 @@
         <span class="flex space-x-2">
             <p class="text-lg"><b>New Message</b></p>
             <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
-                <button type="button" title="Back to Subscriptions" class="h-8 w-8 text-sm focus:outline-none text-gray-500 py-2 px-2 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
-                    <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
-                        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
-                    </svg>
-                </button>
                 <button type="button" title="Exit" onclick="logout()" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
                     <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                         <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
@@ -45,6 +41,14 @@
 
     <main>
         <form class="space-y-2 py-2">
+            <label for="msg_id">
+                Id
+                <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700"/>
+            </label>
+            <label for="msg_ts">
+                Timestamp
+                <input type="text" id="msg_ts" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700"/>
+            </label>
             <label for="msg_attrs">
                 Attributes
                 <textarea id="msg_attrs" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">{

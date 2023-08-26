@@ -1,8 +1,8 @@
 const templateSubEditForm = sub => `
         <span class="flex">
-            <label for="sub_descr" class="flex w-full">
+            <label for="sub_id" class="flex w-full">
                 Id
-                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700" />
+                <input type="text" id="sub_id" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700" />
             </label>
         </span>
         <span class="flex">

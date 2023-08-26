@@ -1,26 +1,26 @@
 const templateSubEditForm = sub => `
         <span class="flex">
             <label for="sub_descr" class="flex w-full">
-                ${sub.id}
-                <input type="text" disabled="disabled" class="border w-full focus:shadow-md outline-none ml-2" />
+                Id
+                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-2" />
             </label>
         </span>
         <span class="flex">
             <label for="sub_descr" class="flex w-full">
-                ${sub.description}
-                <input type="text" id="sub_descr" class="border w-full focus:shadow-md outline-none ml-2" />
+                Description
+                <input type="text" id="sub_descr" value="${sub.description}" class="border w-full focus:shadow-md outline-none ml-2" />
             </label>
         </span>
         <span class="flex" style="padding-bottom: 0.5rem">
             <label for="sub_enabl">
-                ${sub.enabled}
-                <input type="checkbox" id="sub_enabl" checked="checked" class="ml-7" style="accent-color: dimgrey"/>
+                Enabled
+                <input type="checkbox" id="sub_enabl" checked=${sub.hasOwnProperty("enabled") && sub.enabled ? "checked" : "none"} class="ml-7" style="accent-color: dimgrey"/>
             </label>
         </span>
         <span>
             <label for="sub_cond">
                 Condition
-                <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none">${sub.cond}</textarea>
+                <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none">${JSON.stringify(sub.cond)}</textarea>
             </label>
         </span>
         <span class="items-center flex ml-28 py-2">
@@ -49,6 +49,8 @@ function loadUpdateSubForm() {
             return resp.json();
         })
         .then(data => {
+            data.id = subId
+            console.log(data)
             let form = document.getElementById("sub_edit_form");
             form.innerHTML = "";
             form.innerHTML += templateSubEditForm(data);

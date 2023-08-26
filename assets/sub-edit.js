@@ -2,7 +2,7 @@ const templateSubEditForm = sub => `
         <span class="flex">
             <label for="sub_descr" class="flex w-full">
                 Id
-                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-2 font-mono text-sm" />
+                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-2 font-mono text-xs" />
             </label>
         </span>
         <span class="flex">

@@ -14,7 +14,7 @@ const templateSubEditForm = sub => `
         <span class="flex" style="padding-bottom: 0.5rem">
             <label for="sub_enabl">
                 Enabled
-                <input type="checkbox" id="sub_enabl" checked=${sub.hasOwnProperty("enabled") && sub.enabled ? "checked" : "none"} class="ml-7" style="accent-color: dimgrey"/>
+                <input type="checkbox" id="sub_enabl" checked=${sub.hasOwnProperty("enabled") && sub.enabled ? "checked" : "unchecked"} class="ml-7" style="accent-color: dimgrey"/>
             </label>
         </span>
         <span>

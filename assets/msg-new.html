@@ -41,18 +41,10 @@
 
     <main>
         <form class="space-y-2 py-2">
-            <span class="flex">
-                <label for="msg_id" class="flex w-full">
-                    Id
-                    <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700"/>
-                </label>
-            </span>
-            <span class="flex">
-                <label for="msg_ts" class="flex w-full">
-                    Timestamp
-                    <input type="text" id="msg_ts" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700"/>
-                </label>
-            </span>
+            <label for="msg_txt_data">
+                Text
+                <textarea id="msg_txt_data" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">Tesla model S is now available at lower price</textarea>
+            </label>
             <label for="msg_attrs">
                 Attributes
                 <textarea id="msg_attrs" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">{
@@ -61,12 +53,20 @@
     }
 }</textarea>
             </label>
-            <label for="msg_txt_data">
-                Text
-                <textarea id="msg_txt_data" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">Tesla model S is now available at lower price</textarea>
-            </label>
+            <span class="flex">
+                <label for="msg_ts" class="flex w-full">
+                    Timestamp
+                    <input type="text" id="msg_ts" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700"/>
+                </label>
+            </span>
+            <span class="flex">
+                <label for="msg_id" class="flex w-full">
+                    Id
+                    <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700"/>
+                </label>
+            </span>
             <span class="items-center flex ml-28 py-2">
-                <button type="button" title="Submit" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center">
+                <button type="button" title="Submit" onclick="submitMsg()" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center">
                     <p class="ml-5">Submit</p>
                 </button>
             </span>

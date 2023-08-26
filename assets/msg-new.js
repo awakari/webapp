@@ -9,3 +9,8 @@ function genNewMsgAttrs() {
     document.getElementById("msg_id").value = uuidv4()
     document.getElementById("msg_ts").value = new Date().toISOString()
 }
+
+function submitMsg() {
+    let userEmail = sessionStorage.getItem("userEmail")
+    // TODO
+}

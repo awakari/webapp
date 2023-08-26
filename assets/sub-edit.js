@@ -1,11 +1,5 @@
 const templateSubEditForm = sub => `
         <span class="flex">
-            <label for="sub_id" class="flex w-full">
-                Id
-                <input type="text" id="sub_id" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700" />
-            </label>
-        </span>
-        <span class="flex">
             <label for="sub_descr" class="flex w-full">
                 Description
                 <input type="text" id="sub_descr" value="${sub.description}" class="border w-full focus:shadow-md outline-none ml-2" />
@@ -21,6 +15,12 @@ const templateSubEditForm = sub => `
             <label for="sub_cond">
                 Condition
                 <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none text-slate-700">${JSON.stringify(sub.cond)}</textarea>
+            </label>
+        </span>
+        <span class="flex">
+            <label for="sub_id" class="flex w-full">
+                Id
+                <input type="text" id="sub_id" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700" />
             </label>
         </span>
         <span class="items-center flex ml-28 py-2">

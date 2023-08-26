@@ -2,7 +2,7 @@ const templateSubEditForm = sub => `
         <span class="flex">
             <label for="sub_descr" class="flex w-full">
                 Id
-                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-2" />
+                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-2 font-mono text-sm" />
             </label>
         </span>
         <span class="flex">
@@ -75,7 +75,7 @@ function updateSub(subId) {
         },
         body: JSON.stringify(payload)
     }
-    fetch("/v1/subscriptions", optsReq)
+    fetch(`/v1/subscriptions/${subId}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))

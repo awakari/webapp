@@ -50,7 +50,6 @@ function loadUpdateSubForm() {
         })
         .then(data => {
             data.id = subId
-            console.log(data)
             let form = document.getElementById("sub_edit_form");
             form.innerHTML = "";
             form.innerHTML += templateSubEditForm(data);
@@ -84,7 +83,7 @@ function updateSub(subId) {
             return resp.json();
         })
         .then(data => {
-            alert("Updated subscription: " + data.id)
+            alert(`Updated subscription: ${subId}`)
             window.location.assign("/web/subs.html")
         })
         .catch(err => {

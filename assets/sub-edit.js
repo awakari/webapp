@@ -51,7 +51,7 @@ function loadUpdateSubForm() {
         .then(data => {
             let form = document.getElementById("sub_edit_form");
             form.innerHTML = "";
-            form.innerHTML += templateSubEditForm(sub);
+            form.innerHTML += templateSubEditForm(data);
         })
         .catch(err => {
             alert(err);

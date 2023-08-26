@@ -2,7 +2,7 @@ const templateSubEditForm = sub => `
         <span class="flex">
             <label for="sub_descr" class="flex w-full">
                 Id
-                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-2 font-mono text-xs" />
+                <input type="text" disabled="disabled" value="${sub.id}" class="border w-full focus:shadow-md outline-none ml-8 font-mono text-xs text-slate-700" />
             </label>
         </span>
         <span class="flex">
@@ -14,13 +14,13 @@ const templateSubEditForm = sub => `
         <span class="flex" style="padding-bottom: 0.5rem">
             <label for="sub_enabl">
                 Enabled
-                <input type="checkbox" id="sub_enabl" checked=${sub.hasOwnProperty("enabled") && sub.enabled ? "checked" : "unchecked"} class="ml-7" style="accent-color: dimgrey"/>
+                <input type="checkbox" id="sub_enabl" ${sub.hasOwnProperty("enabled") && sub.enabled ? `checked` : ``} class="ml-7" style="accent-color: dimgrey"/>
             </label>
         </span>
         <span>
             <label for="sub_cond">
                 Condition
-                <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none">${JSON.stringify(sub.cond)}</textarea>
+                <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none text-slate-700">${JSON.stringify(sub.cond)}</textarea>
             </label>
         </span>
         <span class="items-center flex ml-28 py-2">

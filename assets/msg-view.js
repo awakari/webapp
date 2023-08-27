@@ -13,3 +13,14 @@ function loadEvent() {
         }
     })
 }
+
+function downloadEvent() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const subId = queryParams.get("subId");
+    const evtsHistory = loadEventsHistory(subId);
+    const evtId = queryParams.get("evtId");
+    evtsHistory.forEach(evt => {
+        if (evt.id === evtId) {
+        }
+    })
+}

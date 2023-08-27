@@ -41,30 +41,18 @@
     </nav>
 
     <main>
-        <table class="w-full">
-            <tr>
-                <td class="text-sm">Id</td>
-                <td id="evt_id" class="text-xs font-mono text-gray-500"></td>
-            </tr>
-            <tr>
-                <td class="text-sm">Source</td>
-                <td id="evt_source" class="text-sm text-sky-600"></td>
-            </tr>
-            <tr>
-                <td class="text-sm">Time</td>
-                <td id="evt_time" class="text-xs font-mono text-gray-500"></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <fieldset id="evt_text_data" class="border"></fieldset>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-xs font-mono text-gray-500">
-                    <fieldset id="evt_ext_attrs" class="border"></fieldset>
-                </td>
-            </tr>
-        </table>
+        <span class="flex-col-2 w-full">
+            <span class="text-sm">Id</span>
+            <span id="evt_id" class="text-xs font-mono text-gray-500"></span>
+            <span class="text-sm">Source</span>
+            <span id="evt_source" class="text-sm text-sky-600"></span>
+            <span class="text-sm">Time</span>
+            <span id="evt_time" class="text-xs font-mono text-gray-500"></span>
+        </span>
+        <span class="flex-col-1 w-full">
+            <fieldset id="evt_text_data" class="border"></fieldset>
+            <fieldset id="evt_ext_attrs" class="border"></fieldset>
+        </span>
     </main>
 </div>
 

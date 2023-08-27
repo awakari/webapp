@@ -1,7 +1,7 @@
 const templateSub = (sub) => `
-                <div class="p-2 shadow-sm border hover:bg-white hover:cursor-pointer" onclick="loadInbox('${sub.id}')">
+                <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
-                        <span>
+                        <span class="hover:cursor-pointer" onclick="loadInbox('${sub.id}')">
                             <span class="flex space-x-2">
                                 <p class="font-mono text-xs text-slate-500">${sub.id}</p>
                             </span>

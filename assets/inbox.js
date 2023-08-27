@@ -27,7 +27,7 @@ const templateInboxEvent = (subId, evt) => `
                             </span>
                             <span class="flex space-x-2">
                                 <p class="truncate w-[256px]">
-                                    ${evt.Data != null && evt.Data.TextData != null ? evt.Data.TextData : ""}
+                                    ${evt.attributes.title != null ? evt.attributes.title.Attr.CeString : (evt.attributes.summary != nil ? evt.attributes.summary.Attr.CeString : (evt.Data != null && evt.Data.TextData != null ? evt.Data.TextData : ""))}
                                 </p>
                             </span>
                             <span class="flex space-x-2">

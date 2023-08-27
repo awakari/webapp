@@ -31,7 +31,7 @@ const templateInboxEvent = evt => `
                                 </p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs text-slate-700">${new Date(evt.attributes.Time.Attr.CeTimestamp.seconds * 1000).toISOString()}</p>
+                                <p class="font-mono text-xs text-slate-700">${new Date(evt.attributes.time.Attr.CeTimestamp.seconds * 1000).toISOString()}</p>
                             </span>
                         </span>
                         <span class="flex">

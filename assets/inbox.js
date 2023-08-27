@@ -4,16 +4,12 @@ const templateInboxNav = subId => `
                 <button type="button" title="Refresh" onclick="loadNewMsgs('${subId}')" class="h-8 w-8 text-sm focus:outline-none text-blue-500 rounded-md border border-blue-500 hover:bg-blue-200 flex items-center">
                     <img src="/web/inbox-reload.svg" alt="Refresh" class="px-1"/>
                 </button>
-                <a href="/web/sub-edit.html?id=${subId}">
-                    <button title="Edit Subscription" class="h-8 w-8 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700 items-center">
-                        <img src="/web/sub-edit.svg" alt="Edit Subscription" class="px-1"/>
-                    </button>
-                </a>
-                <a href="/web/msg-new.html">
-                    <button title="New Message" class="h-8 w-8 rounded-md border border-cyan-700 shadow-2xl hover:bg-cyan-200 text-cyan-700 items-center">
-                        <img src="/web/msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
-                    </button>
-                </a>
+                <button title="Edit Subscription" onclick="window.location.assign('/web/sub-edit.html?id=${subId}')" class="h-8 w-8 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700 items-center">
+                    <img src="/web/sub-edit.svg" alt="Edit Subscription" class="px-1"/>
+                </button>
+                <button title="New Message" onclick="window.location.assign('/web/msg-new.html')" class="h-8 w-8 rounded-md border border-cyan-700 shadow-2xl hover:bg-cyan-200 text-cyan-700 items-center">
+                    <img src="/web/msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
+                </button>
                 <button type="button" title="Exit" onclick="logout()" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
                     <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                         <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
@@ -63,13 +59,18 @@ function loadInboxNav(subId) {
 }
 
 function loadInboxMsgs(subId) {
-    // TODO load from local storage
+    loadOldMsgs(subId);
     loadNewMsgs(subId);
 }
 
+function loadOldMsgs(subId) {
+    let listHtml = document.getElementById("evts_list");
+    listHtml.innerHTML = localStorage.getItem(subId)
+}
+
 function loadNewMsgs(subId) {
-    let userEmail = sessionStorage.getItem("userEmail")
-    let optsReq = {
+    const userEmail = sessionStorage.getItem("userEmail")
+    const optsReq = {
         method: "GET",
         headers: {
             "X-Awakari-User-Id": userEmail,
@@ -85,10 +86,10 @@ function loadNewMsgs(subId) {
         .then(data => {
             if (data != null) {
                 let listHtml = document.getElementById("evts_list");
-                listHtml.innerHTML = "";
                 for (const evt of data) {
                     listHtml.innerHTML += templateInboxEvent(evt);
                 }
+                localStorage.setItem(subId, listHtml.innerHTML)
             }
         })
         .catch(err => {

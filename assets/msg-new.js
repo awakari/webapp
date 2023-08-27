@@ -11,6 +11,37 @@ function genNewMsgAttrs() {
 }
 
 function submitMsg() {
-    let userEmail = sessionStorage.getItem("userEmail")
-    // TODO
+    const userEmail = sessionStorage.getItem("userEmail");
+    const payload = {
+        id: document.getElementById("msg_id").value,
+        specVersion: "1.0",
+        source: "awakari.cloud/web",
+        type: "com.github.awakari.webapp",
+        attributes: JSON.parse(document.getElementById("msg_attrs").value),
+    }
+    payload.attributes["time"] = {
+        ce_timestamp: document.getElementById("msg_ts").value,
+    }
+    const optsReq = {
+        method: "POST",
+        headers: {
+            "X-Awakari-User-Id": userEmail,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    }
+    fetch("/v1/evts", optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg))
+                throw new Error(`Request failed ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(_ => {
+            window.location.assign("/web/subs.html")
+        })
+        .catch(err => {
+            alert(err)
+        })
 }

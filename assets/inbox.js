@@ -31,11 +31,11 @@ const templateInboxEvent = evt => `
                             </span>
                             <span class="flex space-x-2">
                                 <p class="truncate w-[256px]">
-                                    ${evt.text_data}
+                                    ${evt.Data.TextData}
                                 </p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs text-slate-700">${evt.attributes.time}</p>
+                                <p class="font-mono text-xs text-slate-700">${new Date(evt.attributes.Time.Attr.CeTimestamp.seconds * 1000).toISOString()}</p>
                             </span>
                         </span>
                         <span class="flex">
@@ -86,7 +86,6 @@ function loadNewMsgs(subId) {
             let listHtml = document.getElementById("evts_list");
             listHtml.innerHTML = "";
             for (const evt of data) {
-                console.log(evt)
                 listHtml.innerHTML += templateInboxEvent(evt);
             }
         })

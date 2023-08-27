@@ -83,10 +83,12 @@ function loadNewMsgs(subId) {
             return resp.json();
         })
         .then(data => {
-            let listHtml = document.getElementById("evts_list");
-            listHtml.innerHTML = "";
-            for (const evt of data) {
-                listHtml.innerHTML += templateInboxEvent(evt);
+            if (data != null) {
+                let listHtml = document.getElementById("evts_list");
+                listHtml.innerHTML = "";
+                for (const evt of data) {
+                    listHtml.innerHTML += templateInboxEvent(evt);
+                }
             }
         })
         .catch(err => {

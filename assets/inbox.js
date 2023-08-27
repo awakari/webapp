@@ -22,7 +22,7 @@ const templateInboxNav = subId => `
             </span>
 `
 
-const templateInboxMsg = evt => `
+const templateInboxEvent = evt => `
                 <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
                         <span>
@@ -31,7 +31,7 @@ const templateInboxMsg = evt => `
                             </span>
                             <span class="flex space-x-2">
                                 <p class="truncate w-[256px]">
-                                    Unread message
+                                    ${evt.text_data}
                                 </p>
                             </span>
                             <span class="flex space-x-2">
@@ -63,9 +63,34 @@ function loadInboxNav(subId) {
 }
 
 function loadInboxMsgs(subId) {
+    // TODO load from local storage
     loadNewMsgs(subId);
 }
 
 function loadNewMsgs(subId) {
-
+    let userEmail = sessionStorage.getItem("userEmail")
+    let optsReq = {
+        method: "GET",
+        headers: {
+            "X-Awakari-User-Id": userEmail,
+        },
+    }
+    fetch(`/v1/events/${subId}`, optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error(`Request failed with status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            let listHtml = document.getElementById("evts_list");
+            listHtml.innerHTML = "";
+            for (const evt of data) {
+                console.log(evt)
+                listHtml.innerHTML += templateInboxEvent(evt);
+            }
+        })
+        .catch(err => {
+            alert(err);
+        })
 }

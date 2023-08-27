@@ -40,7 +40,8 @@ function submitMsg() {
             return resp.json();
         })
         .then(_ => {
-            window.location.assign("/web/subs.html")
+            alert("Event has been sent")
+            genNewMsgAttrs()
         })
         .catch(err => {
             alert(err)

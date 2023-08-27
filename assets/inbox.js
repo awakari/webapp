@@ -99,6 +99,7 @@ function storeAndDisplayEvents(subId, evts) {
     localStorage.setItem(subId, JSON.stringify(evts));
     // display
     let listHtml = document.getElementById("evts_list")
+    listHtml.innerHTML = "";
     evts.reverse().forEach(function (evt) {
         listHtml.innerHTML += templateInboxEvent(subId, evt);
     })

@@ -27,7 +27,7 @@ const templateInboxEvent = evt => `
                             </span>
                             <span class="flex space-x-2">
                                 <p class="truncate w-[256px]">
-                                    ${evt.Data.TextData}
+                                    ${evt.Data != null && evt.Data.TextData != null ? evt.Data.TextData : ""}
                                 </p>
                             </span>
                             <span class="flex space-x-2">

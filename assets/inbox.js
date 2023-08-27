@@ -75,11 +75,7 @@ function loadEvents(subId) {
         })
         .then(data => {
             if (data != null) {
-                let evtsHistoryTxt = localStorage.getItem(subId);
-                if (evtsHistoryTxt == null) {
-                    evtsHistoryTxt = "[]";
-                }
-                let evtsHistory = JSON.parse(evtsHistoryTxt);
+                let evtsHistory = loadEventsHistory(subId);
                 for (const evt of data) {
                     evtsHistory.push(evt);
                 }
@@ -89,6 +85,14 @@ function loadEvents(subId) {
         .catch(err => {
             alert(err);
         })
+}
+
+function loadEventsHistory(subId) {
+    let evtsHistoryTxt = localStorage.getItem(subId);
+    if (evtsHistoryTxt == null) {
+        evtsHistoryTxt = "[]";
+    }
+    return JSON.parse(evtsHistoryTxt);
 }
 
 function storeAndDisplayEvents(subId, evts) {
@@ -101,15 +105,13 @@ function storeAndDisplayEvents(subId, evts) {
 }
 
 function deleteEvent(subId, evtId) {
-    let evtsHistoryTxt = localStorage.getItem(subId);
-    if (evtsHistoryTxt == null) {
-        evtsHistoryTxt = "[]";
-    }
-    let evtsHistory = JSON.parse(evtsHistoryTxt);
-    for (let i = 0; i < evtsHistory.length; i ++) {
-        if (evtsHistory[i].id === evtId) {
-            evtsHistory.splice(i, 1)
+    if (confirm(`Confirm delete event ${evtId}`)) {
+        let evtsHistory = loadEventsHistory(subId);
+        for (let i = 0; i < evtsHistory.length; i++) {
+            if (evtsHistory[i].id === evtId) {
+                evtsHistory.splice(i, 1)
+            }
         }
+        storeAndDisplayEvents(subId, evtsHistory)
     }
-    storeAndDisplayEvents(subId, evtsHistory)
 }

@@ -30,7 +30,7 @@ function submitMsg() {
         },
         body: JSON.stringify(payload),
     }
-    fetch("/v1/evts", optsReq)
+    fetch("/v1/events", optsReq)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))

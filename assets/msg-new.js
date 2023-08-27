@@ -40,7 +40,7 @@ function submitMsg() {
             return resp.json();
         })
         .then(_ => {
-            alert("Event has been sent")
+            alert("Message has been sent")
             genNewMsgAttrs()
         })
         .catch(err => {

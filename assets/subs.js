@@ -39,10 +39,12 @@ function loadSubs() {
             return resp.json();
         })
         .then(data => {
-            let listHtml = document.getElementById("subs_list");
-            listHtml.innerHTML = "";
-            for (const sub of data) {
-                listHtml.innerHTML += templateSub(sub);
+            if (data != null) {
+                let listHtml = document.getElementById("subs_list");
+                listHtml.innerHTML = "";
+                for (const sub of data) {
+                    listHtml.innerHTML += templateSub(sub);
+                }
             }
         })
         .catch(err => {

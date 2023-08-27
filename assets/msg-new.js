@@ -18,6 +18,7 @@ function submitMsg() {
         source: "awakari.cloud/web",
         type: "com.github.awakari.webapp",
         attributes: JSON.parse(document.getElementById("msg_attrs").value),
+        text_data: document.getElementById("msg_txt_data"),
     }
     payload.attributes["time"] = {
         ce_timestamp: document.getElementById("msg_ts").value,

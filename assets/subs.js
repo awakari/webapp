@@ -124,7 +124,11 @@ function loadSubscriptionEvents(subId) {
             if (evtsUnreadCount > 0) {
                 document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
             }
-            document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
+            if (evtsUnreadCount > 9) {
+                document.getElementById(`unread_count_${subId}`).innerHTML = "9+";
+            } else {
+                document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
+            }
         })
 }
 

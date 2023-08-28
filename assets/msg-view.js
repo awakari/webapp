@@ -1,10 +1,11 @@
 function loadEvent() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("subId");
-    const evtsHistory = loadEventsHistory(subId);
+    let evts = loadEventsHistory(subId);
     const evtId = queryParams.get("evtId");
-    evtsHistory.forEach(evt => {
+    evts.forEach(evt => {
         if (evt.id === evtId) {
+            evt.read = true
             document.getElementById("evt_id").innerText = evt.id;
             document.getElementById("evt_source").innerHTML = `<a href="${evt.source}">${evt.source}</a>`;
             document.getElementById("evt_time").innerText = new Date(evt.attributes.time.Attr.CeTimestamp.seconds * 1000).toISOString();
@@ -18,4 +19,5 @@ function loadEvent() {
             link.download = `${evt.id}.json`;
         }
     })
+    localStorage.setItem(subId, JSON.stringify(evts));
 }

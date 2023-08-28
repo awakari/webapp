@@ -2,10 +2,10 @@ const templateInboxNav = subId => `
             <p class="text-lg"><b>Inbox</b></p>
             <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
                 <button title="Edit Subscription" onclick="window.location.assign('/web/sub-edit.html?id=${subId}')" class="h-8 w-8 rounded-md border border-blue-700 shadow-2xl hover:bg-blue-200 text-blue-700 items-center">
-                    <img src="/web/sub-edit.svg" alt="Edit Subscription" class="px-1"/>
+                    <img src="sub-edit.svg" alt="Edit Subscription" class="px-1"/>
                 </button>
                 <button title="New Message" onclick="window.location.assign('/web/msg-new.html')" class="h-8 w-8 rounded-md border border-cyan-700 shadow-2xl hover:bg-cyan-200 text-cyan-700 items-center">
-                    <img src="/web/msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
+                    <img src="msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
                 </button>
                 <button type="button" title="Exit" onclick="logout()" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
                     <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">

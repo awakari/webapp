@@ -72,7 +72,7 @@ function loadEvents(subId) {
             return resp.json();
         })
         .then(data => {
-            if (data != null) {
+            if (data != null && data.hasOwnProperty("msgs")) {
                 let evtsHistory = loadEventsHistory(subId);
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);

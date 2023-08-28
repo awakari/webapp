@@ -104,7 +104,7 @@ function loadSubscriptionEvents(subId) {
             return resp.json();
         })
         .then(data => {
-            if (data != null) {
+            if (data != null && data.hasOwnProperty("msgs")) {
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }

@@ -15,7 +15,7 @@ function loadEvent() {
             document.getElementById("evt_ext_attrs").innerText = JSON.stringify(evt.attributes);
             // update the download link
             let link = document.getElementById("evt_link_download");
-            link.href += btoa(unescape(encodeURIComponent(JSON.stringify(evt))));
+            link.href += btoa(unescape(encodeURIComponent(JSON.stringify(evt, null, 2))));
             link.download = `${evt.id}.json`;
         }
     })

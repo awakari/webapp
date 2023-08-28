@@ -29,7 +29,7 @@ const templateInboxEvent = (subId, evt) => `
                                 </p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs text-slate-700">${new Date(evt.attributes.time.ce_timestamp.seconds * 1000).toISOString()}</p>
+                                <p class="font-mono text-xs text-slate-700">${evt.attributes.time.ce_timestamp}</p>
                             </span>
                         </span>
                         <span class="flex">

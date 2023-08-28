@@ -1,11 +1,14 @@
-const templateSub = (sub) => `
+const templateSub = (sub, unreadEvtsCount) => `
                 <div class="p-2 shadow-sm border hover:bg-white">
                     <span class="flex space-x-2">
                         <span class="hover:cursor-pointer" onclick="loadInbox('${sub.id}')">
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs text-slate-500">${sub.id}</p>
+                                <p class="font-mono text-xs ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-400"}">
+                                    ${sub.id}
+                                </p>
                             </span>
                             <span class="flex space-x-2">
+                                ${unreadEvtsCount > 0 ? <span className="absolute -top-2 -right-2 bg-indigo-600 h-4 w-4 p-2 flex justify-center items-center text-white rounded-full">${unreadEvtsCount}</span> : "" }
                                 <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">
                                     ${sub.data.description}
                                 </p>
@@ -43,7 +46,8 @@ function loadSubs() {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
                 for (const sub of data) {
-                    listHtml.innerHTML += templateSub(sub);
+                    const unreadEvtsCount = loadNewSubscriptionEvents(sub.id);
+                    listHtml.innerHTML += templateSub(sub, unreadEvtsCount);
                 }
             }
         })
@@ -81,4 +85,8 @@ function deleteSub(id) {
 
 function loadInbox(id) {
     window.location.assign(`/web/inbox.html?id=${id}`);
+}
+
+function loadNewSubscriptionEvents(id) {
+    return math.random() % 2;
 }

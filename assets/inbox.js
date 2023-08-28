@@ -49,6 +49,8 @@ function loadInbox() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("id");
     loadInboxNav(subId);
+    const evts = loadEventsHistory(subId);
+    storeAndDisplayEvents(subId, evts);
 }
 
 function loadInboxNav(subId) {

@@ -64,6 +64,7 @@ function loadEvents(subId) {
             "X-Awakari-User-Id": userEmail,
         },
     }
+    let evtsHistory = loadEventsHistory(subId);
     fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
@@ -73,15 +74,17 @@ function loadEvents(subId) {
         })
         .then(data => {
             if (data != null && data.hasOwnProperty("msgs")) {
-                let evtsHistory = loadEventsHistory(subId);
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }
-                storeAndDisplayEvents(subId, evtsHistory)
+                localStorage.setItem(subId, JSON.stringify(evtsHistory));
             }
         })
         .catch(err => {
             alert(err);
+        })
+        .finally(_ => {
+            displayEvents(subId, evtsHistory)
         })
 }
 
@@ -93,9 +96,7 @@ function loadEventsHistory(subId) {
     return JSON.parse(evtsHistoryTxt);
 }
 
-function storeAndDisplayEvents(subId, evts) {
-    localStorage.setItem(subId, JSON.stringify(evts));
-    // display
+function displayEvents(subId, evts) {
     let listHtml = document.getElementById("evts_list")
     listHtml.innerHTML = "";
     evts.reverse().forEach(evt => {
@@ -111,6 +112,7 @@ function deleteEvent(subId, evtId) {
                 evtsHistory.splice(i, 1)
             }
         }
-        storeAndDisplayEvents(subId, evtsHistory)
+        localStorage.setItem(subId, JSON.stringify(evtsHistory));
+        displayEvents(subId, evtsHistory)
     }
 }

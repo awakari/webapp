@@ -8,7 +8,7 @@ const templateSub = (sub, unreadEvtsCount) => `
                                 </p>
                             </span>
                             <span class="flex space-x-2">
-                                <span class="absolute -top-2 -right-2 bg-indigo-600 h-4 w-4 p-2 flex justify-center items-center text-white rounded-full" style="visibility: ${unreadEvtsCount > 0 ? "true" : "none"}">
+                                <span class="absolute -top-2 -right-2 bg-indigo-600 h-4 w-4 p-2 flex justify-center items-center text-white rounded-full" style="visibility: ${unreadEvtsCount > 0 ? "inherit" : "none"}">
                                     ${unreadEvtsCount}
                                 </span>
                                 <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">

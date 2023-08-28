@@ -90,5 +90,5 @@ function loadInbox(id) {
 }
 
 function loadNewSubscriptionEvents(id) {
-    return math.random() % 2;
+    return Math.floor(Math.random() * 2);
 }

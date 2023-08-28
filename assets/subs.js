@@ -3,7 +3,7 @@ const templateSub = (sub, unreadEvtsCount) => `
                     <span class="flex space-x-2">
                         <span class="hover:cursor-pointer" onclick="loadInbox('${sub.id}')">
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-400"}">
+                                <p class="font-mono text-xs ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "text-slate-500" : "text-slate-400"}">
                                     ${sub.id}
                                 </p>
                             </span>

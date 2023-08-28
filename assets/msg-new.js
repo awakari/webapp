@@ -6,7 +6,7 @@ function uuidv4() {
 }
 
 function genNewMsgAttrs() {
-    document.getElementById("msg_id").value = math.randomUUID();
+    document.getElementById("msg_id").value = uuidv4();
     document.getElementById("msg_ts").value = new Date().toISOString()
 }
 

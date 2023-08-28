@@ -23,7 +23,7 @@ function createSub() {
         })
         .then(data => {
             alert("Created subscription: " + data.id)
-            window.location.assign("subs.html")
+            window.location.assign("/web/subs.html")
         })
         .catch(err => {
             alert(err)

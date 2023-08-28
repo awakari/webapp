@@ -95,6 +95,7 @@ function loadSubscriptionEvents(subId) {
             "X-Awakari-User-Id": userEmail,
         },
     }
+    let evtsHistory = loadSubscriptionEventsHistory(subId);
     fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
@@ -104,26 +105,24 @@ function loadSubscriptionEvents(subId) {
         })
         .then(data => {
             if (data != null) {
-                let evtsUnreadCount = 0;
-                let evtsHistory = loadSubscriptionEventsHistory(subId);
-                for (const evt of evtsHistory) {
-                    if (!evt.hasOwnProperty("read") || evt.read === false) {
-                        evtsUnreadCount ++;
-                    }
-                }
                 for (const evt of data) {
                     evtsHistory.push(evt);
                 }
                 localStorage.setItem(subId, JSON.stringify(evtsHistory));
-                if (data.length > 0) {
-                    evtsUnreadCount += data.length;
-                    document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
-                    document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
-                }
             }
         })
         .catch(err => {
             alert(err);
+        })
+        .finally(_ => {
+            let evtsUnreadCount = 0;
+            for (const evt of evtsHistory) {
+                if (!evt.hasOwnProperty("read") || evt.read === false) {
+                    evtsUnreadCount ++;
+                }
+            }
+            document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
+            document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
         })
 }
 

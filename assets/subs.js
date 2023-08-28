@@ -8,7 +8,7 @@ const templateSub = (sub, unreadEvtsCount) => `
                                 </p>
                             </span>
                             <span class="flex space-x-1">
-                                <span class="h-2 w-2 flex justify-center items-center text-xs ${unreadEvtsCount > 0 ? "text-purple-500" : "text-slate-300" }">
+                                <span class="h-3 w-3 flex justify-center items-center text-xs text-white ${unreadEvtsCount > 0 ? "bg-fuchsia-400" : "" }">
                                     ${unreadEvtsCount}
                                 </span>    
                                 <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">

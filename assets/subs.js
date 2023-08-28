@@ -3,14 +3,14 @@ const templateSub = (sub) => `
                     <span class="flex space-x-2">
                         <span class="hover:cursor-pointer" onclick="showInbox('${sub.id}')">
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "text-slate-500" : "text-slate-400"}">
+                                <p class="font-mono text-xs ${sub.hasOwnProperty("enabled") && sub.enabled ? "text-slate-500" : "text-slate-400"}">
                                     ${sub.id}
                                 </p>
                             </span>
                             <span class="flex space-x-1">
                                 <span id="unread_count_${sub.id}" style="margin-top: 0.25rem" class="h-4 w-4 flex justify-center items-center text-white text-xs rounded-full">0</span>    
-                                <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">
-                                    ${sub.data.description}
+                                <p class="truncate w-[256px] ${sub.hasOwnProperty("enabled") && sub.enabled ? "" : "text-slate-500"}">
+                                    ${sub.description}
                                 </p>
                             </span>
                         </span>

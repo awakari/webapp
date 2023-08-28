@@ -26,6 +26,7 @@ const templateInboxEvent = (subId, evt) => `
                                 <p class="font-mono text-xs text-slate-500">${evt.id}</p>
                             </span>
                             <span class="flex space-x-2">
+                                <span class="h-2 w-2 flex justify-center items-center text-xs rounded-full ${(!evt.hasOwnProperty("read") || !evt.read) ? "bg-fuchsia-300" : "" }"></span>
                                 <p class="truncate w-[256px]">
                                     ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.Attr.CeString : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.Attr.CeString : (evt.Data != null && evt.Data.TextData != null ? evt.Data.TextData : ""))}
                                 </p>

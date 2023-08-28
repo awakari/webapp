@@ -104,14 +104,21 @@ function loadSubscriptionEvents(subId) {
         })
         .then(data => {
             if (data != null) {
-                let evts = loadSubscriptionEventsHistory(subId);
-                for (const evt of data) {
-                    evts.push(evt);
+                let evtsUnreadCount = 0;
+                let evtsHistory = loadSubscriptionEventsHistory(subId);
+                for (const evt of evtsHistory) {
+                    if (!evt.hasOwnProperty("read") || evt.read === false) {
+                        evtsUnreadCount ++;
+                    }
                 }
-                localStorage.setItem(subId, JSON.stringify(evts));
+                for (const evt of data) {
+                    evtsHistory.push(evt);
+                }
+                localStorage.setItem(subId, JSON.stringify(evtsHistory));
                 if (data.length > 0) {
-                    document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc";
-                    document.getElementById(`unread_count_${subId}`).innerHTML = `${data.length}`;
+                    evtsUnreadCount += data.length;
+                    document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
+                    document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
                 }
             }
         })

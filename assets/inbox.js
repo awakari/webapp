@@ -1,9 +1,6 @@
 const templateInboxNav = subId => `
-            <p class="text-lg"><b>Subscription Inbox</b></p>
+            <p class="text-lg"><b>Inbox</b></p>
             <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
-                <button type="button" title="Refresh" onclick="loadEvents('${subId}')" class="h-8 w-8 text-sm focus:outline-none text-indigo-700 rounded-md border border-indigo-700 hover:bg-blue-200 flex items-center">
-                    <img src="/web/reload.svg" alt="Refresh" class="px-1"/>
-                </button>
                 <button title="Edit Subscription" onclick="window.location.assign('/web/sub-edit.html?id=${subId}')" class="h-8 w-8 rounded-md border border-blue-700 shadow-2xl hover:bg-blue-200 text-blue-700 items-center">
                     <img src="/web/sub-edit.svg" alt="Edit Subscription" class="px-1"/>
                 </button>

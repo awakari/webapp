@@ -57,7 +57,7 @@ function loadInboxNav(subId) {
 }
 
 function loadEvents(subId) {
-    const userEmail = sessionStorage.getItem("userEmail")
+    const userEmail = sessionStorage.getItem("userEmail");
     const optsReq = {
         method: "GET",
         headers: {

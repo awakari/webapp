@@ -47,8 +47,7 @@ function loadInbox() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("id");
     loadInboxNav(subId);
-    const evts = loadEventsHistory(subId);
-    storeAndDisplayEvents(subId, evts);
+    loadEvents(subId);
 }
 
 function loadInboxNav(subId) {
@@ -75,7 +74,7 @@ function loadEvents(subId) {
         .then(data => {
             if (data != null) {
                 let evtsHistory = loadEventsHistory(subId);
-                for (const evt of data) {
+                for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }
                 storeAndDisplayEvents(subId, evtsHistory)

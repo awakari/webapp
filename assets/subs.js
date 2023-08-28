@@ -45,7 +45,7 @@ function loadSubscriptions() {
             if (data != null) {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
-                for (const sub of data) {
+                for (const sub of data.subs) {
                     listHtml.innerHTML += templateSub(sub);
                     loadSubscriptionEvents(sub.id);
                 }
@@ -105,7 +105,7 @@ function loadSubscriptionEvents(subId) {
         })
         .then(data => {
             if (data != null) {
-                for (const evt of data) {
+                for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }
                 localStorage.setItem(subId, JSON.stringify(evtsHistory));

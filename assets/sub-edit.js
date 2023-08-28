@@ -82,7 +82,7 @@ function updateSub(subId) {
             }
             return resp.json();
         })
-        .then(data => {
+        .then(_ => {
             alert(`Updated subscription: ${subId}`)
             window.location.assign("subs.html")
         })

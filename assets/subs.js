@@ -7,11 +7,11 @@ const templateSub = (sub, unreadEvtsCount) => `
                                     ${sub.id}
                                 </p>
                             </span>
-                            <span class="flex space-x-2">
+                            <span class="flex space-x-1">
+                                <span class="bg-indigo-700 h-3 w-3 flex justify-center items-center text-white text-xs rounded-full" style="display: ${unreadEvtsCount > 0 ? "inherit" : "none"}">
+                                    ${unreadEvtsCount}
+                                </span>    
                                 <p class="truncate w-[256px] ${sub.data.hasOwnProperty("enabled") && sub.data.enabled ? "" : "text-slate-500"}">
-                                    <span class="absolute -top-2 -right-2 bg-indigo-600 h-3 w-3 flex justify-center items-center text-white text-xs rounded-full" style="display: ${unreadEvtsCount > 0 ? "inherit" : "none"}">
-                                        ${unreadEvtsCount}
-                                    </span>
                                     ${sub.data.description}
                                 </p>
                             </span>

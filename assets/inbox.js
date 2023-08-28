@@ -25,11 +25,11 @@ const templateInboxEvent = (subId, evt) => `
                             <span class="flex space-x-1">
                                 <span style="margin-top: 0.5rem" class="h-2 w-2 flex justify-center items-center text-xs rounded-full ${(!evt.hasOwnProperty("read") || !evt.read) ? "bg-fuchsia-300" : "" }"></span>
                                 <p class="truncate w-[256px]">
-                                    ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.Attr.CeString : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.Attr.CeString : (evt.Data != null && evt.Data.TextData != null ? evt.Data.TextData : ""))}
+                                    ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
                                 </p>
                             </span>
                             <span class="flex space-x-2">
-                                <p class="font-mono text-xs text-slate-700">${new Date(evt.attributes.time.Attr.CeTimestamp.seconds * 1000).toISOString()}</p>
+                                <p class="font-mono text-xs text-slate-700">${new Date(evt.attributes.time.ce_timestamp.seconds * 1000).toISOString()}</p>
                             </span>
                         </span>
                         <span class="flex">

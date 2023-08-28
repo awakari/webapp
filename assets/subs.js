@@ -121,7 +121,9 @@ function loadSubscriptionEvents(subId) {
                     evtsUnreadCount ++;
                 }
             }
-            document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
+            if (evtsUnreadCount > 0) {
+                document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
+            }
             document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
         })
 }

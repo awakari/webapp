@@ -20,7 +20,7 @@ const templateSubEditForm = sub => `
         <span>
             <label for="sub_cond">
                 Condition
-                <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none text-slate-700">${JSON.stringify(sub.cond)}</textarea>
+                <textarea id="sub_cond" disabled="disabled" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none text-slate-700">${JSON.stringify(sub.cond, null, 2)}</textarea>
             </label>
         </span>
         <span class="items-center flex ml-28 py-2">

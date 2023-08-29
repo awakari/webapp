@@ -1,7 +1,7 @@
 function loadEvent() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("subId");
-    let evts = loadEventsHistory(subId);
+    let evts = Events.GetLocalHistory(subId);
     const evtId = queryParams.get("evtId");
     evts.forEach(evt => {
         if (evt.id === evtId) {

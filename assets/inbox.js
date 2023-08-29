@@ -47,7 +47,7 @@ function loadInbox() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("id");
     loadInboxNav(subId);
-    loadEvents(subId);
+    loadInboxEvents(subId);
 }
 
 function loadInboxNav(subId) {
@@ -56,44 +56,13 @@ function loadInboxNav(subId) {
     inboxNav.innerHTML += templateInboxNav(subId);
 }
 
-function loadEvents(subId) {
-    const userEmail = sessionStorage.getItem("userEmail");
-    const optsReq = {
-        method: "GET",
-        headers: {
-            "X-Awakari-User-Id": userEmail,
-        },
-    }
-    let evtsHistory = loadEventsHistory(subId);
-    fetch(`/v1/events/${subId}`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data != null && data.hasOwnProperty("msgs")) {
-                for (const evt of data.msgs) {
-                    evtsHistory.push(evt);
-                }
-                localStorage.setItem(subId, JSON.stringify(evtsHistory));
-            }
-        })
-        .catch(err => {
-            alert(err);
-        })
+function loadInboxEvents(subId) {
+    let evtsHistory = Events.GetLocalHistory(subId);
+    Events
+        .Load(subId, evtsHistory)
         .finally(_ => {
             displayEvents(subId, evtsHistory)
         })
-}
-
-function loadEventsHistory(subId) {
-    let evtsHistoryTxt = localStorage.getItem(subId);
-    if (evtsHistoryTxt == null) {
-        evtsHistoryTxt = "[]";
-    }
-    return JSON.parse(evtsHistoryTxt);
 }
 
 function displayEvents(subId, evts) {
@@ -106,7 +75,7 @@ function displayEvents(subId, evts) {
 
 function deleteEvent(subId, evtId) {
     if (confirm(`Confirm delete event ${evtId}`)) {
-        let evtsHistory = loadEventsHistory(subId);
+        let evtsHistory = Events.GetLocalHistory(subId);
         for (let i = 0; i < evtsHistory.length; i++) {
             if (evtsHistory[i].id === evtId) {
                 evtsHistory.splice(i, 1)

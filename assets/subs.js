@@ -88,32 +88,9 @@ function showInbox(id) {
 }
 
 function loadSubscriptionEvents(subId) {
-    const userEmail = sessionStorage.getItem("userEmail")
-    const optsReq = {
-        method: "GET",
-        headers: {
-            "X-Awakari-User-Id": userEmail,
-        },
-    }
-    let evtsHistory = loadSubscriptionEventsHistory(subId);
-    fetch(`/v1/events/${subId}`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data != null && data.hasOwnProperty("msgs")) {
-                for (const evt of data.msgs) {
-                    evtsHistory.push(evt);
-                }
-                localStorage.setItem(subId, JSON.stringify(evtsHistory));
-            }
-        })
-        .catch(err => {
-            alert(err);
-        })
+    let evtsHistory = Events.GetLocalHistory(subId);
+    Events
+        .Load(subId, evtsHistory)
         .finally(_ => {
             let evtsUnreadCount = 0;
             for (const evt of evtsHistory) {
@@ -130,12 +107,4 @@ function loadSubscriptionEvents(subId) {
                 document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
             }
         })
-}
-
-function loadSubscriptionEventsHistory(subId) {
-    let evtsHistoryTxt = localStorage.getItem(subId);
-    if (evtsHistoryTxt == null) {
-        evtsHistoryTxt = "[]";
-    }
-    return JSON.parse(evtsHistoryTxt);
 }

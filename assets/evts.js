@@ -20,7 +20,7 @@ Events.Load = function (subId, evtsHistory) {
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }
-                localStorage.setItem(subId, JSON.stringify(evtsHistory));
+                Events.PutLocalHistory(subId, evtsHistory);
             }
         })
         .catch(err => {

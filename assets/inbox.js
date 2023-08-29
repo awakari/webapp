@@ -81,7 +81,7 @@ function deleteEvent(subId, evtId) {
                 evtsHistory.splice(i, 1)
             }
         }
-        localStorage.setItem(subId, JSON.stringify(evtsHistory));
+        Events.PutLocalHistory(subId, evtsHistory);
         displayEvents(subId, evtsHistory)
     }
 }

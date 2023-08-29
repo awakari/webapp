@@ -19,5 +19,5 @@ function loadEvent() {
             link.download = `${evt.id}.json`;
         }
     })
-    localStorage.setItem(subId, JSON.stringify(evts));
+    Events.PutLocalHistory(subId, evts);
 }

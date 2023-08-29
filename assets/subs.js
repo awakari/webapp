@@ -42,7 +42,7 @@ function loadSubscriptions() {
             return resp.json();
         })
         .then(data => {
-            if (data != null) {
+            if (data != null && data.hasOwnProperty("subs")) {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
                 for (const sub of data.subs) {

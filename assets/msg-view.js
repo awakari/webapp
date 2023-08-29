@@ -12,7 +12,7 @@ function loadEvent() {
             document.getElementById("evt_title").innerText = evt.attributes.title != null ? evt.attributes.title.ce_string : "";
             document.getElementById("evt_summary").innerText = evt.attributes.summary != null ? evt.attributes.summary.ce_string : "";
             document.getElementById("evt_text_data").innerText = evt.text_data != null ? evt.text_data : "";
-            document.getElementById("evt_ext_attrs").innerText = JSON.stringify(evt.attributes, mill, 2);
+            document.getElementById("evt_ext_attrs").innerText = JSON.stringify(evt.attributes, null, 2);
             // update the download link
             let link = document.getElementById("evt_link_download");
             link.href += btoa(unescape(encodeURIComponent(JSON.stringify(evt, null, 2))));

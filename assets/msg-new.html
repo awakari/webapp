@@ -16,13 +16,17 @@
     <title>Awakari Web</title>
 
     <link href="/web/tailwind.output.css" rel="stylesheet">
+    <!-- for local testing <link href="tailwind.output.css" rel="stylesheet"> -->
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="/web/index.js"></script>
+    <!-- for local testing <script src="index.js"></script> -->
     <script src="/web/msg-new.js"></script>
+    <!-- for local testing <script src="msg-new.js"></script> -->
+
 </head>
-<body class="bg-gray-100" onload="genNewMsgAttrs()">
+<body class="bg-gray-100" onload="loadForm()">
 
 <div id="msg_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
     <!-- section body top nav -->
@@ -43,26 +47,37 @@
         <form class="space-y-2 py-2">
             <label for="msg_txt_data">
                 Text
-                <textarea id="msg_txt_data" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">Tesla model S is now available at lower price</textarea>
+                <textarea
+                        id="msg_txt_data"
+                        rows="5"
+                        class="border font-mono text-sm w-full focus:shadow-md outline-none"
+                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..."></textarea>
             </label>
-            <label for="msg_attrs">
-                Attributes
-                <textarea id="msg_attrs" rows="5" class="border font-mono text-sm w-full focus:shadow-md outline-none">{
-    "subject": {
-       "ce_string": "Tesla price"
-    }
-}</textarea>
-            </label>
-            <span class="flex">
-                <label for="msg_ts" class="flex w-full">
-                    Time
-                    <input type="text" id="msg_ts" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-4 font-mono text-xs text-slate-700"/>
-                </label>
+            <span>
+                <p class="py-1">Attributes</p>
+                <div id="msg_attrs_form"></div>
+                <span class="flex w-full text-xs font-mono h-[24x] min-h-[24px] items-center">
+                    <input type="text" placeholder="name" id="msg_attr_name" class="w-[64px] min-w-[64px] truncate border focus:shadow-md outline-none"/>
+                    <select id="msg_attr_type" class="w-[64px] min-w-[64px] truncate focus:shadow-md outline-none">
+                        <option>boolean</option>
+                        <option>bytes</option>
+                        <option>integer</option>
+                        <option selected="selected">string</option>
+                        <option>timestamp</option>
+                        <option>uri</option>
+                        <option>uri_ref</option>
+                    </select>
+                    <input type="text" placeholder="value" id="msg_attr_value" class="w-full font-mono truncate border focus:shadow-md outline-none"/>
+                    <button type="button" title="Add Attribute" onclick="addMessageAttribute();" class="ml-1 text-2xl font-mono focus:outline-none focus:text-slate-700 text-slate-500 hover:text-slate-700 flex items-center justify-center h-[24x] max-h-[24px]">
+                        +
+                    </button>
+                </span>
+                <textarea id="msg_attrs" rows="10" disabled="disabled" hidden="hidden" class="border font-mono text-xs w-full focus:shadow-md outline-none">{}</textarea>
             </span>
             <span class="flex">
                 <label for="msg_id" class="flex w-full">
                     Id
-                    <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-10 font-mono text-xs text-slate-700"/>
+                    <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none ml-4 font-mono text-xs text-slate-700"/>
                 </label>
             </span>
             <span class="items-center flex ml-28 py-2">

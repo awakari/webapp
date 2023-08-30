@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Recursive JSON Editor Example</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+    <style>
+        .row {
+            max-width: 960px;
+            margin: 0 auto;
+            padding-bottom: 15px
+        }
+        select.je-switcher {
+            font-style: normal;
+        }
+        button.json-editor-btn-collapse {
+            border-style: solid;
+            border-width: 1px;
+            margin-right: 4px;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+        }
+        button.json-editor-btn-edit {
+            width: 0;
+            height: 0;
+            visibility: hidden;
+        }
+        button.json-editor-btntype-properties {
+            border-style: solid;
+            border-width: 1px;
+            margin-right: 4px;
+            padding: 0 4px;
+            height: 24px;
+            font-size: unset;
+        }
+        i.icon {
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+        h3.je-header {
+            font-size: unset;
+            margin: 0;
+            height: 24px;
+        }
+        span.je-object__controls {
+            margin: 0;
+            display: unset;
+            height: 24px;
+        }
+        div.form-control {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-12'>
+            <button id='submit' class='btn btn-info'>Submit (console.log)</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+            <div id='editor_holder'></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize the editor
+    var editor = new JSONEditor(document.getElementById('editor_holder'), {
+        iconlib: 'spectre',
+        // The schema for the editor
+        schema: {
+            additionalProperties: false,
+            title: "Condition",
+            $ref: "#/definitions/cond",
+            definitions: {
+                cond: {
+                    type: "object",
+                    id: "cond",
+                    defaultProperties: [
+                        "not",
+                    ],
+                    minProperties: 2,
+                    maxProperties: 2,
+                    properties: {
+                        not: {
+                            title: "Not",
+                            id: "not",
+                            type: "boolean",
+                            format: "checkbox",
+                            default: false,
+                            required: true,
+                        },
+                        gc: {
+                            title: "Group",
+                            type: "object",
+                            id: "gc",
+                            defaultProperties: ["logic", "group"],
+                            properties: {
+                                logic: {
+                                    title: "Logic",
+                                    id: "logic",
+                                    type: "string",
+                                    enum: ["And", "Or", "Xor"],
+                                    required: true,
+                                },
+                                group: {
+                                    title: "Conditions",
+                                    id: "group",
+                                    type: "array",
+                                    items: {
+                                        title: "Condition",
+                                        $ref: "#/definitions/cond",
+                                    },
+                                    required: true,
+                                    minItems: 1,
+                                    maxItems: 10,
+                                }
+                            },
+                            additionalProperties: false,
+                        },
+                        nc: {
+                            title: "Number",
+                            type: "object",
+                            id: "nc",
+                            defaultProperties: ["key", "op", "val"],
+                            properties: {
+                                key: {
+                                    title: "Key",
+                                    id: "key",
+                                    type: "string",
+                                    required: true,
+                                    minLength: 1,
+                                },
+                                op: {
+                                    title: "Logic",
+                                    id: "logic",
+                                    type: "string",
+                                    enum: ["Gt", "Gte", "Eq", "Lte", "Lt"],
+                                    required: true,
+                                },
+                                val: {
+                                    title: "Value",
+                                    id: "val",
+                                    type: "number",
+                                    required: true,
+                                }
+                            },
+                            additionalProperties: false,
+                        },
+                        tc: {
+                            title: "Text",
+                            type: "object",
+                            id: "tc",
+                            defaultProperties: ["key", "term", "exact"],
+                            properties: {
+                                key: {
+                                    title: "Key",
+                                    id: "key",
+                                    type: "string",
+                                    required: true,
+                                },
+                                term: {
+                                    title: "Term(s)",
+                                    id: "term",
+                                    type: "string",
+                                    required: true,
+                                },
+                                exact: {
+                                    title: "Exact",
+                                    id: "exact",
+                                    type: "boolean",
+                                    format: "checkbox",
+                                    default: false,
+                                    required: true,
+                                }
+                            },
+                            additionalProperties: false,
+                        },
+                    }
+                },
+            }
+        }
+    });
+
+    // Hook up the submit button to log to the console
+    document.getElementById('submit').addEventListener('click', function () {
+        // Get the value from the editor
+        console.log(editor.getValue());
+    });
+
+    // Hook up the Restore to Default button
+    document.getElementById('restore').addEventListener('click', function () {
+        editor.setValue(starting_value);
+    });
+
+    // Hook up the enable/disable button
+    document.getElementById('enable_disable').addEventListener('click', function () {
+        // Enable form
+        if (!editor.isEnabled()) {
+            editor.enable();
+        }
+        // Disable form
+        else {
+            editor.disable();
+        }
+    });
+
+    // Hook up the validation indicator to update its
+    // status whenever the editor changes
+    editor.on('change', function () {
+        // Get an array of errors from the validator
+        var errors = editor.validate();
+
+        var indicator = document.getElementById('valid_indicator');
+
+        // Not valid
+        if (errors.length) {
+            indicator.className = 'label label-danger'
+            indicator.textContent = "not valid";
+        }
+        // Valid
+        else {
+            indicator.className = 'label label-success'
+            indicator.textContent = "valid";
+        }
+    });
+</script>
+</body>
+</html>

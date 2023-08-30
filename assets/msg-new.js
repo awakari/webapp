@@ -160,16 +160,16 @@ function submitMsg() {
     fetch("/v1/events", optsReq)
         .then(resp => {
             if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg))
+                resp.text().then(errMsg => console.error(errMsg));
                 throw new Error(`Request failed ${resp.status}`);
             }
             return resp.json();
         })
         .then(_ => {
-            alert("Message has been sent")
-            genNewMsgAttrs()
+            alert("Message has been sent");
+            loadForm(); // reset
         })
         .catch(err => {
-            alert(err)
+            alert(err);
         })
 }

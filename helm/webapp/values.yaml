@@ -44,11 +44,11 @@ ingress:
   hostsNoTls:
     - host: webapp.local
       paths:
-        - path: /web
+        - path: /www
           pathType: ImplementationSpecific
-        - path: /web/index.html
+        - path: /www/index.html
           pathType: ImplementationSpecific
-        - path: /web/demo-client-0.p12
+        - path: /www/demo-client-0.p12
           pathType: ImplementationSpecific
   hosts:
     - host: webapp.local

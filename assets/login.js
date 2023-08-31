@@ -12,6 +12,6 @@ function handleAuthGoogle(response) {
 function logout() {
     if (confirm("Confirm exit?")) {
         sessionStorage.removeItem("userEmail")
-        window.location.assign("/web")
+        window.location.assign("/web/login.html")
     }
 }

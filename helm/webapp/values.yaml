@@ -41,6 +41,15 @@ service:
 
 ingress:
   enabled: true
+  hostsNoTls:
+    - host: webapp.local
+      paths:
+        - path: /web
+          pathType: ImplementationSpecific
+        - path: /web/index.html
+          pathType: ImplementationSpecific
+        - path: /web/demo-client-0.p12
+          pathType: ImplementationSpecific
   hosts:
     - host: webapp.local
       paths:

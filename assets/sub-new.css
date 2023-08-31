@@ -1,0 +1,45 @@
+input {
+    accent-color: dimgrey;
+    outline: none;
+}
+input[type=checkbox] {
+    margin-right: 0.625rem;
+    margin-left: 0.125rem;
+}
+input[type=text] {
+    border-width: 1px;
+    min-width: 100px;
+}
+button {
+    border-width: 1px;
+    border-color: #475569;
+    border-radius: 0.375rem;
+    color: #475569;
+    height: 1.75rem;
+    padding: 0 0.25rem;
+}
+button:hover {
+    background-color: #cbd5e1;
+}
+button.json-editor-btn-edit,button.json-editor-btn-movedown,button.json-editor-btn-moveup,button.json-editor-btn-subtract,button.json-editor-btntype-deleteall {
+    display: none;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+div.form-control {
+    display: flex;
+}
+div label.required.je-form-input-label {
+    font-weight: normal;
+    margin-right: 0.25rem;
+}
+div div[data-theme="html"] .je-indented-panel {
+    margin: 0.25rem;
+    padding: 0.25rem;
+}
+select {
+    background-color: white;
+    outline: none;
+    border-width: 1px;
+}

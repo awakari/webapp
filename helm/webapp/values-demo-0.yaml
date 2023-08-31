@@ -1,4 +1,13 @@
 ingress:
+  hostsNoTls:
+    - host: demo.awakari.cloud
+      paths:
+        - path: /web
+          pathType: ImplementationSpecific
+        - path: /web/index.html
+          pathType: ImplementationSpecific
+        - path: /web/demo-client-0.p12
+          pathType: ImplementationSpecific
   hosts:
     - host: demo.awakari.cloud
       paths:

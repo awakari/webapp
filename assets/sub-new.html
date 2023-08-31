@@ -15,18 +15,12 @@
 
     <title>Awakari Web</title>
 
-    <link rel="stylesheet" href="spectre-icons.min.css">
+    <link rel="stylesheet" href="/web/spectre-icons.min.css">
+    <link href="/web/tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="/web/sub-new.css">
 
-    <!--link href="/web/tailwind.output.css" rel="stylesheet"-->
-    <link href="tailwind.output.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="sub-new.css">
-
-    <script src="jsoneditor.min.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
-    <script src="sub-new.js"></script>
-    <script src="index.js"></script>
+    <script src="/web/jsoneditor.min.js"></script>
+    <script src="/web/index.js"></script>
 
 </head>
 <body class="bg-gray-100">
@@ -61,24 +55,6 @@
                 <input type="checkbox" id="sub_enabl" checked="checked" class="ml-7"/>
             </label>
         </span>
-        <span>
-            <label for="sub_cond">
-                Condition
-                <textarea id="sub_cond" rows="8" class="border font-mono text-sm w-full focus:shadow-md outline-none">{
-    "not": false,
-    "tc": {
-        "key": "",
-        "term": "Tesla Model S",
-        "exact": false
-    }
-}</textarea>
-            </label>
-        </span>
-        <span class="items-center flex ml-28 py-2">
-            <button type="button" title="Submit" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center" onclick="createSub()">
-                <p class="ml-5">Submit</p>
-            </button>
-        </span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -86,7 +62,12 @@
                 </div>
             </div>
         </div>
-        <script src="sub-cond-editor.js"></script>
+        <script src="/web/sub-new.js"></script>
+        <span class="items-center flex ml-28 py-2">
+            <button type="button" title="Submit" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center" onclick="createSub()">
+                <p class="ml-5">Submit</p>
+            </button>
+        </span>
     </form>
     </main>
 </div>

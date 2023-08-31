@@ -10,7 +10,7 @@ Awakari uses 2-factor authentication:
 
 First, install the <a href="https://raw.githubusercontent.com/awakari/webapp/master/ca.crt" download="ca.crt">CA</a>. 
 
-Navigate [https://demo.awakari.cloud/web](https://demo.awakari.cloud/web)
+Finally, navigate [https://demo.awakari.cloud/web](https://demo.awakari.cloud/web)
 
 ## 2. Usage
 

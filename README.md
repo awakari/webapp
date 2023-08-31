@@ -8,7 +8,7 @@ Awakari uses 2-factor authentication:
 1. Client TLS certificate.
 2. 3-rd party identity provider (Google OAuth2 currently).
 
-First, install [CA](https://raw.githubusercontent.com/awakari/webapp/master/ca.crt). 
+First, install the <a href="https://raw.githubusercontent.com/awakari/webapp/master/ca.crt" download="ca.crt">CA</a>. 
 
 Navigate [https://demo.awakari.cloud/web](https://demo.awakari.cloud/web)
 

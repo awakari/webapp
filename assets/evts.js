@@ -24,7 +24,7 @@ Events.LongPoll = function (subId, evtsHistory) {
             console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs")) {
                 if (data.msgs.length > 0) {
-                    Events.audioSnd.play();
+                    Events.audioSnd.play().catch(err => alert("Failed to play audio!"))
                 }
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);

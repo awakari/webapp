@@ -59,7 +59,7 @@ function loadInboxNav(subId) {
 function loadInboxEvents(subId) {
     let evtsHistory = Events.GetLocalHistory(subId);
     Events
-        .Load(subId, evtsHistory, 100)
+        .Load(subId, evtsHistory, 1_000)
         .finally(_ => {
             displayEvents(subId, evtsHistory)
         })

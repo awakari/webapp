@@ -94,10 +94,10 @@ function showInbox(id) {
     window.location.assign(`/web/inbox.html?id=${id}`);
 }
 
-async function startEventsLoading(subIds) {
+async function startEventsLoading(subs) {
     console.log("Running events loading...");
     while(true) {
-        await Promise.all(subIds.map(subId => loadSubscriptionEvents(subId)));
+        await Promise.all(subs.map(sub => loadSubscriptionEvents(sub.id)));
     }
 }
 

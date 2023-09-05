@@ -1,4 +1,10 @@
-const Events = {}
+const Events = {
+    abortController: new AbortController(),
+}
+
+const timeout = setTimeout(() => {
+   Events.abortController.abort();
+}, 9_000_000);
 
 Events.enableSound = function () {
     Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -16,9 +22,11 @@ Events.LongPoll = function (subId) {
         },
         cache: "no-cache",
         keepalive: true,
+        signal: Events.abortController.signal,
     }
     return fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {
+            clearTimeout(timeout);
             if (!resp.ok) {
                 throw new Error(`Request failed with status: ${resp.status}`);
             }

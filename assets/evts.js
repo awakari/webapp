@@ -14,7 +14,8 @@ Events.LongPoll = function (subId) {
         headers: {
             "X-Awakari-User-Id": userEmail,
         },
-        timeout: 9_000_000, // 15 min
+        cache: "no-cache",
+        keepalive: true,
     }
     return fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {

@@ -77,13 +77,16 @@ async function startEventsLoading(subId, evtsHistory) {
         eventsLoadingRunning = true;
         try {
             while (true) {
+                console.log(`Long poll events for ${subId}...`);
                 await Events
                     .LongPoll(subId, evtsHistory)
                     .finally(_ => {
                         displayEvents(subId, evtsHistory)
                     });
+                console.log(`Long poll events for ${subId} done`);
             }
         } finally {
+            console.log(`Stop events loading for ${subId}`);
             eventsLoadingRunning = false;
         }
     }

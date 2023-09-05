@@ -1,6 +1,6 @@
 const Events = {}
 
-if(confirm("Allow audio notifications?")) {
+Events.enableSound = function () {
     Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     Events.audioSnd = new Audio("/web/sound-msg-new.mp3");
     Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
@@ -26,8 +26,8 @@ Events.LongPoll = function (subId, evtsHistory) {
         .then(data => {
             console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs")) {
-                if (data.msgs.length > 0) {
-                    Events.audioSnd.play().catch(err => alert("Failed to play audio!"))
+                if (data.msgs.length > 0 && Events.hasOwnProperty("audioSnd")) {
+                    Events.audioSnd.play();
                 }
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);

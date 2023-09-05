@@ -1,8 +1,8 @@
-const Events = {
-    audioCtx: new (window.AudioContext || window.webkitAudioContext)(),
-    audioSnd: new Audio("/web/sound-msg-new.mp3"),
-    audioSrc: Events.audioCtx.createMediaElementSource(Events.audioSnd),
-};
+const Events = {}
+
+Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+Events.audioSnd = new Audio("/web/sound-msg-new.mp3");
+Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
 
 Events.LongPoll = function (subId, evtsHistory) {
     const userEmail = sessionStorage.getItem("userEmail");

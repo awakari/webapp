@@ -7,6 +7,7 @@ Events.Load = function (subId, evtsHistory) {
         headers: {
             "X-Awakari-User-Id": userEmail,
         },
+        timeout: 9_000_000, // 15 min
     }
     return fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {

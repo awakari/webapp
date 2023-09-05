@@ -24,7 +24,7 @@ Events.Load = function (subId, evtsHistory) {
             }
         })
         .catch(err => {
-            alert(err);
+            console.error(err);
         })
 };
 

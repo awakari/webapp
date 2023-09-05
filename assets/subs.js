@@ -53,7 +53,6 @@ function loadSubscriptions() {
                 if (!eventsLoadingRunning) {
                     console.log("Start events loading...");
                     startEventsLoading(data.subs);
-                    eventsLoadingRunning = true;
                     console.log("Events loading started in the background");
                 }
             }
@@ -95,8 +94,14 @@ function showInbox(id) {
 }
 
 async function startEventsLoading(subs) {
+    eventsLoadingRunning = true;
     console.log("Running events loading...");
-    await Promise.all(subs.map(sub => loadSubscriptionEvents(sub.id)));
+    try {
+        await Promise.all(subs.map(sub => loadSubscriptionEvents(sub.id)));
+    } finally {
+        console.log("Stopped events loading");
+        eventsLoadingRunning = false;
+    }
 }
 
 async function loadSubscriptionEvents(subId) {

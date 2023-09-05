@@ -9,6 +9,7 @@ templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}"
 
 function loadForm() {
     document.getElementById("msg_attrs").value = "{}";
+    document.getElementById("msg_attrs_form").innerHTML = "";
     document.getElementById("msg_id").value = uuidv4();
     putMessageAttribute("time", "timestamp", new Date().toISOString(), true);
 }

@@ -96,30 +96,30 @@ function showInbox(id) {
 
 async function startEventsLoading(subs) {
     console.log("Running events loading...");
-    while(true) {
-        await Promise.all(subs.map(sub => loadSubscriptionEvents(sub.id)));
-    }
+    await Promise.all(subs.map(sub => loadSubscriptionEvents(sub.id)));
 }
 
-function loadSubscriptionEvents(subId) {
-    console.log(`Load subscription ${subId} events...`)
-    let evtsHistory = Events.GetLocalHistory(subId);
-    return Events
-        .Load(subId, evtsHistory)
-        .finally(_ => {
-            let evtsUnreadCount = 0;
-            for (const evt of evtsHistory) {
-                if (!evt.hasOwnProperty("read") || evt.read === false) {
-                    evtsUnreadCount ++;
+async function loadSubscriptionEvents(subId) {
+    while(true) {
+        console.log(`Load subscription ${subId} events...`);
+        let evtsHistory = Events.GetLocalHistory(subId);
+        await Events
+            .Load(subId, evtsHistory)
+            .finally(_ => {
+                let evtsUnreadCount = 0;
+                for (const evt of evtsHistory) {
+                    if (!evt.hasOwnProperty("read") || evt.read === false) {
+                        evtsUnreadCount++;
+                    }
                 }
-            }
-            if (evtsUnreadCount > 0) {
-                document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
-            }
-            if (evtsUnreadCount > 9) {
-                document.getElementById(`unread_count_${subId}`).innerHTML = "9+";
-            } else {
-                document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
-            }
-        })
+                if (evtsUnreadCount > 0) {
+                    document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
+                }
+                if (evtsUnreadCount > 9) {
+                    document.getElementById(`unread_count_${subId}`).innerHTML = "9+";
+                } else {
+                    document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
+                }
+            })
+    }
 }

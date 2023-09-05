@@ -26,14 +26,14 @@ Events.LongPoll = function (subId) {
         .then(data => {
             console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
-                if (Events.hasOwnProperty("audioSnd")) {
-                    Events.audioSnd.play();
-                }
                 let evtsHistory = Events.GetLocalHistory(subId);
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }
                 Events.PutLocalHistory(subId, evtsHistory);
+                if (Events.hasOwnProperty("audioSnd")) {
+                    return Events.audioSnd.play();
+                }
             }
         })
         .catch(err => {

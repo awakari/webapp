@@ -1,13 +1,13 @@
 const Events = {};
 
-Events.Load = function (subId, evtsHistory) {
+Events.Load = function (subId, evtsHistory, timeout) {
     const userEmail = sessionStorage.getItem("userEmail");
     const optsReq = {
         method: "GET",
         headers: {
             "X-Awakari-User-Id": userEmail,
         },
-        timeout: 9_000_000, // 15 min
+        timeout: timeout,
     }
     return fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {

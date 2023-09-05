@@ -109,7 +109,7 @@ async function loadSubscriptionEvents(subId) {
         console.log(`Load subscription ${subId} events...`);
         let evtsHistory = Events.GetLocalHistory(subId);
         await Events
-            .Load(subId, evtsHistory, 9_000_000) // w/ timeout of 15 minutes
+            .LongPoll(subId, evtsHistory)
             .finally(_ => {
                 let evtsUnreadCount = 0;
                 for (const evt of evtsHistory) {

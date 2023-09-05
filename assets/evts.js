@@ -1,13 +1,17 @@
-const Events = {};
+const Events = {
+    audioCtx: new (window.AudioContext || window.webkitAudioContext)(),
+    audioSnd: new Audio("/web/sound-msg-new.mp3"),
+    audioSrc: Events.audioCtx.createMediaElementSource(Events.audioSnd),
+};
 
-Events.Load = function (subId, evtsHistory, timeout) {
+Events.LongPoll = function (subId, evtsHistory) {
     const userEmail = sessionStorage.getItem("userEmail");
     const optsReq = {
         method: "GET",
         headers: {
             "X-Awakari-User-Id": userEmail,
         },
-        timeout: timeout,
+        timeout: 9_000_000, // 15 min
     }
     return fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {
@@ -19,6 +23,9 @@ Events.Load = function (subId, evtsHistory, timeout) {
         .then(data => {
             console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs")) {
+                if (data.msgs.length > 0) {
+                    Events.audioSnd.play();
+                }
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }

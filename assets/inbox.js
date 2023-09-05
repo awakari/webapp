@@ -43,6 +43,8 @@ const templateInboxEvent = (subId, evt) => `
                 </div>
 `
 
+let eventsLoadingRunning = false;
+
 function loadInbox() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("id");
@@ -58,11 +60,8 @@ function loadInboxNav(subId) {
 
 function loadInboxEvents(subId) {
     let evtsHistory = Events.GetLocalHistory(subId);
-    Events
-        .Load(subId, evtsHistory, 1_000)
-        .finally(_ => {
-            displayEvents(subId, evtsHistory)
-        })
+    displayEvents(subId, evtsHistory);
+    startEventsLoading(subId, evtsHistory);
 }
 
 function displayEvents(subId, evts) {
@@ -71,6 +70,23 @@ function displayEvents(subId, evts) {
     evts.reverse().forEach(evt => {
         listHtml.innerHTML += templateInboxEvent(subId, evt);
     })
+}
+
+async function startEventsLoading(subId, evtsHistory) {
+    if (!eventsLoadingRunning) {
+        eventsLoadingRunning = true;
+        try {
+            while (true) {
+                await Events
+                    .LongPoll(subId, evtsHistory)
+                    .finally(_ => {
+                        displayEvents(subId, evtsHistory)
+                    });
+            }
+        } finally {
+            eventsLoadingRunning = false;
+        }
+    }
 }
 
 function deleteEvent(subId, evtId) {

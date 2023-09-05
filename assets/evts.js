@@ -1,8 +1,11 @@
 const Events = {}
 
-Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-Events.audioSnd = new Audio("/web/sound-msg-new.mp3");
-Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
+if(confirm("Allow audio notifications?")) {
+    Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    Events.audioSnd = new Audio("/web/sound-msg-new.mp3");
+    Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
+    Events.audioSrc.connect(Events.audioCtx.destination);
+}
 
 Events.LongPoll = function (subId, evtsHistory) {
     const userEmail = sessionStorage.getItem("userEmail");

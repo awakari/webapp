@@ -25,6 +25,8 @@ const templateSub = (sub) => `
                 </div>
 `
 
+let eventsLoadingRunning = false;
+
 function loadSubscriptions() {
     let userEmail = sessionStorage.getItem("userEmail")
     let optsReq = {
@@ -47,7 +49,12 @@ function loadSubscriptions() {
                 listHtml.innerHTML = "";
                 for (const sub of data.subs) {
                     listHtml.innerHTML += templateSub(sub);
-                    loadSubscriptionEvents(sub.id);
+                }
+                if (!eventsLoadingRunning) {
+                    console.log("Start events loading...");
+                    startEventsLoading(data.subs);
+                    eventsLoadingRunning = true;
+                    console.log("Events loading started in the background");
                 }
             }
         })
@@ -87,9 +94,17 @@ function showInbox(id) {
     window.location.assign(`/web/inbox.html?id=${id}`);
 }
 
+async function startEventsLoading(subIds) {
+    console.log("Running events loading...");
+    while(true) {
+        await Promise.all(subIds.map(subId => loadSubscriptionEvents(subId)));
+    }
+}
+
 function loadSubscriptionEvents(subId) {
+    console.log(`Load subscription ${subId} events...`)
     let evtsHistory = Events.GetLocalHistory(subId);
-    Events
+    return Events
         .Load(subId, evtsHistory)
         .finally(_ => {
             let evtsUnreadCount = 0;

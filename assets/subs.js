@@ -107,10 +107,10 @@ async function startEventsLoading(subs) {
 async function loadSubscriptionEvents(subId) {
     while(true) {
         console.log(`Load subscription ${subId} events...`);
-        let evtsHistory = Events.GetLocalHistory(subId);
         await Events
-            .LongPoll(subId, evtsHistory)
+            .LongPoll(subId)
             .finally(_ => {
+                let evtsHistory = Events.GetLocalHistory(subId);
                 let evtsUnreadCount = 0;
                 for (const evt of evtsHistory) {
                     if (!evt.hasOwnProperty("read") || evt.read === false) {

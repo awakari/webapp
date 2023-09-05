@@ -7,7 +7,7 @@ Events.enableSound = function () {
     Events.audioSrc.connect(Events.audioCtx.destination);
 }
 
-Events.LongPoll = function (subId, evtsHistory) {
+Events.LongPoll = function (subId) {
     const userEmail = sessionStorage.getItem("userEmail");
     const optsReq = {
         method: "GET",
@@ -25,10 +25,11 @@ Events.LongPoll = function (subId, evtsHistory) {
         })
         .then(data => {
             console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
-            if (data != null && data.hasOwnProperty("msgs")) {
-                if (data.msgs.length > 0 && Events.hasOwnProperty("audioSnd")) {
+            if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
+                if (Events.hasOwnProperty("audioSnd")) {
                     Events.audioSnd.play();
                 }
+                let evtsHistory = Events.GetLocalHistory(subId);
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }

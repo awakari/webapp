@@ -72,15 +72,16 @@ function displayEvents(subId, evts) {
     })
 }
 
-async function startEventsLoading(subId, evtsHistory) {
+async function startEventsLoading(subId) {
     if (!eventsLoadingRunning) {
         eventsLoadingRunning = true;
         try {
             while (true) {
                 console.log(`Long poll events for ${subId}...`);
                 await Events
-                    .LongPoll(subId, evtsHistory)
+                    .LongPoll(subId)
                     .finally(_ => {
+                        let evtsHistory = Events.GetLocalHistory(subId);
                         displayEvents(subId, evtsHistory)
                     });
                 console.log(`Long poll events for ${subId} done`);

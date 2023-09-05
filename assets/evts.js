@@ -16,6 +16,7 @@ Events.Load = function (subId, evtsHistory) {
             return resp.json();
         })
         .then(data => {
+            console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs")) {
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);

@@ -62,7 +62,7 @@ function loadInboxNav(subId) {
 }
 
 function loadInboxEvents(subId) {
-    let evtsHistory = Events.GetLocalHistory(subId);
+    let evtsHistory = Events.getLocalHistory(subId);
     displayEvents(subId, evtsHistory);
     startEventsLoading(subId, evtsHistory);
 }
@@ -82,9 +82,9 @@ async function startEventsLoading(subId) {
             while (true) {
                 console.log(`Long poll events for ${subId}...`);
                 await Events
-                    .LongPoll(subId)
+                    .longPoll(subId)
                     .finally(_ => {
-                        let evtsHistory = Events.GetLocalHistory(subId);
+                        let evtsHistory = Events.getLocalHistory(subId);
                         displayEvents(subId, evtsHistory)
                     });
                 console.log(`Long poll events for ${subId} done`);
@@ -98,13 +98,7 @@ async function startEventsLoading(subId) {
 
 function deleteEvent(subId, evtId) {
     if (confirm(`Confirm delete event ${evtId}`)) {
-        let evtsHistory = Events.GetLocalHistory(subId);
-        for (let i = 0; i < evtsHistory.length; i++) {
-            if (evtsHistory[i].id === evtId) {
-                evtsHistory.splice(i, 1)
-            }
-        }
-        Events.PutLocalHistory(subId, evtsHistory);
+        let evtsHistory = Events.delete(subId, evtId);
         displayEvents(subId, evtsHistory)
     }
 }

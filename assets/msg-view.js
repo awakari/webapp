@@ -1,7 +1,7 @@
 function loadEvent() {
     const queryParams = new URLSearchParams(window.location.search);
     const subId = queryParams.get("subId");
-    let evts = Events.GetLocalHistory(subId);
+    let evts = Events.getLocalHistory(subId);
     const evtId = queryParams.get("evtId");
     evts.forEach(evt => {
         if (evt.id === evtId) {
@@ -19,5 +19,15 @@ function loadEvent() {
             link.download = `${evt.id}.json`;
         }
     })
-    Events.PutLocalHistory(subId, evts);
+    Events.putLocalHistory(subId, evts);
+}
+
+function deleteEvent() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const subId = queryParams.get("subId");
+    const evtId = queryParams.get("evtId");
+    if (confirm(`Confirm delete event ${evtId}`)) {
+        Events.delete(subId, evtId);
+        window.location.assign(`/web/inbox.html?id=${subId}`);
+    }
 }

@@ -21,7 +21,7 @@ Events.toggleAudio = function () {
     }
 };
 
-Events.LongPoll = function (subId) {
+Events.longPoll = function (subId) {
     const userEmail = sessionStorage.getItem("userEmail");
     const optsReq = {
         method: "GET",
@@ -43,11 +43,11 @@ Events.LongPoll = function (subId) {
         .then(data => {
             console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
-                let evtsHistory = Events.GetLocalHistory(subId);
+                let evtsHistory = Events.getLocalHistory(subId);
                 for (const evt of data.msgs) {
                     evtsHistory.push(evt);
                 }
-                Events.PutLocalHistory(subId, evtsHistory);
+                Events.putLocalHistory(subId, evtsHistory);
                 if (Events.audioEnabled) {
                     return Events.audioSnd.play();
                 }
@@ -58,7 +58,7 @@ Events.LongPoll = function (subId) {
         })
 };
 
-Events.GetLocalHistory = function (subId) {
+Events.getLocalHistory = function (subId) {
     let evtsHistoryTxt = localStorage.getItem(subId);
     if (evtsHistoryTxt == null) {
         evtsHistoryTxt = "[]";
@@ -66,6 +66,17 @@ Events.GetLocalHistory = function (subId) {
     return JSON.parse(evtsHistoryTxt);
 }
 
-Events.PutLocalHistory = function (subId, evts) {
+Events.putLocalHistory = function (subId, evts) {
     localStorage.setItem(subId, JSON.stringify(evts));
+}
+
+Events.delete = function (subId, evtId) {
+    let evtsHistory = Events.getLocalHistory(subId);
+    for (let i = 0; i < evtsHistory.length; i++) {
+        if (evtsHistory[i].id === evtId) {
+            evtsHistory.splice(i, 1)
+        }
+    }
+    Events.putLocalHistory(subId, evtsHistory);
+    return evtsHistory;
 }

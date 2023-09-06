@@ -1,16 +1,24 @@
 const Events = {
     abortController: new AbortController(),
+    audioEnabled: false,
 }
 
 const timeout = setTimeout(() => {
    Events.abortController.abort();
 }, 9_000_000);
 
-Events.enableSound = function () {
-    Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    Events.audioSnd = new Audio("/web/sound-msg-new.mp3");
-    Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
-    Events.audioSrc.connect(Events.audioCtx.destination);
+Events.toggleAudio = function () {
+    if (Events.audioEnabled) {
+        Events.audioEnabled = false;
+        document.getElementById("img_toggle_audio").src = "/web/notifications-off.svg";
+    } else {
+        Events.audioEnabled = true;
+        document.getElementById("img_toggle_audio").src = "/web/notifications-on.svg";
+        Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        Events.audioSnd = new Audio("/web/inbox-notification.wav");
+        Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
+        Events.audioSrc.connect(Events.audioCtx.destination);
+    }
 }
 
 Events.LongPoll = function (subId) {
@@ -40,7 +48,7 @@ Events.LongPoll = function (subId) {
                     evtsHistory.push(evt);
                 }
                 Events.PutLocalHistory(subId, evtsHistory);
-                if (Events.hasOwnProperty("audioSnd")) {
+                if (Events.audioEnabled) {
                     return Events.audioSnd.play();
                 }
             }

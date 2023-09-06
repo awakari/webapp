@@ -19,7 +19,7 @@ Events.toggleAudio = function () {
         Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
         Events.audioSrc.connect(Events.audioCtx.destination);
     }
-}
+};
 
 Events.LongPoll = function (subId) {
     const userEmail = sessionStorage.getItem("userEmail");

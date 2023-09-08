@@ -1,0 +1,18 @@
+{
+  "name": "Awakari Web",
+  "short_name": "AwakariWeb",
+  "start_url": ".",
+  "display": "standalone",
+  "description": "Awakari reference Web UI",
+  "icons": [
+    {
+      "src": "web/logo-color.svg"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "homepage",
+      "url": "https://awakari.com"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 default: docker
 
 css:
-	npx tailwindcss -i ./tailwind.input.css -o ./assets/tailwind.output.css
+	npx tailwindcss -i ./tailwind.input.css -o ./web/tailwind.output.css
 
 docker:
 	docker build -t awakari/webapp .

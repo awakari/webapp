@@ -4,9 +4,16 @@ Reference Web UI
 
 ## 1. Usage
 
-TODO
+Uses 2-factor authentication:
+1. Client TLS certificate.
+2. External identity provider (Google OAuth2 currently).
 
-## 2. TODO
+Steps to access:
+1. Install the [CA](https://awakari.com/certs/awakari-demo-ca.crt).
+2. Install the [client certificate](https://awakari.com/certs/awakari-demo-client-0.p12).
+3. Navigate https://demo.awakari.cloud/web
+
+## 2. Convert own certificate
 
 Converting the client certificate for the browser/mobile phone usage:
 ```shell

@@ -3,7 +3,7 @@ ingress:
     - host: awakari.cloud
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
     - secretName: secret-webapp-tls-server
       hosts:

@@ -45,7 +45,7 @@ ingress:
     - host: webapp.local
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tlsCa:
     secretName: secret-webapp-tls-ca
   tls:

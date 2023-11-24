@@ -2,7 +2,7 @@ const templateInboxNav = subId => `
             <p class="text-lg"><b>Inbox</b></p>
             <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
                 <button title="Toggle Notification Sound" onclick="Events.toggleAudio()" class="h-8 w-8 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700 items-center">
-                    <img id="img_toggle_audio" src=${Events.audioEnabled ? "//notifications-on.svg" : "//notifications-off.svg"} alt="Toggle Notification Sound" class="px-1"/>
+                    <img id="img_toggle_audio" src=${Events.audioEnabled ? "notifications-on.svg" : "notifications-off.svg"} alt="Toggle Notification Sound" class="px-1"/>
                 </button>
                 <button title="Edit Subscription" onclick="window.location.assign('//sub-edit.html?id=${subId}')" class="h-8 w-8 rounded-md border border-blue-700 shadow-2xl hover:bg-blue-200 text-blue-700 items-center">
                     <img src="sub-edit.svg" alt="Edit Subscription" class="px-1"/>

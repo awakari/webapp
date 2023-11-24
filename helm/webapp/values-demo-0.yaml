@@ -1,10 +1,10 @@
 ingress:
   hosts:
-    - host: demo.awakari.cloud
+    - host: awakari.cloud
       paths:
-        - path: /web(/|$)(.*)
+        - path: /
           pathType: ImplementationSpecific
   tls:
     - secretName: secret-api-tls-server
       hosts:
-        - demo.awakari.cloud
+        - awakari.cloud

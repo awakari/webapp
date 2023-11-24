@@ -146,7 +146,7 @@ function submitMsg() {
     const payload = {
         id: document.getElementById("msg_id").value,
         specVersion: "1.0",
-        source: "awakari.cloud/web",
+        source: "awakari.cloud",
         type: "com.github.awakari.webapp",
         attributes: JSON.parse(document.getElementById("msg_attrs").value),
         text_data: document.getElementById("msg_txt_data").value,

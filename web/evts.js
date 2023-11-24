@@ -10,12 +10,12 @@ const timeout = setTimeout(() => {
 Events.toggleAudio = function () {
     if (Events.audioEnabled) {
         Events.audioEnabled = false;
-        document.getElementById("img_toggle_audio").src = "/web/notifications-off.svg";
+        document.getElementById("img_toggle_audio").src = "//notifications-off.svg";
     } else {
         Events.audioEnabled = true;
-        document.getElementById("img_toggle_audio").src = "/web/notifications-on.svg";
+        document.getElementById("img_toggle_audio").src = "//notifications-on.svg";
         Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        Events.audioSnd = new Audio("/web/inbox-notification.wav");
+        Events.audioSnd = new Audio("//inbox-notification.wav");
         Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
         Events.audioSrc.connect(Events.audioCtx.destination);
     }

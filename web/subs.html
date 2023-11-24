@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/web/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/web/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/web/favicon-16x16.png">
-    <link rel="manifest" href="/web/site.webmanifest">
-    <link rel="mask-icon" href="/web/safari-pinned-tab.svg" color="#0ed3cf">
+    <link rel="apple-touch-icon" sizes="180x180" href="//apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="//favicon-16x16.png">
+    <link rel="manifest" href="//site.webmanifest">
+    <link rel="mask-icon" href="//safari-pinned-tab.svg" color="#0ed3cf">
     <meta name="msapplication-TileColor" content="#0ed3cf">
     <meta name="theme-color" content="#0ed3ff">
 
     <title>Awakari Web</title>
 
-    <link href="/web/tailwind.output.css" rel="stylesheet">
+    <link href="//tailwind.output.css" rel="stylesheet">
 
-    <script src="/web/login.js"></script>
-    <script src="/web/evts.js"></script>
-    <script src="/web/subs.js"></script>
+    <script src="//login.js"></script>
+    <script src="//evts.js"></script>
+    <script src="//subs.js"></script>
 </head>
 <body class="bg-gray-100" onload="loadSubscriptions()">
 
@@ -31,13 +31,13 @@
             <p class="text-lg"><b>Subscriptions</b></p>
             <span class="flex space-x-2" style="margin-left: auto; margin-right: 0">
                 <button title="Toggle Notification Sound" onclick="Events.toggleAudio()" class="h-8 w-8 rounded-md border border-indigo-700 shadow-2xl hover:bg-indigo-200 text-indigo-700 items-center">
-                    <img id="img_toggle_audio" src="/web/notifications-off.svg" alt="Toggle Notification Sound" class="px-1"/>
+                    <img id="img_toggle_audio" src="//notifications-off.svg" alt="Toggle Notification Sound" class="px-1"/>
                 </button>
-                <button title="New Subscription" onclick="window.location.assign('/web/sub-new.html')" class="h-8 w-8 rounded-md border border-blue-700 shadow-2xl hover:bg-blue-200 text-blue-700 items-center">
-                    <img src="/web/sub-new.svg" alt="New Subscription" class="px-1"/>
+                <button title="New Subscription" onclick="window.location.assign('//sub-new.html')" class="h-8 w-8 rounded-md border border-blue-700 shadow-2xl hover:bg-blue-200 text-blue-700 items-center">
+                    <img src="//sub-new.svg" alt="New Subscription" class="px-1"/>
                 </button>
-                <button title="New Message" onclick="window.location.assign('/web/msg-new.html')" class="h-8 w-8 rounded-md border border-cyan-700 shadow-2xl hover:bg-cyan-200 text-cyan-700 items-center">
-                    <img src="/web/msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
+                <button title="New Message" onclick="window.location.assign('//msg-new.html')" class="h-8 w-8 rounded-md border border-cyan-700 shadow-2xl hover:bg-cyan-200 text-cyan-700 items-center">
+                    <img src="//msg-new.svg" alt="New Message" class="px-1" style="padding-top: 0.25rem"/>
                 </button>
                 <button type="button" title="Exit" onclick="logout()" class="h-8 w-8 text-sm focus:outline-none text-gray-500 rounded-md border border-gray-500 hover:bg-gray-200 flex items-center">
                     <svg class="fill-current w-4 h-4 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">

@@ -81,7 +81,7 @@ function deleteSubscription(id) {
             })
             .then(_ => {
                 alert(`Deleted subscription ${id}`);
-                window.location.assign("/web/subs.html");
+                window.location.assign("//subs.html");
             })
             .catch(err => {
                 alert(err);
@@ -90,7 +90,7 @@ function deleteSubscription(id) {
 }
 
 function showInbox(id) {
-    window.location.assign(`/web/inbox.html?id=${id}`);
+    window.location.assign(`//inbox.html?id=${id}`);
 }
 
 async function startEventsLoading(subs) {

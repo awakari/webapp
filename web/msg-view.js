@@ -28,6 +28,6 @@ function deleteEvent() {
     const evtId = queryParams.get("evtId");
     if (confirm(`Confirm delete event ${evtId}`)) {
         Events.delete(subId, evtId);
-        window.location.assign(`/web/inbox.html?id=${subId}`);
+        window.location.assign(`//inbox.html?id=${subId}`);
     }
 }

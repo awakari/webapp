@@ -84,7 +84,7 @@ function updateSub(subId) {
         })
         .then(_ => {
             alert(`Updated subscription: ${subId}`)
-            window.location.assign("/web/subs.html")
+            window.location.assign("//subs.html")
         })
         .catch(err => {
             alert(err)

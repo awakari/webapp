@@ -20,6 +20,8 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="login.js"></script>
+
+    <link href="login.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-100">
 
@@ -28,7 +30,7 @@
 
         <img src="logo-color.svg" width="320px" height="320px"/>
 
-        <div class="space-y-2">
+        <div class="space-y-2 space-x-2 flex">
 
             <!-- Google -->
             <div id="g_id_onload"
@@ -41,7 +43,7 @@
             <div class="g_id_signin"
                  data-type="standard"
                  data-shape="rectangular"
-                 data-theme="filled_black"
+                 data-theme="outline"
                  data-text="continue_with"
                  data-size="large"
                  data-logo_alignment="left"
@@ -55,7 +57,6 @@
                     data-size="large"
                     data-onauth="onTelegramAuth(user)"
                     data-request-access="write"
-                    data-width="200"
                     data-radius="4"
                     data-userpic="false">
             </script>

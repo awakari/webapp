@@ -12,9 +12,9 @@ function handleAuthGoogle(response) {
     window.location.assign("subs.html");
 }
 
-function handleAuthTelegram(creds) {
-    sessionStorage.setItem("userId", `tg://user?id=${creds.id}`);
-    const token = btoa(JSON.stringify(creds));
+function handleAuthTelegram(user) {
+    sessionStorage.setItem("userId", `tg://user?id=${user.id}`);
+    const token = btoa(JSON.stringify(user));
     sessionStorage.setItem("authToken", token);
 }
 

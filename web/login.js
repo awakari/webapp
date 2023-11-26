@@ -16,6 +16,8 @@ function handleAuthTelegram(user) {
     sessionStorage.setItem("userId", `tg://user?id=${user.id}`);
     const token = btoa(JSON.stringify(user));
     sessionStorage.setItem("authToken", token);
+    // go to subscriptions list
+    window.location.assign("subs.html");
 }
 
 function logout() {

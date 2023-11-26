@@ -1,17 +1,27 @@
+const defaultGroupId = "default"
+
 function handleAuthGoogle(response) {
-    const credential = response.credential;
+    const tokenEncoded = response.credential;
     // Decode the JWT token
-    const decodedToken = jwt_decode(credential);
+    const tokenDecoded = jwt_decode(tokenEncoded);
     // Extract the user email from the decoded token
-    const userEmail = decodedToken.email;
-    sessionStorage.setItem("userEmail", userEmail)
+    const userEmail = tokenDecoded.email;
+    sessionStorage.setItem("userId", `${tokenDecoded.iss}/${tokenDecoded.sub}`);
+    sessionStorage.setItem("authToken", tokenEncoded);
     // go to subscriptions list
-    window.location.assign("subs.html")
+    window.location.assign("subs.html");
+}
+
+function handleAuthTelegram(creds) {
+    sessionStorage.setItem("userId", `tg://user?id=${creds.id}`);
+    const token = btoa(JSON.stringify(creds));
+    sessionStorage.setItem("authToken", token);
 }
 
 function logout() {
     if (confirm("Confirm exit?")) {
-        sessionStorage.removeItem("userEmail")
-        window.location.assign("index.html")
+        sessionStorage.removeItem("userEmail");
+        sessionStorage.removeItem("userId");
+        window.location.assign("index.html");
     }
 }

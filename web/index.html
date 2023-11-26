@@ -55,15 +55,10 @@
                     src="https://telegram.org/js/telegram-widget.js?22"
                     data-telegram-login="AwakariBot"
                     data-size="large"
-                    data-onauth="onTelegramAuth(user)"
+                    data-onauth="handleAuthTelegram(creds)"
                     data-request-access="write"
                     data-radius="4"
                     data-userpic="false">
-            </script>
-            <script type="text/javascript">
-                function onTelegramAuth(user) {
-                    alert('Logged in as ' + JSON.stringify(user));
-                }
             </script>
 
         </div>

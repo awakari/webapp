@@ -28,11 +28,14 @@ const templateSub = (sub) => `
 let eventsLoadingRunning = false;
 
 function loadSubscriptions() {
-    let userEmail = sessionStorage.getItem("userEmail")
+    let authToken = sessionStorage.getItem("authToken");
+    let userId = sessionStorage.getItem("userId");
     let optsReq = {
         method: "GET",
         headers: {
-            "X-Awakari-User-Id": userEmail,
+            "Authorization": `Bearer: ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
         },
         cache: "default",
     }

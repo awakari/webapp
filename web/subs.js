@@ -39,7 +39,7 @@ function loadSubscriptions() {
         },
         cache: "default",
     }
-    fetch("/v1/subscriptions", optsReq)
+    fetch("/v1/sub", optsReq)
         .then(resp => {
             if (!resp.ok) {
                 throw new Error(`Request failed with status: ${resp.status}`);
@@ -75,7 +75,7 @@ function deleteSubscription(id) {
             },
             cache: "default",
         }
-        fetch(`/v1/subscriptions/${id}`, optsReq)
+        fetch(`/v1/sub/${id}`, optsReq)
             .then(resp => {
                 if (!resp.ok) {
                     throw new Error(`Request failed with status: ${resp.status}`);

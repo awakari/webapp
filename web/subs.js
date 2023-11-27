@@ -39,7 +39,7 @@ function loadSubscriptions() {
         },
         cache: "default",
     }
-    fetch("/v1/sub", optsReq)
+    fetch("https://api.awakari.cloud/v1/sub", optsReq)
         .then(resp => {
             if (!resp.ok) {
                 throw new Error(`Request failed with status: ${resp.status}`);

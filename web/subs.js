@@ -33,7 +33,7 @@ function loadSubscriptions() {
     let optsReq = {
         method: "GET",
         headers: {
-            "Authorization": `Bearer: ${authToken}`,
+            "Authorization": `Bearer ${authToken}`,
             "X-Awakari-Group-Id": defaultGroupId,
             "X-Awakari-User-Id": userId,
         },

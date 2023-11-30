@@ -53,11 +53,6 @@ function loadSubscriptions() {
                 for (const sub of data.subs) {
                     listHtml.innerHTML += templateSub(sub);
                 }
-                if (!eventsLoadingRunning) {
-                    console.log("Start events loading...");
-                    startEventsLoading(data.subs);
-                    console.log("Events loading started in the background");
-                }
             }
         })
         .catch(err => {

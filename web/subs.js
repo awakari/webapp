@@ -1,6 +1,6 @@
 const templateSub = (sub) => `
-                <div class="p-1 shadow-sm hover:text-sky-500 hower:bg-gray-200 rounded-md flex">
-                    <span class="truncate w-[240px]">
+                <div class="p-1 shadow-sm hover:text-blue-500 hover:bg-gray-200 rounded-md flex">
+                    <span class="truncate w-[240px] sm:w-[600px]">
                         ${sub.description}
                     </span>
                     <div class="grow"></div>

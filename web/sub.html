@@ -29,9 +29,10 @@
     <link href="style.css" rel="stylesheet">
 
     <script src="login.js"></script>
+    <script src="subs.js"></script>
 
     </head>
-<body class="bg-gray-200">
+<body class="bg-gray-200" onload="loadSubscriptions()">
     <div class="bg-white">
     <nav class="flex flex-row">
         <button class="text-gray-600 py-1 px-1 block hover:text-indigo-500 focus:outline-none flex text-lg"
@@ -74,9 +75,10 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                 </svg>
-                <input type="search" class="ml-1 border-0 outline-none"/>
+                <input type="search" class="ml-1 border-0 outline-none" onchange="loadSubscriptions()"/>
             </div>
         </div>
+        <div id="subs_list"></div>
     </main>
 </div>
 

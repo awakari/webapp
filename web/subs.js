@@ -5,7 +5,7 @@ const templateSub = (sub) => `
                     </span>
                     <div class="grow"></div>
                     <span>
-                        🠆                                         
+                        🠚🠖                                         
                     </span>
                 </div>
 `

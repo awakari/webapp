@@ -1,16 +1,11 @@
 const templateSub = (sub) => `
-                <div class="p-1 shadow-sm border hover:text-sky-500">
-                    <span class="flex space-x-2">
-                        <span class="hover:cursor-pointer" onclick="showInbox('${sub.id}')">
-                            <span class="flex space-x-1">
-                                <p class="truncate w-[256px] ${sub.hasOwnProperty("enabled") && sub.enabled ? "" : "text-slate-500"}">
-                                    ${sub.description}
-                                </p>
-                            </span>
-                        </span>
-                        <span class="flex">
-                             ⃗
-                        </span>
+                <div class="p-1 shadow-sm border hover:text-sky-500 flex">
+                    <span class="truncate w-[240px]">
+                        ${sub.description}
+                    </span>
+                    <div class="hidden md:inline md:grow"></div>
+                    <span>
+                        🠆                                         
                     </span>
                 </div>
 `

@@ -1392,7 +1392,7 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:flex-row {
-    flex-direction: row;
+  .sm\:flex-initial {
+    flex: 0 1 auto;
   }
 }

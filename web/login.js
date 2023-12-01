@@ -7,7 +7,7 @@ function handleAuthGoogle(response) {
     sessionStorage.setItem("userId", `${tokenDecoded.iss}/${tokenDecoded.sub}`);
     sessionStorage.setItem("authToken", tokenEncoded);
     // go to subscriptions list
-    window.location.assign("subs.html");
+    window.location.assign("sub.html");
 }
 
 function handleAuthTelegram(user) {
@@ -15,12 +15,12 @@ function handleAuthTelegram(user) {
     const token = btoa(JSON.stringify(user));
     sessionStorage.setItem("authToken", token);
     // go to subscriptions list
-    window.location.assign("subs.html");
+    window.location.assign("sub.html");
 }
 
 function logout() {
     if (confirm("Confirm exit?")) {
         sessionStorage.removeItem("userId");
-        window.location.assign("index.html");
+        window.location.assign("login.html");
     }
 }

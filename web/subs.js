@@ -1,12 +1,7 @@
 const templateSub = (sub) => `
-                <div class="p-1 shadow-sm border hover:bg-white">
+                <div class="p-1 shadow-sm border hover:text-sky-500">
                     <span class="flex space-x-2">
                         <span class="hover:cursor-pointer" onclick="showInbox('${sub.id}')">
-                            <span class="flex space-x-2">
-                                <p class="font-mono text-xs ${sub.hasOwnProperty("enabled") && sub.enabled ? "text-slate-500" : "text-slate-400"}">
-                                    ${sub.id}
-                                </p>
-                            </span>
                             <span class="flex space-x-1">
                                 <p class="truncate w-[256px] ${sub.hasOwnProperty("enabled") && sub.enabled ? "" : "text-slate-500"}">
                                     ${sub.description}
@@ -14,9 +9,7 @@ const templateSub = (sub) => `
                             </span>
                         </span>
                         <span class="flex">
-                            <button type="button" title="Delete" onclick="deleteSubscription('${sub.id}')" class="ml-1 mt-2 focus:outline-none text-gray-400 hover:text-gray-500">
-                                ⃗
-                            </button>
+                             ⃗
                         </span>
                     </span>
                 </div>

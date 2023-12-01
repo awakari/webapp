@@ -1,87 +1,63 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://tailwindcomponents.com/component/tab-navigation/landing -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
-    <link rel="icon" sizes="32x32" href="logo-color.svg">
-    <link rel="icon" sizes="16x16" href="logo-color.svg">
+    <link rel="icon" type="image/svg" sizes="32x32" href="logo-color.svg">
+    <link rel="icon" type="image/svg" sizes="16x16" href="logo-color.svg">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" href="logo-color.svg" color="#0ed3cf">
     <meta name="msapplication-TileColor" content="#0ed3cf">
-    <meta name="theme-color" content="#0ed3ff">
+    <meta name="theme-color" content="#0ed3cf">
 
-    <title>Awakari Web</title>
+    <meta property="og:url" content="https://awakari.cloud">
+    <meta property="og:title" content="Awarkari">
+    <meta property="og:description" content="Event-driven reverse search">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Awakari">
+    <meta name="twitter:description" content="Event-driven reverse search">
+
+    <link rel="canonical" href="https://awakari.cloud" itemprop="URL">
+    
+    <title>Awakari</title>
 
     <link href="tailwind.output.css" rel="stylesheet">
-
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
-    <script src="login.js"></script>
-
-</head>
-<body class="bg-gray-100">
-
-<div id="login" class="flex items-center justify-center">
-    <div class="flex flex-col items-center">
-
-        <img src="logo-color.svg" width="320px" height="320px"/>
-
-        <div>
-            Choose how to receive the notifications:
-        </div>
-
-        <div class="grid grid-cols-3 space-y-2">
-
-            <div class="pt-1">
-                Email
-            </div>
-
-            <div class="col-span-2">
-                <!-- Google -->
-                <div id="g_id_onload"
-                     data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
-                     data-context="signin"
-                     data-ux_mode="popup"
-                     data-callback="handleAuthGoogle"
-                     data-auto_prompt="false">
-                </div>
-                <div class="g_id_signin"
-                     data-type="standard"
-                     data-shape="rectangular"
-                     data-theme="outline"
-                     data-text="signin_with"
-                     data-size="medium"
-                     data-logo_alignment="left">
-                </div>
-            </div>
-
-            <div class="pt-1">
-                Telegram
-            </div>
-            <div class="col-span-2">
-                <!-- Telegram -->
-                <script async
-                        src="https://telegram.org/js/telegram-widget.js?22"
-                        data-telegram-login="AwakariBot"
-                        data-size="medium"
-                        data-onauth="handleAuthTelegram(user)"
-                        data-request-access="write"
-                        data-radius="4"
-                        data-userpic="false">
-                </script>
-            </div>
-
-        </div>
-
-        <p class="text-center mt-3 text-[14px]">By logging in, you agree to the
-            <a href="tos.html" class="text-gray-600">Terms of Service</a> and <a href="privacy.html" class="text-gray-600">Privacy Policy</a>.
-        </p>
-
-    </div>
+    <link href="style.css" rel="stylesheet">
+    </head>
+<body class="bg-gray-200">
+    <div class="bg-white">
+    <nav class="flex flex-col sm:flex-row">
+        <button class="text-gray-600 py-1 px-2 block hover:text-indigo-500 focus:outline-none text-indigo-500 border-b-2 font-medium border-indigo-500 flex text-xl">
+            About
+        </button>
+        <button class="text-gray-600 py-1 px-2 block hover:text-sky-500 focus:outline-none flex text-xl">
+            Use Cases
+        </button>
+        <button class="text-gray-600 py-1 px-2 block hover:text-sky-500 focus:outline-none flex text-xl">
+            Solutions
+        </button>
+        <button class="text-gray-600 py-1 px-2 block hover:text-sky-500 focus:outline-none flex text-xl">
+            Pricing
+        </button>
+        <button class="text-gray-600 py-1 px-2 block hover:text-sky-500 focus:outline-none flex text-xl">
+            Resources
+        </button>
+        <div class="grow sm:none"></div>
+        <button class="text-gray-600 py-1 px-2 block hover:text-sky-500 focus:outline-none flex text-xl">
+            ✉ Contact
+        </button>
+        <button class="text-gray-600 py-1 px-2 block hover:text-gray-500 focus:outline-none flex text-xl justify-self-end">
+            <svg class="mt-1 mr-1" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6C8 3.79086 9.79086 2 12 2H17.5C19.9853 2 22 4.01472 22 6.5V17.5C22 19.9853 19.9853 22 17.5 22H12C9.79086 22 8 20.2091 8 18V17C8 16.4477 8.44772 16 9 16C9.55228 16 10 16.4477 10 17V18C10 19.1046 10.8954 20 12 20H17.5C18.8807 20 20 18.8807 20 17.5V6.5C20 5.11929 18.8807 4 17.5 4H12C10.8954 4 10 4.89543 10 6V7C10 7.55228 9.55228 8 9 8C8.44772 8 8 7.55228 8 7V6ZM12.2929 8.29289C12.6834 7.90237 13.3166 7.90237 13.7071 8.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L13.7071 15.7071C13.3166 16.0976 12.6834 16.0976 12.2929 15.7071C11.9024 15.3166 11.9024 14.6834 12.2929 14.2929L13.5858 13L5 13C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11L13.5858 11L12.2929 9.70711C11.9024 9.31658 11.9024 8.68342 12.2929 8.29289Z" fill="currentColor"/>
+            </svg>
+            Login
+        </button>
+    </nav>
 </div>
 
-</body>
-</html>
+
+</body></html>

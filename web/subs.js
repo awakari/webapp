@@ -1,9 +1,9 @@
 const templateSub = (sub) => `
-                <div class="p-1 shadow-sm border hover:text-sky-500 flex">
+                <div class="p-1 shadow-sm hover:text-sky-500 hower:bg-gray-200 rounded-md flex">
                     <span class="truncate w-[240px]">
                         ${sub.description}
                     </span>
-                    <div class="hidden md:inline md:grow"></div>
+                    <div class="grow"></div>
                     <span>
                         🠆                                         
                     </span>

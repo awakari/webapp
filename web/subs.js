@@ -26,7 +26,7 @@ function loadSubscriptions() {
         },
         cache: "default",
     }
-    fetch("/v1/sub", optsReq)
+    fetch("/v1/sub?limit=100", optsReq)
         .then(resp => {
             if (!resp.ok) {
                 throw new Error(`Request failed with status: ${resp.status}`);

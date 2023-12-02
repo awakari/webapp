@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0ed3ff">
+
+    <title>Awakari App</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link rel="stylesheet" href="spectre-icons.min.css">
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="jsoneditor.min.js"></script>
+    <script src="sub-cond-schema.js"></script>
+
+</head>
+<body onload="loadSubscription()">
+
+<div id="sub_new" class="flex-1 flex flex-col w-[320px] mx-auto" style="display: flex">
+    <p class="py-2 text-md">View or edit the subscription's matching condition:</p>
+    <form class="space-y-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="sub_cond_editor"></div>
+                </div>
+            </div>
+        </div>
+        <script src="sub-details.js"></script>
+    </form>
+    <p class="py-2 text-xs">Id: <pre id="subId"></pre></p>
+</div>
+
+</body>
+</html>

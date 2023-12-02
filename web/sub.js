@@ -1,5 +1,6 @@
 const templateSub = (sub) => `
-                <div class="p-2 shadow-sm hover:text-blue-500 hover:bg-gray-100 rounded-sm flex">
+                <div class="p-2 shadow-sm hover:text-blue-500 hover:bg-gray-100 rounded-sm flex"
+                     onclick="window.location.assign('sub-details.html?id=${sub.id}')">
                     <span class="truncate w-[240px] sm:w-[600px]">
                         ${sub.description}
                     </span>
@@ -11,8 +12,6 @@ const templateSub = (sub) => `
                     </span>
                 </div>
 `
-
-let eventsLoadingRunning = false;
 
 function loadSubscriptions() {
     let authToken = sessionStorage.getItem("authToken");
@@ -70,46 +69,6 @@ function deleteSubscription(id) {
             })
             .catch(err => {
                 alert(err);
-            })
-    }
-}
-
-function showInbox(id) {
-    window.location.assign(`//inbox.html?id=${id}`);
-}
-
-async function startEventsLoading(subs) {
-    eventsLoadingRunning = true;
-    console.log("Running events loading...");
-    try {
-        await Promise.all(subs.map(sub => loadSubscriptionEvents(sub.id)));
-    } finally {
-        console.log("Stopped events loading");
-        eventsLoadingRunning = false;
-    }
-}
-
-async function loadSubscriptionEvents(subId) {
-    while(true) {
-        console.log(`Load subscription ${subId} events...`);
-        await Events
-            .longPoll(subId)
-            .finally(_ => {
-                let evtsHistory = Events.getLocalHistory(subId);
-                let evtsUnreadCount = 0;
-                for (const evt of evtsHistory) {
-                    if (!evt.hasOwnProperty("read") || evt.read === false) {
-                        evtsUnreadCount++;
-                    }
-                }
-                if (evtsUnreadCount > 0) {
-                    document.getElementById(`unread_count_${subId}`).style.background = "#f0abfc"; // bg-fuchsia-300
-                }
-                if (evtsUnreadCount > 9) {
-                    document.getElementById(`unread_count_${subId}`).innerHTML = "9+";
-                } else {
-                    document.getElementById(`unread_count_${subId}`).innerHTML = `${evtsUnreadCount}`;
-                }
             })
     }
 }

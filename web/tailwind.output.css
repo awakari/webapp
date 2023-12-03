@@ -576,6 +576,10 @@ video {
   visibility: collapse;
 }
 
+.static {
+  position: static;
+}
+
 .absolute {
   position: absolute;
 }
@@ -632,8 +636,16 @@ video {
   margin-bottom: -1px;
 }
 
+.-ml-2 {
+  margin-left: -0.5rem;
+}
+
 .-mr-1 {
   margin-right: -0.25rem;
+}
+
+.-mt-4 {
+  margin-top: -1rem;
 }
 
 .mb-0 {
@@ -818,6 +830,10 @@ video {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-7 {
@@ -1147,6 +1163,10 @@ video {
 
 .pl-0 {
   padding-left: 0px;
+}
+
+.pl-\[1px\] {
+  padding-left: 1px;
 }
 
 .pr-0 {

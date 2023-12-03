@@ -109,8 +109,6 @@ body {
     --placeholder-color: #999da1;
     --ripple-duration: .45s;
     --ripple-end-duration: .3s;
-    -webkit-user-select: none;
-    user-select: none;
     cursor: default;
 }
 html.dark body {

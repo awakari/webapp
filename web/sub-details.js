@@ -43,7 +43,7 @@ function loadSubscription() {
         })
         .then(data => {
             if (data != null) {
-                console.log(JSON.stringify(data));
+                document.getElementById("subDescr").value = data.description;
                 editor.setValue(data.cond);
             }
         })

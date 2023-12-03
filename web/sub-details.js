@@ -40,6 +40,7 @@ function loadSubscription() {
         })
         .then(data => {
             if (data != null) {
+                console.log(JSON.stringify(data));
                 editor.setValue(data.cond);
             }
         })

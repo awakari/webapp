@@ -20,6 +20,9 @@ function loadSubscription() {
     const id = urlParams.get("id");
     document.getElementById("subId").innerHTML = urlParams.get("id");
     //
+    // const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
+    // editor.setValue(data.cond);
+    //
     let authToken = sessionStorage.getItem("authToken");
     let userId = sessionStorage.getItem("userId");
     let optsReq = {

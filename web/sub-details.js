@@ -20,42 +20,43 @@ function loadSubscription() {
     const id = urlParams.get("id");
     document.getElementById("subId").value = id;
     //
-    const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
-    editor.setValue(data.cond);
+    // const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
+    // editor.setValue(data.cond);
     //
-    // let authToken = sessionStorage.getItem("authToken");
-    // let userId = sessionStorage.getItem("userId");
-    // let optsReq = {
-    //     method: "GET",
-    //     headers: {
-    //         "Authorization": `Bearer ${authToken}`,
-    //         "X-Awakari-Group-Id": defaultGroupId,
-    //         "X-Awakari-User-Id": userId,
-    //     },
-    //     cache: "default",
-    // }
-    // fetch(`/v1/sub/${id}`, optsReq)
-    //     .then(resp => {
-    //         if (!resp.ok) {
-    //             throw new Error(`Request failed with status: ${resp.status}`);
-    //         }
-    //         return resp.json();
-    //     })
-    //     .then(data => {
-    //         if (data != null) {
-    //             document.getElementById("subDescr").value = data.description;
-    //             editor.setValue(data.cond);
-    //         }
-    //     })
-    //     .catch(err => {
-    //         alert(err);
-    //     });
+    let authToken = sessionStorage.getItem("authToken");
+    let userId = sessionStorage.getItem("userId");
+    let optsReq = {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
+        },
+        cache: "default",
+    }
+    fetch(`/v1/sub/${id}`, optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error(`Request failed with status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data != null) {
+                document.getElementById("subDescr").value = data.description;
+                editor.setValue(data.cond);
+            }
+        })
+        .catch(err => {
+            alert(err);
+        });
 }
 
 function updateSubscription() {
     const id = document.getElementById("subId").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
-        let userEmail = sessionStorage.getItem("userEmail")
+        let authToken = sessionStorage.getItem("authToken");
+        let userId = sessionStorage.getItem("userId");
         let payload = {
             id: id,
             description: document.getElementById("subDescr").value,
@@ -65,12 +66,13 @@ function updateSubscription() {
         let optsReq = {
             method: "PUT",
             headers: {
-                "X-Awakari-User-Id": userEmail,
-                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+                "X-Awakari-Group-Id": defaultGroupId,
+                "X-Awakari-User-Id": userId,
             },
             body: JSON.stringify(payload)
         }
-        fetch(`/v1/subscriptions/${id}`, optsReq)
+        fetch(`/v1/sub/${id}`, optsReq)
             .then(resp => {
                 if (!resp.ok) {
                     resp.text().then(errMsg => console.error(errMsg))
@@ -91,11 +93,14 @@ function updateSubscription() {
 function deleteSubscription() {
     const id = document.getElementById("subId").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
-        let userEmail = sessionStorage.getItem("userEmail");
+        let authToken = sessionStorage.getItem("authToken");
+        let userId = sessionStorage.getItem("userId");
         let optsReq = {
             method: "DELETE",
             headers: {
-                "X-Awakari-User-Id": userEmail,
+                "Authorization": `Bearer ${authToken}`,
+                "X-Awakari-Group-Id": defaultGroupId,
+                "X-Awakari-User-Id": userId,
             },
             cache: "default",
         }

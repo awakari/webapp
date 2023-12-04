@@ -1,7 +1,7 @@
 const templateSub = (sub) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 flex"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
-                    <span class="truncate w-[240px] sm:w-[600px] p-1">
+                    <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${sub.description}
                     </span>
                     <div class="grow max-"></div>
@@ -14,21 +14,62 @@ const templateSub = (sub) => `
 `
 
 function loadSubscriptions() {
-    let authToken = sessionStorage.getItem("authToken");
-    let userId = sessionStorage.getItem("userId");
-    let optsReq = {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
-        cache: "default",
+    const authToken = sessionStorage.getItem("authToken");
+    const userId = sessionStorage.getItem("userId");
+    const headers = {
+        "Authorization": `Bearer ${authToken}`,
+        "X-Awakari-Group-Id": defaultGroupId,
+        "X-Awakari-User-Id": userId,
     }
-    fetch("/v1/sub?limit=100", optsReq)
+
+    fetch("/v1/usage/1", {
+        method: "GET",
+        headers: headers,
+        cache: "default",
+    })
         .then(resp => {
             if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
+                throw new Error(`Subscriptions usage request failed with status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data != null && data.hasOwnProperty("count")) {
+                document.getElementById("count").innerText = data.count;
+            }
+        })
+        .catch(err => {
+            alert(err);
+        })
+
+    fetch("/v1/usage/1", {
+        method: "GET",
+        headers: headers,
+        cache: "default",
+    })
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error(`Subscriptions limit request failed with status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data != null && data.hasOwnProperty("count")) {
+                document.getElementById("limit").innerText = data.count;
+            }
+        })
+        .catch(err => {
+            alert(err);
+        })
+
+    fetch("/v1/sub?limit=100", {
+        method: "GET",
+        headers: headers,
+        cache: "default",
+    })
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error(`Subscriptions list request failed with status: ${resp.status}`);
             }
             return resp.json();
         })

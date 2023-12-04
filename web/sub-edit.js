@@ -24,7 +24,7 @@ const templateSubEditForm = sub => `
             </label>
         </span>
         <span class="items-center flex ml-28 py-2">
-            <button type="button" title="Submit" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center" onclick="updateSub('${sub.id}')">
+            <button type="button" title="Submit" class="h-8 w-24 focus:outline-none text-blue-700 rounded-md border border-blue-700 hover:bg-blue-200 flex text-center items-center" onclick="updateSubscription('${sub.id}')">
                 <p class="ml-5">Submit</p>
             </button>
         </span>
@@ -56,37 +56,5 @@ function loadUpdateSubForm() {
         })
         .catch(err => {
             alert(err);
-        })
-}
-
-function updateSub(subId) {
-    let userEmail = sessionStorage.getItem("userEmail")
-    let payload = {
-        id: subId,
-        description: document.getElementById("sub_descr").value,
-        enabled: document.getElementById("sub_enabl").checked,
-    }
-    let optsReq = {
-        method: "PUT",
-        headers: {
-            "X-Awakari-User-Id": userEmail,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload)
-    }
-    fetch(`/v1/subscriptions/${subId}`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg))
-                throw new Error(`Request failed ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(_ => {
-            alert(`Updated subscription: ${subId}`)
-            window.location.assign("subs.html")
-        })
-        .catch(err => {
-            alert(err)
         })
 }

@@ -644,10 +644,6 @@ video {
   margin-right: -0.25rem;
 }
 
-.-mt-1 {
-  margin-top: -0.25rem;
-}
-
 .-mt-4 {
   margin-top: -1rem;
 }
@@ -862,6 +858,10 @@ video {
 
 .min-w-\[64px\] {
   min-width: 64px;
+}
+
+.max-w-\[1024px\] {
+  max-width: 1024px;
 }
 
 .max-w-\[200px\] {

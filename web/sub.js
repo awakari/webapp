@@ -45,30 +45,3 @@ function loadSubscriptions() {
             alert(err);
         })
 }
-
-function deleteSubscription(id) {
-    if (confirm(`Confirm delete subscription ${id}?`)) {
-        let userEmail = sessionStorage.getItem("userEmail");
-        let optsReq = {
-            method: "DELETE",
-            headers: {
-                "X-Awakari-User-Id": userEmail,
-            },
-            cache: "default",
-        }
-        fetch(`/v1/sub/${id}`, optsReq)
-            .then(resp => {
-                if (!resp.ok) {
-                    throw new Error(`Request failed with status: ${resp.status}`);
-                }
-                return resp.json();
-            })
-            .then(_ => {
-                alert(`Deleted subscription ${id}`);
-                window.location.assign("subs.html");
-            })
-            .catch(err => {
-                alert(err);
-            })
-    }
-}

@@ -18,7 +18,7 @@ function loadSubscription() {
     //
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
-    document.getElementById("subId").innerHTML = urlParams.get("id");
+    document.getElementById("subId").value = id;
     //
     const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
     editor.setValue(data.cond);
@@ -50,4 +50,68 @@ function loadSubscription() {
     //     .catch(err => {
     //         alert(err);
     //     });
+}
+
+function updateSubscription() {
+    const id = document.getElementById("subId").value;
+    if (confirm(`Confirm delete subscription ${id}?`)) {
+        let userEmail = sessionStorage.getItem("userEmail")
+        let payload = {
+            id: id,
+            description: document.getElementById("subDescr").value,
+            enabled: true,
+            cond: editor.getValue(0),
+        }
+        let optsReq = {
+            method: "PUT",
+            headers: {
+                "X-Awakari-User-Id": userEmail,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload)
+        }
+        fetch(`/v1/subscriptions/${id}`, optsReq)
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg))
+                    throw new Error(`Request failed ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(_ => {
+                alert(`Updated subscription: ${id}`);
+                window.location.assign("subs.html");
+            })
+            .catch(err => {
+                alert(err)
+            })
+    }
+}
+
+function deleteSubscription() {
+    const id = document.getElementById("subId").value;
+    if (confirm(`Confirm delete subscription ${id}?`)) {
+        let userEmail = sessionStorage.getItem("userEmail");
+        let optsReq = {
+            method: "DELETE",
+            headers: {
+                "X-Awakari-User-Id": userEmail,
+            },
+            cache: "default",
+        }
+        fetch(`/v1/sub/${id}`, optsReq)
+            .then(resp => {
+                if (!resp.ok) {
+                    throw new Error(`Request failed with status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(_ => {
+                alert(`Deleted subscription ${id}`);
+                window.location.assign("subs.html");
+            })
+            .catch(err => {
+                alert(err);
+            })
+    }
 }

@@ -42,7 +42,7 @@ function loadSubscriptions() {
             alert(err);
         })
 
-    fetch("/v1/usage/1", {
+    fetch("/v1/limits/1", {
         method: "GET",
         headers: headers,
         cache: "default",

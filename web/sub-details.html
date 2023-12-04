@@ -17,15 +17,23 @@
 </head>
 <body onload="loadSubscription()">
 
-<div id="sub_new" class="m-2 flex-1 flex flex-col" style="display: flex">
-    <p class="text-lg">Subscription Details</p>
-    <div class="flex">
-        <span class="pt-1">Id</span>
-        <span id="subId" class="ml-1 pt-1 font-mono"></span>
+<div id="sub_new" class="m-2 flex-1 flex flex-col space-y-1">
+    <div class="text-lg flex">
+        <button onclick="window.location.assign('sub.html')">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline id="Right-2" data-name="Right" points="7.6 7 2.5 12 7.6 17" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                <line x1="21.5" y1="12" x2="4.8" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+        </button>
+        <span class="ml-2">Subscription Details</span>
     </div>
     <div class="flex">
-        <label class="pt-1">Description</label>
-        <input type="text" id="subDescr" class="ml-1">
+        <span>Id</span>
+        <span id="subId" class="ml-2 font-mono text-sm"></span>
+    </div>
+    <div class="flex">
+        <label style="padding-top: 0.125rem">Description</label>
+        <input type="text" id="subDescr" class="ml-2">
     </div>
     <form class="space-y-2">
         <div class="container">

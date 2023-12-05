@@ -95,7 +95,10 @@ function loadSubscriptions() {
                 listHtml.innerHTML = "";
                 for (const sub of data.subs) {
                     if (filter !== "") {
-                        const idxs = uf.filter(sub.description, filter);
+                        const input  = [
+                            sub.description,
+                        ]
+                        const idxs = uf.filter(input, filter);
                         if (idxs != null && idxs.length > 0) {
                             listHtml.innerHTML += templateSub(sub);
                         }

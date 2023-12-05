@@ -13,7 +13,9 @@ const templateSub = (sub) => `
                 </div>
 `
 
-function loadSubscriptions() {
+const uf = new uFuzzy();
+
+function load() {
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
     const headers = {
@@ -57,14 +59,28 @@ function loadSubscriptions() {
             if (data != null && data.hasOwnProperty("count")) {
                 document.getElementById("limit").innerText = data.count;
             }
+            return data.count;
         })
         .catch(err => {
             alert(err);
         })
 
+    loadSubscriptions();
+}
+
+function loadSubscriptions() {
+
+    const authToken = sessionStorage.getItem("authToken");
+    const userId = sessionStorage.getItem("userId");
+    const filter = document.getElementById("filter").value;
+
     fetch("/v1/sub?limit=100", {
         method: "GET",
-        headers: headers,
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
+        },
         cache: "default",
     })
         .then(resp => {
@@ -78,7 +94,14 @@ function loadSubscriptions() {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
                 for (const sub of data.subs) {
-                    listHtml.innerHTML += templateSub(sub);
+                    if (filter !== "") {
+                        const idxs = uf.filter(sub.description, filter);
+                        if (idxs != null && idxs.length > 0) {
+                            listHtml.innerHTML += templateSub(sub);
+                        }
+                    } else {
+                        listHtml.innerHTML += templateSub(sub);
+                    }
                 }
             }
         })

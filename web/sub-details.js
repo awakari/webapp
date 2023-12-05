@@ -11,6 +11,11 @@ editor.on('change', function () {
     // Not valid
     if (errors.length) {
         console.log(errors);
+        document.getElementById("button-submit").disabled = "disabled";
+    }
+    // Valid
+    else {
+        document.getElementById("button-submit").removeAttribute("disabled");
     }
 });
 
@@ -18,7 +23,7 @@ function loadSubscription() {
     //
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
-    document.getElementById("subId").value = id;
+    document.getElementById("id").value = id;
     //
     // const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
     // editor.setValue(data.cond);
@@ -43,7 +48,7 @@ function loadSubscription() {
         })
         .then(data => {
             if (data != null) {
-                document.getElementById("subDescr").value = data.description;
+                document.getElementById("description").value = data.description;
                 editor.setValue(data.cond);
             }
         })
@@ -53,13 +58,13 @@ function loadSubscription() {
 }
 
 function updateSubscription() {
-    const id = document.getElementById("subId").value;
+    const id = document.getElementById("id").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
         let authToken = sessionStorage.getItem("authToken");
         let userId = sessionStorage.getItem("userId");
         let payload = {
             id: id,
-            description: document.getElementById("subDescr").value,
+            description: document.getElementById("description").value,
             enabled: true,
             cond: editor.getValue(0),
         }
@@ -91,7 +96,7 @@ function updateSubscription() {
 }
 
 function deleteSubscription() {
-    const id = document.getElementById("subId").value;
+    const id = document.getElementById("id").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
         let authToken = sessionStorage.getItem("authToken");
         let userId = sessionStorage.getItem("userId");

@@ -1,10 +1,12 @@
-templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}" class="flex w-full text-xs font-mono h-[24x] min-h-[24px] items-center">
-                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="w-[64px] min-w-[64px] truncate border focus:shadow-md outline-none"/>
-                        <p id="msg_attr_${type}" class="w-[64px] min-w-[64px] px-1 truncate">${type}</p>
-                        <input type="text" id="msg_attr_${value}" value="${value}" disabled="disabled" class="w-full font-mono truncate border focus:shadow-md outline-none text-slate-700"/>
-                        <button type="button" title="Add Attribute" onclick="deleteMessageAttribute('${name}');" class="ml-1 text-2xl font-mono focus:outline-none text-slate-500 hover:text-slate-700 flex items-center justify-center h-[24x] max-h-[24px]">
-                            ${required ? "" : "—" }
-                        </button>
+templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}" class="mt-1 flex w-full text-xs h-[24x] min-h-[24px] items-center space-x-1">
+                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="min-w-[64px] truncate border focus:shadow-md outline-none pt-1"/>
+                        <p id="msg_attr_${type}" class="min-w-[64px] truncate pt-1">${type}</p>
+                        <input type="text" id="msg_attr_${value}" value="${value}" disabled="disabled" class="w-full truncate border focus:shadow-md outline-none text-slate-700 pt-1"/>
+                        <div style="${required ? 'display: none': ''}">
+                            <button type="button" title="Add Attribute" onclick="deleteMessageAttribute('${name}');" class="text-2xl focus:outline-none flex items-center justify-center h-[24px] max-h-[24px] font-mono">
+                                -
+                            </button>
+                        </div>
                     </span>`
 
 function loadForm() {
@@ -142,7 +144,8 @@ function deleteMessageAttribute(name) {
 }
 
 function submitMsg() {
-    const userEmail = sessionStorage.getItem("userEmail");
+    const authToken = sessionStorage.getItem("authToken");
+    const userId = sessionStorage.getItem("userId");
     const payload = {
         id: document.getElementById("msg_id").value,
         specVersion: "1.0",
@@ -151,15 +154,15 @@ function submitMsg() {
         attributes: JSON.parse(document.getElementById("msg_attrs").value),
         text_data: document.getElementById("msg_txt_data").value,
     }
-    const optsReq = {
+    fetch("/v1/pub", {
         method: "POST",
         headers: {
-            "X-Awakari-User-Id": userEmail,
-            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
         },
         body: JSON.stringify(payload),
-    }
-    fetch("/v1/events", optsReq)
+    })
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

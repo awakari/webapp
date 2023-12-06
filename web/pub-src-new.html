@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0ed3ff">
+
+    <title>Awakari App</title>
+
+    <link rel="stylesheet" href="spectre-icons.min.css">
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="login.js"></script>
+    <script src="pub-src-new.js"></script>
+
+</head>
+<body onload="loadForm()">
+
+<div class="m-2 flex-1 flex flex-col space-y-1">
+    <div class="text-lg flex">
+        <button onclick="window.location.assign('pub.html')">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline id="Right-2" data-name="Right" points="7.6 7 2.5 12 7.6 17" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                <line x1="21.5" y1="12" x2="4.8" y2="12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+        </button>
+        <span class="ml-2">New Publishing Source</span>
+    </div>
+    <form class="space-y-2 max-w-[1024px]">
+        <div class="flex flex-col space-y-2">
+            <div class="flex">
+                <label for="src_type" class="text-md w-24">Type</label>
+                <select id="src_type">
+                    <option value="tgch" selected="selected">Telegram Channel</option>
+                    <option value="feed">Feed: RSS/Atom/JSON</option>
+                    <option value="site">Web Site</option>
+                </select>
+            </div>
+            <div id="tgch" hidden="hidden" class="mt-1 space-y-2">
+                <div class="flex">
+                    <label for="chan_name" class="mt-1 text-md w-24">Channel</label>
+                    <input type="text" id="chan_name" placeholder="@proxymtproto" class="min-h-5"/>
+                </div>
+                <div class="text-slate-500 mt-1">
+                    It may take up to 5 minutes before the system starts to receive new messages from the added channel.
+                </div>
+            </div>
+            <div id="feed" hidden="hidden" class="mt-1 space-y-2">
+                <div class="flex">
+                    <label for="feed_upd_freq" class="mt-1 text-md w-24">Update Every</label>
+                    <select id="feed_upd_freq" class="mt-1 min-h-5">
+                        <option value="288">5 min</option>
+                        <option value="96">15 min</option>
+                        <option value="24" selected="selected">1 hour</option>
+                        <option value="4">6 hours</option>
+                        <option value="2">12 hours</option>
+                        <option value="1">24 hours</option>
+                    </select>
+                </div>
+                <div class="flex mt-1">
+                    <label for="feed_url" class="mt-1 text-md w-24">Feed URL</label>
+                    <input id="feed_url" type="text" placeholder="https://time.com/feed" class="col-span-3 min-h-5"/>
+                </div>
+            </div>
+            <div id="site" hidden="hidden" class="mt-1 space-y-2">
+                <div class="flex">
+                    <label for="site_addr" class="mt-1 text-md w-24">Site</label>
+                    <input type="text" id="site_addr" placeholder="walmart.com/browse/" class="col-span-3 min-h-5"/>
+                </div>
+                <div class="col-span-3 mt-1 text-slate-500">
+                    Web sites are checked for a new content once a day.
+                </div>
+            </div>
+        </div>
+        <p class="text-slate-500">
+            The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
+            Ensure the quota is enough for this.
+        </p>
+        <div class="flex justify-center">
+            <button id="button-submit" type="button" class="flex submit justify-center" onclick="addSource()">
+                <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.6097 5.20743C21.0475 5.54416 21.1294 6.17201 20.7926 6.60976L10.7926 19.6098C10.6172 19.8378 10.352 19.9793 10.0648 19.9979C9.77765 20.0166 9.49637 19.9106 9.29289 19.7072L4.29289 14.7072C3.90237 14.3166 3.90237 13.6835 4.29289 13.2929C4.68342 12.9024 5.31658 12.9024 5.70711 13.2929L9.90178 17.4876L19.2074 5.39034C19.5441 4.95258 20.172 4.87069 20.6097 5.20743Z" fill="currentColor"/>
+                </svg>
+                <span class="mt-1">Submit</span>
+            </button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

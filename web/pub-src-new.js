@@ -1,5 +1,3 @@
-window.Telegram.WebApp.expand();
-
 function loadForm() {
     document.getElementById("src_type").onchange = showSrcDetails;
     showSrcDetails();
@@ -9,27 +7,24 @@ function showSrcDetails() {
     let opt = document.getElementById("src_type").value
     switch (opt) {
         case "tgch":
-            document.getElementById("tgch").style.display = "grid";
+            document.getElementById("tgch").style.display = "block";
             document.getElementById("feed").style.display = "none";
             document.getElementById("site").style.display = "none";
             break
         case "feed":
             document.getElementById("tgch").style.display = "none";
-            document.getElementById("feed").style.display = "grid";
+            document.getElementById("feed").style.display = "block";
             document.getElementById("site").style.display = "none";
             break
         case "site":
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
-            document.getElementById("site").style.display = "grid";
+            document.getElementById("site").style.display = "block";
             break
     }
 }
 
-window.Telegram.WebApp.expand();
-window.Telegram.WebApp.MainButton.setText("✓ SUBMIT")
-window.Telegram.WebApp.MainButton.show();
-window.Telegram.WebApp.MainButton.onClick(() => {
+function addSource() {
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {
@@ -52,6 +47,5 @@ window.Telegram.WebApp.MainButton.onClick(() => {
             "type": srcType,
         }
     }
-    window.Telegram.WebApp.sendData(JSON.stringify(payload));
-    window.Telegram.WebApp.close();
-});
+
+}

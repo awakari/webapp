@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0ed3ff">
+
+    <title>Awakari App</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="source-add.js"></script>
+
+</head>
+<body onload="loadForm()">
+
+<div class="m-2 flex-1 flex flex-col">
+    <p class="text-lg">New Publishing Source</p>
+    <form class="space-y-2 items-center">
+        <div class="flex flex-col">
+            <div>
+                <label for="src_type" class="text-md">Type:</label>
+                <select id="src_type">
+                    <option value="tgch" selected="selected">Telegram Channel</option>
+                    <option value="feed">Feed: RSS/Atom/JSON</option>
+                    <option value="site">Web Site</option>
+                </select>
+            </div>
+
+            <div id="tgch" hidden="hidden" class="col-span-3 grid grid-cols-3 my-1">
+                <span class="my-1 text-md">Channel:</span>
+                <input type="text" id="chan_name" placeholder="@proxymtproto" class="col-span-3 min-h-[24px]"/>
+                <span class="col-span-3 mt-2 text-slate-500">
+                    It may take up to 5 minutes before the system starts to receive new messages from the added channel.
+                </span>
+            </div>
+            <div id="feed" hidden="hidden" class="col-span-3 grid grid-cols-3 my-1">
+                <span class="my-1 text-md col-span-2">Update Every:</span>
+                <select id="feed_upd_freq" class="col-span-1 my-1 min-h-[24px]">
+                    <option value="288">5 min</option>
+                    <option value="96">15 min</option>
+                    <option value="24" selected="selected">1 hour</option>
+                    <option value="4">6 hours</option>
+                    <option value="2">12 hours</option>
+                    <option value="1">24 hours</option>
+                </select>
+                <span class="my-1 text-md">Feed URL:</span><input type="text" id="feed_url" placeholder="https://time.com/feed" class="col-span-3 min-h-[24px]"/>
+            </div>
+            <div id="site" hidden="hidden" class="col-span-3 grid grid-cols-3 my-1">
+                <span class="my-1 text-md">Site:</span><input type="text" id="site_addr" placeholder="walmart.com/browse/" class="col-span-3 min-h-[24px]"/>
+                <span class="col-span-3 mt-2 text-slate-500"">
+                    Web sites are checked for a new content once a day.
+                </span>
+            </div>
+        </div>
+        <p class="text-slate-500">
+            The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
+            Ensure the quota is enough for this.
+        </p>
+    </form>
+</div>
+
+</body>
+</html>

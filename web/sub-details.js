@@ -1,5 +1,3 @@
-const defaultGroupId = "default";
-
 // Initialize the editor
 const editor = new JSONEditor(document.getElementById("sub_cond_editor"), subCondSchema);
 

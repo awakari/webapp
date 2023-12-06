@@ -39,9 +39,9 @@
         <span>
             <p class="pt-2">Attributes</p>
             <div id="msg_attrs_form"></div>
-            <span class="flex w-full text-xs h-[24x] min-h-[24px] items-center mt-1 space-x-1">
-                <input type="text" placeholder="name" id="msg_attr_name" class="min-w-[64px] truncate border focus:shadow-md outline-none pt-1"/>
-                <select id="msg_attr_type" class="min-w-[64px] truncate focus:shadow-md outline-none h-5 pt-1">
+            <span class="flex w-full text-sm h-[24x] min-h-[24px] items-center mt-1 space-x-1">
+                <input type="text" placeholder="name" id="msg_attr_name" class="min-w-[64px] truncate border focus:shadow-md outline-none"/>
+                <select id="msg_attr_type" class="min-w-[64px] truncate focus:shadow-md outline-none h-5 px-1">
                     <option>boolean</option>
                     <option>bytes</option>
                     <option>integer</option>
@@ -50,16 +50,16 @@
                     <option>uri</option>
                     <option>uri_ref</option>
                 </select>
-                <input type="text" placeholder="value" id="msg_attr_value" class="w-full truncate border focus:shadow-md outline-none pt-1"/>
+                <input type="text" placeholder="value" id="msg_attr_value" class="w-full truncate border focus:shadow-md outline-none"/>
                 <button type="button" title="Add Attribute" onclick="addMessageAttribute();" class="ml-1 text-2xl focus:outline-none flex items-center justify-center h-[24x] max-h-[24px] font-mono">
                     <span class="mt-1">+</span>
                 </button>
             </span>
-            <textarea id="msg_attrs" rows="10" disabled="disabled" hidden="hidden" class="border text-xs w-full focus:shadow-md outline-none"></textarea>
+            <textarea id="msg_attrs" rows="10" disabled="disabled" hidden="hidden" class="border text-sm w-full focus:shadow-md outline-none"></textarea>
         </span>
         <span class="flex space-x-2 pt-1">
             <label for="msg_id" class="pt-1">Id</label>
-            <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none text-xs text-slate-700 pt-1"/>
+            <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none text-sm text-slate-700"/>
         </span>
         <div class="flex items-center justify-center">
             <button id="button-submit" type="button" class="flex submit justify-center text-center" onclick="submitMsg()">

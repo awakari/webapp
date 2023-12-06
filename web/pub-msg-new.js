@@ -1,7 +1,7 @@
-templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}" class="mt-1 flex w-full text-xs h-[24x] min-h-[24px] items-center space-x-1">
-                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="min-w-[64px] truncate border focus:shadow-md outline-none pt-1"/>
-                        <p id="msg_attr_${type}" class="min-w-[64px] truncate pt-1">${type}</p>
-                        <input type="text" id="msg_attr_${value}" value="${value}" disabled="disabled" class="w-full truncate border focus:shadow-md outline-none text-slate-700 pt-1"/>
+templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}" class="mt-1 flex w-full text-sm h-[24x] min-h-[24px] items-center space-x-1">
+                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="min-w-[64px] truncate border focus:shadow-md outline-none"/>
+                        <p id="msg_attr_${type}" class="min-w-[64px] truncate">${type}</p>
+                        <input type="text" id="msg_attr_${value}" value="${value}" disabled="disabled" class="${required ? 'min-w-[124px]' : ''} w-full truncate border focus:shadow-md outline-none text-slate-700"/>
                         <div style="${required ? 'display: none': ''}">
                             <button type="button" title="Add Attribute" onclick="deleteMessageAttribute('${name}');" class="text-2xl focus:outline-none flex items-center justify-center h-[24px] max-h-[24px] font-mono">
                                 -

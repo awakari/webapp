@@ -12,6 +12,8 @@ const templateSrc = (type, addr) => `
                 </div>
 `
 
+const uf = new uFuzzy();
+
 function load() {
 
     const authToken = sessionStorage.getItem("authToken");

@@ -76,7 +76,7 @@ function loadSources(cursor) {
         "X-Awakari-Group-Id": defaultGroupId,
         "X-Awakari-User-Id": userId,
     }
-    const srcType = document.getElementById("src_type");
+    const srcType = document.getElementById("src_type").value;
     const own = document.getElementById("own").checked;
 
     fetch(`/v1/src/${srcType}?cursor=${cursor}&own=${own}&limit=10`, {

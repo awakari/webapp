@@ -86,7 +86,7 @@ function loadSources(cursor) {
     })
         .then(resp => {
             if (!resp.ok) {
-                throw new Error(`Daily publishing usage request failed with status: ${resp.status}`);
+                throw new Error(`Sources list request failed with status: ${resp.status}`);
             }
             return resp.json();
         })

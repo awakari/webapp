@@ -100,10 +100,10 @@ function loadSources(cursor) {
                         ]
                         const idxs = uf.filter(input, filter);
                         if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSub(srcType, addr);
+                            listHtml.innerHTML += templateSrc(srcType, addr);
                         }
                     } else {
-                        listHtml.innerHTML += templateSub(srcType, addr);
+                        listHtml.innerHTML += templateSrc(srcType, addr);
                     }
                 }
             }

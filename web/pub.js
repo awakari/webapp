@@ -93,6 +93,7 @@ function loadSources(cursor) {
         .then(data => {
             if (data != null) {
                 let listHtml = document.getElementById("src_list");
+                listHtml.innerHTML = "";
                 for (const addr of data) {
                     if (filter !== "") {
                         const input  = [

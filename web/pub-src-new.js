@@ -42,7 +42,7 @@ function addSource() {
     }
     const payload = {
         "limit": {
-            "freq": parseInt(document.getElementById("feed_upd_freq").valueAsNumber),
+            "freq": parseInt(document.getElementById("feed_upd_freq").value),
         },
         "src": {
             "addr": srcAddr,

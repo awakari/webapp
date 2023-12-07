@@ -62,7 +62,7 @@ function addSource() {
                 resp.text().then(errMsg => console.error(errMsg));
                 throw new Error(`Request failed ${resp.status}`);
             }
-            return resp.json();
+            return resp;
         })
         .then(_ => {
             alert("Source has been added");

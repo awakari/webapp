@@ -25,6 +25,8 @@ function showSrcDetails() {
 }
 
 function addSource() {
+    const authToken = sessionStorage.getItem("authToken");
+    const userId = sessionStorage.getItem("userId");
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {
@@ -40,12 +42,33 @@ function addSource() {
     }
     const payload = {
         "limit": {
-            "freq": parseInt(document.getElementById("feed_upd_freq").value),
+            "freq": parseInt(document.getElementById("feed_upd_freq").valueAsNumber),
         },
         "src": {
             "addr": srcAddr,
-            "type": srcType,
         }
     }
-
+    fetch(`/v1/src/${srcType}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
+        },
+        body: JSON.stringify(payload),
+    })
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Request failed ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(_ => {
+            alert("Source has been added");
+            loadForm(); // reset
+        })
+        .catch(err => {
+            alert(err);
+        })
 }

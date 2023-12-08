@@ -1,5 +1,5 @@
-const templateSrc = (type, addr) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex"
+const templateSrc = (type, addr, highlight) => `
+                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-500'}"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${addr}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${addr}
@@ -65,11 +65,16 @@ function load() {
             alert(err);
         })
 
-    loadSources("");
+    loadSources();
 }
 
-function loadSources(cursor) {
+function loadSources() {
 
+    const urlParams = new URLSearchParams(window.location.search);
+    let cursor = "";
+    if (urlParams.has("cursor")) {
+        cursor = urlParams.get("cursor");
+    }
     const filter = document.getElementById("filter").value;
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
@@ -103,10 +108,12 @@ function loadSources(cursor) {
                         ]
                         const idxs = uf.filter(input, filter);
                         if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSrc(srcType, addr);
+                            listHtml.innerHTML += templateSrc(srcType, addr, true);
+                        } else {
+                            listHtml.innerHTML += templateSrc(srcType, addr, false);
                         }
                     } else {
-                        listHtml.innerHTML += templateSrc(srcType, addr);
+                        listHtml.innerHTML += templateSrc(srcType, addr, true);
                     }
                 }
             }

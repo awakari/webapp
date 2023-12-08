@@ -1,5 +1,5 @@
 const templateSrc = (type, addr, highlight) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-500'}"
+                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-500 hover:text-slate-500'}"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${addr}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${addr}
@@ -101,7 +101,9 @@ function loadSources() {
             if (data != null) {
                 let listHtml = document.getElementById("src_list");
                 listHtml.innerHTML = "";
+                let lastAddr = "";
                 for (const addr of data) {
+                    lastAddr = addr;
                     if (filter !== "") {
                         const input  = [
                             addr,
@@ -115,6 +117,11 @@ function loadSources() {
                     } else {
                         listHtml.innerHTML += templateSrc(srcType, addr, true);
                     }
+                }
+                if (lastAddr !== "") {
+                    document.getElementById("button-next").onclick = () => {
+                        window.location.assign(`pub.html?cursor=${lastAddr}`);
+                    };
                 }
             }
         })

@@ -45,7 +45,7 @@ button[type=button].mode {
 button[type=button].submit {
     border-color: #10b981;
     color: #10b981;
-    width: 8rem;
+    width: 100px;
 }
 button[type=button].submit:hover {
     background-color: #a7f3d0;
@@ -60,7 +60,7 @@ button[type=button].submit:disabled:hover {
 button[type=button].delete {
     border-color: #ef4444;
     color: #ef4444;
-    width: 7.5rem;
+    width: 100px;
 }
 button[type=button].delete:hover {
     background-color: #fecaca;

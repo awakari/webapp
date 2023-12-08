@@ -65,15 +65,14 @@ function load() {
             alert(err);
         })
 
-    loadSources();
+    loadSources(true);
 }
 
-function loadSources() {
+function loadSources(start) {
 
-    const urlParams = new URLSearchParams(window.location.search);
-    let cursor = "";
-    if (urlParams.has("cursor")) {
-        cursor = urlParams.get("cursor");
+    let cursor = sessionStorage.getItem("src_list_cursor");
+    if (!cursor || start) {
+        cursor = "";
     }
     const filter = document.getElementById("filter").value;
     const authToken = sessionStorage.getItem("authToken");
@@ -118,11 +117,7 @@ function loadSources() {
                         listHtml.innerHTML += templateSrc(srcType, addr, true);
                     }
                 }
-                if (lastAddr !== "") {
-                    document.getElementById("button-next").onclick = () => {
-                        window.location.assign(`pub.html?cursor=${lastAddr}`);
-                    };
-                }
+                sessionStorage.setItem("src_list_cursor", lastAddr);
             }
         })
         .catch(err => {

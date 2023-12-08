@@ -96,11 +96,11 @@
                     <div class="flex space-x-1 pt-1">
                         <div>
                             <label for="own">Own</label>
-                            <input type="checkbox" id="own" class="w-4 h-4" onchange="loadSources()">
+                            <input type="checkbox" id="own" class="w-4 h-4" onchange="loadSources(true)">
                         </div>
                         <div>
                             <label>Type</label>
-                            <select id="src_type" class="w-[165px] h-5" onchange="loadSources()">
+                            <select id="src_type" class="w-[165px] h-5" onchange="loadSources(true)">
                                 <option value="tgch" selected="selected">Telegram channels</option>
                                 <option value="feed">Feeds</option>
                                 <option value="site">Sites</option>
@@ -111,20 +111,20 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                         </svg>
-                        <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px]" oninput="loadSources()"/>
+                        <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px]" oninput="loadSources(false)"/>
                     </div>
                 </div>
             </div>
         </div>
         <div id="src_list" class="mt-2 flex flex-col items-center justify-center"></div>
         <div class="flex items-center justify-center space-x-4">
-            <button type="button" class="flex justify-center text-center w-[100px] h-6" onclick="window.location.assign('pub.html')">
+            <button type="button" class="flex justify-center text-center w-[100px] h-6" onclick="loadSources(true)">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 4V20M8 12H20M8 12L12 8M8 12L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <span class="mt-1">Start</span>
             </button>
-            <button id="button-next" type="button" class="flex justify-center text-center w-[100px] h-6">
+            <button id="button-next" type="button" class="flex justify-center text-center w-[100px] h-6" onclick="loadSources(false)">
                 <span class="mt-1">Next</span>
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

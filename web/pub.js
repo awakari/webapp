@@ -120,9 +120,9 @@ function loadSources(start) {
                 }
                 sessionStorage.setItem("src_list_cursor", lastAddr);
                 if (data.length === pageLimit) {
-                    document.getElementById("button-next").disabled = "disabled";
-                } else {
                     document.getElementById("button-next").removeAttribute("disabled");
+                } else {
+                    document.getElementById("button-next").disabled = "disabled";
                 }
             }
         })

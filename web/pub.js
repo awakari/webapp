@@ -66,15 +66,18 @@ function load() {
             alert(err);
         })
 
-    loadSources(true);
+    loadSources(true, false);
 }
 
-function loadSources(start) {
+function loadSources(start, next) {
 
-    let cursor = sessionStorage.getItem("src_list_cursor");
-    if (!cursor || start) {
-        cursor = "";
+    let cursor = "";
+    if (next) {
+        cursor = sessionStorage.getItem("src_list_cursor_next");
+    } else if (!start) {
+        cursor = sessionStorage.getItem("src_list_cursor");
     }
+
     const filter = document.getElementById("filter").value;
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
@@ -118,7 +121,8 @@ function loadSources(start) {
                         listHtml.innerHTML += templateSrc(srcType, addr, true);
                     }
                 }
-                sessionStorage.setItem("src_list_cursor", lastAddr);
+                sessionStorage.setItem("src_list_cursor", cursor);
+                sessionStorage.setItem("src_list_cursor_next", lastAddr);
                 if (data.length === pageLimit) {
                     document.getElementById("button-next").removeAttribute("disabled");
                 } else {

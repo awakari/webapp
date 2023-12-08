@@ -96,11 +96,11 @@
                     <div class="flex space-x-1 pt-1">
                         <div>
                             <label for="own">Own</label>
-                            <input type="checkbox" id="own" class="w-4 h-4" onchange="loadSources(true)">
+                            <input type="checkbox" id="own" class="w-4 h-4" onchange="loadSources(true, false)">
                         </div>
                         <div>
                             <label>Type</label>
-                            <select id="src_type" class="w-[165px] h-5" onchange="loadSources(true)">
+                            <select id="src_type" class="w-[165px] h-5" onchange="loadSources(true, false)">
                                 <option value="tgch" selected="selected">Telegram channels</option>
                                 <option value="feed">Feeds</option>
                                 <option value="site">Sites</option>
@@ -111,20 +111,20 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                         </svg>
-                        <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px]" oninput="loadSources(false)"/>
+                        <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px]" oninput="loadSources(false, false)"/>
                     </div>
                 </div>
             </div>
         </div>
         <div id="src_list" class="mt-2 flex flex-col items-center justify-center"></div>
         <div class="flex items-center justify-center space-x-4">
-            <button type="button" class="flex justify-center text-center w-[100px] h-6" onclick="loadSources(true)">
+            <button type="button" class="flex justify-center text-center w-[100px] h-6" onclick="loadSources(true, false)">
                 <svg fill="currentColor" width="21px" height="21px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg">
                     <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/>
                 </svg>
                 <span class="mt-1">Reset</span>
             </button>
-            <button id="button-next" type="button" class="flex justify-center text-center w-[100px] h-6" onclick="loadSources(false)">
+            <button id="button-next" type="button" class="flex justify-center text-center w-[100px] h-6" onclick="loadSources(false, true)">
                 <span class="mt-1">Next</span>
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

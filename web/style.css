@@ -50,11 +50,11 @@ button[type=button].submit {
 button[type=button].submit:hover {
     background-color: #a7f3d0;
 }
-button[type=button].submit:disabled {
+button[type=button]:disabled {
     border-color: #64748b;
     color: #64748b;
 }
-button[type=button].submit:disabled:hover {
+button[type=button]:disabled:hover {
     background-color: unset;
 }
 button[type=button].delete {

@@ -13,6 +13,7 @@ const templateSrc = (type, addr, highlight) => `
 `
 
 const uf = new uFuzzy();
+const pageLimit = 10;
 
 function load() {
 
@@ -85,7 +86,7 @@ function loadSources(start) {
     const srcType = document.getElementById("src_type").value;
     const own = document.getElementById("own").checked;
 
-    fetch(`/v1/src/${srcType}?cursor=${cursor}&own=${own}&limit=10`, {
+    fetch(`/v1/src/${srcType}?cursor=${cursor}&own=${own}&limit=${pageLimit}`, {
         method: "GET",
         headers: headers,
         cache: "default",
@@ -118,6 +119,11 @@ function loadSources(start) {
                     }
                 }
                 sessionStorage.setItem("src_list_cursor", lastAddr);
+                if (data.length === pageLimit) {
+                    document.getElementById("button-next").disabled = "disabled";
+                } else {
+                    document.getElementById("button-next").removeAttribute("disabled");
+                }
             }
         })
         .catch(err => {

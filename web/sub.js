@@ -1,5 +1,5 @@
-const templateSub = (sub) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex"
+const templateSub = (sub, highlight) => `
+                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-200 hover:text-slate-200'}"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${sub.description}
@@ -109,15 +109,17 @@ function loadSubscriptions(start, next) {
                         ]
                         const idxs = uf.filter(input, filter);
                         if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSub(sub);
+                            listHtml.innerHTML += templateSub(sub, true);
+                        } else {
+                            listHtml.innerHTML += templateSub(sub, false);
                         }
                     } else {
-                        listHtml.innerHTML += templateSub(sub);
+                        listHtml.innerHTML += templateSub(sub, true);
                     }
                 }
                 sessionStorage.setItem("sub_list_cursor", cursor);
                 sessionStorage.setItem("sub_list_cursor_next", lastId);
-                if (data.length === pageLimit) {
+                if (data.subs.length === pageLimit) {
                     document.getElementById("button-next").removeAttribute("disabled");
                 } else {
                     document.getElementById("button-next").disabled = "disabled";

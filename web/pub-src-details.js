@@ -7,8 +7,9 @@ function loadSource() {
     document.getElementById("addr").innerText = addr;
     let authToken = sessionStorage.getItem("authToken");
     let userId = sessionStorage.getItem("userId");
+    const addrEnc = encodeURIComponent(addr);
     //
-    fetch(`/v1/src/${typ}/${addr}`, {
+    fetch(`/v1/src/${typ}/${addrEnc}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,

@@ -26,6 +26,17 @@ function loadSource() {
         })
         .then(data => {
             if (data != null) {
+                switch (typ) {
+                    case "feed":
+                        document.getElementById("type").innerText = "Feed";
+                        break
+                    case "site":
+                        document.getElementById("type").innerText = "Site";
+                        break
+                    case "tgch":
+                        document.getElementById("type").innerText = "Telegram channel";
+                        break
+                }
                 document.getElementById("type").innerText = typ;
                 document.getElementById("addr").innerText = data.addr;
                 if (data.lastUpdate === "0001-01-01T00:00:00Z") {

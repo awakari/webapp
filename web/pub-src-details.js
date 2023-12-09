@@ -28,8 +28,16 @@ function loadSource() {
             if (data != null) {
                 document.getElementById("type").innerText = typ;
                 document.getElementById("addr").innerText = data.addr;
-                document.getElementById("last_upd").innerText = data.lastUpdate;
-                document.getElementById("upd_period").innerText = data.updatePeriod;
+                if (data.lastUpdate === "0001-01-01T00:00:00Z") {
+                    document.getElementById("last_upd").innerText = "N/A";
+                } else {
+                    document.getElementById("last_upd").innerText = data.lastUpdate;
+                }
+                if (data.updatePeriod === 0) {
+                    document.getElementById("upd_period").innerText = "N/A";
+                } else {
+                    document.getElementById("upd_period").innerText = data.updatePeriod;
+                }
                 if (data.groupId === defaultGroupId && data.userId === userId) {
                     document.getElementById("button_src_del").removeAttribute("disabled");
                 } else {

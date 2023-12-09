@@ -65,6 +65,13 @@ button[type=button].delete {
 button[type=button].delete:hover {
     background-color: #fecaca;
 }
+button[type=button].delete:disabled {
+    border-color: #64748b;
+    color: #64748b;
+}
+button[type=button].delete:disabled:hover {
+    background-color: unset;
+}
 button.json-editor-btn-edit,button.json-editor-btn-movedown,button.json-editor-btn-moveup,button.json-editor-btn-subtract,button.json-editor-btntype-deleteall {
     display: none;
     width: 0;

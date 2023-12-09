@@ -108,19 +108,18 @@ function loadSources(start, next) {
                 let lastAddr = "";
                 for (const addr of data) {
                     lastAddr = addr;
-                    const addrEnc = encodeURIComponent(addr);
                     if (filter !== "") {
                         const input  = [
                             addr,
                         ]
                         const idxs = uf.filter(input, filter);
                         if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSrc(srcType, addrEnc, true);
+                            listHtml.innerHTML += templateSrc(srcType, addr, true);
                         } else {
-                            listHtml.innerHTML += templateSrc(srcType, addrEnc, false);
+                            listHtml.innerHTML += templateSrc(srcType, addr, false);
                         }
                     } else {
-                        listHtml.innerHTML += templateSrc(srcType, addrEnc, true);
+                        listHtml.innerHTML += templateSrc(srcType, addr, true);
                     }
                 }
                 sessionStorage.setItem("src_list_cursor", cursor);

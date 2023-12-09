@@ -4,12 +4,11 @@ function loadSource() {
     const typ = urlParams.get("type");
     document.getElementById("type").innerText = typ;
     const addr = urlParams.get("addr");
-    document.getElementById("addr").innerText = addr;
+    document.getElementById("addr").innerText = decodeURIComponent(addr);
     let authToken = sessionStorage.getItem("authToken");
     let userId = sessionStorage.getItem("userId");
-    const addrEnc = encodeURIComponent(addr);
     //
-    fetch(`/v1/src/${typ}/${addrEnc}`, {
+    fetch(`/v1/src/${typ}/${addr}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -38,14 +37,46 @@ function loadSource() {
                 } else {
                     document.getElementById("upd_period").innerText = data.updatePeriod;
                 }
+                const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && data.userId === userId) {
-                    document.getElementById("button_src_del").removeAttribute("disabled");
+                    btnDel.removeAttribute("disabled");
+                    btnDel.onclick = () => deleteSource(typ, addr);
                 } else {
-                    document.getElementById("button_src_del").disabled = "disabled";
+                    btnDel.disabled = "disabled";
                 }
             }
         })
         .catch(err => {
             alert(err);
         });
+}
+
+function deleteSource(typ, addr) {
+
+    let authToken = sessionStorage.getItem("authToken");
+    let userId = sessionStorage.getItem("userId");
+
+    if (confirm(`Confirm delete source ${decodeURIComponent(addr)}?`)) {
+        fetch(`/v1/src/${typ}/${addr}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${authToken}`,
+                "X-Awakari-Group-Id": defaultGroupId,
+                "X-Awakari-User-Id": userId,
+            },
+        })
+            .then(resp => {
+                if (!resp.ok) {
+                    throw new Error(`Request failed with status: ${resp.status}`);
+                }
+                return resp;
+            })
+            .then(_ => {
+                alert(`Source ${decodeURIComponent(addr)} deleted successfully`);
+                window.location.assign("pub.html");
+            })
+            .catch(err => {
+                alert(err);
+            });
+    }
 }

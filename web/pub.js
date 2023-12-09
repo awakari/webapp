@@ -1,5 +1,5 @@
 const templateSrc = (type, addr, highlight) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-300 hover:text-slate-300'}"
+                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-400 hover:text-slate-400'}"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${addr}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${addr}
@@ -107,18 +107,19 @@ function loadSources(start, next) {
                 let lastAddr = "";
                 for (const addr of data) {
                     lastAddr = addr;
+                    const addrEnc = encodeURIComponent(addr);
                     if (filter !== "") {
                         const input  = [
                             addr,
                         ]
                         const idxs = uf.filter(input, filter);
                         if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSrc(srcType, addr, true);
+                            listHtml.innerHTML += templateSrc(srcType, addrEnc, true);
                         } else {
-                            listHtml.innerHTML += templateSrc(srcType, addr, false);
+                            listHtml.innerHTML += templateSrc(srcType, addrEnc, false);
                         }
                     } else {
-                        listHtml.innerHTML += templateSrc(srcType, addr, true);
+                        listHtml.innerHTML += templateSrc(srcType, addrEnc, true);
                     }
                 }
                 sessionStorage.setItem("src_list_cursor", cursor);

@@ -27,29 +27,29 @@
         <span class="ml-2">Publishing Source Details</span>
     </div>
     <div class="flex justify-center">
-        <form class="space-y-2 max-w-[640px] grow">
-            <div class="flex flex-col sm:flex-row">
+        <form class="space-y-2 text-sm sm:text-base">
+            <div class="flex flex-col">
                 <div class="flex h-6">
-                    <span class="w-14 sm:w-10 text-slate-500">Type:</span>
-                    <span id="type" class="ml-2 sm:ml-0 font-mono text-xs w-8"></span>
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Type:</span>
+                    <span id="type" class="ml-2 font-mono w-48 sm:w-full"></span>
                 </div>
-                <div class="flex sm:ml-1 h-6">
-                    <span class="w-14 text-slate-500">Address:</span>
-                    <span id="addr" class="ml-2 sm:ml-1 font-mono text-xs w-48 truncate"></span>
+                <div class="flex h-6">
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Address:</span>
+                    <span id="addr" class="ml-2 font-mono w-48 sm:w-full truncate"></span>
                 </div>
-                <div class="flex sm:ml-1 h-6">
-                    <span class="w-14 sm:w-8 text-slate-500">Last:</span>
-                    <span id="last_upd" class="ml-2 sm:ml-1 font-mono text-xs w-44">YYYY-MM-DDThh-mm-ss.SSSZ</span>
+                <div class="flex h-6">
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Last:</span>
+                    <span id="last_upd" class="ml-2 font-mono w-48 sm:w-full">YYYY-MM-DDThh-mm-ss.SSSZ</span>
                 </div>
-                <div class="flex sm:ml-1 h-60">
-                    <span class="w-14 sm:w-10 text-slate-500">Period:</span>
-                    <span id="upd_period" class="ml-2 sm: ml-1 font-mono text-xs w-12">00 min</span>
+                <div class="flex h-6">
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Period:</span>
+                    <span id="upd_period" class="ml-2 font-mono w-48 sm:w-full">00 min</span>
                 </div>
             </div>
             <div class="flex items-center justify-center space-x-2">
-                <button id="button_src_del" type="button" class="flex delete justify-center text-center" onclick="deleteSource()">
-                    <svg fill="currentColor" width="21px" height="21px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
-                    <span class="mt-1">Delete</span>
+                <button id="button_src_del" type="button" class="flex delete justify-center text-center">
+                    <svg fill="currentColor" width="22px" height="22px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
+                    <span>Delete</span>
                 </button>
             </div>
         </form>

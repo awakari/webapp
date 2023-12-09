@@ -13,6 +13,7 @@
 
     <script src="login.js"></script>
     <script src="pub-src-details.js"></script>
+    <script src="moment.min.js"></script>
 
 </head>
 <body onload="loadSource()">
@@ -27,7 +28,7 @@
         <span class="ml-2">Publishing Source Details</span>
     </div>
     <div class="flex justify-center">
-        <form class="space-y-2 text-sm">
+        <form class="space-y-2">
             <div class="flex flex-col">
                 <div class="flex h-6">
                     <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Type:</span>
@@ -49,7 +50,7 @@
             <div class="flex items-center justify-center space-x-2">
                 <button id="button_src_del" type="button" class="flex delete justify-center text-center">
                     <svg fill="currentColor" width="22px" height="22px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
-                    <span>Delete</span>
+                    <span class="pt-1">Delete</span>
                 </button>
             </div>
         </form>

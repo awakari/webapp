@@ -46,7 +46,8 @@ function loadSource() {
                 if (data.updatePeriod === 0) {
                     document.getElementById("upd_period").innerText = "N/A";
                 } else {
-                    document.getElementById("upd_period").innerText = data.updatePeriod;
+                    const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
+                    document.getElementById("upd_period").innerText = d.humanize();
                 }
                 const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && data.userId === userId) {

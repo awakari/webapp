@@ -37,7 +37,6 @@ function loadSource() {
                         document.getElementById("type").innerText = "Telegram channel";
                         break
                 }
-                document.getElementById("type").innerText = typ;
                 document.getElementById("addr").innerText = data.addr;
                 if (data.lastUpdate === "0001-01-01T00:00:00Z") {
                     document.getElementById("last_upd").innerText = "N/A";

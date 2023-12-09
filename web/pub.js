@@ -1,6 +1,6 @@
 const templateSrc = (type, addr, highlight) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-400 hover:text-slate-400'}"
-                     onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${addr}')">
+                     onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${decodeURIComponent(addr)}
                     </span>

@@ -2,7 +2,7 @@ const templateSrc = (type, addr, highlight) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-400 hover:text-slate-400'}"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${addr}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
-                        ${addr}
+                        ${decodeURIComponent(addr)}
                     </span>
                     <span>
                         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

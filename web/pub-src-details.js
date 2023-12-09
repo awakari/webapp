@@ -3,17 +3,18 @@ function loadSource() {
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
     document.getElementById("type").innerText = typ;
-    const addr = urlParams.get("addr");
-    document.getElementById("addr").innerText = decodeURIComponent(addr);
+    const addr = decodeURIComponent(urlParams.get("addr"));
+    document.getElementById("addr").innerText = addr;
     let authToken = sessionStorage.getItem("authToken");
     let userId = sessionStorage.getItem("userId");
     //
-    fetch(`/v1/src/${typ}/${addr}`, {
+    fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
             "X-Awakari-Group-Id": defaultGroupId,
             "X-Awakari-User-Id": userId,
+            "X-Awakari-Src-Addr": addr,
         },
         cache: "default",
     })
@@ -56,13 +57,14 @@ function deleteSource(typ, addr) {
     let authToken = sessionStorage.getItem("authToken");
     let userId = sessionStorage.getItem("userId");
 
-    if (confirm(`Confirm delete source ${decodeURIComponent(addr)}?`)) {
-        fetch(`/v1/src/${typ}/${addr}`, {
+    if (confirm(`Confirm delete source ${addr}?`)) {
+        fetch(`/v1/src/${typ}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${authToken}`,
                 "X-Awakari-Group-Id": defaultGroupId,
                 "X-Awakari-User-Id": userId,
+                "X-Awakari-Src-Addr": addr,
             },
         })
             .then(resp => {

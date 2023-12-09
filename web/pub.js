@@ -2,7 +2,7 @@ const templateSrc = (type, addr, highlight) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-400 hover:text-slate-400'}"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
-                        ${decodeURIComponent(addr)}
+                        ${addr}
                     </span>
                     <span>
                         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,11 +85,12 @@ function loadSources(start, next) {
         "Authorization": `Bearer ${authToken}`,
         "X-Awakari-Group-Id": defaultGroupId,
         "X-Awakari-User-Id": userId,
+        "X-Awakari-Src-Addr": cursor,
     }
     const srcType = document.getElementById("src_type").value;
     const own = document.getElementById("own").checked;
 
-    fetch(`/v1/src/${srcType}?cursor=${cursor}&own=${own}&limit=${pageLimit}`, {
+    fetch(`/v1/src/${srcType}/list?own=${own}&limit=${pageLimit}`, {
         method: "GET",
         headers: headers,
         cache: "default",

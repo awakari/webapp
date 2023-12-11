@@ -40,7 +40,7 @@ function createSubscription() {
             },
             body: JSON.stringify(payload)
         };
-        fetch(`/v1/sub/${id}`, optsReq)
+        fetch(`/v1/sub`, optsReq)
             .then(resp => {
                 if (!resp.ok) {
                     resp.text().then(errMsg => console.error(errMsg));

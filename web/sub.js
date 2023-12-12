@@ -69,11 +69,6 @@ function load() {
     loadSubscriptions(urlParams.get("filter"));
 }
 
-const elementFilter = document.getElementById("filter");
-elementFilter.oninput = () => {
-    loadSubscriptions(elementFilter.value);
-}
-
 function loadSubscriptions(filter) {
 
     const urlParams = new URLSearchParams(window.location.search);

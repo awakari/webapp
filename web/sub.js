@@ -153,6 +153,9 @@ function loadSubscriptions() {
                         listHtml.innerHTML += templateSub(sub, true);
                     }
                 }
+            } else if (order === "DESC") {
+                // back to the beginning
+                window.location.assign("sub.html");
             }
         })
         .catch(err => {

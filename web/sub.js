@@ -120,7 +120,9 @@ function loadSubscriptions() {
                             window.location.assign(`sub.html?cursor=${subs[0].id}&order=DESC`)
                         }
                     } else {
-                        btnPrev.onclick = history.back;
+                        btnPrev.onclick = () => {
+                            history.back();
+                        };
                     }
                 }
 
@@ -157,7 +159,9 @@ function loadSubscriptions() {
                 // empty results page
                 if (order === "ASC") {
                     if (cursor !== "") {
-                        btnPrev.onclick = history.back;
+                        btnPrev.onclick = () => {
+                            history.back();
+                        };
                     }
                 } else if (order === "DESC") {
                     // back to the beginning

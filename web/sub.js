@@ -171,7 +171,7 @@ function loadSubscriptions(filter) {
                     }
                 } else if (order === "DESC") {
                     // back to the beginning
-                    window.location.assign(`sub.html&filter=${encodeURIComponent(filter)}`);
+                    window.location.assign(`sub.html?filter=${encodeURIComponent(filter)}`);
                 }
             }
         })

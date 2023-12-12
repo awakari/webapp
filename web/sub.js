@@ -65,23 +65,19 @@ function load() {
             alert(err);
         })
 
-    loadSubscriptions(false, false);
+    loadSubscriptions();
 }
 
-function loadSubscriptions(prev, next) {
+function loadSubscriptions() {
 
-    let cursor = "";
-    let order = "ASC";
-    if (prev) {
-        cursor = sessionStorage.getItem("sub_list_cursor_prev");
-        order = "DESC";
-    } else if (next) {
-        cursor = sessionStorage.getItem("sub_list_cursor_next");
-    } else {
-        cursor = sessionStorage.getItem("sub_list_cursor_curr");
-    }
+    const urlParams = new URLSearchParams(window.location.search);
+    let cursor = urlParams.get("cursor");
     if (cursor == null) {
         cursor = "";
+    }
+    let order = urlParams.get("order");
+    if (order == null) {
+        order = "ASC";
     }
 
     const authToken = sessionStorage.getItem("authToken");
@@ -105,43 +101,57 @@ function loadSubscriptions(prev, next) {
         })
         .then(data => {
             if (data != null && data.hasOwnProperty("subs")) {
-                let listHtml = document.getElementById("subs_list");
-                listHtml.innerHTML = "";
-                const subs = data.subs;
-                if (subs.length > 0) {
-                    sessionStorage.setItem("sub_list_cursor_prev", subs[0].id);
-                    sessionStorage.setItem("sub_list_cursor_next", subs[subs.length - 1].id);
-                    if (prev) {
-                        subs.reverse();
-                    }
-                    for (const sub of subs) {
-                        if (filter !== "") {
-                            const input = [
-                                sub.description,
-                            ]
-                            const idxs = uf.filter(input, filter);
-                            if (idxs != null && idxs.length > 0) {
-                                listHtml.innerHTML += templateSub(sub, true);
-                            } else {
-                                listHtml.innerHTML += templateSub(sub, false);
-                            }
-                        } else {
-                            listHtml.innerHTML += templateSub(sub, true);
+
+                let subs = data.subs;
+                if (order === "DESC") {
+                    subs.reverse();
+                }
+
+                // prev button
+                const btnPrev = document.getElementById("button-prev");
+                if (cursor === "") {
+                    btnPrev.disabled = "disabled";
+                } else {
+                    btnPrev.removeAttribute("disabled");
+                    if (subs.length > 0) {
+                        btnPrev.onclick = () => {
+                            window.location.assign(`sub.html?cursor=${subs[0].id}&order=DESC`)
+                        }
+                    } else {
+                        btnPrev.onclick = () => {
+                            window.location.assign(`sub.html?cursor=${cursor}&order=DESC`)
                         }
                     }
-                } else {
-                    sessionStorage.setItem("sub_list_cursor_prev", cursor);
                 }
-                sessionStorage.setItem("sub_list_cursor_curr", cursor);
-                if (cursor === "") {
-                    document.getElementById("button-prev").disabled = "disabled";
+
+                // next button
+                const btnNext = document.getElementById("button-next");
+                if (subs.length === pageLimit) {
+                    btnNext.removeAttribute("disabled");
+                    btnNext.onclick = () => {
+                        window.location.assign(`sub.html?cursor=${subs[pageLimit - 1].id}&order=DESC`)
+                    }
                 } else {
-                    document.getElementById("button-prev").removeAttribute("disabled");
+                    btnNext.disabled = "disabled";
                 }
-                if (data.subs.length === pageLimit) {
-                    document.getElementById("button-next").removeAttribute("disabled");
-                } else {
-                    document.getElementById("button-next").disabled = "disabled";
+
+                //
+                let listHtml = document.getElementById("subs_list");
+                listHtml.innerHTML = "";
+                for (const sub of subs) {
+                    if (filter !== "") {
+                        const input = [
+                            sub.description,
+                        ]
+                        const idxs = uf.filter(input, filter);
+                        if (idxs != null && idxs.length > 0) {
+                            listHtml.innerHTML += templateSub(sub, true);
+                        } else {
+                            listHtml.innerHTML += templateSub(sub, false);
+                        }
+                    } else {
+                        listHtml.innerHTML += templateSub(sub, true);
+                    }
                 }
             }
         })

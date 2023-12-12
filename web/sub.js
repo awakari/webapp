@@ -59,29 +59,33 @@ function load() {
             if (data != null && data.hasOwnProperty("count")) {
                 document.getElementById("limit").innerText = data.count;
             }
-            return data.count;
+            return data;
         })
         .catch(err => {
             alert(err);
         })
 
-    loadSubscriptions(true, false);
+    loadSubscriptions(false, false);
 }
 
-function loadSubscriptions(start, next) {
+function loadSubscriptions(prev, next) {
 
     let cursor = "";
-    if (next) {
+    let order = "ASC";
+    if (prev) {
+        cursor = sessionStorage.getItem("sub_list_cursor_prev");
+        order = "DESC";
+    } else if (next) {
         cursor = sessionStorage.getItem("sub_list_cursor_next");
-    } else if (!start) {
-        cursor = sessionStorage.getItem("sub_list_cursor");
+    } else {
+        cursor = sessionStorage.getItem("sub_list_cursor_curr");
     }
 
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
     const filter = document.getElementById("filter").value;
 
-    fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}`, {
+    fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}?order=${order}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -100,25 +104,37 @@ function loadSubscriptions(start, next) {
             if (data != null && data.hasOwnProperty("subs")) {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
-                let lastId = "";
-                for (const sub of data.subs) {
-                    lastId = sub.id;
-                    if (filter !== "") {
-                        const input  = [
-                            sub.description,
-                        ]
-                        const idxs = uf.filter(input, filter);
-                        if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSub(sub, true);
-                        } else {
-                            listHtml.innerHTML += templateSub(sub, false);
-                        }
-                    } else {
-                        listHtml.innerHTML += templateSub(sub, true);
+                const subs = data.subs;
+                if (subs.length > 0) {
+                    sessionStorage.setItem("sub_list_cursor_prev", subs[0].id);
+                    sessionStorage.setItem("sub_list_cursor_next", subs[subs.length - 1].id);
+                    if (prev) {
+                        subs.reverse();
                     }
+                    for (const sub of subs) {
+                        if (filter !== "") {
+                            const input = [
+                                sub.description,
+                            ]
+                            const idxs = uf.filter(input, filter);
+                            if (idxs != null && idxs.length > 0) {
+                                listHtml.innerHTML += templateSub(sub, true);
+                            } else {
+                                listHtml.innerHTML += templateSub(sub, false);
+                            }
+                        } else {
+                            listHtml.innerHTML += templateSub(sub, true);
+                        }
+                    }
+                } else {
+                    sessionStorage.setItem("sub_list_cursor_prev", cursor);
                 }
-                sessionStorage.setItem("sub_list_cursor", cursor);
-                sessionStorage.setItem("sub_list_cursor_next", lastId);
+                sessionStorage.setItem("sub_list_cursor_curr", cursor);
+                if (cursor === "") {
+                    document.getElementById("button-prev").disabled = "disabled";
+                } else {
+                    document.getElementById("button-prev").removeAttribute("disabled");
+                }
                 if (data.subs.length === pageLimit) {
                     document.getElementById("button-next").removeAttribute("disabled");
                 } else {

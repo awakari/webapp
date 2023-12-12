@@ -100,6 +100,9 @@ function loadSubscriptions() {
             return resp.json();
         })
         .then(data => {
+
+            const btnPrev = document.getElementById("button-prev");
+
             if (data != null && data.hasOwnProperty("subs")) {
 
                 let subs = data.subs;
@@ -108,7 +111,6 @@ function loadSubscriptions() {
                 }
 
                 // prev button
-                const btnPrev = document.getElementById("button-prev");
                 if (cursor === "") {
                     btnPrev.disabled = "disabled";
                 } else {
@@ -118,9 +120,7 @@ function loadSubscriptions() {
                             window.location.assign(`sub.html?cursor=${subs[0].id}&order=DESC`)
                         }
                     } else {
-                        btnPrev.onclick = () => {
-                            window.location.assign(`sub.html?cursor=${cursor}&order=DESC`)
-                        }
+                        btnPrev.onclick = history.back;
                     }
                 }
 
@@ -153,9 +153,16 @@ function loadSubscriptions() {
                         listHtml.innerHTML += templateSub(sub, true);
                     }
                 }
-            } else if (order === "DESC") {
-                // back to the beginning
-                window.location.assign("sub.html");
+            } else {
+                // empty results page
+                if (order === "ASC") {
+                    if (cursor !== "") {
+                        btnPrev.onclick = history.back;
+                    }
+                } else if (order === "DESC") {
+                    // back to the beginning
+                    window.location.assign("sub.html");
+                }
             }
         })
         .catch(err => {

@@ -84,7 +84,7 @@ function loadSubscriptions() {
     const userId = sessionStorage.getItem("userId");
     const filter = document.getElementById("filter").value;
 
-    fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}?order=${order}`, {
+    fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,

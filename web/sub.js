@@ -13,7 +13,7 @@ const templateSub = (sub, highlight) => `
 `
 
 const uf = new uFuzzy();
-const pageLimit = 10;
+const pageLimit = 13;
 
 function load() {
     const authToken = sessionStorage.getItem("authToken");

@@ -1,4 +1,4 @@
-const defaultGroupId = "default"
+const defaultGroupId = "default";
 
 function handleAuthGoogle(response) {
     const tokenEncoded = response.credential;

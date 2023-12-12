@@ -65,10 +65,16 @@ function load() {
             alert(err);
         })
 
-    loadSubscriptions();
+    const urlParams = new URLSearchParams(window.location.search);
+    loadSubscriptions(urlParams.get("filter"));
 }
 
-function loadSubscriptions() {
+const elementFilter = document.getElementById("filter");
+elementFilter.oninput = () => {
+    loadSubscriptions(elementFilter.value);
+}
+
+function loadSubscriptions(filter) {
 
     const urlParams = new URLSearchParams(window.location.search);
     let cursor = urlParams.get("cursor");
@@ -79,9 +85,10 @@ function loadSubscriptions() {
     if (order == null) {
         order = "ASC";
     }
-    let filter = urlParams.get("filter");
     if (filter == null) {
         filter = document.getElementById("filter").value;
+    } else {
+        document.getElementById("filter").value = filter;
     }
 
     const authToken = sessionStorage.getItem("authToken");

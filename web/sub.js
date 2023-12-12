@@ -79,10 +79,13 @@ function loadSubscriptions() {
     if (order == null) {
         order = "ASC";
     }
+    let filter = urlParams.get("filter");
+    if (filter == null) {
+        filter = document.getElementById("filter").value;
+    }
 
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
-    const filter = document.getElementById("filter").value;
 
     fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}`, {
         method: "GET",
@@ -118,7 +121,7 @@ function loadSubscriptions() {
                     btnPrev.removeAttribute("disabled");
                     if (subs.length > 0) {
                         btnPrev.onclick = () => {
-                            window.location.assign(`sub.html?cursor=${subs[0].id}&order=DESC`)
+                            window.location.assign(`sub.html?cursor=${subs[0].id}&order=DESC&filter=${encodeURIComponent(filter)}`)
                         }
                     } else {
                         btnPrev.onclick = () => {
@@ -131,7 +134,7 @@ function loadSubscriptions() {
                 if (subs.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
-                        window.location.assign(`sub.html?cursor=${subs[pageLimit - 1].id}&order=ASC`)
+                        window.location.assign(`sub.html?cursor=${subs[pageLimit - 1].id}&order=ASC&filter=${encodeURIComponent(filter)}`)
                     }
                 } else {
                     btnNext.disabled = "disabled";
@@ -166,7 +169,7 @@ function loadSubscriptions() {
                     }
                 } else if (order === "DESC") {
                     // back to the beginning
-                    window.location.assign("sub.html");
+                    window.location.assign(`sub.html&filter=${encodeURIComponent(filter)}`);
                 }
             }
         })

@@ -66,33 +66,35 @@ function load() {
             alert(err);
         })
 
-    loadSources(true, false);
+    loadSources();
 }
 
-function loadSources(start, next) {
+function loadSources() {
 
-    let cursor = "";
-    if (next) {
-        cursor = sessionStorage.getItem("src_list_cursor_next");
-    } else if (!start) {
-        cursor = sessionStorage.getItem("src_list_cursor");
+    const urlParams = new URLSearchParams(window.location.search);
+    let cursor = urlParams.get("cursor");
+    if (cursor == null) {
+        cursor = "";
     }
-
+    let order = urlParams.get("order");
+    if (order == null) {
+        order = "ASC";
+    }
     const filter = document.getElementById("filter").value;
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
-    const headers = {
-        "Authorization": `Bearer ${authToken}`,
-        "X-Awakari-Group-Id": defaultGroupId,
-        "X-Awakari-User-Id": userId,
-        "X-Awakari-Src-Addr": cursor,
-    }
     const srcType = document.getElementById("src_type").value;
     const own = document.getElementById("own").checked;
 
-    fetch(`/v1/src/${srcType}/list?own=${own}&limit=${pageLimit}`, {
+    const authToken = sessionStorage.getItem("authToken");
+    const userId = sessionStorage.getItem("userId");
+
+    fetch(`/v1/src/${srcType}?limit=${pageLimit}&own=${own}&cursor=${cursor}&order=${order}`, {
         method: "GET",
-        headers: headers,
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
+            "X-Awakari-Src-Addr": cursor,
+        },
         cache: "default",
     })
         .then(resp => {
@@ -102,14 +104,42 @@ function loadSources(start, next) {
             return resp.json();
         })
         .then(data => {
-            if (data != null) {
+
+            const btnPrev = document.getElementById("button-prev");
+            const btnNext = document.getElementById("button-next");
+
+            if (data != null && data.length > 0) {
+
+                if (order === "DESC") {
+                    data.reverse();
+                }
+
+                // prev button
+                if (cursor === "") {
+                    btnPrev.disabled = "disabled";
+                } else {
+                    btnPrev.removeAttribute("disabled");
+                    btnPrev.onclick = () => {
+                        window.location.assign(`pub.html?cursor=${data[0].id}&order=DESC`)
+                    };
+                }
+
+                // next button
+                if (data.length === pageLimit) {
+                    btnNext.removeAttribute("disabled");
+                    btnNext.onclick = () => {
+                        window.location.assign(`pub.html?cursor=${data[pageLimit - 1].id}&order=ASC`)
+                    }
+                } else {
+                    btnNext.disabled = "disabled";
+                }
+
+                //
                 let listHtml = document.getElementById("src_list");
                 listHtml.innerHTML = "";
-                let lastAddr = "";
                 for (const addr of data) {
-                    lastAddr = addr;
                     if (filter !== "") {
-                        const input  = [
+                        const input = [
                             addr,
                         ]
                         const idxs = uf.filter(input, filter);
@@ -122,12 +152,18 @@ function loadSources(start, next) {
                         listHtml.innerHTML += templateSrc(srcType, addr, true);
                     }
                 }
-                sessionStorage.setItem("src_list_cursor", cursor);
-                sessionStorage.setItem("src_list_cursor_next", lastAddr);
-                if (data.length === pageLimit) {
-                    document.getElementById("button-next").removeAttribute("disabled");
-                } else {
-                    document.getElementById("button-next").disabled = "disabled";
+            } else {
+                // empty results page
+                if (order === "ASC") {
+                    if (cursor !== "") {
+                        btnPrev.onclick = () => {
+                            history.back();
+                        };
+                        btnNext.disabled = "disabled";
+                    }
+                } else if (order === "DESC") {
+                    // back to the beginning
+                    window.location.assign("pub.html");
                 }
             }
         })

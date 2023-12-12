@@ -66,10 +66,11 @@ function load() {
             alert(err);
         })
 
-    loadSources();
+    const urlParams = new URLSearchParams(window.location.search);
+    loadSources(urlParams.get("filter"), urlParams.get("srcType"), urlParams.get("own"));
 }
 
-function loadSources() {
+function loadSources(filter, srcType, own) {
 
     const urlParams = new URLSearchParams(window.location.search);
     let cursor = urlParams.get("cursor");
@@ -80,9 +81,25 @@ function loadSources() {
     if (order == null) {
         order = "ASC";
     }
-    const filter = document.getElementById("filter").value;
-    const srcType = document.getElementById("src_type").value;
-    const own = document.getElementById("own").checked;
+    if (filter == null) {
+        filter = document.getElementById("filter").value;
+    } else {
+        document.getElementById("filter").value = filter;
+    }
+    if (srcType == null) {
+        srcType = document.getElementById("src_type").value;
+    } else {
+        document.getElementById("src_type").value = srcType;
+    }
+    if (own == null) {
+        own = document.getElementById("own").checked;
+    } else if (own === "true") {
+        own = true;
+        document.getElementById("own").checked = true;
+    } else {
+        own = false;
+        document.getElementById("own").checked = false;
+    }
 
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
@@ -120,7 +137,7 @@ function loadSources() {
                 } else {
                     btnPrev.removeAttribute("disabled");
                     btnPrev.onclick = () => {
-                        window.location.assign(`pub.html?cursor=${data[0].id}&order=DESC`)
+                        window.location.assign(`pub.html?cursor=${data[0].id}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
                     };
                 }
 
@@ -128,7 +145,7 @@ function loadSources() {
                 if (data.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
-                        window.location.assign(`pub.html?cursor=${data[pageLimit - 1].id}&order=ASC`)
+                        window.location.assign(`pub.html?cursor=${data[pageLimit - 1].id}&order=ASC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
                     }
                 } else {
                     btnNext.disabled = "disabled";
@@ -163,7 +180,7 @@ function loadSources() {
                     }
                 } else if (order === "DESC") {
                     // back to the beginning
-                    window.location.assign("pub.html");
+                    window.location.assign(`pub.html?filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`);
                 }
             }
         })

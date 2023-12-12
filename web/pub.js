@@ -137,7 +137,7 @@ function loadSources(filter, srcType, own) {
                 } else {
                     btnPrev.removeAttribute("disabled");
                     btnPrev.onclick = () => {
-                        window.location.assign(`pub.html?cursor=${data[0].id}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
+                        window.location.assign(`pub.html?cursor=${data[0]}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
                     };
                 }
 
@@ -145,7 +145,7 @@ function loadSources(filter, srcType, own) {
                 if (data.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
-                        window.location.assign(`pub.html?cursor=${data[pageLimit - 1].id}&order=ASC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
+                        window.location.assign(`pub.html?cursor=${data[pageLimit - 1]}&order=ASC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
                     }
                 } else {
                     btnNext.disabled = "disabled";

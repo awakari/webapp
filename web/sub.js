@@ -80,6 +80,9 @@ function loadSubscriptions(prev, next) {
     } else {
         cursor = sessionStorage.getItem("sub_list_cursor_curr");
     }
+    if (cursor == null) {
+        cursor = "";
+    }
 
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");

@@ -129,7 +129,7 @@ function loadSubscriptions() {
                 if (subs.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
-                        window.location.assign(`sub.html?cursor=${subs[pageLimit - 1].id}&order=DESC`)
+                        window.location.assign(`sub.html?cursor=${subs[pageLimit - 1].id}&order=ASC`)
                     }
                 } else {
                     btnNext.disabled = "disabled";

@@ -13,7 +13,7 @@ const templateSub = (sub, highlight) => `
 `
 
 const uf = new uFuzzy();
-const pageLimit = 13;
+const pageLimit = 10;
 
 function load() {
     const authToken = sessionStorage.getItem("authToken");
@@ -102,6 +102,7 @@ function loadSubscriptions() {
         .then(data => {
 
             const btnPrev = document.getElementById("button-prev");
+            const btnNext = document.getElementById("button-next");
 
             if (data != null && data.hasOwnProperty("subs")) {
 
@@ -127,7 +128,6 @@ function loadSubscriptions() {
                 }
 
                 // next button
-                const btnNext = document.getElementById("button-next");
                 if (subs.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
@@ -162,6 +162,7 @@ function loadSubscriptions() {
                         btnPrev.onclick = () => {
                             history.back();
                         };
+                        btnNext.disabled = "disabled";
                     }
                 } else if (order === "DESC") {
                     // back to the beginning

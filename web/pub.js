@@ -104,7 +104,7 @@ function loadSources(filter, srcType, own) {
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
 
-    fetch(`/v1/src/${srcType}?limit=${pageLimit}&own=${own}&cursor=${cursor}&order=${order}`, {
+    fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,

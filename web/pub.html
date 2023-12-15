@@ -96,11 +96,11 @@
                     <div class="flex space-x-1 pt-1">
                         <div>
                             <label for="own">Own</label>
-                            <input type="checkbox" id="own" class="w-4 h-4" onchange="loadSources(document.getElementById('filter').value, document.getElementById('src_type').value, this.value)">
+                            <input type="checkbox" id="own" class="w-4 h-4" onchange="loadSources(document.getElementById('filter').value, document.getElementById('src_type').value, this.checked)">
                         </div>
                         <div>
                             <label>Type</label>
-                            <select id="src_type" class="w-[165px] h-5" onchange="loadSources(document.getElementById('filter').value, this.value, document.getElementById('own').value)">
+                            <select id="src_type" class="w-[165px] h-5" onchange="loadSources(document.getElementById('filter').value, this.value, document.getElementById('own').checked)">
                                 <option value="tgch" selected="selected">Telegram channels</option>
                                 <option value="feed">Feeds</option>
                                 <option value="site">Sites</option>
@@ -113,7 +113,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                 </svg>
-                <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px] sm:w-[514px]" oninput="loadSources(this.value, document.getElementById('src_type').value, document.getElementById('own').value)"/>
+                <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px] sm:w-[514px]" oninput="loadSources(this.value, document.getElementById('src_type').value, document.getElementById('own').checked)"/>
             </div>
         </div>
         <div id="src_list" class="mt-2 flex flex-col items-center justify-center"></div>

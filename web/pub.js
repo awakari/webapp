@@ -74,7 +74,7 @@ function loadSources(cursor, filter, srcType, own) {
     if (cursor == null) {
         cursor = "";
     }
-    let order = urlParams.get("order");
+    let order = new URLSearchParams(window.location.search).get("order");
     if (order == null) {
         order = "ASC";
     }

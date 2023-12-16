@@ -93,7 +93,7 @@ function loadSources(filter, srcType, own) {
     }
     if (own == null) {
         own = document.getElementById("own").checked;
-    } else if (own === "on" || own === "true") {
+    } else if (own === "on" || own === true) {
         own = true;
         document.getElementById("own").checked = true;
     } else {

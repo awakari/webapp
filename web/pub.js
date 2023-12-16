@@ -67,13 +67,10 @@ function load() {
         })
 
     const urlParams = new URLSearchParams(window.location.search);
-    loadSources(urlParams.get("filter"), urlParams.get("srcType"), urlParams.get("own"));
+    loadSources(urlParams.get("cursor"), urlParams.get("filter"), urlParams.get("srcType"), urlParams.get("own"));
 }
 
-function loadSources(filter, srcType, own) {
-
-    const urlParams = new URLSearchParams(window.location.search);
-    let cursor = urlParams.get("cursor");
+function loadSources(cursor, filter, srcType, own) {
     if (cursor == null) {
         cursor = "";
     }

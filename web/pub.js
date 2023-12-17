@@ -1,5 +1,5 @@
-const templateSrc = (type, addr, highlight) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-400 hover:text-slate-400'}"
+const templateSrc = (type, addr) => `
+                <div class="hover:text-blue-500 hover:bg-gray-100 flex"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${addr}
@@ -101,7 +101,7 @@ function loadSources(cursor, filter, srcType, own) {
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
 
-    fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}`, {
+    fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -152,19 +152,7 @@ function loadSources(cursor, filter, srcType, own) {
                 let listHtml = document.getElementById("src_list");
                 listHtml.innerHTML = "";
                 for (const addr of data) {
-                    if (filter !== "") {
-                        const input = [
-                            addr,
-                        ]
-                        const idxs = uf.filter(input, filter);
-                        if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSrc(srcType, addr, true);
-                        } else {
-                            listHtml.innerHTML += templateSrc(srcType, addr, false);
-                        }
-                    } else {
-                        listHtml.innerHTML += templateSrc(srcType, addr, true);
-                    }
+                    listHtml.innerHTML += templateSrc(srcType, addr, true);
                 }
             } else {
                 // empty results page

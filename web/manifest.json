@@ -1,9 +1,10 @@
 {
-  "name": "Awakari Web",
-  "short_name": "AwakariWeb",
-  "start_url": ".",
+  "name": "Awakari",
+  "background_color": "#ffffff",
+  "short_name": "Awakari",
+  "start_url": "https://awakari.cloud",
   "display": "standalone",
-  "description": "Awakari reference Web UI",
+  "description": "Awakari UI",
   "icons": [
     {
       "src": "web/logo-color.svg"

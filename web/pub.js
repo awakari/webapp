@@ -12,7 +12,6 @@ const templateSrc = (type, addr) => `
                 </div>
 `
 
-const uf = new uFuzzy();
 const pageLimit = 10;
 
 function load() {

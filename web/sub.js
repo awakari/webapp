@@ -1,5 +1,5 @@
-const templateSub = (sub, highlight) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex ${highlight ? '' : 'text-slate-400 hover:text-slate-400'}"
+const templateSub = (sub) => `
+                <div class="hover:text-blue-500 hover:bg-gray-100 flex"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${sub.description}
@@ -12,7 +12,6 @@ const templateSub = (sub, highlight) => `
                 </div>
 `
 
-const uf = new uFuzzy();
 const pageLimit = 10;
 
 function load() {
@@ -89,7 +88,7 @@ function loadSubscriptions(filter) {
     const authToken = sessionStorage.getItem("authToken");
     const userId = sessionStorage.getItem("userId");
 
-    fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}`, {
+    fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -146,19 +145,7 @@ function loadSubscriptions(filter) {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
                 for (const sub of subs) {
-                    if (filter !== "") {
-                        const input = [
-                            sub.description,
-                        ]
-                        const idxs = uf.filter(input, filter);
-                        if (idxs != null && idxs.length > 0) {
-                            listHtml.innerHTML += templateSub(sub, true);
-                        } else {
-                            listHtml.innerHTML += templateSub(sub, false);
-                        }
-                    } else {
-                        listHtml.innerHTML += templateSub(sub, true);
-                    }
+                    listHtml.innerHTML += templateSub(sub);
                 }
             } else {
                 // empty results page

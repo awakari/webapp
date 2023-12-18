@@ -27,6 +27,38 @@ textarea, select, fieldset  {
     border-width: 1px;
     outline: none;
 }
+@media (prefers-color-scheme: dark) {
+    input[type=text] {
+        display: flex;
+        flex-grow: 1;
+        height: 20px;
+        border-color: #334155;
+        border-width: 1px;
+        outline: none;
+        background-color: #1f2937;
+        color: #94a3b8;
+    }
+    input[type=number] {
+        background-color: #1f2937;
+        border-color: #334155;
+        border-width: 1px;
+        color: #94a3b8;
+    }
+    input[type=date] {
+        background-color: #1f2937;
+        border-color: #334155;
+        border-width: 1px;
+        color: #94a3b8;
+    }
+    textarea, select, fieldset  {
+        background-color: #1f2937;
+        border-color: #334155;
+        border-width: 1px;
+        outline: none;
+        color: #94a3b8;
+    }
+
+}
 button[type=button] {
     border-width: 1px;
     border-color: #3b82f6;
@@ -37,6 +69,11 @@ button[type=button] {
 }
 button[type=button]:hover {
     background-color: #bfdbfe;
+}
+@media (prefers-color-scheme: dark) {
+    button[type=button]:hover {
+        background-color: #1e40af;
+    }
 }
 button[type=button].mode {
     height: 2rem;
@@ -49,6 +86,11 @@ button[type=button].submit {
 }
 button[type=button].submit:hover {
     background-color: #a7f3d0;
+}
+@media (prefers-color-scheme: dark) {
+    button[type=button].submit:hover {
+        background-color: #065f46;
+    }
 }
 button[type=button]:disabled {
     border-color: #64748b;
@@ -64,6 +106,11 @@ button[type=button].delete {
 }
 button[type=button].delete:hover {
     background-color: #fecaca;
+}
+@media (prefers-color-scheme: dark) {
+    button[type=button].delete:hover {
+        background-color: #991b1b;
+    }
 }
 button[type=button].delete:disabled {
     border-color: #64748b;

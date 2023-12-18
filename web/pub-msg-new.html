@@ -15,10 +15,10 @@
     <script src="pub-msg-new.js"></script>
 
 </head>
-<body onload="loadForm()">
+<body onload="loadForm()" class="bg-white dark:bg-gray-900">
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
-    <div class="text-xl flex">
+    <div class="text-xl flex dark:text-gray-300">
         <button onclick="history.back()">
             <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,7 +26,7 @@
         </button>
         <span class="pt-1">New Message</span>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center dark:text-gray-300">
         <form class="space-y-1 min-w-[264px] sm:w-[624px] max-w-[1024px]">
             <label for="msg_txt_data">
                 Text

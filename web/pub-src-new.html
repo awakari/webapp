@@ -15,7 +15,7 @@
     <script src="pub-src-new.js"></script>
 
 </head>
-<body onload="loadForm()">
+<body onload="loadForm()" class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300">
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
     <div class="text-xl flex">
@@ -42,7 +42,7 @@
                         <label for="chan_name" class="mt-1 text-md w-24">Channel</label>
                         <input type="text" id="chan_name" placeholder="@proxymtproto" class="min-h-5"/>
                     </div>
-                    <div class="text-slate-500 mt-1">
+                    <div class="text-slate-500 dark:text-slate-400 mt-1">
                         It may take up to 5 minutes before the system starts to receive new messages from the added channel.
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-slate-500">
+            <p class="text-slate-500 dark:text-slate-400">
                 The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
                 Ensure the quota is enough for this.
             </p>

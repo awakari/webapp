@@ -22,6 +22,6 @@ function logout() {
     const userId = sessionStorage.getItem("userId")
     if (confirm(`User is "${userId}". Confirm exit?`)) {
         sessionStorage.removeItem("userId");
-        window.location.assign("login.html");
+        window.location.assign("index.html");
     }
 }

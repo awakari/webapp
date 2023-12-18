@@ -1,5 +1,5 @@
 const templateSrc = (type, addr) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex"
+                <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex"
                      onclick="window.location.assign('pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}')">
                     <span class="truncate w-[240px] sm:w-[600px] py-2">
                         ${addr}

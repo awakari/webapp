@@ -85,7 +85,7 @@ function updateSubscription() {
             })
             .then(_ => {
                 alert(`Updated subscription: ${id}`);
-                window.location.assign("subs.html");
+                window.location.assign("sub.html");
             })
             .catch(err => {
                 alert(err)
@@ -116,7 +116,7 @@ function deleteSubscription() {
             })
             .then(_ => {
                 alert(`Deleted subscription ${id}`);
-                window.location.assign("subs.html");
+                window.location.assign("sub.html");
             })
             .catch(err => {
                 alert(err);

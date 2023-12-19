@@ -51,7 +51,7 @@ function createSubscription() {
             .then(data => {
                 if (data) {
                     alert(`Created subscription: ${data.id}`);
-                    window.location.assign("subs.html");
+                    window.location.assign("sub.html");
                 }
             })
             .catch(err => {

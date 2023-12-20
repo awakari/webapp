@@ -8,7 +8,8 @@
   "icons": [
     {
       "src": "logo-color.svg",
-      "type": "image/svg"
+      "type": "image/svg",
+      "sizes": "any"
     },
     {
       "src": "logo-color.png",

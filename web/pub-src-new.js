@@ -25,8 +25,8 @@ function showSrcDetails() {
 }
 
 function addSource() {
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
+    const authToken = sessionStorage.getItem(keyAuthToken);
+    const userId = sessionStorage.getItem(keyUserId);
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {

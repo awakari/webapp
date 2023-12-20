@@ -16,8 +16,8 @@ const pageLimit = 10;
 
 function load() {
 
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
+    const authToken = sessionStorage.getItem(keyAuthToken);
+    const userId = sessionStorage.getItem(keyUserId);
     const headers = {
         "Authorization": `Bearer ${authToken}`,
         "X-Awakari-Group-Id": defaultGroupId,
@@ -97,8 +97,8 @@ function loadSources(cursor, filter, srcType, own) {
         document.getElementById("own").checked = false;
     }
 
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
+    const authToken = sessionStorage.getItem(keyAuthToken);
+    const userId = sessionStorage.getItem(keyUserId);
 
     fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",

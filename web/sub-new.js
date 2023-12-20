@@ -29,8 +29,8 @@ function createSubscription() {
         payload.cond = editor.getValue(0);
     }
     if (validationErr === "") {
-        let authToken = sessionStorage.getItem("authToken");
-        let userId = sessionStorage.getItem("userId");
+        let authToken = sessionStorage.getItem(keyAuthToken);
+        let userId = sessionStorage.getItem(keyUserId);
         let optsReq = {
             method: "POST",
             headers: {

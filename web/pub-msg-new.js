@@ -144,8 +144,8 @@ function deleteMessageAttribute(name) {
 }
 
 function submitMsg() {
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
+    const authToken = sessionStorage.getItem(keyAuthToken);
+    const userId = sessionStorage.getItem(keyUserId);
     const payload = {
         id: document.getElementById("msg_id").value,
         specVersion: "1.0",

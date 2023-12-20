@@ -1,4 +1,8 @@
 {
+  "id": "awakari",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "name": "Awakari",
   "background_color": "#ffffff",
   "short_name": "Awakari",
@@ -26,5 +30,17 @@
       "type": "image/png",
       "sizes": "1024x1024"
     }
-  ]
+  ],
+  "orientation": "any",
+  "screenshots": [
+    {
+      "src": "2023-12-20_16-26.png",
+      "sizes": "361x590",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Publishing tab"
+    }
+  ],
+  "theme_color": "#6366f1",
+  "categories": [ "news", "reader", "messaging", "messenger" ]
 }

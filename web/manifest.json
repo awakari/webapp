@@ -8,15 +8,12 @@
   "icons": [
     {
       "src": "logo-color.svg",
-      "type": "image/svg",
-      "sizes": "any",
-      "purpose": "any"
+      "type": "image/svg"
     },
     {
       "src": "logo-color.png",
       "type": "image/png",
-      "sizes": "1500x1500",
-      "purpose": "any,maskable"
+      "sizes": "1500x1500"
     }
   ]
 }

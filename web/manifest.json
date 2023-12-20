@@ -9,12 +9,25 @@
     {
       "src": "logo-color.svg",
       "type": "image/svg+xml",
-      "sizes": "16x16 24x24 32x32 48x48 64x64 72x72 96x96 128x128 256x256 512x512 1024x1024"
+      "sizes": "1000x1000"
     },
     {
-      "src": "logo-color.png",
+      "src": "logo-color-64.png",
       "type": "image/png",
-      "sizes": "1500x1500"
+      "sizes": "64x64",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo-color-256.png",
+      "type": "image/png",
+      "sizes": "256x256",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo-color-1500.png",
+      "type": "image/png",
+      "sizes": "1500x1500",
+      "purpose": "maskable any"
     }
   ]
 }

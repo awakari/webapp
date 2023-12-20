@@ -7,7 +7,16 @@
   "description": "Awakari UI",
   "icons": [
     {
-      "src": "logo-color.svg"
+      "src": "logo-color.svg",
+      "type": "image/svg",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "logo-color.png",
+      "type": "image/png",
+      "sizes": "1500x1500",
+      "purpose": "maskable"
     }
   ]
 }

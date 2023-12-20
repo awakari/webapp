@@ -2,7 +2,7 @@
   "name": "Awakari",
   "background_color": "#ffffff",
   "short_name": "awakari",
-  "start_url": "https://awakari.cloud",
+  "start_url": "https://awakari.cloud/login.html",
   "display": "standalone",
   "description": "Awakari UI",
   "icons": [

@@ -26,7 +26,7 @@ function logout() {
         sessionStorage.removeItem(keyUserName);
         sessionStorage.removeItem(keyUserId);
         sessionStorage.removeItem(keyAuthToken)
-        window.location.assign("index.html");
+        window.location.assign("login.html");
     }
 }
 

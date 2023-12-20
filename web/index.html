@@ -1,102 +1,623 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
-    <link rel="icon" type="image/svg" sizes="32x32" href="logo-color.svg">
-    <link rel="icon" type="image/svg" sizes="16x16" href="logo-color.svg">
+    <link rel="icon" href="logo-color.svg">
     <link rel="manifest" href="manifest.json">
-    <link rel="mask-icon" href="logo-color.svg" color="#0ed3cf">
     <meta name="msapplication-TileColor" content="#0ed3cf">
     <meta name="theme-color" content="#0ed3cf">
 
-    <meta property="og:url" content="https://awakari.cloud">
-    <meta property="og:title" content="Awarkari">
-    <meta property="og:description" content="Event-driven reverse search">
+    <meta name="twitter:site" content="https://awakari.com" />
+    <meta name="twitter:title" content="Awakari" />
+    <meta name="twitter:description" content="Event-driven search. For faster and valuable decisions." />
+    <meta name="twitter:image" content="logo-color.svg" />
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Awakari">
-    <meta name="twitter:description" content="Event-driven reverse search">
-
-    <link rel="canonical" href="https://awakari.cloud" itemprop="URL">
-    
     <title>Awakari</title>
 
-    <link href="tailwind.output.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <!--<script src="https://accounts.google.com/gsi/client" async defer></script>-->
-    <!--<script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>-->
-    <script src="login.js"></script>
     <script>
         navigator.serviceWorker.register("sw.js");
     </script>
+    <script src="script.js"></script>
+    <script src="alpinejs-3.13.0.min.js" defer></script>
+</head>
+<body class="bg-gray-200">
 
-    </head>
-<body class="bg-white dark:bg-gray-900 dark:text-gray-300" onload="checkSessionExists()">
-    <main>
+<main>
+    <header class="bg-white dark:bg-gray-900">
+        <nav x-data="{ isOpen: false }" class="container mx-auto p-2 lg:flex lg:items-center lg:justify-between">
+            <div class="flex items-center justify-between">
+                <span class="flex">
+                    <a class="text-2xl font-bold text-gray-800 hover:text-gray-700 dark:text-white dark:hover:text-gray-300 lg:text-3xl py-2 px-1" href="#">Awakari</a>
+                </span>
 
-        <div class="mt-10 flex items-center justify-center">
-            <img alt="logo" src="logo-color.svg" width="256px" height="256px"/>
-        </div>
+                <!-- Mobile menu button -->
+                <div class="flex lg:hidden">
+                    <button x-cloak @click="isOpen = !isOpen" type="button" class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400" aria-label="toggle menu">
+                        <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+                        </svg>
 
-        <p class="px-2 text-center mt-2 justify-center text-2xl">
-            Welcome to Awakari
-        </p>
-
-        <p class="px-2 text-center mt-2 justify-center">
-            Choose the notification and login method:
-        </p>
-
-        <div class="grid grid-cols-3 md:grid-cols-2 space-y-2 mt-2 px-2 items-center justify-center">
-
-            <!-- Google -->
-            <!--
-            <div class="pt-2 px-2 text-right">
-                Email
-            </div>
-
-            <div class="max-w-[200px] col-span-2 md:col-span-1 h-[32px]">
-                <div id="g_id_onload"
-                     data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
-                     data-context="signin"
-                     data-ux_mode="popup"
-                     data-callback="handleAuthGoogle"
-                     data-auto_prompt="false">
-                </div>
-                <div class="g_id_signin"
-                     data-type="standard"
-                     data-shape="rectangular"
-                     data-theme="outline"
-                     data-text="signin_with"
-                     data-size="medium"
-                     data-logo_alignment="left">
+                        <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            -->
 
-            <!-- Telegram -->
-            <div class="pt-2 px-2 text-right">
-                Telegram
+            <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+            <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent">
+                <div class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0">
+                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#about">About</a>
+                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#use_cases">Use Cases</a>
+                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#solutions">Solutions</a>
+                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#pricing">Pricing</a>
+                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#resources">Resources</a>
+                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="mailto:awakari@awakari.com">Contact &#10697;</a>
+                </div>
             </div>
-            <div class="max-w-[200px] col-span-2 md:col-span-1 h-[32px]">
-                <script async
-                        src="https://telegram.org/js/telegram-widget.js?22"
-                        data-telegram-login="AwakariBot"
-                        data-size="medium"
-                        data-onauth="handleAuthTelegram(user)"
-                        data-request-access="write"
-                        data-radius="4"
-                        data-userpic="false">
-                </script>
+        </nav>
+
+        <div class="container mx-auto py-2 items-center justify-center">
+            <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
+                <span class="py-4 items-center text-center">
+                    <p class="m-1 text-4xl font-semibold text-indigo-700">
+                        Reach everyone interested
+                    </p>
+                </span>
+                <div class="items-center justify-center">
+                    <center>
+                        <img src="logo-color.svg" width="256" class="items-center justify-center"/>
+                    </center>
+                </div>
+                <div class="py-4 align-middle items-center text-center">
+                    <h1 class="m-1 text-4xl font-semibold text-cyan-700">
+                        Capture the most important
+                    </h1>
+                </div>
+            </div>
+            <div class="container items-center justify-center py-4">
+                <center>
+                    <button type="button" class="text-white text-lg w-56 h-12 bg-gradient-to-r from-indigo-600 hover:from-indigo-500 to-cyan-600 hover:to-cyan-500 focus:outline-none font-bold rounded-md px-5 py-2 text-center">
+                        <a href="https://awakari.cloud">Start for Free</a>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-white dark:bg-gray-900" id="about">
+        <div class="container mx-auto px-6 pt-8">
+            <div class="mx-auto mt-6 flex">
+                <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl">About</h1>
+            </div>
+            <div class="mx-auto max-w-6xl mt-2">
+                <h2 class="text-2xl px-2 py-2 capitalize text-gray-800 dark:text-white">Event-Driven Reverse Search</h2>
+                <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                    <div class="space-y-2 py-4 text-lg text-gray-700">
+                        <p class="align-text-middle px-2 py-2">
+                            Stay informed in the real-time. No more repeating searches.
+                        </p>
+                        <p class="px-2 py-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Saves your time</span>
+                        </p>
+                        <p class="px-2 py-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Reduces the cost removing the dry polls with no new results</span>
+                        </p>
+                        <p class="px-2 py-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Reduces the latency</span>
+                        </p>
+                        <p class="px-2 py-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Finds all queries by an incoming event at once. Most cost-efficient when query number grows.</span>
+                        </p>
+                    </div>
+                    <div>
+                        <img src="data-value-vs-time.svg" alt="figure: data value vs time"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto max-w-6xl mt-8">
+                <h2 class="px-2 py-4 capitalize text-gray-700 dark:text-white text-2xl">Publishing Sources</h2>
+                <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 text-gray-700">
+                    <div class="flex justify-end">
+                        <img src="how-it-works.svg" alt="add own pub src"/>
+                    </div>
+                    <div class="space-y-4 py-4 text-lg">
+                        <p class="align-text-middle px-2 pt-2">
+                            Already available event sources:
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>90+ Feeds (RSS/Atom/JSON)</span>
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>60+ Telegram Channels</span>
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>30+ Web Sites</span>
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Messages published by others</span>
+                        </p>
+                        <p class="align-text-middle px-4 text-lg">
+                            Add your own RSS Feed, Telegram Channel or Web Site.
+                        </p>
+                        <p class="align-text-middle px-4 text-lg">
+                            More sources coming soon.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto max-w-6xl mt-8">
+                <h2 class="px-2 py-4 capitalize text-gray-700 dark:text-white text-2xl">Query Subscriptions</h2>
+                <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 text-gray-700">
+                    <div class="space-y-4 py-4 text-lg">
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Group conditions using operators like "And", "Or", ... </span>
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Match text keywords</span>
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Match numbers using operators like "<", "=", "≥", ...</span>
+                        </p>
+                    </div>
+                    <div class="flex justify-start px-16">
+                        <img src="photo_5352989553037791923_y.jpg" alt="subscription" class="w-72"/>
+                    </div>
+                </div>
             </div>
 
         </div>
+    </div>
 
-        <p class="text-center mt-3 text-[14px]">By logging in, you agree to the
-            <a href="tos.html" class="text-gray-600 dark:text-slate-400">Terms of Service</a> and <a href="privacy.html" class="text-gray-600 dark:text-slate-400">Privacy Policy</a>.
-        </p>
+    <div class="bg-white dark:bg-gray-900" id="use_cases">
+        <div class="container mx-auto px-6 pt-8">
+            <div class="mt-6 md:flex md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">Use Cases</h1>
+                </div>
+            </div>
 
-    </main>
+            <div class="xl:-mx-8 xl:flex items-center justify-center">
+                <div class="xl:mx-8 max-w-6xl items-center justify-center">
+                    <div class="mt-8 mt-2 grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 items-center justify-center">
 
-</body></html>
+                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4" style="height: 480px">
+                            <div class="p-6 space-y-4">
+                                <div class="flex">
+                                    <img src="insight-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
+                                    <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white lg:text-3xl">Business Insights</h1>
+                                </div>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Connect to various data sources relevant to the business, such as social media feeds, news sources, industry reports, financial markets, and internal data systems.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Subscribe for specific keywords, topics, and queries related to the business's interests, including brand mentions, industry trends, competitor activities, and market events.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Business leaders can make data-driven decisions faster, responding promptly to risks, opportunities and trends.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4" style="height: 480px">
+                            <div class="p-6 space-y-4">
+                                <div class="flex">
+                                    <img src="share-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
+                                    <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white lg:text-3xl">Media Monitoring</h1>
+                                </div>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Connect to a wide range of data sources, including social media platforms, news websites, blogs, forums, and other online communities.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Subscribe for specific persons, brands, topics, trends, activities, and events.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Staying informed helps individuals or organizations proactively manage their online presence and reputation.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4" style="height: 480px">
+                            <div class="p-6 space-y-4">
+                                <div class="flex">
+                                    <img src="target-icon.svg" alt="Customer Targeting" class="w-8 h-8 mr-2"/>
+                                    <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white lg:text-3xl">Customer Targeting</h1>
+                                </div>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Engage actively with potential customers by publishing offers that are received by everyone interested.
+                                    This enables businesses to proactively reach out to potential customers with relevant information, offers, or content.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    Published events have an immediate impact as they are received by users in real-time.
+                                    Targeted messages increase the likelihood of conversion and customer acquisition.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4" style="height: 480px">
+                            <div class="p-6 space-y-4">
+                                <div class="flex">
+                                    <img src="cloud-services-icon.svg" alt="services" class="w-8 h-8 mr-2"/>
+                                    <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white lg:text-3xl">And Much More...</h1>
+                                </div>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    <b>Real Estate</b>: subscribe for notifications about new properties that match a criteria, simplifying their search process.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    <b>Recruitment</b>: publish a CV or a job description, find a dream job or candidate.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    <b>Science</b>: researchers can monitor journals and databases for the latest publications and developments.
+                                </p>
+                                <p class="text-slate-600 dark:text-gray-300">
+                                    <b>Entertainment</b>: discover and receive notifications about upcoming concerts, movie releases, theater shows, etc.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-900" id="solutions">
+        <div class="container mx-auto px-6 pt-8 space-y-4 text-gray-700">
+            <div class="mt-6 md:flex md:items-center md:justify-between">
+                <h1 class="text-3xl font-semibold capitalize dark:text-white lg:text-4xl">Solutions</h1>
+            </div>
+
+            <h2 class="text-2xl capitalize dark:text-white">Serverless</h2>
+            <div class="mt-8 space-y-8 md:flex md:space-y-0 xl:mt-2">
+
+                <div class="w-72">
+                    <div class="flex items-center py-2">
+                        <span class="h-6 w-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg></span>
+                        <span class="mx-2 text-gray-600 dark:text-gray-300">
+                        No deployment required
+                    </span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <span class="h-6 w-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg></span>
+                        <span class="mx-2 text-gray-600 dark:text-gray-300">
+                        Ready to use public event sources
+                    </span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <span class="h-6 w-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg></span>
+                        <span class="mx-2 text-gray-600 dark:text-gray-300">
+                        Free single subscription that never expires
+                    </span>
+                    </div>
+                </div>
+
+                <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
+                    <div class="p-6">
+                        <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white font-semibold flex items-center justify-center">Public UI</h1>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">
+                            Easy way to manage publishing and subscriptions.
+                        </p>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Best for personal use.</p>
+                        <a href="https://awakari.cloud">
+                            <button class="mt-6 w-full transform rounded-md bg-slate-500 px-4 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-slate-600 focus:bg-slate-500 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+                                Start Now
+                            </button>
+                        </a>
+                    </div>
+                    <hr class="border-gray-200 dark:border-gray-700" />
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="mx-2 text-gray-600 dark:text-gray-300">Free to use</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="mx-2 text-gray-600 dark:text-gray-300">Adding own sources</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
+                    <div class="p-6">
+                        <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white font-semibold flex items-center justify-center">Public API</h1>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">
+                            Want to build own service?<br/>
+                            Try the Awakari streaming API.
+                        </p>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Best for client integrations.</p>
+                        <a href="https://github.com/awakari#3-access">
+                            <button class="mt-6 w-full transform rounded-md bg-slate-500 px-4 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-slate-600 focus:bg-slate-500 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+                                Learn More
+                            </button>
+                        </a>
+                    </div>
+                    <hr class="border-gray-200 dark:border-gray-700" />
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="mx-2 text-gray-600 dark:text-gray-300">Free first 30 days of access</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="h-5 w-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                                <span class="mx-2 text-gray-600 dark:text-gray-300">Free first 10 pubs per day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="text-2xl capitalize dark:text-white">Dedicated</h2>
+            <div class="mt-8 space-y-8 md:flex md:space-y-0 xl:mt-2">
+
+                <div class="w-72">
+                    <div class="flex items-center py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        <span class="mx-2 text-gray-600 dark:text-gray-300">
+                        Private event sources
+                    </span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        <span class="mx-2 text-gray-600 dark:text-gray-300">
+                        Unlimited message publications
+                    </span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        <span class="mx-2 text-gray-600 dark:text-gray-300">
+                        Unlimited subscriptions
+                    </span>
+                    </div>
+                </div>
+
+                <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
+                    <div class="p-6">
+                        <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white font-semibold flex items-center justify-center">Cloud Instance</h1>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Don't want to publish your events to everyone?</p>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Private event sources.</p>
+                        <a href="mailto:awakari@awakari.com">
+                            <button class="mt-6 w-full transform rounded-md bg-slate-500 px-4 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-slate-600 focus:bg-slate-500 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+                                Contact
+                            </button>
+                        </a>
+                    </div>
+                    <hr class="border-gray-200 dark:border-gray-700" />
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+
+                                <span class="mx-2 text-gray-600 dark:text-gray-300">No deployment required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
+                    <div class="p-6">
+                        <h1 class="text-xl font-medium capitalize text-gray-700 dark:text-white font-semibold flex items-center justify-center">Events On Premises</h1>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Want all events to remain inside your network?</p>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Subscriptions only in the cloud.</p>
+                        <a href="https://github.com/awakari/core#3-deployment">
+                            <button class="mt-6 w-full transform rounded-md bg-slate-500 px-4 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-slate-600 focus:bg-slate-500 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+                                Learn More
+                            </button>
+                        </a>
+                    </div>
+                    <hr class="border-gray-200 dark:border-gray-700" />
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+
+                                <span class="mx-2 text-gray-600 dark:text-gray-300">Strict events privacy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-900" id="pricing">
+
+        <div class="container mx-auto px-6 pt-8 space-y-4">
+            <div class="mt-6 md:flex md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl">Pricing</h1>
+                </div>
+            </div>
+
+            <div class="mt-4 space-y-2 text-gray-700">
+                <p>Telegram Bot interface is completely free to use (donations are welcome).</p>
+                <p>For other price options, <a href="mailto:awakari@awakari.com" style="color: #1d4ed8">contact</a>.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-900" id="resources">
+        <div class="container mx-auto px-6 pt-8 space-y-4 text-gray-600">
+            <div class="mt-6 md:flex md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-3xl lg:text-4xl font-semibold capitalize dark:text-white">Resources</h1>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-5 md:grid-cols-2 sm:grid-cols-1">
+
+                <div class="pt-4 space-y-2">
+                    <h3 class="text-xl capitalize dark:text-white">Articles</h3>
+                    <div class="pt-2 space-y-2">
+                        <p><a href="https://habr.com/ru/articles/771874/" style="color: #1d4ed8">https://habr.com/ru/articles/771874/</a></p>
+                        <p><a href="https://habr.com/ru/articles/767662/" style="color: #1d4ed8">https://habr.com/ru/articles/767662/</a></p>
+                        <p><a href="https://habr.com/ru/articles/767422/" style="color: #1d4ed8">https://habr.com/ru/articles/767422/</a></p>
+                        <p><a href="https://habr.com/ru/articles/742972/" style="color: #1d4ed8">https://habr.com/ru/articles/742972/</a></p>
+                    </div>
+                </div>
+
+                <div class="pt-4 space-y-2">
+                    <h2 class="text-xl capitalize dark:text-white">Posts</h2>
+                    <div class="space-y-2">
+                        <p><a href="https://news.ycombinator.com/item?id=38143228" style="color: #1d4ed8">Show HN</a></p>
+                    </div>
+                </div>
+
+                <div class="pt-4 space-y-2">
+                    <h2 class="text-xl capitalize dark:text-white">Community</h2>
+                    <div class="space-y-2">
+                        <p><a href="https://github.com/awakari" style="color: #1d4ed8">GitHub</a></p>
+                        <p><a href="https://www.reddit.com/r/awakari/" style="color: #1d4ed8">Reddit</a></p>
+                        <p><a href="https://t.me/awakari" style="color: #1d4ed8">Telegram</a></p>
+                        <p><a href="https://www.saashub.com/awakari" style="color: #1d4ed8">SaasHub</a></p>
+                        <p><a href="https://www.indiegogo.com/projects/--2810259/coming_soon/x/35869246" style="color: #1d4ed8">Indiegogo</a></p>
+                    </div>
+                </div>
+
+                <div class="pt-4 space-y-2">
+                    <h2 class="text-xl capitalize dark:text-white">Documentation</h2>
+                    <div class="space-y-2">
+                        <p><a href="https://awakari.app/help" style="color: #1d4ed8">Telegram Bot</a></p>
+                        <p><a href="https://github.com/awakari/core#32-connect-subscriptions" style="color: #1d4ed8">Subscriptions Access</a></p>
+                        <p><a href="https://github.com/awakari/core#42-api" style="color: #1d4ed8">Core API</a></p>
+                        <p><a href="https://github.com/awakari/client-sdk-go" style="color: #1d4ed8">Client SDK</a></p>
+                        <p><a href="https://github.com/awakari/.github/blob/master/ROADMAP.md" style="color: #1d4ed8">Roadmap</a></p>
+                        <p><a href="https://github.com/awakari/webapp#1-usage" style="color: #1d4ed8">Demo Web UI</a></p>
+                    </div>
+                </div>
+
+                <div class="pt-4 space-y-2">
+                    <h2 class="text-xl capitalize dark:text-white">Other</h2>
+                    <div class="space-y-2">
+                        <p><a href="tos.html" style="color: #1d4ed8">Terms of Service</a></p>
+                        <p><a href="privacy.html" style="color: #1d4ed8">Privacy Policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-6 py-20">
+            <hr class="my-6 border-gray-200 dark:border-gray-700 md:my-8" />
+            <center><small class="text-slate-500">&copy; Awakari</small></center>
+        </div>
+    </footer>
+
+</main>
+</body>
+</html>

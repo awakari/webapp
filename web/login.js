@@ -1,3 +1,5 @@
+navigator.serviceWorker.register("sw.js");
+
 const defaultGroupId = "default";
 const keyUserId = "userId";
 const keyUserName = "userName";

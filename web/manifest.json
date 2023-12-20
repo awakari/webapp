@@ -9,11 +9,5 @@
     {
       "src": "web/logo-color.svg"
     }
-  ],
-  "related_applications": [
-    {
-      "platform": "homepage",
-      "url": "https://awakari.com"
-    }
   ]
 }

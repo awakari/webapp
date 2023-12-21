@@ -36,11 +36,11 @@
 <body class="bg-white dark:bg-gray-900 dark:text-gray-300" onload="checkSessionExists()">
     <main>
 
-        <div class="mt-10 flex items-center justify-center">
+        <div class="mt-12 flex items-center justify-center">
             <img alt="logo" src="logo-color.svg" width="256px" height="256px"/>
         </div>
 
-        <p class="px-2 text-center mt-2 justify-center text-2xl">
+        <p class="px-2 text-center mt-8 justify-center text-2xl">
             Welcome to Awakari
         </p>
 
@@ -48,15 +48,32 @@
             Choose the notification and login method:
         </p>
 
-        <div class="grid grid-cols-3 md:grid-cols-2 space-y-2 mt-2 px-2 items-center justify-center">
+        <div class="grid grid-cols-5 space-y-2 mt-2 px-2 items-center justify-center">
+
+            <!-- Telegram -->
+            <div class="pt-2 px-2 text-right">
+                Telegram
+            </div>
+            <div class="w-40 h-8 col-span-2">
+                <script async
+                        src="https://telegram.org/js/telegram-widget.js?22"
+                        data-telegram-login="AwakariBot"
+                        data-size="medium"
+                        data-onauth="handleAuthTelegram(user)"
+                        data-request-access="write"
+                        data-radius="4"
+                        data-userpic="false">
+                </script>
+            </div>
+            <div class="col-span-2">
+                <a href="https://t.me/AwakariBot">Chat Bot</a>
+            </div>
 
             <!-- Google -->
-            <!--
             <div class="pt-2 px-2 text-right">
                 Email
             </div>
-
-            <div class="max-w-[200px] col-span-2 md:col-span-1 h-[32px]">
+            <div class="w-40 h-8 col-span-2">
                 <div id="g_id_onload"
                      data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
                      data-context="signin"
@@ -73,27 +90,16 @@
                      data-logo_alignment="left">
                 </div>
             </div>
-            -->
-
-            <!-- Telegram -->
-            <div class="pt-2 px-2 text-right">
-                Telegram
-            </div>
-            <div class="max-w-[200px] col-span-2 md:col-span-1 h-[32px]">
-                <script async
-                        src="https://telegram.org/js/telegram-widget.js?22"
-                        data-telegram-login="AwakariBot"
-                        data-size="medium"
-                        data-onauth="handleAuthTelegram(user)"
-                        data-request-access="write"
-                        data-radius="4"
-                        data-userpic="false">
-                </script>
+            <div class="col-span-2">
+                Coming Soon
             </div>
 
         </div>
 
-        <p class="text-center mt-3 text-[14px]">By logging in, you agree to the
+        <p class="text-center mt-3 text-[14px]">
+            By logging in, you agree to the
+        </p>
+        <p class="text-center mt-1 text-[14px]">
             <a href="tos.html" class="text-gray-600 dark:text-slate-400">Terms of Service</a> and <a href="privacy.html" class="text-gray-600 dark:text-slate-400">Privacy Policy</a>.
         </p>
 

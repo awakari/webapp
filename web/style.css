@@ -113,6 +113,7 @@ button[type=button].delete:hover {
     }
 }
 button[type=button].delete:disabled {
+    visibility: hidden;
     border-color: #64748b;
     color: #64748b;
 }

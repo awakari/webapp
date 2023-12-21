@@ -29,12 +29,16 @@ function loadSource() {
                 switch (typ) {
                     case "feed":
                         document.getElementById("type").innerText = "Feed";
+                        const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
+                        document.getElementById("upd_period").innerText = d.humanize();
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
+                        document.getElementById("upd_period").innerText = "a day";
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel";
+                        document.getElementById("upd_period").innerText = "N/A";
                         break
                 }
                 document.getElementById("addr").innerText = data.addr;
@@ -42,12 +46,6 @@ function loadSource() {
                     document.getElementById("last_upd").innerText = "N/A";
                 } else {
                     document.getElementById("last_upd").innerText = data.lastUpdate;
-                }
-                if (data.updatePeriod === 0) {
-                    document.getElementById("upd_period").innerText = "N/A";
-                } else {
-                    const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
-                    document.getElementById("upd_period").innerText = d.humanize();
                 }
                 const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && data.userId === userId) {

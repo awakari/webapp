@@ -12,7 +12,7 @@ const templateSrc = (type, addr) => `
                 </div>
 `
 
-const pageLimit = 14;
+const pageLimit = 12;
 
 function load() {
 

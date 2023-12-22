@@ -42,5 +42,6 @@
     }
   ],
   "theme_color": "#6366f1",
-  "categories": [ "news", "reader", "messaging", "messenger" ]
+  "categories": [ "news", "reader", "messaging", "messenger" ],
+  "scope": "https://awakari.cloud"
 }

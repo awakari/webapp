@@ -50,8 +50,7 @@ function createSubscription() {
             })
             .then(data => {
                 if (data) {
-                    alert(`Created subscription: ${data.id}`);
-                    window.location.assign("sub.html");
+                    window.location.assign(`sub-new-success.html?id=${data.id}`);
                 }
             })
             .catch(err => {

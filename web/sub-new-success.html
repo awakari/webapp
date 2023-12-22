@@ -12,46 +12,50 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="login.js"></script>
+    <script src="sub-new-success.js"></script>
 
 </head>
-<body onload="loadSource()" class="bg-white dark:bg-gray-900">
+<body onload="load()" class="bg-white dark:bg-gray-900">
 
 <div class="m-1 flex-1 flex flex-col space-y-1 text-slate-700 dark:text-gray-300">
-    <div class="text-xl flex">
-        <button onclick="history.back()" class="mr-1">
-            <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-        <span>Publishing Source Details</span>
+    <div class="text-xl flex justify-center">
+        <span>Created Subscription</span>
     </div>
-    <div class="flex justify-center m-1">
-        <form class="space-y-2">
-            <div class="flex flex-col">
-                <div class="flex h-6">
-                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Type:</span>
-                    <span id="type" class="ml-2 w-[280px] sm:w-full sm:text-sm"></span>
-                </div>
-                <div class="flex min-h-6 flex-wrap">
-                    <span class="h-6 min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Address:</span>
-                    <span id="addr" class="ml-2 w-[280px] sm:w-[552px] text-xs sm:text-sm break-all"></span>
-                </div>
-                <div class="flex h-6">
-                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Last:</span>
-                    <span id="last_upd" class="ml-2 font-mono w-[280px] sm:w-full text-xs sm:text-sm">YYYY-MM-DDThh-mm-ss.SSSZ</span>
-                </div>
-                <div class="flex h-6">
-                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Period:</span>
-                    <span id="upd_period" class="ml-2 font-mono w-[280px] sm:w-full text-xs sm:text-sm">00 min</span>
-                </div>
+    <div class="flex flex-col items-center justify-center m-1 pt-2 space-y-4">
+
+        <div class="flex">
+            <span class="min-w-4 w-4 text-slate-500 dark:text-slate-400">Id:</span>
+            <span id="id" class="ml-2 w-[280px] sm:w-full"></span>
+        </div>
+
+        <!-- Telegram -->
+        <div id="telegram" class="space-y-2" style="display: none">
+            <div class="flex space-x-2">
+                <svg fill="currentColor" width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="currentColor">
+                        <path d="M8 0a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8zm0 1a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7z"/>
+                        <path d="M8.708 5.663q0 1.19-.085 2.167-.085.963-.212 1.926h-.822q-.127-.963-.212-1.926-.085-.977-.085-2.167V3h1.416zm.241 6.388q0 .382-.255.666Q8.44 13 8 13q-.44 0-.694-.283-.255-.284-.255-.666 0-.382.255-.666.255-.283.694-.283.44 0 .694.283.255.284.255.666z" style="line-height:1000%;-inkscape-font-specification:Ubuntu" font-weight="400" font-family="Ubuntu" letter-spacing="0" word-spacing="0"/>
+                    </g>
+                </svg>
+                <p class="text-lg">To receive matching messages:</p>
             </div>
-            <div class="flex items-center justify-center pt-1">
-                <button id="button_src_del" type="button" class="flex delete justify-center text-center">
-                    <svg fill="currentColor" width="22px" height="22px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
-                    <span class="pt-1">Delete</span>
-                </button>
+            <div class="space-y-1 pl-5">
+                <p>1. Open Telegram</p>
+                <p>2. Create a Group</p>
+                <p>3. Invite <a href="https://t.me/AwakariBot" target="_blank" class="text-blue-500">AwakariBot</a> to the Group</p>
+                <p>4. Select this Subscription from the list</p>
             </div>
-        </form>
+        </div>
+
+        <div class="flex items-center justify-center pt-2">
+            <button type="button" onclick="window.location.assign('sub.html')" class="flex w-[100px] justify-center text-center">
+                <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.6097 5.20743C21.0475 5.54416 21.1294 6.17201 20.7926 6.60976L10.7926 19.6098C10.6172 19.8378 10.352 19.9793 10.0648 19.9979C9.77765 20.0166 9.49637 19.9106 9.29289 19.7072L4.29289 14.7072C3.90237 14.3166 3.90237 13.6835 4.29289 13.2929C4.68342 12.9024 5.31658 12.9024 5.70711 13.2929L9.90178 17.4876L19.2074 5.39034C19.5441 4.95258 20.172 4.87069 20.6097 5.20743Z" fill="currentColor"/>
+                </svg>
+                <span class="pt-1">OK</span>
+            </button>
+        </div>
+
     </div>
 </div>
 

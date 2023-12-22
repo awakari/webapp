@@ -17,10 +17,7 @@ function handleAuthTelegram(user) {
     localStorage.setItem(keyUserId, `tg://user?id=${user.id}`);
     localStorage.setItem(keyUserName, user.first_name);
     localStorage.setItem(keyAuthProvider, "Telegram");
-    const userJson = JSON.stringify(user);
-    const token = btoa(userJson.replace(/[\u00A0-\u2666]/g, function(c) {
-        return "&#" + c.charCodeAt(0) + ";";
-    }));
+    const token = Base64.encode(JSON.stringify(user));
     localStorage.setItem(keyAuthToken, token);
     window.location.assign("pub.html");
 }

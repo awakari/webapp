@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0ed3ff">
 
@@ -16,38 +16,38 @@
     <script src="moment.min.js"></script>
 
 </head>
-<body onload="loadSource()">
+<body onload="loadSource()" class="bg-white dark:bg-gray-900">
 
-<div class="m-1 flex-1 flex flex-col space-y-1">
+<div class="m-1 flex-1 flex flex-col space-y-1 text-slate-700 dark:text-gray-300">
     <div class="text-xl flex">
-        <button onclick="history.back()">
-            <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <button onclick="history.back()" class="mr-1">
+            <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
-        <span class="pt-1">Publishing Source Details</span>
+        <span>Publishing Source Details</span>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center m-1">
         <form class="space-y-2">
             <div class="flex flex-col">
                 <div class="flex h-6">
-                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Type:</span>
-                    <span id="type" class="ml-2 font-mono w-48 sm:w-full text-xs sm:text-sm"></span>
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Type:</span>
+                    <span id="type" class="ml-2 w-[280px] sm:w-full"></span>
                 </div>
                 <div class="flex min-h-6 flex-wrap">
-                    <span class="h-6 min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Address:</span>
-                    <span id="addr" class="ml-2 font-mono w-48 sm:w-[560px] text-xs sm:text-sm break-all"></span>
+                    <span class="h-6 min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Address:</span>
+                    <span id="addr" class="ml-2 w-[280px] sm:w-[552px] break-all"></span>
                 </div>
                 <div class="flex h-6">
-                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Last:</span>
-                    <span id="last_upd" class="ml-2 font-mono w-48 sm:w-full text-xs sm:text-sm">YYYY-MM-DDThh-mm-ss.SSSZ</span>
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Last:</span>
+                    <span id="last_upd" class="ml-2 font-mono w-[280px] sm:w-full">YYYY-MM-DDThh-mm-ss.SSSZ</span>
                 </div>
                 <div class="flex h-6">
-                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500">Period:</span>
-                    <span id="upd_period" class="ml-2 font-mono w-48 sm:w-full text-xs sm:text-sm">00 min</span>
+                    <span class="min-w-14 w-14 sm:w-16 sm:min-w-16 text-slate-500 dark:text-slate-400">Period:</span>
+                    <span id="upd_period" class="ml-2 font-mono w-[280px] sm:w-full">00 min</span>
                 </div>
             </div>
-            <div class="flex items-center justify-center space-x-2">
+            <div class="flex items-center justify-center pt-1">
                 <button id="button_src_del" type="button" class="flex delete justify-center text-center">
                     <svg fill="currentColor" width="22px" height="22px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
                     <span class="pt-1">Delete</span>

@@ -2,7 +2,6 @@
 <html lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
     
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
@@ -30,61 +29,64 @@
 
     <script src="login.js"></script>
     <script src="sub.js"></script>
+    <script>
+        navigator.serviceWorker.register("sw.js");
+    </script>
 
     </head>
 <body class="bg-white dark:bg-gray-900" onload="load()">
     <nav class="flex flex-row">
-        <button class="text-gray-600 dark:text-gray-400 py-1 px-1 block hover:text-indigo-500 focus:outline-none flex text-xl"
-                onclick="window.location.assign('pub.html')">
-            <svg class="mr-1" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 17a1 1 0 1 1 2 0v1.077c0 .76-.082 1.185-.319 1.627a2.363 2.363 0 0 1-.977.977c-.442.237-.867.319-1.627.319H5.923c-.76 0-1.185-.082-1.627-.319a2.363 2.363 0 0 1-.978-.977C3.082 19.262 3 18.838 3 18.077L2.999 6.5A2.5 2.5 0 0 1 5.502 4l1.5.005a1 1 0 1 1-.005 2L5.499 6a.5.5 0 0 0-.5.5v11.577c0 .459.023.57.083.684.038.07.087.12.157.157.113.06.225.082.684.082h11.154c.459 0 .57-.022.684-.082a.363.363 0 0 0 .157-.157c.06-.113.082-.225.082-.684V17zm4-4a1 1 0 1 1-2 0 9 9 0 0 0-9-9 1 1 0 1 1 0-2c6.075 0 11 4.925 11 11zm-4 0a1 1 0 1 1-2 0 5 5 0 0 0-5-5 1 1 0 1 1 0-2 7 7 0 0 1 7 7zm-4 0a1 1 0 1 1-2 0 1 1 0 0 0-1-1 1 1 0 1 1 0-2 3 3 0 0 1 3 3z" fill="currentColor"/></svg>
-            <span>Pub</span>
-        </button>
-        <button class="text-gray-600 py-1 px-1 block hover:text-sky-500 focus:outline-none text-sky-500 border-b-2 font-medium border-sky-500 flex text-xl">
-            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14 20.5H10C9.80189 20.4974 9.61263 20.4176 9.47253 20.2775C9.33244 20.1374 9.25259 19.9481 9.25 19.75V12L3.9 4.69C3.81544 4.58007 3.76395 4.44832 3.75155 4.31018C3.73915 4.17204 3.76636 4.03323 3.83 3.91C3.89375 3.78712 3.98984 3.68399 4.10792 3.61173C4.226 3.53947 4.36157 3.50084 4.5 3.5H19.5C19.6384 3.50084 19.774 3.53947 19.8921 3.61173C20.0101 3.68399 20.1062 3.78712 20.17 3.91C20.2336 4.03323 20.2608 4.17204 20.2484 4.31018C20.236 4.44832 20.1846 4.58007 20.1 4.69L14.75 12V19.75C14.7474 19.9481 14.6676 20.1374 14.5275 20.2775C14.3874 20.4176 14.1981 20.4974 14 20.5ZM10.75 19H13.25V11.75C13.2492 11.5907 13.302 11.4357 13.4 11.31L18 5H6L10.62 11.31C10.718 11.4357 10.7708 11.5907 10.77 11.75L10.75 19Z" fill="currentColor"/>
-            </svg>
-            <span>Sub</span>
-        </button>
-        <div class="grow"></div>
-        <button class="text-gray-600 dark:text-gray-400 py-1 px-2 block hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none flex text-xl"
+        <button class="w-20 text-gray-600 dark:text-gray-400 py-1 px-1 block hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none flex text-xl"
                 onclick="logout()">
-            <svg class="mr-1" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6.5C2 4.01472 4.01472 2 6.5 2H12C14.2091 2 16 3.79086 16 6V7C16 7.55228 15.5523 8 15 8C14.4477 8 14 7.55228 14 7V6C14 4.89543 13.1046 4 12 4H6.5C5.11929 4 4 5.11929 4 6.5V17.5C4 18.8807 5.11929 20 6.5 20H12C13.1046 20 14 19.1046 14 18V17C14 16.4477 14.4477 16 15 16C15.5523 16 16 16.4477 16 17V18C16 20.2091 14.2091 22 12 22H6.5C4.01472 22 2 19.9853 2 17.5V6.5ZM18.2929 8.29289C18.6834 7.90237 19.3166 7.90237 19.7071 8.29289L22.7071 11.2929C23.0976 11.6834 23.0976 12.3166 22.7071 12.7071L19.7071 15.7071C19.3166 16.0976 18.6834 16.0976 18.2929 15.7071C17.9024 15.3166 17.9024 14.6834 18.2929 14.2929L19.5858 13L11 13C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11L19.5858 11L18.2929 9.70711C17.9024 9.31658 17.9024 8.68342 18.2929 8.29289Z" fill="currentColor"/>
+            <svg class="mr-1 " width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span>Exit</span>
         </button>
+        <div class="grow flex items-center justify-center">
+            <button class="w-20 text-gray-600 dark:text-gray-400 py-1 px-1 block hover:text-indigo-500 focus:outline-none flex text-xl"
+                    onclick="window.location.assign('pub.html')">
+                <svg class="mr-1" width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 17a1 1 0 1 1 2 0v1.077c0 .76-.082 1.185-.319 1.627a2.363 2.363 0 0 1-.977.977c-.442.237-.867.319-1.627.319H5.923c-.76 0-1.185-.082-1.627-.319a2.363 2.363 0 0 1-.978-.977C3.082 19.262 3 18.838 3 18.077L2.999 6.5A2.5 2.5 0 0 1 5.502 4l1.5.005a1 1 0 1 1-.005 2L5.499 6a.5.5 0 0 0-.5.5v11.577c0 .459.023.57.083.684.038.07.087.12.157.157.113.06.225.082.684.082h11.154c.459 0 .57-.022.684-.082a.363.363 0 0 0 .157-.157c.06-.113.082-.225.082-.684V17zm4-4a1 1 0 1 1-2 0 9 9 0 0 0-9-9 1 1 0 1 1 0-2c6.075 0 11 4.925 11 11zm-4 0a1 1 0 1 1-2 0 5 5 0 0 0-5-5 1 1 0 1 1 0-2 7 7 0 0 1 7 7zm-4 0a1 1 0 1 1-2 0 1 1 0 0 0-1-1 1 1 0 1 1 0-2 3 3 0 0 1 3 3z" fill="currentColor"/></svg>
+                <span>Pub</span>
+            </button>
+            <button class="w-20 text-gray-600 py-1 px-1 block hover:text-sky-500 focus:outline-none text-sky-500 border-b-2 font-medium border-sky-500 flex text-xl">
+                <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 20.5H10C9.80189 20.4974 9.61263 20.4176 9.47253 20.2775C9.33244 20.1374 9.25259 19.9481 9.25 19.75V12L3.9 4.69C3.81544 4.58007 3.76395 4.44832 3.75155 4.31018C3.73915 4.17204 3.76636 4.03323 3.83 3.91C3.89375 3.78712 3.98984 3.68399 4.10792 3.61173C4.226 3.53947 4.36157 3.50084 4.5 3.5H19.5C19.6384 3.50084 19.774 3.53947 19.8921 3.61173C20.0101 3.68399 20.1062 3.78712 20.17 3.91C20.2336 4.03323 20.2608 4.17204 20.2484 4.31018C20.236 4.44832 20.1846 4.58007 20.1 4.69L14.75 12V19.75C14.7474 19.9481 14.6676 20.1374 14.5275 20.2775C14.3874 20.4176 14.1981 20.4974 14 20.5ZM10.75 19H13.25V11.75C13.2492 11.5907 13.302 11.4357 13.4 11.31L18 5H6L10.62 11.31C10.718 11.4357 10.7708 11.5907 10.77 11.75L10.75 19Z" fill="currentColor"/>
+                </svg>
+                <span>Sub</span>
+            </button>
+        </div>
+        <div class="w-20"></div>
     </nav>
-    <main class="py-2 mx-2">
-        <div class="flex flex-col sm:flex-row text-slate-700 dark:text-gray-300 items-center justify-center">
-            <div class="flex w-[264px]">
+    <main class="py-2 mx-2 text-slate-700 dark:text-gray-300">
+        <div class="flex flex-col sm:flex-row items-center justify-center">
+            <div class="flex w-80 sm:w-60">
                 <div class="pt-1 w-28 sm:w-24">Subscriptions:</div>
-                <div class="pt-1 w-10" id="count">000</div>
-                <div class="ml-3">
-                    <button class="text-blue-500 border border-blue-500 rounded-md w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-800 static px-2"
+                <div class="pt-1 w-12 sm:w-8" id="count">0000</div>
+                <div class="ml-2">
+                    <button type="button" class="text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2"
                             onclick="window.location.assign('sub-new.html')">
                         <span>+ Subscribe</span>
                     </button>
                 </div>
             </div>
-            <div class="flex w-[264px] sm:w-[96px]">
+            <div class="flex w-80 mt-2 sm:mt-0 sm:ml-2 sm:w-48">
                 <div class="pt-1 w-28 sm:w-10">Limit:</div>
-                <div class="pt-1 w-10" id="limit">000</div>
-                <!-- TODO
-                <div class="ml-3">
-                    <button class="text-blue-500 border border-blue-500 rounded-md w-6 h-6 hover:bg-blue-200 static">
-                        <span class="absolute -mt-4 -ml-2 text-2xl pl-[1px]">+</span>
+                <div class="pt-1 w-12 sm:w-8" id="limit">0000</div>
+                <div class="ml-2">
+                    <button type="button" disabled="disabled" class="text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
+                        + Increase
                     </button>
                 </div>
-                -->
             </div>
-            <div class="border flex text-slate-500 w-[264px] mt-2 sm:mt-0 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+            <div class="border flex text-slate-500 w-80 sm:w-48 mt-2 sm:mt-0 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                 </svg>
-                <input id="filter" type="search" class="ml-1 border-0 outline-none w-[234px] dark:bg-gray-800" onchange="loadSubscriptions(this.value)"/>
+                <input id="filter" type="search" class="ml-1 border-0 outline-none w-40 dark:bg-gray-800" oninput="loadSubscriptions(this.value)"/>
             </div>
         </div>
-        <div id="subs_list" class="mt-2 flex flex-col items-center justify-center"></div>
+        <div id="subs_list" class="mt-3 flex flex-col items-center justify-center"></div>
         <div class="flex items-center justify-center space-x-4 mt-2">
             <button id="button-prev" type="button" class="flex justify-center text-center w-[100px] h-6">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

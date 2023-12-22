@@ -5,8 +5,8 @@ function loadSource() {
     document.getElementById("type").innerText = typ;
     const addr = decodeURIComponent(urlParams.get("addr"));
     document.getElementById("addr").innerText = addr;
-    let authToken = sessionStorage.getItem("authToken");
-    let userId = sessionStorage.getItem("userId");
+    let authToken = localStorage.getItem(keyAuthToken);
+    let userId = localStorage.getItem(keyUserId);
     //
     fetch(`/v1/src/${typ}`, {
         method: "GET",
@@ -29,25 +29,31 @@ function loadSource() {
                 switch (typ) {
                     case "feed":
                         document.getElementById("type").innerText = "Feed";
+                        const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
+                        document.getElementById("upd_period").innerText = d.humanize();
+                        document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
+                        document.getElementById("upd_period").innerText = "a day";
+                        document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel";
+                        document.getElementById("upd_period").innerText = "N/A";
+                        if (data.addr[0] === '@') {
+                            const chName = data.addr.slice(1);
+                            document.getElementById("addr").innerHTML = `<a href="https://t.me/${chName}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        } else {
+                            document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        }
+
                         break
                 }
-                document.getElementById("addr").innerText = data.addr;
                 if (data.lastUpdate === "0001-01-01T00:00:00Z") {
                     document.getElementById("last_upd").innerText = "N/A";
                 } else {
                     document.getElementById("last_upd").innerText = data.lastUpdate;
-                }
-                if (data.updatePeriod === 0) {
-                    document.getElementById("upd_period").innerText = "N/A";
-                } else {
-                    const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
-                    document.getElementById("upd_period").innerText = d.humanize();
                 }
                 const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && data.userId === userId) {
@@ -65,8 +71,8 @@ function loadSource() {
 
 function deleteSource(typ, addr) {
 
-    let authToken = sessionStorage.getItem("authToken");
-    let userId = sessionStorage.getItem("userId");
+    let authToken = localStorage.getItem(keyAuthToken);
+    let userId = localStorage.getItem(keyUserId);
 
     if (confirm(`Confirm delete source ${addr}?`)) {
         fetch(`/v1/src/${typ}`, {

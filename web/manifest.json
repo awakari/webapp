@@ -1,19 +1,47 @@
 {
+  "id": "awakari",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "name": "Awakari",
   "background_color": "#ffffff",
   "short_name": "Awakari",
-  "start_url": "https://awakari.cloud",
+  "start_url": "https://awakari.cloud/login.html",
   "display": "standalone",
   "description": "Awakari UI",
   "icons": [
     {
-      "src": "web/logo-color.svg"
+      "src": "logo-color.svg",
+      "type": "image/svg+xml",
+      "sizes": "1000x1000"
+    },
+    {
+      "src": "logo-color-64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "logo-color-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "logo-color-1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
     }
   ],
-  "related_applications": [
+  "orientation": "any",
+  "screenshots": [
     {
-      "platform": "homepage",
-      "url": "https://awakari.com"
+      "src": "2023-12-20_16-26.png",
+      "sizes": "361x590",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Publishing tab"
     }
-  ]
+  ],
+  "theme_color": "#6366f1",
+  "categories": [ "news", "reader", "messaging", "messenger" ],
+  "scope": "https://awakari.cloud"
 }

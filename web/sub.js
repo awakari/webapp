@@ -1,10 +1,10 @@
 const templateSub = (sub) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 flex"
+                <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
-                    <span class="truncate w-[240px] sm:w-[600px] py-2">
+                    <span class="truncate w-[280px] sm:w-[600px] py-2">
                         ${sub.description}
                     </span>
-                    <span>
+                    <span class="pt-1">
                         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>                                         
@@ -12,11 +12,11 @@ const templateSub = (sub) => `
                 </div>
 `
 
-const pageLimit = 10;
+const pageLimit = 14;
 
 function load() {
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
+    const authToken = localStorage.getItem(keyAuthToken);
+    const userId = localStorage.getItem(keyUserId);
     const headers = {
         "Authorization": `Bearer ${authToken}`,
         "X-Awakari-Group-Id": defaultGroupId,
@@ -85,8 +85,8 @@ function loadSubscriptions(filter) {
         document.getElementById("filter").value = filter;
     }
 
-    const authToken = sessionStorage.getItem("authToken");
-    const userId = sessionStorage.getItem("userId");
+    const authToken = localStorage.getItem(keyAuthToken);
+    const userId = localStorage.getItem(keyUserId);
 
     fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",

@@ -72,7 +72,7 @@ button[type=button]:hover {
 }
 @media (prefers-color-scheme: dark) {
     button[type=button]:hover {
-        background-color: #1e40af;
+        background-color: #1e3a8a;
     }
 }
 button[type=button].mode {
@@ -89,7 +89,7 @@ button[type=button].submit:hover {
 }
 @media (prefers-color-scheme: dark) {
     button[type=button].submit:hover {
-        background-color: #065f46;
+        background-color: #064e3b;
     }
 }
 button[type=button]:disabled {
@@ -109,10 +109,11 @@ button[type=button].delete:hover {
 }
 @media (prefers-color-scheme: dark) {
     button[type=button].delete:hover {
-        background-color: #991b1b;
+        background-color: #7f1d1d;
     }
 }
 button[type=button].delete:disabled {
+    visibility: hidden;
     border-color: #64748b;
     color: #64748b;
 }
@@ -193,6 +194,13 @@ html.dark body {
 button[type=button].attr {
     width: 40px;
     height: 40px;
+}
+@media (prefers-color-scheme: dark) {
+    div.je-modal {
+        background-color: #111827;
+        border-color: #1f2937;
+        box-shadow: #1f2937;
+    }
 }
 
 /* Dropdown Button */

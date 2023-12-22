@@ -5,8 +5,8 @@ function loadSource() {
     document.getElementById("type").innerText = typ;
     const addr = decodeURIComponent(urlParams.get("addr"));
     document.getElementById("addr").innerText = addr;
-    let authToken = sessionStorage.getItem(keyAuthToken);
-    let userId = sessionStorage.getItem(keyUserId);
+    let authToken = localStorage.getItem(keyAuthToken);
+    let userId = localStorage.getItem(keyUserId);
     //
     fetch(`/v1/src/${typ}`, {
         method: "GET",
@@ -63,8 +63,8 @@ function loadSource() {
 
 function deleteSource(typ, addr) {
 
-    let authToken = sessionStorage.getItem(keyAuthToken);
-    let userId = sessionStorage.getItem(keyUserId);
+    let authToken = localStorage.getItem(keyAuthToken);
+    let userId = localStorage.getItem(keyUserId);
 
     if (confirm(`Confirm delete source ${addr}?`)) {
         fetch(`/v1/src/${typ}`, {

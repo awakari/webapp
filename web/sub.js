@@ -15,8 +15,8 @@ const templateSub = (sub) => `
 const pageLimit = 10;
 
 function load() {
-    const authToken = sessionStorage.getItem(keyAuthToken);
-    const userId = sessionStorage.getItem(keyUserId);
+    const authToken = localStorage.getItem(keyAuthToken);
+    const userId = localStorage.getItem(keyUserId);
     const headers = {
         "Authorization": `Bearer ${authToken}`,
         "X-Awakari-Group-Id": defaultGroupId,
@@ -85,8 +85,8 @@ function loadSubscriptions(filter) {
         document.getElementById("filter").value = filter;
     }
 
-    const authToken = sessionStorage.getItem(keyAuthToken);
-    const userId = sessionStorage.getItem(keyUserId);
+    const authToken = localStorage.getItem(keyAuthToken);
+    const userId = localStorage.getItem(keyUserId);
 
     fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",

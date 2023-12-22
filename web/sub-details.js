@@ -26,8 +26,8 @@ function loadSubscription() {
     // const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
     // editor.setValue(data.cond);
     //
-    let authToken = sessionStorage.getItem(keyAuthToken);
-    let userId = sessionStorage.getItem(keyUserId);
+    let authToken = localStorage.getItem(keyAuthToken);
+    let userId = localStorage.getItem(keyUserId);
     let optsReq = {
         method: "GET",
         headers: {
@@ -58,8 +58,8 @@ function loadSubscription() {
 function updateSubscription() {
     const id = document.getElementById("id").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
-        let authToken = sessionStorage.getItem(keyAuthToken);
-        let userId = sessionStorage.getItem(keyUserId);
+        let authToken = localStorage.getItem(keyAuthToken);
+        let userId = localStorage.getItem(keyUserId);
         let payload = {
             id: id,
             description: document.getElementById("description").value,
@@ -96,8 +96,8 @@ function updateSubscription() {
 function deleteSubscription() {
     const id = document.getElementById("id").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
-        let authToken = sessionStorage.getItem(keyAuthToken);
-        let userId = sessionStorage.getItem(keyUserId);
+        let authToken = localStorage.getItem(keyAuthToken);
+        let userId = localStorage.getItem(keyUserId);
         let optsReq = {
             method: "DELETE",
             headers: {

@@ -25,8 +25,8 @@
 
     <link href="tailwind.output.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
+    <!--<script src="https://accounts.google.com/gsi/client" async defer></script>-->
+    <!--<script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>-->
     <script src="login.js"></script>
     <script>
         navigator.serviceWorker.register("sw.js");
@@ -46,17 +46,42 @@
                 <img alt="logo" src="logo-color.svg" width="256px" height="256px"/>
             </div>
 
-            <div class="grid grid-cols-4 space-y-2 space-x-2 mt-2 px-2 items-center justify-center w-[360px]">
+            <p class="px-2 text-center mt-2 justify-center">
+                Choose the notification and login method:
+            </p>
 
-                <div></div>
-                <div class="text-center col-span-2">Login Method</div>
-                <div>Notifications</div>
+            <div class="grid grid-cols-3 md:grid-cols-2 space-y-2 mt-2 px-2 items-center justify-center">
+
+                    <!-- Google -->
+                <!--
+                <div class="pt-2 px-2 text-right">
+                    Email
+                    </div>
+
+                <div class="max-w-[200px] col-span-2 md:col-span-1 h-[32px]">
+                        <div id="g_id_onload"
+                             data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-callback="handleAuthGoogle"
+                             data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="signin_with"
+                             data-size="medium"
+                             data-logo_alignment="left">
+                        </div>
+                    </div>
+                -->
 
                 <!-- Telegram -->
-                <div class="text-right">
+                <div class="pt-2 px-2 text-right">
                     Telegram
-                </div>
-                <div class="col-span-2 flex h-8 items-center justify-center">
+                    </div>
+                <div class="max-w-[200px] col-span-2 md:col-span-1 h-[32px]">
                     <script async
                             src="https://telegram.org/js/telegram-widget.js?22"
                             data-telegram-login="AwakariBot"
@@ -64,48 +89,15 @@
                             data-onauth="handleAuthTelegram(user)"
                             data-request-access="write"
                             data-radius="4"
-                            data-userpic="false"
-                            data-type="icon">
+                            data-userpic="false">
                     </script>
                 </div>
-                <div>
-                    <a href="https://t.me/AwakariBot" style="color: #1d4ed8">Chat Bot</a>
+
                 </div>
 
-                <!-- Google -->
-                <div class="text-right">
-                    Google
-                </div>
-                <div class="col-span-2 flex h-8 items-center justify-center">
-                    <div id="g_id_onload"
-                         data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
-                         data-context="signin"
-                         data-ux_mode="popup"
-                         data-callback="handleAuthGoogle"
-                         data-auto_prompt="false">
-                    </div>
-                    <div class="g_id_signin"
-                         data-type="standard"
-                         data-shape="rectangular"
-                         data-theme="outline"
-                         data-text="signin_with"
-                         data-size="medium"
-                         data-logo_alignment="left">
-                    </div>
-                </div>
-                <div>
-                    Coming Soon
-                </div>
-
-            </div>
-
-            <p class="text-center mt-3 text-[14px]">
-                By logging in, you agree to the
+            <p class="text-center mt-3 text-[14px]">By logging in, you agree to the
+                    <a href="tos.html" class="text-gray-600 dark:text-slate-400">Terms of Service</a> and <a href="privacy.html" class="text-gray-600 dark:text-slate-400">Privacy Policy</a>.
             </p>
-            <p class="text-center mt-1 text-[14px]">
-                <a href="tos.html" class="text-gray-600 dark:text-slate-400">Terms of Service</a> and <a href="privacy.html" class="text-gray-600 dark:text-slate-400">Privacy Policy</a>.
-            </p>
-
         </div>
 
     </main>

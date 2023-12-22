@@ -12,7 +12,10 @@ function handleAuthGoogle(response) {
 
 function handleAuthTelegram(user) {
     sessionStorage.setItem("userId", `tg://user?id=${user.id}`);
-    const token = btoa(JSON.stringify(user));
+    const userJson = JSON.stringify(user);
+    const token = btoa(userJson.replace(/[\u00A0-\u2666]/g, function(c) {
+        return "&#" + c.charCodeAt(0) + ";";
+    }));
     sessionStorage.setItem("authToken", token);
     // go to subscriptions list
     window.location.assign("sub.html");

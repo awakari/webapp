@@ -31,21 +31,21 @@ function loadSource() {
                         document.getElementById("type").innerText = "Feed";
                         const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
                         document.getElementById("upd_period").innerText = d.humanize();
-                        document.getElementById("addr").innerHTML = `<a href="${data.addr}">${data.addr}</a>`;
+                        document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
                         document.getElementById("upd_period").innerText = "a day";
-                        document.getElementById("addr").innerHTML = `<a href="${data.addr}">${data.addr}</a>`;
+                        document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel";
                         document.getElementById("upd_period").innerText = "N/A";
                         if (data.addr[0] === '@') {
                             const chName = data.addr.slice(1);
-                            document.getElementById("addr").innerHTML = `<a href="https://t.me/${chName}">${data.addr}</a>`;
+                            document.getElementById("addr").innerHTML = `<a href="https://t.me/${chName}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         } else {
-                            document.getElementById("addr").innerHTML = `<a href="${data.addr}">${data.addr}</a>`;
+                            document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
 
                         break

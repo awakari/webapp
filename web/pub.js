@@ -146,8 +146,10 @@ function loadSources(cursor, filter, srcType, own) {
 
             let listHtml = document.getElementById("src_list");
             listHtml.innerHTML = "";
-            for (const addr of data) {
-                listHtml.innerHTML += templateSrc(srcType, addr, true);
+            if (data != null) {
+                for (const addr of data) {
+                    listHtml.innerHTML += templateSrc(srcType, addr, true);
+                }
             }
 
             if (data == null || data.length === 0) {

@@ -118,42 +118,39 @@ function loadSources(cursor, filter, srcType, own) {
         })
         .then(data => {
 
+            if (order === "DESC") {
+                data.reverse();
+            }
+
+            // prev button
             const btnPrev = document.getElementById("button-prev");
+            if (cursor === "") {
+                btnPrev.disabled = "disabled";
+            } else {
+                btnPrev.removeAttribute("disabled");
+                btnPrev.onclick = () => {
+                    window.location.assign(`pub.html?cursor=${encodeURIComponent(data[0])}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
+                };
+            }
+
+            // next button
             const btnNext = document.getElementById("button-next");
-
-            if (data != null && data.length > 0) {
-
-                if (order === "DESC") {
-                    data.reverse();
-                }
-
-                // prev button
-                if (cursor === "") {
-                    btnPrev.disabled = "disabled";
-                } else {
-                    btnPrev.removeAttribute("disabled");
-                    btnPrev.onclick = () => {
-                        window.location.assign(`pub.html?cursor=${encodeURIComponent(data[0])}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
-                    };
-                }
-
-                // next button
-                if (data.length === pageLimit) {
-                    btnNext.removeAttribute("disabled");
-                    btnNext.onclick = () => {
-                        window.location.assign(`pub.html?cursor=${encodeURIComponent(data[pageLimit - 1])}&order=ASC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
-                    }
-                } else {
-                    btnNext.disabled = "disabled";
-                }
-
-                //
-                let listHtml = document.getElementById("src_list");
-                listHtml.innerHTML = "";
-                for (const addr of data) {
-                    listHtml.innerHTML += templateSrc(srcType, addr, true);
+            if (data.length === pageLimit) {
+                btnNext.removeAttribute("disabled");
+                btnNext.onclick = () => {
+                    window.location.assign(`pub.html?cursor=${encodeURIComponent(data[pageLimit - 1])}&order=ASC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
                 }
             } else {
+                btnNext.disabled = "disabled";
+            }
+
+            let listHtml = document.getElementById("src_list");
+            listHtml.innerHTML = "";
+            for (const addr of data) {
+                listHtml.innerHTML += templateSrc(srcType, addr, true);
+            }
+
+            if (data.length === 0) {
                 // empty results page
                 if (order === "ASC") {
                     if (cursor !== "") {

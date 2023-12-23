@@ -57,7 +57,7 @@ function loadSubscription() {
 
 function updateSubscription() {
     const id = document.getElementById("id").value;
-    if (confirm(`Confirm delete subscription ${id}?`)) {
+    if (confirm(`Confirm update subscription ${id}?`)) {
         let authToken = localStorage.getItem(keyAuthToken);
         let userId = localStorage.getItem(keyUserId);
         let payload = {

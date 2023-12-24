@@ -6,7 +6,7 @@
   "name": "Awakari",
   "background_color": "#ffffff",
   "short_name": "Awakari",
-  "start_url": "https://awakari.cloud/login.html",
+  "start_url": "https://awakari.com/login.html",
   "display": "standalone",
   "description": "Awakari UI",
   "icons": [
@@ -43,5 +43,5 @@
   ],
   "theme_color": "#6366f1",
   "categories": [ "news", "reader", "messaging", "messenger" ],
-  "scope": "https://awakari.cloud"
+  "scope": "https://awakari.com"
 }

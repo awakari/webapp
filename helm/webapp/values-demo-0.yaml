@@ -1,10 +1,10 @@
 ingress:
   hosts:
-    - host: awakari.cloud
+    - host: awakari.com
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: secret-webapp-tls-server
       hosts:
-        - awakari.cloud
+        - awakari.com

@@ -105,17 +105,19 @@ function loadSubscriptions(filter) {
         })
         .then(data => {
 
-            const btnPrev = document.getElementById("button-prev");
-            const btnNext = document.getElementById("button-next");
+            if (data != null) {
 
-            if (data != null && data.hasOwnProperty("subs")) {
+                let subs = [];
+                if (data.hasOwnProperty("subs")) {
+                    subs = data.subs;
+                }
 
-                let subs = data.subs;
                 if (order === "DESC") {
                     subs.reverse();
                 }
 
                 // prev button
+                const btnPrev = document.getElementById("button-prev");
                 if (cursor === "") {
                     btnPrev.disabled = "disabled";
                 } else {
@@ -132,6 +134,7 @@ function loadSubscriptions(filter) {
                 }
 
                 // next button
+                const btnNext = document.getElementById("button-next");
                 if (subs.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
@@ -147,18 +150,20 @@ function loadSubscriptions(filter) {
                 for (const sub of subs) {
                     listHtml.innerHTML += templateSub(sub);
                 }
-            } else {
-                // empty results page
-                if (order === "ASC") {
-                    if (cursor !== "") {
-                        btnPrev.onclick = () => {
-                            history.back();
-                        };
-                        btnNext.disabled = "disabled";
+
+                if (subs.length === 0) {
+                    // empty results page
+                    if (order === "ASC") {
+                        if (cursor !== "") {
+                            btnPrev.onclick = () => {
+                                history.back();
+                            };
+                            btnNext.disabled = "disabled";
+                        }
+                    } else if (order === "DESC") {
+                        // back to the beginning
+                        window.location.assign(`sub.html?filter=${encodeURIComponent(filter)}`);
                     }
-                } else if (order === "DESC") {
-                    // back to the beginning
-                    window.location.assign(`sub.html?filter=${encodeURIComponent(filter)}`);
                 }
             }
         })

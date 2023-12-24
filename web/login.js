@@ -28,7 +28,8 @@ function logout() {
     if (confirm(`Confirm exit for user ${userName} (${authProvider})?`)) {
         localStorage.removeItem(keyUserName);
         localStorage.removeItem(keyUserId);
-        localStorage.removeItem(keyAuthToken)
+        localStorage.removeItem(keyAuthToken);
+        localStorage.removeItem(keyAuthProvider);
         window.location.assign("login.html");
     }
 }

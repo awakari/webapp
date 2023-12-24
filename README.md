@@ -5,7 +5,7 @@ Reference Web UI
 ## 1. Usage
 
 Uses an external identity provider (Google OAuth2 currently).
-Navigate https://awakari.cloud
+Navigate https://awakari.com
 
 ## 2. Server TLS
 
@@ -13,8 +13,8 @@ Navigate https://awakari.cloud
 openssl req -x509 -sha256 -newkey rsa:4096 -nodes \
 -keyout ca.key \
 -out ca.crt \
--addext "subjectAltName=DNS:awakari.cloud" \
--subj '/O=awakari/CN=awakari.cloud' \
+-addext "subjectAltName=DNS:awakari.com" \
+-subj '/O=awakari/CN=awakari.com' \
 -days 30
 ```
 
@@ -26,14 +26,14 @@ kubectl create secret generic \
 
 ```shell
 openssl req -newkey rsa:4096 -nodes -keyout server.key -out server.csr \
-  -addext "subjectAltName=DNS:awakari.cloud" \
+  -addext "subjectAltName=DNS:awakari.com" \
   -subj "/O=awakari"
 ```
 
 ```shell
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
   -copy_extensions copyall \
-  -extfile <(printf "subjectAltName=DNS:awakari.cloud") \
+  -extfile <(printf "subjectAltName=DNS:awakari.com") \
   -out server.crt \
   -days 30
 ```

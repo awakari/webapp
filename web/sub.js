@@ -12,9 +12,15 @@ const templateSub = (sub) => `
                 </div>
 `
 
-const pageLimit = 14;
+const pageLimit = 10;
 
 function load() {
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        const donationIframe = document.getElementById("telegram-post-donateawk-14");
+        donationIframe.setAttribute("src", `${donationIframe.getAttribute("src")}&dark=1`);
+    }
+
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
     const headers = {

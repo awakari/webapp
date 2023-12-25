@@ -16,9 +16,11 @@ const pageLimit = 10;
 
 function load() {
 
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        const donationIframe = document.getElementById("telegram-post-donateawk-14");
-        donationIframe.setAttribute("src", `${donationIframe.getAttribute("src")}&dark=1`);
+    const authProvider = localStorage.getItem(keyAuthProvider);
+    switch (authProvider) {
+        case "Telegram":
+            document.getElementById("donate-tg").style.display = "block";
+            break
     }
 
     const authToken = localStorage.getItem(keyAuthToken);

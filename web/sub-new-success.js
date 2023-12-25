@@ -3,6 +3,6 @@ function load() {
     document.getElementById("id").innerText = urlParams.get("id");
     switch (localStorage.getItem(keyAuthProvider)) {
         case "Telegram":
-            document.getElementById("telegram").style.display = "block";;
+            document.getElementById("telegram").style.display = "block";
     }
 }

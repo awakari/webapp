@@ -120,6 +120,23 @@ button[type=button].delete:disabled {
 button[type=button].delete:disabled:hover {
     background-color: unset;
 }
+button[type=button].donate {
+    border-color: #06b6d4;
+    border-radius: 0.25rem;
+    color: #06b6d4;
+    height: 1.5rem;
+    padding: 0 0.25rem;
+}
+button[type=button]:hover {
+    background-color: #a5f3fc;
+}
+@media (prefers-color-scheme: dark) {
+    button[type=button]:hover {
+        background-color: #164e63;
+    }
+}
+
+
 button.json-editor-btn-edit,button.json-editor-btn-movedown,button.json-editor-btn-moveup,button.json-editor-btn-subtract,button.json-editor-btntype-deleteall {
     display: none;
     width: 0;
@@ -315,11 +332,4 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    min-width: 100%;
 }

@@ -22,6 +22,79 @@ function loadForm() {
             document.getElementById("pub-tg").style.display = "block";
             break
     }
+
+    document.getElementById("msg_attr_name").oninput = msgAttrNameChanged;
+}
+
+function msgAttrNameChanged(evt) {
+    const attrType = document.getElementById("msg_attr_type");
+    const attrVal = document.getElementById("msg_attr_value");
+    switch (evt.target.value) {
+        case "author":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "John Doe");
+            break
+        case "categories":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "news jobs homes");
+            break
+        case "contact":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "awakari@awakari.com");
+            break
+        case "currency":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "USD");
+            break
+        case "language":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "fi");
+            break
+        case "latitude":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "-41.94093");
+            break
+        case "longitude":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "171.523619");
+            break
+        case "pricemax":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "12.34");
+            break
+        case "pricemin":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "12.34");
+            break
+        case "quantitymax":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "1.234");
+            break
+        case "quantitymin":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "1.234");
+            break
+        case "quantityunit":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "kg");
+            break
+        case "secret":
+            attrType.value = "bytes";
+            attrVal.setAttribute("placeholder", "Ynl0ZXMsIGJhc2U2NCBlbmNvZGVk");
+            break
+        case "subject":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "breaking");
+            break
+        case "summary":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "Seasoned software engineer with 10 years of experience");
+            break
+        case "title":
+            attrType.value = "string";
+            attrVal.setAttribute("placeholder", "New iPhone 42");
+            break
+    }
 }
 
 function uuidv4() {

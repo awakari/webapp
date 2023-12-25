@@ -127,11 +127,11 @@ button[type=button].donate {
     height: 1.5rem;
     padding: 0 0.25rem;
 }
-button[type=button]:hover {
+button[type=button].donate:hover {
     background-color: #a5f3fc;
 }
 @media (prefers-color-scheme: dark) {
-    button[type=button]:hover {
+    button[type=button].donate:hover {
         background-color: #164e63;
     }
 }

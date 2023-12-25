@@ -19,6 +19,7 @@ function load() {
     const authProvider = localStorage.getItem(keyAuthProvider);
     switch (authProvider) {
         case "Telegram":
+            alert(authProvider);
             document.getElementById("donate-tg").style.display = "block";
             break
     }

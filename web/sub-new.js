@@ -44,6 +44,13 @@ function createSubscription() {
     let payload = {
         description: document.getElementById("description").value,
         enabled: true,
+        cond: {
+            not: false,
+            gc: {
+                logic: 0,
+                group: []
+            }
+        },
     }
     if (payload.description === "") {
         validationErr = "empty description";

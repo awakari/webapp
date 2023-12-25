@@ -26,14 +26,24 @@
             </svg>
         </button>
         <span class="pl-1">New Subscription</span>
+        <div class="grow"></div>
+        <span>
+            <span class="text-slate-500">Advanced</span>
+            <label class="switch">
+                <input type="checkbox" checked="checked" id="toggle_mode">
+                <span class="slider round"></span>
+            </label>
+        </span>
     </div>
     <div class="flex justify-center m-1">
         <form class="space-y-2 max-w-[800px] grow">
+
             <div class="flex">
                 <label for="description" style="padding-top: 0.125rem">Description</label>
                 <input type="text" id="description" class="ml-2">
             </div>
-            <div class="container">
+
+            <div class="container" id="advanced">
                 <div class="row">
                     <div class="col-md-12">
                         <div id="sub_cond_editor"></div>
@@ -41,6 +51,46 @@
                 </div>
             </div>
             <script src="sub-new.js"></script>
+
+            <!-- wizard -->
+            <div id="wizard" style="display: none" class="space-y-2">
+
+                <legend class="text">Matching Conditions:</legend>
+                <div>
+                    <div class="grid">
+                        <p>Any of keywords:</p>
+                        <input id="cond_extra1" type="text" placeholder="" class="mt-1 border focus:shadow-md outline-none"/>
+                    </div>
+                    <div class="grid mt-2">
+                        <div>
+                            <span>And then any of keywords:</span>
+                            <span class="text-slate-500 mr-4">(optional)</span>
+                            <input type="checkbox" id="cond_extra2_not"/>
+                            <span>Not</span>
+                        </div>
+                        <input id="cond_extra2" type="text" placeholder="" class="mt-1 border focus:shadow-md outline-none"/>
+                    </div>
+                    <div class="grid grid-cols-1 mt-2">
+                        <div>
+                            <span>And then any of keywords:</span>
+                            <span class="text-slate-500 mr-4">(optional)</span>
+                            <input type="checkbox" id="cond_extra3_not"/>
+                            <span>Not</span>
+                        </div>
+                        <input id="cond_extra3" type="text" placeholder="" class="mt-1 border focus:shadow-md outline-none col-span-2"/>
+                    </div>
+                    <div class="grid grid-cols-1 mt-2">
+                        <div>
+                            <span>And then any of keywords:</span>
+                            <span class="text-slate-500 mr-4">(optional)</span>
+                            <input type="checkbox" id="cond_extra4_not"/>
+                            <span>Not</span>
+                        </div>
+                        <input id="cond_extra4" type="text" placeholder="" class="mt-1 border focus:shadow-md outline-none col-span-2"/>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex items-center justify-center space-x-2 pt-1">
                 <button id="button-submit" type="button" class="flex submit justify-center text-center" onclick="createSubscription()">
                     <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,6 +99,7 @@
                     <span class="mt-1">Subscribe</span>
                 </button>
             </div>
+
         </form>
     </div>
 </div>

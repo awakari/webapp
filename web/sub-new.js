@@ -17,6 +17,28 @@ editor.on('change', function () {
     }
 });
 
+document.getElementById("toggle_mode").onchange = function (evt) {
+    switch (evt.target.checked) {
+        case true:
+            showAdvanced();
+            break;
+        default:
+            showWizard();
+            document.getElementById("button-submit").removeAttribute("disabled");
+            break;
+    }
+}
+
+function showAdvanced() {
+    document.getElementById("advanced").style.display = "block";
+    document.getElementById("wizard").style.display = "none";
+}
+
+function showWizard() {
+    document.getElementById("advanced").style.display = "none";
+    document.getElementById("wizard").style.display = "block";
+}
+
 function createSubscription() {
     let validationErr = "";
     let payload = {
@@ -26,7 +48,23 @@ function createSubscription() {
     if (payload.description === "") {
         validationErr = "empty description";
     } else {
-        payload.cond = editor.getValue(0);
+        switch (document.getElementById("advanced").style.display) {
+            case "none": // wizard mode
+                validationErr = getFormConditions(payload.cond.gc.group);
+                if (validationErr === "") {
+                    switch (payload.cond.gc.group.length) {
+                        case 0:
+                            validationErr = "no conditions defined"
+                            break
+                        case 1:
+                            payload.cond = payload.cond.gc.group[0]
+                            break
+                    }
+                }
+                break
+            default: // advanced mode
+                payload.cond = editor.getValue(0);
+        }
     }
     if (validationErr === "") {
         let authToken = localStorage.getItem(keyAuthToken);
@@ -59,4 +97,29 @@ function createSubscription() {
     } else {
         window.alert(`Validation error: ${validationErr}`);
     }
+}
+
+function getFormConditions(rootGroupConds) {
+
+    let validationErr = "";
+
+    for (let i = 1; i <= 4; i ++) {
+        let not = false;
+        const extraTerms = document.getElementById(`cond_extra${i}`).value;
+        if (extraTerms.length > 2) {
+            if (i > 1) {
+                not = document.getElementById(`cond_extra${i}_not`).checked;
+            }
+            rootGroupConds.push({
+                not: not,
+                tc: {
+                    exact: false,
+                    key: "",
+                    term: extraTerms,
+                }
+            })
+        }
+    }
+
+    return validationErr;
 }

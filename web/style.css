@@ -294,7 +294,7 @@ button[type=button].dropbtn {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #94a3b8;
+    background-color: #6b7280;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -306,17 +306,19 @@ button[type=button].dropbtn {
     width: 20px;
     left: 2px;
     bottom: 2px;
-    background-color: var(--tg-theme-button-text-color);
+    background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
-input:checked + .slider {
-    background-color: var(--tg-theme-button-color);
+@media (prefers-color-scheme: dark) {
+    .slider:before {
+        background-color: #1e293b;
+    }
 }
 
-input:focus + .slider {
-    box-shadow: 0 0 1px var(--tg-theme-button-color);
+input:checked + .slider {
+    background-color: #06b6d4;
 }
 
 input:checked + .slider:before {

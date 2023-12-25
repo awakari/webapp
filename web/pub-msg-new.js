@@ -10,10 +10,18 @@ templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}"
                     </span>`
 
 function loadForm() {
+
     document.getElementById("msg_attrs").value = "{}";
     document.getElementById("msg_attrs_form").innerHTML = "";
     document.getElementById("msg_id").value = uuidv4();
     putMessageAttribute("time", "timestamp", new Date().toISOString(), true);
+
+    const authProvider = localStorage.getItem(keyAuthProvider);
+    switch (authProvider) {
+        case "Telegram":
+            document.getElementById("pub-tg").style.display = "block";
+            break
+    }
 }
 
 function uuidv4() {

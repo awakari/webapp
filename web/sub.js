@@ -12,7 +12,7 @@ const templateSub = (sub) => `
                 </div>
 `
 
-const pageLimit = 10;
+const pageLimit = 14;
 
 function load() {
 

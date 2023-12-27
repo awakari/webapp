@@ -41,7 +41,7 @@ function addSource() {
     switch (srcType) {
         case "tgchadmin":
             window.location.assign("https://t.me/AwakariBot?startchannel&admin=other");
-            break
+            return
         case "tgch":
             srcAddr = document.getElementById("chan_name").value;
             break

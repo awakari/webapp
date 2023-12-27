@@ -6,26 +6,17 @@ function loadForm() {
 function showSrcDetails() {
     let opt = document.getElementById("src_type").value
     switch (opt) {
-        case "tgchadmin":
-            document.getElementById("tgchadmin").style.display = "block";
-            document.getElementById("tgch").style.display = "none";
-            document.getElementById("feed").style.display = "none";
-            document.getElementById("site").style.display = "none";
-            break
         case "tgch":
-            document.getElementById("tgchadmin").style.display = "none";
             document.getElementById("tgch").style.display = "block";
             document.getElementById("feed").style.display = "none";
             document.getElementById("site").style.display = "none";
             break
         case "feed":
-            document.getElementById("tgchadmin").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "block";
             document.getElementById("site").style.display = "none";
             break
         case "site":
-            document.getElementById("tgchadmin").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
             document.getElementById("site").style.display = "block";
@@ -39,9 +30,6 @@ function addSource() {
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {
-        case "tgchadmin":
-            window.location.assign("https://t.me/AwakariBot?startchannel&admin=other");
-            return
         case "tgch":
             srcAddr = document.getElementById("chan_name").value;
             break

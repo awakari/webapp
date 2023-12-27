@@ -48,7 +48,29 @@
                 <p class="pt-2">Attributes</p>
                 <div id="msg_attrs_form"></div>
                 <span class="flex w-full text-sm h-[24x] min-h-[24px] items-center mt-1 space-x-1">
-                    <input type="text" placeholder="name" id="msg_attr_name" class="min-w-[64px] truncate border focus:shadow-md outline-none"/>
+                    <input
+                            type="text"
+                            id="msg_attr_name"
+                            class="min-w-[64px] truncate border focus:shadow-md outline-none"
+                            list="msg_attr_name_opts"/>
+                    <datalist id="msg_attr_name_opts">
+                        <option>author</option>
+                        <option>categories</option>
+                        <option>contact</option>
+                        <option>currency</option>
+                        <option>language</option>
+                        <option>latitude</option>
+                        <option>longitude</option>
+                        <option>pricemax</option>
+                        <option>pricemin</option>
+                        <option>quantitymax</option>
+                        <option>quantitymin</option>
+                        <option>quantitiyunit</option>
+                        <option>secret</option>
+                        <option>subject</option>
+                        <option>summary</option>
+                        <option>title</option>
+                    </datalist>
                     <select id="msg_attr_type" class="min-w-[64px] truncate focus:shadow-md outline-none h-5 px-1">
                         <option>boolean</option>
                         <option>bytes</option>

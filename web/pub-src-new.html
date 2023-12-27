@@ -32,12 +32,21 @@
                 <div class="flex">
                     <label for="src_type" class="text-md w-24">Type</label>
                     <select id="src_type">
-                        <option value="tgch" selected="selected">Telegram Channel</option>
+                        <option value="tgchadmin" selected="selected">Telegram Channel (for admins)</option>
+                        <option value="tgch">Telegram Channel</option>
                         <option value="feed">Feed: RSS/Atom/JSON</option>
                         <option value="site">Web Site</option>
                     </select>
                 </div>
-                <div id="tgch" hidden="hidden" class="mt-1 space-y-2">
+                <div id="tgchadmin" hidden="hidden" class="mt-2 space-y-2">
+                    <p>
+                        A telegram channel admin may add AwakariBot to feed the selected channel posts to Awakari.
+                    </p>
+                    <p>
+                        Tap "Submit" button below to select a channel.
+                    </p>
+                </div>
+                <div id="tgch" hidden="hidden" class="mt-2 space-y-2">
                     <div class="flex">
                         <label for="chan_name" class="mt-1 text-md w-24">Channel</label>
                         <input type="text" id="chan_name" placeholder="@proxymtproto" class="min-h-5"/>
@@ -45,8 +54,12 @@
                     <div class="text-slate-500 dark:text-slate-400 mt-1">
                         It may take up to 5 minutes before the system starts to receive new messages from the added channel.
                     </div>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
+                        Ensure the quota is enough for this.
+                    </p>
                 </div>
-                <div id="feed" hidden="hidden" class="mt-1 space-y-2">
+                <div id="feed" hidden="hidden" class="mt-2 space-y-2">
                     <div class="flex">
                         <label for="feed_upd_freq" class="mt-1 text-md w-24">Update Every</label>
                         <select id="feed_upd_freq" class="mt-1 min-h-5">
@@ -62,8 +75,12 @@
                         <label for="feed_url" class="mt-1 text-md w-24">Feed URL</label>
                         <input id="feed_url" type="text" placeholder="https://time.com/feed" class="col-span-3 min-h-5"/>
                     </div>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
+                        Ensure the quota is enough for this.
+                    </p>
                 </div>
-                <div id="site" hidden="hidden" class="mt-1 space-y-2">
+                <div id="site" hidden="hidden" class="mt-2 space-y-2">
                     <div class="flex">
                         <label for="site_addr" class="mt-1 text-md w-24">Site</label>
                         <input type="text" id="site_addr" placeholder="walmart.com/browse/" class="col-span-3 min-h-5"/>
@@ -71,12 +88,12 @@
                     <div class="col-span-3 mt-1 text-slate-500">
                         Web sites are checked for a new content once a day.
                     </div>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
+                        Ensure the quota is enough for this.
+                    </p>
                 </div>
             </div>
-            <p class="text-slate-500 dark:text-slate-400">
-                The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
-                Ensure the quota is enough for this.
-            </p>
             <div class="flex justify-center pt-1">
                 <button id="button-submit" type="button" class="flex submit justify-center" onclick="addSource()">
                     <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

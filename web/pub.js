@@ -77,6 +77,7 @@ function load() {
 }
 
 function loadSources(cursor, filter, srcType, own) {
+
     if (cursor == null) {
         cursor = "";
     }
@@ -89,11 +90,20 @@ function loadSources(cursor, filter, srcType, own) {
     } else {
         document.getElementById("filter").value = filter;
     }
+
     if (srcType == null) {
         srcType = document.getElementById("src_type").value;
     } else {
         document.getElementById("src_type").value = srcType;
     }
+    switch (srcType) {
+        case "tgbc":
+            document.getElementById("own").disabled = "disabled";
+            break
+        default:
+            document.getElementById("own").removeAttribute("disabled");
+    }
+
     if (own == null) {
         own = document.getElementById("own").checked;
     } else if (own === "on" || own === true || own === "true") {

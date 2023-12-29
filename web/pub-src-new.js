@@ -4,19 +4,33 @@ function loadForm() {
 }
 
 function showSrcDetails() {
-    let opt = document.getElementById("src_type").value
+    const opt = document.getElementById("src_type").value
+    const btnSubmit = document.getElementById("button-submit");
     switch (opt) {
+        case "tgbc":
+            btnSubmit.style.display = "none";
+            document.getElementById("tgbc").style.display = "block";
+            document.getElementById("tgch").style.display = "none";
+            document.getElementById("feed").style.display = "none";
+            document.getElementById("site").style.display = "none";
+            break
         case "tgch":
+            btnSubmit.style.display = "flex";
+            document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "block";
             document.getElementById("feed").style.display = "none";
             document.getElementById("site").style.display = "none";
             break
         case "feed":
+            btnSubmit.style.display = "flex";
+            document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "block";
             document.getElementById("site").style.display = "none";
             break
         case "site":
+            btnSubmit.style.display = "flex";
+            document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
             document.getElementById("site").style.display = "block";
@@ -30,6 +44,8 @@ function addSource() {
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {
+        case "tgbc":
+            return
         case "tgch":
             srcAddr = document.getElementById("chan_name").value;
             break

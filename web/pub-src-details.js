@@ -39,7 +39,7 @@ function loadSource() {
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "tgch":
-                        document.getElementById("type").innerText = "Telegram channel";
+                        document.getElementById("type").innerText = "Telegram channel (App)";
                         document.getElementById("upd_period").innerText = "N/A";
                         if (data.addr[0] === '@') {
                             const chName = data.addr.slice(1);
@@ -47,7 +47,16 @@ function loadSource() {
                         } else {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
-
+                        break
+                    case "tgbc":
+                        document.getElementById("type").innerText = "Telegram channel (Bot)";
+                        document.getElementById("upd_period").innerText = "N/A";
+                        if (data.addr[0] === '@') {
+                            const chName = data.addr.slice(1);
+                            document.getElementById("addr").innerHTML = `<a href="https://t.me/${chName}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        } else {
+                            document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        }
                         break
                 }
                 if (data.lastUpdate === "0001-01-01T00:00:00Z") {

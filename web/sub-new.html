@@ -30,7 +30,7 @@
         <span>
             <span class="text-slate-500">Advanced</span>
             <label class="switch">
-                <input type="checkbox" checked="checked" id="toggle_mode">
+                <input type="checkbox" id="toggle_mode">
                 <span class="slider round"></span>
             </label>
         </span>
@@ -40,10 +40,10 @@
 
             <div class="flex">
                 <label for="description" style="padding-top: 0.125rem">Description</label>
-                <input type="text" id="description" class="ml-2">
+                <input type="text" id="description" class="ml-2" placeholder="Mentions of me">
             </div>
 
-            <div class="container" id="advanced">
+            <div class="container" id="advanced" style="display: none">
                 <div class="row">
                     <div class="col-md-12">
                         <div id="sub_cond_editor"></div>
@@ -53,13 +53,13 @@
             <script src="sub-new.js"></script>
 
             <!-- wizard -->
-            <div id="wizard" style="display: none" class="space-y-2">
+            <div id="wizard" class="space-y-2">
 
                 <legend class="text">Matching Conditions:</legend>
                 <div>
                     <div class="grid">
-                        <p>Any of keywords:</p>
-                        <input id="cond_extra1" type="text" placeholder="" class="mt-1 border focus:shadow-md outline-none"/>
+                        <p>Any of keywords (space separated):</p>
+                        <input id="cond_extra1" type="text" placeholder="John" class="mt-1 border focus:shadow-md outline-none"/>
                     </div>
                     <div class="grid mt-2">
                         <div>
@@ -68,7 +68,7 @@
                             <input type="checkbox" id="cond_extra2_not"/>
                             <span>Not</span>
                         </div>
-                        <input id="cond_extra2" type="text" placeholder="" class="mt-1 border focus:shadow-md outline-none"/>
+                        <input id="cond_extra2" type="text" placeholder="Doe" class="mt-1 border focus:shadow-md outline-none"/>
                     </div>
                     <div class="grid grid-cols-1 mt-2">
                         <div>

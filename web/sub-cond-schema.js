@@ -120,6 +120,7 @@ const subCondSchema = {
                                 id: "term",
                                 type: "string",
                                 required: true,
+                                minLength: 3,
                                 options: {
                                     inputAttributes: {
                                         placeholder: "e.g. Tesla, iPhone, ...",

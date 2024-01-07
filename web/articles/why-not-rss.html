@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Why Not RSS?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../tailwind.output.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+</head>
+<body class="flex justify-center text-gray-800 dark:text-gray-400">
+    <main class="p-4 space-y-4 max-w-[800px]">
+
+        <h1 class="text-4xl font-semibold text-center">Why Not RSS?</h1>
+        <div class="sm:grid sm:grid-cols-2">
+            <div class="space-y-4 pt-4">
+                <p>
+                    Today many of us want to get updates timely from the services they use: news, shops, jobs, etc.
+                    But visiting every service every minute is wasting of the time.
+                    One can increase the update period and do it daily.
+                    Unfortunately, this means the important update is not early enough.
+                    Even worse, the important update may be gone already and lost.
+                </p>
+                <p>
+                    We needed this update check to be automated.
+                    And this is the exact purpose of RSS.
+                    No more manual visiting.
+                    One's favorite feed reader does the trick and checks for updates in the background.
+                </p>
+            </div>
+            <div>
+                <img width="320px" src="../data-value-vs-time.svg"/>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold text-center">Nobody offers RSS</h2>
+            <div class="sm:grid sm:grid-cols-2">
+                <div class="space-y-4">
+                    <p>
+                        So why this didn't work?
+                        The RSS support by popular services gradually decreases every year.
+                        More and more services drop their RSS support.
+                    </p>
+                    <p>
+                        Mozilla <a href="https://support.mozilla.org/en-US/kb/feed-reader-replacements-firefox" class="text-blue-500">removed RSS support from Firefox in 2018</a>.
+                        Apple <a href="https://mjtsai.com/blog/2019/12/26/apple-news-no-longer-supports-rss/" class="text-blue-500">stopped providing RSS for Apple News in 2019</a>.
+                        And in 2021, Google <a href="https://www.theregister.com/2021/08/16/google_groups_rss/" class="text-blue-500">removed RSS feeds from Google Groups</a>.
+                    </p>
+                    <p>
+                        The reason is simple: they don't want to waste their resources.
+                        Consider a popular service have 1 million of their feed subscribers.
+                        Let's say the approximate feed reader update period is 15 minutes.
+                        Then the service has to sustain the load of about 1000 requests per second!
+                    </p>
+                    <p>
+                        Next, consider that service actually publish updates once a day in a random time.
+                        So any average reader will do 95 "dry" requests yielding no new results and only 1 is useful.
+                    </p>
+                    <p>
+                        So the service has to support a permanent load of 1000 RPS where about 99% of requests are waste of resources.
+                    </p>
+                    <p>
+                        The actual <b>issue is polling</b>.
+                        In the ideal world the service should push a notification to you when something happens.
+                        So this should work in the reverse way.
+                    </p>
+                </div>
+                <div class="pt-2 sm:pt-0">
+                    <img width="320px" src="be-honest.png"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-2 pt-2">
+            <h2 class="text-2xl font-semibold text-center">Nobody wants Spam</h2>
+            <p>
+                What do services offer instead of RSS?
+                They want people to allow push notifications or subscribe by email.
+                The problem is that people actually hate this way.
+                We'd never allow notifications from services and sites.
+                We always try to avoid leaving our email for a subscription purpose.
+            </p>
+            <p>
+                Allowing a service to notify is the same as open the door to the hell of <b>spam</b>.
+                Basically, we loose the control on what we want to receive.
+                And that's why people <a href="https://news.ycombinator.com/item?id=28967540" class="text-blue-500">still love RSS</a>.
+                Nobody wants all this spam that comes via push notifications and emails. Be honest.
+            </p>
+            <div class="flex justify-center items-center">
+                <div class="grid grid-cols-2 text-lg w-[320px] sm:w-[560px]">
+                    <div class="space-y-2 w-[160px] sm:w-[280px]">
+                        <h3 class="text-lg text-center font-semibold">Poll</h3>
+                        <p><span class="text-green-400 text-xl">👍</span> Client controls what to receive</p>
+                        <p><span class="text-red-600 text-xl">👎</span> Waste of resources</p>
+                    </div>
+                    <div class="space-y-2 w-[160px] sm:w-[280px]">
+                        <h3 class="text-lg text-center font-semibold">Push</h3>
+                        <p><span class="text-red-600 text-xl">👎</span> Service controls what to push</p>
+                        <p><span class="text-green-400 text-xl">👍</span> Resource-efficient</p>
+                    </div>
+                </div>
+            </div>
+            <p>
+                The <b>conclusion</b> is that we need a service that does push but with our own control.
+            </p>
+        </div>
+
+        <div class="space-y-2 pt-2">
+            <h2 class="text-2xl font-semibold text-center">Solution</h2>
+            <p>
+                The above issues are the reason why <a href="https://awakari.com" class="text-blue-500">Awakari</a> has been created.
+            </p>
+            <p>
+                Define your interest once and stay tuned, Awakari will notify you once a matching event occurs.
+                Track brands, jobs, whatsoever.
+            </p>
+            <p>
+                Not enough sources? Add your own source like RSS feed, Telegram channel, web site.
+                More integrations coming soon, e.g. ActivityPub/WhatsApp or ML stage to label incoming images/videos.
+                The service is free for use and doesn't store any user data.
+            </p>
+        </div>
+
+        <p class="text-gray-500 text-lg text-right">Andrei Kurilov, 2024</p>
+    </main>
+</body>
+</html>

@@ -43,11 +43,25 @@
                 Awakari
             </p>
 
-            <div class="flex flex-col space-y-2 mt-4">
-                <p class="px-2 text-center justify-center">
-                    Install this app:
-                </p>
-                <img src="app-install.png"/>
+            <div class="flex flex-col space-y-2 mt-4 justify-center items-center">
+                <button type="button"
+                        class="w-32"
+                        onclick="document.getElementById('install-app-dialog').style.display = 'block'">
+                    Install Application
+                </button>
+                <div id="install-app-dialog"
+                     class="border p-1 rounded-md shadow-lg bg-white bg-white dark:bg-gray-900"
+                     style="position: absolute; margin-top: 120px; display: none">
+                    <span>
+                        <span class="w-24 pl-24">Install Application</span>
+                        <button type="button"
+                                class="ml-16 w-6 h-6"
+                                onclick="document.getElementById('install-app-dialog').style.display = 'none'">
+                            ✕
+                        </button>
+                    </span>
+                    <img src="app-install.png"/>
+                </div>
             </div>
 
             <p class="px-2 text-center mt-4 justify-center">

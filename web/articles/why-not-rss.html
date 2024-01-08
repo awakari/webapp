@@ -11,31 +11,36 @@
     <main class="p-4 space-y-4 max-w-[800px]">
 
         <h1 class="text-4xl font-semibold text-center">Why Not RSS?</h1>
-        <div class="sm:grid sm:grid-cols-2">
-            <div class="space-y-4 pt-4">
-                <p>
-                    Today many of us want to get updates timely from the services they use: news, shops, jobs, etc.
-                    But visiting every service every minute is wasting of the time.
-                    One can increase the update period and do it daily.
-                    Unfortunately, this means the important update is not early enough.
-                    Even worse, the important update may be gone already and lost.
-                </p>
-                <p>
-                    We needed this update check to be automated.
-                    And this is the exact purpose of RSS.
-                    No more manual visiting.
-                    One's favorite feed reader does the trick and checks for updates in the background.
-                </p>
+        <div>
+            <div class="sm:grid sm:grid-cols-2">
+                <div class="space-y-4 pt-4">
+                    <p>
+                        Today many of us want to get updates timely from the services they use: news, shops, jobs, etc.
+                        But visiting every service every minute is wasting of the time.
+                        One can increase the update period and do it daily.
+                        Unfortunately, this means the important update is not early enough.
+                        Even worse, the important update may be gone already and lost.
+                    </p>
+                    <p>
+                        We needed this update check to be automated.
+                        And this is the exact purpose of RSS.
+                        No more manual visiting.
+                        One's favorite feed reader does the trick and checks for updates in the background.
+                    </p>
+                </div>
+                <div>
+                    <img width="320px" src="../data-value-vs-time.svg"/>
+                </div>
             </div>
-            <div>
-                <img width="320px" src="../data-value-vs-time.svg"/>
+            <div class="border-l-4 p-2 font-mono">
+                <p>Conclusion 1: an important message should be delivered as soon as it occurs.</p>
             </div>
         </div>
 
-        <div class="space-y-4">
+        <div class="space-y-2">
             <h2 class="text-2xl font-semibold text-center">Nobody offers RSS</h2>
-            <div class="sm:grid sm:grid-cols-2">
-                <div class="space-y-4">
+            <div class="sm:grid sm:grid-cols-2 pt-2">
+                <div class="space-y-2">
                     <p>
                         So why this didn't work?
                         The RSS support by popular services gradually decreases every year.
@@ -47,7 +52,7 @@
                         And in 2021, Google <a href="https://www.theregister.com/2021/08/16/google_groups_rss/" class="text-blue-500">removed RSS feeds from Google Groups</a>.
                     </p>
                     <p>
-                        The reason is simple: they don't want to waste their resources.
+                        Among others reasons: they don't want to waste their resources.
                         Consider a popular service have 1 million of their feed subscribers.
                         Let's say the approximate feed reader update period is 15 minutes.
                         Then the service has to sustain the load of about 1000 requests per second!
@@ -55,19 +60,23 @@
                     <p>
                         Next, consider that service actually publish updates once a day in a random time.
                         So any average reader will do 95 "dry" requests yielding no new results and only 1 is useful.
-                    </p>
-                    <p>
                         So the service has to support a permanent load of 1000 RPS where about 99% of requests are waste of resources.
                     </p>
                     <p>
                         The actual <b>issue is polling</b>.
-                        In the ideal world the service should push a notification to you when something happens.
-                        So this should work in the reverse way.
+                        Services don't want you to poll them (for free).
+                        The numbers may be different depending on the exact case.
+                        But it's always about a tradeoff:
                     </p>
+                    <li>Poll once a day = get it later, possibly too late.</li>
+                    <li>Poll every minute = resource waste, possibly ban.</li>
                 </div>
                 <div class="pt-2 sm:pt-0">
                     <img width="320px" src="be-honest.png"/>
                 </div>
+            </div>
+            <div class="border-l-4 p-2 font-mono">
+                <p>Conclusion 2: a service should push updates to avoid a delay and resource wasting.</p>
             </div>
         </div>
 
@@ -75,50 +84,76 @@
             <h2 class="text-2xl font-semibold text-center">Nobody wants Spam</h2>
             <p>
                 What do services offer instead of RSS?
-                They want people to allow push notifications or subscribe by email.
+                They want people to allow push notifications or subscribe-by-email.
                 The problem is that people actually hate this way.
                 We'd never allow notifications from services and sites.
                 We always try to avoid leaving our email for a subscription purpose.
             </p>
             <p>
                 Allowing a service to notify is the same as open the door to the hell of <b>spam</b>.
-                Basically, we loose the control on what we want to receive.
+                Basically, we loose the control on what, where and when we want to receive.
                 And that's why people <a href="https://news.ycombinator.com/item?id=28967540" class="text-blue-500">still love RSS</a>.
-                Nobody wants all this spam that comes via push notifications and emails. Be honest.
+                In their reader, all subscriptions are organized well in one place.
+                Compare it to typical subscriptions when it's very hard to get a list of all sources.
             </p>
             <div class="flex justify-center items-center">
-                <div class="grid grid-cols-2 text-lg w-[320px] sm:w-[560px]">
-                    <div class="space-y-2 w-[160px] sm:w-[280px]">
-                        <h3 class="text-lg text-center font-semibold">Poll</h3>
-                        <p><span class="text-green-400 text-xl">👍</span> Client controls what to receive</p>
-                        <p><span class="text-red-600 text-xl">👎</span> Waste of resources</p>
+                <div class="grid grid-cols-2 w-[320px]">
+                    <div class="space-y-2 w-[160px]">
+                        <h3 class="text-center font-semibold text-lg">Poll</h3>
+                        <p><span class="text-green-400 text-lg">👍</span> Client controls</p>
+                        <p><span class="text-red-600 text-lg">👎</span> Inefficient</p>
                     </div>
-                    <div class="space-y-2 w-[160px] sm:w-[280px]">
-                        <h3 class="text-lg text-center font-semibold">Push</h3>
-                        <p><span class="text-red-600 text-xl">👎</span> Service controls what to push</p>
-                        <p><span class="text-green-400 text-xl">👍</span> Resource-efficient</p>
+                    <div class="space-y-2 w-[160px]">
+                        <h3 class="text-center font-semibold text-lg">Push</h3>
+                        <p><span class="text-red-600 text-lg">👎</span> Service controls</p>
+                        <p><span class="text-green-400 text-lg">👍</span> Efficient</p>
                     </div>
                 </div>
             </div>
-            <p>
-                The <b>conclusion</b> is that we need a service that does push but with our own control.
-            </p>
+            <div class="border-l-4 p-2 font-mono space-y-2">
+                <p>Conclusion 3: a client should be able to</p>
+                <li>control what to receive</li>
+                <li>manage all subscriptions in one place</li>
+            </div>
         </div>
 
         <div class="space-y-2 pt-2">
             <h2 class="text-2xl font-semibold text-center">Solution</h2>
             <p>
+                Poll-based feeds like RSS lack the delay control.
+                While existing push-based solutions are impossible to manage in one place.
+                Moreover, all existing before solutions lack the content control.
+            </p>
+            <p>
                 The above issues are the reason why <a href="https://awakari.com" class="text-blue-500">Awakari</a> has been created.
+                It's free to use service that doesn't store any user data.
             </p>
-            <p>
-                Define your interest once and stay tuned, Awakari will notify you once a matching event occurs.
-                Track brands, jobs, whatsoever.
-            </p>
-            <p>
-                Not enough sources? Add your own source like RSS feed, Telegram channel, web site.
-                More integrations coming soon, e.g. ActivityPub/WhatsApp or ML stage to label incoming images/videos.
-                The service is free for use and doesn't store any user data.
-            </p>
+            <div class="grid grid-cols-2 space-y-4 items-center sm:text-xl">
+                <div class="space-y-2">
+                    <p>Get information from:</p>
+                    <li>100+ feeds (RSS, etc)</li>
+                    <li>70+ Telegram channels</li>
+                    <li>etc</li>
+                    <p>Collection is growing.</p>
+                    <p>New integrations are coming.</p>
+                </div>
+                <img src="2024-01-08_10-37.png" class="px-2"/>
+                <img src="2024-01-04_17-38.png" class="px-2"/>
+                <div class="space-y-2">
+                    <p>Not enough sources?</p>
+                    <p>Bring your own.</p>
+                </div>
+                <div class="space-y-2">
+                    <p>Get rid of spam.</p>
+                    <p>Define what is interesting to get.</p>
+                </div>
+                <img src="2024-01-04_16-50.png" width="320px" class="px-2"/>
+                <img src="photo_5249482056679937464_y.jpg" width="320px" class="px-2"/>
+                <div class="space-y-2">
+                    <p>Use Telegram to read.</p>
+                    <p>More integrations are coming.</p>
+                </div>
+            </div>
         </div>
 
         <p class="text-gray-500 text-lg text-right">Andrei Kurilov, 2024</p>

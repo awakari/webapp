@@ -48,12 +48,30 @@ function addSource() {
             return
         case "tgch":
             srcAddr = document.getElementById("chan_name").value;
+            if (srcAddr.length < 6) {
+                alert(`Source address ${srcAddr} is not valid telegram channel name`)
+                return;
+            }
             break
         case "feed":
             srcAddr = document.getElementById("feed_url").value;
+            if (srcAddr.length < 9) {
+                alert(`Source address ${srcAddr} is not valid feed URL`)
+                return;
+            }
             break
         case "site":
             srcAddr = document.getElementById("site_addr").value;
+            if (srcAddr.startsWith("http://")) {
+                srcAddr = srcAddr.substring("http://".length)
+            }
+            if (srcAddr.startsWith("https://")) {
+                srcAddr = srcAddr.substring("https://".length)
+            }
+            if (srcAddr.length < 4) {
+                alert(`Source address ${srcAddr} is not valid site address`)
+                return;
+            }
             break
     }
     const payload = {

@@ -4,16 +4,21 @@ var editor = new JSONEditor(document.getElementById("sub_cond_editor"), subCondS
 // Hook up the validation indicator to update its
 // status whenever the editor changes
 editor.on('change', function () {
-    // Get an array of errors from the validator
-    var errors = editor.validate();
-    // Not valid
-    if (errors.length) {
-        console.log(errors);
-        document.getElementById("button-submit").disabled = "disabled";
-    }
-    // Valid
-    else {
-        document.getElementById("button-submit").removeAttribute("disabled");
+    switch (document.getElementById("advanced").style.display) {
+        case "none": // wizard mode
+            break
+        default:
+            // Get an array of errors from the validator
+            var errors = editor.validate();
+            // Not valid
+            if (errors.length) {
+                console.log(errors);
+                document.getElementById("button-submit").disabled = "disabled";
+            }
+            // Valid
+            else {
+                document.getElementById("button-submit").removeAttribute("disabled");
+            }
     }
 });
 

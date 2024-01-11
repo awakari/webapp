@@ -99,24 +99,29 @@
                     <span class="mt-1">Subscribe</span>
                 </button>
                 <div id="sub-new-success-dialog"
-                     class="border p-1 rounded-md shadow-lg bg-white bg-white dark:bg-gray-900"
-                     style="position: absolute; margin-top: -120px; display: block">
-                    <span>
-                        <span class="w-24 pl-24">Success</span>
+                     class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1"
+                     style="position: absolute; margin-top: -100px; display: none">
+                    <div class="flex w-full">
+                        <div class="w-full">
+                            <span class="text-lg">Success</span>
+                        </div>
                         <button type="button"
-                                class="ml-16 w-6 h-6"
-                                onclick="document.getElementById('install-app-dialog').style.display = 'none'">
+                                class="w-6 h-6"
+                                onclick="document.getElementById('sub-new-success-dialog').style.display = 'none'">
                             ✕
                         </button>
-                        <p>
-                            Subscription created
-                        </p>
-                        <p>
-                            Id: <span id="id"></span>
-                        </p>
-
-                    </span>
-                    <img src="app-install.png"/>
+                    </div>
+                    <p>
+                        Subscription created
+                    </p>
+                    <p>
+                        Id: <span id="new-sub-id"></span>
+                    </p>
+                    <button type="button"
+                            onclick="window.open('https://t.me/AwakariBot', '_blank')"
+                            class="flex w-full justify-center text-center">
+                        <span class="pt-1">&#10697; Start Reading</span>
+                    </button>
                 </div>
             </div>
 

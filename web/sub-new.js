@@ -95,7 +95,8 @@ function createSubscription() {
             })
             .then(data => {
                 if (data) {
-                    window.location.assign(`sub-new-success.html?id=${data.id}`);
+                    document.getElementById("sub-new-success-dialog").style.display = "block";
+                    document.getElementById("new-sub-id").innerText = data.id;
                 }
             })
             .catch(err => {

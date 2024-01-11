@@ -98,6 +98,26 @@
                     </svg>
                     <span class="mt-1">Subscribe</span>
                 </button>
+                <div id="sub-new-success-dialog"
+                     class="border p-1 rounded-md shadow-lg bg-white bg-white dark:bg-gray-900"
+                     style="position: absolute; margin-top: -120px; display: block">
+                    <span>
+                        <span class="w-24 pl-24">Success</span>
+                        <button type="button"
+                                class="ml-16 w-6 h-6"
+                                onclick="document.getElementById('install-app-dialog').style.display = 'none'">
+                            ✕
+                        </button>
+                        <p>
+                            Subscription created
+                        </p>
+                        <p>
+                            Id: <span id="id"></span>
+                        </p>
+
+                    </span>
+                    <img src="app-install.png"/>
+                </div>
             </div>
 
         </form>

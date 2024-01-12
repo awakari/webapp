@@ -72,7 +72,12 @@ function loadSource() {
                     btnDel.disabled = "disabled";
                 }
                 //
-                document.getElementById("owner").innerText = data.usage.owner;
+                switch (data.usage.type) {
+                    case 1:
+                        document.getElementById("owner").innerText = "shared";
+                    case 2:
+                        document.getElementById("owner").innerText = "private";
+                }
                 document.getElementById("count").innerText = data.usage.count;
                 document.getElementById("total").innerText = data.usage.total;
                 document.getElementById("limit").innerText = data.usage.limit;

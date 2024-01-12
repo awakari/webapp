@@ -71,6 +71,11 @@ function loadSource() {
                 } else {
                     btnDel.disabled = "disabled";
                 }
+                if (data.userId === "") {
+                    document.getElementById("owner").innerText = "system";
+                } else {
+                    document.getElementById("owner").innerText = "user";
+                }
             }
         })
         .catch(err => {

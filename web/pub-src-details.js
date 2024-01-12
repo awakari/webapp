@@ -74,10 +74,10 @@ function loadSource() {
                 //
                 switch (data.usage.type) {
                     case 1:
-                        document.getElementById("owner").innerText = "shared";
+                        document.getElementById("owner").innerText = "Shared";
                         break;
                     case 2:
-                        document.getElementById("owner").innerText = "private";
+                        document.getElementById("owner").innerText = "Private";
                         break;
                 }
                 document.getElementById("count").innerText = data.usage.count;

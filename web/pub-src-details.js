@@ -75,8 +75,10 @@ function loadSource() {
                 switch (data.usage.type) {
                     case 1:
                         document.getElementById("owner").innerText = "shared";
+                        break;
                     case 2:
                         document.getElementById("owner").innerText = "private";
+                        break;
                 }
                 document.getElementById("count").innerText = data.usage.count;
                 document.getElementById("total").innerText = data.usage.total;

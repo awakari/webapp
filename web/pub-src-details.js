@@ -71,11 +71,59 @@ function loadSource() {
                 } else {
                     btnDel.disabled = "disabled";
                 }
+                //
+                let limitOwnerId = data.userId;
                 if (data.userId === "") {
                     document.getElementById("owner").innerText = "system";
+                    limitOwnerId = data.addr;
                 } else {
                     document.getElementById("owner").innerText = "user";
                 }
+                //
+                const headers = {
+                    "Authorization": `Bearer ${authToken}`,
+                    "X-Awakari-Group-Id": defaultGroupId,
+                    "X-Awakari-User-Id": limitOwnerId,
+                };
+                fetch("/v1/usage/2", {
+                    method: "GET",
+                    headers: headers,
+                    cache: "default",
+                })
+                    .then(resp => {
+                        if (!resp.ok) {
+                            throw new Error(`Daily publishing usage request failed with status: ${resp.status}`);
+                        }
+                        return resp.json();
+                    })
+                    .then(data => {
+                        if (data != null && data.hasOwnProperty("count")) {
+                            document.getElementById("count").innerText = data.count;
+                        }
+                    })
+                    .catch(err => {
+                        alert(err);
+                    })
+                fetch("/v1/limits/2", {
+                    method: "GET",
+                    headers: headers,
+                    cache: "default",
+                })
+                    .then(resp => {
+                        if (!resp.ok) {
+                            throw new Error(`Daily publishing limit request failed with status: ${resp.status}`);
+                        }
+                        return resp.json();
+                    })
+                    .then(data => {
+                        if (data != null && data.hasOwnProperty("count")) {
+                            document.getElementById("limit").innerText = data.count;
+                        }
+                        return data;
+                    })
+                    .catch(err => {
+                        alert(err);
+                    })
             }
         })
         .catch(err => {

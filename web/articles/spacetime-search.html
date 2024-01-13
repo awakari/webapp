@@ -11,43 +11,75 @@
 <main class="p-4 space-y-4 max-w-[960px]">
 
     <h1 class="text-4xl font-semibold text-center">On Search In Space And Time</h1>
-    <div class="space-y-2">
+    <div>
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
-            <div class="sm:pt-4">
+            <div class="sm:pt-1">
                 <p class="pt-1">
-                    &nbsp;&nbsp;The role of a <i>chance</i> in our life is great.
-                    It's always about finding of a <i>relevant opportunity</i>.
+                    &nbsp;&nbsp;
+                    The role of a <b><i>chance</i></b> in our life is great.
+                    It's always about finding of a <b><i>relevant opportunity</i></b>.
                     Whether it's a dream job, car, home or a partner.
                 </p>
                 <p class="pt-1">
-                    &nbsp;&nbsp;Unfortunately, an opportunity is generally not available immediately.
+                    &nbsp;&nbsp;
+                    Unfortunately, an opportunity is generally not available immediately.
                     When we don't find exactly what is needed, there are few options:
                     <li>search wider, include more sources</li>
-                    <li>wait until match appears</li>
+                    <li>wait longer until match appears</li>
                     <li>weaken the search criteria.</li>
                 </p>
                 <p class="pt-1">
-                    &nbsp;&nbsp;Every option has specific pros and cons. Using a search online means one can not
-                    search wider anymore. No luck? Try again later or sacrifice your requirements.
+                    &nbsp;&nbsp;
+                    Every option has specific pros and cons. Using a search engine means one can not
+                    search wider anymore. It searches globally already. No luck?
+                    Try again later or sacrifice your requirements.
                 </p>
             </div>
-            <img width="360" src="finding-probability.png"/>
+            <img width="360px" src="finding-probability.png"/>
         </div>
         <div>
             <p class="pt-1">
-                &nbsp;&nbsp;Instead of repeating a search again and again we usually <i>subscribe</i> to important
-                sources. The problem is that to maximize the chance to catch an opportunity it's necessary to subscribe
-                to nearly everything.
+                &nbsp;&nbsp;
+                Hence, in many cases the only option is to wait longer.
+                Instead of repeating a search again and again we have to subscribe for a notification when something
+                matching our interest occurs. To maximize the chance to capture an opportunity we need to be able to
+                find an event matching our criteria in a stream of unlimited width.
+                Preferably, this should be a <b><i>stream of every event occurring globally</i></b>.
             </p>
             <p class="pt-1">
-                &nbsp;&nbsp;It's okay to filter content on the client side when you have limited number of well-known sources.
+                &nbsp;&nbsp;
+                It's okay to filter content on the client side when you have limited number of well-known sources.
                 This is how social networks, messengers, news readers, email clients use to work.
                 Just follow/join to limited set of groups or channels.
-                This gives you a comfortable control but with a price.
-                You'll never catch any serendipitous message.
-                Just because you don't know where this important message comes from.
-                You remain in your limited bubble missing new things to know.
+                This gives us a comfortable control but with a price.
+                We'll never catch any <b><i>serendipitous</i></b> message.
+                Just because we don't know where an important message comes from.
+                We remain in our <b><i>limited bubble missing the opportunity</i></b>.
             </p>
+            <p class="pt-1">
+                &nbsp;&nbsp;
+                Hence, we need to filter events from the whole Internet (!).
+                It's not feasible to burden the client with the event stream of the unlimited width.
+                Any client basically won't be able to sustain this.
+                Moreover, it should not do this, because this means the huge streams of duplicate events to every client.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <img width="480px" src="../how-it-works.svg"/>
+            <div>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    So how to achieve the highest possible chance to find an opportunity?
+                    The service itself should:
+                    <li>collect and consume event sources</li>
+                    <li>determine what is relevant to whom</li>
+                    <li>deliver the relevant only events.</li>
+                    This is exactly how Awakari service works. It consumes many sources on its input.
+                    For every incoming event it resolves every subscriber who is interested in this.
+                    Using the reverse search under the hood allows to resolve all interest subscribers at once.
+                    This means Awakari is the service easily scalable to consume the event stream of an unlimited width.
+                </p>
+            </div>
         </div>
     </div>
 </main>

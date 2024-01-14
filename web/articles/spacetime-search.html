@@ -20,7 +20,7 @@
                     <a href="https://www.quora.com/How-vital-is-the-role-of-opportunity-in-life-do-opportunity-matter-and-to-what-extent"
                        class="text-blue-700 dark:text-blue-300">
                     is great</a>.
-                    It's always about finding of a <b><i>relevant opportunity</i></b>.
+                    It's always about finding a <b><i>relevant opportunity</i></b>.
                     Whether it's a dream job, car, home or a partner.
                 </p>
                 <p class="pt-1">
@@ -40,45 +40,60 @@
             </div>
             <img width="360px" src="finding-probability.png"/>
         </div>
+        <h2 class="text-3xl font-semibold text-center py-2">Continuous Search</h2>
         <div>
             <p class="pt-1">
                 &nbsp;&nbsp;
                 Hence, in many cases the only option is to wait longer.
-                Instead of repeating a search again and again we have to subscribe for a notification when something
-                matching our interest occurs. To maximize the chance to capture an opportunity we need to be able to
-                find an event matching our criteria in a stream of an unlimited width.
-                Preferably, this should be a <b><i>stream of every event occurring globally</i></b>.
-                For sure, it's full of spam and other irrelevant info.
+                For example, one is looking for a job in certain company/area but no offers are available at the moment.
+                Or one may want to be notified when his name is mentioned anywhere online.
+                Repeating the search again and again (polling) doesn't work well.
+                First, it wastes the researcher's time. Though, it might be automated.
+                Second is that the wanted event may happen and expire between polls.
             </p>
             <p class="pt-1">
                 &nbsp;&nbsp;
-                It's okay to filter content on the client side when you have limited number of well-known sources.
+                Instead of polling, we have to subscribe for a notification when something
+                matching our interest occurs. To maximize the chance to capture an opportunity we need to be able to
+                find an event matching our criteria in a stream of an unlimited width.
+                Preferably, this should be a <b><i>stream of every event occurring globally</i></b>.
+                For sure, it's expected to be full of spam and other irrelevant info.
+                So the comprehensive filtering should be included into any solution.
+            </p>
+        </div>
+        <h2 class="text-3xl font-semibold text-center py-2">Unlimited Search</h2>
+        <div>
+            <p class="pt-1">
+                &nbsp;&nbsp;
+                The client-side content filtering works well enough when you have limited number of well-known sources.
                 This is how social networks, messengers, news readers, email clients use to work.
                 Just follow/join to limited set of groups or channels.
                 This gives us a comfortable control but with a price.
                 We'll never catch any <b><i>serendipitous</i></b> message.
                 Just because we don't know where an important message comes from.
-                We remain in our <b><i>limited bubble</i></b> more likely missing the opportunity.
+                We remain in our <b><i>limited bubble</i></b> more likely missing the opportunity from other sources.
             </p>
             <p class="pt-1">
                 &nbsp;&nbsp;
                 The conclusion is that we often need to filter events from the whole Internet (!).
-                It's not feasible to burden the client with an unlimited event stream.
+                However, it's not feasible to burden the client with an unlimited event stream.
                 Any client basically won't be able to sustain this.
                 Moreover, it should not do this, because this means the huge streams of unwanted info duplicated to
                 every client.
             </p>
         </div>
+        <h2 class="text-3xl font-semibold text-center py-2">Solution</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <img width="480px" src="../how-it-works.svg"/>
             <div>
                 <p>
                     &nbsp;&nbsp;
-                    So how to achieve the highest possible chance to find an opportunity?
-                    The service itself should:
-                    <li class="ml-4">collect and consume event sources</li>
-                    <li class="ml-4">determine what is relevant to whom</li>
-                    <li class="ml-4">deliver the relevant only events.</li>
+                    So how to achieve the both continuous and unlimited search?
+                    This may be a service that:
+                    <li class="ml-4">collects event sources</li>
+                    <li class="ml-4">consumes these sources</li>
+                    <li class="ml-4">resolves what is relevant to whom</li>
+                    <li class="ml-4">delivers matching messages.</li>
                 </p>
                 <p>
                     &nbsp;&nbsp;
@@ -92,10 +107,22 @@
         <div>
             <p class="pt-1">
                 &nbsp;&nbsp;
-                To start using Awakari, it's enough to define a subscription.
+                To start using Awakari, define a new subscription including own matching conditions.
+                A condition may be a simple keyword sequence, number condition or a group of other conditions.
+                It's easy to test a subscription sending a sample message to Awakari. If it matches the subscription,
+                one will receive it (currently in Telegram via
+                <a href="https://t.me/AwakariBot" class="text-blue-700 dark:text-blue-300">AwakariBot</a>).
             </p>
         </div>
-
+        <div class="text-center py-4">
+            <button class="text-white text-xl w-56 h-14 bg-gradient-to-r from-indigo-600 hover:from-indigo-500 to-cyan-600 hover:to-cyan-500 focus:outline-none font-bold rounded-md px-5 py-2 text-center"
+                    onclick="window.location.assign('https://awakari.com/login.html')">
+                Try for Free
+            </button>
+        </div>
+        <div>
+            <p class="text-gray-500 text-lg text-right">Andrei Kurilov, 2024</p>
+        </div>
     </div>
 </main>
 </body>

@@ -7,7 +7,7 @@
     <link href="../tailwind.output.css" rel="stylesheet">
     <link href="../style.css" rel="stylesheet">
 </head>
-<body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg">
+<body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg dark:bg-gray-800">
 <main class="p-4 space-y-4 max-w-[960px]">
 
     <h1 class="text-4xl font-semibold text-center">On Search In Space And Time</h1>
@@ -16,7 +16,10 @@
             <div class="sm:pt-1">
                 <p class="pt-1">
                     &nbsp;&nbsp;
-                    The role of a <b><i>chance</i></b> in our life is great.
+                    The role of a chance in our life
+                    <a href="https://www.quora.com/How-vital-is-the-role-of-opportunity-in-life-do-opportunity-matter-and-to-what-extent"
+                       class="text-blue-700 dark:text-blue-300">
+                    is great</a>.
                     It's always about finding of a <b><i>relevant opportunity</i></b>.
                     Whether it's a dream job, car, home or a partner.
                 </p>
@@ -24,9 +27,9 @@
                     &nbsp;&nbsp;
                     Unfortunately, an opportunity is generally not available immediately.
                     When we don't find exactly what is needed, there are few options:
-                    <li>search wider, include more sources</li>
-                    <li>wait longer until match appears</li>
-                    <li>weaken the search criteria.</li>
+                    <li class="ml-4">search wider, include more sources</li>
+                    <li class="ml-4">wait longer until a match appears</li>
+                    <li class="ml-4">weaken the search criteria.</li>
                 </p>
                 <p class="pt-1">
                     &nbsp;&nbsp;
@@ -43,8 +46,9 @@
                 Hence, in many cases the only option is to wait longer.
                 Instead of repeating a search again and again we have to subscribe for a notification when something
                 matching our interest occurs. To maximize the chance to capture an opportunity we need to be able to
-                find an event matching our criteria in a stream of unlimited width.
+                find an event matching our criteria in a stream of an unlimited width.
                 Preferably, this should be a <b><i>stream of every event occurring globally</i></b>.
+                For sure, it's full of spam and other irrelevant info.
             </p>
             <p class="pt-1">
                 &nbsp;&nbsp;
@@ -54,33 +58,44 @@
                 This gives us a comfortable control but with a price.
                 We'll never catch any <b><i>serendipitous</i></b> message.
                 Just because we don't know where an important message comes from.
-                We remain in our <b><i>limited bubble missing the opportunity</i></b>.
+                We remain in our <b><i>limited bubble</i></b> more likely missing the opportunity.
             </p>
             <p class="pt-1">
                 &nbsp;&nbsp;
-                Hence, we need to filter events from the whole Internet (!).
-                It's not feasible to burden the client with the event stream of the unlimited width.
+                The conclusion is that we often need to filter events from the whole Internet (!).
+                It's not feasible to burden the client with an unlimited event stream.
                 Any client basically won't be able to sustain this.
-                Moreover, it should not do this, because this means the huge streams of duplicate events to every client.
+                Moreover, it should not do this, because this means the huge streams of unwanted info duplicated to
+                every client.
             </p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <img width="480px" src="../how-it-works.svg"/>
             <div>
-                <p class="pt-1">
+                <p>
                     &nbsp;&nbsp;
                     So how to achieve the highest possible chance to find an opportunity?
                     The service itself should:
-                    <li>collect and consume event sources</li>
-                    <li>determine what is relevant to whom</li>
-                    <li>deliver the relevant only events.</li>
+                    <li class="ml-4">collect and consume event sources</li>
+                    <li class="ml-4">determine what is relevant to whom</li>
+                    <li class="ml-4">deliver the relevant only events.</li>
+                </p>
+                <p>
+                    &nbsp;&nbsp;
                     This is exactly how Awakari service works. It consumes many sources on its input.
                     For every incoming event it resolves every subscriber who is interested in this.
                     Using the reverse search under the hood allows to resolve all interest subscribers at once.
-                    This means Awakari is the service easily scalable to consume the event stream of an unlimited width.
+                    This means Awakari is the service easily scalable to consume the unlimited event stream.
                 </p>
             </div>
         </div>
+        <div>
+            <p class="pt-1">
+                &nbsp;&nbsp;
+                To start using Awakari, it's enough to define a subscription.
+            </p>
+        </div>
+
     </div>
 </main>
 </body>

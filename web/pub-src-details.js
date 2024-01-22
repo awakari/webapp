@@ -28,7 +28,14 @@ function loadSource() {
             if (data != null) {
                 switch (typ) {
                     case "feed":
-                        document.getElementById("type").innerText = "Feed";
+                        switch (data.push) {
+                            case true:
+                                document.getElementById("type").innerText = "WebSub";
+                                break
+                            default:
+                                document.getElementById("type").innerText = "Feed";
+                                break
+                        }
                         const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
                         document.getElementById("upd_period").innerText = d.humanize();
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;

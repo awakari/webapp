@@ -89,7 +89,7 @@ function loadSource() {
                     case 2:
                         document.getElementById("owner").innerText = "User";
                         document.getElementById("total").innerText = `${data.usage.total} (all user's publications)`;
-                        document.getElementById("limit").innerText = `${data.usage.count} (all user's publications)`;
+                        document.getElementById("count").innerText = `${data.usage.count} (all user's publications)`;
                         break;
                 }
                 document.getElementById("limit").innerText = data.usage.limit;

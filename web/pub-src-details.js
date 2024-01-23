@@ -31,23 +31,24 @@ function loadSource() {
                         switch (data.push) {
                             case true:
                                 document.getElementById("type").innerText = "WebSub";
+                                document.getElementById("upd_period").innerText = "Real-Time";
                                 break
                             default:
                                 document.getElementById("type").innerText = "Feed";
+                                const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
+                                document.getElementById("upd_period").innerText = `Polling once ${d.humanize()}`;
                                 break
                         }
-                        const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
-                        document.getElementById("upd_period").innerText = d.humanize();
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
-                        document.getElementById("upd_period").innerText = "a day";
+                        document.getElementById("upd_period").innerText = "Polling once a day";
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel (App)";
-                        document.getElementById("upd_period").innerText = "N/A";
+                        document.getElementById("upd_period").innerText = "Real-Time";
                         if (data.addr[0] === '@') {
                             const chName = data.addr.slice(1);
                             document.getElementById("addr").innerHTML = `<a href="https://t.me/${chName}" target="_blank" class="text-blue-500">${data.addr}</a>`;
@@ -57,7 +58,7 @@ function loadSource() {
                         break
                     case "tgbc":
                         document.getElementById("type").innerText = "Telegram channel (Bot)";
-                        document.getElementById("upd_period").innerText = "N/A";
+                        document.getElementById("upd_period").innerText = "Real-Time";
                         if (data.addr[0] === '@') {
                             const chName = data.addr.slice(1);
                             document.getElementById("addr").innerHTML = `<a href="https://t.me/${chName}" target="_blank" class="text-blue-500">${data.addr}</a>`;
@@ -82,13 +83,15 @@ function loadSource() {
                 switch (data.usage.type) {
                     case 1:
                         document.getElementById("owner").innerText = "Dedicated";
+                        document.getElementById("total").innerText = data.usage.total;
+                        document.getElementById("count").innerText = data.usage.count;
                         break;
                     case 2:
                         document.getElementById("owner").innerText = "User";
+                        document.getElementById("total").innerText = `${data.usage.total} (all user's publications)`;
+                        document.getElementById("limit").innerText = `${data.usage.count} (all user's publications)`;
                         break;
                 }
-                document.getElementById("count").innerText = data.usage.count;
-                document.getElementById("total").innerText = data.usage.total;
                 document.getElementById("limit").innerText = data.usage.limit;
             }
         })

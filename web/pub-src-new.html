@@ -34,7 +34,7 @@
                     <select id="src_type">
                         <option value="tgch">Telegram Channel (App)</option>
                         <option value="tgbc">Telegram Channel (Bot)</option>
-                        <option value="feed">Feed (RSS/Atom/JSON), WebSub</option>
+                        <option value="feed">Feed (RSS/Atom/etc), WebSub</option>
                         <option value="site">Web Site</option>
                     </select>
                 </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div id="tgbc" hidden="hidden" class="mt-2 space-y-2">
                     <div class="mt-1 space-y-1">
-                        <p>Add <a href="https://t.me/AwakariBot" class="text-cyan-600">@AwakariBot</a> to the source channel.</p>
+                        <p>Add <a href="https://t.me/AwakariBot" class="text-blue-500" target="_blank">@AwakariBot</a> to the source channel.</p>
                         <p>No admin rights are needed, the bot is read-only:</p>
                         <img alt="screenshot" src="photo_5222133117983251049_y.jpg" width="360px"/>
                     </div>
@@ -71,9 +71,26 @@
                         </select>
                     </div>
                     <div class="flex mt-1">
-                        <label for="feed_url" class="mt-1 text-md w-24">Feed URL</label>
+                        <label for="feed_url" class="mt-1 text-md w-24">Source URL</label>
                         <input id="feed_url" type="text" placeholder="https://time.com/feed" class="col-span-3 min-h-5"/>
                     </div>
+                    <p class="text-slate-500 dark:text-slate-400">Supported:</p>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        • <a href="https://en.wikipedia.org/wiki/WebSub" class="text-blue-500" target="_blank">WebSub</a> push protocol
+                    </p>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        • <a href="https://json-ld.org/" class="text-blue-500" target="_blank">JSON-LD</a> entries
+                    </p>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        • <a href="https://en.wikipedia.org/wiki/Microdata_(HTML)" class="text-blue-500" target="_blank">Microdata</a>,
+                        <a href="https://microformats.org/" class="text-blue-500" target="_blank">Microformats</a> markups
+                    </p>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        • <a href="https://en.wikipedia.org/wiki/RSS" class="text-blue-500" target="_blank">RSS</a>,
+                        <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" class="text-blue-500" target="_blank">Atom</a>,
+                        <a href="https://www.jsonfeed.org/"  class="text-blue-500" target="_blank">JSON</a>
+                        feeds
+                    </p>
                     <p class="text-slate-500 dark:text-slate-400">
                         The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
                         Ensure the quota is enough for this.

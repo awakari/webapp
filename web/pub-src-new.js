@@ -1,5 +1,6 @@
 function loadForm() {
     document.getElementById("src_type").onchange = showSrcDetails;
+    document.getElementById("feed_url").value = "";
     showSrcDetails();
 }
 

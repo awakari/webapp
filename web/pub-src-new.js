@@ -91,18 +91,16 @@ function addSource() {
         },
         body: JSON.stringify(payload),
     })
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
+        .then(resp => resp.text().then(msg => {
+            if (resp.ok) {
+                alert(`Source added: ${msg}`);
+                loadForm(); // reset
+            } else {
+                alert(`Failed to add the source: ${msg}`);
             }
-            return resp;
-        })
-        .then(_ => {
-            alert("Source has been added");
-            loadForm(); // reset
-        })
+            return msg
+        }))
         .catch(err => {
-            alert(err);
+            console.error(err);
         })
 }

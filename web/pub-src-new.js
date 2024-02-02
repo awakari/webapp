@@ -94,12 +94,16 @@ function addSource() {
         .then(resp => resp.text().then(msg => {
             if (resp.ok) {
                 alert(`Source added: ${msg}`);
-                loadForm(); // reset
             } else {
                 alert(`Failed to add the source: ${msg}`);
             }
-            return msg
+            return resp
         }))
+        .then(resp => {
+            if (resp.ok) {
+                loadForm(); // reset
+            }
+        })
         .catch(err => {
             console.error(err);
         })

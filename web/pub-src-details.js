@@ -93,11 +93,40 @@ function loadSource() {
                         break;
                 }
                 document.getElementById("limit").innerText = data.usage.limit;
+                drawFreqChart(data.counts);
             }
         })
         .catch(err => {
             alert(err);
         });
+}
+
+const dayMinutes = 24 * 60;
+const freqChartHeight = 100;
+const freqChartWidth = 288;
+const stepX = freqChartWidth / dayMinutes;
+const freqChartOffsetTop = 22;
+const freqChartOffsetLeft = 30;
+
+function drawFreqChart(counts) {
+    let countMax = 0;
+    for(const [t, c] of Object.entries(counts)) {
+        if (c > countMax) {
+            countMax = c;
+        }
+    }
+    const stepY = freqChartHeight / countMax;
+    for(let i = 0; i < 7; i ++) {
+        let chartElement = document.getElementById(`chart-freq-${i}`);
+        chartElement.innerHTML += `<text x="20" y="34">${countMax}</text>`;
+    }
+    for(const [t, c] of Object.entries(counts)) {
+        const dayNum = Math.floor(t / dayMinutes);
+        let chartElement = document.getElementById(`chart-freq-${dayNum}`);
+        const h = stepY * c;
+        const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
+        chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop+freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop+freqChartHeight-h}" stroke="blue" stroke-width="1"></line>`
+    }
 }
 
 function deleteSource(typ, addr) {

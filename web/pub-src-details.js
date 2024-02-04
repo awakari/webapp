@@ -101,6 +101,7 @@ function loadSource() {
         });
 }
 
+const weekDays = 7;
 const dayMinutes = 24 * 60;
 const freqChartHeight = 100;
 const freqChartWidth = 288;
@@ -116,9 +117,9 @@ function drawFreqChart(counts) {
         }
     }
     const stepY = freqChartHeight / countMax;
-    for(let i = 0; i < 7; i ++) {
+    for(let i = 0; i < weekDays; i ++) {
         let chartElement = document.getElementById(`chart-freq-${i}`);
-        chartElement.innerHTML += `<text x="20" y="34">${countMax}</text>`;
+        chartElement.innerHTML += `<text x="20" y="16">${countMax}</text>`;
     }
     for(const [t, c] of Object.entries(counts)) {
         const dayNum = Math.floor(t / dayMinutes);

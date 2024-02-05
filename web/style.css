@@ -335,3 +335,30 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.svg-text {
+    fill: dimgrey;
+}
+
+.svg-text.dark {
+    fill: grey;
+}
+
+.svg-chart-rect {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    stroke-opacity: 0.5;
+}
+
+.svg-chart-line-major {
+    stroke: grey;
+    stroke-width: 1;
+    stroke-opacity: 0.5;
+}
+
+.svg-chart-line-minor {
+    stroke: grey;
+    stroke-width: 1;
+    stroke-opacity: 0.25;
+}

@@ -121,7 +121,7 @@ function drawFreqChart(counts) {
     const stepY = freqChartHeight / countMax;
     for(let i = 0; i < weekDays; i ++) {
         let chartElement = document.getElementById(`chart-freq-${i}`);
-        chartElement.innerHTML += `<text x="20" y="20">${countMax}</text>`;
+        chartElement.innerHTML += `<text x="20" y="20" class="svg-chart-rect">${countMax}</text>`;
     }
     for(const [t, c] of Object.entries(counts)) {
         const dayNum = Math.floor(t / dayMinutes);

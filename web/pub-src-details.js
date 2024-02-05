@@ -40,11 +40,13 @@ function loadSource() {
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        document.getElementById("freq-charts").display = "block";
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
                         document.getElementById("upd_period").innerText = "Polling once a day";
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        document.getElementById("freq-charts").display = "none";
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel (App)";
@@ -55,6 +57,7 @@ function loadSource() {
                         } else {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
+                        document.getElementById("freq-charts").display = "none";
                         break
                     case "tgbc":
                         document.getElementById("type").innerText = "Telegram channel (Bot)";
@@ -65,6 +68,7 @@ function loadSource() {
                         } else {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
+                        document.getElementById("freq-charts").display = "none";
                         break
                 }
                 if (data.lastUpdate === "0001-01-01T00:00:00Z") {

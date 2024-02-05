@@ -121,14 +121,14 @@ function drawFreqChart(counts) {
     const stepY = freqChartHeight / countMax;
     for(let i = 0; i < weekDays; i ++) {
         let chartElement = document.getElementById(`chart-freq-${i}`);
-        chartElement.innerHTML += `<text x="20" y="20" class="svg-chart-rect">${countMax}</text>`;
+        chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
     }
     for(const [t, c] of Object.entries(counts)) {
         const dayNum = Math.floor(t / dayMinutes);
         let chartElement = document.getElementById(`chart-freq-${dayNum}`);
         const h = stepY * c;
         const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
-        chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop+freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop+freqChartHeight-h}" stroke="blue" stroke-width="1"></line>`
+        chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop+freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop+freqChartHeight-h}" class="svg-chart-line-data"></line>`
     }
 }
 

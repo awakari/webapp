@@ -340,8 +340,10 @@ input:checked + .slider:before {
     fill: dimgrey;
 }
 
-.svg-text.dark {
-    fill: grey;
+@media (prefers-color-scheme: dark) {
+    .svg-text {
+        fill: grey;
+    }
 }
 
 .svg-chart-rect {
@@ -368,7 +370,9 @@ input:checked + .slider:before {
     stroke: #0000aa;
 }
 
-.svg-chart-line-data.dark {
-    stroke-width: 1;
-    stroke: #4488ff;
+@media (prefers-color-scheme: dark) {
+    .svg-chart-line-data {
+        stroke-width: 1;
+        stroke: #4488ff;
+    }
 }

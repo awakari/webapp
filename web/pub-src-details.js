@@ -15,7 +15,7 @@ function loadSource() {
             "Authorization": `Bearer ${authToken}`,
             "X-Awakari-Group-Id": defaultGroupId,
             "X-Awakari-User-Id": userId,
-            "X-Awakari-Src-Addr": encodeURIComponent(addr),
+            "X-Awakari-Src-Addr": addr,
         },
         cache: "default",
     })

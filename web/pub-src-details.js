@@ -3,8 +3,8 @@ function loadSource() {
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
     document.getElementById("type").innerText = typ;
-    const addrEnc = urlParams.get("addr");
-    const addr = decodeURIComponent(addrEnc);
+    const addr = decodeURIComponent(urlParams.get("addr"));
+    const addrEnc = encodeURIComponent(addr);
     document.getElementById("addr").innerText = addr;
     let authToken = localStorage.getItem(keyAuthToken);
     let userId = localStorage.getItem(keyUserId);

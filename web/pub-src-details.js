@@ -3,7 +3,8 @@ function loadSource() {
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
     document.getElementById("type").innerText = typ;
-    const addr = decodeURIComponent(urlParams.get("addr"));
+    const addrEnc = urlParams.get("addr");
+    const addr = decodeURIComponent(addrEnc);
     document.getElementById("addr").innerText = addr;
     let authToken = localStorage.getItem(keyAuthToken);
     let userId = localStorage.getItem(keyUserId);
@@ -15,7 +16,7 @@ function loadSource() {
             "Authorization": `Bearer ${authToken}`,
             "X-Awakari-Group-Id": defaultGroupId,
             "X-Awakari-User-Id": userId,
-            "X-Awakari-Src-Addr": addr,
+            "X-Awakari-Src-Addr": addrEnc,
         },
         cache: "default",
     })
@@ -77,7 +78,7 @@ function loadSource() {
                 const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && data.userId === userId) {
                     btnDel.removeAttribute("disabled");
-                    btnDel.onclick = () => deleteSource(typ, addr);
+                    btnDel.onclick = () => deleteSource(typ, addrEnc);
                 } else {
                     btnDel.disabled = "disabled";
                 }
@@ -132,19 +133,19 @@ function drawFreqChart(counts) {
     }
 }
 
-function deleteSource(typ, addr) {
+function deleteSource(typ, addrEnc) {
 
     let authToken = localStorage.getItem(keyAuthToken);
     let userId = localStorage.getItem(keyUserId);
 
-    if (confirm(`Confirm delete source ${addr}?`)) {
+    if (confirm(`Confirm delete source ${decodeURIComponent(addrEnc)}?`)) {
         fetch(`/v1/src/${typ}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${authToken}`,
                 "X-Awakari-Group-Id": defaultGroupId,
                 "X-Awakari-User-Id": userId,
-                "X-Awakari-Src-Addr": addr,
+                "X-Awakari-Src-Addr": addrEnc,
             },
         })
             .then(resp => {
@@ -154,7 +155,7 @@ function deleteSource(typ, addr) {
                 return resp;
             })
             .then(_ => {
-                alert(`Source ${decodeURIComponent(addr)} deleted successfully`);
+                alert(`Source ${decodeURIComponent(addrEnc)} deleted successfully`);
                 window.location.assign("pub.html");
             })
             .catch(err => {

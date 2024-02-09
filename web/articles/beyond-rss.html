@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>On Search In Space And Time</title>
+    <title>Beyond RSS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../tailwind.output.css" rel="stylesheet">
     <link href="../style.css" rel="stylesheet">
@@ -78,7 +78,7 @@
                         the largest in Russia) joined the initiative.[7][8]
                     </blockquote>
                     <div class="text-right italic text-gray-500 dark:text-gray-400">
-                        - <a href="https://en.wikipedia.org/wiki/Schema.org" target="_blank" class="text-blue-700 dark:text-blue-300 text-sm">Wikipedia</a>
+                        - <a href="https://en.wikipedia.org/wiki/Schema.org" target="_blank" class="text-blue-700 dark:text-blue-300">Wikipedia</a>
                     </div>
                 </p>
                 <p class="pt-1">
@@ -127,13 +127,12 @@
             There are also some other semantic markup ways:
             <li class="ml-4">
                 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_blank" class="text-blue-700 dark:text-blue-300">HTML5 articles</a>
+                - usually enclose <code>&lt;header&gt;/&lt;figure&gt;/&lt;summary&gt;/&lt;time&gt;</code> semantic elements
             </li>
             <li class="ml-4">
                 <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a>
+                - contain <a href="https://microformats.org/wiki/h-entry" target="_blank" class="text-blue-700 dark:text-blue-300">h-entry</a> marked elements for feed items
             </li>
-        </p>
-        <p class="pt-1">
-            &nbsp;&nbsp;
             All above ways are now supported by Awakari. To bake unique events from such entities it's also necessary to:
             <li class="ml-4">Always get the same event from the same source data</li>
             <li class="ml-4">Compute a hash from event's significant attributes</li>
@@ -147,10 +146,62 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <p class="pt-1">
                 &nbsp;&nbsp;
-                So now Awakari
+                So now Awakari is able to consume all the structured data. To try this new capability, let's create a
+                subscription with a maximum price condition. For the sake of simplicity the desired item name and
+                currency are omitted in this example. For the real use, please use a group condition specifying also the
+                item name condition, e.g. "iPhone".
             </p>
+            <img src="2024-02-09_14-03.png"/>
+            <div>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    This subscription is expected to match everything that is not more
+                    expensive than <code>1000</code>. Although, you can always to update your subscription and make it more
+                    precise using attributes of received messages.
+                </p>
+                <div class="text-center py-4">
+                    <button class="text-white text-lg w-56 h-14 bg-gradient-to-r from-indigo-600 hover:from-indigo-500 to-cyan-600 hover:to-cyan-500 focus:outline-none font-bold rounded-md px-5 py-2 text-center"
+                            onclick="window.location.assign('https://awakari.com/login.html')">
+                        Try for Free
+                    </button>
+                </div>
+            </div>
+            <img src="photo_5346084267828041031_y.jpg">
         </div>
 
+        <h2 class="text-3xl font-semibold text-center py-2 pt-4">WebSub</h2>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            WebSub is not a format but a protocol.
+        </p>
+        <p class="pt-1 italic text-gray-500">
+            <blockquote class="border-s-4 border-gray-300 dark:border-gray-600 px-2 italic text-gray-500 dark:text-gray-400">
+                Initially designed to extend the Atom (and RSS) protocols for data feeds, the protocol can be applied to any
+                data type (e.g. HTML, text, pictures, audio, video) as long as it is accessible via HTTP. Its main purpose
+                is to provide real-time notifications of changes, which improves upon the typical situation where a client
+                periodically polls the feed server at some arbitrary interval. In this way, WebSub provides
+                pushed HTTP notifications without requiring clients to spend resources on polling for changes.
+            </blockquote>
+            <div class="text-right italic text-gray-500 dark:text-gray-400">
+                - <a href="https://en.wikipedia.org/wiki/WebSub" target="_blank" class="text-blue-700 dark:text-blue-300">Wikipedia</a>
+            </div>
+        </p>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            Now Awakari also supports the WebSub sources. It recognizes the sources that support WebSub automatically
+            and subscribe for the updates for the given source. Example:
+        </p>
+        <img src="2024-02-09_15-00.png"/>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            There are the frequency chart as it's seen on the above screenshot. These charts display the events
+            frequency versus a given minute of the week. There's an idea to utilize this statistic to implement an
+            adaptive update period for the polling-based source (those are not WebSub capable). Among the other ideas,
+            there's also the ActivityPub integration to consume e.g. Mastodon. Stay tuned.
+        </p>
+        <div>
+            <p class="text-gray-500 text-lg text-right">Andrei Kurilov, 2024</p>
+        </div>
     </div>
 
 </main>

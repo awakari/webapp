@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>On Search In Space And Time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../tailwind.output.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Beyond RSS",
+            "image": "https://awakari.com/articles/2024-02-09_10-52.png",
+            "author": "Andrei Kurilov",
+            "keywords": "awakari search rss microdata microformats semantic markup schema syndication websub",
+            "wordcount": "600",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Awakari",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://awakari.com/logo-color.svg"
+                }
+            },
+            "url": "https://awakari.com/articles/beyond-rss.html",
+            "datePublished": "2024-02-09",
+            "dateCreated": "2024-02-09",
+            "dateModified": "2024-02-09",
+            "description": "Ways to extract structured metadata from Internet"
+        }
+    </script>
+</head>
+<body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg dark:bg-gray-800">
+<main class="p-4 space-y-4 max-w-[960px]">
+
+    <h1 class="text-4xl font-semibold text-center">Beyond RSS</h1>
+
+    <div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div class="sm:pt-1">
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    The idea of the Awakari service is to filter important events from unlimited number of various
+                    sources. This article is about the ways it uses to extract a structured data from the Internet
+                    beyond RSS feeds and Telegram channels.
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    The first and most obvious type of public data sources is RSS/Atom feed. Using the Awakari service
+                    you can get rid of visiting the feeds, channels and sites again and again. Instead, the service
+                    performs the <i>reverse search</i> and delivers relevant messages. Nevertheless, most of useful
+                    data in the Internet remains unavailable.
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    Online services have benefits from users getting the content only in their apps and platforms.
+                    This is also one of the reasons why RSS is loosing its popularity for the last 10-20 years.
+                    Moreover, many services blocking any attempts to automatically collect their data.
+                </p>
+            </div>
+            <img src="2024-02-09_10-52.png"/>
+        </div>
+
+        <h2 class="text-3xl font-semibold text-center py-2">Structured Data</h2>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            On the other hand, there's an opposite initiative:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div>
+                <p class="pt-1 italic text-gray-500">
+                    <blockquote class="border-s-4 border-gray-300 dark:border-gray-600 px-2 italic text-gray-500 dark:text-gray-400">
+                        Schema.org is an initiative launched on June 2, 2011, by Bing, Google and Yahoo![3][4][5]
+                        (operators of the world's largest search engines at that time)[6] to create and support a common set
+                        of schemas for structured data markup on web pages. In November 2011, Yandex (whose search engine is
+                        the largest in Russia) joined the initiative.[7][8]
+                    </blockquote>
+                    <div class="text-right italic text-gray-500 dark:text-gray-400">
+                        - <a href="https://en.wikipedia.org/wiki/Schema.org" target="_blank" class="text-blue-700 dark:text-blue-300 text-sm">Wikipedia</a>
+                    </div>
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    The structured data is ubiquitous among the Internet and it's not unexpected.
+                    Services do want to publish it at least to stay as high as possible in Google's search results.
+                    Just have a look to the
+                    <a href="https://webdatacommons.org/structureddata/#results-2023-1" target="_blank" class="text-blue-700 dark:text-blue-300">detailed statistics</a>:
+                </p>
+                <img src="2024-02-09_11-56.png"/>
+            </div>
+            <img src="robot.jpg"/>
+        </div>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            It's clearly visible there are 2 most popular options - JSON-LD and Microdata. Both are used to describe
+            entities of a certain type with certain attributes.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    Most popular types are:
+                    <li class="ml-4"><a href="https://schema.org/Product" target="_blank" class="text-blue-700 dark:text-blue-300">Product</a></li>
+                    <li class="ml-4"><a href="https://schema.org/LocalBusiness" target="_blank" class="text-blue-700 dark:text-blue-300">LocalBusiness</a></li>
+                    <li class="ml-4"><a href="https://schema.org/CreativeWork" target="_blank" class="text-blue-700 dark:text-blue-300">CreativeWork</a></li>
+                    <li class="ml-4"><a href="https://schema.org/Event" target="_blank" class="text-blue-700 dark:text-blue-300">Event</a></li>
+                    <li class="ml-4"><a href="https://schema.org/Place" target="_blank" class="text-blue-700 dark:text-blue-300">Place</a></li>
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    In the example to the right there's a "Product" entity that has attributes. There's a nested
+                    "Offers" entity that has a "price" attribute. Awakari converts these attribute names to lowercase.
+                    The nested attribute names have the parent entity name as a prefix. For example, the price attribute
+                    will have the certain name "offersprice" in Awakari. This is conversion is necessary to be
+                    compatible with
+                    <a href="https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md#naming-conventions" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        CloudEvents standard
+                    </a>.
+                </p>
+            </div>
+            <img src="2024-02-09_14-20.png"/>
+        </div>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            There are also some other semantic markup ways:
+            <li class="ml-4">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_blank" class="text-blue-700 dark:text-blue-300">HTML5 articles</a>
+            </li>
+            <li class="ml-4">
+                <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a>
+            </li>
+        </p>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            All above ways are now supported by Awakari. To bake unique events from such entities it's also necessary to:
+            <li class="ml-4">Always get the same event from the same source data</li>
+            <li class="ml-4">Compute a hash from event's significant attributes</li>
+            The event hash allows to decide whether the given event is a new one or not to avoid duplicates.
+        </p>
+        <div class="border-l-4 p-2 m-2 font-mono text-center text-lg">
+            <p>Conclusion: it's possible to consume much more online sources as "update feeds".</p>
+        </div>
+
+        <h2 class="text-3xl font-semibold text-center py-2">How it works</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <p class="pt-1">
+                &nbsp;&nbsp;
+                So now Awakari
+            </p>
+        </div>
+
+    </div>
+
+</main>
+</body>
+</html>

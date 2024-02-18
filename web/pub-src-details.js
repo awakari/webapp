@@ -29,6 +29,11 @@ function loadSource() {
         .then(data => {
             if (data != null) {
                 switch (typ) {
+                    case "apub":
+                        document.getElementById("type").innerText = "ActivityPub";
+                        document.getElementById("upd_period").innerText = "Real-Time";
+                        document.getElementById("addr").innerHTML = `${data.addr}`;
+                        break
                     case "feed":
                         switch (data.push) {
                             case true:

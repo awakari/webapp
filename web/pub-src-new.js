@@ -8,8 +8,17 @@ function showSrcDetails() {
     const opt = document.getElementById("src_type").value
     const btnSubmit = document.getElementById("button-submit");
     switch (opt) {
+        case "apub":
+            btnSubmit.style.display = "flex";
+            document.getElementById("apub").style.display = "block";
+            document.getElementById("tgbc").style.display = "none";
+            document.getElementById("tgch").style.display = "none";
+            document.getElementById("feed").style.display = "none";
+            document.getElementById("site").style.display = "none";
+            break
         case "tgbc":
             btnSubmit.style.display = "none";
+            document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "block";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
@@ -17,6 +26,7 @@ function showSrcDetails() {
             break
         case "tgch":
             btnSubmit.style.display = "flex";
+            document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "block";
             document.getElementById("feed").style.display = "none";
@@ -24,6 +34,7 @@ function showSrcDetails() {
             break
         case "feed":
             btnSubmit.style.display = "flex";
+            document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "block";
@@ -31,6 +42,7 @@ function showSrcDetails() {
             break
         case "site":
             btnSubmit.style.display = "flex";
+            document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
@@ -39,12 +51,21 @@ function showSrcDetails() {
     }
 }
 
+const emailLikeRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 function addSource() {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {
+        case "apub":
+            srcAddr = document.getElementById("actor").value;
+            if (!emailLikeRegex.test(srcAddr)) {
+                alert(`Source address ${srcAddr} is not valid WebFinger address`)
+                return;
+            }
+            break
         case "tgbc":
             return
         case "tgch":

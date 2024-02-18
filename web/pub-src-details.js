@@ -33,6 +33,10 @@ function loadSource() {
                         document.getElementById("type").innerText = "ActivityPub";
                         document.getElementById("upd_period").innerText = "Real-Time";
                         document.getElementById("addr").innerHTML = `<a href="${apAliasToWebFinger(data.addr)}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        document.getElementById("name").innerText = data.name;
+                        if (data.accepted) {
+                            document.getElementById("accepted").checked = true;
+                        }
                         break
                     case "feed":
                         switch (data.push) {
@@ -48,11 +52,13 @@ function loadSource() {
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         document.getElementById("freq-charts").style.display = "block";
+                        document.getElementById("accepted").checked = true;
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
                         document.getElementById("upd_period").innerText = "Polling once a day";
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        document.getElementById("accepted").checked = true;
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel (App)";
@@ -63,6 +69,8 @@ function loadSource() {
                         } else {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
+                        document.getElementById("name").innerText = data.name;
+                        document.getElementById("accepted").checked = true;
                         break
                     case "tgbc":
                         document.getElementById("type").innerText = "Telegram channel (Bot)";
@@ -73,6 +81,7 @@ function loadSource() {
                         } else {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
+                        document.getElementById("accepted").checked = true;
                         break
                 }
                 if (data.lastUpdate === "0001-01-01T00:00:00Z") {

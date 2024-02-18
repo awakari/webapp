@@ -32,7 +32,7 @@ function loadSource() {
                     case "apub":
                         document.getElementById("type").innerText = "ActivityPub";
                         document.getElementById("upd_period").innerText = "Real-Time";
-                        document.getElementById("addr").innerHTML = `${data.addr}`;
+                        document.getElementById("addr").innerHTML = `<a href="${apAliasToWebFinger(data.addr)}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         break
                     case "feed":
                         switch (data.push) {
@@ -167,4 +167,11 @@ function deleteSource(typ, addrEnc) {
                 alert(err);
             });
     }
+}
+
+function apAliasToWebFinger(alias) {
+    // Encode the email address as per WebFinger specification
+    const encodedEmail = encodeURIComponent("acct:" + alias);
+    // Construct the WebFinger URL
+    return `https://${alias.split('@')[1]}/.well-known/webfinger?resource=${encodedEmail}`;
 }

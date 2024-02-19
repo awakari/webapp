@@ -32,7 +32,7 @@ function loadSource() {
                     case "apub":
                         document.getElementById("type").innerText = "ActivityPub";
                         document.getElementById("upd_period").innerText = "Real-Time";
-                        document.getElementById("addr").innerHTML = `<a href="${apAliasToWebFinger(data.addr)}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         document.getElementById("name").innerText = data.name;
                         if (data.accepted) {
                             document.getElementById("accepted").checked = true;

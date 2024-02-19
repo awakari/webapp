@@ -51,8 +51,6 @@ function showSrcDetails() {
     }
 }
 
-const emailLikeRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
 function addSource() {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
@@ -61,8 +59,8 @@ function addSource() {
     switch (srcType) {
         case "apub":
             srcAddr = document.getElementById("actor").value;
-            if (!emailLikeRegex.test(srcAddr)) {
-                alert(`Source address ${srcAddr} is not valid WebFinger address`)
+            if (srcAddr.length < 6) {
+                alert(`Source address ${srcAddr} is not valid actor address`)
                 return;
             }
             break

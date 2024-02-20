@@ -113,6 +113,9 @@ function addSource() {
     })
         .then(resp => resp.text().then(msg => {
             if (resp.ok) {
+                if (msg.length === 0) {
+                    msg = "success"
+                }
                 alert(`Source added: ${msg}`);
             } else {
                 alert(`Failed to add the source: ${msg}`);

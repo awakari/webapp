@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Awakari goes Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../tailwind.output.css" rel="stylesheet">
+    <link href="../../style.css" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Awakari goes Social",
+            "image": "https://awakari.com/articles/awakari-goes-social/TODO",
+            "author": "Andrei Kurilov",
+            "keywords": "awakari search social fediverse activitypub mastodon",
+            "wordcount": "600",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Awakari",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://awakari.com/logo-color.svg"
+                }
+            },
+            "url": "https://awakari.com/articles/awakari-goes-social",
+            "datePublished": "2024-02-09",
+            "dateCreated": "2024-02-09",
+            "dateModified": "2024-02-09",
+            "description": "Awakari announces the ActivityPub sources support"
+        }
+    </script>
+</head>
+<body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg dark:bg-gray-800">
+<main class="p-4 space-y-4 max-w-[960px]">
+
+    <h1 class="text-4xl font-semibold text-center">Awakari goes Social</h1>
+
+    <div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div class="sm:pt-1">
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    The idea of the Awakari service is to filter important events from unlimited number of various
+                    sources. This article is about the ways it uses to extract a structured data from the Internet
+                    beyond RSS feeds and Telegram channels.
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    The first and most obvious type of public data sources is RSS/Atom feed. Using the Awakari service
+                    you can get rid of visiting the feeds, channels and sites again and again. Instead, the service
+                    performs the <i>reverse search</i> and delivers relevant messages. Nevertheless, most of useful
+                    data in the Internet remains unavailable.
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    Online services have benefits from users getting the content only in their apps and platforms.
+                    This is also one of the reasons why RSS is loosing its popularity for the last 10-20 years.
+                    Moreover, many services blocking any attempts to automatically collect their data.
+                </p>
+            </div>
+            <img src="2024-02-09_10-52.png"/>
+        </div>
+
+        <h2 class="text-3xl font-semibold text-center py-2">Structured Data</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div>
+                <p class="pt-1 sm:pt-12">
+                    &nbsp;&nbsp;
+                    On the other hand, there's an opposite initiative:
+                </p>
+                <blockquote class="border-s-4 border-gray-300 dark:border-gray-600 px-2 italic text-gray-500 dark:text-gray-400">
+                    Schema.org is an initiative launched on June 2, 2011, by Bing, Google and Yahoo![3][4][5]
+                    (operators of the world's largest search engines at that time)[6] to create and support a common set
+                    of schemas for structured data markup on web pages. In November 2011, Yandex (whose search engine is
+                    the largest in Russia) joined the initiative.[7][8]
+                </blockquote>
+                <div class="text-right italic text-gray-500 dark:text-gray-400">
+                    - <a href="https://en.wikipedia.org/wiki/Schema.org" target="_blank" class="text-blue-700 dark:text-blue-300">Wikipedia</a>
+                </div>
+            </div>
+            <img src="robot.jpg" class="sm:w-[240px]"/>
+            <p class="pt-1 sm:pt-24">
+                &nbsp;&nbsp;
+                The structured data is ubiquitous among the Internet and it's not unexpected.
+                Services do want to publish it at least to stay as high as possible in Google's search results.
+                Just have a look to the
+                <a href="https://webdatacommons.org/structureddata/#results-2023-1" target="_blank" class="text-blue-700 dark:text-blue-300">detailed statistics</a>:
+            </p>
+            <img src="2024-02-09_11-56.png"/>
+        </div>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            It's clearly visible there are 2 most popular options - JSON-LD and Microdata. Both are used to describe
+            entities of a certain type with certain attributes.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    Most popular types are:
+                    <li class="ml-4"><a href="https://schema.org/Product" target="_blank" class="text-blue-700 dark:text-blue-300">Product</a></li>
+                    <li class="ml-4"><a href="https://schema.org/LocalBusiness" target="_blank" class="text-blue-700 dark:text-blue-300">LocalBusiness</a></li>
+                    <li class="ml-4"><a href="https://schema.org/CreativeWork" target="_blank" class="text-blue-700 dark:text-blue-300">CreativeWork</a></li>
+                    <li class="ml-4"><a href="https://schema.org/Event" target="_blank" class="text-blue-700 dark:text-blue-300">Event</a></li>
+                    <li class="ml-4"><a href="https://schema.org/Place" target="_blank" class="text-blue-700 dark:text-blue-300">Place</a></li>
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    In the example to the right there's a "Product" entity that has attributes. There's a nested
+                    "Offers" entity that has a "price" attribute. Awakari converts these attribute names to lowercase.
+                    The nested attribute names have the parent entity name as a prefix. For example, the price attribute
+                    will have the certain name "offersprice" in Awakari. This is conversion is necessary to be
+                    compatible with
+                    <a href="https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md#naming-conventions" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        CloudEvents standard
+                    </a>.
+                </p>
+            </div>
+            <img src="2024-02-09_14-20.png"/>
+        </div>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            There are also some other semantic markup ways:
+            <li class="ml-4">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_blank" class="text-blue-700 dark:text-blue-300">HTML5 articles</a>
+                - usually enclose <code>&lt;header&gt;/&lt;figure&gt;/&lt;summary&gt;/&lt;time&gt;</code> semantic elements
+            </li>
+            <li class="ml-4">
+                <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a>
+                - contain <a href="https://microformats.org/wiki/h-entry" target="_blank" class="text-blue-700 dark:text-blue-300">h-entry</a> marked elements for feed items
+            </li>
+            All above ways are now supported by Awakari. To bake unique events from such entities it's also necessary to:
+            <li class="ml-4">Always get the same event from the same source data</li>
+            <li class="ml-4">Compute a hash from event's significant attributes</li>
+            The event hash allows to decide whether the given event is a new one or not to avoid duplicates.
+        </p>
+        <div class="border-l-4 p-2 m-2 font-mono text-center text-lg">
+            <p>Conclusion: it's possible to consume much more online sources as "update feeds".</p>
+        </div>
+
+        <h2 class="text-3xl font-semibold text-center py-2">How it works</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <p class="pt-1 sm:pt-12">
+                &nbsp;&nbsp;
+                So now Awakari is able to consume all the structured data. To try this new capability, let's create a
+                subscription with a maximum price condition. For the sake of simplicity the desired item name and
+                currency are omitted in this example. For the real use, please use a group condition specifying also the
+                item name condition, e.g. "iPhone".
+            </p>
+            <img src="2024-02-09_14-03.png"/>
+            <div class="sm:pt-24 sm:space-y-24">
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    This subscription is expected to match everything that is not more expensive than <code>1000</code>.
+                    Although, you can always update your subscription and make it more precise using attributes of received messages.
+                </p>
+                <div class="text-center py-4">
+                    <button class="text-white text-lg w-56 h-10 sm:h-14 bg-gradient-to-r from-indigo-600 hover:from-indigo-500 to-cyan-600 hover:to-cyan-500 focus:outline-none font-bold rounded-md px-5 py-2 text-center"
+                            onclick="window.location.assign('https://awakari.com/login.html')">
+                        Try for Free
+                    </button>
+                </div>
+            </div>
+            <img src="photo_5346084267828041031_y.jpg">
+        </div>
+
+        <h2 class="text-3xl font-semibold text-center py-2 pt-4">WebSub</h2>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            WebSub is not a format but a protocol.
+        </p>
+        <p class="pt-1 italic text-gray-500">
+            <blockquote class="border-s-4 border-gray-300 dark:border-gray-600 px-2 italic text-gray-500 dark:text-gray-400">
+                Initially designed to extend the Atom (and RSS) protocols for data feeds, the protocol can be applied to any
+                data type (e.g. HTML, text, pictures, audio, video) as long as it is accessible via HTTP. Its main purpose
+                is to provide real-time notifications of changes, which improves upon the typical situation where a client
+                periodically polls the feed server at some arbitrary interval. In this way, WebSub provides
+                pushed HTTP notifications without requiring clients to spend resources on polling for changes.
+            </blockquote>
+            <div class="text-right italic text-gray-500 dark:text-gray-400">
+                - <a href="https://en.wikipedia.org/wiki/WebSub" target="_blank" class="text-blue-700 dark:text-blue-300">Wikipedia</a>
+            </div>
+        </p>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            Now Awakari also supports the WebSub sources. It recognizes the sources that support WebSub automatically
+            and subscribe for the updates for the given source. Example:
+        </p>
+        <img src="2024-02-09_15-00.png"/>
+        <p class="pt-1">
+            &nbsp;&nbsp;
+            There are the frequency chart as it's seen on the above screenshot. These charts display the events
+            frequency versus a given minute of the week. There's an idea to utilize this statistic to implement an
+            adaptive update period for the polling-based source (those are not WebSub capable). Among the other ideas,
+            there's also the ActivityPub integration to consume e.g. Mastodon. Stay tuned.
+        </p>
+        <div>
+            <p class="text-gray-500 text-lg text-right">Andrei Kurilov, 2024</p>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

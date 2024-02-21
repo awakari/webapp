@@ -38,7 +38,8 @@
 
     <div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-4">
+            <img src="fediverse.svg"/>
             <div class="sm:pt-1">
                 <p class="pt-1">
                     &nbsp;&nbsp;
@@ -62,137 +63,74 @@
                     number of publishers and services in addition to the existing source types like RSS and Telegram. 
                 </p>
             </div>
-            <img src="fediverse.svg"/>
         </div>
 
-        <h2 class="text-3xl font-semibold text-center py-2">Usage</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
-            <div>
-                <p class="pt-1 sm:pt-12">
-                    &nbsp;&nbsp;
-                    Go to the source service, e.g. Mastodon, find the publisher you want to track and copy a link to it,
-                    as shown on the screenshot. It may look a bit different on other services than Mastodon but usually
-                    easily available. Some services give a link in the format of WebFinger
-                </p>
-            </div>
-            <img src="2024-02-21_07-26.png" class="sm:w-[320px]"/>
-            <p class="pt-1 sm:pt-24">
-                &nbsp;&nbsp;
-                The structured data is ubiquitous among the Internet and it's not unexpected.
-                Services do want to publish it at least to stay as high as possible in Google's search results.
-                Just have a look to the
-                <a href="https://webdatacommons.org/structureddata/#results-2023-1" target="_blank" class="text-blue-700 dark:text-blue-300">detailed statistics</a>:
-            </p>
-            <img src="2024-02-09_11-56.png"/>
-        </div>
-        <p class="pt-1">
-            &nbsp;&nbsp;
-            It's clearly visible there are 2 most popular options - JSON-LD and Microdata. Both are used to describe
-            entities of a certain type with certain attributes.
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+        <h2 class="text-3xl font-semibold text-center py-4">Usage</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-4">
             <div>
                 <p class="pt-1">
                     &nbsp;&nbsp;
-                    Most popular types are:
-                    <li class="ml-4"><a href="https://schema.org/Product" target="_blank" class="text-blue-700 dark:text-blue-300">Product</a></li>
-                    <li class="ml-4"><a href="https://schema.org/LocalBusiness" target="_blank" class="text-blue-700 dark:text-blue-300">LocalBusiness</a></li>
-                    <li class="ml-4"><a href="https://schema.org/CreativeWork" target="_blank" class="text-blue-700 dark:text-blue-300">CreativeWork</a></li>
-                    <li class="ml-4"><a href="https://schema.org/Event" target="_blank" class="text-blue-700 dark:text-blue-300">Event</a></li>
-                    <li class="ml-4"><a href="https://schema.org/Place" target="_blank" class="text-blue-700 dark:text-blue-300">Place</a></li>
+                    Go to the source service, e.g. Mastodon, find the publisher you want to track and get a link to it.
+                    Different services provide a publisher address in different formats:
+                    <li class="ml-4">Direct, example: <span class="font-mono">https://mastodon.social/users/Mastodon</span></li>
+                    <li class="ml-4">Alias/shortcut, like: <span class="font-mono">https://mastodon.social/@Mastodon</span></li>
+                    <li class="ml-4">WebFinger: <span class="font-mono">Mastodon@mastodon.social</span></li>
+                    Awakari supports every option. It resolves aliases and WebFinger addresses and always registers
+                    a new source using the direct publisher URL only.
+                </p>
+            </div>
+            <img src="2024-02-21_07-26.png"/>
+            <div>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    Next, go to <a href="https://awakari.com/login.html" target="_blank" class="text-blue-700 dark:text-blue-300">Awakari UI</a> and click the
+                    <a href="https://awakari.com/pub-src-new.html" target="_blank">
+                        <span class="border text-blue-500 border-blue-500 px-1 rounded-md">
+                            + Source
+                        </span>
+                    </a>&nbsp;button on the
+                    <a href="https://awakari.com/pub.html" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        Pub
+                    </a>
+                    tab to add a new publishing source.
                 </p>
                 <p class="pt-1">
                     &nbsp;&nbsp;
-                    In the example to the right there's a "Product" entity that has attributes. There's a nested
-                    "Offers" entity that has a "price" attribute. Awakari converts these attribute names to lowercase.
-                    The nested attribute names have the parent entity name as a prefix. For example, the price attribute
-                    will have the certain name "offersprice" in Awakari. This is conversion is necessary to be
-                    compatible with
-                    <a href="https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md#naming-conventions" target="_blank" class="text-blue-700 dark:text-blue-300">
-                        CloudEvents standard
-                    </a>.
+                    Specify the source publisher address and then submit.
+                    Awakari will respond with the actual source address when everything is fine.
                 </p>
             </div>
-            <img src="2024-02-09_14-20.png"/>
-        </div>
-        <p class="pt-1">
-            &nbsp;&nbsp;
-            There are also some other semantic markup ways:
-            <li class="ml-4">
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_blank" class="text-blue-700 dark:text-blue-300">HTML5 articles</a>
-                - usually enclose <code>&lt;header&gt;/&lt;figure&gt;/&lt;summary&gt;/&lt;time&gt;</code> semantic elements
-            </li>
-            <li class="ml-4">
-                <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a>
-                - contain <a href="https://microformats.org/wiki/h-entry" target="_blank" class="text-blue-700 dark:text-blue-300">h-entry</a> marked elements for feed items
-            </li>
-            All above ways are now supported by Awakari. To bake unique events from such entities it's also necessary to:
-            <li class="ml-4">Always get the same event from the same source data</li>
-            <li class="ml-4">Compute a hash from event's significant attributes</li>
-            The event hash allows to decide whether the given event is a new one or not to avoid duplicates.
-        </p>
-        <div class="border-l-4 p-2 m-2 font-mono text-center text-lg">
-            <p>Conclusion: it's possible to consume much more online sources as "update feeds".</p>
-        </div>
-
-        <h2 class="text-3xl font-semibold text-center py-2">How it works</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
-            <p class="pt-1 sm:pt-12">
-                &nbsp;&nbsp;
-                So now Awakari is able to consume all the structured data. To try this new capability, let's create a
-                subscription with a maximum price condition. For the sake of simplicity the desired item name and
-                currency are omitted in this example. For the real use, please use a group condition specifying also the
-                item name condition, e.g. "iPhone".
-            </p>
-            <img src="2024-02-09_14-03.png"/>
-            <div class="sm:pt-24 sm:space-y-24">
+            <img src="2024-02-21_07-27.png"/>
+            <div>
                 <p class="pt-1">
                     &nbsp;&nbsp;
-                    This subscription is expected to match everything that is not more expensive than <code>1000</code>.
-                    Although, you can always update your subscription and make it more precise using attributes of received messages.
+                    Now you can create a subscription to filter the incoming events and wait when something really important
+                    occurs.
                 </p>
-                <div class="text-center py-4">
-                    <button class="text-white text-lg w-56 h-10 sm:h-14 bg-gradient-to-r from-indigo-600 hover:from-indigo-500 to-cyan-600 hover:to-cyan-500 focus:outline-none font-bold rounded-md px-5 py-2 text-center"
-                            onclick="window.location.assign('https://awakari.com/login.html')">
-                        Try for Free
-                    </button>
-                </div>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    It's easy to test it - add own Fediverse account as a source and post something that triggers your
+                    subscription in Awakari.
+                </p>
+                <p class="pt-1">
+                    &nbsp;&nbsp;
+                    Note that Awakari is doing a conversion from the
+                    <a href="https://github.com/activitystreams/activity-schema/blob/master/activity-schema.md" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        activity JSON</a>
+                    to the
+                    <a href="https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        CloudEvents</a>
+                    format used internally. It's doing the best effort to retain the original attribute names with few
+                    exceptions. For example, an actor name becomes the <span class="font-mono">subject</span> attribute.
+                    This <a href="https://github.com/awakari/int-activitypub" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        ActivityPub integration is open-source</a>, so you can always use it as a reference.
+                </p>
             </div>
-            <img src="photo_5346084267828041031_y.jpg">
+            <img src="2024-02-21_07-34.png"/>
+            <p class="text-gray-500 text-lg text-bottom">- Andrei Kurilov, 2024</p>
         </div>
-
-        <h2 class="text-3xl font-semibold text-center py-2 pt-4">WebSub</h2>
-        <p class="pt-1">
-            &nbsp;&nbsp;
-            WebSub is not a format but a protocol.
-        </p>
-        <p class="pt-1 italic text-gray-500">
-            <blockquote class="border-s-4 border-gray-300 dark:border-gray-600 px-2 italic text-gray-500 dark:text-gray-400">
-                Initially designed to extend the Atom (and RSS) protocols for data feeds, the protocol can be applied to any
-                data type (e.g. HTML, text, pictures, audio, video) as long as it is accessible via HTTP. Its main purpose
-                is to provide real-time notifications of changes, which improves upon the typical situation where a client
-                periodically polls the feed server at some arbitrary interval. In this way, WebSub provides
-                pushed HTTP notifications without requiring clients to spend resources on polling for changes.
-            </blockquote>
-            <div class="text-right italic text-gray-500 dark:text-gray-400">
-                - <a href="https://en.wikipedia.org/wiki/WebSub" target="_blank" class="text-blue-700 dark:text-blue-300">Wikipedia</a>
-            </div>
-        </p>
-        <p class="pt-1">
-            &nbsp;&nbsp;
-            Now Awakari also supports the WebSub sources. It recognizes the sources that support WebSub automatically
-            and subscribe for the updates for the given source. Example:
-        </p>
-        <img src="2024-02-09_15-00.png"/>
-        <p class="pt-1">
-            &nbsp;&nbsp;
-            There are the frequency chart as it's seen on the above screenshot. These charts display the events
-            frequency versus a given minute of the week. There's an idea to utilize this statistic to implement an
-            adaptive update period for the polling-based source (those are not WebSub capable). Among the other ideas,
-            there's also the ActivityPub integration to consume e.g. Mastodon. Stay tuned.
-        </p>
         <div>
-            <p class="text-gray-500 text-lg text-right">Andrei Kurilov, 2024</p>
+
         </div>
     </div>
 

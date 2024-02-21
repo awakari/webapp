@@ -72,11 +72,15 @@
                     &nbsp;&nbsp;
                     Go to the source service, e.g. Mastodon, find the publisher you want to track and get a link to it.
                     Different services provide a publisher address in different formats:
-                    <li class="ml-4">Direct, example: <span class="font-mono">https://mastodon.social/users/Mastodon</span></li>
-                    <li class="ml-4">Alias/shortcut, like: <span class="font-mono">https://mastodon.social/@Mastodon</span></li>
-                    <li class="ml-4">WebFinger: <span class="font-mono">Mastodon@mastodon.social</span></li>
+                    <li class="ml-4">Direct URL, example: <a href="https://mastodon.social/users/Mastodon" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        https://mastodon.social/users/Mastodon</a></li>
+                    <li class="ml-4">Alias (shortcut) URL, like: <a href="https://mastodon.social/@Mastodon" target="_blank" class="text-blue-700 dark:text-blue-300">
+                        https://mastodon.social/@Mastodon</a></li>
+                    <li class="ml-4">
+                        <a href="https://en.wikipedia.org/wiki/WebFinger" target="_blank" class="text-blue-700 dark:text-blue-300">
+                            WebFinger</a> ID: <span class="font-mono whitespace-nowrap">Mastodon@mastodon.social</span></li>
                     Awakari supports every option. It resolves aliases and WebFinger addresses and always registers
-                    a new source using the direct publisher URL only.
+                    a new source using the <u>direct</u> publisher URL only.
                 </p>
             </div>
             <img src="2024-02-21_07-26.png"/>
@@ -84,7 +88,7 @@
                 <p class="pt-1">
                     &nbsp;&nbsp;
                     Next, go to <a href="https://awakari.com/login.html" target="_blank" class="text-blue-700 dark:text-blue-300">Awakari UI</a> and click the
-                    <a href="https://awakari.com/pub-src-new.html" target="_blank">
+                    <a href="https://awakari.com/pub-src-new.html" target="_blank" class="whitespace-nowrap">
                         <span class="border text-blue-500 border-blue-500 px-1 rounded-md">
                             + Source
                         </span>
@@ -109,7 +113,7 @@
                 </p>
                 <p class="pt-1">
                     &nbsp;&nbsp;
-                    It's easy to test it - add own Fediverse account as a source and post something that triggers your
+                    It's easy to test it: add own Fediverse account as a source and post something that triggers your
                     subscription in Awakari.
                 </p>
                 <p class="pt-1">
@@ -123,7 +127,8 @@
                     format used internally. It's doing the best effort to retain the original attribute names with few
                     exceptions. For example, an actor name becomes the <span class="font-mono">subject</span> attribute.
                     This <a href="https://github.com/awakari/int-activitypub" target="_blank" class="text-blue-700 dark:text-blue-300">
-                        ActivityPub integration is open-source</a>, so you can always use it as a reference.
+                        ActivityPub integration is open-source</a>, so you can always use it as a reference and suggest
+                    enhancements.
                 </p>
             </div>
             <img src="2024-02-21_07-34.png"/>

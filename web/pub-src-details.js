@@ -1,4 +1,4 @@
-async function loadSource() {
+function loadSource() {
     //
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
@@ -12,7 +12,7 @@ async function loadSource() {
     document.getElementById("freq-charts").style.display = "none";
     document.body.classList.add('waiting-cursor');
     document.getElementById("wait").style.display = "block";
-    let freqCountsPromise = fetch(`/v1/src/${typ}`, {
+    fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -115,21 +115,20 @@ async function loadSource() {
             }
             return null;
         })
+        .then(counts => {
+            if (counts != null && Object.keys(counts).length > 0) {
+                document.body.classList.add('waiting-cursor');
+                document.getElementById("freq-charts").style.display = "block";
+                drawFreqChart(counts);
+            }
+        })
         .catch(err => {
             alert(err);
-            return null;
         })
         .finally(() => {
             document.body.classList.remove('waiting-cursor');
+            document.getElementById("wait").style.display = "none";
         });
-    let counts = await freqCountsPromise;
-    if (counts != null && Object.keys(counts).length > 0) {
-        document.body.classList.add('waiting-cursor');
-        document.getElementById("freq-charts").style.display = "block";
-        drawFreqChart(counts);
-        document.body.classList.remove('waiting-cursor');
-    }
-    document.getElementById("wait").style.display = "none";
 }
 
 const weekDays = 7;

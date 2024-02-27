@@ -11,6 +11,7 @@ async function loadSource() {
     //
     document.getElementById("freq-charts").style.display = "none";
     document.body.classList.add('waiting-cursor');
+    document.getElementById("wait").style.display = "block";
     let freqCountsPromise = fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
@@ -128,6 +129,7 @@ async function loadSource() {
         drawFreqChart(counts);
         document.body.classList.remove('waiting-cursor');
     }
+    document.getElementById("wait").style.display = "none";
 }
 
 const weekDays = 7;

@@ -10,7 +10,8 @@ function loadSource() {
     let userId = localStorage.getItem(keyUserId);
     //
     document.getElementById("freq-charts").style.display = "none";
-    fetch(`/v1/src/${typ}`, {
+    document.body.classList.add('waiting-cursor');
+    let freqCountsPromise = fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -51,7 +52,6 @@ function loadSource() {
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        document.getElementById("freq-charts").style.display = "block";
                         document.getElementById("accepted").checked = true;
                         break
                     case "site":
@@ -110,12 +110,25 @@ function loadSource() {
                         break;
                 }
                 document.getElementById("limit").innerText = data.usage.limit;
-                drawFreqChart(data.counts);
+                return data.counts;
             }
+            return null;
         })
         .catch(err => {
             alert(err);
-        });
+            return null;
+        })
+        .finally(() => {
+            document.body.classList.remove('waiting-cursor');
+        })
+    freqCountsPromise.then(counts => {
+        if (counts != null && counts.length > 0) {
+            document.body.classList.add('waiting-cursor');
+            document.getElementById("freq-charts").style.display = "block";
+            drawFreqChart(counts);
+            document.body.classList.remove('waiting-cursor');
+        }
+    })
 }
 
 const weekDays = 7;
@@ -176,11 +189,4 @@ function deleteSource(typ, addrEnc) {
                 alert(err);
             });
     }
-}
-
-function apAliasToWebFinger(alias) {
-    // Encode the email address as per WebFinger specification
-    const encodedEmail = encodeURIComponent("acct:" + alias);
-    // Construct the WebFinger URL
-    return `https://${alias.split('@')[1]}/.well-known/webfinger?resource=${encodedEmail}`;
 }

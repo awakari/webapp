@@ -122,7 +122,7 @@ function loadSource() {
             document.body.classList.remove('waiting-cursor');
         })
     freqCountsPromise.then(counts => {
-        if (counts != null && counts.length > 0) {
+        if (counts != null && Object.keys(counts).length > 0) {
             document.body.classList.add('waiting-cursor');
             document.getElementById("freq-charts").style.display = "block";
             drawFreqChart(counts);

@@ -1,4 +1,4 @@
-function loadSource() {
+async function loadSource() {
     //
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
@@ -120,15 +120,14 @@ function loadSource() {
         })
         .finally(() => {
             document.body.classList.remove('waiting-cursor');
-        })
-    freqCountsPromise.then(counts => {
-        if (counts != null && Object.keys(counts).length > 0) {
-            document.body.classList.add('waiting-cursor');
-            document.getElementById("freq-charts").style.display = "block";
-            drawFreqChart(counts);
-            document.body.classList.remove('waiting-cursor');
-        }
-    })
+        });
+    let counts = await freqCountsPromise;
+    if (counts != null && Object.keys(counts).length > 0) {
+        document.body.classList.add('waiting-cursor');
+        document.getElementById("freq-charts").style.display = "block";
+        drawFreqChart(counts);
+        document.body.classList.remove('waiting-cursor');
+    }
 }
 
 const weekDays = 7;

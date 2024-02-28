@@ -116,7 +116,7 @@ function deleteSubscription() {
             })
             .then(_ => {
                 alert(`Deleted subscription ${id}`);
-                window.location.assign("sub.html");
+                window.location.assign("sub2.html");
             })
             .catch(err => {
                 alert(err);

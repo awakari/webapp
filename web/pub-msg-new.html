@@ -17,23 +17,24 @@
 </head>
 <body onload="loadForm()" class="bg-white dark:bg-gray-900">
 
+<nav class="text-xl flex p-1 sm:p-4 text-slate-700 dark:text-slate-200">
+    <button onclick="history.back()" class="mr-1">
+        <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <span>New Message</span>
+    <div class="grow"></div>
+    <button id="pub-tg"
+            type="button"
+            style="display: none"
+            class="w-36 text-sm text-cyan-500 border border-cyan-500 h-6 hover:bg-cyan-200 dark:hover:bg-cyan-900 static mx-2 my-1"
+            onclick="window.location.assign('https://t.me/AwakariBot')">
+        <span class="text-sm">Publish in Telegram</span>
+    </button>
+</nav>
+
 <div class="m-1 flex-1 flex flex-col space-y-1">
-    <nav class="text-xl flex p-1 sm:p-4 text-slate-700 dark:text-slate-200">
-        <button onclick="history.back()" class="mr-1">
-            <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-        <span>New Message</span>
-        <div class="grow"></div>
-        <button id="pub-tg"
-                type="button"
-                style="display: none"
-                class="w-36 text-sm text-cyan-500 border border-cyan-500 h-6 hover:bg-cyan-200 dark:hover:bg-cyan-900 static mx-2 my-1"
-                onclick="window.location.assign('https://t.me/AwakariBot')">
-            <span class="text-sm">Publish in Telegram</span>
-        </button>
-    </nav>
     <div class="flex justify-center dark:text-gray-300 m-1">
         <form class="space-y-2 min-w-[264px] sm:w-[624px] max-w-[1024px]">
             <label for="msg_txt_data">

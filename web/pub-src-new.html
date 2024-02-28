@@ -18,14 +18,14 @@
 <body onload="loadForm()" class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300">
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
-    <div class="text-xl flex">
-        <button onclick="history.back()">
+    <nav class="text-xl flex p-1 sm:p-4 text-slate-700 dark:text-slate-200">
+        <button onclick="history.back()" class="mr-1">
             <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
-        <span class="ml-1">New Publishing Source</span>
-    </div>
+        <span>New Publishing Source</span>
+    </nav>
     <div class="flex justify-center m-1">
         <form class="space-y-2 max-w-[1024px]">
             <div class="flex flex-col space-y-2">

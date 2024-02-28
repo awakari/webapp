@@ -16,12 +16,12 @@ const pageLimit = 14;
 
 function load() {
 
-    const authProvider = localStorage.getItem(keyAuthProvider);
-    switch (authProvider) {
-        case "Telegram":
-            document.getElementById("donate-tg").style.display = "block";
-            break
-    }
+    // const authProvider = localStorage.getItem(keyAuthProvider);
+    // switch (authProvider) {
+    //     case "Telegram":
+    //         document.getElementById("donate-tg").style.display = "block";
+    //         break
+    // }
 
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);

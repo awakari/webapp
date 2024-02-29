@@ -162,42 +162,20 @@
                     <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="mailto:awakari@awakari.com">Contact &#10697;</a>
                 </div>
                 <div id="menu-user" style="display: none" class="flex flex-col space-y-4 md:mt-0 md:flex-row md:space-y-0 text-right items-end md:text-center md:justify-center md:space-x-8">
-                    <fieldset class="flex flex-col sm:flex-row border">
-                        <legend class="flex flex-row">
+                    <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
+                            onclick="window.location.assign('pub2.html')">
                             <span>Publishing</span>
                             <svg class="mr-1" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18 17a1 1 0 1 1 2 0v1.077c0 .76-.082 1.185-.319 1.627a2.363 2.363 0 0 1-.977.977c-.442.237-.867.319-1.627.319H5.923c-.76 0-1.185-.082-1.627-.319a2.363 2.363 0 0 1-.978-.977C3.082 19.262 3 18.838 3 18.077L2.999 6.5A2.5 2.5 0 0 1 5.502 4l1.5.005a1 1 0 1 1-.005 2L5.499 6a.5.5 0 0 0-.5.5v11.577c0 .459.023.57.083.684.038.07.087.12.157.157.113.06.225.082.684.082h11.154c.459 0 .57-.022.684-.082a.363.363 0 0 0 .157-.157c.06-.113.082-.225.082-.684V17zm4-4a1 1 0 1 1-2 0 9 9 0 0 0-9-9 1 1 0 1 1 0-2c6.075 0 11 4.925 11 11zm-4 0a1 1 0 1 1-2 0 5 5 0 0 0-5-5 1 1 0 1 1 0-2 7 7 0 0 1 7 7zm-4 0a1 1 0 1 1-2 0 1 1 0 0 0-1-1 1 1 0 1 1 0-2 3 3 0 0 1 3 3z" fill="currentColor"/>
                             </svg>
-                        </legend>
-                        <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
-                                onclick="window.location.assign('pub2.html')">
-                            Overview
                         </button>
-                        <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
-                                onclick="window.location.assign('pub-msg-new.html')">
-                            + Message
-                        </button>
-                        <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
-                                onclick="window.location.assign('pub-src-new.html')">
-                            + Source
-                        </button>
-                    </fieldset>
-                    <fieldset class="flex flex-col sm:flex-row border">
-                        <legend class="flex flex-row">
+                    <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex"
+                            onclick="window.location.assign('sub2.html')">
                             <span>Subscriptions</span>
                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 20.5H10C9.80189 20.4974 9.61263 20.4176 9.47253 20.2775C9.33244 20.1374 9.25259 19.9481 9.25 19.75V12L3.9 4.69C3.81544 4.58007 3.76395 4.44832 3.75155 4.31018C3.73915 4.17204 3.76636 4.03323 3.83 3.91C3.89375 3.78712 3.98984 3.68399 4.10792 3.61173C4.226 3.53947 4.36157 3.50084 4.5 3.5H19.5C19.6384 3.50084 19.774 3.53947 19.8921 3.61173C20.0101 3.68399 20.1062 3.78712 20.17 3.91C20.2336 4.03323 20.2608 4.17204 20.2484 4.31018C20.236 4.44832 20.1846 4.58007 20.1 4.69L14.75 12V19.75C14.7474 19.9481 14.6676 20.1374 14.5275 20.2775C14.3874 20.4176 14.1981 20.4974 14 20.5ZM10.75 19H13.25V11.75C13.2492 11.5907 13.302 11.4357 13.4 11.31L18 5H6L10.62 11.31C10.718 11.4357 10.7708 11.5907 10.77 11.75L10.75 19Z" fill="currentColor"/>
                             </svg>
-                        </legend>
-                        <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex"
-                                onclick="window.location.assign('sub2.html')">
-                            Overview
                         </button>
-                        <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
-                                onclick="window.location.assign('pub-src-new.html')">
-                            + Subscribe
-                        </button>
-                    </fieldset>
                     <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
                             onclick="logout()">
                         <span>Exit</span>
@@ -210,7 +188,7 @@
                             <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
-                </fieldset>
+                </div>
             </div>
         </nav>
 

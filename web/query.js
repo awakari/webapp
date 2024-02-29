@@ -22,7 +22,8 @@ function querySubmit() {
 }
 
 function queryRun(q) {
-    alert(`Run query: ${q}`);
+    document.getElementById("query").value = q;
+    document.getElementById("events-menu").style.display = "flex";
     // createQuerySubscription(q)
     //     .then(subId => {
     //
@@ -91,4 +92,8 @@ async function startEventsLoading(subId) {
             eventsLoadingRunning = false;
         }
     }
+}
+
+function queryStop() {
+    alert("TODO: queryStop");
 }

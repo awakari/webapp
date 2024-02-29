@@ -121,23 +121,23 @@
                     </div>
 
                     <!-- Google -->
-                    <div class="justify-center">
-                        <div id="g_id_onload"
-                             data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
-                             data-context="signin"
-                             data-ux_mode="popup"
-                             data-callback="handleAuthGoogle"
-                             data-auto_prompt="false">
-                        </div>
-                        <div class="g_id_signin"
-                             data-type="standard"
-                             data-shape="rectangular"
-                             data-theme="outline"
-                             data-text="signin_with"
-                             data-size="medium"
-                             data-logo_alignment="left">
-                        </div>
-                    </div>
+<!--                    <div class="justify-center">-->
+<!--                        <div id="g_id_onload"-->
+<!--                             data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"-->
+<!--                             data-context="signin"-->
+<!--                             data-ux_mode="popup"-->
+<!--                             data-callback="handleAuthGoogle"-->
+<!--                             data-auto_prompt="false">-->
+<!--                        </div>-->
+<!--                        <div class="g_id_signin"-->
+<!--                             data-type="standard"-->
+<!--                             data-shape="rectangular"-->
+<!--                             data-theme="outline"-->
+<!--                             data-text="signin_with"-->
+<!--                             data-size="medium"-->
+<!--                             data-logo_alignment="left">-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <svg xmlns="http://www.w3.org/2000/svg"
                          onclick="document.getElementById('login').style.display = 'none'"
@@ -148,27 +148,6 @@
                          stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-            </div>
-
-            <div id="events-menu"
-                 style="display: flex"
-                 class="absolute inset-x-0 z-20 w-full bg-white px-1 py-1 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
-
-                <p class="col-span-2 text-center text-gray-600 dark:text-gray-400">New results will appear below for the next 1h.</p>
-
-                <div id="events" class="flex flex-col">
-                </div>
-
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     onclick="document.getElementById('login').style.display = 'none'"
-                     class="h-6 w-6 place-self-end sm:place-self-center"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-
             </div>
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
@@ -211,6 +190,28 @@
                     </button>
                 </div>
             </div>
+
+            <div id="events-menu"
+                 style="display: none"
+                 class="absolute inset-x-0 z-20 w-full bg-white px-1 py-1 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
+
+                <p class="col-span-2 text-center text-gray-600 dark:text-gray-400">New results will appear below for the next 1h.</p>
+
+                <div id="events" class="flex flex-col">
+                </div>
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     onclick="queryStop()"
+                     class="h-6 w-6 place-self-end sm:place-self-center"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+
+            </div>
+
         </nav>
 
         <div class="container mx-auto py-2 items-center justify-center">

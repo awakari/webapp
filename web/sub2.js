@@ -1,10 +1,10 @@
 const templateSub = (sub) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[280px] sm:max-w-[624px] place-content-end"
+                <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[280px] sm:max-w-[624px] space-x-1"
                      onclick="window.location.assign('sub-details2.html?id=${sub.id}')">
-                    <span class="truncate py-2 text-right">
+                    <span class="truncate py-2">
                         ${sub.description}
                     </span>
-                    <span class="pt-1 place-self-end">
+                    <span class="pt-1">
                         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>                                         

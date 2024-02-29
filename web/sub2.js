@@ -1,5 +1,5 @@
 const templateSub = (sub) => `
-                <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[320px] sm:w-[600px] space-x-1"
+                <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[320px] sm:w-[400px] space-x-1"
                      onclick="window.location.assign('sub-details2.html?id=${sub.id}')">
                     <span class="truncate py-2 grow">
                         ${sub.description}

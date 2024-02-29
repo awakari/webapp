@@ -1,3 +1,40 @@
+const Events = {
+    abortController: new AbortController(),
+}
+
+const timeout = setTimeout(() => {
+    Events.abortController.abort();
+}, 9_000_000);
+
+Events.longPoll = function (subId) {
+    let authToken = localStorage.getItem(keyAuthToken);
+    let userId = localStorage.getItem(keyUserId);
+    let optsReq = {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
+        },
+    };
+    return fetch(`/v1/events/${subId}`, optsReq)
+        .then(resp => {
+            clearTimeout(timeout);
+            if (!resp.ok) {
+                throw new Error(`Request failed with status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
+            if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
+                for (const evt of data.msgs) {
+                    console.log(evt);
+                }
+            }
+        });
+};
+
 function queryType() {
     if (document.getElementById('query').value === '') {
         queryStop();
@@ -24,10 +61,12 @@ function querySubmit() {
 function queryRun(q) {
     document.getElementById("query").value = q;
     document.getElementById("events-menu").style.display = "flex";
-    // createQuerySubscription(q)
-    //     .then(subId => {
-    //
-    //     })
+    createQuerySubscription(q)
+        .then(subId => {
+            if (subId !== "") {
+                startEventsLoading(subId);
+            }
+        })
 }
 
 function createQuerySubscription(q) {
@@ -73,6 +112,8 @@ function createQuerySubscription(q) {
         })
 }
 
+let eventsLoadingRunning = false;
+
 async function startEventsLoading(subId) {
     if (!eventsLoadingRunning) {
         eventsLoadingRunning = true;
@@ -81,9 +122,12 @@ async function startEventsLoading(subId) {
                 console.log(`Long poll events for ${subId}...`);
                 await Events
                     .longPoll(subId)
+                    .catch(err => {
+                        console.error(err);
+                        break
+                    })
                     .finally(_ => {
-                        let evtsHistory = Events.getLocalHistory(subId);
-                        displayEvents(subId, evtsHistory)
+                        //displayEvents(subId, evtsHistory)
                     });
                 console.log(`Long poll events for ${subId} done`);
             }
@@ -98,3 +142,4 @@ function queryStop() {
     document.getElementById("events-menu").style.display = "none";
     alert("TODO: queryStop");
 }
+

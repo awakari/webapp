@@ -1,40 +1,3 @@
-const Events = {
-    abortController: new AbortController(),
-}
-
-const timeout = setTimeout(() => {
-    Events.abortController.abort();
-}, 900_000); // 15 minutes
-
-Events.longPoll = function (subId) {
-    let authToken = localStorage.getItem(keyAuthToken);
-    let userId = localStorage.getItem(keyUserId);
-    let optsReq = {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
-    };
-    return fetch(`/v1/events/${subId}`, optsReq)
-        .then(resp => {
-            clearTimeout(timeout);
-            if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
-            if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
-                for (const evt of data.msgs) {
-                    console.log(evt);
-                }
-            }
-        });
-};
-
 function queryType() {
     if (document.getElementById('query').value === '') {
         queryStop();
@@ -85,19 +48,22 @@ function getQuerySubscription(q) {
             "X-Awakari-User-Id": userId,
         },
     }
-    return fetch(`/v1/sub`, optsReq)
+    return fetch(`/v1/sub?limit=1000`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
-            } else if (resp.status === 404) {
-                return null;
             }
             resp.text().then(errMsg => console.error(errMsg));
             throw new Error(`Failed to create a new subscription: ${resp.status}`);
         })
         .then(data => {
-            if (data) {
-                return data.id;
+            if (data && data.subs) {
+                for (let sub of data.subs) {
+                    if (sub.description === q) {
+                        return sub.id;
+                    }
+                }
+                return createSubscription(q, headers);
             } else {
                 return createSubscription(q, headers);
             }
@@ -145,33 +111,53 @@ function createSubscription(q, headers) {
         })
 }
 
-let eventsLoadingRunning = false;
+let queryRunning = false;
+
+function queryStop() {
+    queryRunning = false;
+    document.getElementById("events-menu").style.display = "none";
+    document.getElementById("events").innerHTML = "";
+}
 
 async function startEventsLoading(subId) {
-    if (!eventsLoadingRunning) {
-        eventsLoadingRunning = true;
-        try {
-            while (true) {
-                console.log(`Long poll events for ${subId}...`);
-                await Events
-                    .longPoll(subId)
-                    .catch(err => {
-                        console.error(err);
-                        break
-                    })
-                    .finally(_ => {
-                        //displayEvents(subId, evtsHistory)
-                    });
-                console.log(`Long poll events for ${subId} done`);
-            }
-        } finally {
-            console.log(`Stop events loading for ${subId}`);
-            eventsLoadingRunning = false;
+    queryRunning = true;
+    try {
+        while (queryRunning) {
+            console.log(`Long poll events for ${subId}...`);
+            await Events
+                .longPoll(subId)
+                .then(evts => {
+                    displayEvents(evts)
+                });
+            console.log(`Long poll events for ${subId} done`);
         }
+    } catch (e) {
+        console.log(`Events loading error ${subId}: ${e}`);
+    } finally {
+        alert(`Stopped events loading for ${subId}`);
+        queryStop();
     }
 }
 
-function queryStop() {
-    document.getElementById("events-menu").style.display = "none";
-    alert("TODO: queryStop");
+const templateEvent = (evt) => `
+    <div class="p-1 shadow-xs border hover:bg-white">
+        <p class="font-mono text-slate-600 dark:text-slate-300 text-xs">
+            ${evt.attributes.hasOwnProperty("time") ? evt.attributes.time.ce_timestamp : (new Date().toISOString())}
+        </p>
+        <p class="truncate w-80 sm:w-[624px] text-gray-700 dark:text-gray-200 hover:text-blue-500">
+            <a href="${evt.source}" target="_blank"> 
+                ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
+            </a>
+        </p>
+    </div>
+`
+
+function displayEvents(evts) {
+    let elemEvts = document.getElementById("events");
+    for (let evt of evts) {
+        if (elemEvts.childElementCount === 10) {
+            elemEvts.removeChild(elemEvts.lastChild);
+        }
+        elemEvts.innerHTML = templateEvent(evt) + elemEvts.innerHTML;
+    }
 }

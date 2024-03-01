@@ -23,7 +23,6 @@ function querySubmit() {
 
 function queryRun(q) {
     document.getElementById("query").value = q;
-    document.getElementById("events-menu").style.display = "flex";
     getQuerySubscription(q)
         .then(subId => {
             if (subId !== "") {
@@ -120,6 +119,7 @@ function queryStop() {
 }
 
 async function startEventsLoading(subId) {
+    document.getElementById("events-menu").style.display = "flex";
     queryRunning = true;
     try {
         while (queryRunning) {

@@ -2,11 +2,7 @@ const Events = {
     abortController: new AbortController(),
 }
 
-const timeout = setTimeout(() => {
-    Events.abortController.abort();
-}, 900_000); // 15 minutes
-
-Events.longPoll = function (subId) {
+Events.longPoll = function (subId, deadline) {
     let authToken = localStorage.getItem(keyAuthToken);
     let userId = localStorage.getItem(keyUserId);
     let optsReq = {
@@ -17,9 +13,12 @@ Events.longPoll = function (subId) {
             "X-Awakari-User-Id": userId,
         },
     };
+    const timeout = deadline - Date.now();
     return fetch(`/v1/events/${subId}`, optsReq)
         .then(resp => {
-            clearTimeout(timeout);
+            clearTimeout(setTimeout(() => {
+                Events.abortController.abort();
+            }, timeout));
             if (!resp.ok) {
                 throw new Error(`Request failed with status: ${resp.status}`);
             }

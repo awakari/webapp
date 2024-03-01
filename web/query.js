@@ -114,18 +114,26 @@ let queryRunning = false;
 
 function queryStop() {
     queryRunning = false;
-    document.getElementById("events-menu").style.display = "none";
-    document.getElementById("events").innerHTML = "";
+    let elemEvents = document.getElementById("events");
+    if (elemEvents.innerHTML === "") {
+        document.getElementById("events-menu").style.display = "none";
+    } else if (confirm("Clear the results?")) {
+        document.getElementById("events-menu").style.display = "none";
+        elemEvents.innerHTML = "";
+    }
 }
 
+const timeout = 60_000;
+
 async function startEventsLoading(subId) {
+    const deadline = Date.now() + timeout;
     document.getElementById("events-menu").style.display = "flex";
     queryRunning = true;
     try {
-        while (queryRunning) {
+        while (queryRunning && Date.now() < deadline) {
             console.log(`Long poll events for ${subId}...`);
             await Events
-                .longPoll(subId)
+                .longPoll(subId, deadline)
                 .then(evts => {
                     displayEvents(evts)
                 });
@@ -134,7 +142,7 @@ async function startEventsLoading(subId) {
     } catch (e) {
         console.log(`Events loading error ${subId}: ${e}`);
     } finally {
-        alert(`Stopped events loading for ${subId}`);
+        alert("Search results streaming finished");
         queryStop();
     }
 }

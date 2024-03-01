@@ -4,7 +4,7 @@ const Events = {
 
 const timeout = setTimeout(() => {
     Events.abortController.abort();
-}, 9_000_000);
+}, 900_000); // 15 minutes
 
 Events.longPoll = function (subId) {
     let authToken = localStorage.getItem(keyAuthToken);
@@ -61,7 +61,7 @@ function querySubmit() {
 function queryRun(q) {
     document.getElementById("query").value = q;
     document.getElementById("events-menu").style.display = "flex";
-    createQuerySubscription(q)
+    getQuerySubscription(q)
         .then(subId => {
             if (subId !== "") {
                 startEventsLoading(subId);
@@ -69,7 +69,46 @@ function queryRun(q) {
         })
 }
 
-function createQuerySubscription(q) {
+function getQuerySubscription(q) {
+    const authToken = localStorage.getItem(keyAuthToken);
+    const userId = localStorage.getItem(keyUserId);
+    const headers = {
+        "Authorization": `Bearer ${authToken}`,
+        "X-Awakari-Group-Id": defaultGroupId,
+        "X-Awakari-User-Id": userId,
+    }
+    let optsReq = {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "X-Awakari-Group-Id": defaultGroupId,
+            "X-Awakari-User-Id": userId,
+        },
+    }
+    return fetch(`/v1/sub`, optsReq)
+        .then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else if (resp.status === 404) {
+                return null;
+            }
+            resp.text().then(errMsg => console.error(errMsg));
+            throw new Error(`Failed to create a new subscription: ${resp.status}`);
+        })
+        .then(data => {
+            if (data) {
+                return data.id;
+            } else {
+                return createSubscription(q, headers);
+            }
+        })
+        .catch(err => {
+            alert(err);
+            return "";
+        })
+}
+
+function createSubscription(q, headers) {
     const payload = {
         description: q,
         enabled: true,
@@ -80,15 +119,9 @@ function createQuerySubscription(q) {
             }
         },
     }
-    let authToken = localStorage.getItem(keyAuthToken);
-    let userId = localStorage.getItem(keyUserId);
     let optsReq = {
         method: "POST",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
+        headers: headers,
         body: JSON.stringify(payload)
     };
     return fetch(`/v1/sub`, optsReq)
@@ -142,4 +175,3 @@ function queryStop() {
     document.getElementById("events-menu").style.display = "none";
     alert("TODO: queryStop");
 }
-

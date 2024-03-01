@@ -34,7 +34,7 @@ function logout() {
     }
 }
 
-function loadMainPage() {
+function selectMainMenu() {
     //
     const userId = localStorage.getItem(keyUserId);
     switch (userId) {
@@ -46,9 +46,5 @@ function loadMainPage() {
             // already logged in
             document.getElementById("menu-default").style.display = "none";
             document.getElementById("menu-user").style.display = "flex";
-            const q = sessionStorage.getItem("query");
-            if (q != null && q !== "") {
-                queryRun(q);
-            }
     }
 }

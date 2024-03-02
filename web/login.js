@@ -10,7 +10,7 @@ function handleAuthGoogle(response) {
     const tokenDecoded = jwt_decode(tokenEncoded);
     localStorage.setItem(keyUserId, `${tokenDecoded.iss}/${tokenDecoded.sub}`);
     localStorage.setItem(keyAuthToken, tokenEncoded);
-    window.location.assign("pub.html");
+    window.location.reload();
 }
 
 function handleAuthTelegram(user) {
@@ -19,7 +19,7 @@ function handleAuthTelegram(user) {
     localStorage.setItem(keyAuthProvider, "Telegram");
     const token = Base64.encode(JSON.stringify(user));
     localStorage.setItem(keyAuthToken, token);
-    window.location.assign("pub.html");
+    window.location.reload();
 }
 
 function logout() {
@@ -30,14 +30,21 @@ function logout() {
         localStorage.removeItem(keyUserId);
         localStorage.removeItem(keyAuthToken);
         localStorage.removeItem(keyAuthProvider);
-        window.location.assign("login.html");
+        window.location.reload();
     }
 }
 
-function checkSessionExists() {
+function selectMainMenu() {
+    //
     const userId = localStorage.getItem(keyUserId);
-    if (userId != null) {
-        // already logged in
-        window.location.assign("pub.html");
+    switch (userId) {
+        case null:
+            document.getElementById("menu-default").style.display = "flex";
+            document.getElementById("menu-user").style.display = "none";
+            break
+        default:
+            // already logged in
+            document.getElementById("menu-default").style.display = "none";
+            document.getElementById("menu-user").style.display = "flex";
     }
 }

@@ -6,7 +6,7 @@
   "name": "Awakari",
   "background_color": "#ffffff",
   "short_name": "Awakari",
-  "start_url": "https://awakari.com/login.html",
+  "start_url": "https://awakari.com",
   "display": "standalone",
   "description": "Awakari UI",
   "icons": [
@@ -34,7 +34,7 @@
   "orientation": "any",
   "screenshots": [
     {
-      "src": "2023-12-20_16-26.png",
+      "src": "2024-01-04_16-50.png",
       "sizes": "361x590",
       "type": "image/png",
       "form_factor": "narrow",

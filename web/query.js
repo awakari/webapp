@@ -146,21 +146,21 @@ async function startEventsLoading(subId) {
     } catch (e) {
         console.log(`Events loading error ${subId}: ${e}`);
     } finally {
-        alert("Search results streaming finished");
+        document.getElementById("streaming-results").innerText = "Results streaming stopped.";
         queryStop();
     }
 }
 
-const templateEvent = (evt) => `
-    <div class="p-1 shadow-xs border hover:bg-white">
-        <p class="font-mono text-slate-600 dark:text-slate-300 text-xs">
-            ${evt.attributes.hasOwnProperty("time") ? evt.attributes.time.ce_timestamp : (new Date().toISOString())}
-        </p>
-        <p class="truncate w-80 sm:w-[624px] text-gray-700 dark:text-gray-200 hover:text-blue-500">
-            <a href="${evt.source}" target="_blank"> 
+const templateEvent = (evt, time) => `
+    <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px]">
+        <a href="${evt.source}" target="_blank">
+            <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
-            </a>
-        </p>
+            </p>
+            <p class="font-mono text-slate-600 dark:text-slate-300 hover:text-blue-500 text-xs">
+                ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
+            </p>
+        </a>
     </div>
 `
 
@@ -170,6 +170,12 @@ function displayEvents(evts) {
         if (elemEvts.childElementCount >= 10) {
             elemEvts.removeChild(elemEvts.lastElementChild);
         }
-        elemEvts.innerHTML = templateEvent(evt) + elemEvts.innerHTML;
+        let time;
+        if (evt.attributes.hasOwnProperty("time")) {
+            time = new Date(evt.attributes.time.ce_timestamp);
+        } else {
+            time = new Date();
+        }
+        elemEvts.innerHTML = templateEvent(evt, time) + elemEvts.innerHTML;
     }
 }

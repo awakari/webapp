@@ -5,8 +5,8 @@ function loadQuery() {
             document.getElementById('login').style.display = 'flex';
             break
         default:
-            const q = new URLSearchParams(window.location.href).get("q");
-            if (q !== "") {
+            const q = new URLSearchParams(window.location.search).get("q");
+            if (q != null && q !== "") {
                 document.getElementById("query").value = q;
                 getQuerySubscription(q)
                     .then(subId => {
@@ -36,12 +36,10 @@ function getQuerySubscription(q) {
             "X-Awakari-User-Id": userId,
         },
     }
-    return fetch(`/v1/sub?limit=1000&cursor=${subNameDefault}`, optsReq)
+    return fetch(`/v1/sub?limit=1000&filter=${subNameDefault}`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
-            } else if (resp.status === 404) {
-                return null;
             }
             resp.text().then(errMsg => console.error(errMsg));
             throw new Error(`Failed to create a new subscription: ${resp.status}`);
@@ -130,7 +128,7 @@ function queryStop() {
     }
 }
 
-const timeout = 60_000;
+const timeout = 900_000;
 
 async function startEventsLoading(subId) {
     const deadline = Date.now() + timeout;

@@ -5,17 +5,20 @@ function loadQuery() {
             document.getElementById('login').style.display = 'flex';
             break
         default:
-            document.getElementById("query").value = q;
-            getQuerySubscription(q)
-                .then(subId => {
-                    if (subId !== "") {
-                        startEventsLoading(subId);
-                    }
-                })
+            const q = new URLSearchParams(window.location.href).get("q");
+            if (q !== "") {
+                document.getElementById("query").value = q;
+                getQuerySubscription(q)
+                    .then(subId => {
+                        if (subId !== "") {
+                            startEventsLoading(subId);
+                        }
+                    })
+            }
     }
 }
 
-const subNameDefault = "default";
+const subNameDefault = "_app_reserved";
 
 function getQuerySubscription(q) {
     const authToken = localStorage.getItem(keyAuthToken);
@@ -33,10 +36,12 @@ function getQuerySubscription(q) {
             "X-Awakari-User-Id": userId,
         },
     }
-    return fetch(`/v1/sub?limit=1&cursor=${subNameDefault}`, optsReq)
+    return fetch(`/v1/sub?limit=1000&cursor=${subNameDefault}`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
+            } else if (resp.status === 404) {
+                return null;
             }
             resp.text().then(errMsg => console.error(errMsg));
             throw new Error(`Failed to create a new subscription: ${resp.status}`);
@@ -44,14 +49,13 @@ function getQuerySubscription(q) {
         .then(data => {
             if (data && data.subs) {
                 for (let sub of data.subs) {
-                    if (sub.description === q) {
-                        return sub.id;
+                    if (sub.description === subNameDefault) {
+                        return deleteSubscription(sub.id, headers)
+                            .then(_ => createSubscription(q, headers));
                     }
                 }
-                return createSubscription(q, headers);
-            } else {
-                return createSubscription(q, headers);
             }
+            return createSubscription(q, headers);
         })
         .catch(err => {
             alert(err);
@@ -59,9 +63,26 @@ function getQuerySubscription(q) {
         })
 }
 
+function deleteSubscription(id, headers) {
+    let optsReq = {
+        method: "DELETE",
+        headers: headers,
+    };
+    return fetch(`/v1/sub/${id}`, optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Failed to delete the subscription ${id}: ${resp.status}`);
+            }
+        })
+        .catch(err => {
+            alert(err);
+        })
+}
+
 function createSubscription(q, headers) {
     const payload = {
-        description: q,
+        description: subNameDefault,
         enabled: true,
         cond: {
             not: false,
@@ -120,9 +141,7 @@ async function startEventsLoading(subId) {
             console.log(`Long poll events for ${subId}...`);
             await Events
                 .longPoll(subId, deadline)
-                .then(evts => {
-                    displayEvents(evts)
-                });
+                .then(evts => displayEvents(evts));
             console.log(`Long poll events for ${subId} done`);
         }
     } catch (e) {

@@ -25,9 +25,12 @@ Events.longPoll = function (subId, deadline) {
             return resp.json();
         })
         .then(data => {
-            console.log(`Read subscription ${subId} events response data: ${JSON.stringify(data)}`);
             if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
+                console.log(`Read subscription ${subId}: got ${data.msgs.length} new events`);
                 return data.msgs;
+            } else {
+                console.log(`Read subscription ${subId}: no new events`);
+                return null;
             }
         });
 };

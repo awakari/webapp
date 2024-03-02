@@ -60,7 +60,7 @@
     </script>
 
 </head>
-<body class="bg-gray-200" onload="selectMainMenu()">
+<body class="bg-gray-200" onload="selectMainMenu(); loadQuery();">
 
 <main>
     <header class="bg-white dark:bg-gray-900">
@@ -69,24 +69,28 @@
 
                 <a class="font-condensed text-xl md:text-2xl text-slate-700 hover:text-slate-500 dark:text-slate-200 dark:hover:text-gray-300 px-1" href="#">Awakari</a>
 
-                <div class="border flex text-slate-500 max-w-56 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke-width="2"
-                         stroke="currentColor"
-                         width="24px"
-                         height="24px"
-                        class="md:w-8 md:h-8" >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-                    </svg>
-                    <input id="query"
-                           type="search"
-                           placeholder="Real-Time Search"
-                           class="ml-1 border-0 outline-none max-w-56 md:w-96 dark:bg-gray-800 text-md md:text-lg"
-                           oninput="queryType()"
-                           onchange="querySubmit()"/>
-                </div>
+                <form method="GET" role="search">
+                    <div class="border flex text-slate-500 max-w-56 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="2"
+                             stroke="currentColor"
+                             width="24px"
+                             height="24px"
+                            class="md:w-8 md:h-8" >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+                        </svg>
+                        <input name="q"
+                               id="query"
+                               spellcheck="false"
+                               required="required"
+                               type="search"
+                               placeholder="Real-Time Search"
+                               class="ml-1 border-0 outline-none max-w-56 md:w-96 dark:bg-gray-800 text-md md:text-lg"
+                               minlength="3"/>
+                    </div>
+                </form>
 
                 <!-- Mobile menu button -->
                 <div class="flex">

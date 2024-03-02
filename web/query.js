@@ -1,35 +1,21 @@
-function queryType() {
-    if (document.getElementById('query').value === '') {
-        queryStop();
+function loadQuery() {
+    const userId = localStorage.getItem(keyUserId);
+    switch (userId) {
+        case null:
+            document.getElementById('login').style.display = 'flex';
+            break
+        default:
+            document.getElementById("query").value = q;
+            getQuerySubscription(q)
+                .then(subId => {
+                    if (subId !== "") {
+                        startEventsLoading(subId);
+                    }
+                })
     }
 }
 
-function querySubmit() {
-    const q = document.getElementById('query').value;
-    if (q === '') {
-        queryStop();
-    } else {
-        const userId = localStorage.getItem(keyUserId);
-        switch (userId) {
-            case null:
-                sessionStorage.setItem("query", q);
-                document.getElementById('login').style.display = 'flex';
-                break
-            default:
-                queryRun(q);
-        }
-    }
-}
-
-function queryRun(q) {
-    document.getElementById("query").value = q;
-    getQuerySubscription(q)
-        .then(subId => {
-            if (subId !== "") {
-                startEventsLoading(subId);
-            }
-        })
-}
+const subNameDefault = "default";
 
 function getQuerySubscription(q) {
     const authToken = localStorage.getItem(keyAuthToken);
@@ -47,7 +33,7 @@ function getQuerySubscription(q) {
             "X-Awakari-User-Id": userId,
         },
     }
-    return fetch(`/v1/sub?limit=1000`, optsReq)
+    return fetch(`/v1/sub?limit=1&cursor=${subNameDefault}`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();

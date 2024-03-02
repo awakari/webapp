@@ -1,12 +1,12 @@
 function loadQuery() {
-    const userId = localStorage.getItem(keyUserId);
-    switch (userId) {
-        case null:
-            document.getElementById('login').style.display = 'flex';
-            break
-        default:
-            const q = new URLSearchParams(window.location.search).get("q");
-            if (q != null && q !== "") {
+    const q = new URLSearchParams(window.location.search).get("q");
+    if (q != null && q !== "") {
+        const userId = localStorage.getItem(keyUserId);
+        switch (userId) {
+            case null:
+                document.getElementById('login').style.display = 'flex';
+                break
+            default:
                 document.getElementById("query").value = q;
                 getQuerySubscription(q)
                     .then(subId => {
@@ -14,7 +14,7 @@ function loadQuery() {
                             startEventsLoading(subId);
                         }
                     })
-            }
+        }
     }
 }
 
@@ -120,9 +120,10 @@ let queryRunning = false;
 function queryStop() {
     queryRunning = false;
     let elemEvents = document.getElementById("events");
+    let elemEventsMenu = document.getElementById("events-menu");
     if (elemEvents.innerHTML === "") {
-        document.getElementById("events-menu").style.display = "none";
-    } else if (confirm("Clear the results?")) {
+        elemEventsMenu.style.display = "none";
+    } else if (elemEventsMenu.style.display !== "none" && confirm("Clear the results?")) {
         document.getElementById("events-menu").style.display = "none";
         elemEvents.innerHTML = "";
     }
@@ -166,8 +167,8 @@ const templateEvent = (evt) => `
 function displayEvents(evts) {
     let elemEvts = document.getElementById("events");
     for (let evt of evts) {
-        if (elemEvts.childElementCount === 10) {
-            elemEvts.removeChild(elemEvts.lastChild);
+        if (elemEvts.childElementCount >= 10) {
+            elemEvts.removeChild(elemEvts.lastElementChild);
         }
         elemEvts.innerHTML = templateEvent(evt) + elemEvts.innerHTML;
     }

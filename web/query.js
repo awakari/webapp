@@ -14,7 +14,7 @@ function loadQuery() {
                 getQuerySubscription(q, expires)
                     .then(subId => {
                         if (subId !== "") {
-                            startEventsLoading(subId, resultsStreamingTtimeout);
+                            startEventsLoading(subId, expires);
                         }
                     })
         }
@@ -102,7 +102,11 @@ function createSubscription(q, headers, expires) {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Failed to create a new subscription: ${resp.status}`);
+                if (resp.status === 429) {
+                    throw new Error("Subscription count limit reached. Please contact awakari@awakari.com and request to increase the limit.");
+                } else {
+                    throw new Error(`Failed to create a new subscription: ${resp.status}`);
+                }
             }
             return resp.json();
         })

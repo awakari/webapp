@@ -63,37 +63,37 @@
 <body class="bg-gray-200" onload="selectMainMenu(); loadQuery();">
 
 <main>
-    <header class="bg-white dark:bg-gray-900">
-        <nav x-data="{ isOpen: false }" class="p-1 sm:p-4 items-center justify-center mx-auto">
-            <div class="flex items-center justify-center max-w-xl align-middle mx-auto space-x-1 sm:space-x-4">
+    <header class="bg-white dark:bg-gray-900 h-screen">
+        <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
+            <div class="flex flex-col sm:flex-row items-center justify-center max-w-xl align-middle mx-auto space-x-2 sm:space-x-4 space-y-2">
 
-                <a class="font-condensed text-xl md:text-2xl text-slate-700 hover:text-slate-500 dark:text-slate-200 dark:hover:text-gray-300 px-1" href="#">Awakari</a>
+                <a class="text-4xl text-slate-700 hover:text-slate-500 dark:text-slate-200 dark:hover:text-gray-300 px-1" href="#">Awakari</a>
 
-                <form method="GET" role="search">
-                    <div class="border flex text-slate-500 max-w-56 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             fill="none"
-                             viewBox="0 0 24 24"
-                             stroke-width="2"
-                             stroke="currentColor"
-                             width="24px"
-                             height="24px"
-                             class="md:w-8 md:h-8" >
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-                        </svg>
-                        <input name="q"
-                               id="query"
-                               spellcheck="false"
-                               required="required"
-                               type="search"
-                               placeholder="Real-Time Search"
-                               class="ml-1 border-0 outline-none max-w-56 md:w-96 dark:bg-gray-800 text-md md:text-lg"
-                               minlength="3"/>
-                    </div>
-                </form>
+                <div class="flex space-x-2 sm:space-x-4">
+                    <form method="GET" role="search">
+                        <div class="border flex text-slate-500 w-72 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="2"
+                                 stroke="currentColor"
+                                 width="24px"
+                                 height="24px"
+                                 class="w-8 h-8" >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+                            </svg>
+                            <input name="q"
+                                   id="query"
+                                   spellcheck="false"
+                                   required="required"
+                                   type="search"
+                                   placeholder="Real-Time Search"
+                                   class="ml-1 border-0 outline-none w-72 md:w-96 dark:bg-gray-800 text-md text-lg"
+                                   minlength="3"/>
+                        </div>
+                    </form>
 
-                <!-- Mobile menu button -->
-                <div class="flex">
+                    <!-- Mobile menu button -->
                     <button x-cloak @click="isOpen = !isOpen" type="button" class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400" aria-label="toggle menu">
                         <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
@@ -227,7 +227,7 @@
 
         </nav>
 
-        <div class="container mx-auto py-2 items-center justify-center">
+        <div class="container mx-auto py-10 items-center justify-center">
             <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
                 <span class="py-4 items-center text-center">
                     <p class="m-1 text-4xl font-semibold text-indigo-700 dark:text-indigo-500 md:pt-16">
@@ -249,7 +249,7 @@
     </header>
 
     <div class="bg-white dark:bg-gray-900" id="about">
-        <div class="container mx-auto pt-8 px-4">
+        <div class="container mx-auto pt-4 px-4">
             <div class="mx-auto mt-6 flex flex-col space-y-2">
                 <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl">Continuous Search</h1>
             </div>

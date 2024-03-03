@@ -19,10 +19,14 @@ Events.longPoll = function (subId, deadline) {
             clearTimeout(setTimeout(() => {
                 Events.abortController.abort();
             }, timeout));
-            if (!resp.ok && resp.status !== 504) {
+            if (!resp.ok) {
                 throw new Error(`Request failed with status: ${resp.status}`);
             }
             return resp.json();
+        })
+        .catch(e => {
+            console.log(e);
+            return null;
         })
         .then(data => {
             if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {

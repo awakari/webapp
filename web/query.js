@@ -1,3 +1,5 @@
+const resultsStreamingTtimeout = 3_600_000;
+
 function loadQuery() {
     const q = new URLSearchParams(window.location.search).get("q");
     if (q != null && q !== "") {
@@ -8,19 +10,20 @@ function loadQuery() {
                 break
             default:
                 document.getElementById("query").value = q;
-                getQuerySubscription(q)
+                const expires = Date.now() + resultsStreamingTtimeout;
+                getQuerySubscription(q, expires)
                     .then(subId => {
                         if (subId !== "") {
-                            startEventsLoading(subId);
+                            startEventsLoading(subId, resultsStreamingTtimeout);
                         }
                     })
         }
     }
 }
 
-const subNameDefault = "_app_reserved";
+const defaultSubName = "_reserved_app_search";
 
-function getQuerySubscription(q) {
+function getQuerySubscription(q, expires) {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
     const headers = {
@@ -36,7 +39,7 @@ function getQuerySubscription(q) {
             "X-Awakari-User-Id": userId,
         },
     }
-    return fetch(`/v1/sub?limit=1000&filter=${subNameDefault}`, optsReq)
+    return fetch(`/v1/sub?limit=1000&filter=${defaultSubName}`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -47,13 +50,13 @@ function getQuerySubscription(q) {
         .then(data => {
             if (data && data.subs) {
                 for (let sub of data.subs) {
-                    if (sub.description === subNameDefault) {
+                    if (sub.description === defaultSubName) {
                         return deleteSubscription(sub.id, headers)
-                            .then(_ => createSubscription(q, headers));
+                            .then(_ => createSubscription(q, headers, expires));
                     }
                 }
             }
-            return createSubscription(q, headers);
+            return createSubscription(q, headers, expires);
         })
         .catch(err => {
             alert(err);
@@ -78,10 +81,11 @@ function deleteSubscription(id, headers) {
         })
 }
 
-function createSubscription(q, headers) {
+function createSubscription(q, headers, expires) {
     const payload = {
-        description: subNameDefault,
+        description: defaultSubName,
         enabled: true,
+        expires: expires.toISOString(),
         cond: {
             not: false,
             tc: {
@@ -129,10 +133,7 @@ function queryStop() {
     }
 }
 
-const timeout = 900_000;
-
-async function startEventsLoading(subId) {
-    const deadline = Date.now() + timeout;
+async function startEventsLoading(subId, deadline) {
     document.getElementById("events-menu").style.display = "flex";
     queryRunning = true;
     try {

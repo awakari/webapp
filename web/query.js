@@ -123,7 +123,7 @@ function queryStop() {
     let elemEventsMenu = document.getElementById("events-menu");
     if (elemEvents.innerHTML === "") {
         elemEventsMenu.style.display = "none";
-    } else if (elemEventsMenu.style.display !== "none" && confirm("Clear the results?")) {
+    } else if (elemEventsMenu.style.display !== "none" && confirm("Results streaming ended. Clear the results?")) {
         document.getElementById("events-menu").style.display = "none";
         elemEvents.innerHTML = "";
     }
@@ -146,19 +146,24 @@ async function startEventsLoading(subId) {
     } catch (e) {
         console.log(`Events loading error ${subId}: ${e}`);
     } finally {
-        document.getElementById("streaming-results").innerText = "Results streaming stopped.";
+        document.getElementById("streaming-results").innerText = "Results streaming ended.";
         queryStop();
     }
 }
 
-const templateEvent = (evt, time) => `
+const templateEvent = (evt, time, src) => `
     <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px]">
-        <a href="${evt.source}" target="_blank">
+        <a href="${src}" target="_blank">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
             </p>
-            <p class="font-mono text-slate-600 dark:text-slate-300 hover:text-blue-500 text-xs">
-                ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
+            <p class="font-mono text-slate-600 dark:text-slate-300 text-xs space-x-2">
+                <span class="hover:text-blue-500 ">
+                    ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
+                </span>
+                <span class="text-gray-600 dark:text-gray-400 ">
+                    ${evt.type}
+                </span>
             </p>
         </a>
     </div>
@@ -176,6 +181,13 @@ function displayEvents(evts) {
         } else {
             time = new Date();
         }
-        elemEvts.innerHTML = templateEvent(evt, time) + elemEvts.innerHTML;
+        let src = evt.source;
+        if (src.startsWith("@")) {
+            src = `https://t.me/${src.substring(1)}`;
+        }
+        if (!src.startsWith("http://") && !src.startsWith("https://")) {
+            src = `https://${src}`;
+        }
+        elemEvts.innerHTML = templateEvent(evt, time, src) + elemEvts.innerHTML;
     }
 }

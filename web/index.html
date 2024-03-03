@@ -200,24 +200,25 @@
                  style="display: none"
                  class="absolute inset-x-0 z-20 w-full bg-white px-1 py-1 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col space-y-1">
 
-                <div class="flex space-x-2">
-                    <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
-                        <span id="streaming-results">Results appear below for the next few minutes.</span>
-                        For full functionality, please use
-                        <a href="https://t.me/AwakariBot" target="_blank" class="text-blue-500">
-                            @AwakariBot
-                        </a>
-                        in Telegram.
+                <div class="grid space-x-2">
+                    <span class="col-span-2 text-center text-gray-600 dark:text-gray-400 text-sm">
+                        <p id="streaming-results">Results appear below for the next 15 minutes.</p>
+                        <p>
+                            For full functionality use
+                            <a href="https://t.me/AwakariBot" target="_blank" class="text-blue-500">
+                                @AwakariBot
+                            </a>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 onclick="queryStop()"
+                                 class="h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                                 stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </p>
                     </span>
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         onclick="queryStop()"
-                         class="h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
                 </div>
 
                 <div id="events" class="flex flex-col space-y-1">

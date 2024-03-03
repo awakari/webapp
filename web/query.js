@@ -162,7 +162,7 @@ const templateEvent = (evt, time, src, type) => `
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
                 <span class="text-gray-600 dark:text-gray-300 ">
-                    ${evt.type}
+                    ${type}
                 </span>
             </p>
         </a>
@@ -195,6 +195,6 @@ function displayEvents(evts) {
         if (type.startsWith("com.awakari")) {
             type = type.substring(11);
         }
-        elemEvts.innerHTML = templateEvent(evt, time, src) + elemEvts.innerHTML;
+        elemEvts.innerHTML = templateEvent(evt, time, src, type) + elemEvts.innerHTML;
     }
 }

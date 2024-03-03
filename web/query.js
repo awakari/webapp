@@ -85,7 +85,7 @@ function createSubscription(q, headers, expires) {
     const payload = {
         description: defaultSubName,
         enabled: true,
-        expires: expires.toISOString(),
+        expires: new Date(expires).toISOString(),
         cond: {
             not: false,
             tc: {

@@ -140,11 +140,15 @@ async function startEventsLoading(subId) {
             console.log(`Long poll events for ${subId}...`);
             await Events
                 .longPoll(subId, deadline)
-                .then(evts => displayEvents(evts));
+                .then(evts => {
+                    if (evts && evts.length > 0) {
+                        displayEvents(evts);
+                    }
+                });
             console.log(`Long poll events for ${subId} done`);
         }
     } catch (e) {
-        console.log(`Events loading error ${subId}: ${e}`);
+        alert(`Unexpected events loading error ${subId}: ${e}`);
     } finally {
         document.getElementById("streaming-results").innerText = "Results streaming ended.";
         queryStop();
@@ -162,7 +166,7 @@ const templateEvent = (evt, time, src, type) => `
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
                 <span class="text-gray-600 dark:text-gray-300 ">
-                    ${type}
+                    from ${type}
                 </span>
             </p>
         </a>

@@ -189,11 +189,11 @@ function displayEvents(evts) {
             src = `https://${src}`;
         }
         let type = evt.type;
-        if (type.startsWith("com.github.awakari")) {
-            type = type.substring(18);
+        if (type.startsWith("com.github.awakari.")) {
+            type = type.substring(19);
         }
-        if (type.startsWith("com.awakari")) {
-            type = type.substring(11);
+        if (type.startsWith("com.awakari,")) {
+            type = type.substring(12);
         }
         elemEvts.innerHTML = templateEvent(evt, time, src, type) + elemEvts.innerHTML;
     }

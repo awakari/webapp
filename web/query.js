@@ -166,11 +166,11 @@ const templateEvent = (evt, time, src, srcShort) => `
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
             </p>
-            <p class="font-mono text-slate-600 dark:text-slate-300 text-xs">
+            <p class="font-mono text-slate-600 dark:text-slate-400 text-xs">
                 <span class="hover:text-blue-500">
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
-                <span class="text-gray-600 dark:text-gray-300 truncate">
+                <span class="text-gray-600 dark:text-gray-400 truncate">
                     ${srcShort}
                 </span>
             </p>

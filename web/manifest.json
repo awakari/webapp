@@ -34,11 +34,11 @@
   "orientation": "any",
   "screenshots": [
     {
-      "src": "2024-01-04_16-50.png",
-      "sizes": "361x590",
+      "src": "2024-03-04_18-02.png",
+      "sizes": "400x800",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Publishing tab"
+      "label": "Example Search"
     }
   ],
   "theme_color": "#6366f1",

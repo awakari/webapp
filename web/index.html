@@ -155,13 +155,13 @@
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
         <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
-            <div class="flex flex-col sm:flex-row items-center justify-center max-w-xl align-middle mx-auto space-x-2 sm:space-x-4 space-y-2">
+            <div class="flex flex-row items-center justify-center max-w-xl align-middle mx-auto space-x-2">
 
-                <a class="text-4xl text-slate-700 hover:text-slate-500 dark:text-slate-200 dark:hover:text-gray-300 px-1" href="#">Awakari</a>
+                <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">Awakari</a>
 
-                <div class="flex space-x-2 sm:space-x-4">
+                <div class="flex space-x-1 sm:space-x-2">
                     <form method="GET" role="search">
-                        <div class="border flex text-slate-500 w-72 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+                        <div class="border flex text-slate-500 w-56 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
                                  viewBox="0 0 24 24"
@@ -178,7 +178,7 @@
                                    required="required"
                                    type="search"
                                    placeholder="Real-Time Search"
-                                   class="ml-1 border-0 outline-none w-72 md:w-96 dark:bg-gray-800 text-md text-lg"
+                                   class="ml-1 border-0 outline-none w-56 md:w-96 dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
                     </form>
@@ -230,9 +230,6 @@
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#solutions">Solutions</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#pricing">Pricing</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#resources">Resources</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="mailto:awakari@awakari.com">Contact &#10697;</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="install.html">Install App</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="https://t.me/donateawk/14">Donate &#10697;</a>
                 </div>
                 <div id="menu-default" class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" x-cloak @click="isOpen = !isOpen" onclick="document.getElementById('login').style.display='flex'">Sign In</a>
@@ -241,9 +238,6 @@
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#solutions">Solutions</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#pricing">Pricing</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#resources">Resources</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="mailto:awakari@awakari.com">Contact &#10697;</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="install.html">Install App</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="https://t.me/donateawk/14">Donate &#10697;</a>
                 </div>
             </div>
 
@@ -345,7 +339,7 @@
 
         </nav>
 
-        <div class="container mx-auto py-10 items-center justify-center">
+        <div class="container mx-auto items-center justify-center">
             <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
                 <span class="py-4 items-center text-center">
                     <p class="m-1 text-4xl font-semibold text-indigo-700 dark:text-indigo-500 md:pt-16">
@@ -364,6 +358,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex justify-center items-center pt-4">
+            <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
+                    onclick="window.open('mailto:awakari@awakari.com', '_blank')">
+                Contact
+            </button>
+            <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
+                    onclick="window.open('install.html', '_blank')">
+                Install
+            </button>
+            <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
+                    onclick="window.open('https://t.me/donateawk/14', '_blank')">
+                Donate
+            </button>
+        </div>
+
     </header>
 
     <div class="bg-white dark:bg-gray-900" id="about">

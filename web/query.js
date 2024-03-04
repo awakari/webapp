@@ -160,9 +160,9 @@ async function startEventsLoading(subId, deadline) {
     }
 }
 
-const templateEvent = (evt, time, src, srcShort) => `
+const templateEvent = (evt, time, srcUrl) => `
     <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px]">
-        <a href="${src}" target="_blank">
+        <a href="${srcUrl.href}" target="_blank">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
             </p>
@@ -171,7 +171,7 @@ const templateEvent = (evt, time, src, srcShort) => `
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
                 <span class="text-gray-600 dark:text-gray-400 truncate">
-                    ${srcShort}
+                    ${srcUrl.host}<span class="text-gray-500">${srcUrl.pathname}</span>
                 </span>
             </p>
         </a>
@@ -194,7 +194,7 @@ function displayEvents(evts) {
         if (src.startsWith("@")) {
             src = `https://t.me/${src.substring(1)}`;
         }
-        const srcShort = new URL(src).hostname;
-        elemEvts.innerHTML = templateEvent(evt, time, src, srcShort) + elemEvts.innerHTML;
+        const srcUrl = new URL(src);
+        elemEvts.innerHTML = templateEvent(evt, time, srcUrl) + elemEvts.innerHTML;
     }
 }

@@ -1,3 +1,5 @@
+const resultsStreamingTtimeout = 3_600_000;
+
 function loadQuery() {
     const q = new URLSearchParams(window.location.search).get("q");
     if (q != null && q !== "") {
@@ -8,19 +10,20 @@ function loadQuery() {
                 break
             default:
                 document.getElementById("query").value = q;
-                getQuerySubscription(q)
+                const expires = Date.now() + resultsStreamingTtimeout;
+                getQuerySubscription(q, expires)
                     .then(subId => {
                         if (subId !== "") {
-                            startEventsLoading(subId);
+                            startEventsLoading(subId, expires);
                         }
                     })
         }
     }
 }
 
-const subNameDefault = "_app_reserved";
+const defaultSubName = "_reserved_app_search";
 
-function getQuerySubscription(q) {
+function getQuerySubscription(q, expires) {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
     const headers = {
@@ -36,7 +39,7 @@ function getQuerySubscription(q) {
             "X-Awakari-User-Id": userId,
         },
     }
-    return fetch(`/v1/sub?limit=1000&filter=${subNameDefault}`, optsReq)
+    return fetch(`/v1/sub?limit=1000&filter=${defaultSubName}`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -47,13 +50,13 @@ function getQuerySubscription(q) {
         .then(data => {
             if (data && data.subs) {
                 for (let sub of data.subs) {
-                    if (sub.description === subNameDefault) {
+                    if (sub.description === defaultSubName) {
                         return deleteSubscription(sub.id, headers)
-                            .then(_ => createSubscription(q, headers));
+                            .then(_ => createSubscription(q, headers, expires));
                     }
                 }
             }
-            return createSubscription(q, headers);
+            return createSubscription(q, headers, expires);
         })
         .catch(err => {
             alert(err);
@@ -78,10 +81,11 @@ function deleteSubscription(id, headers) {
         })
 }
 
-function createSubscription(q, headers) {
+function createSubscription(q, headers, expires) {
     const payload = {
-        description: subNameDefault,
+        description: defaultSubName,
         enabled: true,
+        expires: new Date(expires).toISOString(),
         cond: {
             not: false,
             tc: {
@@ -98,7 +102,11 @@ function createSubscription(q, headers) {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Failed to create a new subscription: ${resp.status}`);
+                if (resp.status === 429) {
+                    throw new Error("Subscription count limit reached. Please contact awakari@awakari.com and request to increase the limit.");
+                } else {
+                    throw new Error(`Failed to create a new subscription: ${resp.status}`);
+                }
             }
             return resp.json();
         })
@@ -126,13 +134,11 @@ function queryStop() {
     } else if (elemEventsMenu.style.display !== "none" && confirm("Results streaming ended. Clear the results?")) {
         document.getElementById("events-menu").style.display = "none";
         elemEvents.innerHTML = "";
+        window.location.assign("index.html");
     }
 }
 
-const timeout = 900_000;
-
-async function startEventsLoading(subId) {
-    const deadline = Date.now() + timeout;
+async function startEventsLoading(subId, deadline) {
     document.getElementById("events-menu").style.display = "flex";
     queryRunning = true;
     try {
@@ -140,29 +146,33 @@ async function startEventsLoading(subId) {
             console.log(`Long poll events for ${subId}...`);
             await Events
                 .longPoll(subId, deadline)
-                .then(evts => displayEvents(evts));
+                .then(evts => {
+                    if (evts && evts.length > 0) {
+                        displayEvents(evts);
+                    }
+                });
             console.log(`Long poll events for ${subId} done`);
         }
     } catch (e) {
-        console.log(`Events loading error ${subId}: ${e}`);
+        alert(`Unexpected events loading error ${subId}: ${e}`);
     } finally {
         document.getElementById("streaming-results").innerText = "Results streaming ended.";
         queryStop();
     }
 }
 
-const templateEvent = (evt, time, src, type) => `
+const templateEvent = (evt, time, srcUrl) => `
     <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px]">
-        <a href="${src}" target="_blank">
+        <a href="${srcUrl.href}" target="_blank">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
             </p>
-            <p class="font-mono text-slate-600 dark:text-slate-300 text-xs space-x-1">
-                <span class="hover:text-blue-500 ">
+            <p class="font-mono text-xs truncate">
+                <span class="text-stone-500">
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
-                <span class="text-gray-600 dark:text-gray-300 ">
-                    ${evt.type}
+                <span class="text-slate-600 dark:text-slate-400 truncate">
+                    ${srcUrl.host}<span class="text-slate-500 truncate">${srcUrl.pathname}</span>
                 </span>
             </p>
         </a>
@@ -185,16 +195,7 @@ function displayEvents(evts) {
         if (src.startsWith("@")) {
             src = `https://t.me/${src.substring(1)}`;
         }
-        if (!src.startsWith("http://") && !src.startsWith("https://")) {
-            src = `https://${src}`;
-        }
-        let type = evt.type;
-        if (type.startsWith("com.github.awakari")) {
-            type = type.substring(18);
-        }
-        if (type.startsWith("com.awakari")) {
-            type = type.substring(11);
-        }
-        elemEvts.innerHTML = templateEvent(evt, time, src) + elemEvts.innerHTML;
+        const srcUrl = new URL(src);
+        elemEvts.innerHTML = templateEvent(evt, time, srcUrl) + elemEvts.innerHTML;
     }
 }

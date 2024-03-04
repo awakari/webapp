@@ -27,12 +27,25 @@
     <script type="application/ld+json">
         {
             "@context": "https://schema.org/",
+            "name": "awakari",
             "@type": "Service",
+            "description": "Real-Time Streaming Search Engine",
             "slogan": "Reach everyone interested - Capture the most important",
-            "audience": "",
-            "category": "",
+            "contactPoint": {
+                "@context": "https://schema.org"
+                "@type": "ContactPoint",
+                "name": "Support",
+                "email": "awakari@awakari.com",
+                "contactType": "customer support"
+            },
+            "category": "https://www.wikidata.org/wiki/Q19541",
             "logo": "logo-color.svg",
             "termsOfService": "tos.html",
+            "potentialAction": {
+                "@context": "https://schema.org"
+                "@type": "SearchAction",
+                "target": "https://awakari.com?q={query_string}"
+            },
             "provider": {
                 "@context": "http://schema.org/",
                 "@type": "Organization",
@@ -40,12 +53,89 @@
                 "logo": "logo-color.svg",
                 "url": "https://awakari.com",
                 "email": "awakari@awakari.com",
+                "keywords": "search realtime continuous feed reader rss telegram atom activitypub fediverse free news insights monitoring tracking targeting estate recruitment",
                 "sameAs": [
                     "https://github.com/awakari",
                     "https://www.reddit.com/r/awakari/",
                     "https://t.me/awakari"
                 ]
-            }
+            },
+            "url": "https://awakari.com",
+            "isRelatedTo": {
+                "@context": "https://schema.org/",
+                "@type": "Service",
+                "name": "@AwakariBot",
+                "description": "Awakari Telegram Bot",
+                "audience": "telegram",
+                "category": "https://www.wikidata.org/wiki/Q15616276",
+                "logo": "logo-color.svg",
+                "termsOfService": "tos.html",
+                "url": "https://t.me/AwakariBot"
+            },
+            "isSimilarTo": [
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "Organization",
+                    "name": "Inoreader",
+                    "logo": "https://www.inoreader.com/icon-512.png",
+                    "url": "https://www.inoreader.com"
+                  },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Service",
+                    "name": "Feedly",
+                    "logo": "https://feedly.com/_next/static/media/feedly-logo.b8daba29.png",
+                    "url": "https://feedly.com"
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Service",
+                    "name": "Feeder",
+                    "url": "https://feeder.co"
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Service",
+                    "name": "NewsBlur",
+                    "url": "https://newsblur.com"
+                }
+            ],
+            "offers": [
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Offer",
+                    "availability": "https://schema.org/OnlineOnly",
+                    "name": "Public UI",
+                    "description": "Easy way to manage publishing and subscriptions. Best for personal use. Free to use. Adding own sources.",
+                    "price": 0,
+                    "url": "https://awakari.com"
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Offer",
+                    "availability": "https://schema.org/OnlineOnly",
+                    "name": "Public API",
+                    "description": "Want to build own service? Try the Awakari streaming API. Best for client integrations. Free first 30 days of access. Free first 10 publications per day.",
+                    "url": "https://github.com/awakari#3-access"
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Offer",
+                    "availability": "https://schema.org/OnlineOnly",
+                    "name": "Cloud Instance",
+                    "description": "Don't want to publish your events to everyone? Private event sources. No deployment required.",
+                    "url": "mailto:awakari@awakari.com"
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Offer",
+                    "availability": "https://schema.org/OnlineOnly",
+                    "name": "Events On Premises",
+                    "description": "Want all events to remain inside your network? When subscriptions only are in the cloud. Strict events privacy",
+                    "url": "https://github.com/awakari/core#3-deployment"
+                }
+
+            ]
         }
     </script>
 
@@ -65,13 +155,13 @@
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
         <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
-            <div class="flex flex-col sm:flex-row items-center justify-center max-w-xl align-middle mx-auto space-x-2 sm:space-x-4 space-y-2">
+            <div class="flex flex-row items-center justify-center max-w-xl align-middle mx-auto space-x-2">
 
-                <a class="text-4xl text-slate-700 hover:text-slate-500 dark:text-slate-200 dark:hover:text-gray-300 px-1" href="#">Awakari</a>
+                <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">Awakari</a>
 
-                <div class="flex space-x-2 sm:space-x-4">
+                <div class="flex space-x-1 sm:space-x-2">
                     <form method="GET" role="search">
-                        <div class="border flex text-slate-500 w-72 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+                        <div class="border flex text-slate-500 w-56 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
                                  viewBox="0 0 24 24"
@@ -88,7 +178,7 @@
                                    required="required"
                                    type="search"
                                    placeholder="Real-Time Search"
-                                   class="ml-1 border-0 outline-none w-72 md:w-96 dark:bg-gray-800 text-md text-lg"
+                                   class="ml-1 border-0 outline-none w-56 md:w-96 dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
                     </form>
@@ -108,15 +198,6 @@
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div id="menu" x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900">
-                <div id="menu-default" class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" x-cloak @click="isOpen = !isOpen" onclick="document.getElementById('login').style.display='flex'">Sign In</a>
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#about">About</a>
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#use_cases">Use Cases</a>
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#solutions">Solutions</a>
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#pricing">Pricing</a>
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="#resources">Resources</a>
-                    <a class="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-6" href="mailto:awakari@awakari.com">Contact &#10697;</a>
-                </div>
                 <div id="menu-user" style="display: none" class="flex flex-col space-y-4 md:mt-0 md:flex-row md:space-y-0 text-right items-end md:text-center md:justify-center md:space-x-8">
                     <button class="text-gray-600 dark:text-gray-400 block hover:text-blue-500 focus:outline-none flex space-x-1"
                             onclick="window.location.assign('pub.html')">
@@ -144,56 +225,81 @@
                             <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#about">About</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#use_cases">Use Cases</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#solutions">Solutions</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#pricing">Pricing</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#resources">Resources</a>
+                </div>
+                <div id="menu-default" class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" x-cloak @click="isOpen = !isOpen" onclick="document.getElementById('login').style.display='flex'">Sign In</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#about">About</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#use_cases">Use Cases</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#solutions">Solutions</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#pricing">Pricing</a>
+                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#resources">Resources</a>
                 </div>
             </div>
 
             <div id="login"
                  style="display: none"
-                 class="absolute inset-x-0 z-20 w-full bg-white px-2 py-3 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
+                 class="absolute inset-x-0 z-20 w-full bg-white px-2 py-3 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 flex flex-col items-center justify-center">
 
-                <p class="col-span-2 text-center text-gray-600 dark:text-gray-400">Sign In to continue</p>
+                <div class="items-center justify-center flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
+                    <p class="col-span-2 text-center text-gray-600 dark:text-gray-400">Sign In to continue</p>
 
-                <!-- Telegram -->
-                <div class="justify-center">
-                    <script async
-                            src="https://telegram.org/js/telegram-widget.js?22"
-                            data-telegram-login="AwakariBot"
-                            data-size="medium"
-                            data-onauth="handleAuthTelegram(user)"
-                            data-request-access="write"
-                            data-radius="4"
-                            data-userpic="false">
-                    </script>
+                    <!-- Telegram -->
+                    <div class="justify-center">
+                        <script async
+                                src="https://telegram.org/js/telegram-widget.js?22"
+                                data-telegram-login="AwakariBot"
+                                data-size="medium"
+                                data-onauth="handleAuthTelegram(user)"
+                                data-request-access="write"
+                                data-radius="4"
+                                data-userpic="false">
+                        </script>
+                    </div>
+
+                    <!-- Google -->
+                    <!--                    <div class="justify-center">-->
+                    <!--                        <div id="g_id_onload"-->
+                    <!--                             data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"-->
+                    <!--                             data-context="signin"-->
+                    <!--                             data-ux_mode="popup"-->
+                    <!--                             data-callback="handleAuthGoogle"-->
+                    <!--                             data-auto_prompt="false">-->
+                    <!--                        </div>-->
+                    <!--                        <div class="g_id_signin"-->
+                    <!--                             data-type="standard"-->
+                    <!--                             data-shape="rectangular"-->
+                    <!--                             data-theme="outline"-->
+                    <!--                             data-text="signin_with"-->
+                    <!--                             data-size="medium"-->
+                    <!--                             data-logo_alignment="left">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
 
-                <!-- Google -->
-                <!--                    <div class="justify-center">-->
-                <!--                        <div id="g_id_onload"-->
-                <!--                             data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"-->
-                <!--                             data-context="signin"-->
-                <!--                             data-ux_mode="popup"-->
-                <!--                             data-callback="handleAuthGoogle"-->
-                <!--                             data-auto_prompt="false">-->
-                <!--                        </div>-->
-                <!--                        <div class="g_id_signin"-->
-                <!--                             data-type="standard"-->
-                <!--                             data-shape="rectangular"-->
-                <!--                             data-theme="outline"-->
-                <!--                             data-text="signin_with"-->
-                <!--                             data-size="medium"-->
-                <!--                             data-logo_alignment="left">-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     onclick="document.getElementById('login').style.display = 'none'"
-                     class="h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <div class="flex">
+                    <span class="text-center mt-1 text-sm text-neutral-500 flex flex-col sm:flex-row">
+                        <span class="whitespace-nowrap">By signing in, you agree to the</span>
+                        <span class="whitespace-nowrap flex">
+                            &nbsp;<a href="tos.html" class="text-gray-600 dark:text-slate-400 hover:text-slate-500">Terms of Service</a>
+                            &nbsp;and
+                            &nbsp;<a href="privacy.html" class="text-gray-600 dark:text-slate-400 hover:text-slate-500">Privacy Policy</a>.
+                        </span>
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         onclick="document.getElementById('login').style.display = 'none'"
+                         class="ml-2 h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200 justify-start align-top place-self-start mb-2"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
             </div>
 
             <div id="events-menu"
@@ -202,12 +308,17 @@
 
                 <div class="grid space-x-2">
                     <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
-                        <p id="streaming-results">Results appear below for the next 15 minutes.</p>
-                        <p class="flex space-x-2">
-                            For full functionality use
-                            <a href="https://t.me/AwakariBot" target="_blank" class="text-blue-500">
-                                @AwakariBot
-                            </a>
+                        <p id="streaming-results">Results will appear below for the next 1 hour.</p>
+                        <p>
+                            Use
+                            <a href="https://t.me/AwakariBot" target="_blank" class="text-blue-500">@AwakariBot</a>
+                            as full-featured reader.</p>
+                        <p>
+                            Go to
+                            <a href="https://awakari.com/sub.html" class="text-blue-500">Subscriptions</a>
+                            to manage own queries.</p>
+                        <div class="flex">
+                            <div class="grow w-full"></div>
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  onclick="queryStop()"
                                  class="h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200"
@@ -217,7 +328,7 @@
                                  stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                        </p>
+                        </div>
                     </span>
                 </div>
 
@@ -228,7 +339,7 @@
 
         </nav>
 
-        <div class="container mx-auto py-10 items-center justify-center">
+        <div class="container mx-auto items-center justify-center">
             <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
                 <span class="py-4 items-center text-center">
                     <p class="m-1 text-4xl font-semibold text-indigo-700 dark:text-indigo-500 md:pt-16">
@@ -247,6 +358,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex justify-center items-center pt-4">
+            <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
+                    onclick="window.open('mailto:awakari@awakari.com', '_blank')">
+                Contact
+            </button>
+            <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
+                    onclick="window.open('https://t.me/donateawk/14', '_blank')">
+                Donate
+            </button>
+            <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
+                    onclick="window.open('install.html', '_blank')">
+                Install
+            </button>
+        </div>
+
     </header>
 
     <div class="bg-white dark:bg-gray-900" id="about">
@@ -322,7 +449,7 @@
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                             </span>
-                            <span>100+ Feeds (RSS/Atom/JSON)</span>
+                            <span>180+ Feeds (RSS/Atom/JSON)</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -338,7 +465,7 @@
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                             </span>
-                            <span>30+ Web Sites</span>
+                            <span>50+ Web Sites</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -346,7 +473,7 @@
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                             </span>
-                            <span>Fediverse (ActivityPub Actors)</span>
+                            <span>30+ Fediverse Publishers (ActivityPub Actors)</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -641,7 +768,7 @@
                             Easy way to manage publishing and subscriptions.
                         </p>
                         <p class="mt-4">Best for personal use.</p>
-                        <a href="https://awakari.com/login.html">
+                        <a href="https://awakari.com" onclick="window.location.assign('https://awakari.com'); document.getElementById('login').style.display = 'flex'">
                             <button class="mt-6 w-full transform rounded-md bg-slate-500 px-4 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-slate-600 focus:bg-slate-500 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
                                 Start Now
                             </button>

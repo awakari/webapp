@@ -119,7 +119,9 @@ async function loadSource() {
         });
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
-    return drawFreqChart(counts);
+    if (confirm("Draw frequency chart? This may take a while.")) {
+        drawFreqChart(counts);
+    }
 }
 
 const weekDays = 7;

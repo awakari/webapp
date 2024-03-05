@@ -1,4 +1,4 @@
-function loadSource() {
+async function loadSource() {
     //
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
@@ -12,7 +12,7 @@ function loadSource() {
     document.getElementById("freq-charts").style.display = "none";
     document.body.classList.add('waiting-cursor');
     document.getElementById("wait").style.display = "block";
-    fetch(`/v1/src/${typ}`, {
+    const counts = await fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -113,20 +113,16 @@ function loadSource() {
             }
             return null;
         })
-        .then(counts => {
-            if (counts != null && Object.keys(counts).length > 0) {
-                document.body.classList.add('waiting-cursor');
-                document.getElementById("freq-charts").style.display = "block";
-                drawFreqChart(counts);
-            }
-        })
         .catch(err => {
             alert(err);
-        })
-        .finally(() => {
-            document.body.classList.remove('waiting-cursor');
-            document.getElementById("wait").style.display = "none";
+            return null;
         });
+    document.body.classList.remove('waiting-cursor');
+    document.getElementById("wait").style.display = "none";
+    await drawFreqChart(counts).finally(() => {
+        document.body.classList.remove('waiting-cursor');
+        document.getElementById("wait").style.display = "none";
+    });
 }
 
 const weekDays = 7;
@@ -137,24 +133,29 @@ const stepX = freqChartWidth / dayMinutes;
 const freqChartOffsetTop = 22;
 const freqChartOffsetLeft = 30;
 
-function drawFreqChart(counts) {
-    let countMax = 0;
-    for(const [t, c] of Object.entries(counts)) {
-        if (c > countMax) {
-            countMax = c;
+async function drawFreqChart(counts) {
+    if (counts != null && Object.keys(counts).length > 0) {
+        document.body.classList.add('waiting-cursor');
+        document.getElementById("wait").style.display = "block";
+        document.getElementById("freq-charts").style.display = "block";
+        let countMax = 0;
+        for (const [t, c] of Object.entries(counts)) {
+            if (c > countMax) {
+                countMax = c;
+            }
         }
-    }
-    const stepY = freqChartHeight / countMax;
-    for(let i = 0; i < weekDays; i ++) {
-        let chartElement = document.getElementById(`chart-freq-${i}`);
-        chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
-    }
-    for(const [t, c] of Object.entries(counts)) {
-        const dayNum = Math.floor(t / dayMinutes);
-        let chartElement = document.getElementById(`chart-freq-${dayNum}`);
-        const h = stepY * c;
-        const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
-        chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop+freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop+freqChartHeight-h}" class="svg-chart-line-data"></line>`
+        const stepY = freqChartHeight / countMax;
+        for (let i = 0; i < weekDays; i++) {
+            let chartElement = document.getElementById(`chart-freq-${i}`);
+            chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
+        }
+        for (const [t, c] of Object.entries(counts)) {
+            const dayNum = Math.floor(t / dayMinutes);
+            let chartElement = document.getElementById(`chart-freq-${dayNum}`);
+            const h = stepY * c;
+            const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
+            chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop + freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop + freqChartHeight - h}" class="svg-chart-line-data"></line>`
+        }
     }
 }
 

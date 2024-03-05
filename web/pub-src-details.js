@@ -1,5 +1,3 @@
-let counts = null;
-
 async function loadSource() {
     //
     const urlParams = new URLSearchParams(window.location.search);
@@ -14,7 +12,7 @@ async function loadSource() {
     document.getElementById("freq-charts").style.display = "none";
     document.body.classList.add('waiting-cursor');
     document.getElementById("wait").style.display = "block";
-    counts = await fetch(`/v1/src/${typ}`, {
+    const counts = await fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -121,6 +119,7 @@ async function loadSource() {
         });
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
+    return drawFreqChart(counts);
 }
 
 const weekDays = 7;
@@ -131,7 +130,7 @@ const stepX = freqChartWidth / dayMinutes;
 const freqChartOffsetTop = 22;
 const freqChartOffsetLeft = 30;
 
-async function drawFreqChart() {
+async function drawFreqChart(counts) {
     if (counts != null && Object.keys(counts).length > 0) {
         document.body.classList.add('waiting-cursor');
         document.getElementById("wait").style.display = "block";

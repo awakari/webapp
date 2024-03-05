@@ -117,14 +117,9 @@ async function loadSource() {
             alert(err);
             return null;
         });
-    console.log("source loading done");
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
-    await drawFreqChart(counts).finally(() => {
-        document.body.classList.remove('waiting-cursor');
-        document.getElementById("wait").style.display = "none";
-    });
-    console.log("frequency chart drawing done");
+    return drawFreqChart(counts);
 }
 
 const weekDays = 7;
@@ -158,6 +153,8 @@ async function drawFreqChart(counts) {
             const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
             chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop + freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop + freqChartHeight - h}" class="svg-chart-line-data"></line>`
         }
+        document.body.classList.remove('waiting-cursor');
+        document.getElementById("wait").style.display = "none";
     }
 }
 

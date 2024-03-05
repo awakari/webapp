@@ -117,12 +117,14 @@ async function loadSource() {
             alert(err);
             return null;
         });
+    console.log("source loading done");
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
     await drawFreqChart(counts).finally(() => {
         document.body.classList.remove('waiting-cursor');
         document.getElementById("wait").style.display = "none";
     });
+    console.log("frequency chart drawing done");
 }
 
 const weekDays = 7;

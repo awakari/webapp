@@ -1,4 +1,4 @@
-function loadSource() {
+async function loadSource() {
     //
     const urlParams = new URLSearchParams(window.location.search);
     const typ = urlParams.get("type");
@@ -12,7 +12,7 @@ function loadSource() {
     document.getElementById("freq-charts").style.display = "none";
     document.body.classList.add('waiting-cursor');
     document.getElementById("wait").style.display = "block";
-    fetch(`/v1/src/${typ}`, {
+    const counts = await fetch(`/v1/src/${typ}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${authToken}`,
@@ -45,6 +45,7 @@ function loadSource() {
                             case true:
                                 document.getElementById("type").innerText = "WebSub";
                                 document.getElementById("upd_period").innerText = "Real-Time";
+                                document.getElementById("accepted").checked = true;
                                 break
                             default:
                                 document.getElementById("type").innerText = "Feed";
@@ -53,13 +54,11 @@ function loadSource() {
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        document.getElementById("accepted").checked = true;
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
                         document.getElementById("upd_period").innerText = "Polling once a day";
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        document.getElementById("accepted").checked = true;
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel (App)";
@@ -71,7 +70,6 @@ function loadSource() {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
                         document.getElementById("name").innerText = data.name;
-                        document.getElementById("accepted").checked = true;
                         break
                     case "tgbc":
                         document.getElementById("type").innerText = "Telegram channel (Bot)";
@@ -115,20 +113,18 @@ function loadSource() {
             }
             return null;
         })
-        .then(counts => {
-            if (counts != null && Object.keys(counts).length > 0) {
-                document.body.classList.add('waiting-cursor');
-                document.getElementById("freq-charts").style.display = "block";
-                drawFreqChart(counts);
-            }
-        })
         .catch(err => {
             alert(err);
-        })
-        .finally(() => {
-            document.body.classList.remove('waiting-cursor');
-            document.getElementById("wait").style.display = "none";
+            return null;
         });
+    document.body.classList.remove('waiting-cursor');
+    document.getElementById("wait").style.display = "none";
+    if (counts != null) {
+        const pointsCount = Object.keys(counts).length;
+        if (pointsCount < 720 || confirm("Draw frequency chart? This may take a while.")) {
+            drawFreqChart(counts);
+        }
+    }
 }
 
 const weekDays = 7;
@@ -139,24 +135,31 @@ const stepX = freqChartWidth / dayMinutes;
 const freqChartOffsetTop = 22;
 const freqChartOffsetLeft = 30;
 
-function drawFreqChart(counts) {
-    let countMax = 0;
-    for(const [t, c] of Object.entries(counts)) {
-        if (c > countMax) {
-            countMax = c;
+async function drawFreqChart(counts) {
+    if (counts != null && Object.keys(counts).length > 0) {
+        document.body.classList.add('waiting-cursor');
+        document.getElementById("wait").style.display = "block";
+        document.getElementById("freq-charts").style.display = "block";
+        let countMax = 0;
+        for (const [t, c] of Object.entries(counts)) {
+            if (c > countMax) {
+                countMax = c;
+            }
         }
-    }
-    const stepY = freqChartHeight / countMax;
-    for(let i = 0; i < weekDays; i ++) {
-        let chartElement = document.getElementById(`chart-freq-${i}`);
-        chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
-    }
-    for(const [t, c] of Object.entries(counts)) {
-        const dayNum = Math.floor(t / dayMinutes);
-        let chartElement = document.getElementById(`chart-freq-${dayNum}`);
-        const h = stepY * c;
-        const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
-        chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop+freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop+freqChartHeight-h}" class="svg-chart-line-data"></line>`
+        const stepY = freqChartHeight / countMax;
+        for (let i = 0; i < weekDays; i++) {
+            let chartElement = document.getElementById(`chart-freq-${i}`);
+            chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
+        }
+        for (const [t, c] of Object.entries(counts)) {
+            const dayNum = Math.floor(t / dayMinutes);
+            let chartElement = document.getElementById(`chart-freq-${dayNum}`);
+            const h = stepY * c;
+            const x = freqChartOffsetLeft + (t - dayNum * dayMinutes) * stepX;
+            chartElement.innerHTML += `<line x1="${x}" y1="${freqChartOffsetTop + freqChartHeight}" x2="${x}" y2="${freqChartOffsetTop + freqChartHeight - h}" class="svg-chart-line-data"></line>`
+        }
+        document.body.classList.remove('waiting-cursor');
+        document.getElementById("wait").style.display = "none";
     }
 }
 

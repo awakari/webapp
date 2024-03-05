@@ -45,6 +45,7 @@ function loadSource() {
                             case true:
                                 document.getElementById("type").innerText = "WebSub";
                                 document.getElementById("upd_period").innerText = "Real-Time";
+                                document.getElementById("accepted").checked = true;
                                 break
                             default:
                                 document.getElementById("type").innerText = "Feed";
@@ -53,13 +54,11 @@ function loadSource() {
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        document.getElementById("accepted").checked = true;
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
                         document.getElementById("upd_period").innerText = "Polling once a day";
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        document.getElementById("accepted").checked = true;
                         break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel (App)";
@@ -71,7 +70,6 @@ function loadSource() {
                             document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         }
                         document.getElementById("name").innerText = data.name;
-                        document.getElementById("accepted").checked = true;
                         break
                     case "tgbc":
                         document.getElementById("type").innerText = "Telegram channel (Bot)";

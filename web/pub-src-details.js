@@ -119,8 +119,11 @@ async function loadSource() {
         });
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
-    if (confirm("Draw frequency chart? This may take a while.")) {
-        drawFreqChart(counts);
+    if (counts != null) {
+        const pointsCount = Object.keys(counts).length;
+        if (pointsCount < 720 || confirm("Draw frequency chart? This may take a while.")) {
+            drawFreqChart(counts);
+        }
     }
 }
 

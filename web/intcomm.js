@@ -16,7 +16,7 @@ async function requestIncreasePublishingDailyLimit(userId) {
     }
     if (inc > 0) {
         const payload = {
-            id: document.getElementById("msg_id").value,
+            id: uuidv4(),
             specVersion: "1.0",
             source: "awakari.com",
             type: "com.github.awakari.webapp",
@@ -28,7 +28,8 @@ async function requestIncreasePublishingDailyLimit(userId) {
             text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for the user ${userId} by ${inc}`,
         }
         if (await submitMessageInternal(payload, userId)) {
-            alert("Success");
+            document.getElementById("request-increase-success-dialog").style.display = "block";
+            document.getElementById("req-id").innerText = payload.id;
         }
     } else {
         alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
@@ -60,4 +61,11 @@ function submitMessageInternal(payload, userId) {
             alert(err);
             return false;
         })
+}
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }

@@ -161,11 +161,11 @@ async function startEventsLoading(subId, deadline) {
     }
 }
 
-const templateEvent = (evt, time, srcUrl, link) => `
+const templateEvent = (txt, time, srcUrl, link) => `
     <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px]">
         <a href="${link}" target="_blank">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
-                ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
+                ${txt}
             </p>
             <p class="font-mono text-xs truncate">
                 <span class="text-stone-500">
@@ -196,13 +196,21 @@ function displayEvents(evts) {
             src = `https://t.me/${src.substring(1)}`;
         }
         let link = src;
-        const srcUrl = new URL(src);
         if (evt.attributes.hasOwnProperty("object") && evt.attributes.object.hasOwnProperty("ce_uri")) {
             link = evt.attributes.object.ce_uri;
         }
         if (evt.attributes.hasOwnProperty("objecturl")) {
             link = evt.attributes.objecturl.ce_uri;
         }
-        elemEvts.innerHTML = templateEvent(evt, time, srcUrl, link) + elemEvts.innerHTML;
+        const srcUrl = new URL(src);
+        let txt = evt.text_data;
+        if (evt.attributes.hasOwnProperty("summary")) {
+            txt = evt.attributes.summary.ce_string;
+        }
+        if (evt.attributes.hasOwnProperty("title")) {
+            txt = evt.attributes.title.ce_string;
+        }
+        txt = txt.replace(/(<([^>]+)>)/gi, ""); // remove HTML tags
+        elemEvts.innerHTML = templateEvent(txt, time, srcUrl) + elemEvts.innerHTML;
     }
 }

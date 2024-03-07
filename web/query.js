@@ -161,9 +161,9 @@ async function startEventsLoading(subId, deadline) {
     }
 }
 
-const templateEvent = (evt, time, srcUrl) => `
+const templateEvent = (evt, time, srcUrl, link) => `
     <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px]">
-        <a href="${srcUrl.href}" target="_blank">
+        <a href="${link}" target="_blank">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${evt.attributes.hasOwnProperty("title") ? evt.attributes.title.ce_string : (evt.attributes.hasOwnProperty("summary") ? evt.attributes.summary.ce_string : (evt.text_data != null ? evt.text_data : ""))}
             </p>
@@ -195,7 +195,14 @@ function displayEvents(evts) {
         if (src.startsWith("@")) {
             src = `https://t.me/${src.substring(1)}`;
         }
+        let link = src;
         const srcUrl = new URL(src);
-        elemEvts.innerHTML = templateEvent(evt, time, srcUrl) + elemEvts.innerHTML;
+        if (evt.attributes.hasOwnProperty("object") && evt.attributes.object.hasOwnProperty("ce_uri")) {
+            link = evt.attributes.object.ce_uri;
+        }
+        if (evt.attributes.hasOwnProperty("objecturl")) {
+            link = evt.attributes.objecturl.ce_uri;
+        }
+        elemEvts.innerHTML = templateEvent(evt, time, srcUrl, link) + elemEvts.innerHTML;
     }
 }

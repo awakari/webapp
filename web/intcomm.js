@@ -23,13 +23,22 @@ async function requestIncreasePublishingDailyLimit(userId) {
             attributes: {
                 increment: {
                     ce_integer: inc,
-                }
+                },
+                action: {
+                    ce_string: "request",
+                },
+                object: {
+                    ce_string: `publishing limit for ${userId}`,
+                },
+                subject: {
+                    ce_string: userIdCurrent,
+                },
             },
             text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for the user ${userId} by ${inc}`,
         }
         if (await submitMessageInternal(payload, userId)) {
             document.getElementById("request-increase-success-dialog").style.display = "block";
-            document.getElementById("req-id").innerText = payload.id;
+            document.getElementById("request-id").innerText = payload.id;
         }
     } else {
         alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);

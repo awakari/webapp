@@ -28,6 +28,7 @@
 
     <script src="login.js"></script>
     <script src="pub.js"></script>
+    <script src="intcomm.js"></script>
     <script>
         navigator.serviceWorker.register("sw.js");
     </script>
@@ -64,7 +65,9 @@
                 <div class="pt-1 w-[124px]">Daily Limit:</div>
                 <div class="pt-1 w-20" id="limit"></div>
                 <div>
-                    <button type="button" disabled="disabled" class="text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2 w-[100px]">
+                    <button type="button"
+                            onclick="requestIncreasePublishingDailyLimit(localStorage.getItem(keyUserId))"
+                            class="text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2 w-[100px]">
                         + Increase
                     </button>
                 </div>

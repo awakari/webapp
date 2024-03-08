@@ -95,17 +95,26 @@ async function loadSource() {
                 } else {
                     btnDel.disabled = "disabled";
                 }
+                document.getElementById("button_src_report").onclick = () => {
+                    reportPublishingSourceInappropriate(data.addr);
+                }
                 //
                 switch (data.usage.type) {
                     case 1:
                         document.getElementById("owner").innerText = "Dedicated";
                         document.getElementById("total").innerText = data.usage.total;
                         document.getElementById("count").innerText = data.usage.count;
+                        document.getElementById("pub-src-lim-incr-btn").onclick = () => {
+                            requestIncreasePublishingDailyLimit(data.addr);
+                        };
                         break;
                     case 2:
                         document.getElementById("owner").innerText = "User";
                         document.getElementById("total").innerText = `${data.usage.total} (all user's publications)`;
                         document.getElementById("count").innerText = `${data.usage.count} (all user's publications)`;
+                        document.getElementById("pub-src-lim-incr-btn").onclick = () => {
+                            requestIncreasePublishingDailyLimit(data.userId);
+                        };
                         break;
                 }
                 document.getElementById("limit").innerText = data.usage.limit;

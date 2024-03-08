@@ -117,9 +117,24 @@ button[type=button].delete:disabled {
     border-color: #64748b;
     color: #64748b;
 }
-button[type=button].delete:disabled:hover {
+
+button[type=button].report {
+    border-color: #f59e0b;
+    color: #f59e0b;
+    width: 100px;
+}
+button[type=button].report:hover {
+    background-color: #fde68a;
+}
+button[type=button].report:disabled:hover {
     background-color: unset;
 }
+@media (prefers-color-scheme: dark) {
+    button[type=button].report:hover {
+        background-color: #78350f;
+    }
+}
+
 button[type=button].donate {
     border-color: #06b6d4;
     border-radius: 0.25rem;

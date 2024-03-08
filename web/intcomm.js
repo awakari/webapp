@@ -1,47 +1,81 @@
-async function requestIncreasePublishingDailyLimit(userId) {
+async function requestIncreasePublishingDailyLimit(objId) {
     const userIdCurrent = localStorage.getItem(keyUserId);
     let msg;
-    if (userId === userIdCurrent) {
+    if (objId === userIdCurrent) {
         msg = "Request to increase own publishing daily limit.";
     } else {
-        msg = "Request to increase another user's publishing daily limit.";
+        msg = "Request to increase the publishing daily limit";
     }
-    msg += "Please enter the number to add:"
+    msg += "\nPlease enter the number to add:"
     const input = prompt(msg, "1");
-    let inc = 0;
-    try {
-        inc = parseInt(input);
-    } catch (e) {
-        console.log(e);
+    if (input) {
+        let inc = 0;
+        try {
+            inc = parseInt(input);
+        } catch (e) {
+            console.log(e);
+        }
+        if (inc > 0) {
+            const payload = {
+                id: uuidv4(),
+                specVersion: "1.0",
+                source: "awakari.com",
+                type: "com.github.awakari.webapp",
+                attributes: {
+                    increment: {
+                        ce_integer: inc,
+                    },
+                    action: {
+                        ce_string: "request",
+                    },
+                    object: {
+                        ce_string: `publishing daily limit for ${objId}`,
+                    },
+                    subject: {
+                        ce_string: userIdCurrent,
+                    },
+                },
+                text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for ${objId} by ${inc}`,
+            }
+            if (await submitMessageInternal(payload, userIdCurrent)) {
+                document.getElementById("request-increase-success-dialog").style.display = "block";
+                document.getElementById("request-id").innerText = payload.id;
+            }
+        } else {
+            alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
+        }
     }
-    if (inc > 0) {
+}
+
+async function reportPublishingSourceInappropriate(srcAddr) {
+    const userIdCurrent = localStorage.getItem(keyUserId);
+    const reason = prompt(`Please specify the reason why do you think the source is inappropriate.\nSource: ${srcAddr}`)
+    if (reason) {
         const payload = {
             id: uuidv4(),
             specVersion: "1.0",
             source: "awakari.com",
             type: "com.github.awakari.webapp",
             attributes: {
-                increment: {
-                    ce_integer: inc,
+                reason: {
+                    ce_string: reason,
                 },
                 action: {
-                    ce_string: "request",
+                    ce_string: "report",
                 },
                 object: {
-                    ce_string: `publishing limit for ${userId}`,
+                    ce_string: `inappropriate publishing source ${srcAddr}`,
                 },
                 subject: {
                     ce_string: userIdCurrent,
                 },
             },
-            text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for the user ${userId} by ${inc}`,
+            text_data: `User ${userIdCurrent} reports the inappropriate publishing source ${srcAddr}, reason: ${reason}`,
         }
-        if (await submitMessageInternal(payload, userId)) {
-            document.getElementById("request-increase-success-dialog").style.display = "block";
-            document.getElementById("request-id").innerText = payload.id;
+        if (await submitMessageInternal(payload, userIdCurrent)) {
+            document.getElementById("report-success-dialog").style.display = "block";
+            document.getElementById("report-id").innerText = payload.id;
         }
-    } else {
-        alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
     }
 }
 

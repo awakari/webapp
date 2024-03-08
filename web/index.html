@@ -155,13 +155,13 @@
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
         <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
-            <div class="flex flex-row items-center justify-center max-w-xl align-middle mx-auto space-x-2">
+            <div class="flex flex-row items-center justify-center max-w-[640px] align-middle mx-auto space-x-2">
 
                 <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">Awakari</a>
 
                 <div class="flex space-x-1 sm:space-x-2">
                     <form method="GET" role="search">
-                        <div class="border flex text-slate-500 w-56 md:w-96 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+                        <div class="border flex text-slate-500 w-56 sm:w-[480px] dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
                                  viewBox="0 0 24 24"
@@ -178,7 +178,7 @@
                                    required="required"
                                    type="search"
                                    placeholder="Real-Time Search"
-                                   class="ml-1 border-0 outline-none w-56 md:w-96 dark:bg-gray-800 text-md text-lg"
+                                   class="ml-1 border-0 outline-none w-56 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
                     </form>

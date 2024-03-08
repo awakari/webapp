@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="login.js"></script>
+    <script src="intcomm.js"></script>
     <script src="pub-src-details.js"></script>
     <script src="moment.min.js"></script>
 
@@ -42,12 +43,48 @@
                 <span id="name" class="ml-2 col-span-2 break-all py-1"></span>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-1">Daily Limit:</span>
                 <div class="col-span-2 space-x-2 flex">
+
                     <div id="limit" class="ml-2 mt-1"></div>
-                    <button type="button"
-                            disabled="disabled"
+
+                    <button id="pub-src-lim-incr-btn"
+                            type="button"
                             class="text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static w-[100px]">
                         + Increase
                     </button>
+
+                    <div id="request-increase-success-dialog"
+                         class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1"
+                         style="position: absolute; margin-left: -230px; display: none">
+                        <div class="flex w-full">
+                            <div class="w-full">
+                                <span class="text-lg">
+                                    Request submitted.
+                                </span>
+                            </div>
+                            <button type="button"
+                                    class="w-6 h-6"
+                                    onclick="document.getElementById('request-increase-success-dialog').style.display = 'none'">
+                                ✕
+                            </button>
+                        </div>
+                        <p>
+                            Request Id: <span id="request-id"></span>
+                        </p>
+                        <p>
+                            We review the request as soon as possible and update.
+                        </p>
+                        <p>
+                            Please consider to help us to provide the service:
+                        </p>
+                        <div class="flex justify-center">
+                            <button type="button"
+                                    onclick="window.open('https://t.me/donateawk/14', '_blank')"
+                                    class="flex justify-center text-center w-25 h-6">
+                                <span class="pt-1 px-2">&#10697; Donate</span>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-1">Limit Owner:</span>
                 <span id="owner" class="ml-2 col-span-2 py-1"></span>
@@ -351,11 +388,40 @@
                     </svg>
                 </div>
             </div>
-            <div class="flex items-center justify-center pt-1">
+            <div class="flex items-center justify-center pt-1 space-x-4">
+
+                <button id="button_src_report" type="button" class="flex report justify-center text-center">
+                    <span class="pt-1">⚠ Report</span>
+                </button>
+
+                <div id="report-success-dialog"
+                     class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1"
+                     style="position: absolute; display: block">
+                    <div class="flex w-full">
+                        <div class="w-full">
+                                <span class="text-lg">
+                                    Report submitted.
+                                </span>
+                        </div>
+                        <button type="button"
+                                class="w-6 h-6"
+                                onclick="document.getElementById('report-success-dialog').style.display = 'none'">
+                            ✕
+                        </button>
+                    </div>
+                    <p>
+                        Report Id: <span id="report-id"></span>
+                    </p>
+                    <p>
+                        We review the report as soon as possible and update.
+                    </p>
+                </div>
+
                 <button id="button_src_del" type="button" class="flex delete justify-center text-center">
                     <svg fill="currentColor" width="22px" height="22px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
                     <span class="pt-1">Delete</span>
                 </button>
+
             </div>
         </form>
     </div>

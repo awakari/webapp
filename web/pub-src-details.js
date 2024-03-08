@@ -142,6 +142,7 @@ async function loadSource() {
 
 const weekDays = 7;
 const dayMinutes = 24 * 60;
+const weekMinutes = weekDays * dayMinutes;
 const freqChartHeight = 100;
 const freqChartWidth = 288;
 const stepX = freqChartWidth / dayMinutes;
@@ -154,11 +155,17 @@ async function drawFreqChart(counts) {
         document.getElementById("wait").style.display = "block";
         document.getElementById("freq-charts").style.display = "block";
         let countMax = 0;
-        for (const [t, c] of Object.entries(counts)) {
-            if (c > countMax) {
-                countMax = c;
+        let countSum = 0;
+        for (let i = 0; i < weekMinutes; i ++) {
+            if (counts.hasOwnProperty(i)) {
+                const c = countSum[i];
+                countSum += c;
+                if (c > countMax) {
+                    countMax = c;
+                }
             }
         }
+        console.log(`Average per minute: ${countSum / weekMinutes}`);
         const stepY = freqChartHeight / countMax;
         for (let i = 0; i < weekDays; i++) {
             let chartElement = document.getElementById(`chart-freq-${i}`);

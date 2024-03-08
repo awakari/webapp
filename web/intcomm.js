@@ -82,7 +82,7 @@ async function requestPublishingSourceDedicated(addr){
         if (await submitMessageInternal(payload, userIdCurrent)) {
             document.getElementById("request-increase-success-dialog").style.display = "block";
             document.getElementById("request-id").innerText = payload.id;
-            document.getElementById("pub-src-nominate").disable();
+            document.getElementById("pub-src-nominate").disabled = true;
         }
     }
 }

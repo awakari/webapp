@@ -50,6 +50,43 @@ async function requestIncreasePublishingDailyLimit(objId) {
     }
 }
 
+async function requestPublishingSourceDedicated(addr){
+    const userIdCurrent = localStorage.getItem(keyUserId);
+    const msg = "Request to make the source dedicated.\nPlease justify how it is useful for others:"
+    const reason = prompt(msg);
+    if (reason) {
+        const payload = {
+            id: uuidv4(),
+            specVersion: "1.0",
+            source: "awakari.com",
+            type: "com.github.awakari.webapp",
+            attributes: {
+                reason: {
+                    ce_string: reason,
+                },
+                limit: {
+                    ce_integer: parseInt(document.getElementById("limit").value),
+                },
+                action: {
+                    ce_string: "request",
+                },
+                object: {
+                    ce_string: `make dedicated ${addr}`,
+                },
+                subject: {
+                    ce_string: userIdCurrent,
+                },
+            },
+            text_data: `User ${userIdCurrent} requests to make the source ${addr} dedicated`,
+        }
+        if (await submitMessageInternal(payload, userIdCurrent)) {
+            document.getElementById("request-increase-success-dialog").style.display = "block";
+            document.getElementById("request-id").innerText = payload.id;
+            document.getElementById("pub-src-nominate").disable();
+        }
+    }
+}
+
 async function requestIncreaseSubscriptionsLimit(userId) {
     const msg = "Request to increase the subscriptions limit\nPlease enter the number to add:"
     const input = prompt(msg, "1");

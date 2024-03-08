@@ -115,6 +115,10 @@ async function loadSource() {
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
                             requestIncreasePublishingDailyLimit(data.userId);
                         };
+                        document.getElementById("pub-src-nominate").style.display = "block";
+                        document.getElementById("pub-src-nominate").onclick = () => {
+                            requestPublishingSourceDedicated(data.addr);
+                        }
                         break;
                 }
                 document.getElementById("limit").innerText = data.usage.limit;

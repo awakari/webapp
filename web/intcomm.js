@@ -127,6 +127,44 @@ async function reportPublishingSourceInappropriate(srcAddr) {
     }
 }
 
+async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
+    const userIdCurrent = localStorage.getItem(keyUserId);
+    const reason = prompt(`Please specify the reason why do you think the message is inappropriate.\nMessage link: ${evtLink}`)
+    if (reason) {
+        const payload = {
+            id: uuidv4(),
+            specVersion: "1.0",
+            source: "awakari.com",
+            type: "com.github.awakari.webapp",
+            attributes: {
+                reason: {
+                    ce_string: reason,
+                },
+                action: {
+                    ce_string: "report",
+                },
+                object: {
+                    ce_string: `inappropriate message from ${srcAddr}`,
+                },
+                evtid: {
+                    ce_string: evtId,
+                },
+                evtlink: {
+                    ce_uri: evtLink,
+                },
+                subject: {
+                    ce_string: userIdCurrent,
+                },
+            },
+            text_data: `User ${userIdCurrent} reports the inappropriate message from ${srcAddr}, reason: ${reason}`,
+        }
+        if (await submitMessageInternal(payload, userIdCurrent)) {
+            document.getElementById("report-success-dialog").style.display = "block";
+            document.getElementById("report-id").innerText = payload.id;
+        }
+    }
+}
+
 function submitMessageInternal(payload, userId) {
     const authToken = localStorage.getItem(keyAuthToken);
     return fetch("/v1/pub/internal", {

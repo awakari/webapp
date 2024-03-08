@@ -161,9 +161,9 @@ async function startEventsLoading(subId, deadline) {
     }
 }
 
-const templateEvent = (txt, time, srcUrl, link) => `
-    <div class="p-1 shadow-xs border dark:border-gray-600 h-12 w-86 sm:w-[624px] flex">
-        <a href="${link}" target="_blank" class="w-80 sm:w-[584px]">
+const templateEvent = (txt, time, srcUrl, link, id) => `
+    <div class="p-1 shadow-xs border dark:border-gray-600 h-12 w-86 sm:w-[624px] flex align-middle">
+        <a href="${link}" target="_blank" class="w-80 sm:w-[582px]">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${txt}
             </p>
@@ -176,8 +176,9 @@ const templateEvent = (txt, time, srcUrl, link) => `
                 </span>
             </p>
         </a>
-        <button type="button" 
-                class="p-1 flex report justify-center text-center text-xl h-6 w-6 text-stone-500 hover:text-amber-500">
+        <button type="button"
+                onclick="reportPublicationInappropriate(${srcUrl}, ${link}, ${id})"
+                class="m-1 flex report justify-center text-center text-xl h-6 w-6 text-stone-500 hover:text-amber-500">
             ⚠
         </button>
     </div>
@@ -215,6 +216,6 @@ function displayEvents(evts) {
             txt = evt.attributes.title.ce_string;
         }
         txt = txt.replace(/(<([^>]+)>)/gi, ""); // remove HTML tags
-        elemEvts.innerHTML = templateEvent(txt, time, srcUrl, link) + elemEvts.innerHTML;
+        elemEvts.innerHTML = templateEvent(txt, time, srcUrl, link, evt.id) + elemEvts.innerHTML;
     }
 }

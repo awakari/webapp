@@ -143,6 +143,7 @@
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="base64.min.js"></script>
     <script src="evts.js"></script>
+    <script src="intcomm.js"></script>
     <script src="query.js"></script>
     <script src="login.js"></script>
     <script>
@@ -333,6 +334,29 @@
                 </div>
 
                 <div id="events" class="flex flex-col space-y-1">
+                </div>
+
+                <div id="report-success-dialog"
+                     class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1 text-gray-600 dark:text-gray-400"
+                     style="position: absolute; display: none;">
+                    <div class="flex w-full">
+                        <div class="w-full">
+                                <span class="text-lg">
+                                    Report submitted.
+                                </span>
+                        </div>
+                        <button type="button"
+                                class="w-6 h-6"
+                                onclick="document.getElementById('report-success-dialog').style.display = 'none'">
+                            ✕
+                        </button>
+                    </div>
+                    <p>
+                        Report Id: <span id="report-id"></span>
+                    </p>
+                    <p>
+                        We review the report as soon as possible and update.
+                    </p>
                 </div>
 
             </div>

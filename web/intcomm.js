@@ -25,11 +25,14 @@ async function requestIncreasePublishingDailyLimit(objId) {
                     increment: {
                         ce_integer: inc,
                     },
+                    limit: {
+                        ce_integer: parseInt(document.getElementById("limit").value),
+                    },
                     action: {
                         ce_string: "request",
                     },
                     object: {
-                        ce_string: `publishing daily limit for ${objId}`,
+                        ce_string: `daily publications for ${objId}`,
                     },
                     subject: {
                         ce_string: userIdCurrent,
@@ -38,6 +41,51 @@ async function requestIncreasePublishingDailyLimit(objId) {
                 text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for ${objId} by ${inc}`,
             }
             if (await submitMessageInternal(payload, userIdCurrent)) {
+                document.getElementById("request-increase-success-dialog").style.display = "block";
+                document.getElementById("request-id").innerText = payload.id;
+            }
+        } else {
+            alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
+        }
+    }
+}
+
+async function requestIncreaseSubscriptionsLimit(userId) {
+    const msg = "Request to increase the subscriptions limit\nPlease enter the number to add:"
+    const input = prompt(msg, "1");
+    if (input) {
+        let inc = 0;
+        try {
+            inc = parseInt(input);
+        } catch (e) {
+            console.log(e);
+        }
+        if (inc > 0) {
+            const payload = {
+                id: uuidv4(),
+                specVersion: "1.0",
+                source: "awakari.com",
+                type: "com.github.awakari.webapp",
+                attributes: {
+                    increment: {
+                        ce_integer: inc,
+                    },
+                    limit: {
+                        ce_integer: parseInt(document.getElementById("limit").value),
+                    },
+                    action: {
+                        ce_string: "request",
+                    },
+                    object: {
+                        ce_string: "subscriptions",
+                    },
+                    subject: {
+                        ce_string: userId,
+                    },
+                },
+                text_data: `User ${userId} requests to increase the subscriptions limit by ${inc}`,
+            }
+            if (await submitMessageInternal(payload, userId)) {
                 document.getElementById("request-increase-success-dialog").style.display = "block";
                 document.getElementById("request-id").innerText = payload.id;
             }

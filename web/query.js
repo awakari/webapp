@@ -176,6 +176,9 @@ const templateEvent = (txt, time, srcUrl, link) => `
                 </span>
             </p>
         </a>
+        <button id="button_src_report" type="button" class="flex report justify-center text-center">
+            <span class="pt-1">⚠</span>
+        </button>
     </div>
 `
 

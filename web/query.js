@@ -177,7 +177,7 @@ const templateEvent = (txt, time, srcUrl, link, id) => `
             </p>
         </a>
         <button type="button"
-                onclick="reportPublicationInappropriate(${srcUrl}, ${link}, ${id})"
+                onclick="reportPublicationInappropriate('${srcUrl}', '${link}', '${id}')"
                 class="m-1 flex report justify-center text-center text-xl h-6 w-6 text-stone-500 hover:text-amber-500">
             ⚠
         </button>

@@ -163,7 +163,7 @@ async function startEventsLoading(subId, deadline) {
 
 const templateEvent = (txt, time, srcUrl, link) => `
     <div class="p-1 shadow-xs border space-x-1 dark:border-gray-600 h-12 w-80 sm:w-[624px] flex">
-        <a href="${link}" target="_blank" class="w-full">
+        <a href="${link}" target="_blank" class="w-[300px] sm:w-[600px]">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${txt}
             </p>
@@ -176,7 +176,7 @@ const templateEvent = (txt, time, srcUrl, link) => `
                 </span>
             </p>
         </a>
-        <button id="button_src_report" type="button" class="flex report justify-center text-center">
+        <button id="button_src_report" type="button" class="flex report justify-center text-center text-xl border round-md">
             <span class="pt-1">⚠</span>
         </button>
     </div>

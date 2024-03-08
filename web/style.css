@@ -392,6 +392,18 @@ input:checked + .slider:before {
     }
 }
 
+.svg-chart-line-avg {
+    stroke-width: 1;
+    stroke: #006600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .svg-chart-line-avg {
+        stroke-width: 1;
+        stroke: #44aa44;
+    }
+}
+
 .waiting-cursor {
     cursor: wait;
 }

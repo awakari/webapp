@@ -158,18 +158,21 @@ async function drawFreqChart(counts) {
         let countSum = 0;
         for (let i = 0; i < weekMinutes; i ++) {
             if (counts.hasOwnProperty(i)) {
-                const c = countSum[i];
+                const c = counts[i];
                 countSum += c;
                 if (c > countMax) {
                     countMax = c;
                 }
             }
         }
-        console.log(`Average per minute: ${countSum / weekMinutes}`);
+        const avg = countSum / weekMinutes;
+        console.log(`Average per minute: ${avg}`);
         const stepY = freqChartHeight / countMax;
+        const hAvg = stepY * avg;
         for (let i = 0; i < weekDays; i++) {
             let chartElement = document.getElementById(`chart-freq-${i}`);
             chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
+            chartElement.innerHTML += `<line x1="${freqChartOffsetLeft}" y1="${freqChartOffsetTop + freqChartHeight - hAvg}" x2="${freqChartOffsetLeft + freqChartWidth}" y2="${freqChartOffsetTop + freqChartHeight - hAvg}" class="svg-chart-line-avg"></line>`
         }
         for (const [t, c] of Object.entries(counts)) {
             const dayNum = Math.floor(t / dayMinutes);

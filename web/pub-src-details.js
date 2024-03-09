@@ -145,7 +145,6 @@ async function loadSource() {
             }
         }
         const avg = countSum / weekMinutes;
-        document.getElementById("rate-avg").innerText = `${avg.toFixed(3)} / min`;
         const pointsCount = Object.keys(counts).length;
         if (pointsCount < 720 || confirm("Draw frequency chart? This may take a while.")) {
             drawFreqChart(counts, avg, countMax);

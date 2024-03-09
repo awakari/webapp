@@ -1,3 +1,7 @@
+const weekDays = 7;
+const dayMinutes = 24 * 60;
+const weekMinutes = weekDays * dayMinutes;
+
 async function loadSource() {
     //
     const urlParams = new URLSearchParams(window.location.search);
@@ -49,8 +53,7 @@ async function loadSource() {
                                 break
                             default:
                                 document.getElementById("type").innerText = "Feed";
-                                const d = moment.duration(data.updatePeriod / 1_000_000); // nanos -> millis
-                                document.getElementById("upd_period").innerText = `Polling once ${d.humanize()}`;
+                                document.getElementById("upd_period").innerText = `Next poll at ${data.nextUpdate}`;
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
@@ -133,40 +136,34 @@ async function loadSource() {
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
     if (counts != null) {
+        let countMax = 0;
+        let countSum = 0;
+        for (const c of Object.values(counts)) {
+            countSum += c;
+            if (c > countMax) {
+                countMax = c;
+            }
+        }
+        const avg = countSum / weekMinutes;
+        document.getElementById("rate-avg").innerText = `${avg.toFixed(3)} / min`;
         const pointsCount = Object.keys(counts).length;
         if (pointsCount < 720 || confirm("Draw frequency chart? This may take a while.")) {
-            drawFreqChart(counts);
+            drawFreqChart(counts, avg, countMax);
         }
     }
 }
 
-const weekDays = 7;
-const dayMinutes = 24 * 60;
-const weekMinutes = weekDays * dayMinutes;
 const freqChartHeight = 100;
 const freqChartWidth = 288;
 const stepX = freqChartWidth / dayMinutes;
 const freqChartOffsetTop = 22;
 const freqChartOffsetLeft = 30;
 
-async function drawFreqChart(counts) {
+async function drawFreqChart(counts, avg, countMax) {
     if (counts != null && Object.keys(counts).length > 0) {
         document.body.classList.add('waiting-cursor');
         document.getElementById("wait").style.display = "block";
         document.getElementById("freq-charts").style.display = "block";
-        let countMax = 0;
-        let countSum = 0;
-        for (let i = 0; i < weekMinutes; i ++) {
-            if (counts.hasOwnProperty(i)) {
-                const c = counts[i];
-                countSum += c;
-                if (c > countMax) {
-                    countMax = c;
-                }
-            }
-        }
-        const avg = countSum / weekMinutes;
-        console.log(`Average per minute: ${avg}`);
         const stepY = freqChartHeight / countMax;
         for (const [t, c] of Object.entries(counts)) {
             const dayNum = Math.floor(t / dayMinutes);

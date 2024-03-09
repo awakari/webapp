@@ -91,15 +91,10 @@
                     </div>
                 </div>
                 <div id="feed" hidden="hidden" class="mt-2 space-y-2">
-                    <div class="flex">
+                    <div class="flex" style="display: none">
                         <label for="feed_upd_freq" class="mt-1 text-md w-24">Update Every</label>
                         <select id="feed_upd_freq" class="mt-1 min-h-5">
-                            <option value="288">5 min</option>
-                            <option value="96">15 min</option>
                             <option value="24" selected="selected">1 hour</option>
-                            <option value="4">6 hours</option>
-                            <option value="2">12 hours</option>
-                            <option value="1">24 hours</option>
                         </select>
                     </div>
                     <div class="flex mt-1">
@@ -127,6 +122,9 @@
                         <a href="https://www.jsonfeed.org/"  class="text-blue-500" target="_blank">JSON</a>
                         feeds
                     </p>
+                    <div class="col-span-3 mt-1 text-slate-500">
+                        The polling will be adaptively scheduled if the specified source doesn't support WebSub protocol.
+                    </div>
                     <p class="text-slate-500 dark:text-slate-400">
                         The current user's <i>messages publishing quota</i> will be used to publish messages from the added source.
                         Ensure the quota is enough for this.

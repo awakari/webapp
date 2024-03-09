@@ -184,6 +184,7 @@ async function drawFreqChart(addr) {
             document.getElementById("wait").style.display = "none";
         }
     }
+    document.getElementById("button-src-freq").style.display = "none";
 }
 
 function deleteSource(typ, addrEnc) {

@@ -37,6 +37,8 @@ function loadSubscription() {
         },
         cache: "default",
     }
+
+    document.getElementById("wait").style.display = "block";
     fetch(`/v1/sub/${id}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
@@ -52,6 +54,9 @@ function loadSubscription() {
         })
         .catch(err => {
             alert(err);
+        })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
         });
 }
 
@@ -75,6 +80,8 @@ function updateSubscription() {
             },
             body: JSON.stringify(payload)
         }
+
+        document.getElementById("wait").style.display = "block";
         fetch(`/v1/sub/${id}`, optsReq)
             .then(resp => {
                 if (!resp.ok) {
@@ -90,6 +97,9 @@ function updateSubscription() {
             .catch(err => {
                 alert(err)
             })
+            .finally(() => {
+                document.getElementById("wait").style.display = "none";
+            });
     }
 }
 
@@ -107,6 +117,7 @@ function deleteSubscription() {
             },
             cache: "default",
         }
+        document.getElementById("wait").style.display = "block";
         fetch(`/v1/sub/${id}`, optsReq)
             .then(resp => {
                 if (!resp.ok) {
@@ -121,5 +132,8 @@ function deleteSubscription() {
             .catch(err => {
                 alert(err);
             })
+            .finally(() => {
+                document.getElementById("wait").style.display = "none";
+            });
     }
 }

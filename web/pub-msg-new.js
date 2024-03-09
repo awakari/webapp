@@ -235,6 +235,7 @@ function submitMsg() {
         attributes: JSON.parse(document.getElementById("msg_attrs").value),
         text_data: document.getElementById("msg_txt_data").value,
     }
+    document.getElementById("wait").style.display = "block";
     fetch("/v1/pub", {
         method: "POST",
         headers: {
@@ -258,4 +259,7 @@ function submitMsg() {
         .catch(err => {
             alert(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 }

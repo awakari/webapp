@@ -31,6 +31,7 @@ function load() {
         "X-Awakari-User-Id": userId,
     }
 
+    document.getElementById("wait").style.display = "block";
     fetch("/v1/usage/2", {
         method: "GET",
         headers: headers,
@@ -50,7 +51,11 @@ function load() {
         .catch(err => {
             alert(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 
+    document.getElementById("wait").style.display = "block";
     fetch("/v1/limits/2", {
         method: "GET",
         headers: headers,
@@ -71,6 +76,9 @@ function load() {
         .catch(err => {
             alert(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 
     const urlParams = new URLSearchParams(window.location.search);
     loadSources(urlParams.get("cursor"), urlParams.get("filter"), urlParams.get("srcType"), urlParams.get("own"));
@@ -117,6 +125,7 @@ function loadSources(cursor, filter, srcType, own) {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
 
+    document.getElementById("wait").style.display = "block";
     fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
         headers: {
@@ -186,5 +195,8 @@ function loadSources(cursor, filter, srcType, own) {
         })
         .catch(err => {
             alert(err);
+        })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
         })
 }

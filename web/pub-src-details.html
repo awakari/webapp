@@ -34,17 +34,17 @@
             <img src="wait.gif"/>
         </div>
         <form class="space-y-2">
-            <div class="grid grid-cols-3 space-y-1">
-                <span class="text-slate-500 dark:text-slate-400 py-1 text-right">Type:</span>
-                <span id="type" class="ml-2 col-span-2 py-1"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Address:</span>
-                <span id="addr" class="ml-2 col-span-2 break-all py-1"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Name:</span>
-                <span id="name" class="ml-2 col-span-2 break-all py-1"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Daily Limit:</span>
-                <div class="col-span-2 space-x-2 flex">
+            <div class="grid grid-cols-3">
+                <span class="text-slate-500 dark:text-slate-400 py-2 text-right">Type:</span>
+                <span id="type" class="ml-2 col-span-2 py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Address:</span>
+                <span id="addr" class="ml-2 col-span-2 break-all py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Name:</span>
+                <span id="name" class="ml-2 col-span-2 break-all py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Daily Limit:</span>
+                <div class="col-span-2 space-x-2 flex py-1">
 
-                    <div id="limit" class="ml-2 mt-1 w-16"></div>
+                    <div id="limit" class="py-1 w-16"></div>
 
                     <button id="pub-src-lim-incr-btn"
                             type="button"
@@ -86,28 +86,28 @@
                     </div>
 
                 </div>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Limit Owner:</span>
-                <div class="col-span-2 space-x-2 flex">
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Limit Owner:</span>
+                <div class="col-span-2 space-x-2 flex py-1">
 
-                    <span id="owner" class="ml-2 py-1 w-16"></span>
+                    <span id="owner" class="py-1 w-16"></span>
 
                     <button id="pub-src-nominate"
                             style="display: none"
                             type="button"
-                            class="text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static w-[100px]">
+                            class="text-blue-500 py-1 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static w-[100px]">
                         ★ Nominate
                     </button>
 
                 </div>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Published Today:</span>
-                <span id="count" class="ml-2 col-span-2 py-1"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Published Total:</span>
-                <span id="total" class="ml-2 col-span-2 py-1"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Last Event:</span>
-                <span id="last_upd" class="ml-2 col-span-2 py-1">YYYY-MM-DDThh-mm-ss.SSSZ</span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Updates:</span>
-                <span id="upd_period" class="ml-2 col-span-2 py-1"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-1">Accepted:</span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Published Today:</span>
+                <span id="count" class="ml-2 col-span-2 py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Published Total:</span>
+                <span id="total" class="ml-2 col-span-2 py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Last Event:</span>
+                <span id="last_upd" class="ml-2 col-span-2 py-2">YYYY-MM-DDThh-mm-ss.SSSZ</span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Updates:</span>
+                <span id="upd_period" class="ml-2 col-span-2 py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Accepted:</span>
                 <div class="ml-2 col-span-2 flex">
                     <input type="checkbox" disabled="disabled" id="accepted"/>
                 </div>

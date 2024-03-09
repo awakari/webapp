@@ -90,6 +90,7 @@ function createSubscription() {
             },
             body: JSON.stringify(payload)
         };
+        document.getElementById("wait").style.display = "block";
         fetch(`/v1/sub`, optsReq)
             .then(resp => {
                 if (!resp.ok) {
@@ -107,6 +108,9 @@ function createSubscription() {
             .catch(err => {
                 alert(err);
             })
+            .finally(() => {
+                document.getElementById("wait").style.display = "none";
+            });
     } else {
         window.alert(`Validation error: ${validationErr}`);
     }

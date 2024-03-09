@@ -150,6 +150,8 @@ const freqChartOffsetTop = 22;
 const freqChartOffsetLeft = 30;
 
 async function drawFreqChart(addr) {
+    document.body.classList.add('waiting-cursor');
+    document.getElementById("wait").style.display = "block";
     const countsTxt = sessionStorage.getItem(addr);
     if (countsTxt) {
         const counts = JSON.parse(countsTxt)
@@ -163,8 +165,6 @@ async function drawFreqChart(addr) {
                 }
             }
             const avg = countSum / weekMinutes;
-            document.body.classList.add('waiting-cursor');
-            document.getElementById("wait").style.display = "block";
             document.getElementById("freq-charts").style.display = "block";
             const stepY = freqChartHeight / countMax;
             for (const [t, c] of Object.entries(counts)) {
@@ -180,10 +180,10 @@ async function drawFreqChart(addr) {
                 chartElement.innerHTML += `<text x="20" y="20" class="svg-text">${countMax}</text>`;
                 chartElement.innerHTML += `<line x1="${freqChartOffsetLeft}" y1="${freqChartOffsetTop + freqChartHeight - hAvg}" x2="${freqChartOffsetLeft + freqChartWidth}" y2="${freqChartOffsetTop + freqChartHeight - hAvg}" class="svg-chart-line-avg"></line>`
             }
-            document.body.classList.remove('waiting-cursor');
-            document.getElementById("wait").style.display = "none";
         }
     }
+    document.body.classList.remove('waiting-cursor');
+    document.getElementById("wait").style.display = "none";
     document.getElementById("button-src-freq").style.display = "none";
 }
 

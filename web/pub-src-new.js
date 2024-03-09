@@ -102,6 +102,7 @@ function addSource() {
             "addr": srcAddr,
         }
     }
+    document.getElementById("wait").style.display = "block";
     fetch(`/v1/src/${srcType}`, {
         method: "POST",
         headers: {
@@ -130,4 +131,7 @@ function addSource() {
         .catch(err => {
             console.error(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 }

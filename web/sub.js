@@ -31,6 +31,7 @@ function load() {
         "X-Awakari-User-Id": userId,
     }
 
+    document.getElementById("wait").style.display = "block";
     fetch("/v1/usage/1", {
         method: "GET",
         headers: headers,
@@ -50,7 +51,11 @@ function load() {
         .catch(err => {
             alert(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 
+    document.getElementById("wait").style.display = "block";
     fetch("/v1/limits/1", {
         method: "GET",
         headers: headers,
@@ -71,6 +76,9 @@ function load() {
         .catch(err => {
             alert(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 
     const urlParams = new URLSearchParams(window.location.search);
     loadSubscriptions(urlParams.get("filter"));
@@ -96,6 +104,7 @@ function loadSubscriptions(filter) {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
 
+    document.getElementById("wait").style.display = "block";
     fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
         headers: {
@@ -178,4 +187,7 @@ function loadSubscriptions(filter) {
         .catch(err => {
             alert(err);
         })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
 }

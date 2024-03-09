@@ -53,7 +53,7 @@ async function loadSource() {
                                 break
                             default:
                                 document.getElementById("type").innerText = "Feed";
-                                document.getElementById("upd_period").innerText = `Next poll at ${data.nextUpdate}`;
+                                document.getElementById("upd_period").innerText = data.nextUpdate;
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;

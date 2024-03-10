@@ -140,8 +140,10 @@ async function loadSource() {
         sessionStorage.setItem(addr, JSON.stringify(counts));
         document.getElementById("button-src-freq").onclick = () => {
             document.getElementById("wait").style.display = "block";
-            alert("wait");
-            drawFreqChart(addr);
+            fetch("https://awakari.com", {
+                method: "GET",
+                cache: "default",
+            }).finally(() => drawFreqChart(addr));
         }
     }
 }

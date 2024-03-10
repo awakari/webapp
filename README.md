@@ -1,10 +1,10 @@
 # webapp
 
-Reference Web UI
+Reference Web Applicatin UI
 
 ## 1. Usage
 
-Uses an external identity provider (Google OAuth2 currently).
+Uses an external identity provider (Telegram currently).
 Navigate https://awakari.com
 
 ## 2. Server TLS

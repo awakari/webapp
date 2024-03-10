@@ -57,7 +57,7 @@ async function loadSource() {
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        document.getElementById("button-src-freq").style.display = "block";
+                        document.getElementById("button-src-freq").style.display = "flex";
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";
@@ -139,6 +139,8 @@ async function loadSource() {
     if (counts != null) {
         sessionStorage.setItem(addr, JSON.stringify(counts));
         document.getElementById("button-src-freq").onclick = () => {
+            document.getElementById("wait").style.display = "block";
+            alert("wait");
             drawFreqChart(addr);
         }
     }
@@ -152,7 +154,6 @@ const freqChartOffsetLeft = 30;
 
 async function drawFreqChart(addr) {
     document.body.classList.add('waiting-cursor');
-    document.getElementById("wait").style.display = "block";
     const countsTxt = sessionStorage.getItem(addr);
     if (countsTxt) {
         const counts = JSON.parse(countsTxt)

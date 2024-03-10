@@ -57,6 +57,7 @@ async function loadSource() {
                                 break
                         }
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
+                        document.getElementById("button-src-freq").style.display = "block";
                         break
                     case "site":
                         document.getElementById("type").innerText = "Site";

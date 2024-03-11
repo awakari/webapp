@@ -136,6 +136,8 @@ async function loadSource() {
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
     if (counts != null && Object.keys(counts).length > 0) {
+        document.getElementById("wait").style.display = "block";
+        document.body.classList.add('waiting-cursor');
         // simulate a blocking I/O to redraw before
         fetch("https://awakari.com", {
             method: "GET",
@@ -151,8 +153,6 @@ const freqChartOffsetTop = 22;
 const freqChartOffsetLeft = 30;
 
 async function drawFreqChart(addr, counts) {
-    document.getElementById("wait").style.display = "block";
-    document.body.classList.add('waiting-cursor');
     let countMax = 0;
     let countSum = 0;
     for (const c of Object.values(counts)) {

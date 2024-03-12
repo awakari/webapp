@@ -10,23 +10,29 @@ async function loadStatus() {
         .then(data => {
             if (data) {
 
+                const pubRateAvgMin5 = data.publishingRate.min5;
+                if (pubRateAvgMin5 > 0) {7
+                    document.getElementById("pub-last-5m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMin5 * 300))}</span>`;
+                } else {
+                    document.getElementById("pub-last-5m").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMin5 * 300))}</span>`;
+                }
                 const pubRateAvgHour = data.publishingRate.hour;
                 if (pubRateAvgHour > 0) {
-                    document.getElementById("pub-rate-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(pubRateAvgHour)}</span>`;
+                    document.getElementById("pub-last-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgHour * 3600))}</span>`;
                 } else {
-                    document.getElementById("pub-rate-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(pubRateAvgHour)}</span>`;
+                    document.getElementById("pub-last-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgHour * 3600))}</span>`;
                 }
                 const pubRateAvgDay = data.publishingRate.day;
                 if (pubRateAvgDay > 0) {
-                    document.getElementById("pub-rate-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(pubRateAvgDay)}</span>`;
+                    document.getElementById("pub-last-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
                 } else {
-                    document.getElementById("pub-rate-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(pubRateAvgDay)}</span>`;
+                    document.getElementById("pub-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
                 }
                 const pubRateAvgWeek = data.publishingRate.week;
                 if (pubRateAvgWeek > 0) {
-                    document.getElementById("pub-rate-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(pubRateAvgWeek)}</span>`;
+                    document.getElementById("pub-last-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
                 } else {
-                    document.getElementById("pub-rate-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(pubRateAvgWeek)}</span>`;
+                    document.getElementById("pub-last-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
                 }
 
                 const evtQueueCurrent = data.queueLength.current;
@@ -196,7 +202,7 @@ async function loadStatus() {
 
 function formatNumberShort(number) {
     const suffixes = ["", "K", "M", "B", "T"];
-    let suffixNum = Math.floor(("" + number).length / 3);
+    let suffixNum = Math.floor(("" + Math.round(number)).length / 3);
     if (number >= 100 && number < 1000) {
         suffixNum = 0;
     }

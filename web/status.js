@@ -11,24 +11,28 @@ async function loadStatus() {
             if (data) {
 
                 const evtCountCurrent = data.eventsSubmitted.current;
-                document.getElementById("evt-count-curr").innerHTML = `${formatNumberShort(evtCountCurrent)}`;
+                if (evtCountCurrent > 0) {
+                    document.getElementById("evt-count-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtCountCurrent)}</span>`;
+                } else {
+                    document.getElementById("evt-count-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCountCurrent)}</span>`;
+                }
                 const evtCount1hChange = evtCountCurrent - data.eventsSubmitted.past.hour;
                 if (evtCount1hChange > 0) {
                     document.getElementById("evt-count-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(evtCount1hChange)}</span>`;
                 } else {
-                    document.getElementById("evt-count-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${evtCount1hChange === 0 ? '': '-'}${formatNumberShort(evtCount1hChange)}</span>`;
+                    document.getElementById("evt-count-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCount1hChange)}</span>`;
                 }
                 const evtCount1dChange = evtCountCurrent - data.eventsSubmitted.past.day;
                 if (evtCount1dChange > 0) {
                     document.getElementById("evt-count-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(evtCount1dChange)}</span>`;
                 } else {
-                    document.getElementById("evt-count-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${evtCount1dChange === 0 ? '': '-'}${formatNumberShort(evtCount1dChange)}</span>`;
+                    document.getElementById("evt-count-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCount1dChange)}</span>`;
                 }
                 const evtCount1wChange = evtCountCurrent - data.eventsSubmitted.past.week;
                 if (evtCount1wChange > 0) {
                     document.getElementById("evt-count-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(evtCount1wChange)}</span>`;
                 } else {
-                    document.getElementById("evt-count-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${evtCount1wChange === 0 ? '': '-'}${formatNumberShort(evtCount1wChange)}</span>`;
+                    document.getElementById("evt-count-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCount1wChange)}</span>`;
                 }
 
                 const evtQueueCurrent = data.queueLength.current;
@@ -39,7 +43,7 @@ async function loadStatus() {
                 }
                 const evtQueue1hChange = evtQueueCurrent - data.queueLength.past.hour;
                 if (evtQueue1hChange < 0) {
-                    document.getElementById("evt-queue-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">-${formatNumberShort(evtQueue1hChange)}</span>`;
+                    document.getElementById("evt-queue-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1hChange)}</span>`;
                 } else if (evtQueue1hChange > 0) {
                     document.getElementById("evt-queue-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1hChange)}</span>`;
                 } else {
@@ -47,7 +51,7 @@ async function loadStatus() {
                 }
                 const evtQueue1dChange = evtQueueCurrent - data.queueLength.past.day;
                 if (evtQueue1dChange < 0) {
-                    document.getElementById("evt-queue-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">-${formatNumberShort(evtQueue1dChange)}</span>`;
+                    document.getElementById("evt-queue-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1dChange)}</span>`;
                 } else if (evtQueue1dChange > 0) {
                     document.getElementById("evt-queue-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1dChange)}</span>`;
                 } else {
@@ -55,7 +59,7 @@ async function loadStatus() {
                 }
                 const evtQueue1wChange = evtQueueCurrent - data.queueLength.past.week;
                 if (evtQueue1wChange < 0) {
-                    document.getElementById("evt-queue-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">-${formatNumberShort(evtQueue1wChange)}</span>`;
+                    document.getElementById("evt-queue-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1wChange)}</span>`;
                 } else if (evtQueue1wChange > 0) {
                     document.getElementById("evt-queue-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1wChange)}</span>`;
                 } else {
@@ -63,10 +67,14 @@ async function loadStatus() {
                 }
 
                 const subscriptionsCurrent = data.subscriptions.current;
-                document.getElementById("subscriptions-curr").innerHTML = `${formatNumberShort(subscriptionsCurrent)}`;
+                if (subscriptionsCurrent > 0) {
+                    document.getElementById("subscriptions-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(subscriptionsCurrent)}</span>`;
+                } else {
+                    document.getElementById("subscriptions-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptionsCurrent)}</span>`;
+                }
                 const subscriptions1hChange = subscriptionsCurrent - data.subscriptions.past.hour;
                 if (subscriptions1hChange < 0) {
-                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(subscriptions1hChange)}</span>`;
+                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions1hChange)}</span>`;
                 } else if(subscriptions1hChange > 0) {
                     document.getElementById("subscriptions-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions1hChange)}</span>`;
                 } else {
@@ -74,7 +82,7 @@ async function loadStatus() {
                 }
                 const subscriptions1dChange = subscriptionsCurrent - data.subscriptions.past.day;
                 if (subscriptions1dChange < 0) {
-                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(subscriptions1dChange)}</span>`;
+                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions1dChange)}</span>`;
                 } else if (subscriptions1dChange > 0) {
                     document.getElementById("subscriptions-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions1dChange)}</span>`;
                 } else {
@@ -82,7 +90,7 @@ async function loadStatus() {
                 }
                 const subscriptions1wChange = subscriptionsCurrent - data.subscriptions.past.week;
                 if (subscriptions1wChange < 0) {
-                    document.getElementById("subscriptions-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(subscriptions1wChange)}</span>`;
+                    document.getElementById("subscriptions-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions1wChange)}</span>`;
                 } else if (subscriptions1wChange > 0) {
                     document.getElementById("subscriptions-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions1wChange)}</span>`;
                 } else {
@@ -90,10 +98,14 @@ async function loadStatus() {
                 }
 
                 const readersCurrent = data.telegramReaderChats.current;
-                document.getElementById("readers-curr").innerHTML = `${formatNumberShort(readersCurrent)}`;
+                if (readersCurrent > 0) {
+                    document.getElementById("readers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(readersCurrent)}</span>`;
+                } else {
+                    document.getElementById("readers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readersCurrent)}</span>`;
+                }
                 const readers1hChange = readersCurrent - data.telegramReaderChats.past.hour;
                 if (readers1hChange < 0) {
-                    document.getElementById("readers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(readers1hChange)}</span>`;
+                    document.getElementById("readers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1hChange)}</span>`;
                 } else if (readers1hChange > 0) {
                     document.getElementById("readers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers1hChange)}</span>`;
                 } else {
@@ -101,7 +113,7 @@ async function loadStatus() {
                 }
                 const readers1dChange = readersCurrent - data.telegramReaderChats.past.day;
                 if (readers1dChange < 0) {
-                    document.getElementById("readers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(readers1dChange)}</span>`;
+                    document.getElementById("readers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1dChange)}</span>`;
                 } else if (readers1dChange > 0) {
                     document.getElementById("readers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers1dChange)}</span>`;
                 } else {
@@ -109,7 +121,7 @@ async function loadStatus() {
                 }
                 const readers1wChange = readersCurrent - data.telegramReaderChats.past.week;
                 if (readers1wChange < 0) {
-                    document.getElementById("readers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(readers1wChange)}</span>`;
+                    document.getElementById("readers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1wChange)}</span>`;
                 } if (readers1wChange > 0) {
                     document.getElementById("readers-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers1wChange)}</span>`;
                 } else {
@@ -117,10 +129,14 @@ async function loadStatus() {
                 }
 
                 const subscribersCurrent = data.uniqueSubscribers.current;
-                document.getElementById("subscribers-curr").innerHTML = `${formatNumberShort(subscribersCurrent)}`;
+                if (subscribersCurrent > 0) {
+                    document.getElementById("subscribers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(subscribersCurrent)}</span>`;
+                } else {
+                    document.getElementById("subscribers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscribersCurrent)}</span>`;
+                }
                 const subscribers1hChange = subscribersCurrent - data.uniqueSubscribers.past.hour;
                 if (subscribers1hChange < 0) {
-                    document.getElementById("subscribers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(subscribers1hChange)}</span>`;
+                    document.getElementById("subscribers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscribers1hChange)}</span>`;
                 } if (subscribers1hChange > 0) {
                     document.getElementById("subscribers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscribers1hChange)}</span>`;
                 } else {
@@ -128,7 +144,7 @@ async function loadStatus() {
                 }
                 const subscribers1dChange = subscribersCurrent - data.uniqueSubscribers.past.day;
                 if (subscribers1dChange < 0) {
-                    document.getElementById("subscribers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(subscribers1dChange)}</span>`;
+                    document.getElementById("subscribers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscribers1dChange)}</span>`;
                 } else if (subscribers1dChange > 0) {
                     document.getElementById("subscribers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscribers1dChange)}</span>`;
                 } else {
@@ -136,7 +152,7 @@ async function loadStatus() {
                 }
                 const subscribers1wChange = subscribersCurrent - data.uniqueSubscribers.past.week;
                 if (subscribers1wChange < 0) {
-                    document.getElementById("subscribers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(subscribers1wChange)}</span>`;
+                    document.getElementById("subscribers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscribers1wChange)}</span>`;
                 } else if (subscribers1wChange > 0) {
                     document.getElementById("subscribers-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscribers1wChange)}</span>`;
                 } else {
@@ -144,10 +160,14 @@ async function loadStatus() {
                 }
 
                 const publishersCurrent = data.uniquePublishers.current;
-                document.getElementById("publishers-curr").innerHTML = `${formatNumberShort(publishersCurrent)}`;
+                if (publishersCurrent > 0) {
+                    document.getElementById("publishers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(publishersCurrent)}</span>`;
+                } else {
+                    document.getElementById("publishers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishersCurrent)}</span>`;
+                }
                 const publishers1hChange = publishersCurrent - data.uniquePublishers.past.hour;
                 if (publishers1hChange < 0) {
-                    document.getElementById("publishers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(publishers1hChange)}</span>`;
+                    document.getElementById("publishers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1hChange)}</span>`;
                 } if (publishers1hChange > 0) {
                     document.getElementById("publishers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1hChange)}</span>`;
                 } else {
@@ -155,15 +175,15 @@ async function loadStatus() {
                 }
                 const publishers1dChange = publishersCurrent - data.uniquePublishers.past.day;
                 if (publishers1dChange < 0) {
-                    document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(publishers1dChange)}</span>`;
+                    document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1dChange)}</span>`;
                 } else if (publishers1dChange > 0) {
                     document.getElementById("publishers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1dChange)}</span>`;
                 } else {
-                    document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(publishers1dChange)}</span>`;
+                    document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1dChange)}</span>`;
                 }
                 const publishers1wChange = publishersCurrent - data.uniquePublishers.past.week;
                 if (publishers1wChange < 0) {
-                    document.getElementById("publishers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">-${formatNumberShort(publishers1wChange)}</span>`;
+                    document.getElementById("publishers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1wChange)}</span>`;
                 } else if (publishers1wChange > 0) {
                     document.getElementById("publishers-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1wChange)}</span>`;
                 } else {

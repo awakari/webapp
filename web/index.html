@@ -146,12 +146,13 @@
     <script src="intcomm.js"></script>
     <script src="query.js"></script>
     <script src="login.js"></script>
+    <script src="status.js"></script>
     <script>
         navigator.serviceWorker.register("sw.js");
     </script>
 
 </head>
-<body class="bg-gray-200" onload="selectMainMenu(); loadQuery();">
+<body class="bg-gray-200" onload="selectMainMenu(); loadQuery(); loadStatus();">
 
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
@@ -979,11 +980,163 @@
         </div>
     </div>
 
-    <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300" id="resources">
-        <div class="container mx-auto px-6 pt-8 space-y-4">
-            <div class="mt-6 md:flex md:items-center md:justify-between">
-                <div>
-                    <h1 class="text-3xl lg:text-4xl font-semibold capitalize dark:text-white">Resources</h1>
+    <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center items-center" id="status">
+
+        <div class="container mx-auto px-2 pt-8 space-y-4 justify-center items-center">
+            <div class="mt-6 px-4 md:flex md:items-center md:justify-between justify-center items-center">
+                <h1 class="text-3xl font-semibold capitalize lg:text-4xl justify-center text-center">Status</h1>
+            </div>
+
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
+
+                <div class="grid grid-cols-4 sm:text-center p-2 space-x-2 space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <span>Events</span>
+                        <span class="text-neutral-400 dark:text-neutral-600">Submitted Total Count</span>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="evt-count-curr">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="evt-count-1h">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="evt-count-1d">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>7 Days</p>
+                        <p class="font-mono" id="evt-count-1w">xxxxxx</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-2 space-x-2 space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <span>Events Queue</span>
+                        <span class="text-neutral-400 dark:text-neutral-600">Total Length</span>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="evt-queue-curr">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="evt-queue-1h">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="evt-queue-1d">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>7 Days</p>
+                        <p class="font-mono" id="evt-queue-1w">xxxxxx</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-2 space-x-2 space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <span>Subscriptions</span>
+                        <span class="text-neutral-400 dark:text-neutral-600">Total Count</span>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="subscriptions-curr">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="subscriptions-1h">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="subscriptions-1d">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>7 Days</p>
+                        <p class="font-mono" id="subscriptions-1w">xxxxxx</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-2 space-x-2 space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <span>Active Readers</span>
+                        <span class="text-neutral-400 dark:text-neutral-600">In Telegram</span>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="readers-curr">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="readers-1h">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="readers-1d">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>7 Days</p>
+                        <p class="font-mono" id="readers-1w">xxxxxx</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-2 space-x-2 space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <span>Unique Subscribers</span>
+                        <span class="text-neutral-400 dark:text-neutral-600">Total Count</span>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="subscribers-curr">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="subscribers-1h">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="subscribers-1d">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>7 Days</p>
+                        <p class="font-mono" id="subscribers-1w">xxxxxx</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-2 space-x-2 space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <span>Unique Publishers</span>
+                        <span class="text-neutral-400 dark:text-neutral-600">Total Count</span>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="publishers-curr">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="publishers-1h">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="publishers-1d">xxxxxx</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>7 Days</p>
+                        <p class="font-mono" id="publishers-1w">xxxxxx</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center" id="resources">
+        <div class="container mx-auto px-6 pt-8 space-y-4 justify-center">
+            <div class="mt-6 md:flex md:items-center md:justify-between justify-center text-center">
+                <div class="justify-center text-center">
+                    <h1 class="text-3xl lg:text-4xl font-semibold capitalize dark:text-white text-center justify-center">Resources</h1>
                 </div>
             </div>
 

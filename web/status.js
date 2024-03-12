@@ -10,29 +10,23 @@ async function loadStatus() {
         .then(data => {
             if (data) {
 
-                const evtCountCurrent = data.eventsSubmitted.current;
-                if (evtCountCurrent > 0) {
-                    document.getElementById("evt-count-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtCountCurrent)}</span>`;
+                const pubRateAvgHour = data.publishingRate.hour;
+                if (pubRateAvgHour > 0) {
+                    document.getElementById("pub-rate-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(pubRateAvgHour)}</span>`;
                 } else {
-                    document.getElementById("evt-count-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCountCurrent)}</span>`;
+                    document.getElementById("pub-rate-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(pubRateAvgHour)}</span>`;
                 }
-                const evtCount1hChange = evtCountCurrent - data.eventsSubmitted.past.hour;
-                if (evtCount1hChange > 0) {
-                    document.getElementById("evt-count-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(evtCount1hChange)}</span>`;
+                const pubRateAvgDay = data.publishingRate.day;
+                if (pubRateAvgDay > 0) {
+                    document.getElementById("pub-rate-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(pubRateAvgDay)}</span>`;
                 } else {
-                    document.getElementById("evt-count-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCount1hChange)}</span>`;
+                    document.getElementById("pub-rate-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(pubRateAvgDay)}</span>`;
                 }
-                const evtCount1dChange = evtCountCurrent - data.eventsSubmitted.past.day;
-                if (evtCount1dChange > 0) {
-                    document.getElementById("evt-count-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(evtCount1dChange)}</span>`;
+                const pubRateAvgWeek = data.publishingRate.week;
+                if (pubRateAvgWeek > 0) {
+                    document.getElementById("pub-rate-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(pubRateAvgWeek)}</span>`;
                 } else {
-                    document.getElementById("evt-count-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCount1dChange)}</span>`;
-                }
-                const evtCount1wChange = evtCountCurrent - data.eventsSubmitted.past.week;
-                if (evtCount1wChange > 0) {
-                    document.getElementById("evt-count-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(evtCount1wChange)}</span>`;
-                } else {
-                    document.getElementById("evt-count-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtCount1wChange)}</span>`;
+                    document.getElementById("pub-rate-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(pubRateAvgWeek)}</span>`;
                 }
 
                 const evtQueueCurrent = data.queueLength.current;

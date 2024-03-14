@@ -42,8 +42,11 @@
                 </div>
 
                 <div class="flex">
-                    <label for="expires" style="margin-top: 0.125rem" class="pt-2 w-20">Expires</label>
-                    <input type="date" id="expires" style="margin-top: 0.5rem" class="border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800 mr-4"/>
+                    <label for="expires" style="margin-top: 0.125rem" class="pt-2 w-20 flex">Expires</label>
+                    <div class="mt-2 mr-4">
+                        <input type="date" id="expires" class="border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
+                        <div class="w-20" id="expires-never" style="margin-top: 0.125rem; display: none">Never</div>
+                    </div>
                     <input type="checkbox" id="enabled" class="je-checkbox mt-2"/>
                     <label for="enabled" style="margin-top: 0.125rem" class="pt-2 w-20">Enabled</label>
                 </div>

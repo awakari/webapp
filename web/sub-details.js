@@ -51,7 +51,14 @@ function loadSubscription() {
                 document.getElementById("description").value = data.description;
                 document.getElementById("enabled").checked = data.enabled;
                 const expires = new Date(data.expires);
-                document.getElementById("expires").value = expires;
+                if (!isNaN(expires) && expires > 0) {
+                    document.getElementById("expires").value = expires;
+                    document.getElementById("expires").style.display = "block";
+                    document.getElementById("expires-never").style.display = "none";
+                } else {
+                    document.getElementById("expires").style.display = "none";
+                    document.getElementById("expires-never").style.display = "block";
+                }
                 editor.setValue(data.cond);
             }
         })

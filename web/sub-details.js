@@ -78,7 +78,10 @@ function updateSubscription() {
         }
         const expires = document.getElementById("expires").value;
         if (expires && expires !== "") {
-            payload.expires = expires;
+            const d = new Date(expires);
+            payload.expires = new Date(d.getTime() - d.getTimezoneOffset() * 60_000).toISOString();
+        } else {
+            payload.expires = null;
         }
         let optsReq = {
             method: "PUT",

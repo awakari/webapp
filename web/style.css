@@ -50,6 +50,12 @@ textarea, select, fieldset  {
         border-width: 1px;
         color: #94a3b8;
     }
+    input[type=datetime-local] {
+        background-color: #1f2937;
+        border-color: #334155;
+        border-width: 1px;
+        color: #94a3b8;
+    }
     textarea, select, fieldset  {
         background-color: #1f2937;
         border-color: #334155;

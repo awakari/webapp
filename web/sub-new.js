@@ -4,45 +4,18 @@ var editor = new JSONEditor(document.getElementById("sub_cond_editor"), subCondS
 // Hook up the validation indicator to update its
 // status whenever the editor changes
 editor.on('change', function () {
-    switch (document.getElementById("advanced").style.display) {
-        case "none": // wizard mode
-            break
-        default:
-            // Get an array of errors from the validator
-            var errors = editor.validate();
-            // Not valid
-            if (errors.length) {
-                console.log(errors);
-                document.getElementById("button-submit").disabled = "disabled";
-            }
-            // Valid
-            else {
-                document.getElementById("button-submit").removeAttribute("disabled");
-            }
+    // Get an array of errors from the validator
+    var errors = editor.validate();
+    // Not valid
+    if (errors.length) {
+        console.log(errors);
+        document.getElementById("button-submit").disabled = "disabled";
+    }
+    // Valid
+    else {
+        document.getElementById("button-submit").removeAttribute("disabled");
     }
 });
-
-document.getElementById("toggle_mode").onchange = function (evt) {
-    switch (evt.target.checked) {
-        case true:
-            showAdvanced();
-            break;
-        default:
-            showWizard();
-            document.getElementById("button-submit").removeAttribute("disabled");
-            break;
-    }
-}
-
-function showAdvanced() {
-    document.getElementById("advanced").style.display = "block";
-    document.getElementById("wizard").style.display = "none";
-}
-
-function showWizard() {
-    document.getElementById("advanced").style.display = "none";
-    document.getElementById("wizard").style.display = "block";
-}
 
 function createSubscription() {
     let validationErr = "";
@@ -60,23 +33,7 @@ function createSubscription() {
     if (payload.description === "") {
         validationErr = "empty description";
     } else {
-        switch (document.getElementById("advanced").style.display) {
-            case "none": // wizard mode
-                validationErr = getFormConditions(payload.cond.gc.group);
-                if (validationErr === "") {
-                    switch (payload.cond.gc.group.length) {
-                        case 0:
-                            validationErr = "no conditions defined"
-                            break
-                        case 1:
-                            payload.cond = payload.cond.gc.group[0]
-                            break
-                    }
-                }
-                break
-            default: // advanced mode
-                payload.cond = editor.getValue(0);
-        }
+        payload.cond = editor.getValue(0);
     }
     if (validationErr === "") {
         let authToken = localStorage.getItem(keyAuthToken);

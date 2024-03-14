@@ -49,6 +49,9 @@ function loadSubscription() {
         .then(data => {
             if (data != null) {
                 document.getElementById("description").value = data.description;
+                document.getElementById("enabled").checked = data.enabled;
+                const expires = new Date(data.expires);
+                document.getElementById("expires").value = expires;
                 editor.setValue(data.cond);
             }
         })

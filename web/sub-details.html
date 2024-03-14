@@ -43,13 +43,10 @@
 
                 <div class="flex">
                     <label for="expires" class="pt-2 w-20 flex" style="margin-top: 0.125rem">Expires</label>
-                    <div class="mt-2 mr-2">
-                        <input type="datetime-local" id="expires" class="border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
-                        <div class="w-20" id="expires-never" style="margin-top: 0.125rem; display: none">Never</div>
-                    </div>
+                    <input type="datetime-local" id="expires" class="mt-2 h-5 border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
                 </div>
 
-                <div class="flex">
+                <div class="flex" style="display: none">
                     <label for="enabled" class="pt-2 w-20" style="margin-top: 0.125rem">Enabled</label>
                     <input type="checkbox" id="enabled" class="je-checkbox mt-2"/>
                 </div>

@@ -52,12 +52,7 @@ function loadSubscription() {
                 document.getElementById("enabled").checked = data.enabled;
                 const expires = new Date(data.expires);
                 if (!isNaN(expires) && expires > 0) {
-                    document.getElementById("expires").value = data.expires;
-                    document.getElementById("expires").style.display = "block";
-                    document.getElementById("expires-never").style.display = "none";
-                } else {
-                    document.getElementById("expires").style.display = "none";
-                    document.getElementById("expires-never").style.display = "block";
+                    document.getElementById("expires").value = data.expires.substring(0, 16);
                 }
                 editor.setValue(data.cond);
             }
@@ -78,8 +73,12 @@ function updateSubscription() {
         let payload = {
             id: id,
             description: document.getElementById("description").value,
-            enabled: true,
+            enabled: document.getElementById("enabled").checked,
             cond: editor.getValue(0),
+        }
+        const expires = document.getElementById("expires").value;
+        if (expires && expires !== "") {
+            payload.expires = expires;
         }
         let optsReq = {
             method: "PUT",

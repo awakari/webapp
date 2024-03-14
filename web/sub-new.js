@@ -30,6 +30,10 @@ function createSubscription() {
             }
         },
     }
+    const expires = document.getElementById("expires").value;
+    if (expires && expires !== "") {
+        payload.expires = expires;
+    }
     if (payload.description === "") {
         validationErr = "empty description";
     } else {

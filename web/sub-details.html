@@ -31,24 +31,27 @@
     <div class="flex justify-center m-1">
         <form class="space-y-2 max-w-[800px] grow">
             <div class="flex">
-                <label for="id" style="padding-top: 0.125rem">Id</label>
+                <label for="id" style="margin-top: 0.125rem">Id</label>
                 <input type="text" readonly="readonly" id="id" class="ml-2">
             </div>
             <div class="flex flex-col">
 
                 <div class="flex">
-                    <label for="description" class="w-20" style="padding-top: 0.125rem">Description</label>
+                    <label for="description" class="w-20" style="margin-top: 0.125rem">Description</label>
                     <input type="text" id="description">
                 </div>
 
                 <div class="flex">
-                    <label for="expires" style="margin-top: 0.125rem" class="pt-2 w-20 flex">Expires</label>
-                    <div class="mt-2 mr-4">
-                        <input type="date" id="expires" class="border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
+                    <label for="expires" class="pt-2 w-20 flex" style="margin-top: 0.125rem">Expires</label>
+                    <div class="mt-2 mr-2">
+                        <input type="datetime-local" id="expires" class="border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
                         <div class="w-20" id="expires-never" style="margin-top: 0.125rem; display: none">Never</div>
                     </div>
+                </div>
+
+                <div class="flex">
+                    <label for="enabled" class="pt-2 w-20" style="margin-top: 0.125rem">Enabled</label>
                     <input type="checkbox" id="enabled" class="je-checkbox mt-2"/>
-                    <label for="enabled" style="margin-top: 0.125rem" class="pt-2 w-20">Enabled</label>
                 </div>
 
             </div>

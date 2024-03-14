@@ -52,7 +52,7 @@ function loadSubscription() {
                 document.getElementById("enabled").checked = data.enabled;
                 const expires = new Date(data.expires);
                 if (!isNaN(expires) && expires > 0) {
-                    document.getElementById("expires").value = expires;
+                    document.getElementById("expires").value = data.expires;
                     document.getElementById("expires").style.display = "block";
                     document.getElementById("expires-never").style.display = "none";
                 } else {

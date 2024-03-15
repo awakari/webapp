@@ -20,7 +20,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
                 id: uuidv4(),
                 specVersion: "1.0",
                 source: "awakari.com",
-                type: "com.github.awakari.webapp",
+                type: "com.awakari.webapp",
                 attributes: {
                     increment: {
                         ce_integer: inc,
@@ -59,7 +59,7 @@ async function requestPublishingSourceDedicated(addr){
             id: uuidv4(),
             specVersion: "1.0",
             source: "awakari.com",
-            type: "com.github.awakari.webapp",
+            type: "com.awakari.webapp",
             attributes: {
                 reason: {
                     ce_string: reason,
@@ -102,7 +102,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
                 id: uuidv4(),
                 specVersion: "1.0",
                 source: "awakari.com",
-                type: "com.github.awakari.webapp",
+                type: "com.awakari.webapp",
                 attributes: {
                     increment: {
                         ce_integer: inc,
@@ -140,7 +140,7 @@ async function reportPublishingSourceInappropriate(srcAddr) {
             id: uuidv4(),
             specVersion: "1.0",
             source: "awakari.com",
-            type: "com.github.awakari.webapp",
+            type: "com.awakari.webapp",
             attributes: {
                 reason: {
                     ce_string: reason,
@@ -172,7 +172,7 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
             id: uuidv4(),
             specVersion: "1.0",
             source: "awakari.com",
-            type: "com.github.awakari.webapp",
+            type: "com.awakari.webapp",
             attributes: {
                 reason: {
                     ce_string: reason,

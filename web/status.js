@@ -10,11 +10,11 @@ async function loadStatus() {
         .then(data => {
             if (data) {
 
-                const pubRateAvgMin5 = data.publishingRate.min5;
-                if (pubRateAvgMin5 > 0) {7
-                    document.getElementById("pub-last-5m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMin5 * 300))}</span>`;
+                const pubRateAvgMin1 = Math.floor(data.publishingRate.min5 * 60);
+                if (pubRateAvgMin1 > 0) {
+                    document.getElementById("pub-last-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMin1))}</span>`;
                 } else {
-                    document.getElementById("pub-last-5m").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMin5 * 300))}</span>`;
+                    document.getElementById("pub-last-1m").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMin1))}</span>`;
                 }
                 const pubRateAvgHour = data.publishingRate.hour;
                 if (pubRateAvgHour > 0) {

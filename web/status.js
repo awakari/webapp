@@ -179,7 +179,7 @@ async function loadStatus() {
                 } else if (publishers1dChange > 0) {
                     document.getElementById("publishers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1dChange)}</span>`;
                 } else {
-                    document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1dChange)}</span>`;
+                    document.getElementById("publishers-1d").innerHTML = `${formatNumberShort(publishers1dChange)}</span>`;
                 }
                 const publishers1wChange = publishersCurrent - data.uniquePublishers.past.week;
                 if (publishers1wChange < 0) {
@@ -201,12 +201,9 @@ async function loadStatus() {
 }
 
 function formatNumberShort(number) {
-    const suffixes = ["", "K", "M", "B", "T"];
-    let suffixNum = Math.floor(("" + Math.round(number)).length / 3);
-    if (number >= 100 && number < 1000) {
-        suffixNum = 0;
-    }
-    let shortNumber = parseFloat((suffixNum != 0 ? (number / Math.pow(1000, suffixNum)) : number).toPrecision(3));
+    const suffixes = ["", "", "K", "M", "B", "T", "P"];
+    let suffixNum = Math.ceil(("" + Math.round(number)).length / 3);
+    let shortNumber = parseFloat((suffixNum > 1 ? (number / Math.pow(1000, suffixNum-1)) : number).toPrecision(3));
     if (shortNumber % 1 !== 0) {
         if (shortNumber > 10) {
             shortNumber = shortNumber.toFixed(1);

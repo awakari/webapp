@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link href="tailwind.output.css" rel="stylesheet">
+        <script src="multiselect-dropdown.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+    <form>
+        <div class="flex mx-auto">
+            <div class="grid grid-cols-6 space-x-2 w-[352px]">
+                <input type="search"
+                       class="col-span-3 border outline-none focus:outline-none"/>
+                <select class="col-span-2"
+                        multiple="multiple"
+                        multiselect-max-items="1"
+                        multiselect-search="true"
+                        multiselect-select-all="true">
+                    <option value="opt0">Option 0</option>
+                    <option value="opt1">Option 1</option>
+                    <option value="opt0">Option 2</option>
+                    <option value="opt0">Option 3</option>
+                </select>
+                <button>
+                    Add
+                </button>
+            </div>
+        </div>
+    </form>
+    </body>
+</html>

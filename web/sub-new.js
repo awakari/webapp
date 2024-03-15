@@ -1,5 +1,6 @@
 // Initialize the editor
-var editor = new JSONEditor(document.getElementById("sub_cond_editor"), subCondSchema);
+let editor = new JSONEditor(document.getElementById("sub_cond_editor"), subCondSchema);
+loadAttributeTypes();
 
 // Hook up the validation indicator to update its
 // status whenever the editor changes
@@ -16,6 +17,60 @@ editor.on('change', function () {
         document.getElementById("button-submit").removeAttribute("disabled");
     }
 });
+
+let keyOptsInt = [];
+let keyOptsTxt = [];
+
+function loadAttributeTypes() {
+    let optsReq = {
+        method: "GET",
+    };
+    return fetch(`/v1/status/attrs`, optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Request failed ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            let typesByKey = null;
+            if (data) {
+                typesByKey = data.typesByKey;
+            }
+            if (typesByKey) {
+                for (const key of Object.keys(typesByKey)) {
+                    const types = typesByKey[key];
+                    for (const type of types) {
+                        if (type === "int32") {
+                            keyOptsInt.push(key);
+                        }
+                        if (type === "string") {
+                            keyOptsTxt.push(key);
+                        }
+                    }
+                }
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+window.JSONEditor.defaults.callbacks = {
+    "autocomplete": {
+        "autoCompleteKeyInt": function search(editor, input) {
+            return new Promise(function (resolve) {
+                return resolve(keyOptsInt);
+            });
+        },
+        "autoCompleteKeyTxt": function search(editor, input) {
+            return new Promise(function (resolve) {
+                return resolve(keyOptsTxt);
+            });
+        },
+    },
+};
 
 function createSubscription() {
     let validationErr = "";
@@ -76,29 +131,4 @@ function createSubscription() {
     } else {
         window.alert(`Validation error: ${validationErr}`);
     }
-}
-
-function getFormConditions(rootGroupConds) {
-
-    let validationErr = "";
-
-    for (let i = 1; i <= 4; i ++) {
-        let not = false;
-        const extraTerms = document.getElementById(`cond_extra${i}`).value;
-        if (extraTerms.length > 2) {
-            if (i > 1) {
-                not = document.getElementById(`cond_extra${i}_not`).checked;
-            }
-            rootGroupConds.push({
-                not: not,
-                tc: {
-                    exact: false,
-                    key: "",
-                    term: extraTerms,
-                }
-            })
-        }
-    }
-
-    return validationErr;
 }

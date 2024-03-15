@@ -1,4 +1,4 @@
-const subCondSchema = {
+let subCondSchema = {
     iconlib: "spectre",
     theme: "html",
     // The schema for the editor
@@ -69,10 +69,11 @@ const subCondSchema = {
                                 minLength: 1,
                                 maxLength: 20,
                                 pattern: "^[a-z0-9]+$",
+                                format: "autocomplete",
                                 options: {
-                                    inputAttributes: {
-                                        placeholder: "e.g. price, revenue, time, ...",
-                                    },
+                                    "autocomplete": {
+                                        "search": "autoCompleteKeyInt",
+                                    }
                                 },
                             },
                             op: {
@@ -109,9 +110,10 @@ const subCondSchema = {
                                 minLength: 0,
                                 maxLength: 20,
                                 pattern: "^[a-z0-9]*$",
+                                format: "autocomplete",
                                 options: {
-                                    inputAttributes: {
-                                        placeholder: "e.g. language, source, title, ...",
+                                    "autocomplete": {
+                                        "search": "autoCompleteKeyTxt",
                                     }
                                 },
                             },

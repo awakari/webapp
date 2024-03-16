@@ -21,6 +21,21 @@ editor.on('change', function () {
 let keyOptsInt = [];
 let keyOptsTxt = [];
 
+window.JSONEditor.defaults.callbacks = {
+    "autocomplete": {
+        "autoCompleteKeyInt": function search(editor, input) {
+            return new Promise(function (resolve) {
+                return resolve(keyOptsInt);
+            });
+        },
+        "autoCompleteKeyTxt": function search(editor, input) {
+            return new Promise(function (resolve) {
+                return resolve(keyOptsTxt);
+            });
+        },
+    },
+};
+
 function loadAttributeTypes() {
     let optsReq = {
         method: "GET",

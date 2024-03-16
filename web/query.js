@@ -258,3 +258,39 @@ function loadQueryOptionsAttribute() {
             console.log(err);
         });
 }
+
+function loadQueryOptionsSource() {
+    let optsReq = {
+        method: "GET",
+    };
+    return fetch(`/v1/status/sources`, optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Request failed ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                let optsHtml = "";
+                let uniqueSrcs = new Set();
+                for (const type of Object.keys(data)) {
+                    const srcs = data[type];
+                    for (const src of srcs) {
+                        uniqueSrcs.add(src);
+
+                    }
+                }
+                let i = 0;
+                for (const src of uniqueSrcs) {
+                    optsHtml += queryOptTemplate(`src-${i}`, src);
+                    i ++;
+                }
+                document.getElementById("query-opt-srcs").innerHTML += optsHtml;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}

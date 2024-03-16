@@ -8,7 +8,7 @@
     </head>
     <body>
     <form>
-        <div class="flex flex-col mx-auto justify-center p-1 space-y-2">
+        <div class="flex flex-col mx-auto justify-center p-1 space-y-2 max-w-[640px]">
             <input type="search"
                    class="border outline-none focus:outline-none text-lg"/>
             <div class="flex space-x-2 text-sm align-middle justify-center text-sm h-7">
@@ -17,7 +17,7 @@
                         open: false,
                         filter: ''
                     }" class="w-full relative">
-                    <div @click="open = !open" class="p-1 flex gap-2 w-28 cursor-pointer truncate" x-text="options.length + ' selected ⌄'">
+                    <div @click="open = !open" class="p-1 flex gap-2 w-28 cursor-pointer truncate" x-text="options.length > 0 ? options.length + ' Sources ⌄' : 'All Sources ⌄'">
                     </div>
                     <div class="p-3 rounded-lg flex gap-3 w-full shadow-lg x-50 absolute flex-col bg-white" x-show="open" x-trap="open" @click.outside="open = false" @keydown.escape.window="open = false" x-transition:enter=" ease-[cubic-bezier(.3,2.3,.6,1)] duration-200" x-transition:enter-start="!opacity-0 !mt-0" x-transition:enter-end="!opacity-1 !mt-3" x-transition:leave=" ease-out duration-200" x-transition:leave-start="!opacity-1 !mt-3" x-transition:leave-end="!opacity-0 !mt-0">
                         <input x-model="filter" placeholder="filter" class="border-b outline-none -mx-3" type="text">

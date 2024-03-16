@@ -219,3 +219,42 @@ function displayEvents(evts) {
         elemEvts.innerHTML = templateEvent(txt, time, srcUrl, link, evt.id) + elemEvts.innerHTML;
     }
 }
+
+const queryOptTemplate = (id, value) => `    
+    <div x-show="$el.innerText.toLowerCase().includes(filter.toLowerCase())" class="flex items-center">
+        <input x-model="options" id="${id}" type="checkbox" value="${value}" class="outline-none focus:outline-none w-4 h-4 text-gray-600 bg-gray-500 border-gray-300">
+        <label for="${id}" class="ml-1 flex-grow truncate">${value}</label>
+    </div>
+`
+
+function loadQueryOptionsAttribute() {
+    let optsReq = {
+        method: "GET",
+    };
+    return fetch(`/v1/status/attrs`, optsReq)
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Request failed ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            let typesByKey = null;
+            if (data) {
+                typesByKey = data.typesByKey;
+            }
+            if (typesByKey) {
+                let optsHtml = "";
+                for (const key of Object.keys(typesByKey)) {
+                    if (key !== "") {
+                        optsHtml += queryOptTemplate(key, key);
+                    }
+                }
+                document.getElementById("query-opt-attrs").innerHTML += optsHtml;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}

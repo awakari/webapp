@@ -8,6 +8,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
     <link rel="icon" href="logo-color.svg">
     <link rel="manifest" href="manifest.json">
+    <link href="select2.min.css" rel="stylesheet" />
+
     <meta name="msapplication-TileColor" content="#0ed3cf">
     <meta name="theme-color" content="#0ed3cf">
 
@@ -144,28 +146,94 @@
     <script src="base64.min.js"></script>
     <script src="evts.js"></script>
     <script src="intcomm.js"></script>
-    <script src="query.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="select2.min.js"></script><script src="query.js"></script>
     <script src="login.js"></script>
     <script src="status.js"></script>
-    <script src="jquery-3.7.1.min.js"></script>
 
-    <link href="select2.min.css" rel="stylesheet" />
-    <script src="select2.min.js"></script>
     <script>
         // select2 init
         $(document).ready(function() {
-            $('.dropdown-multiselect').select2({
-                placeholder: function() {
-                    // 'this' refers to the current select2 element
-                    return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
-                },
-                allowClear: true,
+
+            $('#currencies').select2({
+                ajax: {
+                    url: '/v1/status/attr/values/offerspricecurrency',
+                    processResults: function (data) {
+                        let results = [];
+                        let i = 0;
+                        for (const v of data) {
+                            results.push({
+                                id: i,
+                                text: v,
+                            });
+                            i ++;
+                        }
+                        return {
+                            results: results,
+                        };
+                    },
+                    placeholder: function() {
+                        // 'this' refers to the current select2 element
+                        return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+                    },
+                    allowClear: true,
+                }
+            });
+
+            $('#languages').select2({
+                ajax: {
+                    url: '/v1/status/attr/values/language',
+                    processResults: function (data) {
+                        let results = [];
+                        let i = 0;
+                        for (const v of data) {
+                            results.push({
+                                id: i,
+                                text: v,
+                            });
+                            i ++;
+                        }
+                        return {
+                            results: results,
+                        };
+                    },
+                    placeholder: function() {
+                        // 'this' refers to the current select2 element
+                        return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+                    },
+                    allowClear: true,
+                }
+            });
+
+            $('#subjects').select2({
+                ajax: {
+                    url: '/v1/status/attr/values/subject',
+                    processResults: function (data) {
+                        let results = [];
+                        let i = 0;
+                        for (const v of data) {
+                            results.push({
+                                id: i,
+                                text: v,
+                            });
+                            i ++;
+                        }
+                        return {
+                            results: results,
+                        };
+                    },
+                    placeholder: function() {
+                        // 'this' refers to the current select2 element
+                        return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+                    },
+                    allowClear: true,
+                }
             });
         });
     </script>
 
 </head>
-<body class="bg-gray-200" onload="selectMainMenu(); loadQuery(); loadStatus(); loadQueryOptionsAttribute(); loadQueryOptionsSource();">
+<body class="bg-gray-200" onload="selectMainMenu(); loadQuery(); loadStatus();">
 
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
@@ -212,13 +280,13 @@
             </div>
 
             <div class="flex space-x-2 pt-2 align-middle justify-center text-sm sm:text-md h-12 max-w-[420px] mx-auto text-neutral-600 dark:text-neutral-300">
-                <select class="dropdown-multiselect js-states form-control w-[76px]"
+                <select class="dropdown-multiselect js-states form-control w-[80px]"
                         id="currencies"
                         name="currencies[]"
                         multiple="multiple"
                         data-placeholder="Currency...">
                 </select>
-                <select class="dropdown-multiselect js-states form-control w-[84px]"
+                <select class="dropdown-multiselect js-states form-control w-[88px]"
                         id="languages"
                         name="languages[]"
                         multiple="multiple"

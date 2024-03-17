@@ -79,6 +79,7 @@
 
 .select2-dropdown {
     background-color: white;
+    color: #4b5563;
     border: 1px solid rgb(229, 231, 235);
     border-radius: 0;
     box-sizing: border-box;
@@ -91,15 +92,9 @@
 
 @media (prefers-color-scheme: dark) {
     .select2-dropdown {
-        background-color: white;
+        background-color: #1f2937;
         border: 1px solid #374151;
-        border-radius: 0;
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        left: -100000px;
-        width: 100%;
-        z-index: 1051
+        color: #9ca3af;
     }
 }
 

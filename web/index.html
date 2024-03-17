@@ -212,32 +212,29 @@
             </div>
 
             <div class="flex space-x-2 pt-2 align-middle justify-center text-sm sm:text-md h-12 max-w-[420px] mx-auto text-neutral-600 dark:text-neutral-300">
-                <select class="dropdown-multiselect js-states form-control w-[82px]"
+                <select class="dropdown-multiselect js-states form-control w-[76px]"
+                        id="currencies"
+                        name="currencies[]"
+                        multiple="multiple"
+                        data-placeholder="Currency...">
+                </select>
+                <select class="dropdown-multiselect js-states form-control w-[84px]"
+                        id="languages"
                         name="languages[]"
                         multiple="multiple"
                         data-placeholder="Language...">
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
                 </select>
-                <select class="dropdown-multiselect js-states form-control w-[70px]"
+                <select class="dropdown-multiselect js-states form-control w-[72px]"
+                        id="subjects"
                         name="subjects[]"
                         multiple="multiple"
                         data-placeholder="Subject...">
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
                 </select>
-                <select class="dropdown-multiselect js-states form-control w-[76px]"
-                        name="subjects[]"
-                        multiple="multiple"
-                        data-placeholder="Currency...">
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
-                </select>
-                <select class="border-0 outline-none focus:outline-none mb-3 text-gray-600 dark:text-gray-400" style="background-color: unset">
-                    <option value="opt0" class="dark:bg-gray-800">5 min</option>
-                    <option value="opt1"  class="dark:bg-gray-800" selected="selected">15 min</option>
-                    <option value="opt0" class="dark:bg-gray-800">1 h</option>
-                    <option value="opt0" class="dark:bg-gray-800">6 h</option>
+                <select class="border-0 outline-none focus:outline-none text-gray-600 dark:text-gray-400" style="background-color: unset; margin-bottom: 14px">
+                    <option value="5m" class="dark:bg-gray-800">5 min</option>
+                    <option value="15m"  class="dark:bg-gray-800" selected="selected">15 min</option>
+                    <option value="1h" class="dark:bg-gray-800">1 h</option>
+                    <option value="6h" class="dark:bg-gray-800">6 h</option>
                 </select>
             </div>
 

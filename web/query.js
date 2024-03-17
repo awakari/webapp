@@ -1,11 +1,79 @@
 // select2 init
 $(document).ready(function() {
-    $('.dropdown-multiselect').select2({
-        placeholder: function() {
-            // 'this' refers to the current select2 element
-            return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
-        },
-        allowClear: true,
+
+    $('#currencies').select2({
+        ajax: {
+            url: '/v1/status/attr/values/offerspricecurrency',
+            processResults: function (data) {
+                let results = [];
+                let i = 0;
+                for (const v of data) {
+                    results.push({
+                        id: i,
+                        text: v,
+                    });
+                    i ++;
+                }
+                return {
+                    results: results,
+                };
+            },
+            placeholder: function() {
+                // 'this' refers to the current select2 element
+                return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+            },
+            allowClear: true,
+        }
+    });
+
+    $('#languages').select2({
+        ajax: {
+            url: '/v1/status/attr/values/language',
+            processResults: function (data) {
+                let results = [];
+                let i = 0;
+                for (const v of data) {
+                    results.push({
+                        id: i,
+                        text: v,
+                    });
+                    i ++;
+                }
+                return {
+                    results: results,
+                };
+            },
+            placeholder: function() {
+                // 'this' refers to the current select2 element
+                return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+            },
+            allowClear: true,
+        }
+    });
+
+    $('#subjects').select2({
+        ajax: {
+            url: '/v1/status/attr/values/subject',
+            processResults: function (data) {
+                let results = [];
+                let i = 0;
+                for (const v of data) {
+                    results.push({
+                        id: i,
+                        text: v,
+                    });
+                    i ++;
+                }
+                return {
+                    results: results,
+                };
+            },
+            placeholder: function() {
+                // 'this' refers to the current select2 element
+                return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+            },
+            allowClear: true,
+        }
     });
 });
 

@@ -1,3 +1,14 @@
+// select2 init
+$(document).ready(function() {
+    $('.dropdown-multiselect').select2({
+        placeholder: function() {
+            // 'this' refers to the current select2 element
+            return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+        },
+        allowClear: true,
+    });
+});
+
 const resultsStreamingTtimeout = 3_600_000;
 
 function loadQuery() {
@@ -82,6 +93,7 @@ function deleteSubscription(id, headers) {
 }
 
 function createSubscription(q, headers, expires) {
+    console.log(``);
     const payload = {
         description: defaultSubName,
         enabled: true,

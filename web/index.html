@@ -144,25 +144,13 @@
     <script src="base64.min.js"></script>
     <script src="evts.js"></script>
     <script src="intcomm.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="select2.min.js"></script>
     <script src="query.js"></script>
     <script src="login.js"></script>
     <script src="status.js"></script>
-    <script src="jquery-3.7.1.min.js"></script>
 
-    <link href="select2.min.css" rel="stylesheet" />
-    <script src="select2.min.js"></script>
-    <script>
-        // select2 init
-        $(document).ready(function() {
-            $('.dropdown-multiselect').select2({
-                placeholder: function() {
-                    // 'this' refers to the current select2 element
-                    return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
-                },
-                allowClear: true,
-            });
-        });
-    </script>
+    <link href="select2.css" rel="stylesheet" />
 
 </head>
 <body class="bg-gray-200" onload="selectMainMenu(); loadQuery(); loadStatus(); loadQueryOptionsAttribute(); loadQueryOptionsSource();">
@@ -211,20 +199,20 @@
                 </div>
             </div>
 
-            <div class="flex space-x-2 pt-2 align-middle justify-center text-sm sm:text-md h-12 max-w-[420px] mx-auto text-neutral-600 dark:text-neutral-300">
-                <select class="dropdown-multiselect js-states form-control w-[76px]"
+            <div class="flex space-x-2 pt-2 align-middle justify-center text-sm sm:text-md h-12 max-w-[624px] mx-auto text-neutral-600 dark:text-neutral-300">
+                <select class="dropdown-multiselect js-states form-control sm:w-40"
                         id="currencies"
                         name="currencies[]"
                         multiple="multiple"
                         data-placeholder="Currency...">
                 </select>
-                <select class="dropdown-multiselect js-states form-control w-[84px]"
+                <select class="dropdown-multiselect js-states form-control sm:w-40"
                         id="languages"
                         name="languages[]"
                         multiple="multiple"
                         data-placeholder="Language...">
                 </select>
-                <select class="dropdown-multiselect js-states form-control w-[72px]"
+                <select class="dropdown-multiselect js-states form-control sm:w-40"
                         id="subjects"
                         name="subjects[]"
                         multiple="multiple"

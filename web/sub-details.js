@@ -40,7 +40,7 @@ function loadAttributeTypes() {
     let optsReq = {
         method: "GET",
     };
-    return fetch(`/v1/status/attrs`, optsReq)
+    return fetch(`/v1/status/attr/types`, optsReq)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

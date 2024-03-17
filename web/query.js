@@ -75,12 +75,38 @@ $(document).ready(function() {
             allowClear: true,
         }
     });
+
+    document.getElementById("currencies").onchange = (evt) => {
+        let currencies = [];
+        for (const item of $('#currencies').select2('data')) {
+            currencies.push(item.text);
+        }
+        document.getElementById("q-curr").value = currencies.join(",");
+    }
+    document.getElementById("languages").onchange = (evt) => {
+        let languages = [];
+        for (const item of $('#languages').select2('data')) {
+            languages.push(item.text);
+        }
+        document.getElementById("q-lang").value = languages.join(",");
+    }
+    document.getElementById("subjects").onchange = (evt) => {
+        let subjects = [];
+        for (const item of $('#subjects').select2('data')) {
+            subjects.push(item.text);
+        }
+        document.getElementById("q-subj").value = subjects.join(",");
+    }
 });
 
-const resultsStreamingTtimeout = 3_600_000;
+const resultsStreamingTimeout = 3_600_000;
 
 function loadQuery() {
-    const q = new URLSearchParams(window.location.search).get("q");
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    const curr = params.get("curr");
+    const lang = params.get("lang");
+    const subj = params.get("lang");
     if (q != null && q !== "") {
         const userId = localStorage.getItem(keyUserId);
         switch (userId) {
@@ -89,8 +115,8 @@ function loadQuery() {
                 break
             default:
                 document.getElementById("query").value = q;
-                const expires = Date.now() + resultsStreamingTtimeout;
-                getQuerySubscription(q, expires)
+                const expires = Date.now() + resultsStreamingTimeout;
+                getQuerySubscription(q, curr, lang, subj, expires)
                     .then(subId => {
                         if (subId !== "") {
                             startEventsLoading(subId, expires);
@@ -102,7 +128,7 @@ function loadQuery() {
 
 const defaultSubName = "_reserved_app_search";
 
-function getQuerySubscription(q, expires) {
+function getQuerySubscription(q, curr, lang, subj, expires) {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
     const headers = {

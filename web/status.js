@@ -30,9 +30,9 @@ async function loadStatus() {
                 }
                 const pubRateAvgWeek = data.publishingRate.month;
                 if (pubRateAvgWeek > 0) {
-                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
+                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgWeek * 30 * 86400))}</span>`;
                 } else {
-                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
+                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgWeek * 30 * 86400))}</span>`;
                 }
 
                 const evtQueueCurrent = data.queueLength.current;

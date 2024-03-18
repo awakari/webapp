@@ -1,112 +1,109 @@
 // select2 init
-$(document).ready(function() {
+//$(document).ready(function() {
 
-    $('#currencies').select2({
-        ajax: {
-            url: '/v1/status/attr/values/offerspricecurrency',
-            processResults: function (data) {
-                let results = [];
-                let i = 0;
-                for (const v of data) {
-                    results.push({
-                        id: i,
-                        text: v,
-                    });
-                    i ++;
-                }
-                return {
-                    results: results,
-                };
-            },
-            placeholder: function() {
-                // 'this' refers to the current select2 element
-                return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
-            },
-            allowClear: true,
-        }
-    });
+    // $('#currencies').select2({
+    //     ajax: {
+    //         url: '/v1/status/attr/values/offerspricecurrency',
+    //         processResults: function (data) {
+    //             let results = [];
+    //             let i = 0;
+    //             for (const v of data) {
+    //                 results.push({
+    //                     id: i,
+    //                     text: v,
+    //                 });
+    //                 i ++;
+    //             }
+    //             return {
+    //                 results: results,
+    //             };
+    //         },
+    //         placeholder: function() {
+    //             // 'this' refers to the current select2 element
+    //             return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+    //         },
+    //         allowClear: true,
+    //     }
+    // });
 
-    $('#languages').select2({
-        ajax: {
-            url: '/v1/status/attr/values/language',
-            processResults: function (data) {
-                let results = [];
-                let i = 0;
-                for (const v of data) {
-                    results.push({
-                        id: i,
-                        text: v,
-                    });
-                    i ++;
-                }
-                return {
-                    results: results,
-                };
-            },
-            placeholder: function() {
-                // 'this' refers to the current select2 element
-                return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
-            },
-            allowClear: true,
-        }
-    });
+    // $('#languages').select2({
+    //     ajax: {
+    //         url: '/v1/status/attr/values/language',
+    //         processResults: function (data) {
+    //             let results = [];
+    //             let i = 0;
+    //             for (const v of data) {
+    //                 results.push({
+    //                     id: i,
+    //                     text: v,
+    //                 });
+    //                 i ++;
+    //             }
+    //             return {
+    //                 results: results,
+    //             };
+    //         },
+    //         placeholder: function() {
+    //             // 'this' refers to the current select2 element
+    //             return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+    //         },
+    //         allowClear: true,
+    //     }
+    // });
 
-    $('#subjects').select2({
-        ajax: {
-            url: '/v1/status/attr/values/subject',
-            processResults: function (data) {
-                let results = [];
-                let i = 0;
-                for (const v of data) {
-                    results.push({
-                        id: i,
-                        text: v,
-                    });
-                    i ++;
-                }
-                return {
-                    results: results,
-                };
-            },
-            placeholder: function() {
-                // 'this' refers to the current select2 element
-                return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
-            },
-            allowClear: true,
-        }
-    });
-
-    document.getElementById("currencies").onchange = (evt) => {
-        let currencies = [];
-        for (const item of $('#currencies').select2('data')) {
-            currencies.push(item.text);
-        }
-        document.getElementById("q-curr").value = currencies.join(",");
-    }
-    document.getElementById("languages").onchange = (evt) => {
-        let languages = [];
-        for (const item of $('#languages').select2('data')) {
-            languages.push(item.text);
-        }
-        document.getElementById("q-lang").value = languages.join(",");
-    }
-    document.getElementById("subjects").onchange = (evt) => {
-        let subjects = [];
-        for (const item of $('#subjects').select2('data')) {
-            subjects.push(item.text);
-        }
-        document.getElementById("q-subj").value = subjects.join(",");
-    }
-});
+    // $('#subjects').select2({
+    //     ajax: {
+    //         url: '/v1/status/attr/values/subject',
+    //         processResults: function (data) {
+    //             let results = [];
+    //             let i = 0;
+    //             for (const v of data) {
+    //                 results.push({
+    //                     id: i,
+    //                     text: v,
+    //                 });
+    //                 i ++;
+    //             }
+    //             return {
+    //                 results: results,
+    //             };
+    //         },
+    //         placeholder: function() {
+    //             // 'this' refers to the current select2 element
+    //             return $(this).data('placeholder'); // Assuming you have a 'data-placeholder' attribute in your HTML
+    //         },
+    //         allowClear: true,
+    //     }
+    // });
+    //
+    // document.getElementById("currencies").onchange = (evt) => {
+    //     let currencies = [];
+    //     for (const item of $('#currencies').select2('data')) {
+    //         currencies.push(item.text);
+    //     }
+    //     document.getElementById("q-curr").value = currencies.join(",");
+    // }
+    // document.getElementById("languages").onchange = (evt) => {
+    //     let languages = [];
+    //     for (const item of $('#languages').select2('data')) {
+    //         languages.push(item.text);
+    //     }
+    //     document.getElementById("q-lang").value = languages.join(",");
+    // }
+    // document.getElementById("subjects").onchange = (evt) => {
+    //     let subjects = [];
+    //     for (const item of $('#subjects').select2('data')) {
+    //         subjects.push(item.text);
+    //     }
+    //     document.getElementById("q-subj").value = subjects.join(",");
+    // }
+//});
 
 const resultsStreamingTimeout = 3_600_000;
 
 function loadQuery() {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
-    const curr = params.get("curr");
-    const lang = params.get("lang");
-    const subj = params.get("lang");
     if (q != null && q !== "") {
         const userId = localStorage.getItem(keyUserId);
         switch (userId) {
@@ -116,7 +113,7 @@ function loadQuery() {
             default:
                 document.getElementById("query").value = q;
                 const expires = Date.now() + resultsStreamingTimeout;
-                getQuerySubscription(q, curr, lang, subj, expires)
+                getQuerySubscription(q, expires)
                     .then(subId => {
                         if (subId !== "") {
                             startEventsLoading(subId, expires);
@@ -128,7 +125,7 @@ function loadQuery() {
 
 const defaultSubName = "_reserved_app_search";
 
-function getQuerySubscription(q, curr, lang, subj, expires) {
+function getQuerySubscription(q, expires) {
     const authToken = localStorage.getItem(keyAuthToken);
     const userId = localStorage.getItem(keyUserId);
     const headers = {

@@ -18,60 +18,6 @@ editor.on('change', function () {
     }
 });
 
-let keyOptsInt = [];
-let keyOptsTxt = [];
-
-window.JSONEditor.defaults.callbacks = {
-    "autocomplete": {
-        "autoCompleteKeyInt": function search(editor, input) {
-            return new Promise(function (resolve) {
-                return resolve(keyOptsInt);
-            });
-        },
-        "autoCompleteKeyTxt": function search(editor, input) {
-            return new Promise(function (resolve) {
-                return resolve(keyOptsTxt);
-            });
-        },
-    },
-};
-
-function loadAttributeTypes() {
-    let optsReq = {
-        method: "GET",
-    };
-    return fetch(`/v1/status/attr/types`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            let typesByKey = null;
-            if (data) {
-                typesByKey = data.typesByKey;
-            }
-            if (typesByKey) {
-                for (const key of Object.keys(typesByKey)) {
-                    const types = typesByKey[key];
-                    for (const type of types) {
-                        if (type === "int32") {
-                            keyOptsInt.push(key);
-                        }
-                        if (type === "string") {
-                            keyOptsTxt.push(key);
-                        }
-                    }
-                }
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
-
 function loadSubscription() {
     //
     const urlParams = new URLSearchParams(window.location.search);

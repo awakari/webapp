@@ -138,11 +138,7 @@ async function loadSource() {
     if (counts != null && Object.keys(counts).length > 0) {
         document.getElementById("wait").style.display = "block";
         document.body.classList.add('waiting-cursor');
-        // simulate a blocking I/O to redraw before
-        fetch("https://awakari.com", {
-            method: "GET",
-            cache: "default",
-        }).finally(() => drawFreqChart(addr, counts));
+        await drawFreqChart(addr, counts);
     }
 }
 
@@ -164,7 +160,17 @@ async function drawFreqChart(addr, counts) {
     const avg = countSum / weekMinutes;
     document.getElementById("freq-charts").style.display = "block";
     const stepY = freqChartHeight / countMax;
+    let prevHour = -1;
     for (const [t, c] of Object.entries(counts)) {
+        const weekHour = Math.floor(t / 60);
+        if (prevHour !== weekHour) {
+            prevHour = weekHour;
+            // simulate a blocking I/O to redraw before
+            await fetch("https://awakari.com", {
+                method: "GET",
+                cache: "force-cache",
+            }).finally(() => console.log(`draw char for the next hour ${weekHour}`));
+        }
         const dayNum = Math.floor(t / dayMinutes);
         let chartElement = document.getElementById(`chart-freq-${dayNum}`);
         const h = stepY * c;

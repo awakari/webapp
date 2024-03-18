@@ -155,7 +155,7 @@ function loadSources(cursor, filter, srcType, own) {
             } else if (data != null) {
                 btnPrev.removeAttribute("disabled");
                 btnPrev.onclick = () => {
-                    window.location.assign(`pub.html?cursor=${encodeURIComponent(data[0])}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`)
+                    window.location.assign(`pub.html?cursor=${encodeURIComponent(data[0])}&order=DESC&filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`);
                 };
             }
 

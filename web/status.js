@@ -28,11 +28,11 @@ async function loadStatus() {
                 } else {
                     document.getElementById("pub-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
                 }
-                const pubRateAvgWeek = data.publishingRate.week;
+                const pubRateAvgWeek = data.publishingRate.month;
                 if (pubRateAvgWeek > 0) {
-                    document.getElementById("pub-last-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
+                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
                 } else {
-                    document.getElementById("pub-last-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
+                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgWeek * 7 * 86400))}</span>`;
                 }
 
                 const evtQueueCurrent = data.queueLength.current;
@@ -57,13 +57,13 @@ async function loadStatus() {
                 } else {
                     document.getElementById("evt-queue-1d").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
                 }
-                const evtQueue1wChange = evtQueueCurrent - data.queueLength.past.week;
-                if (evtQueue1wChange < 0) {
-                    document.getElementById("evt-queue-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1wChange)}</span>`;
-                } else if (evtQueue1wChange > 0) {
-                    document.getElementById("evt-queue-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1wChange)}</span>`;
+                const evtQueue30dChange = evtQueueCurrent - data.queueLength.past.month;
+                if (evtQueue30dChange < 0) {
+                    document.getElementById("evt-queue-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue30dChange)}</span>`;
+                } else if (evtQueue30dChange > 0) {
+                    document.getElementById("evt-queue-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue30dChange)}</span>`;
                 } else {
-                    document.getElementById("evt-queue-1w").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
+                    document.getElementById("evt-queue-30d").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
                 }
 
                 const subscriptionsCurrent = data.subscriptions.current;
@@ -88,13 +88,13 @@ async function loadStatus() {
                 } else {
                     document.getElementById("subscriptions-1d").innerHTML = `${formatNumberShort(subscriptions1dChange)}</span>`;
                 }
-                const subscriptions1wChange = subscriptionsCurrent - data.subscriptions.past.week;
-                if (subscriptions1wChange < 0) {
-                    document.getElementById("subscriptions-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions1wChange)}</span>`;
-                } else if (subscriptions1wChange > 0) {
-                    document.getElementById("subscriptions-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions1wChange)}</span>`;
+                const subscriptions30dChange = subscriptionsCurrent - data.subscriptions.past.month;
+                if (subscriptions30dChange < 0) {
+                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions30dChange)}</span>`;
+                } else if (subscriptions30dChange > 0) {
+                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions30dChange)}</span>`;
                 } else {
-                    document.getElementById("subscriptions-1w").innerHTML = `${formatNumberShort(subscriptions1wChange)}</span>`;
+                    document.getElementById("subscriptions-30d").innerHTML = `${formatNumberShort(subscriptions30dChange)}</span>`;
                 }
 
                 const readersCurrent = data.telegramReaderChats.current;
@@ -119,13 +119,13 @@ async function loadStatus() {
                 } else {
                     document.getElementById("readers-1d").innerHTML = `${formatNumberShort(readers1dChange)}</span>`;
                 }
-                const readers1wChange = readersCurrent - data.telegramReaderChats.past.week;
-                if (readers1wChange < 0) {
-                    document.getElementById("readers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1wChange)}</span>`;
-                } if (readers1wChange > 0) {
-                    document.getElementById("readers-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers1wChange)}</span>`;
+                const readers30dChange = readersCurrent - data.telegramReaderChats.past.month;
+                if (readers30dChange < 0) {
+                    document.getElementById("readers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers30dChange)}</span>`;
+                } if (readers30dChange > 0) {
+                    document.getElementById("readers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers30dChange)}</span>`;
                 } else {
-                    document.getElementById("readers-1w").innerHTML = `${formatNumberShort(readers1wChange)}</span>`;
+                    document.getElementById("readers-30d").innerHTML = `${formatNumberShort(readers30dChange)}</span>`;
                 }
 
                 const subscribersCurrent = data.uniqueSubscribers.current;
@@ -150,13 +150,13 @@ async function loadStatus() {
                 } else {
                     document.getElementById("subscribers-1d").innerHTML = `${formatNumberShort(subscribers1dChange)}</span>`;
                 }
-                const subscribers1wChange = subscribersCurrent - data.uniqueSubscribers.past.week;
-                if (subscribers1wChange < 0) {
-                    document.getElementById("subscribers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscribers1wChange)}</span>`;
-                } else if (subscribers1wChange > 0) {
-                    document.getElementById("subscribers-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscribers1wChange)}</span>`;
+                const subscribers30dChange = subscribersCurrent - data.uniqueSubscribers.past.month;
+                if (subscribers30dChange < 0) {
+                    document.getElementById("subscribers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscribers30dChange)}</span>`;
+                } else if (subscribers30dChange > 0) {
+                    document.getElementById("subscribers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscribers30dChange)}</span>`;
                 } else {
-                    document.getElementById("subscribers-1w").innerHTML = `${formatNumberShort(subscribers1wChange)}</span>`;
+                    document.getElementById("subscribers-30d").innerHTML = `${formatNumberShort(subscribers30dChange)}</span>`;
                 }
 
                 const publishersCurrent = data.uniquePublishers.current;
@@ -181,13 +181,13 @@ async function loadStatus() {
                 } else {
                     document.getElementById("publishers-1d").innerHTML = `${formatNumberShort(publishers1dChange)}</span>`;
                 }
-                const publishers1wChange = publishersCurrent - data.uniquePublishers.past.week;
-                if (publishers1wChange < 0) {
-                    document.getElementById("publishers-1w").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1wChange)}</span>`;
-                } else if (publishers1wChange > 0) {
-                    document.getElementById("publishers-1w").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1wChange)}</span>`;
+                const publishers30dChange = publishersCurrent - data.uniquePublishers.past.month;
+                if (publishers30dChange < 0) {
+                    document.getElementById("publishers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers30dChange)}</span>`;
+                } else if (publishers30dChange > 0) {
+                    document.getElementById("publishers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers30dChange)}</span>`;
                 } else {
-                    document.getElementById("publishers-1w").innerHTML = `${formatNumberShort(publishers1wChange)}</span>`;
+                    document.getElementById("publishers-30d").innerHTML = `${formatNumberShort(publishers30dChange)}</span>`;
                 }
 
             } else {

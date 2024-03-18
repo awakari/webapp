@@ -92,6 +92,12 @@ let subCondSchema = {
                                 id: "val",
                                 type: "number",
                                 required: true,
+                                format: "autocomplete",
+                                options: {
+                                    "autocomplete": {
+                                        "search": "autoCompleteVal",
+                                    }
+                                },
                             }
                         },
                         additionalProperties: false,
@@ -123,9 +129,10 @@ let subCondSchema = {
                                 type: "string",
                                 required: true,
                                 minLength: 3,
+                                format: "autocomplete",
                                 options: {
-                                    inputAttributes: {
-                                        placeholder: "e.g. Tesla, iPhone, ...",
+                                    "autocomplete": {
+                                        "search": "autoCompleteVal",
                                     }
                                 },
                             },

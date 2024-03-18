@@ -22,14 +22,27 @@ window.JSONEditor.defaults.callbacks = {
     "autocomplete": {
         "autoCompleteKeyInt": function search(editor, input) {
             return new Promise(function (resolve) {
-                return resolve(EventAttrKeysInt);
+                let keys = [];
+                for (const k of EventAttrKeysInt) {
+                    if (k.startsWith(input)) {
+                        keys.push(k);
+                    }
+                }
+                return resolve(keys);
             });
         },
         "autoCompleteKeyTxt": function search(editor, input) {
             return new Promise(function (resolve) {
-                return resolve(EventAttrKeysTxt);
+                let keys = [];
+                for (const k of EventAttrKeysTxt) {
+                    if (k.startsWith(input)) {
+                        keys.push(k);
+                    }
+                }
+                return resolve(keys);
             });
         },
+        "autoCompleteVal": loadAttributeValues,
     },
 };
 

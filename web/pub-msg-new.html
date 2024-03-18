@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="login.js"></script>
+    <script src="evt-attrs.js"></script>
     <script src="pub-msg-new.js"></script>
 
 </head>
@@ -49,29 +50,11 @@
                 <p class="pt-2">Attributes</p>
                 <div id="msg_attrs_form"></div>
                 <span class="flex w-full text-sm h-[24x] min-h-[24px] items-center mt-1 space-x-1">
-                    <input
-                            type="text"
-                            id="msg_attr_name"
-                            class="min-w-[64px] truncate border focus:shadow-md outline-none"
-                            list="msg_attr_name_opts"/>
-                    <datalist id="msg_attr_name_opts">
-                        <option>author</option>
-                        <option>categories</option>
-                        <option>contact</option>
-                        <option>currency</option>
-                        <option>language</option>
-                        <option>latitude</option>
-                        <option>longitude</option>
-                        <option>pricemax</option>
-                        <option>pricemin</option>
-                        <option>quantitymax</option>
-                        <option>quantitymin</option>
-                        <option>quantitiyunit</option>
-                        <option>secret</option>
-                        <option>subject</option>
-                        <option>summary</option>
-                        <option>title</option>
-                    </datalist>
+                    <input type="text"
+                           id="msg_attr_name"
+                           class="min-w-[64px] truncate border focus:shadow-md outline-none"
+                           list="msg_attr_name_opts"/>
+                    <datalist id="msg_attr_name_opts"></datalist>
                     <select id="msg_attr_type" class="min-w-[64px] truncate focus:shadow-md outline-none h-5 px-1">
                         <option>boolean</option>
                         <option>bytes</option>
@@ -81,7 +64,12 @@
                         <option>uri</option>
                         <option>uri_ref</option>
                     </select>
-                    <input type="text" placeholder="value" id="msg_attr_value" class="w-full truncate border focus:shadow-md outline-none"/>
+                    <input type="text"
+                           placeholder="value"
+                           id="msg_attr_value"
+                           class="w-full truncate border focus:shadow-md outline-none"
+                           list="msg_attr_val_opts"/>
+                    <datalist id="msg_attr_val_opts"></datalist>
                     <button type="button" title="Add Attribute" onclick="addMessageAttribute();" class="ml-1 text-2xl focus:outline-none flex items-center justify-center h-[24x] max-h-[24px] font-mono">
                         <span class="mt-1">+</span>
                     </button>

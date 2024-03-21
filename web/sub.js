@@ -23,12 +23,18 @@ function load() {
     //         break
     // }
 
-    const authToken = localStorage.getItem(keyAuthToken);
-    const userId = localStorage.getItem(keyUserId);
     const headers = {
-        "Authorization": `Bearer ${authToken}`,
         "X-Awakari-Group-Id": defaultGroupId,
-        "X-Awakari-User-Id": userId,
+    }
+
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
     }
 
     document.getElementById("wait").style.display = "block";
@@ -100,18 +106,25 @@ function loadSubscriptions(filter) {
     } else {
         document.getElementById("filter").value = filter;
     }
+    document.getElementById("wait").style.display = "block";
+
+    const headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+    }
 
     const authToken = localStorage.getItem(keyAuthToken);
-    const userId = localStorage.getItem(keyUserId);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
 
-    document.getElementById("wait").style.display = "block";
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
+
     fetch(`/v1/sub?limit=${pageLimit}&cursor=${cursor}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
+        headers: headers,
         cache: "default",
     })
         .then(resp => {

@@ -3,7 +3,7 @@ ingress:
     - host: awakari.com
       cookie:
         enabled: true
-        name: "awakari"
+        name: "awkappuser"
         expires:
           seconds: 86400
         samesite: "Strict"

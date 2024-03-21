@@ -264,7 +264,7 @@ async function startEventsLoading(subId, deadline) {
     }
 }
 
-const templateEvent = (txt, time, srcUrl, link, id) => `
+const templateEvent = (txt, time, src, link, id) => `
     <div class="p-1 shadow-xs border dark:border-gray-600 h-12 w-86 sm:w-[624px] flex align-middle">
         <a href="${link}" target="_blank" class="w-80 sm:w-[586px]">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
@@ -274,13 +274,11 @@ const templateEvent = (txt, time, srcUrl, link, id) => `
                 <span class="text-stone-500">
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
-                <span class="text-slate-600 dark:text-slate-400 truncate">
-                    ${srcUrl.host}<span class="text-slate-500 truncate">${srcUrl.pathname}</span>
-                </span>
+                <span class="text-slate-600 dark:text-slate-400 truncate">${src}</span>
             </p>
         </a>
         <button type="button"
-                onclick="reportPublicationInappropriate('${srcUrl}', '${link}', '${id}')"
+                onclick="reportPublicationInappropriate('${src}', '${link}', '${id}')"
                 class="m-1 flex report justify-center text-center text-xl h-6 w-6 text-stone-500 hover:text-amber-500">
             ⚠
         </button>
@@ -299,18 +297,19 @@ function displayEvents(evts) {
         } else {
             time = new Date();
         }
-        let src = evt.source;
-        if (src.startsWith("@")) {
-            src = `https://t.me/${src.substring(1)}`;
+        let link = evt.source;
+        if (link.startsWith("@")) {
+            link = `https://t.me/${link.substring(1)}`;
         }
-        let link = src;
+        if (!link.startsWith("http://") || !link.startsWith("https")) {
+            link = `https://${link}`;
+        }
         if (evt.attributes.hasOwnProperty("object") && evt.attributes.object.hasOwnProperty("ce_uri")) {
             link = evt.attributes.object.ce_uri;
         }
         if (evt.attributes.hasOwnProperty("objecturl")) {
             link = evt.attributes.objecturl.ce_uri;
         }
-        const srcUrl = new URL(src);
         let txt = evt.text_data;
         if (evt.attributes.hasOwnProperty("summary")) {
             txt = evt.attributes.summary.ce_string;
@@ -319,6 +318,6 @@ function displayEvents(evts) {
             txt = evt.attributes.title.ce_string;
         }
         txt = txt.replace(/(<([^>]+)>)/gi, ""); // remove HTML tags
-        elemEvts.innerHTML = templateEvent(txt, time, srcUrl, link, evt.id) + elemEvts.innerHTML;
+        elemEvts.innerHTML = templateEvent(txt, time, evt.source, link, evt.id) + elemEvts.innerHTML;
     }
 }

@@ -43,8 +43,6 @@ ingress:
   enabled: true
   hosts:
     - host: webapp.local
-      cookie:
-        enabled: false
       paths:
         - path: /
           pathType: Prefix

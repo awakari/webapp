@@ -23,16 +23,6 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/affinity: "cookie"
-    {{- range .Values.ingress.hosts }}
-    {{- if .cookie.enabled }}
-    nginx.ingress.kubernetes.io/session-cookie-domain: "{{ .host }}"
-    nginx.ingress.kubernetes.io/session-cookie-expires: "{{ .cookie.expires.seconds }}"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "{{ .cookie.expires.seconds }}"
-    nginx.ingress.kubernetes.io/session-cookie-name: "{{ .cookie.name }}"
-    nginx.ingress.kubernetes.io/session-cookie-samesite: "{{ .cookie.samesite }}"
-    {{- end }}
-    {{- end }}
 spec:
   {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
   ingressClassName: {{ .Values.ingress.className }}

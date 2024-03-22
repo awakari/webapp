@@ -33,6 +33,9 @@ function load() {
     const userId = localStorage.getItem(keyUserId);
     if (userId) {
         headers["X-Awakari-User-Id"] = userId;
+        document.getElementById("exit").style.display = "block";
+    } else {
+        document.getElementById("login").style.display = "block";
     }
 
     document.getElementById("wait").style.display = "block";

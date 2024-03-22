@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
     <link rel="icon" href="logo-color.svg">
     <link rel="manifest" href="manifest.json">
-    <link href="select2.min.css" rel="stylesheet" />
+    <link href="select2.css" rel="stylesheet" />
 
     <meta name="msapplication-TileColor" content="#0ed3cf">
     <meta name="theme-color" content="#0ed3cf">
@@ -143,7 +143,6 @@
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
-    <script src="base64.min.js"></script>
     <script src="evts.js"></script>
     <script src="intcomm.js"></script>
     <script src="jquery-3.7.1.min.js"></script>
@@ -156,10 +155,6 @@
 
 </head>
 <body class="bg-gray-200" onload="selectMainMenu(); loadQuery(); loadStatus();">
-
-<audio id="audio" hidden="hidden">
-    Your browser does not support the audio element.
-</audio>
 
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
@@ -186,7 +181,7 @@
                                    spellcheck="false"
                                    required="required"
                                    type="search"
-                                   placeholder="Real-Time Search"
+                                   placeholder="Search"
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
 <!--                            <input name="curr" id="q-curr" type="hidden"/>-->
@@ -272,7 +267,6 @@
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#resources">Resources</a>
                 </div>
                 <div id="menu-default" class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" x-cloak @click="isOpen = !isOpen" onclick="document.getElementById('login').style.display='flex'">Sign In</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#about">About</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#use_cases">Use Cases</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6" href="#solutions">Solutions</a>
@@ -405,7 +399,7 @@
             <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
                 <span class="py-4 items-center text-center">
                     <p class="m-1 text-4xl font-semibold text-indigo-700 dark:text-indigo-500 md:pt-16">
-                        Reach everyone interested
+                        Capture the most important
                     </p>
                 </span>
                 <div class="items-center justify-center">
@@ -415,7 +409,7 @@
                 </div>
                 <div class="py-4 align-middle items-center text-center">
                     <h1 class="m-1 text-4xl font-semibold text-cyan-700 dark:text-cyan-400 md:pt-16">
-                        Capture the most important
+                        Reach everyone interested
                     </h1>
                 </div>
             </div>
@@ -431,8 +425,8 @@
                 Donate
             </button>
             <button type="button" class="text-blue-500 border border-blue-500 h-8 hover:bg-blue-200 dark:hover:bg-blue-900 static w-24 rounded-md m-2"
-                    onclick="window.open('install.html', '_blank')">
-                Install
+                    onclick="window.location.assign('login.html')">
+                Start
             </button>
         </div>
 

@@ -3,11 +3,10 @@ const Events = {
 }
 
 Events.longPoll = function (subId, deadline) {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const audioElement = document.getElementById('audio');
-    const audioSource = audioContext.createMediaElementSource(audioElement);
-    audioElement.src = "inbox-notification.wav";
-    audioSource.connect(audioContext.destination);
+    Events.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    Events.audioSnd = new Audio("inbox-notification.wav");
+    Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
+    Events.audioSrc.connect(Events.audioCtx.destination);
     let headers = {
         "X-Awakari-Group-Id": defaultGroupId,
     }
@@ -40,7 +39,11 @@ Events.longPoll = function (subId, deadline) {
         })
         .then(data => {
             if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
-                audioElement.play();
+                try {
+                    Events.audioSnd.play();
+                } catch (e) {
+                    console.log(e);
+                }
                 console.log(`Read subscription ${subId}: got ${data.msgs.length} new events`);
                 return data.msgs;
             } else {

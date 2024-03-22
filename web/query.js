@@ -105,21 +105,14 @@ function loadQuery() {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
     if (q != null && q !== "") {
-        const userId = localStorage.getItem(keyUserId);
-        switch (userId) {
-            case null:
-                document.getElementById('login').style.display = 'flex';
-                break
-            default:
-                document.getElementById("query").value = q;
-                const expires = Date.now() + resultsStreamingTimeout;
-                getQuerySubscription(q, expires)
-                    .then(subId => {
-                        if (subId !== "") {
-                            startEventsLoading(subId, expires);
-                        }
-                    })
-        }
+        document.getElementById("query").value = q;
+        const expires = Date.now() + resultsStreamingTimeout;
+        getQuerySubscription(q, expires)
+            .then(subId => {
+                if (subId !== "") {
+                    startEventsLoading(subId, expires);
+                }
+            });
     }
 }
 

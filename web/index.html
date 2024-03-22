@@ -31,7 +31,7 @@
             "@context": "https://schema.org/",
             "name": "awakari",
             "@type": "Service",
-            "description": "Real-Time Streaming Search Engine",
+            "description": "Continuous Future Search",
             "slogan": "Reach everyone interested - Capture the most important",
             "contactPoint": {
                 "@context": "https://schema.org"
@@ -181,7 +181,7 @@
                                    spellcheck="false"
                                    required="required"
                                    type="search"
-                                   placeholder="Search"
+                                   placeholder="Future Search..."
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
 <!--                            <input name="curr" id="q-curr" type="hidden"/>-->
@@ -247,11 +247,11 @@
                  class="absolute inset-x-0 z-20 w-full bg-white px-1 py-1 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col space-y-1">
 
                 <div class="grid space-x-2">
-                    <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
-                        <p id="streaming-results">Results will appear below for the next 1 hour.</p>
-                        <p>
+                    <span class="col-span-2 text-center text-gray-600 dark:text-gray-400 text-sm">
+                        <p id="streaming-results">
+                            Results will appear below.
                             <a href="login.html" class="text-blue-500">Sign In</a>
-                            for the full functionality.
+                            for the full mode.
                         </p>
                         <div class="flex">
                             <div class="grow w-full"></div>
@@ -483,8 +483,46 @@
                             </span>
                             <span>Match numbers using operators like "<", "=", "≥", ...</span>
                         </p>
+                        <p class="px-2">
+                            Structured search across attributes:
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Categories</span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Language</span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Location</span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Price</span>
+                        </p>
+                        <p class="px-2">
+                            ...and much more
+                        </p>
                     </div>
-                    <div class="flex justify-start px-16">
+                    <div class="flex justify-start px-2">
                         <img src="2024-01-04_16-50.png" alt="subscription"/>
                     </div>
                 </div>

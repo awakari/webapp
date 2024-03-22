@@ -33,18 +33,3 @@ function logout() {
         window.location.assign("index.html");
     }
 }
-
-function selectMainMenu() {
-    //
-    const userId = localStorage.getItem(keyUserId);
-    switch (userId) {
-        case null:
-            document.getElementById("menu-default").style.display = "flex";
-            document.getElementById("menu-user").style.display = "none";
-            break
-        default:
-            // already logged in
-            document.getElementById("menu-default").style.display = "none";
-            document.getElementById("menu-user").style.display = "flex";
-    }
-}

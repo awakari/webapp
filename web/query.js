@@ -259,7 +259,7 @@ async function startEventsLoading(subId, deadline) {
 
 const templateEvent = (txt, time, src, link, id) => `
     <div class="p-1 shadow-xs border dark:border-gray-600 h-12 w-86 sm:w-[624px] flex align-middle">
-        <a href="${link}" target="_blank" class="w-80 sm:w-[586px]">
+        <a href="${link}" target="_blank" class="w-78 sm:w-[586px]">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 truncate">
                 ${txt}
             </p>

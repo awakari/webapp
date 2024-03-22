@@ -70,15 +70,20 @@ function createSubscription() {
         payload.cond = editor.getValue(0);
     }
     if (validationErr === "") {
-        let authToken = localStorage.getItem(keyAuthToken);
-        let userId = localStorage.getItem(keyUserId);
+        let headers = {
+            "X-Awakari-Group-Id": defaultGroupId,
+        }
+        const authToken = localStorage.getItem(keyAuthToken);
+        if (authToken) {
+            headers["Authorization"] = `Bearer ${authToken}`;
+        }
+        const userId = localStorage.getItem(keyUserId);
+        if (userId) {
+            headers["X-Awakari-User-Id"] = userId;
+        }
         let optsReq = {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${authToken}`,
-                "X-Awakari-Group-Id": defaultGroupId,
-                "X-Awakari-User-Id": userId,
-            },
+            headers: headers,
             body: JSON.stringify(payload)
         };
         document.getElementById("wait").style.display = "block";
@@ -94,6 +99,9 @@ function createSubscription() {
                 if (data) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";
                     document.getElementById("new-sub-id").innerText = data.id;
+                    if (userId && userId.startsWith("tg://user?id=")) {
+                        document.getElementById("sub-new-success-btn-tg").style.display = "block";
+                    }
                 }
             })
             .catch(err => {

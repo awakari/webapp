@@ -10,20 +10,26 @@ async function loadSource() {
     const addr = decodeURIComponent(urlParams.get("addr"));
     const addrEnc = encodeURIComponent(addr);
     document.getElementById("addr").innerText = addr;
-    let authToken = localStorage.getItem(keyAuthToken);
-    let userId = localStorage.getItem(keyUserId);
     //
     document.getElementById("freq-charts").style.display = "none";
     document.body.classList.add('waiting-cursor');
     document.getElementById("wait").style.display = "block";
+    //
+    let headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+        "X-Awakari-Src-Addr": addrEnc,
+    }
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
     const counts = await fetch(`/v1/src/${typ}`, {
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-            "X-Awakari-Src-Addr": addrEnc,
-        },
+        headers: headers,
         cache: "default",
     })
         .then(resp => {

@@ -3,15 +3,25 @@ const Events = {
 }
 
 Events.longPoll = function (subId, deadline) {
-    let authToken = localStorage.getItem(keyAuthToken);
-    let userId = localStorage.getItem(keyUserId);
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioElement = document.getElementById('audio');
+    const audioSource = audioContext.createMediaElementSource(audioElement);
+    audioElement.src = "inbox-notification.wav";
+    audioSource.connect(audioContext.destination);
+    let headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+    }
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
     let optsReq = {
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
+        headers: headers,
     };
     const timeout = deadline - Date.now();
     return fetch(`/v1/events/${subId}`, optsReq)
@@ -30,6 +40,7 @@ Events.longPoll = function (subId, deadline) {
         })
         .then(data => {
             if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
+                audioElement.play();
                 console.log(`Read subscription ${subId}: got ${data.msgs.length} new events`);
                 return data.msgs;
             } else {

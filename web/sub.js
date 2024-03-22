@@ -26,12 +26,10 @@ function load() {
     const headers = {
         "X-Awakari-Group-Id": defaultGroupId,
     }
-
     const authToken = localStorage.getItem(keyAuthToken);
     if (authToken) {
         headers["Authorization"] = `Bearer ${authToken}`;
     }
-
     const userId = localStorage.getItem(keyUserId);
     if (userId) {
         headers["X-Awakari-User-Id"] = userId;
@@ -111,12 +109,10 @@ function loadSubscriptions(filter) {
     const headers = {
         "X-Awakari-Group-Id": defaultGroupId,
     }
-
     const authToken = localStorage.getItem(keyAuthToken);
     if (authToken) {
         headers["Authorization"] = `Bearer ${authToken}`;
     }
-
     const userId = localStorage.getItem(keyUserId);
     if (userId) {
         headers["X-Awakari-User-Id"] = userId;

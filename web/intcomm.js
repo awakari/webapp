@@ -32,7 +32,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
                         ce_string: "request",
                     },
                     object: {
-                        ce_string: `daily publications for ${objId}`,
+                        ce_string: objId,
                     },
                     subject: {
                         ce_string: userIdCurrent,
@@ -71,7 +71,7 @@ async function requestPublishingSourceDedicated(addr){
                     ce_string: "request",
                 },
                 object: {
-                    ce_string: `make dedicated ${addr}`,
+                    ce_string: addr,
                 },
                 subject: {
                     ce_string: userIdCurrent,
@@ -149,7 +149,7 @@ async function reportPublishingSourceInappropriate(srcAddr) {
                     ce_string: "report",
                 },
                 object: {
-                    ce_string: `inappropriate publishing source ${srcAddr}`,
+                    ce_string: srcAddr,
                 },
                 subject: {
                     ce_string: userIdCurrent,
@@ -181,12 +181,9 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
                     ce_string: "report",
                 },
                 object: {
-                    ce_string: `inappropriate message from ${srcAddr}`,
-                },
-                evtid: {
                     ce_string: evtId,
                 },
-                evtlink: {
+                objecturl: {
                     ce_uri: evtLink,
                 },
                 subject: {
@@ -203,14 +200,19 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
 }
 
 function submitMessageInternal(payload, userId) {
+    let headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+    }
     const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
     return fetch("/v1/pub/internal", {
         method: "POST",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
+        headers: headers,
         body: JSON.stringify(payload),
     })
         .then(resp => {

@@ -23,12 +23,16 @@ function load() {
     //         break
     // }
 
-    const authToken = localStorage.getItem(keyAuthToken);
-    const userId = localStorage.getItem(keyUserId);
-    const headers = {
-        "Authorization": `Bearer ${authToken}`,
+    let headers = {
         "X-Awakari-Group-Id": defaultGroupId,
-        "X-Awakari-User-Id": userId,
+    }
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
     }
 
     document.getElementById("wait").style.display = "block";
@@ -122,18 +126,23 @@ function loadSources(cursor, filter, srcType, own) {
         document.getElementById("own").checked = false;
     }
 
+    let headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+        "X-Awakari-Src-Addr": cursor,
+    }
     const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
     const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
 
     document.getElementById("wait").style.display = "block";
     fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-            "X-Awakari-Src-Addr": cursor,
-        },
+        headers: headers,
         cache: "default",
     })
         .then(resp => {

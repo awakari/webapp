@@ -55,15 +55,20 @@ function loadSubscription() {
     // const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
     // editor.setValue(data.cond);
     //
-    let authToken = localStorage.getItem(keyAuthToken);
-    let userId = localStorage.getItem(keyUserId);
+    let headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+    }
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
     let optsReq = {
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
+        headers: headers,
         cache: "default",
     }
 
@@ -97,8 +102,6 @@ function loadSubscription() {
 function updateSubscription() {
     const id = document.getElementById("id").value;
     if (confirm(`Confirm update subscription ${id}?`)) {
-        let authToken = localStorage.getItem(keyAuthToken);
-        let userId = localStorage.getItem(keyUserId);
         let payload = {
             id: id,
             description: document.getElementById("description").value,
@@ -112,13 +115,22 @@ function updateSubscription() {
         } else {
             payload.expires = null;
         }
+
+        let headers = {
+            "X-Awakari-Group-Id": defaultGroupId,
+        }
+        const authToken = localStorage.getItem(keyAuthToken);
+        if (authToken) {
+            headers["Authorization"] = `Bearer ${authToken}`;
+        }
+        const userId = localStorage.getItem(keyUserId);
+        if (userId) {
+            headers["X-Awakari-User-Id"] = userId;
+        }
+
         let optsReq = {
             method: "PUT",
-            headers: {
-                "Authorization": `Bearer ${authToken}`,
-                "X-Awakari-Group-Id": defaultGroupId,
-                "X-Awakari-User-Id": userId,
-            },
+            headers: headers,
             body: JSON.stringify(payload)
         }
 
@@ -147,15 +159,20 @@ function updateSubscription() {
 function deleteSubscription() {
     const id = document.getElementById("id").value;
     if (confirm(`Confirm delete subscription ${id}?`)) {
-        let authToken = localStorage.getItem(keyAuthToken);
-        let userId = localStorage.getItem(keyUserId);
+        let headers = {
+            "X-Awakari-Group-Id": defaultGroupId,
+        }
+        const authToken = localStorage.getItem(keyAuthToken);
+        if (authToken) {
+            headers["Authorization"] = `Bearer ${authToken}`;
+        }
+        const userId = localStorage.getItem(keyUserId);
+        if (userId) {
+            headers["X-Awakari-User-Id"] = userId;
+        }
         let optsReq = {
             method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${authToken}`,
-                "X-Awakari-Group-Id": defaultGroupId,
-                "X-Awakari-User-Id": userId,
-            },
+            headers: headers,
             cache: "default",
         }
         document.getElementById("wait").style.display = "block";

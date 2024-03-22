@@ -42,52 +42,41 @@ function loadAttributeValues(editor, input) {
     const k = editor.parent.editors.key.input.value;
     switch (k) {
         case "source":
+            let headers = {
+                "X-Awakari-Group-Id": defaultGroupId,
+            }
             const authToken = localStorage.getItem(keyAuthToken);
+            if (authToken) {
+                headers["Authorization"] = `Bearer ${authToken}`;
+            }
             const userId = localStorage.getItem(keyUserId);
+            if (userId) {
+                headers["X-Awakari-User-Id"] = userId;
+            }
             return Promise.all([
                 fetch(`/v1/src/apub/list?&own=false&order=ASC&limit=3&filter=${encodeURIComponent(input)}`, {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${authToken}`,
-                        "X-Awakari-Group-Id": defaultGroupId,
-                        "X-Awakari-User-Id": userId,
-                    },
+                    headers: headers,
                     cache: "force-cache",
                 }),
                 fetch(`/v1/src/feed/list?&own=false&order=ASC&limit=3&filter=${encodeURIComponent(input)}`, {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${authToken}`,
-                        "X-Awakari-Group-Id": defaultGroupId,
-                        "X-Awakari-User-Id": userId,
-                    },
+                    headers: headers,
                     cache: "force-cache",
                 }),
                 fetch(`/v1/src/site/list?&own=false&order=ASC&limit=3&filter=${encodeURIComponent(input)}`, {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${authToken}`,
-                        "X-Awakari-Group-Id": defaultGroupId,
-                        "X-Awakari-User-Id": userId,
-                    },
+                    headers: headers,
                     cache: "force-cache",
                 }),
                 fetch(`/v1/src/tgbc/list?&own=false&order=ASC&limit=3&filter=${encodeURIComponent(input)}`, {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${authToken}`,
-                        "X-Awakari-Group-Id": defaultGroupId,
-                        "X-Awakari-User-Id": userId,
-                    },
+                    headers: headers,
                     cache: "force-cache",
                 }),
                 fetch(`/v1/src/tgch/list?&own=false&order=ASC&limit=3&filter=${encodeURIComponent(input)}`, {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${authToken}`,
-                        "X-Awakari-Group-Id": defaultGroupId,
-                        "X-Awakari-User-Id": userId,
-                    },
+                    headers: headers,
                     cache: "force-cache",
                 }),
             ])

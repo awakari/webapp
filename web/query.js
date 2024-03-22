@@ -126,20 +126,20 @@ function loadQuery() {
 const defaultSubName = "_reserved_app_search";
 
 function getQuerySubscription(q, expires) {
-    const authToken = localStorage.getItem(keyAuthToken);
-    const userId = localStorage.getItem(keyUserId);
-    const headers = {
-        "Authorization": `Bearer ${authToken}`,
+    let headers = {
         "X-Awakari-Group-Id": defaultGroupId,
-        "X-Awakari-User-Id": userId,
+    }
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
     }
     let optsReq = {
         method: "GET",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
+        headers: headers,
     }
     return fetch(`/v1/sub?limit=1000&filter=${defaultSubName}`, optsReq)
         .then(resp => {

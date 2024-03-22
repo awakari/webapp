@@ -41,8 +41,7 @@
             <div class="w-16 justify-self-start text-left hover:text-neutral-500">
                 <span id="exit"
                       class="flex"
-                      style="display: none"
-                      onclick="logout()">
+                      onclick="localStorage.getItem(keyUserName) ? logout() : window.location.assign('index.html')">
                     <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>

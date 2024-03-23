@@ -8,7 +8,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
     <link rel="icon" href="logo-color.svg">
     <link rel="manifest" href="manifest.json">
-    <link href="select2.css" rel="stylesheet" />
 
     <meta name="msapplication-TileColor" content="#0ed3cf">
     <meta name="theme-color" content="#0ed3cf">
@@ -146,12 +145,9 @@
     <script src="evts.js"></script>
     <script src="intcomm.js"></script>
     <script src="jquery-3.7.1.min.js"></script>
-    <script src="select2.min.js"></script>
     <script src="query.js"></script>
     <script src="login.js"></script>
     <script src="status.js"></script>
-
-    <link href="select2.css" rel="stylesheet" />
 
 </head>
 <body class="bg-gray-200" onload="loadQuery(); loadStatus();">
@@ -181,12 +177,9 @@
                                    spellcheck="false"
                                    required="required"
                                    type="search"
-                                   placeholder="Future Search..."
+                                   placeholder="Future Search"
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
-<!--                            <input name="curr" id="q-curr" type="hidden"/>-->
-<!--                            <input name="lang" id="q-lang" type="hidden"/>-->
-<!--                            <input name="subj" id="q-subj" type="hidden"/>-->
                         </div>
                     </form>
 
@@ -202,33 +195,6 @@
                     </button>
                 </div>
             </div>
-
-<!--            <div class="flex space-x-2 pt-2 align-middle justify-center text-sm sm:text-md h-12 max-w-[624px] mx-auto text-neutral-600 dark:text-neutral-300">-->
-<!--                <select class="dropdown-multiselect js-states form-control min-w-20 sm:w-40"-->
-<!--                        id="currencies"-->
-<!--                        name="currencies[]"-->
-<!--                        multiple="multiple"-->
-<!--                        data-placeholder="Currency...">-->
-<!--                </select>-->
-<!--                <select class="dropdown-multiselect js-states form-control min-w-20 sm:w-40"-->
-<!--                        id="languages"-->
-<!--                        name="languages[]"-->
-<!--                        multiple="multiple"-->
-<!--                        data-placeholder="Language...">-->
-<!--                </select>-->
-<!--                <select class="dropdown-multiselect js-states form-control min-w-20 sm:w-40"-->
-<!--                        id="subjects"-->
-<!--                        name="subjects[]"-->
-<!--                        multiple="multiple"-->
-<!--                        data-placeholder="Subject...">-->
-<!--                </select>-->
-<!--                <select class="border-0 outline-none focus:outline-none text-gray-600 dark:text-gray-400" style="background-color: unset; margin-bottom: 14px">-->
-<!--                    <option value="5m" class="dark:bg-gray-800">5 min</option>-->
-<!--                    <option value="15m"  class="dark:bg-gray-800" selected="selected">15 min</option>-->
-<!--                    <option value="1h" class="dark:bg-gray-800">1 h</option>-->
-<!--                    <option value="6h" class="dark:bg-gray-800">6 h</option>-->
-<!--                </select>-->
-<!--            </div>-->
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div id="menu" x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900">
@@ -247,16 +213,16 @@
                  class="absolute inset-x-0 z-20 w-full bg-white px-1 py-1 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col space-y-1">
 
                 <div class="grid space-x-2">
-                    <span class="col-span-2 text-center text-gray-600 dark:text-gray-400 text-sm">
+                    <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
                         <p id="streaming-results">
-                            Results will appear below.
+                            Results will appear below for the next 1h.</p>
+                        <p>
                             <a href="login.html" class="text-blue-500">Sign In</a>
-                            for the full mode.
-                        </p>
+                            for the full-featured mode.</p>
                         <div class="flex">
                             <div class="grow w-full"></div>
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                 onclick="queryStop()"
+                                 onclick="confirm('Stop search and results streaming?') ? queryStop() : console.log('query stop cancelled by user')"
                                  class="h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200"
                                  fill="none"
                                  viewBox="0 0 24 24"
@@ -492,6 +458,14 @@
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                             </span>
+                            <span>Author</span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
                             <span>Categories</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
@@ -517,6 +491,14 @@
                                 </svg>
                             </span>
                             <span>Price</span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>Source</span>
                         </p>
                         <p class="px-2">
                             ...and much more

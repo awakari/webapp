@@ -48,60 +48,29 @@ window.JSONEditor.defaults.callbacks = {
 
 function createSubscription() {
     let validationErr = "";
-    let payload = {
-        description: document.getElementById("description").value,
-        enabled: true,
-        cond: {
-            not: false,
-            gc: {
-                logic: 0,
-                group: []
-            }
-        },
-    }
-    const expires = document.getElementById("expires").value;
+    let expires = document.getElementById("expires").value;
     if (expires && expires !== "") {
         const d = new Date(expires);
-        payload.expires = new Date(d.getTime() - d.getTimezoneOffset() * 60_000).toISOString();
-    }
-    if (payload.description === "") {
-        validationErr = "empty description";
+        expires = new Date(d.getTime() - d.getTimezoneOffset() * 60_000);
     } else {
-        payload.cond = editor.getValue(0);
+        expires = null;
+    }
+    const cond = editor.getValue(0);
+    const descr = document.getElementById("description").value;
+    if (descr === "") {
+        validationErr = "empty description";
     }
     if (validationErr === "") {
-        let headers = {
-            "X-Awakari-Group-Id": defaultGroupId,
-        }
-        const authToken = localStorage.getItem(keyAuthToken);
-        if (authToken) {
-            headers["Authorization"] = `Bearer ${authToken}`;
-        }
-        const userId = localStorage.getItem(keyUserId);
-        if (userId) {
-            headers["X-Awakari-User-Id"] = userId;
-        }
-        let optsReq = {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(payload)
-        };
+        const headers = getAuthHeaders();
+        const userId = headers["X-Awakari-User-Id"];
         document.getElementById("wait").style.display = "block";
-        fetch(`/v1/sub`, optsReq)
-            .then(resp => {
-                if (!resp.ok) {
-                    resp.text().then(errMsg => console.error(errMsg));
-                    throw new Error(`Request failed ${resp.status}`);
-                }
-                return resp.json();
-            })
-            .then(data => {
-                if (data) {
-                    document.getElementById("sub-new-success-dialog").style.display = "block";
-                    document.getElementById("new-sub-id").innerText = data.id;
-                    if (userId && userId.startsWith("tg://user?id=")) {
-                        document.getElementById("sub-new-success-btn-tg").style.display = "block";
-                    }
+        Subscriptions
+            .create(descr, true, expires, cond, headers)
+            .then(id => {
+                document.getElementById("sub-new-success-dialog").style.display = "block";
+                document.getElementById("new-sub-id").innerText = id;
+                if (userId && userId.startsWith("tg://user?id=")) {
+                    document.getElementById("sub-new-success-btn-tg").style.display = "block";
                 }
             })
             .catch(err => {

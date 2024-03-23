@@ -13,7 +13,7 @@ async function loadForm() {
 
     document.getElementById("msg_attrs").value = "{}";
     document.getElementById("msg_attrs_form").innerHTML = "";
-    document.getElementById("msg_id").value = uuidv4();
+    document.getElementById("msg_id").value = Events.newId();
     putMessageAttribute("time", "timestamp", new Date().toISOString(), true);
 
     const authProvider = localStorage.getItem(keyAuthProvider);
@@ -71,34 +71,19 @@ async function msgAttrNameChanged(evt) {
     }
     //
     const attrVal = document.getElementById("msg_attr_value");
-    return fetch(`/v1/status/attr/values/${k}`, {
-        method: "GET",
-        cache: "force-cache",
-    })
-        .then(resp => {
+    return Status
+        .fetchAttributeValues(k)
+        .then(vals => {
             const valsHtml = document.getElementById("msg_attr_val_opts");
             valsHtml.innerHTML = "";
             attrVal.placeholder = "";
-            if (resp.ok) {
-                resp.json().then(vals => {
-                    if (vals && vals.length > 0) {
-                        attrVal.placeholder = vals[0];
-                        for (const v of vals) {
-                            valsHtml.innerHTML += `<option>${v}</option>`;
-                        }
-                    }
-                })
-            } else {
-                console.log(`Failed to load sample values for key ${k}, response status: ${resp.status}`);
+            if (vals && vals.length > 0) {
+                attrVal.placeholder = vals[0];
+                for (const v of vals) {
+                    valsHtml.innerHTML += `<option>${v}</option>`;
+                }
             }
         })
-}
-
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
 }
 
 function isBase64Encoded(str) {
@@ -222,8 +207,6 @@ function deleteMessageAttribute(name) {
 }
 
 function submitMsg() {
-    const authToken = localStorage.getItem(keyAuthToken);
-    const userId = localStorage.getItem(keyUserId);
     const payload = {
         id: document.getElementById("msg_id").value,
         specVersion: "1.0",
@@ -233,22 +216,9 @@ function submitMsg() {
         text_data: document.getElementById("msg_txt_data").value,
     }
     document.getElementById("wait").style.display = "block";
-    fetch("/v1/pub", {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
-        body: JSON.stringify(payload),
-    })
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
-            }
-            return resp.json();
-        })
+    const headers = getAuthHeaders();
+    Events
+        .publish(payload, headers)
         .then(_ => {
             alert("Message has been sent");
             loadForm(); // reset

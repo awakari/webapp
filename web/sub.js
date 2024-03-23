@@ -77,7 +77,7 @@ function loadSubscriptions(filter) {
     const headers = getAuthHeaders();
 
     Subscriptions
-        .fetchListPage(cursor, order, filter, headers)
+        .fetchListPage(cursor, order, pageLimit, filter, headers)
         .then(data => {
 
             if (data != null) {

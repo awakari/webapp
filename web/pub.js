@@ -39,12 +39,6 @@ function load() {
     document.getElementById("wait").style.display = "block";
     Limits
         .fetch("2", headers)
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Daily publishing limit request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
         .then(data => {
             if (data != null && data.hasOwnProperty("count")) {
                 document.getElementById("limit").innerText = data.count;
@@ -100,25 +94,12 @@ function loadSources(cursor, filter, srcType, own) {
         document.getElementById("own").checked = false;
     }
 
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-        "X-Awakari-Src-Addr": cursor,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    const userId = localStorage.getItem(keyUserId);
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    }
+    let headers = getAuthHeaders();
+    headers["X-Awakari-Src-Addr"] = cursor;
 
     document.getElementById("wait").style.display = "block";
-    fetch(`/v1/src/${srcType}/list?limit=${pageLimit}&own=${own}&order=${order}&filter=${encodeURIComponent(filter)}`, {
-        method: "GET",
-        headers: headers,
-        cache: "default",
-    })
+    Sources
+        .fetchListPage(srcType, own, order, pageLimit, encodeURIComponent(filter), headers)
         .then(resp => {
             if (!resp.ok) {
                 throw new Error(`Sources list request failed with status: ${resp.status}`);

@@ -15,29 +15,9 @@ async function loadSource() {
     document.body.classList.add('waiting-cursor');
     document.getElementById("wait").style.display = "block";
     //
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-        "X-Awakari-Src-Addr": addrEnc,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    const userId = localStorage.getItem(keyUserId);
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    }
-    const counts = await fetch(`/v1/src/${typ}`, {
-        method: "GET",
-        headers: headers,
-        cache: "default",
-    })
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
+    let headers = getAuthHeaders();
+    const counts = await Sources
+        .fetch(typ, addrEnc, headers)
         .then(data => {
             if (data != null) {
                 switch (typ) {
@@ -98,7 +78,7 @@ async function loadSource() {
                     document.getElementById("last_upd").innerText = data.lastUpdate;
                 }
                 const btnDel = document.getElementById("button_src_del");
-                if (data.groupId === defaultGroupId && data.userId === userId) {
+                if (data.groupId === defaultGroupId && data.userId === headers["X-Awakari-User-Id"]) {
                     btnDel.removeAttribute("disabled");
                     btnDel.onclick = () => deleteSource(typ, addrEnc);
                 } else {
@@ -194,26 +174,10 @@ async function drawFreqChart(addr, counts) {
 }
 
 function deleteSource(typ, addrEnc) {
-
-    let authToken = localStorage.getItem(keyAuthToken);
-    let userId = localStorage.getItem(keyUserId);
-
     if (confirm(`Confirm delete source ${decodeURIComponent(addrEnc)}?`)) {
-        fetch(`/v1/src/${typ}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${authToken}`,
-                "X-Awakari-Group-Id": defaultGroupId,
-                "X-Awakari-User-Id": userId,
-                "X-Awakari-Src-Addr": addrEnc,
-            },
-        })
-            .then(resp => {
-                if (!resp.ok) {
-                    throw new Error(`Request failed with status: ${resp.status}`);
-                }
-                return resp;
-            })
+        let headers = getAuthHeaders();
+        Sources
+            .delete(typ, addrEnc, headers)
             .then(_ => {
                 alert(`Source ${decodeURIComponent(addrEnc)} deleted successfully`);
                 window.location.assign("pub.html");

@@ -7,17 +7,7 @@ Events.longPoll = function (subId, deadline) {
     Events.audioSnd = new Audio("inbox-notification.wav");
     Events.audioSrc = Events.audioCtx.createMediaElementSource(Events.audioSnd);
     Events.audioSrc.connect(Events.audioCtx.destination);
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    const userId = localStorage.getItem(keyUserId);
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    }
+    const headers = getAuthHeaders();
     let optsReq = {
         method: "GET",
         headers: headers,

@@ -33,3 +33,18 @@ function logout() {
         window.location.assign("index.html");
     }
 }
+
+function getAuthHeaders() {
+    let headers = {
+        "X-Awakari-Group-Id": defaultGroupId,
+    }
+    const authToken = localStorage.getItem(keyAuthToken);
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`;
+    }
+    const userId = localStorage.getItem(keyUserId);
+    if (userId) {
+        headers["X-Awakari-User-Id"] = userId;
+    }
+    return headers;
+}

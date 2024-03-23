@@ -22,7 +22,7 @@
     <script>
         navigator.serviceWorker.register("sw.js");
     </script>
-    <script src="script.js"></script>
+    <script src="tailwind.js"></script>
     <script src="alpinejs-3.13.0.min.js" defer></script>
 
     <script type="application/ld+json">
@@ -141,12 +141,12 @@
     </script>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
-    <script src="evts.js"></script>
+    <script src="jwt-decode.js"></script>
+    <script src="auth.js"></script>
+    <script src="api/evts.js"></script>
     <script src="intcomm.js"></script>
     <script src="jquery-3.7.1.min.js"></script>
     <script src="query.js"></script>
-    <script src="login.js"></script>
     <script src="status.js"></script>
 
 </head>
@@ -216,7 +216,7 @@
                     <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
                         <p id="streaming-results">
                             Results will appear below for the next 1h.</p>
-                        <p>
+                        <p id="sign-in-for-full">
                             <a href="login.html" class="text-blue-500">Sign In</a>
                             for the full-featured mode.</p>
                         <div class="flex">

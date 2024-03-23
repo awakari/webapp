@@ -1,6 +1,11 @@
 const resultsStreamingTimeout = 3_600_000;
 
 function loadQuery() {
+    if (localStorage.getItem(keyUserId)) {
+        document.getElementById("sign-in-for-full").style.display = "none";
+    } else {
+        document.getElementById("sign-in-for-full").style.display = "block"
+    }
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
     if (q != null && q !== "") {

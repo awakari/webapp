@@ -16,39 +16,14 @@ const pageLimit = 12;
 
 function load() {
 
-    // const authProvider = localStorage.getItem(keyAuthProvider);
-    // switch (authProvider) {
-    //     case "Telegram":
-    //         document.getElementById("donate-tg").style.display = "block";
-    //         break
-    // }
-
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    const userId = localStorage.getItem(keyUserId);
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    } else {
+    const headers = getAuthHeaders();
+    if (!headers["Authorization"]) {
         document.getElementById("login").style.display = "block";
     }
 
     document.getElementById("wait").style.display = "block";
-    fetch("/v1/usage/2", {
-        method: "GET",
-        headers: headers,
-        cache: "default",
-    })
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Daily publishing usage request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
+    Usage
+        .fetch("2", headers)
         .then(data => {
             if (data != null && data.hasOwnProperty("count")) {
                 document.getElementById("count").innerText = data.count;
@@ -62,11 +37,8 @@ function load() {
         });
 
     document.getElementById("wait").style.display = "block";
-    fetch("/v1/limits/2", {
-        method: "GET",
-        headers: headers,
-        cache: "default",
-    })
+    Limits
+        .fetch("2", headers)
         .then(resp => {
             if (!resp.ok) {
                 throw new Error(`Daily publishing limit request failed with status: ${resp.status}`);

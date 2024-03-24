@@ -55,31 +55,9 @@ function loadSubscription() {
     // const data = {"description":"Exoplanets","enabled":true,"cond":{"gc":{"logic":"Or","group":[{"tc":{"id":"txt_651f009c25fef58d2c176c06","term":"exoplanet экзопланета экзопланет экзопланеты экзопланету"}},{"gc":{"group":[{"tc":{"id":"txt_651f009c25fef58d2c176c13","term":"planet"}},{"tc":{"id":"txt_651f009c25fef58d2c176c27","term":"extrasolar"}}]}}]}},"expires":"0001-01-01T00:00:00Z"};
     // editor.setValue(data.cond);
     //
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    const userId = localStorage.getItem(keyUserId);
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    }
-    let optsReq = {
-        method: "GET",
-        headers: headers,
-        cache: "default",
-    }
-
-    document.getElementById("wait").style.display = "block";
-    fetch(`/v1/sub/${id}`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
-            }
-            return resp.json();
-        })
+    const headers = getAuthHeaders();
+    Subscriptions
+        .fetch(id, headers)
         .then(data => {
             if (data != null) {
                 document.getElementById("description").value = data.description;
@@ -101,48 +79,21 @@ function loadSubscription() {
 
 function updateSubscription() {
     const id = document.getElementById("id").value;
-    if (confirm(`Confirm update subscription ${id}?`)) {
-        let payload = {
-            id: id,
-            description: document.getElementById("description").value,
-            enabled: document.getElementById("enabled").checked,
-            cond: editor.getValue(0),
-        }
-        const expires = document.getElementById("expires").value;
+    if (confirm(`Update subscription ${id}?`)) {
+        const descr = document.getElementById("description").value;
+        const enabled = document.getElementById("enabled").checked;
+        const cond = editor.getValue(0);
+        let expires = document.getElementById("expires").value;
         if (expires && expires !== "") {
             const d = new Date(expires);
-            payload.expires = new Date(d.getTime() - d.getTimezoneOffset() * 60_000).toISOString();
+            expires = new Date(d.getTime() - d.getTimezoneOffset() * 60_000);
         } else {
-            payload.expires = null;
+            expires = null;
         }
-
-        let headers = {
-            "X-Awakari-Group-Id": defaultGroupId,
-        }
-        const authToken = localStorage.getItem(keyAuthToken);
-        if (authToken) {
-            headers["Authorization"] = `Bearer ${authToken}`;
-        }
-        const userId = localStorage.getItem(keyUserId);
-        if (userId) {
-            headers["X-Awakari-User-Id"] = userId;
-        }
-
-        let optsReq = {
-            method: "PUT",
-            headers: headers,
-            body: JSON.stringify(payload)
-        }
-
+        const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        fetch(`/v1/sub/${id}`, optsReq)
-            .then(resp => {
-                if (!resp.ok) {
-                    resp.text().then(errMsg => console.error(errMsg))
-                    throw new Error(`Request failed ${resp.status}`);
-                }
-                return resp.json();
-            })
+        Subscriptions
+            .update(id, descr, enabled, expires, cond, headers)
             .then(_ => {
                 alert(`Updated subscription: ${id}`);
                 window.location.assign("sub.html");
@@ -158,31 +109,11 @@ function updateSubscription() {
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
-    if (confirm(`Confirm delete subscription ${id}?`)) {
-        let headers = {
-            "X-Awakari-Group-Id": defaultGroupId,
-        }
-        const authToken = localStorage.getItem(keyAuthToken);
-        if (authToken) {
-            headers["Authorization"] = `Bearer ${authToken}`;
-        }
-        const userId = localStorage.getItem(keyUserId);
-        if (userId) {
-            headers["X-Awakari-User-Id"] = userId;
-        }
-        let optsReq = {
-            method: "DELETE",
-            headers: headers,
-            cache: "default",
-        }
+    if (confirm(`Delete subscription ${id}?`)) {
+        const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        fetch(`/v1/sub/${id}`, optsReq)
-            .then(resp => {
-                if (!resp.ok) {
-                    throw new Error(`Request failed with status: ${resp.status}`);
-                }
-                return resp.json();
-            })
+        Subscriptions
+            .delete(id, headers)
             .then(_ => {
                 alert(`Deleted subscription ${id}`);
                 window.location.assign("sub.html");

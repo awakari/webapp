@@ -52,8 +52,6 @@ function showSrcDetails() {
 }
 
 function addSource() {
-    const authToken = localStorage.getItem(keyAuthToken);
-    const userId = localStorage.getItem(keyUserId);
     const srcType = document.getElementById("src_type").value;
     let srcAddr;
     switch (srcType) {
@@ -94,24 +92,11 @@ function addSource() {
             }
             break
     }
-    const payload = {
-        "limit": {
-            "freq": parseInt(document.getElementById("feed_upd_freq").value),
-        },
-        "src": {
-            "addr": srcAddr,
-        }
-    }
+    const headers = getAuthHeaders();
+    const feedUpdFreq = parseInt(document.getElementById("feed_upd_freq").value);
     document.getElementById("wait").style.display = "block";
-    fetch(`/v1/src/${srcType}`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "X-Awakari-Group-Id": defaultGroupId,
-            "X-Awakari-User-Id": userId,
-        },
-        body: JSON.stringify(payload),
-    })
+    Sources
+        .add(srcType, srcAddr, feedUpdFreq, headers)
         .then(resp => resp.text().then(msg => {
             if (resp.ok) {
                 if (msg.length === 0) {

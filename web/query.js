@@ -23,99 +23,38 @@ function loadQuery() {
 const defaultSubName = "_reserved_app_search";
 
 function getQuerySubscription(q, expires) {
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    const userId = localStorage.getItem(keyUserId);
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    }
-    let optsReq = {
-        method: "GET",
-        headers: headers,
-    }
-    return fetch(`/v1/sub?limit=1000&filter=${defaultSubName}`, optsReq)
-        .then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            }
-            resp.text().then(errMsg => console.error(errMsg));
-            throw new Error(`Failed to create a new subscription: ${resp.status}`);
-        })
+    const headers = getAuthHeaders();
+    const cond = {
+        not: false,
+        tc: {
+            term: q,
+        },
+    };
+    return Subscriptions
+        .fetchListPage("", "ASC", 1000, defaultSubName, headers)
         .then(data => {
             if (data && data.subs) {
                 for (let sub of data.subs) {
                     if (sub.description === defaultSubName) {
-                        return deleteSubscription(sub.id, headers)
-                            .then(_ => createSubscription(q, headers, expires));
+                        return Subscriptions
+                            .delete(sub.id, headers)
+                            .catch(e => alert(e))
+                            .then(_ => Subscriptions
+                                .create(defaultSubName, true, new Date(expires), cond, headers)
+                                .catch(e => {
+                                    alert(e);
+                                    return "";
+                                })
+                            );
                     }
                 }
             }
-            return createSubscription(q, headers, expires);
-        })
-        .catch(err => {
-            alert(err);
-            return "";
-        })
-}
-
-function deleteSubscription(id, headers) {
-    let optsReq = {
-        method: "DELETE",
-        headers: headers,
-    };
-    return fetch(`/v1/sub/${id}`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Failed to delete the subscription ${id}: ${resp.status}`);
-            }
-        })
-        .catch(err => {
-            alert(err);
-        })
-}
-
-function createSubscription(q, headers, expires) {
-    console.log(``);
-    const payload = {
-        description: defaultSubName,
-        enabled: true,
-        expires: new Date(expires).toISOString(),
-        cond: {
-            not: false,
-            tc: {
-                term: q,
-            }
-        },
-    }
-    let optsReq = {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(payload)
-    };
-    return fetch(`/v1/sub`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                if (resp.status === 429) {
-                    throw new Error("Subscription count limit reached. Please contact awakari@awakari.com and request to increase the limit.");
-                } else {
-                    throw new Error(`Failed to create a new subscription: ${resp.status}`);
-                }
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data) {
-                return data.id;
-            } else {
-                throw new Error(`Empty create subscription response`);
-            }
+            return Subscriptions
+                .create(defaultSubName, true, new Date(expires), cond, headers)
+                .catch(e => {
+                    alert(e);
+                    return "";
+                });
         })
         .catch(err => {
             alert(err);
@@ -138,9 +77,15 @@ function queryStop() {
     }
 }
 
+let audio = {};
+
 async function startEventsLoading(subId, deadline) {
     document.getElementById("events-menu").style.display = "flex";
     queryRunning = true;
+    audio.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    audio.snd = new Audio("inbox-notification.wav");
+    audio.src = audio.ctx.createMediaElementSource(audio.snd);
+    audio.src.connect(audio.ctx.destination);
     try {
         while (queryRunning && Date.now() < deadline) {
             console.log(`Long poll events for ${subId}...`);
@@ -149,6 +94,11 @@ async function startEventsLoading(subId, deadline) {
                 .then(evts => {
                     if (evts && evts.length > 0) {
                         displayEvents(evts);
+                        try {
+                            audio.snd.play();
+                        } catch (e) {
+                            console.log(e);
+                        }
                     }
                 });
             console.log(`Long poll events for ${subId} done`);

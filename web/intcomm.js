@@ -17,7 +17,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
         }
         if (inc > 0) {
             const payload = {
-                id: uuidv4(),
+                id: Events.newId(),
                 specVersion: "1.0",
                 source: "awakari.com",
                 type: "com.awakari.webapp",
@@ -40,7 +40,8 @@ async function requestIncreasePublishingDailyLimit(objId) {
                 },
                 text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for ${objId} by ${inc}`,
             }
-            if (await submitMessageInternal(payload, userIdCurrent)) {
+            const headers = getAuthHeaders();
+            if (await Events.publishInternal(payload, headers)) {
                 document.getElementById("request-increase-success-dialog").style.display = "block";
                 document.getElementById("request-id").innerText = payload.id;
             }
@@ -56,7 +57,7 @@ async function requestPublishingSourceDedicated(addr){
     const reason = prompt(msg);
     if (reason) {
         const payload = {
-            id: uuidv4(),
+            id: Events.newId(),
             specVersion: "1.0",
             source: "awakari.com",
             type: "com.awakari.webapp",
@@ -79,7 +80,8 @@ async function requestPublishingSourceDedicated(addr){
             },
             text_data: `User ${userIdCurrent} requests to make the source ${addr} dedicated`,
         }
-        if (await submitMessageInternal(payload, userIdCurrent)) {
+        const headers = getAuthHeaders();
+        if (await Events.publishInternal(payload, headers)) {
             document.getElementById("request-increase-success-dialog").style.display = "block";
             document.getElementById("request-id").innerText = payload.id;
             document.getElementById("pub-src-nominate").disabled = true;
@@ -99,7 +101,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
         }
         if (inc > 0) {
             const payload = {
-                id: uuidv4(),
+                id: Events.newId(),
                 specVersion: "1.0",
                 source: "awakari.com",
                 type: "com.awakari.webapp",
@@ -122,7 +124,8 @@ async function requestIncreaseSubscriptionsLimit(userId) {
                 },
                 text_data: `User ${userId} requests to increase the subscriptions limit by ${inc}`,
             }
-            if (await submitMessageInternal(payload, userId)) {
+            const headers = getAuthHeaders();
+            if (await Events.publishInternal(payload, headers)) {
                 document.getElementById("request-increase-success-dialog").style.display = "block";
                 document.getElementById("request-id").innerText = payload.id;
             }
@@ -137,7 +140,7 @@ async function reportPublishingSourceInappropriate(srcAddr) {
     const reason = prompt(`Please specify the reason why do you think the source is inappropriate.\nSource: ${srcAddr}`)
     if (reason) {
         const payload = {
-            id: uuidv4(),
+            id: Events.newId(),
             specVersion: "1.0",
             source: "awakari.com",
             type: "com.awakari.webapp",
@@ -157,7 +160,8 @@ async function reportPublishingSourceInappropriate(srcAddr) {
             },
             text_data: `User ${userIdCurrent} reports the inappropriate publishing source ${srcAddr}, reason: ${reason}`,
         }
-        if (await submitMessageInternal(payload, userIdCurrent)) {
+        const headers = getAuthHeaders();
+        if (await Events.publishInternal(payload, headers)) {
             document.getElementById("report-success-dialog").style.display = "block";
             document.getElementById("report-id").innerText = payload.id;
         }
@@ -169,7 +173,7 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
     const reason = prompt(`Please specify the reason why do you think the message is inappropriate.\nMessage link: ${evtLink}`)
     if (reason) {
         const payload = {
-            id: uuidv4(),
+            id: Events.newId(),
             specVersion: "1.0",
             source: "awakari.com",
             type: "com.awakari.webapp",
@@ -192,48 +196,10 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
             },
             text_data: `User ${userIdCurrent} reports the inappropriate message from ${srcAddr}, reason: ${reason}`,
         }
-        if (await submitMessageInternal(payload, userIdCurrent)) {
+        const headers = getAuthHeaders();
+        if (await Events.publishInternal(payload, headers)) {
             document.getElementById("report-success-dialog").style.display = "block";
             document.getElementById("report-id").innerText = payload.id;
         }
     }
-}
-
-function submitMessageInternal(payload, userId) {
-    let headers = {
-        "X-Awakari-Group-Id": defaultGroupId,
-    }
-    const authToken = localStorage.getItem(keyAuthToken);
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    if (userId) {
-        headers["X-Awakari-User-Id"] = userId;
-    }
-    return fetch("/v1/pub/internal", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(payload),
-    })
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(_ => {
-            return true;
-        })
-        .catch(err => {
-            alert(err);
-            return false;
-        })
-}
-
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
 }

@@ -10,7 +10,7 @@ function handleAuthGoogle(response) {
     const tokenDecoded = jwt_decode(tokenEncoded);
     localStorage.setItem(keyUserId, `${tokenDecoded.iss}/${tokenDecoded.sub}`);
     localStorage.setItem(keyAuthToken, tokenEncoded);
-    window.location.assign("pub.html");
+    window.location.assign("sub.html");
 }
 
 function handleAuthTelegram(user) {
@@ -19,7 +19,7 @@ function handleAuthTelegram(user) {
     localStorage.setItem(keyAuthProvider, "Telegram");
     const token = Base64.encode(JSON.stringify(user));
     localStorage.setItem(keyAuthToken, token);
-    window.location.assign("pub.html");
+    window.location.assign("sub.html");
 }
 
 function logout() {

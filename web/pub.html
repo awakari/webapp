@@ -41,8 +41,8 @@
 <body class="bg-white dark:bg-gray-900" onload="load()">
 <header>
     <nav class="text-xl flex p-1 sm:p-4 text-neutral-600 dark:text-neutral-400 justify-center">
-        <div class="text-center min-w-[352px] w-[352x] flex space-x-2">
-            <div class="w-16 justify-self-start text-left hover:text-neutral-500">
+        <div class="text-center min-w-[352px] max-w-[352x] flex">
+            <div class="w-16 justify-self-start text-left hover:text-fuchsia-500">
                 <span id="exit"
                       class="flex"
                       onclick="localStorage.getItem(keyUserName) ? logout() : window.location.assign('index.html')">
@@ -52,9 +52,12 @@
                     Exit
                 </span>
             </div>
-            <div class="w-24 border-b-2 border-indigo-500 text-indigo-500">Publish</div>
-            <div class="w-24 hover:text-cyan-500" onclick="window.location.assign('sub.html')">Subscribe</div>
-            <div class="w-16 justify-self-end text-right hover:text-neutral-800 dark:hover:text-neutral-300">
+            <div class="grow"></div>
+            <div class="w-24 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Subscribe</div>
+            <div class="grow"></div>
+            <div class="w-24 border-b-2 border-cyan-500 text-cyan-500">Publish</div>
+            <div class="grow"></div>
+            <div class="w-16 justify-self-end text-right hover:text-green-500 mr-2">
                 <span id="login"
                       style="display: none"
                       onclick="window.location.assign('login.html')">

@@ -6,6 +6,7 @@ Usage.fetch = function (subj, headers) {
         headers: headers,
         cache: "no-cache",
     })
+        .then(resp => handleCookieExpiration(resp, headers, (h) => Usage.fetch(subj, h)))
         .then(resp => {
             if (!resp.ok) {
                 if (subj === "1" || subj === "2") {

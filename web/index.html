@@ -145,15 +145,14 @@
     <script src="api/events.js"></script>
     <script src="intcomm.js"></script>
     <script src="jquery-3.7.1.min.js"></script>
-    <script src="api/error.js"></script>
+    <script src="api/response.js"></script>
     <script src="api/subscriptions.js"></script>
-    <script src="query.js"></script>
     <script src="status.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body class="bg-gray-200" onload="loadQuery(); loadStatus();">
+<body class="bg-gray-200" onload="loadStatus();">
 
 <main>
     <header class="bg-white dark:bg-gray-900 h-screen">
@@ -163,7 +162,7 @@
                 <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">Awakari</a>
 
                 <div class="flex space-x-1 sm:space-x-2">
-                    <form method="GET" role="search">
+                    <form role="search" id="form_search">
                         <div class="border flex text-slate-500 w-56 sm:w-[480px] dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
@@ -181,11 +180,13 @@
                                    spellcheck="false"
                                    required="required"
                                    type="search"
+                                   role="searchbox"
                                    placeholder="Future Search"
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
                     </form>
+                    <script src="query.js"></script>
 
                     <!-- Mobile menu button -->
                     <button x-cloak @click="isOpen = !isOpen" type="button"

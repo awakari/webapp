@@ -1,28 +1,29 @@
 const resultsStreamingTimeout = 3_600_000;
 
-function loadQuery() {
-    if (localStorage.getItem(keyUserId)) {
-        document.getElementById("sign-in-for-full").style.display = "none";
-    } else {
-        document.getElementById("sign-in-for-full").style.display = "block"
-    }
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get("q");
-    if (q != null && q !== "") {
-        document.getElementById("query").value = q;
-        const expires = Date.now() + resultsStreamingTimeout;
-        getQuerySubscription(q, expires)
-            .then(subId => {
-                if (subId && subId !== "") {
-                    startEventsLoading(subId, expires);
-                }
-            });
-    }
-}
+document
+    .getElementById("form_search")
+    .addEventListener("submit", function (evt){
+        evt.preventDefault();
+        if (localStorage.getItem(keyUserId)) {
+            document.getElementById("sign-in-for-full").style.display = "none";
+        } else {
+            document.getElementById("sign-in-for-full").style.display = "block"
+        }
+        const q = document.getElementById("query").value;
+        if (q != null && q !== "") {
+            const expires = Date.now() + resultsStreamingTimeout;
+            createQuerySubscription(q, expires, false)
+                .then(subId => {
+                    if (subId && subId !== "") {
+                        startEventsLoading(subId, expires);
+                    }
+                });
+        }
+    });
 
 const searchSubNamePrefix = "_Reserved_Search ";
 
-function getQuerySubscription(q, expires) {
+function createQuerySubscription(q, expires, retried) {
     const headers = getAuthHeaders();
     const cond = {
         not: false,
@@ -32,24 +33,44 @@ function getQuerySubscription(q, expires) {
     };
     return Subscriptions
         .createResponse(searchSubNamePrefix + q, true, new Date(expires), cond, headers)
+        .then(resp => handleLimitReached(resp, q, expires, headers))
         .then(resp => {
             if (!resp.ok) {
-                switch (resp.status) {
-                    case 401:
-                        alert("Access failure. Sign in or clean cookies.");
-                        break;
-                    case 429:
-                        alert("Limit reached. Go to own subscriptions list and delete unneeded.");
-                        break;
-                    default:
-                        alert(`Subscription create request failed, response status: ${resp.status}`);
-                        break;
-                }
+                alert(`Subscription create request failed, response status: ${resp.status}`);
                 return null;
             }
             return resp.json();
         })
         .then(data => data ? data.id : null);
+}
+
+function handleLimitReached(resp, q, expires, headers) {
+    if (!resp.ok && resp.status === 429) {
+        console.log("Subscriptions limit reached");
+        return Subscriptions
+            .fetchListPage("", "ASC", 10, searchSubNamePrefix, headers)
+            .then(data => {
+                let subIdToDelete = "";
+                let expiresMin = 0;
+                if (data && data.hasOwnProperty("subs")) {
+                    for (const sub of data.subs) {
+                        const expiresTs = new Date(sub.expires).getTime();
+                        if (expiresMin === 0 || (expiresTs > 0 && expiresTs < expiresMin)) {
+                            subIdToDelete = sub.id;
+                            expiresMin = expiresTs;
+                        }
+                    }
+                    if (subIdToDelete !== "") {
+                        console.log(`Delete oldest found search subscription ${subIdToDelete}`);
+                        return Subscriptions.delete(subIdToDelete, headers);
+                    }
+                }
+                return null;
+            })
+            .then(_ => createQuerySubscription(q, expires, true));
+    } else {
+        return resp;
+    }
 }
 
 let activeSubId = null;

@@ -48,6 +48,7 @@ Events.publishInternal = function (payload, headers) {
         headers: headers,
         body: JSON.stringify(payload),
     })
+        .then(resp => handleCookieExpiration(resp, headers, (h) => Events.publishInternal(payload, h)))
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -64,6 +65,7 @@ Events.publish = function (payload, headers) {
         headers: headers,
         body: JSON.stringify(payload),
     })
+        .then(resp => handleCookieExpiration(resp, headers, (h) => Events.publish(payload, h)))
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

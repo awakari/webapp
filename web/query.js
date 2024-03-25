@@ -13,7 +13,7 @@ function loadQuery() {
         const expires = Date.now() + resultsStreamingTimeout;
         getQuerySubscription(q, expires)
             .then(subId => {
-                if (subId !== "") {
+                if (subId && subId !== "") {
                     startEventsLoading(subId, expires);
                 }
             });
@@ -38,27 +38,14 @@ function getQuerySubscription(q, expires) {
                     if (sub.description === defaultSubName) {
                         return Subscriptions
                             .delete(sub.id, headers)
-                            .catch(e => alert(e))
                             .then(_ => Subscriptions
                                 .create(defaultSubName, true, new Date(expires), cond, headers)
-                                .catch(e => {
-                                    alert(e);
-                                    return "";
-                                })
                             );
                     }
                 }
             }
             return Subscriptions
-                .create(defaultSubName, true, new Date(expires), cond, headers)
-                .catch(e => {
-                    alert(e);
-                    return "";
-                });
-        })
-        .catch(err => {
-            alert(err);
-            return "";
+                .create(defaultSubName, true, new Date(expires), cond, headers);
         })
 }
 

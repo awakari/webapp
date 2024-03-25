@@ -100,21 +100,18 @@ function addSource() {
         .then(resp => resp.text().then(msg => {
             if (resp.ok) {
                 if (msg.length === 0) {
-                    msg = "success"
+                    msg = "success";
                 }
                 alert(`Source added: ${msg}`);
             } else {
-                alert(`Failed to add the source: ${msg}`);
+                handleResponseStatus(resp.status);
             }
-            return resp
+            return resp;
         }))
         .then(resp => {
             if (resp.ok) {
                 loadForm(); // reset
             }
-        })
-        .catch(err => {
-            console.error(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";

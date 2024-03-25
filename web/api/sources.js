@@ -1,6 +1,6 @@
 const Sources = {};
 
-Sources.fetchListPage = function (type, own, order, limit, filter, headers) {
+Sources.fetchListPageResponse = function (type, own, order, limit, filter, headers) {
     return fetch(`/v1/src/${type}/list?&own=${own}&order=${order}&limit=${limit}&filter=${filter}`, {
         method: "GET",
         headers: headers,
@@ -17,7 +17,8 @@ Sources.fetch = function (typ, addrEnc, headers) {
     })
         .then(resp => {
             if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
+                handleResponseStatus(resp.status);
+                return null;
             }
             return resp.json();
         });
@@ -31,9 +32,10 @@ Sources.delete = function (typ, addrEnc, headers) {
     })
         .then(resp => {
             if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
+                handleResponseStatus(resp.status);
+                return false;
             }
-            return resp;
+            return true;
         })
 }
 

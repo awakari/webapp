@@ -16,34 +16,28 @@
     <script src="auth.js"></script>
 
 </head>
-<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300"
-      onload="localStorage.getItem(keyUserId) ? document.getElementById('login').style.display = 'none' : document.getElementById('login').style.display = 'block'">
+<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300">
 
 <header>
-    <nav class="text-xl flex p-1 sm:p-4 text-neutral-600 dark:text-neutral-400 justify-center">
+    <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
         <div class="text-center min-w-[352px] w-[352px] flex">
-            <div class="justify-self-start text-left hover:text-fuchsia-500">
+            <div class="w-16 justify-self-start text-left hover:text-fuchsia-500">
                 <span id="exit"
                       class="flex"
                       onclick="localStorage.getItem(keyUserName) ? logout() : window.location.assign('index.html')">
                     <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2"
-                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     Exit
                 </span>
             </div>
             <div class="grow"></div>
-            <div class="hover:text-indigo-500 px-1">Subscribe</div>
+            <div class="w-24 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Subscribe</div>
             <div class="grow"></div>
-            <div class="hover:text-cyan-500 px-1" onclick="window.location.assign('pub.html')">Publish</div>
+            <div class="w-24 hover:text-cyan-500" onclick="window.location.assign('pub.html')">Publish</div>
             <div class="grow"></div>
-            <div class="justify-self-end text-right border-b-2 border-green-500 text-green-500 mr-2">
-                <span id="login"
-                      style="display: none"
-                      onclick="window.location.assign('login.html')">
-                    Sign In
-                </span>
+            <div class="w-16 justify-self-end text-right border-b-2 border-green-500 text-green-500 mr-2">
+                Sign In
             </div>
         </div>
     </nav>
@@ -58,7 +52,7 @@
             <script async
                     src="https://telegram.org/js/telegram-widget.js?22"
                     data-telegram-login="AwakariBot"
-                    data-size="large"
+                    data-size="medium"
                     data-onauth="handleAuthTelegram(user)"
                     data-request-access="write"
                     data-radius="4"

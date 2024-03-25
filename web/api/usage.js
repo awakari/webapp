@@ -8,14 +8,13 @@ Usage.fetch = function (subj, headers) {
     })
         .then(resp => {
             if (!resp.ok) {
-                if (subj === "1") {
-                    throw new Error(`Subscriptions usage request failed with status: ${resp.status}`);
-                } else if (subj === "2") {
-                    throw new Error(`Publishing usage request failed with status: ${resp.status}`);
+                if (subj === "1" || subj === "2") {
+                    handleResponseStatus(resp.status);
                 } else {
-                    throw new Error(`Invalid usage subject: ${subj}`);
+                    alert(`Invalid usage subject: ${subj}`);
                 }
+                return null;
             }
             return resp.json();
-        })
+        });
 }

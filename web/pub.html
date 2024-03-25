@@ -26,6 +26,7 @@
     <link href="tailwind.output.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 
+    <script src="api/error.js"></script>
     <script src="auth.js"></script>
     <script src="api/usage.js"></script>
     <script src="api/limits.js"></script>
@@ -40,8 +41,8 @@
 </head>
 <body class="bg-white dark:bg-gray-900" onload="load()">
 <header>
-    <nav class="text-xl flex p-1 sm:p-4 text-neutral-600 dark:text-neutral-400 justify-center">
-        <div class="text-center min-w-[352px] max-w-[352x] flex">
+    <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
+        <div class="text-center min-w-[352px] max-w-[352px] flex">
             <div class="w-16 justify-self-start text-left hover:text-fuchsia-500">
                 <span id="exit"
                       class="flex"
@@ -57,12 +58,11 @@
             <div class="grow"></div>
             <div class="w-24 border-b-2 border-cyan-500 text-cyan-500">Publish</div>
             <div class="grow"></div>
-            <div class="w-16 justify-self-end text-right hover:text-green-500 mr-2">
-                <span id="login"
-                      style="display: none"
-                      onclick="window.location.assign('login.html')">
-                    Sign In
-                </span>
+            <div class="w-16 justify-self-end text-right hover:text-green-500 mr-2"
+                 onclick="window.location.assign('login.html')"
+                 id="login"
+                 style="display: none">
+                Sign In
             </div>
         </div>
     </nav>

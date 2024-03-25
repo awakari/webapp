@@ -25,12 +25,9 @@ function load() {
     Usage
         .fetch("2", headers)
         .then(data => {
-            if (data != null && data.hasOwnProperty("count")) {
+            if (data && data.hasOwnProperty("count")) {
                 document.getElementById("count").innerText = data.count;
             }
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
@@ -40,13 +37,10 @@ function load() {
     Limits
         .fetch("2", headers)
         .then(data => {
-            if (data != null && data.hasOwnProperty("count")) {
+            if (data && data.hasOwnProperty("count")) {
                 document.getElementById("limit").innerText = data.count;
             }
             return data;
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
@@ -99,10 +93,11 @@ function loadSources(cursor, filter, srcType, own) {
 
     document.getElementById("wait").style.display = "block";
     Sources
-        .fetchListPage(srcType, own, order, pageLimit, encodeURIComponent(filter), headers)
+        .fetchListPageResponse(srcType, own, order, pageLimit, encodeURIComponent(filter), headers)
         .then(resp => {
             if (!resp.ok) {
-                throw new Error(`Sources list request failed with status: ${resp.status}`);
+                handleResponseStatus(resp.status);
+                return null;
             }
             return resp.json();
         })
@@ -156,9 +151,6 @@ function loadSources(cursor, filter, srcType, own) {
                     window.location.assign(`pub.html?filter=${encodeURIComponent(filter)}&srcType=${srcType}&own=${own}`);
                 }
             }
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";

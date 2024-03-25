@@ -219,12 +219,11 @@ function submitMsg() {
     const headers = getAuthHeaders();
     Events
         .publish(payload, headers)
-        .then(_ => {
-            alert("Message has been sent");
-            loadForm(); // reset
-        })
-        .catch(err => {
-            alert(err);
+        .then(sent => {
+            if (sent) {
+                alert("Message has been sent");
+                loadForm(); // reset
+            }
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";

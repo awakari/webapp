@@ -12,7 +12,7 @@ const templateSub = (sub) => `
                 </div>
 `
 
-const pageLimit= 14;
+const pageLimit= 12;
 
 function load() {
 
@@ -25,12 +25,9 @@ function load() {
     Usage
         .fetch("1", headers)
         .then(data => {
-            if (data != null && data.hasOwnProperty("count")) {
+            if (data && data.hasOwnProperty("count")) {
                 document.getElementById("count").innerText = data.count;
             }
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
@@ -40,13 +37,10 @@ function load() {
     Limits
         .fetch("1", headers)
         .then(data => {
-            if (data != null && data.hasOwnProperty("count")) {
+            if (data && data.hasOwnProperty("count")) {
                 document.getElementById("limit").innerText = data.count;
             }
             return data;
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
@@ -80,7 +74,7 @@ function loadSubscriptions(filter) {
         .fetchListPage(cursor, order, pageLimit, filter, headers)
         .then(data => {
 
-            if (data != null) {
+            if (data) {
 
                 let subs = [];
                 if (data.hasOwnProperty("subs")) {
@@ -141,9 +135,6 @@ function loadSubscriptions(filter) {
                     }
                 }
             }
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";

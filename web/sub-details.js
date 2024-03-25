@@ -59,7 +59,7 @@ function loadSubscription() {
     Subscriptions
         .fetch(id, headers)
         .then(data => {
-            if (data != null) {
+            if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("enabled").checked = data.enabled;
                 const expires = new Date(data.expires);
@@ -68,9 +68,6 @@ function loadSubscription() {
                 }
                 editor.setValue(data.cond);
             }
-        })
-        .catch(err => {
-            alert(err);
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
@@ -94,12 +91,11 @@ function updateSubscription() {
         document.getElementById("wait").style.display = "block";
         Subscriptions
             .update(id, descr, enabled, expires, cond, headers)
-            .then(_ => {
-                alert(`Updated subscription: ${id}`);
-                window.location.assign("sub.html");
-            })
-            .catch(err => {
-                alert(err)
+            .then(updated => {
+                if (updated) {
+                    alert(`Updated subscription: ${id}`);
+                    window.location.assign("sub.html");
+                }
             })
             .finally(() => {
                 document.getElementById("wait").style.display = "none";
@@ -114,12 +110,11 @@ function deleteSubscription() {
         document.getElementById("wait").style.display = "block";
         Subscriptions
             .delete(id, headers)
-            .then(_ => {
-                alert(`Deleted subscription ${id}`);
-                window.location.assign("sub.html");
-            })
-            .catch(err => {
-                alert(err);
+            .then(deleted => {
+                if (deleted) {
+                    alert(`Deleted subscription ${id}`);
+                    window.location.assign("sub.html");
+                }
             })
             .finally(() => {
                 document.getElementById("wait").style.display = "none";

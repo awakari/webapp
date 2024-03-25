@@ -28,6 +28,7 @@
     <link href="style.css" rel="stylesheet">
 
     <script src="auth.js"></script>
+    <script src="api/error.js"></script>
     <script src="api/events.js"></script>
     <script src="intcomm.js"></script>
     <script src="api/subscriptions.js"></script>
@@ -41,7 +42,7 @@
 </head>
 <body class="bg-white dark:bg-gray-900" onload="load()">
 <header>
-    <nav class="text-xl flex p-1 sm:p-4 text-neutral-600 dark:text-neutral-400 justify-center">
+    <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
         <div class="text-center min-w-[352px] max-w-[352px] flex">
             <div class="w-16 justify-self-start text-left hover:text-fuchsia-500-500">
                 <span id="exit"
@@ -58,19 +59,21 @@
             <div class="grow"></div>
             <div class="w-24 hover:text-cyan-500" onclick="window.location.assign('pub.html')">Publish</div>
             <div class="grow"></div>
-            <div class="w-16 justify-self-end text-right hover:text-green-500 mr-2">
-                <span id="login"
-                      style="display: none"
-                      onclick="window.location.assign('login.html')">
-                    Sign In
-                </span>
+            <div class="w-16 justify-self-end text-right hover:text-green-500 mr-2"
+                 onclick="window.location.assign('login.html')"
+                 id="login"
+                 style="display: none">
+                Sign In
             </div>
         </div>
     </nav>
 </header>
-<main class="py-2 mx-2 text-slate-700 dark:text-gray-300">
+<main class="py-1 mx-2 text-slate-700 dark:text-gray-300">
+    <div class="flex justify-center text-neutral-600 dark:text-neutral-400 py-1">
+        <span class="text-slate-700 dark:text-neutral-300">Subscriptions</span>&nbsp;are persistent search queries.
+    </div>
     <div class="flex flex-col sm:flex-row items-center justify-center">
-        <div class="flex w-80 sm:w-48 sm:ml-2">
+        <div class="flex w-80 sm:w-48 sm:ml-2 pt-1">
             <div class="pt-1 w-28 sm:w-24">Count:</div>
             <div class="pt-1 w-12 sm:w-8" id="count"></div>
             <div class="ml-2">
@@ -127,7 +130,7 @@
             </div>
         </div>
     </div>
-    <div class="flex items-center justify-center pt-2">
+    <div class="flex flex-col items-center justify-center pt-2">
         <div class="border flex text-slate-500 w-80 sm:w-[400px] mt-2 sm:mt-0 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700 justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>

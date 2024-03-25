@@ -67,14 +67,13 @@ function createSubscription() {
         Subscriptions
             .create(descr, true, expires, cond, headers)
             .then(id => {
-                document.getElementById("sub-new-success-dialog").style.display = "block";
-                document.getElementById("new-sub-id").innerText = id;
-                if (userId && userId.startsWith("tg://user?id=")) {
-                    document.getElementById("sub-new-success-btn-tg").style.display = "block";
+                if (id) {
+                    document.getElementById("sub-new-success-dialog").style.display = "block";
+                    document.getElementById("new-sub-id").innerText = id;
+                    if (userId && userId.startsWith("tg://user?id=")) {
+                        document.getElementById("sub-new-success-btn-tg").style.display = "block";
+                    }
                 }
-            })
-            .catch(err => {
-                alert(err);
             })
             .finally(() => {
                 document.getElementById("wait").style.display = "none";

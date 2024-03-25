@@ -15,7 +15,7 @@ Events.longPoll = function (subId, deadline) {
                 Events.abortController.abort();
             }, timeout));
             if (!resp.ok) {
-                throw new Error(`Request failed with status: ${resp.status}`);
+                throw new Error(`Fetch events request failed, response status: ${resp.status}`);
             }
             return resp.json();
         })
@@ -24,7 +24,7 @@ Events.longPoll = function (subId, deadline) {
             return null;
         })
         .then(data => {
-            if (data != null && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
+            if (data && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
                 console.log(`Read subscription ${subId}: got ${data.msgs.length} new events`);
                 return data.msgs;
             } else {
@@ -51,16 +51,10 @@ Events.publishInternal = function (payload, headers) {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
+                handleResponseStatus(resp.status);
+                return false;
             }
-            return resp.json();
-        })
-        .then(_ => {
             return true;
-        })
-        .catch(err => {
-            alert(err);
-            return false;
         });
 }
 
@@ -73,9 +67,10 @@ Events.publish = function (payload, headers) {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
+                handleResponseStatus(resp.status);
+                return false;
             }
-            return resp.json();
+            return true;
         })
 
 }

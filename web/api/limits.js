@@ -8,13 +8,12 @@ Limits.fetch = function (subj, headers) {
     })
         .then(resp => {
             if (!resp.ok) {
-                if (subj === "1") {
-                    throw new Error(`Subscriptions limit request failed with status: ${resp.status}`);
-                } else if (subj === "2") {
-                    throw new Error(`Daily publishing limit request failed with status: ${resp.status}`);
+                if (subj === "1" || subj === "2") {
+                    handleResponseStatus(resp.status);
                 } else {
-                    throw new Error(`Invalid subject: ${subj}`);
+                    alert(`Invalid subject: ${subj}`);
                 }
+                return null;
             }
             return resp.json();
         })

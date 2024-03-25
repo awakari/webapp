@@ -19,7 +19,7 @@ async function loadSource() {
     const counts = await Sources
         .fetch(typ, addrEnc, headers)
         .then(data => {
-            if (data != null) {
+            if (data) {
                 switch (typ) {
                     case "apub":
                         document.getElementById("type").innerText = "ActivityPub";
@@ -114,14 +114,10 @@ async function loadSource() {
                 return data.counts;
             }
             return null;
-        })
-        .catch(err => {
-            alert(err);
-            return null;
         });
     document.body.classList.remove('waiting-cursor');
     document.getElementById("wait").style.display = "none";
-    if (counts != null && Object.keys(counts).length > 0) {
+    if (counts && Object.keys(counts).length > 0) {
         document.getElementById("wait").style.display = "block";
         document.body.classList.add('waiting-cursor');
         await drawFreqChart(addr, counts);
@@ -178,12 +174,11 @@ function deleteSource(typ, addrEnc) {
         let headers = getAuthHeaders();
         Sources
             .delete(typ, addrEnc, headers)
-            .then(_ => {
-                alert(`Source ${decodeURIComponent(addrEnc)} deleted successfully`);
-                window.location.assign("pub.html");
-            })
-            .catch(err => {
-                alert(err);
+            .then(deleted => {
+                if (deleted) {
+                    alert(`Source ${decodeURIComponent(addrEnc)} deleted successfully`);
+                    window.location.assign("pub.html");
+                }
             });
     }
 }

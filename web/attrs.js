@@ -34,15 +34,15 @@ function loadAttributeValues(editor, input) {
         case "source":
             const headers = getAuthHeaders();
             return Promise.all([
-                Sources.fetchListPage("apub", false, "ASC", 3, encodeURIComponent(input), headers),
-                Sources.fetchListPage("feed", false, "ASC", 3, encodeURIComponent(input), headers),
-                Sources.fetchListPage("site", false, "ASC", 3, encodeURIComponent(input), headers),
-                Sources.fetchListPage("tgbc", false, "ASC", 3, encodeURIComponent(input), headers),
-                Sources.fetchListPage("tgch", false, "ASC", 3, encodeURIComponent(input), headers),
+                Sources.fetchListPageResponse("apub", false, "ASC", 3, encodeURIComponent(input), headers),
+                Sources.fetchListPageResponse("feed", false, "ASC", 3, encodeURIComponent(input), headers),
+                Sources.fetchListPageResponse("site", false, "ASC", 3, encodeURIComponent(input), headers),
+                Sources.fetchListPageResponse("tgbc", false, "ASC", 3, encodeURIComponent(input), headers),
+                Sources.fetchListPageResponse("tgch", false, "ASC", 3, encodeURIComponent(input), headers),
             ])
                 .then(resps => {
                     let promises = [];
-                    for (const resp of resps) {
+                    for (const data of resps) {
                         if (resp.ok) {
                             promises.push(resp.json());
                         } else {

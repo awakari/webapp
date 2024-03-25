@@ -20,7 +20,7 @@ function loadQuery() {
     }
 }
 
-const defaultSubName = "_reserved_app_search";
+const searchSubNamePrefix = "_Reserved_Search ";
 
 function getQuerySubscription(q, expires) {
     const headers = getAuthHeaders();
@@ -31,28 +31,44 @@ function getQuerySubscription(q, expires) {
         },
     };
     return Subscriptions
-        .fetchListPage("", "ASC", 1000, defaultSubName, headers)
-        .then(data => {
-            if (data && data.subs) {
-                for (let sub of data.subs) {
-                    if (sub.description === defaultSubName) {
-                        return Subscriptions
-                            .delete(sub.id, headers)
-                            .then(_ => Subscriptions
-                                .create(defaultSubName, true, new Date(expires), cond, headers)
-                            );
-                    }
+        .createResponse(searchSubNamePrefix + q, true, new Date(expires), cond, headers)
+        .then(resp => {
+            if (!resp.ok) {
+                switch (resp.status) {
+                    case 401:
+                        alert("Access failure. Sign in or clean cookies.");
+                        break;
+                    case 429:
+                        alert("Limit reached. Go to own subscriptions list and delete unneeded.");
+                        break;
+                    default:
+                        alert(`Subscription create request failed, response status: ${resp.status}`);
+                        break;
                 }
+                return null;
             }
-            return Subscriptions
-                .create(defaultSubName, true, new Date(expires), cond, headers);
+            return resp.json();
         })
+        .then(data => data ? data.id : null);
 }
 
-let queryRunning = false;
+let activeSubId = null;
 
-function queryStop() {
-    queryRunning = false;
+async function queryStop() {
+    const headers = getAuthHeaders();
+    const data = await Subscriptions
+        .fetch(activeSubId, headers)
+        .then(data => {
+            if (data) {
+                data.expires = new Date(); // now
+                return data;
+            }
+            return null;
+        });
+    if (data) {
+        await Subscriptions.update(activeSubId, data.description, data.enabled, data.expires, data.cond, headers);
+    }
+    activeSubId = null;
     let elemEvents = document.getElementById("events");
     let elemEventsMenu = document.getElementById("events-menu");
     if (elemEvents.innerHTML === "") {
@@ -68,13 +84,13 @@ let audio = {};
 
 async function startEventsLoading(subId, deadline) {
     document.getElementById("events-menu").style.display = "flex";
-    queryRunning = true;
+    activeSubId = subId;
     audio.ctx = new (window.AudioContext || window.webkitAudioContext)();
     audio.snd = new Audio("inbox-notification.wav");
     audio.src = audio.ctx.createMediaElementSource(audio.snd);
     audio.src.connect(audio.ctx.destination);
     try {
-        while (queryRunning && Date.now() < deadline) {
+        while (activeSubId && Date.now() < deadline) {
             console.log(`Long poll events for ${subId}...`);
             await Events
                 .longPoll(subId, deadline)
@@ -94,7 +110,7 @@ async function startEventsLoading(subId, deadline) {
         alert(`Unexpected events loading error ${subId}: ${e}`);
     } finally {
         document.getElementById("streaming-results").innerText = "Results streaming ended.";
-        queryStop();
+        await queryStop();
     }
 }
 

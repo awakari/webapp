@@ -62,9 +62,10 @@ function loadSubscription() {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("enabled").checked = data.enabled;
-                const expires = new Date(data.expires);
+                let expires = new Date(data.expires);
                 if (!isNaN(expires) && expires > 0) {
-                    document.getElementById("expires").value = data.expires.substring(0, 16);
+                    expires = new Date(expires.getTime() - 60_000 * expires.getTimezoneOffset());
+                    document.getElementById("expires").value = expires.toISOString().substring(0, 16); // YYYY-MM-DDTHH:mm
                 }
                 editor.setValue(data.cond);
             }

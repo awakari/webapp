@@ -31,7 +31,7 @@ Subscriptions.delete = function (id, headers) {
         });
 }
 
-Subscriptions.create = function (descr, enabled, expires, cond, headers) {
+Subscriptions.createResponse = function (descr, enabled, expires, cond, headers) {
     const payload = {
         description: descr,
         enabled: enabled,
@@ -45,7 +45,12 @@ Subscriptions.create = function (descr, enabled, expires, cond, headers) {
         headers: headers,
         body: JSON.stringify(payload)
     };
-    return fetch(`/v1/sub`, optsReq)
+    return fetch(`/v1/sub`, optsReq);
+}
+
+Subscriptions.create = function (descr, enabled, expires, cond, headers) {
+    return Subscriptions
+        .createResponse(descr, enabled, expires, cond, headers)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

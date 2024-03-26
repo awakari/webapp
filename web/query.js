@@ -78,6 +78,9 @@ function handleLimitReached(resp, q, expires, headers, retried) {
 let activeSubId = null;
 
 async function queryStop(askClear) {
+    if (activeSubId == null) {
+        return;
+    }
     const headers = getAuthHeaders();
     const data = await Subscriptions
         .fetch(activeSubId, headers)

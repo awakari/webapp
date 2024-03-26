@@ -3,7 +3,7 @@ const Status = {};
 Status.fetchAttributeTypes = function () {
     const optsReq = {
         method: "GET",
-        cache: "force-cache",
+        cache: "default",
     };
     return fetch(`/v1/status/attr/types`, optsReq)
         .then(resp => {
@@ -18,7 +18,7 @@ Status.fetchAttributeTypes = function () {
 Status.fetchAttributeValues = function (name) {
     return fetch(`/v1/status/attr/values/${name}`, {
         method: "GET",
-        cache: "force-cache",
+        cache: "default",
     })
         .then(resp => {
             if (resp.ok) {

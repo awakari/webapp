@@ -1,10 +1,10 @@
 const Sources = {};
 
-Sources.fetchListPageResponse = function (type, own, order, limit, filter, headers) {
+Sources.fetchListPageResponse = function (type, own, order, limit, filter, headers, forceCache) {
     return fetch(`/v1/src/${type}/list?&own=${own}&order=${order}&limit=${limit}&filter=${filter}`, {
         method: "GET",
         headers: headers,
-        cache: "force-cache",
+        cache: "default",
     })
         .then(resp => handleCookieExpiration(resp, headers, (h) => Sources.fetchListPageResponse(type, own, order, limit, filter, h)));
 }

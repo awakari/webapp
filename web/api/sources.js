@@ -32,7 +32,6 @@ Sources.delete = function (typ, addrEnc, headers) {
         method: "DELETE",
         headers: headers,
     })
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Sources.delete(typ, addrEnc, h)))
         .then(resp => {
             if (!resp.ok) {
                 handleResponseStatus(resp.status);

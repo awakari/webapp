@@ -10,21 +10,9 @@ function handleResponseStatus(code) {
 }
 
 function handleCookieExpiration(resp, reqHeaders, retry) {
-    if (resp.status === 401 && !reqHeaders["Authorization"] && reqHeaders["Cookie"] !== "") {
-        let b;
-        if (typeof browser === "undefined") {
-            b = chrome;
-        } else {
-            b = browser;
-        }
-        return b
-            .cookies
-            .remove({
-                url: location.href,
-                name: "tmpuser-",
-            })
-            .then((_) => retry(reqHeaders));
-    } else {
-        return resp;
+    if ((resp.status === 401 || resp.status === 503) && !reqHeaders["Authorization"] && !reqHeaders["X-Awakari-Retry"] && resp.headers.get("Set-Cookie")) {
+        reqHeaders["X-Awakari-Retry"] = "1";
+        return retry(reqHeaders);
     }
+    return resp;
 }

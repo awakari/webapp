@@ -78,7 +78,7 @@ async function loadSource() {
                     document.getElementById("last_upd").innerText = data.lastUpdate;
                 }
                 const btnDel = document.getElementById("button_src_del");
-                if (data.groupId === defaultGroupId && data.userId === headers["X-Awakari-User-Id"]) {
+                if (data.groupId === defaultGroupId && headers["X-Awakari-User-Id"] && data.userId === headers["X-Awakari-User-Id"]) {
                     btnDel.removeAttribute("disabled");
                     btnDel.onclick = () => deleteSource(typ, addrEnc);
                 } else {

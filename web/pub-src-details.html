@@ -89,7 +89,15 @@
                     </div>
 
                 </div>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Limit Owner:</span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">
+                    <span class="tooltip">Limit Owner:
+                        <span class="tooltiptext" style="margin-left: -24px; width: 328px">
+                            <p>"User": utilizing owner user's daily publishing limit.</p>
+                            <p>"Dedicated": own dedicated limit.</p>
+                            <p>Click "Nominate" button to request making it Dedicated</p>
+                        </span>
+                    </span>
+                </span>
                 <div class="col-span-2 space-x-2 flex py-1 ml-2">
 
                     <span id="owner" class="py-1 w-16"></span>
@@ -110,7 +118,12 @@
                 <span id="last_upd" class="ml-2 col-span-2 py-2">YYYY-MM-DDThh-mm-ss.SSSZ</span>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-2">Updates:</span>
                 <span id="upd_period" class="ml-2 col-span-2 py-2"></span>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Accepted:</span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">
+                    <span class="tooltip">
+                        Accepted:
+                        <span class="tooltiptext" style="width: 224px">Explicit confirmation from source.</span>
+                    </span>
+                </span>
                 <div class="ml-2 col-span-2 flex">
                     <input type="checkbox" disabled="disabled" id="accepted"/>
                 </div>

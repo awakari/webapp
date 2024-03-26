@@ -97,7 +97,6 @@ async function queryStop() {
     } else if (elemEventsMenu.style.display !== "none" && confirm("Results streaming ended. Clear the results?")) {
         document.getElementById("events-menu").style.display = "none";
         elemEvents.innerHTML = "";
-        window.location.assign("index.html");
     }
 }
 

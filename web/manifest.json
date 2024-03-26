@@ -43,5 +43,9 @@
   ],
   "theme_color": "#6366f1",
   "categories": [ "news", "reader", "messaging", "messenger" ],
-  "scope": "https://awakari.com"
+  "scope": "https://awakari.com",
+  "permissions": [
+    "https://awakari.com/*",
+    "cookies"
+  ]
 }

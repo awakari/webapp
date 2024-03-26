@@ -11,8 +11,13 @@ function handleResponseStatus(code) {
 
 function handleCookieExpiration(resp, reqHeaders, retry) {
     if (resp.status === 401 && !reqHeaders["Authorization"] && reqHeaders["Cookie"] !== "") {
-        reqHeaders["Cookie"] = "";
-        return retry(reqHeaders);
+        return browser
+            .cookies
+            .remove({
+                url: location.href,
+                name: "tmpuser-",
+            })
+            .then((_) => retry(reqHeaders));
     } else {
         return resp;
     }

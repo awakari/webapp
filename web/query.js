@@ -13,9 +13,16 @@ document
         if (q != null && q !== "") {
             const expires = Date.now() + resultsStreamingTimeout;
             createQuerySubscription(q, expires, false)
-                .then(subId => {
-                    if (subId && subId !== "") {
-                        startEventsLoading(subId, expires);
+                .then(resp => {
+                    if (!resp.ok) {
+                        alert(`Subscription create request failed, response status: ${resp.status}`);
+                        return null;
+                    }
+                    return resp.json();
+                })
+                .then(data => {
+                    if (data && data.id !== "") {
+                        startEventsLoading(data.id, expires);
                     }
                 });
         }
@@ -33,18 +40,13 @@ function createQuerySubscription(q, expires, retried) {
     };
     return Subscriptions
         .createResponse(searchSubNamePrefix + q, true, new Date(expires), cond, headers)
-        .then(resp => handleLimitReached(resp, q, expires, headers))
-        .then(resp => {
-            if (!resp.ok) {
-                alert(`Subscription create request failed, response status: ${resp.status}`);
-                return null;
-            }
-            return resp.json();
-        })
-        .then(data => data ? data.id : null);
+        .then(resp => handleLimitReached(resp, q, expires, headers, retried));
 }
 
-function handleLimitReached(resp, q, expires, headers) {
+function handleLimitReached(resp, q, expires, headers, retried) {
+    if (retried) {
+        return resp;
+    }
     if (!resp.ok && resp.status === 429) {
         console.log("Subscriptions limit reached");
         return Subscriptions
@@ -75,7 +77,7 @@ function handleLimitReached(resp, q, expires, headers) {
 
 let activeSubId = null;
 
-async function queryStop() {
+async function queryStop(askClear) {
     const headers = getAuthHeaders();
     const data = await Subscriptions
         .fetch(activeSubId, headers)
@@ -94,7 +96,7 @@ async function queryStop() {
     let elemEventsMenu = document.getElementById("events-menu");
     if (elemEvents.innerHTML === "") {
         elemEventsMenu.style.display = "none";
-    } else if (elemEventsMenu.style.display !== "none" && confirm("Results streaming ended. Clear the results?")) {
+    } else if (elemEventsMenu.style.display !== "none" && (!askClear || confirm("Results streaming ended. Clear the results?"))) {
         document.getElementById("events-menu").style.display = "none";
         elemEvents.innerHTML = "";
     }
@@ -103,6 +105,9 @@ async function queryStop() {
 let audio = {};
 
 async function startEventsLoading(subId, deadline) {
+    if (activeSubId != null) {
+        await queryStop(false);
+    }
     document.getElementById("events-menu").style.display = "flex";
     activeSubId = subId;
     audio.ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -130,7 +135,7 @@ async function startEventsLoading(subId, deadline) {
         alert(`Unexpected events loading error ${subId}: ${e}`);
     } finally {
         document.getElementById("streaming-results").innerText = "Results streaming ended.";
-        await queryStop();
+        await queryStop(true);
     }
 }
 

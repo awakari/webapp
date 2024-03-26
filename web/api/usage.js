@@ -8,14 +8,18 @@ Usage.fetch = function (subj, headers) {
     })
         .then(resp => handleCookieExpiration(resp, headers, (h) => Usage.fetch(subj, h)))
         .then(resp => {
-            if (!resp.ok) {
-                if (subj === "1" || subj === "2") {
-                    handleResponseStatus(resp.status);
-                } else {
-                    alert(`Invalid usage subject: ${subj}`);
+            if (resp) {
+                if (!resp.ok) {
+                    if (subj === "1" || subj === "2") {
+                        handleResponseStatus(resp.status);
+                    } else {
+                        alert(`Invalid usage subject: ${subj}`);
+                    }
+                    return null;
                 }
+                return resp.json();
+            } else {
                 return null;
             }
-            return resp.json();
         });
 }

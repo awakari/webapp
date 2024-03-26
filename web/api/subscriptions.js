@@ -8,11 +8,15 @@ Subscriptions.fetchListPage = function (cursor, order, limit, filter, headers) {
     })
         .then(resp => handleCookieExpiration(resp, headers, (h) => Subscriptions.fetchListPage(cursor, order, limit, filter, h)))
         .then(resp => {
-            if (!resp.ok) {
-                handleResponseStatus(resp.code);
+            if (resp) {
+                if (!resp.ok) {
+                    handleResponseStatus(resp.code);
+                    return null;
+                }
+                return resp.json();
+            } else {
                 return null;
             }
-            return resp.json();
         })
 }
 

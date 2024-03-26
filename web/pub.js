@@ -24,6 +24,7 @@ function load() {
     document.getElementById("wait").style.display = "block";
     Usage
         .fetch("2", headers)
+        .then(resp => resp ? resp.json() : null)
         .then(data => {
             if (data && data.hasOwnProperty("count")) {
                 document.getElementById("count").innerText = data.count;
@@ -36,6 +37,7 @@ function load() {
     document.getElementById("wait").style.display = "block";
     Limits
         .fetch("2", headers)
+        .then(resp => resp ? resp.json() : null)
         .then(data => {
             if (data && data.hasOwnProperty("count")) {
                 document.getElementById("limit").innerText = data.count;

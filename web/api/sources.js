@@ -22,7 +22,7 @@ Sources.fetch = function (typ, addrEnc, headers) {
                 handleResponseStatus(resp.status);
                 return null;
             }
-            return resp.json();
+            return resp;
         });
 }
 
@@ -33,12 +33,12 @@ Sources.delete = function (typ, addrEnc, headers) {
         headers: headers,
     })
         .then(resp => {
-            if (!resp.ok) {
-                handleResponseStatus(resp.status);
-                return false;
+            if (resp.ok) {
+                return resp;
             }
-            return true;
-        })
+            handleResponseStatus(resp.status);
+            return null;
+        });
 }
 
 Sources.add = function (srcType, srcAddr, updFreq, headers) {

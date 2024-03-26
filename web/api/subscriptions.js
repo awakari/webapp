@@ -28,12 +28,12 @@ Subscriptions.delete = function (id, headers) {
     return fetch(`/v1/sub/${id}`, optsReq)
         .then(resp => handleCookieExpiration(resp, headers, (h) => Subscriptions.delete(id, h)))
         .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                handleResponseStatus(resp.status);
-                return false;
+            if (resp.ok) {
+                return resp;
             }
-            return true;
+            resp.text().then(errMsg => console.error(errMsg));
+            handleResponseStatus(resp.status);
+            return null;
         });
 }
 
@@ -90,7 +90,7 @@ Subscriptions.fetch = function (id, headers) {
                 handleResponseStatus(resp.status);
                 return null;
             }
-            return resp.json();
+            return resp;
         })
 }
 
@@ -115,7 +115,8 @@ Subscriptions.update = function (id, descr, enabled, expires, cond, headers) {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))
                 handleResponseStatus(resp.status);
+                return null;
             }
-            return resp.json();
+            return resp;
         });
 }

@@ -84,6 +84,7 @@ async function queryStop(askClear) {
     const headers = getAuthHeaders();
     const data = await Subscriptions
         .fetch(activeSubId, headers)
+        .then(resp => resp ? resp.json() : null)
         .then(data => {
             if (data) {
                 data.expires = new Date(); // now

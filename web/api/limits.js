@@ -9,15 +9,15 @@ Limits.fetch = function (subj, headers) {
         .then(resp => handleCookieExpiration(resp, headers, (h) => Limits.fetch(subj, h)))
         .then(resp => {
             if (resp) {
-                if (!resp.ok) {
-                    if (subj === "1" || subj === "2") {
-                        handleResponseStatus(resp.status);
-                    } else {
-                        alert(`Invalid subject: ${subj}`);
-                    }
-                    return null;
+                if (resp.ok) {
+                    return resp;
                 }
-                return resp.json();
+                if (subj === "1" || subj === "2") {
+                    handleResponseStatus(resp.status);
+                } else {
+                    alert(`Invalid subject: ${subj}`);
+                }
+                return null;
             } else {
                 return null;
             }

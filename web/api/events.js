@@ -53,9 +53,9 @@ Events.publishInternal = function (payload, headers) {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
                 handleResponseStatus(resp.status);
-                return false;
+                return null;
             }
-            return true;
+            return resp;
         });
 }
 
@@ -70,9 +70,9 @@ Events.publish = function (payload, headers) {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
                 handleResponseStatus(resp.status);
-                return false;
+                return null;
             }
-            return true;
-        })
+            return resp;
+        });
 
 }

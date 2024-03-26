@@ -18,6 +18,7 @@ async function loadSource() {
     let headers = getAuthHeaders();
     const counts = await Sources
         .fetch(typ, addrEnc, headers)
+        .then(resp => resp ? resp.json() : null)
         .then(data => {
             if (data) {
                 switch (typ) {

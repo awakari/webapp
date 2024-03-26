@@ -58,6 +58,7 @@ function loadSubscription() {
     const headers = getAuthHeaders();
     Subscriptions
         .fetch(id, headers)
+        .then(resp => resp ? resp.json() : null)
         .then(data => {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;

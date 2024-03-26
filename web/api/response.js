@@ -9,10 +9,28 @@ function handleResponseStatus(code) {
     }
 }
 
-function handleCookieExpiration(resp, reqHeaders, retry) {
-    if ((resp.status === 401 || resp.status === 503) && !reqHeaders["Authorization"] && !reqHeaders["X-Awakari-Retry"] && resp.headers.get("Set-Cookie")) {
-        reqHeaders["X-Awakari-Retry"] = "1";
-        return retry(reqHeaders);
+const retriesMax = 10;
+
+async function handleCookieExpiration(resp, reqHeaders, funcRetry) {
+    if ((resp.status === 401 || resp.status === 503) && !reqHeaders["Authorization"]) {
+        const retry = reqHeaders["X-Awakari-Retry"];
+        let retryNum = 0;
+        if (retry) {
+            try {
+                retryNum = parseInt(retry);
+            } catch (e) {
+                console.error(`Failed to parse the retry number: ${retry}`);
+            }
+        }
+        retryNum ++;
+        if (retryNum < retriesMax) {
+            reqHeaders["X-Awakari-Retry"] = `${retryNum}`;
+            await new Promise(r => setTimeout(r, 1_000));
+            return funcRetry(reqHeaders);
+        } else {
+            console.error("Retries number limit reached.");
+        }
+        return resp;
     }
     return resp;
 }

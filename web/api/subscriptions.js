@@ -13,7 +13,7 @@ Subscriptions.fetchListPage = function (cursor, order, limit, filter, headers) {
                     handleResponseStatus(resp.code);
                     return null;
                 }
-                return resp.json();
+                return resp;
             } else {
                 return null;
             }

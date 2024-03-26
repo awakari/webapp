@@ -43,7 +43,7 @@
 <header>
     <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
         <div class="text-center min-w-[352px] max-w-[352px] flex">
-            <div class="w-16 justify-self-start text-left hover:text-fuchsia-500">
+            <div class="w-20 justify-self-start text-left hover:text-fuchsia-500">
                 <span id="exit"
                       class="flex"
                       onclick="localStorage.getItem(keyUserName) ? logout() : window.location.assign('index.html')">
@@ -54,15 +54,17 @@
                 </span>
             </div>
             <div class="grow"></div>
-            <div class="w-24 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Subscribe</div>
+            <div class="w-20 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Search</div>
             <div class="grow"></div>
-            <div class="w-24 border-b-2 border-cyan-500 text-cyan-500">Publish</div>
+            <div class="w-20 border-b-2 border-cyan-500 text-cyan-500">Publish</div>
             <div class="grow"></div>
-            <div class="w-16 justify-self-end text-right hover:text-green-500 mr-2"
+            <div class="w-20 justify-self-end text-right hover:text-green-500 mr-2">
+                <div
                  onclick="window.location.assign('login.html')"
                  id="login"
                  style="display: none">
                 Sign In
+                </div>
             </div>
         </div>
     </nav>

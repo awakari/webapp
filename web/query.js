@@ -51,6 +51,7 @@ function handleLimitReached(resp, q, expires, headers, retried) {
         console.log("Subscriptions limit reached");
         return Subscriptions
             .fetchListPage("", "ASC", 10, searchSubNamePrefix, headers)
+            .then(resp => resp ? resp.json() : null)
             .then(data => {
                 let subIdToDelete = "";
                 let expiresMin = 0;

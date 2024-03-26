@@ -74,6 +74,7 @@ function loadSubscriptions(filter) {
 
     Subscriptions
         .fetchListPage(cursor, order, pageLimit, filter, headers)
+        .then(resp => resp ? resp.json() : null)
         .then(data => {
 
             if (data) {

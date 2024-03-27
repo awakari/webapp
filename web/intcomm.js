@@ -50,7 +50,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
                 alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
             }
         }
-    } else if (confirm("This function is available for signed in users only.\nProceed to sign in?")) {
+    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
         window.location.assign("login.html");
     }
 }
@@ -92,14 +92,14 @@ async function requestPublishingSourceDedicated(addr){
                 document.getElementById("pub-src-nominate").disabled = true;
             }
         }
-    } else if (confirm("This function is available for signed in users only.\nProceed to sign in?")) {
+    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
         window.location.assign("login.html");
     }
 }
 
 async function requestIncreaseSubscriptionsLimit(userId) {
     if (userId) {
-        const msg = "Request to increase the subscriptions limit\nPlease enter the number to add:"
+        const msg = "Request to increase the queries limit\nPlease enter the number to add:"
         const input = prompt(msg, "1");
         if (input) {
             let inc = 0;
@@ -142,7 +142,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
                 alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
             }
         }
-    } else if (confirm("This function is available for signed in users only.\nProceed to sign in?")) {
+    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
         window.location.assign("login.html");
     }
 }
@@ -179,7 +179,7 @@ async function reportPublishingSourceInappropriate(srcAddr) {
                 document.getElementById("report-id").innerText = payload.id;
             }
         }
-    } else if (confirm("This function is available for signed in users only.\nProceed to sign in?")) {
+    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
         window.location.assign("login.html");
     }
 }
@@ -219,7 +219,7 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
                 document.getElementById("report-id").innerText = payload.id;
             }
         }
-    } else if (confirm("This function is available for signed in users only.\nProceed to sign in?")) {
+    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
         window.location.assign("login.html");
     }
 }

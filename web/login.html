@@ -21,7 +21,7 @@
 <header>
     <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
         <div class="text-center min-w-[352px] w-[352px] flex">
-            <div class="w-20 justify-self-start text-left hover:text-fuchsia-500">
+            <div class="w-16 justify-self-start text-left hover:text-fuchsia-500">
                 <span id="exit"
                       class="flex"
                       onclick="localStorage.getItem(keyUserName) ? logout() : window.location.assign('index.html')">
@@ -32,11 +32,11 @@
                 </span>
             </div>
             <div class="grow"></div>
-            <div class="w-20 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Search</div>
+            <div class="w-20 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Queries</div>
             <div class="grow"></div>
-            <div class="w-20 hover:text-cyan-500" onclick="window.location.assign('pub.html')">Publish</div>
+            <div class="w-18 hover:text-cyan-500" onclick="window.location.assign('pub.html')">Publish</div>
             <div class="grow"></div>
-            <div class="w-20 justify-self-end text-right border-b-2 border-green-500 text-green-500 mr-2">
+            <div class="w-16 border-b-2 border-green-500 text-green-500 mr-2">
                 Sign In
             </div>
         </div>
@@ -82,21 +82,19 @@
         <div class="justify-center flex p-1">
             <p class="text-center text-sm text-neutral-700 dark:text-neutral-400">
                 Sign In is required for full-featured functionality.
-                <a href="sub.html" class="col-span-2 text-center text-blue-700 dark:text-slate-400">Skip</a>
-                to continue in the limited mode.
+                <span class="whitespace-nowrap">
+                    <a href="sub.html" class="col-span-2 text-center text-blue-700 dark:text-slate-400">Skip</a>
+                    to continue in the limited mode.
+                </span>
+                <span class="whitespace-nowrap">
+                    By signing in, you agree to the
+                </span>
+                <span class="whitespace-nowrap">
+                    <a href="tos.html" class="text-blue-700 dark:text-slate-400">Terms of Service</a>
+                    and
+                    <a href="privacy.html" class="text-blue-700 dark:text-slate-400">Privacy Policy</a>.
+                </span>
             </p>
-        </div>
-
-    </div>
-
-    <div class="flex justify-center">
-        <span class="text-center text-sm text-neutral-700 dark:text-neutral-400 flex flex-col sm:flex-row">
-            <span class="whitespace-nowrap">By signing in, you agree to the</span>
-            <span class="whitespace-nowrap flex">
-                &nbsp;<a href="tos.html" class="text-blue-700 dark:text-slate-400">Terms of Service</a>
-                &nbsp;and
-                &nbsp;<a href="privacy.html" class="text-blue-700 dark:text-slate-400">Privacy Policy</a>.
-            </span>
         </span>
     </div>
 

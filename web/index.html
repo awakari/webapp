@@ -14,7 +14,7 @@
 
     <meta name="twitter:site" content="https://awakari.com"/>
     <meta name="twitter:title" content="Awakari"/>
-    <meta name="twitter:description" content="Event-driven search. For faster and valuable decisions."/>
+    <meta name="twitter:description" content="Live search. For faster and valuable decisions."/>
     <meta name="twitter:image" content="logo-color.svg"/>
 
     <title>Awakari</title>
@@ -30,8 +30,8 @@
             "@context": "https://schema.org/",
             "name": "awakari",
             "@type": "Service",
-            "description": "Continuous Future Search",
-            "slogan": "Capture the most important - Reach everyone interested",
+            "description": "Live Search: Realtime Alerts",
+            "slogan": "For faster and valuable decisions",
             "contactPoint": {
                 "@context": "https://schema.org",
                 "@type": "ContactPoint",
@@ -45,7 +45,6 @@
             "potentialAction": {
                 "@context": "https://schema.org",
                 "@type": "SearchAction",
-                "target": "https://awakari.com?q={query_string}"
             },
             "provider": {
                 "@context": "http://schema.org/",
@@ -54,7 +53,7 @@
                 "logo": "logo-color.svg",
                 "url": "https://awakari.com",
                 "email": "awakari@awakari.com",
-                "keywords": "search realtime continuous feed reader rss telegram atom activitypub fediverse free news insights monitoring tracking targeting estate recruitment",
+                "keywords": "search realtime continuous live feed reader rss telegram atom activitypub fediverse free news insights monitoring tracking targeting recruitment",
                 "sameAs": [
                     "https://github.com/awakari",
                     "https://www.reddit.com/r/awakari/",
@@ -155,7 +154,7 @@
 <body class="bg-gray-200" onload="loadStatus();">
 
 <main>
-    <header class="bg-white dark:bg-gray-900 h-screen">
+    <header class="bg-white dark:bg-gray-900 h-screen sm:h-full pb-8">
         <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
             <div class="flex flex-row items-center justify-center max-w-[640px] align-middle mx-auto space-x-1">
 
@@ -326,33 +325,17 @@
 
     <div class="bg-white dark:bg-gray-900" id="about">
         <div class="container mx-auto pt-4 px-4">
-            <div class="mx-auto mt-6 flex flex-col space-y-2">
-                <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl">Continuous
-                    Search</h1>
-            </div>
+            <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl text-center">
+                Search In The Future
+            </h1>
             <div class="mx-auto max-w-6xl mt-4 text-gray-700 dark:text-gray-300 ">
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div>
                         <h2 class="text-2xl px-2 py-2 capitalize">
-                            Immediate Updates
+                            Get Results As They Occur
                         </h2>
-                        <div class="space-y-2 py-4 text-lg">
-                            <p class="align-text-middle px-2 py-2">
-                                Stay informed in the real-time. No more repeating searches.
-                            </p>
-                            <p class="px-2 py-2 align-text-middle space-x-2 flex">
-                                <span class="h-6 w-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                                <span>Saves your time</span>
-                            </p>
-                            <p class="px-2 py-2 align-text-middle space-x-2 flex">
+                        <div class="space-y-2 text-xl">
+                            <p class="px-2 pt-4 align-text-middle space-x-2 flex">
                                 <span class="h-6 w-6">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20"
@@ -364,7 +347,8 @@
                                 </span>
                                 <span>No delay</span>
                             </p>
-                            <p class="px-2 py-2 align-text-middle space-x-2 flex">
+                            <p class="px-10 text-lg">Stay informed in real-time</p>
+                            <p class="px-2 pt-4 align-text-middle space-x-2 flex">
                                 <span class="h-6 w-6">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20"
@@ -374,20 +358,11 @@
                                               clip-rule="evenodd"/>
                                     </svg>
                                 </span>
-                                <span>Reduces the cost by terminating the polling</span>
+                                <span>Saves your time</span>
                             </p>
-                            <p class="px-2 py-2 align-text-middle space-x-2 flex">
-                                <span class="h-6 w-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                                <span>Cost-efficient by resolving all interested at once</span>
-                            </p>
+                            <p class="px-10 text-lg">No more repeating searches</p>
+                            <p class="px-10 text-lg">No more spam</p>
+                            <p class="px-10 text-lg">Control what to get</p>
                         </div>
                     </div>
                     <div>
@@ -398,7 +373,7 @@
 
             <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300 ">
                 <h2 class="px-2 py-4 capitalize text-2xl">
-                    Unlimited Sources
+                    From Unlimited Sources
                 </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-end">
@@ -406,7 +381,7 @@
                     </div>
                     <div class="space-y-4 py-4 text-lg">
                         <p class="align-text-middle px-2 pt-2">
-                            Already available event sources:
+                            Already available:
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -473,12 +448,12 @@
                 </div>
             </div>
 
-            <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300 ">
+            <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300">
+                <h2 class="px-2 py-4 capitalize text-2xl">Advanced Filtering</h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="space-y-4 py-4 text-lg">
-                        <h2 class="px-2 capitalize text-2xl">No More Spam</h2>
                         <p class="px-2">
-                            Define what is important. Filter out everything else.
+                            Define what is important to match.
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">

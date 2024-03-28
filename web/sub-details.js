@@ -78,7 +78,7 @@ function loadSubscription() {
 
 function updateSubscription() {
     const id = document.getElementById("id").value;
-    if (confirm(`Update subscription ${id}?`)) {
+    if (confirm(`Update the query ${id}?`)) {
         const descr = document.getElementById("description").value;
         const enabled = document.getElementById("enabled").checked;
         const cond = editor.getValue(0);
@@ -95,7 +95,7 @@ function updateSubscription() {
             .update(id, descr, enabled, expires, cond, headers)
             .then(updated => {
                 if (updated) {
-                    alert(`Updated subscription: ${id}`);
+                    alert(`Updated the query: ${id}`);
                     window.location.assign("sub.html");
                 }
             })
@@ -107,14 +107,14 @@ function updateSubscription() {
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
-    if (confirm(`Delete subscription ${id}?`)) {
+    if (confirm(`Delete the query ${id}?`)) {
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         Subscriptions
             .delete(id, headers)
             .then(deleted => {
                 if (deleted) {
-                    alert(`Deleted subscription ${id}`);
+                    alert(`Deleted the query ${id}`);
                     window.location.assign("sub.html");
                 }
             })

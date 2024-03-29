@@ -5,7 +5,9 @@ const keyAuthProvider = "authProvider";
 const keyAuthToken = "authToken";
 
 function load() {
-    localStorage.getItem(keyUserName) ? window.location.assign('sub.html') : window.location.assign('login.html');
+    if (localStorage.getItem(keyUserName)) {
+        window.location.assign('sub.html')
+    }
 }
 
 function handleAuthGoogle(response) {

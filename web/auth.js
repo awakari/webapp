@@ -4,6 +4,10 @@ const keyUserName = "userName";
 const keyAuthProvider = "authProvider";
 const keyAuthToken = "authToken";
 
+function load() {
+    localStorage.getItem(keyUserName) ? window.location.assign('sub.html') : window.location.assign('login.html');
+}
+
 function handleAuthGoogle(response) {
     const tokenEncoded = response.credential;
     // Decode the JWT token

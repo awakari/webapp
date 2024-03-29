@@ -3,10 +3,10 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
-  "name": "Awakari",
+  "name": "Awakari: Live Search",
   "background_color": "#ffffff",
   "short_name": "Awakari",
-  "start_url": "https://awakari.com",
+  "start_url": "https://awakari.com/login.html",
   "display": "standalone",
   "description": "Awakari UI",
   "icons": [
@@ -34,15 +34,15 @@
   "orientation": "any",
   "screenshots": [
     {
-      "src": "2024-03-04_18-02.png",
-      "sizes": "400x800",
+      "src": "app-screenshot.png",
+      "sizes": "600x314",
       "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Example Search"
+      "form_factor": "wide",
+      "label": "App Screenshot"
     }
   ],
   "theme_color": "#6366f1",
-  "categories": [ "news", "reader", "messaging", "messenger" ],
+  "categories": [ "news", "reader", "messaging", "messenger", "search", "alerts", "signals", "feeds", "fediverse", "telegram" ],
   "scope": "https://awakari.com",
   "permissions": [
     "https://awakari.com/*",

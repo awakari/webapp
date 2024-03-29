@@ -21,7 +21,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Awakari">
     <meta property="og:description" content="Live Search. Get results as they occur. From unlimited sources. Advanced filtering.">
-    <meta property="og:image" content="logo-color.svg">
+    <meta property="og:image" content="main.png">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -29,7 +29,7 @@
     <meta property="twitter:url" content="https://awakari.com">
     <meta name="twitter:title" content="Awakari">
     <meta name="twitter:description" content="Live Search. Get results as they occur. From unlimited sources. Advanced filtering.">
-    <meta name="twitter:image" content="logo-color.svg">
+    <meta name="twitter:image" content="main.png">
 
     <script>
         navigator.serviceWorker.register("sw.js");
@@ -327,7 +327,7 @@
         </div>
 
         <div class="flex justify-center items-center pt-6 text-xl">
-            <button onclick="localStorage.getItem(keyUserName) ? window.location.assign('pub.html') : window.location.assign('login.html')"
+            <button onclick="window.location.assign('login.html')"
                     class="w-56 h-10 transform rounded-md bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
                 Start Now
             </button>
@@ -846,7 +846,7 @@
                             Easy way to manage publishing and subscriptions.
                         </p>
                         <p class="mt-4">Best for personal use.</p>
-                        <button onclick="localStorage.getItem(keyUserName) ? window.location.assign('pub.html') : window.location.assign('login.html')"
+                        <button onclick="window.location.assign('login.html')"
                                 class="mt-6 w-full transform rounded-md bg-slate-500 px-4 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-slate-600 focus:bg-slate-500 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
                             Start Now
                         </button>

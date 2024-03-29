@@ -3,9 +3,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0ed3ff">
 
+    <meta name="description" content="Live Search. Get results as they occur. From unlimited sources. Advanced filtering.">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
+    <link rel="icon" href="logo-color.svg">
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="msapplication-TileColor" content="#6366f1">
+    <meta name="theme-color" content="#6366f1">
+
+    <!-- HTML Meta Tags -->
     <title>Awakari App</title>
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://awakari.com/login.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Awakari App">
+    <meta property="og:description" content="Live Search. Get results as they occur. From unlimited sources. Advanced filtering.">
+    <meta property="og:image" content="app-screenshot.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="awakari.com">
+    <meta property="twitter:url" content="https://awakari.com/login.html">
+    <meta name="twitter:title" content="Awakari App">
+    <meta name="twitter:description" content="Live Search. Get results as they occur. From unlimited sources. Advanced filtering.">
+    <meta name="twitter:image" content="app-screenshot.png">
 
     <link rel="stylesheet" href="spectre-icons.min.css">
     <link href="tailwind.output.css" rel="stylesheet">
@@ -16,7 +40,7 @@
     <script src="auth.js"></script>
 
 </head>
-<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300">
+<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300" onload="load()">
 
 <header>
     <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">

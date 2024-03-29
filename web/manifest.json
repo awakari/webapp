@@ -39,6 +39,13 @@
       "type": "image/png",
       "form_factor": "wide",
       "label": "App Screenshot"
+    },
+    {
+      "src": "app-screenshot-narrow.png",
+      "sizes": "355x644",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "App Screenshot"
     }
   ],
   "theme_color": "#6366f1",

@@ -67,7 +67,7 @@
         </div>
 
         <div class="flex justify-center">
-            <img src="0.jpg" class="w-[320px]"/>
+            <img src="0.jpg" class="w-[320px] border border-slate-500"/>
         </div>
 
     </div>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="flex justify-center">
-                <img src="1.jpg" class="w-[352px]"/>
+                <img src="1.jpg" class="w-[352px] border border-slate-500"/>
             </div>
 
         </div>
@@ -118,31 +118,32 @@
             Feeds are always a compromise between missing the important outside your bubble and distracting to tons of spam.</p>
 
         <p class="p-1">&nbsp;&nbsp;
-            Therefore, a true prospective search solution should resolve all recipients at once for every incoming message.
+            Therefore, a true prospective search solution should resolve matching queries for every incoming message.
+            After this the message may be pushed to everyone interested.
             For the notification purpose we have today some ready to use instant messaging applications.
             So I see the solution as an integration with an existing messenger.</p>
+        <p class="p-1">&nbsp;&nbsp;
+            Google had something resembling named
+            <a href="http://googleblog.blogspot.com/2009/12/relevance-meets-real-time-web.html"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                Real-Time Search</a> a long ago.
+            Unfortunately, it
+            <a href="https://killedby.tech/google/google-real-time-search/"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                moved to the graveyard in 2011</a>.
+            There is also Google Alerts, but it's based on
+            <a href="https://www.webmasterworld.com/google/4595198.htm"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                retrospective search</a>, hence, the
+            <a href="https://support.google.com/websearch/thread/201174003/delay-on-google-alerts-not-working-at-all"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                delay is unacceptable (might be not working at all).</a>
+            So the demand is still present and I don't know anything else fulfilling it.</p>
 
         <h2 class="text-2xl font-semibold text-center py-2">3. How</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <div>
-                <p class="p-1">&nbsp;&nbsp;
-                    Google had something resembling named
-                    <a href="http://googleblog.blogspot.com/2009/12/relevance-meets-real-time-web.html"
-                       target="_blank" class="text-blue-700 dark:text-blue-300">
-                        Real-Time Search</a> a long ago.
-                    Unfortunately, it
-                    <a href="https://killedby.tech/google/google-real-time-search/"
-                       target="_blank" class="text-blue-700 dark:text-blue-300">
-                        moved to the graveyard in 2011</a>.
-                    There is also Google Alerts, but it's based on
-                    <a href="https://www.webmasterworld.com/google/4595198.htm"
-                       target="_blank" class="text-blue-700 dark:text-blue-300">
-                        retrospective search</a>, hence, the
-                    <a href="https://support.google.com/websearch/thread/201174003/delay-on-google-alerts-not-working-at-all"
-                       target="_blank" class="text-blue-700 dark:text-blue-300">
-                        delay is unacceptable (might be not working at all).</a>
-                    So the demand is still present and I don't know anything else fulfilling it.</p>
                 <p class="p-1">&nbsp;&nbsp;
                     Hence, based on the requirements described earlier, I implemented the Awakari service.
                     Now this is the only public live search service I know so far.
@@ -153,17 +154,48 @@
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         awakari.com</a>
                     site, first you will see the search input.
-                    Use it for to test a basic text keywords query.
-                    It's limited by 1 hour but doesn't require any sign in.
+                    You can use it for a rough test of basic keywords query.
+                    It's limited by 1 hour and doesn't require any sign in.
                     When a temporary query is not enough, and you need more persistence you need to
                     <a href="https://awakari.com/login.html"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
-                       sign in</a>.</p>
+                       sign in</a>.
+                <p class="p-1">&nbsp;&nbsp;
+                    Currently, it's possible to sign in with a Telegram account.
+                    The Telegram integration serves both authentication and notification purposes.
+                    Awakari service itself doesn't use any user data except id to distinguish users.
+                    This may be proven as far as this part is
+                    <a href="https://github.com/awakari/bot-telegram/blob/master/api/grpc/tgbot/controller.go#L60"
+                       target="_blank" class="text-blue-700 dark:text-blue-300">
+                        Open-Source</a>.
+                    In the future, it may be easily extended to deliver search results in WhatsApp, by email, etc.
+                    </p>
+                <p class="p-1">&nbsp;&nbsp;
+                    After signed in, you're welcome to create up to 10 parallel queries and publish up to 100 own messages per day.
+                    A signed-in user also allowed to add own publishing sources to the common collection.
+                    The sources added by the user will utilize the user's daily publishing quota.
+                    You can request the source to have the separate dedicated publishing limit.
+                    </p>
             </div>
             <div class="flex justify-center">
-                <img src="../../2024-03-04_18-02.png" class="w-80"/>
+                <img src="../../2024-03-04_18-02.png" class="w-80 border border-slate-500"/>
             </div>
         </div>
+
+        <p class="p-1">&nbsp;&nbsp;
+            Awakari supports a wide variety of publishing source types:
+            </p>
+        <p>&nbsp;&nbsp;✓ Feeds:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/RSS" target="_blank" class="text-blue-700 dark:text-blue-300">RSS</a>/
+            <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" target="_blank" class="text-blue-700 dark:text-blue-300">Atom</a></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://www.jsonfeed.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON</a></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://schema.org/" target="_blank" class="text-blue-700 dark:text-blue-300">schema.org</a> entries:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://json-ld.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON-LD</a></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/Microdata_(HTML)" target="_blank" class="text-blue-700 dark:text-blue-300">Microdata</a></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ HTML5 <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-article-element.html" target="_blank" class="text-blue-700 dark:text-blue-300">articles</a></p>
+        <p>&nbsp;&nbsp;✓ Fediverse:</p>
+        <p>&nbsp;&nbsp;✓ Telegram Channels (public)</p>
 
         <div class="text-right">
             <p class="text-slate-500 text-lg text-bottom">- Andrei Kurilov, 2024</p>

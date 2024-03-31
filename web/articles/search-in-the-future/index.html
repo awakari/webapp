@@ -30,6 +30,37 @@
             "description": "Awakari Live Search: What, Why and How"
         }
     </script>
+    <style>
+        #toc_container {
+            border: 1px solid #9ca3af;
+            display: table;
+            margin-bottom: 1em;
+            padding: 16px;
+            width: auto;
+        }
+
+        .toc_title {
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #toc_container li, #toc_container ul, #toc_container ul li{
+            list-style: outside none none !important;
+            color: #1d4ed8;
+        }
+
+        @media (prefers-color-scheme: dark) {
+
+            #toc_container {
+                border: 1px solid #4b5563;
+            }
+
+            #toc_container li, #toc_container ul, #toc_container ul li{
+                color: #93c5fd;
+            }
+
+        }
+    </style>
 </head>
 <body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg dark:bg-gray-800">
 <main class="p-4 space-y-2 max-w-[960px]">
@@ -38,7 +69,32 @@
         <h1 class="text-3xl font-semibold text-center place-self-center">Search In The Future</h1>
     </div>
 
-    <div>
+    <div class="flex justify-center">
+        <div id="toc_container">
+            <p class="toc_title">Contents</p>
+            <ul class="toc_list">
+                <li><a href="#1-what">1. What</a>
+                <li><a href="#2-why">2. Why</a>
+                    <ul>
+                        <li><a href="#21-conventional-search">&nbsp;&nbsp;&nbsp;&nbsp;2.1. Conventional Search</a></li>
+                        <li><a href="#22-feeds">&nbsp;&nbsp;&nbsp;&nbsp;2.2. Feeds</a></li>
+                    </ul>
+                </li>
+                <li><a href="#3-how">3. How</a>
+                    <ul>
+                        <li><a href="#31-sources">&nbsp;&nbsp;&nbsp;&nbsp;3.1. Sources</a></li>
+                        <li><a href="#32-text-search">&nbsp;&nbsp;&nbsp;&nbsp;3.2. Text Search</a></li>
+                        <li><a href="#33-structured-search">&nbsp;&nbsp;&nbsp;&nbsp;3.3. Structured Search</a></li>
+                        <li><a href="#34-number-search">&nbsp;&nbsp;&nbsp;&nbsp;3.4. Number Search</a></li>
+                        <li><a href="#35-group-conditions">&nbsp;&nbsp;&nbsp;&nbsp;3.5. Group Conditions</a></li>
+                        <li><a href="#36-reading-results">&nbsp;&nbsp;&nbsp;&nbsp;3.6. Reading Results</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="1-what">
         <h2 class="text-2xl font-semibold text-center py-2">1. What</h2>
     </div>
 
@@ -74,12 +130,14 @@
 
     <div>
 
-        <h2 class="text-2xl font-semibold text-center py-2">2. Why</h2>
+        <h2 id="2-why" class="text-2xl font-semibold text-center py-2">2. Why</h2>
 
         <p class="p-1">&nbsp;&nbsp;
             I want to get updates on my interests as soon as they happen.
             Whether it's a scientific discovery, breaking news or matching offers.
             My idea is that many of us would want to have the same too.</p>
+
+        <h3 id="21-conventional-search" class="text-xl font-semibold text-center py-2">2.1. Conventional Search</h3>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
 
@@ -106,6 +164,8 @@
 
         </div>
 
+        <h3 id="22-feeds" class="text-xl font-semibold text-center py-2">2.2. Feeds</h3>
+
         <p class="p-1">&nbsp;&nbsp;
             What about feed readers and aggregators like Feedly or Inoreader?
             Reader applications automatically poll for updates and able to notify.
@@ -122,6 +182,9 @@
             After this the message may be pushed to everyone interested.
             For the notification purpose we have today some ready to use instant messaging applications.
             So I see the solution as an integration with an existing messenger.</p>
+
+        <h3 id="23-past-solutions-graveyard" class="text-xl font-semibold text-center py-2">2.3. Past Solutions Graveyard</h3>
+
         <p class="p-1">&nbsp;&nbsp;
             Google had something resembling named
             <a href="http://googleblog.blogspot.com/2009/12/relevance-meets-real-time-web.html"
@@ -131,7 +194,7 @@
             <a href="https://killedby.tech/google/google-real-time-search/"
                target="_blank" class="text-blue-700 dark:text-blue-300">
                 moved to the graveyard in 2011</a>.
-            There is also Google Alerts, but it's based on
+            There is also Google Alerts, but it's based on the
             <a href="https://www.webmasterworld.com/google/4595198.htm"
                target="_blank" class="text-blue-700 dark:text-blue-300">
                 retrospective search</a>, hence, the
@@ -140,12 +203,12 @@
                 delay is unacceptable (might be not working at all).</a>
             So the demand is still present and I don't know anything else fulfilling it.</p>
 
-        <h2 class="text-2xl font-semibold text-center py-2">3. How</h2>
+        <h2 id="3-how" class="text-2xl font-semibold text-center py-2">3. How</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <div>
                 <p class="p-1">&nbsp;&nbsp;
-                    Based on the requirements described earlier, I implemented the Awakari service.
+                    Based on the requirements described above, I implemented the Awakari service.
                     Now this is the only public live search service I know so far.
                     It's free to use, so I encourage everyone to try it.</p>
                 <p class="p-1">&nbsp;&nbsp;
@@ -153,10 +216,10 @@
                     <a href="https://www.safaridigital.com.au/blog/google-crawl-rate/"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         awakari.com</a>
-                    site, first you will see the search input.
-                    You can use it for a rough test of a basic keywords query.
-                    Such test query is limited by 1 hour and doesn't require any sign in.
-                    When a temporary query is not enough, and you need more persistence you need to
+                    site, first you will see the search input box.
+                    You can use it for a quick keywords query test without signing in.
+                    Such query is temporary and limited by 1 hour.
+                    When it's not enough, and you need persistent queries you need to
                     <a href="https://awakari.com/login.html"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                        sign in</a>.
@@ -172,7 +235,7 @@
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         Open-Source</a>.
                     In the future, it may be easily extended to deliver search results in RSS format if there's a demand.
-                    Other delivery and notification options are possible too.
+                    Other delivery and notification options are possible to implement too.
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
                     After signed in, you're welcome to:</p>
@@ -181,7 +244,6 @@
                 <p>
                     A signed-in user also allowed to add own publishing sources to the common collection.
                     The sources added by the user will utilize the user's daily publishing quota.
-                    You can request to increase a limit or separate a dedicated publishing limit for your source.
                     </p>
             </div>
             <div class="flex justify-center">
@@ -190,35 +252,39 @@
         </div>
 
         <p class="p-1">&nbsp;&nbsp;
+            You can request to increase a limit or separate a dedicated publishing limit for your source.
             As far as the service is completely free, a
             <a href="https://t.me/donateawk/14"
                target="_blank" class="text-blue-700 dark:text-blue-300">
                 donation</a> is appreciated.
             This would help handle a load and further development.</p>
 
+        <h3 id="31-sources" class="text-xl font-semibold text-center py-2">3.1. Sources</h3>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
 
             <div>
 
                 <p class="p-1">&nbsp;&nbsp;
+                    There are currently around 500 sources producing nearly 40,000 messages every day together.
                     Awakari supports a wide variety of publishing source types:
                     </p>
-                <p>✓ Feeds:</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/RSS" target="_blank" class="text-blue-700 dark:text-blue-300">RSS</a> /
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ Feeds:</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/RSS" target="_blank" class="text-blue-700 dark:text-blue-300">RSS</a> /
                     <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" target="_blank" class="text-blue-700 dark:text-blue-300">Atom</a> /
                     <a href="https://www.jsonfeed.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://schema.org/" target="_blank" class="text-blue-700 dark:text-blue-300">schema.org</a> entries:</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://json-ld.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON-LD</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/Microdata_(HTML)" target="_blank" class="text-blue-700 dark:text-blue-300">Microdata</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ HTML5 <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-article-element.html" target="_blank" class="text-blue-700 dark:text-blue-300">articles</a></p>
-                <p>✓ Fediverse (<a href="https://activitypub.rocks/" target="_blank" class="text-blue-700 dark:text-blue-300">ActivityPub</a>):</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://joinmastodon.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Mastodon</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://friendi.ca/" target="_blank" class="text-blue-700 dark:text-blue-300">Friendica</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://hubzilla.org/page/info/discover" target="_blank" class="text-blue-700 dark:text-blue-300">Hubzilla</a></p>
-                <p>✓ Telegram Channels (public)</p>
-                <p>✓ Sites been checked daily</p>
-                <p>There are currently around 500 sources of different types.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://schema.org/" target="_blank" class="text-blue-700 dark:text-blue-300">schema.org</a> entries:</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://json-ld.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON-LD</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/Microdata_(HTML)" target="_blank" class="text-blue-700 dark:text-blue-300">Microdata</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ HTML5 <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-article-element.html" target="_blank" class="text-blue-700 dark:text-blue-300">articles</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ Fediverse (<a href="https://activitypub.rocks/" target="_blank" class="text-blue-700 dark:text-blue-300">ActivityPub</a>):</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://joinmastodon.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Mastodon</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://friendi.ca/" target="_blank" class="text-blue-700 dark:text-blue-300">Friendica</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://hubzilla.org/page/info/discover" target="_blank" class="text-blue-700 dark:text-blue-300">Hubzilla</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ others (not tested though)</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ Telegram Channels (public)</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ Sites been checked daily</p>
             </div>
 
             <div class="justify-center items-center">
@@ -231,10 +297,114 @@
             Awakari recognizes the feeds with
             <a href="https://en.wikipedia.org/wiki/WebSub"
                target="_blank" class="text-blue-700 dark:text-blue-300">
-                WebSub</a>. If there's no WebSub in a feed, Awakari uses periodic polling for
-                updates and collects the frequency statistic. This statistic is later used for the adaptive poll
-                scheduling.
-            </p>
+                WebSub</a>. If there's no WebSub in the feed, Awakari uses periodic polling for
+                updates and collects a
+                <a href="https://awakari.com/pub-src-details.html?type=feed&addr=https%3A%2F%2Ftime.com%2Ffeed"
+                   target="_blank" class="text-blue-700 dark:text-blue-300">
+                   frequency statistic</a>.
+            The statistic is later used for the adaptive poll scheduling.
+            For other source types like Telegram and Fediverse the updates are being consumed in real-time without any polling.</p>
+
+        <h3 id="32-text-search" class="text-xl font-semibold text-center py-2">3.2. Text Search</h3>
+
+        <p class="p-1">&nbsp;&nbsp;
+            Awakari extracts the message text and performs a text search to find all matching queries.
+            It also uses the basic words
+            <a href="https://en.wikipedia.org/wiki/Stemming"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                stemming</a> so different forms of the same word will match.
+            At the moment the stemming works only for english language but later this may be extended.
+            Exact query text match option is available as well.</p>
+        <p class="p-1">&nbsp;&nbsp;
+            The general recommendation is to use specific keywords longer than 3 symbols.
+            When you specify multiple keywords separated by space the search will match any of them.
+            So "funny cat" will match every message containing either "funny" or "cat" or both.
+            This is a bit different from how conventional search works.</p>
+
+        <h3 id="33-structured-search" class="text-xl font-semibold text-center py-2">3.3. Structured Search</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+
+            <div>
+                <p class="p-1">&nbsp;&nbsp;
+                    The next important feature is <b>structured search</b> across the message metadata attributes.
+                    There are many different useful attributes in every message:</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;• Subject (Author)</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;• Categories</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;• Language</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;• Location</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;• Price</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;• Source</p>
+                <p>... and more.
+                    So you can use it in advanced queries for additional filtering.
+                    For text search conditions the attribute key may be skipped to look for a match everywhere.</p>
+            </div>
+
+            <img src="2024-03-31_11-49.png" style="width: 350px" class="border border-slate-500"/>
+
+        </div>
+
+        <p class="p-1">&nbsp;&nbsp;
+            Note also the "Not" checkbox on the screenshot.
+            This negates the condition when you want to exclude anything from the results.
+            Negative conditions can not be used alone and require to be combined with others.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div>
+
+                <h3 id="34-number-search" class="text-xl font-semibold text-center py-2">3.4. Number Search</h3>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    As far as some message attributes are numbers, there are the <i>numeric search conditions</i>.
+                    You can define a certain message attribute like price, latitude or media duration.
+                    Then define a comparison like "<", "=", "≥" and value like 42.
+                    Note that it's required to specifiy a message attribute key for a numeric condition.
+                    </p>
+
+                <h3 id="35-group-conditions" class="text-xl font-semibold text-center py-2">3.5. Group Conditions</h3>
+                <p class="p-1">&nbsp;&nbsp;
+                    Finally, you can group conditions and define logic like "And", "Or", "Xor".
+                    Nested conditions may also be groups.</p>
+                <p class="p-1">&nbsp;&nbsp;
+                    Together all these advanced search features provide rich possibilities to filter a content.
+                    You're encouraged to experiment with various query condition combinations.
+                    When a query produce unexpected results just update it modifying its conditions.
+                    For example, a query initially may be too general and produce too many results.
+                    Just try to make it more specific then.</p>
+            </div>
+
+            <img src="../../2024-01-04_16-51.png" class="border border-slate-500"/>
+        </div>
+
+        <h3 id="36-reading-results" class="text-xl font-semibold text-center py-2">3.6. Reading Results</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+            <div>
+                <p class="p-1">&nbsp;&nbsp;
+                    When you create a query the
+                    <a href="https://t.me/AwakariBot"
+                       target="_blank" class="text-blue-700 dark:text-blue-300">
+                        @AwakariBot</a> in Telegram starts to deliver the search results to you.
+                    If you have multiple queries it's recommended to assign every query to a separate group for your convenience.
+                    To do this, just type the <code class="text-slate-500">/start</code> command to the chatbot.
+                    This command always displays list of your own queries.
+                    Additonal icons against every query show whether a query is linked to the current chat or another.
+                    So you can link or unlink a selected query to the current chat.
+                <p class="p-1">&nbsp;&nbsp;
+                    The primary chatbot purpose is a search results reader.
+                    The chatbot may be also used to publish a basic message or subscribing for a simple text search query.
+                    If you're an admin of a public channel and want Awakari to consume posts from your channel you can
+                    add @AwakariBot to your channel removing all admin rights.
+                    </p>
+                <p class="p-1">&nbsp;&nbsp;
+                    Note the resulting messages also contain the attributes, e.g. "source".
+                    You can use this info to fine-tune the query conditions.
+                    </p>
+                <p class="p-1">&nbsp;&nbsp;
+                    Other than Telegram integrations are doable too. So your feedback is important. Thanks for reading.</p>
+            </div>
+            <img src="../photo_5346084267828041031_y.jpg"/>
+        </div>
 
         <div class="text-right">
             <p class="text-slate-500 text-lg text-bottom">- Andrei Kurilov, 2024</p>

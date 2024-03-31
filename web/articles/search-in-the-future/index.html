@@ -145,7 +145,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <div>
                 <p class="p-1">&nbsp;&nbsp;
-                    Hence, based on the requirements described earlier, I implemented the Awakari service.
+                    Based on the requirements described earlier, I implemented the Awakari service.
                     Now this is the only public live search service I know so far.
                     It's free to use, so I encourage everyone to try it.</p>
                 <p class="p-1">&nbsp;&nbsp;
@@ -154,48 +154,87 @@
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         awakari.com</a>
                     site, first you will see the search input.
-                    You can use it for a rough test of basic keywords query.
-                    It's limited by 1 hour and doesn't require any sign in.
+                    You can use it for a rough test of a basic keywords query.
+                    Such test query is limited by 1 hour and doesn't require any sign in.
                     When a temporary query is not enough, and you need more persistence you need to
                     <a href="https://awakari.com/login.html"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                        sign in</a>.
                 <p class="p-1">&nbsp;&nbsp;
-                    Currently, it's possible to sign in with a Telegram account.
+                    Currently, it's possible to sign in
+                    <a href="https://telegram.org/blog/login"
+                       target="_blank" class="text-blue-700 dark:text-blue-300">
+                        with a Telegram account.</a>
                     The Telegram integration serves both authentication and notification purposes.
                     Awakari service itself doesn't use any user data except id to distinguish users.
                     This may be proven as far as this part is
                     <a href="https://github.com/awakari/bot-telegram/blob/master/api/grpc/tgbot/controller.go#L60"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         Open-Source</a>.
-                    In the future, it may be easily extended to deliver search results in WhatsApp, by email, etc.
+                    In the future, it may be easily extended to deliver search results in RSS format if there's a demand.
+                    Other delivery and notification options are possible too.
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
-                    After signed in, you're welcome to create up to 10 parallel queries and publish up to 100 own messages per day.
+                    After signed in, you're welcome to:</p>
+                <p>✓ create and use up to 10 parallel queries</p>
+                <p>✓ publish up to 100 messages per day.</p>
+                <p>
                     A signed-in user also allowed to add own publishing sources to the common collection.
                     The sources added by the user will utilize the user's daily publishing quota.
-                    You can request the source to have the separate dedicated publishing limit.
+                    You can request to increase a limit or separate a dedicated publishing limit for your source.
                     </p>
             </div>
             <div class="flex justify-center">
-                <img src="../../2024-03-04_18-02.png" class="w-80 border border-slate-500"/>
+                <img src="../../2024-03-04_18-02.png" class="border border-slate-500" style="width: 350px; height: 700px"/>
             </div>
         </div>
 
         <p class="p-1">&nbsp;&nbsp;
-            Awakari supports a wide variety of publishing source types:
+            As far as the service is completely free, a
+            <a href="https://t.me/donateawk/14"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                donation</a> is appreciated.
+            This would help handle a load and further development.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+
+            <div>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    Awakari supports a wide variety of publishing source types:
+                    </p>
+                <p>✓ Feeds:</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/RSS" target="_blank" class="text-blue-700 dark:text-blue-300">RSS</a> /
+                    <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" target="_blank" class="text-blue-700 dark:text-blue-300">Atom</a> /
+                    <a href="https://www.jsonfeed.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://schema.org/" target="_blank" class="text-blue-700 dark:text-blue-300">schema.org</a> entries:</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://json-ld.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON-LD</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/Microdata_(HTML)" target="_blank" class="text-blue-700 dark:text-blue-300">Microdata</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ HTML5 <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-article-element.html" target="_blank" class="text-blue-700 dark:text-blue-300">articles</a></p>
+                <p>✓ Fediverse (<a href="https://activitypub.rocks/" target="_blank" class="text-blue-700 dark:text-blue-300">ActivityPub</a>):</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://joinmastodon.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Mastodon</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://friendi.ca/" target="_blank" class="text-blue-700 dark:text-blue-300">Friendica</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://hubzilla.org/page/info/discover" target="_blank" class="text-blue-700 dark:text-blue-300">Hubzilla</a></p>
+                <p>✓ Telegram Channels (public)</p>
+                <p>✓ Sites been checked daily</p>
+                <p>There are currently around 500 sources of different types.</p>
+            </div>
+
+            <div class="justify-center items-center">
+                <img src="Screenshot_20240331_091728.png" class="border border-slate-500"/>
+            </div>
+
+        </div>
+
+        <p class="p-1">&nbsp;&nbsp;
+            Awakari recognizes the feeds with
+            <a href="https://en.wikipedia.org/wiki/WebSub"
+               target="_blank" class="text-blue-700 dark:text-blue-300">
+                WebSub</a>. If there's no WebSub in a feed, Awakari uses periodic polling for
+                updates and collects the frequency statistic. This statistic is later used for the adaptive poll
+                scheduling.
             </p>
-        <p>&nbsp;&nbsp;✓ Feeds:</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/RSS" target="_blank" class="text-blue-700 dark:text-blue-300">RSS</a>/
-            <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" target="_blank" class="text-blue-700 dark:text-blue-300">Atom</a></p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://www.jsonfeed.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON</a></p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://schema.org/" target="_blank" class="text-blue-700 dark:text-blue-300">schema.org</a> entries:</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://json-ld.org/" target="_blank" class="text-blue-700 dark:text-blue-300">JSON-LD</a></p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://en.wikipedia.org/wiki/Microdata_(HTML)" target="_blank" class="text-blue-700 dark:text-blue-300">Microdata</a></p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://microformats.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Microformats</a></p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ HTML5 <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-article-element.html" target="_blank" class="text-blue-700 dark:text-blue-300">articles</a></p>
-        <p>&nbsp;&nbsp;✓ Fediverse:</p>
-        <p>&nbsp;&nbsp;✓ Telegram Channels (public)</p>
 
         <div class="text-right">
             <p class="text-slate-500 text-lg text-bottom">- Andrei Kurilov, 2024</p>

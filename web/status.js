@@ -28,12 +28,6 @@ async function loadStatus() {
                 } else {
                     document.getElementById("pub-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
                 }
-                const pubRateAvgWeek = data.publishingRate.month;
-                if (pubRateAvgWeek > 0) {
-                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgWeek * 30 * 86400))}</span>`;
-                } else {
-                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgWeek * 30 * 86400))}</span>`;
-                }
 
                 const evtQueueCurrent = data.queueLength.current;
                 if (evtQueueCurrent > 0) {
@@ -56,14 +50,6 @@ async function loadStatus() {
                     document.getElementById("evt-queue-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1dChange)}</span>`;
                 } else {
                     document.getElementById("evt-queue-1d").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
-                }
-                const evtQueue30dChange = evtQueueCurrent - data.queueLength.past.month;
-                if (evtQueue30dChange < 0) {
-                    document.getElementById("evt-queue-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue30dChange)}</span>`;
-                } else if (evtQueue30dChange > 0) {
-                    document.getElementById("evt-queue-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue30dChange)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-30d").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
                 }
 
                 const subscriptionsCurrent = data.subscriptions.current;

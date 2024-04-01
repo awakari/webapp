@@ -103,7 +103,7 @@
         <div class="md:col-span-2">
 
             <p class="p-1">&nbsp;&nbsp;
-                A conventional search, like Google, is <i>retrospective</i>.
+                A conventional search, like Google, is definitely <i>retrospective</i>.
                 This means that you can find only what had happened in the past.
                 Moreover, any change should be indexed first before it becomes available for a search.
                 The indexing typically lasts
@@ -128,14 +128,14 @@
 
     </div>
 
-    <div>
+    <p>
 
         <h2 id="2-why" class="text-2xl font-semibold text-center py-2">2. Why</h2>
 
         <p class="p-1">&nbsp;&nbsp;
             I want to get updates on my interests as soon as they happen.
             Whether it's a scientific discovery, breaking news or matching offers.
-            My idea is that many of us would want to have the same too.</p>
+            My idea is that I'm not alone and many of us would want the same too.</p>
 
         <h3 id="21-conventional-search" class="text-xl font-semibold text-center py-2">2.1. Conventional Search</h3>
 
@@ -146,8 +146,7 @@
                 <p class="p-1">&nbsp;&nbsp;
                     It's enough for a human to briefly read and understand a message for seconds or minutes.
                     So a good end-to-end delivery delay should be 1 second and the worst should be 1 minute.
-                    This is quite far from what conventional search engines offer.
-                    The best time period you can use is 1 hour.</p>
+                    This is quite far from what conventional search engines offer (hours at least).</p>
 
                 <p class="p-1">&nbsp;&nbsp;
                     Moreover, you have to repeat the search again and again to get new updates.
@@ -158,8 +157,8 @@
 
             </div>
 
-            <div class="flex justify-center">
-                <img src="1.jpg" class="w-[352px] border border-slate-500"/>
+            <div class="justify-center">
+                <img src="2024-04-01_10-38.png" class="border border-slate-500"/>
             </div>
 
         </div>
@@ -178,7 +177,7 @@
             Feeds are always a compromise between missing the important outside your bubble and distracting to tons of spam.</p>
 
         <p class="p-1">&nbsp;&nbsp;
-            Therefore, a true prospective search solution should resolve matching queries for every incoming message.
+            Therefore, an effective prospective search solution should resolve matching queries for every incoming message.
             After this the message may be pushed to everyone interested.
             For the notification purpose we have today some ready to use instant messaging applications.
             So I see the solution as an integration with an existing messenger.</p>
@@ -209,7 +208,6 @@
             <div>
                 <p class="p-1">&nbsp;&nbsp;
                     Based on the requirements described above, I implemented the Awakari service.
-                    Now this is the only public live search service I know so far.
                     It's free to use, so I encourage everyone to try it.</p>
                 <p class="p-1">&nbsp;&nbsp;
                     When you navigate to the
@@ -239,11 +237,12 @@
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
                     After signed in, you're welcome to:</p>
-                <p>✓ create and use up to 10 parallel queries</p>
-                <p>✓ publish up to 100 messages per day.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ create and use up to 10 parallel queries</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ publish up to 100 messages per day.</p>
                 <p>
                     A signed-in user also allowed to add own publishing sources to the common collection.
                     The sources added by the user will utilize the user's daily publishing quota.
+                    You can request to increase a limit or separate a dedicated publishing limit for your source.
                     </p>
             </div>
             <div class="flex justify-center">
@@ -252,11 +251,10 @@
         </div>
 
         <p class="p-1">&nbsp;&nbsp;
-            You can request to increase a limit or separate a dedicated publishing limit for your source.
-            As far as the service is completely free, a
+            As far as the service is completely free,
             <a href="https://t.me/donateawk/14"
                target="_blank" class="text-blue-700 dark:text-blue-300">
-                donation</a> is appreciated.
+                donations</a> are appreciated.
             This would help handle a load and further development.</p>
 
         <h3 id="31-sources" class="text-xl font-semibold text-center py-2">3.1. Sources</h3>
@@ -282,7 +280,7 @@
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://joinmastodon.org/" target="_blank" class="text-blue-700 dark:text-blue-300">Mastodon</a></p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://friendi.ca/" target="_blank" class="text-blue-700 dark:text-blue-300">Friendica</a></p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ <a href="https://hubzilla.org/page/info/discover" target="_blank" class="text-blue-700 dark:text-blue-300">Hubzilla</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ others (not tested though)</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? others (not tested though)</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ Telegram Channels (public)</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ Sites been checked daily</p>
             </div>
@@ -327,8 +325,8 @@
 
             <div>
                 <p class="p-1">&nbsp;&nbsp;
-                    The next important feature is <b>structured search</b> across the message metadata attributes.
-                    There are many different useful attributes in every message:</p>
+                    The next important feature is <b>structured search</b> across the message metadata.
+                    Messages contain useful attributes like:</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Subject (Author)</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Categories</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Language</p>
@@ -336,7 +334,7 @@
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Price</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Source</p>
                 <p>... and more.
-                    So you can use it in advanced queries for additional filtering.
+                    So you can use it in advanced queries for the additional filtering.
                     For text search conditions the attribute key may be skipped to look for a match everywhere.</p>
             </div>
 
@@ -363,7 +361,7 @@
 
                 <h3 id="35-group-conditions" class="text-xl font-semibold text-center py-2">3.5. Group Conditions</h3>
                 <p class="p-1">&nbsp;&nbsp;
-                    Finally, you can group conditions and define logic like "And", "Or", "Xor".
+                    Finally, you can group conditions and define the logic like "And", "Or", "Xor".
                     Nested conditions may also be groups.</p>
                 <p class="p-1">&nbsp;&nbsp;
                     Together all these advanced search features provide rich possibilities to filter a content.
@@ -386,10 +384,10 @@
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         @AwakariBot</a> in Telegram starts to deliver the search results to you.
                     If you have multiple queries it's recommended to assign every query to a separate group for your convenience.
-                    To do this, just type the <code class="text-slate-500">/start</code> command to the chatbot.
-                    This command always displays list of your own queries.
+                    To do this, create a simple group, add @AwakariBot and type the <code class="text-slate-500">/start</code> command to the chatbot.
+                    This command always displays list of your queries to choose.
+                    Clicking on a selected query will link or unlink it to a current chat.
                     Additonal icons against every query show whether a query is linked to the current chat or another.
-                    So you can link or unlink a selected query to the current chat.
                 <p class="p-1">&nbsp;&nbsp;
                     The primary chatbot purpose is a search results reader.
                     The chatbot may be also used to publish a basic message or subscribing for a simple text search query.
@@ -401,10 +399,14 @@
                     You can use this info to fine-tune the query conditions.
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
-                    Other than Telegram integrations are doable too. So your feedback is important. Thanks for reading.</p>
+                    Other than Telegram integrations are doable too. So your feedback is important.</p>
             </div>
             <img src="../photo_5346084267828041031_y.jpg"/>
         </div>
+
+        <p class="p-1">&nbsp;&nbsp;
+            That's it for this time. Thanks for reading.
+        </p>
 
         <div class="text-right">
             <p class="text-slate-500 text-lg text-bottom">- Andrei Kurilov, 2024</p>

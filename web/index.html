@@ -250,15 +250,17 @@
             </div>
 
             <div id="events-menu"
-                 style="display: none"
+                 style="display: block"
                  class="absolute inset-x-0 z-20 w-full bg-white px-1 py-1 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 items-center justify-center flex flex-col space-y-1">
 
                 <div class="grid space-x-2">
                     <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
-                        <p>Limited results from the past only.</p>
-                        <p id="sign-in-for-full">
-                            <a onclick="loginAndSubscribe()" style="cursor: pointer" class="text-blue-500 font-semibold">Subscribe</a>
-                            for free to get unlimited future results and advanced search features.</p>
+                        <p>Max 10 results from the past.
+                            <span id="sign-in-for-full">
+                                <a onclick="loginAndSubscribe()" style="cursor: pointer" class="text-blue-500">Subscribe</a>
+                                for unlimited future results.
+                            </span>
+                        </p>
                         <div class="absolute w-[320px]" id="wait" style="display: none">
                             <div class="flex justify-center">
                                 <img src="wait.gif"/>

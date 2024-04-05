@@ -55,22 +55,17 @@ async function closeSearchResults() {
 
 const templateEvent = (txt, time, src, link, id) => `
     <div class="p-1 shadow-xs border dark:border-gray-600 h-12 w-86 sm:w-[624px] flex align-middle">
-        <a href="${link}" target="_blank" class="w-78 sm:w-[586px]">
-            <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 w-80 sm:w-[586px] truncate">
+        <a href="${link}" target="_blank" class="w-80 sm:w-[600px]">
+            <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 w-80 sm:w-[600px] truncate">
                 ${txt}
             </p>
-            <p class="font-mono text-xs w-80 sm:w-[586px] truncate">
+            <p class="font-mono text-xs w-80 sm:w-[600px] truncate">
                 <span class="text-stone-500">
                     ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
                 </span>
                 <span class="text-slate-600 dark:text-slate-400 w-80 truncate">${src}</span>
             </p>
         </a>
-        <button type="button"
-                onclick="reportPublicationInappropriate('${src}', '${link}', '${id}')"
-                class="mt-1 flex report justify-center text-center text-xl h-6 w-6 text-stone-500 hover:text-amber-500">
-            ⚠
-        </button>
     </div>
 `
 

@@ -217,13 +217,10 @@
                         awakari.com</a>
                     site, first you will see the search input box.
                     You can use it for a quick keywords query test without signing in.
-                    Such query is temporary and limited by 1 hour.
-                    When it's not enough, and you need persistent queries you need to
-                    <a href="https://awakari.com/login.html"
-                       target="_blank" class="text-blue-700 dark:text-blue-300">
-                       sign in</a>.
+                    Such search is text only and results are limited to the past.
+                    When it's not enough, and you want to be notified about future results you need to subscribe.
                 <p class="p-1">&nbsp;&nbsp;
-                    Currently, it's possible to sign in
+                    Currently, it's possible to subscribe
                     <a href="https://telegram.org/blog/login"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         with a Telegram account.</a>
@@ -233,25 +230,23 @@
                     <a href="https://github.com/awakari/bot-telegram/blob/master/api/grpc/tgbot/controller.go#L60"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         Open-Source</a>.
-                    In the future, it may be easily extended to deliver search results in RSS format if there's a demand.
                     Other delivery and notification options are possible to implement too.
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
                     After signed in, you're welcome to:</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ create and use up to 10 parallel queries</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ publish up to 100 messages per day.</p>
-                <p>
-                    A signed-in user also allowed to add own publishing sources to the common collection.
-                    The sources added by the user will utilize the user's daily publishing quota.
-                    You can request to increase a limit or separate a dedicated publishing limit for your source.
-                    </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ create and use up to 10 subscriptions</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ publish up to 100 messages per day</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ define advanced query conditions</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;✓ bring own publishing sources</p>
             </div>
             <div class="flex justify-center">
-                <img src="../../2024-03-04_18-02.png" class="border border-slate-500" style="width: 350px; height: 700px"/>
+                <img src="../../2024-03-04_18-02.png" class="border border-slate-500" style="width: 360px; height: 640px"/>
             </div>
         </div>
 
         <p class="p-1">&nbsp;&nbsp;
+            Sources added by a user will utilize the user's daily publishing quota.
+            You can request to increase a limit or separate a dedicated publishing limit for your source.
             As far as the service is completely free,
             <a href="https://t.me/donateawk/14"
                target="_blank" class="text-blue-700 dark:text-blue-300">
@@ -307,13 +302,13 @@
         <h3 id="32-text-search" class="text-xl font-semibold text-center py-2">3.2. Text Search</h3>
 
         <p class="p-1">&nbsp;&nbsp;
-            Awakari extracts the message text and performs a text search to find all matching queries.
+            Awakari extracts the message text and performs a text search to find all matching subscriptions.
             It also uses the basic words
             <a href="https://en.wikipedia.org/wiki/Stemming"
                target="_blank" class="text-blue-700 dark:text-blue-300">
                 stemming</a> so different forms of the same word will match.
             At the moment the stemming works only for english language but later this may be extended.
-            Exact query text match option is available as well.</p>
+            Exact text match option is available as well.</p>
         <p class="p-1">&nbsp;&nbsp;
             The general recommendation is to use specific keywords longer than 3 symbols.
             When you specify multiple keywords separated by space the search will match any of them.
@@ -335,7 +330,7 @@
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Price</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;• Source</p>
                 <p>... and more.
-                    So you can use it in advanced queries for the additional filtering.
+                    So you can use it in advanced conditions for the additional filtering.
                     For text search conditions the attribute key may be skipped to look for a match everywhere.</p>
             </div>
 
@@ -366,9 +361,9 @@
                     Nested conditions may also be groups.</p>
                 <p class="p-1">&nbsp;&nbsp;
                     Together all these advanced search features provide rich possibilities to filter a content.
-                    You're encouraged to experiment with various query condition combinations.
-                    When a query produce unexpected results just update it modifying its conditions.
-                    For example, a query initially may be too general and produce too many results.
+                    You're encouraged to experiment with various conditions combinations.
+                    When a subscription produce unexpected results just update it modifying its conditions.
+                    For example, a subscription initially may be too general and produce too many results.
                     Just try to make it more specific then.</p>
             </div>
 
@@ -380,24 +375,24 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
             <div>
                 <p class="p-1">&nbsp;&nbsp;
-                    When you create a query the
+                    When you create a new subscription the
                     <a href="https://t.me/AwakariBot"
                        target="_blank" class="text-blue-700 dark:text-blue-300">
                         @AwakariBot</a> in Telegram starts to deliver the search results to you.
-                    If you have multiple queries it's recommended to assign every query to a separate group for your convenience.
+                    If you have multiple subscriptions it's recommended to assign every subscription to a separate group for your convenience.
                     To do this, create a simple group, add @AwakariBot and type the <code class="text-slate-500">/start</code> command to the chatbot.
-                    This command always displays list of your queries to choose.
-                    Clicking on a selected query will link or unlink it to a current chat.
-                    Additonal icons against every query show whether a query is linked to the current chat or another.
+                    This command always displays list of your subscriptions to choose.
+                    Clicking on a selected subscription will link or unlink it to a current chat.
+                    Additonal icons against every subscription show whether the subscription is linked to the current chat or another.
                 <p class="p-1">&nbsp;&nbsp;
                     The primary chatbot purpose is a search results reader.
-                    The chatbot may be also used to publish a basic message or subscribing for a simple text search query.
+                    The chatbot may be also used to publish a basic message or subscribe for a simple text search query.
                     If you're an admin of a public channel and want Awakari to consume posts from your channel you can
                     add @AwakariBot to your channel removing all admin rights.
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
                     Note the resulting messages also contain the attributes, e.g. "source".
-                    You can use this info to fine-tune the query conditions.
+                    You can use this info to fine-tune the subscription conditions.
                     </p>
                 <p class="p-1">&nbsp;&nbsp;
                     Other than Telegram integrations are doable too. So your feedback is important.</p>

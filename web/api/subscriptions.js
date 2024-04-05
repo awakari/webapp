@@ -6,7 +6,7 @@ Subscriptions.fetchListPage = function (cursor, order, limit, filter, headers) {
         headers: headers,
         cache: "no-cache",
     })
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Subscriptions.fetchListPage(cursor, order, limit, filter, h)))
+        .then(resp => handleCookieAuth(resp, headers, (h) => Subscriptions.fetchListPage(cursor, order, limit, filter, h)))
         .then(resp => {
             if (resp) {
                 if (!resp.ok) {
@@ -26,7 +26,7 @@ Subscriptions.delete = function (id, headers) {
         headers: headers,
     };
     return fetch(`/v1/sub/${id}`, optsReq)
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Subscriptions.delete(id, h)))
+        .then(resp => handleCookieAuth(resp, headers, (h) => Subscriptions.delete(id, h)))
         .then(resp => {
             if (resp.ok) {
                 return resp;
@@ -53,7 +53,7 @@ Subscriptions.createResponse = function (descr, enabled, expires, cond, headers)
     };
     return fetch(`/v1/sub`, optsReq)
         .then(resp =>
-            handleCookieExpiration(resp, headers, (h) =>
+            handleCookieAuth(resp, headers, (h) =>
                 Subscriptions.createResponse(descr, enabled, expires, cond, h)))
 }
 
@@ -84,7 +84,7 @@ Subscriptions.fetch = function (id, headers) {
         cache: "default",
     }
     return fetch(`/v1/sub/${id}`, optsReq)
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Subscriptions.fetch(id, h)))
+        .then(resp => handleCookieAuth(resp, headers, (h) => Subscriptions.fetch(id, h)))
         .then(resp => {
             if (!resp.ok) {
                 handleResponseStatus(resp.status);
@@ -110,7 +110,7 @@ Subscriptions.update = function (id, descr, enabled, expires, cond, headers) {
         body: JSON.stringify(payload)
     }
     return fetch(`/v1/sub/${id}`, optsReq)
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Subscriptions.update(id, descr, enabled, expires, cond, h)))
+        .then(resp => handleCookieAuth(resp, headers, (h) => Subscriptions.update(id, descr, enabled, expires, cond, h)))
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))

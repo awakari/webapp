@@ -6,5 +6,5 @@ Past.search = function (q, headers) {
         headers: headers,
         cache: "no-cache",
     })
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Past.search(q, h)));
+        .then(resp => handleCookieAuth(resp, headers, (h) => Past.search(q, h)));
 }

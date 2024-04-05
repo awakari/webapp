@@ -9,9 +9,9 @@ function handleResponseStatus(code) {
     }
 }
 
-const retriesMax = 10;
+const retriesMax = 5;
 
-async function handleCookieExpiration(resp, reqHeaders, funcRetry) {
+async function handleCookieAuth(resp, reqHeaders, funcRetry) {
     if ((resp.status === 401 || resp.status === 503) && !reqHeaders["Authorization"]) {
         const retry = reqHeaders["X-Awakari-Retry"];
         let retryNum = 0;

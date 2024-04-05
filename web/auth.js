@@ -6,7 +6,14 @@ const keyAuthToken = "authToken";
 
 function load() {
     if (localStorage.getItem(keyUserName)) {
-        window.location.assign('sub.html')
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get("redirect");
+        if (redirect) {
+            const args = urlParams.get("args");
+            window.location.assign(`${redirect}?args=${args}`)
+        } else {
+            window.location.assign('sub.html')
+        }
     }
 }
 
@@ -16,7 +23,7 @@ function handleAuthGoogle(response) {
     const tokenDecoded = jwt_decode(tokenEncoded);
     localStorage.setItem(keyUserId, `${tokenDecoded.iss}/${tokenDecoded.sub}`);
     localStorage.setItem(keyAuthToken, tokenEncoded);
-    window.location.assign("sub.html");
+    load();
 }
 
 function handleAuthTelegram(user) {
@@ -25,7 +32,7 @@ function handleAuthTelegram(user) {
     localStorage.setItem(keyAuthProvider, "Telegram");
     const token = Base64.encode(JSON.stringify(user));
     localStorage.setItem(keyAuthToken, token);
-    window.location.assign("sub.html");
+    load();
 }
 
 function logout() {

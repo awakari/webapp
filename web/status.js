@@ -1,5 +1,10 @@
-async function loadStatus() {
+function loadStatusWithRetry(headers) {
     return fetch("/v1/status/public")
+        .then(resp => handleCookieAuth(resp, headers, (h) => loadStatusWithRetry(h)))
+}
+
+async function loadStatus() {
+    return loadStatusWithRetry({})
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

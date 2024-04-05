@@ -1,5 +1,21 @@
 // Initialize the editor
 let editor = new JSONEditor(document.getElementById("sub_cond_editor"), subCondSchema);
+const urlParams = new URLSearchParams(window.location.search);
+const args = urlParams.get("args");
+if (args) {
+    document.getElementById("description").value = args;
+    editor.on('ready', function () {
+        editor.setValue({
+            not: false,
+            tc: {
+                key: "",
+                exact: false,
+                term: args,
+            },
+        });
+    });
+}
+
 loadAttributeTypes();
 
 // Hook up the validation indicator to update its

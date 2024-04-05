@@ -113,3 +113,8 @@ function displayEvents(evts) {
         elemEvts.innerHTML = templateEvent(txt, time, evt.source, link, evt.id) + elemEvts.innerHTML;
     }
 }
+
+function loginAndSubscribe() {
+    const q = document.getElementById("query").value;
+    window.location.assign(`login.html?redirect=sub-new.html&args=${q}`);
+}

@@ -6,7 +6,7 @@ Sources.fetchListPageResponse = function (type, own, order, limit, filter, heade
         headers: headers,
         cache: "default",
     })
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Sources.fetchListPageResponse(type, own, order, limit, filter, h)));
+        .then(resp => handleCookieAuth(resp, headers, (h) => Sources.fetchListPageResponse(type, own, order, limit, filter, h)));
 }
 
 Sources.fetch = function (typ, addrEnc, headers) {
@@ -16,7 +16,7 @@ Sources.fetch = function (typ, addrEnc, headers) {
         headers: headers,
         cache: "default",
     })
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Sources.fetch(typ, addrEnc, h)))
+        .then(resp => handleCookieAuth(resp, headers, (h) => Sources.fetch(typ, addrEnc, h)))
         .then(resp => {
             if (!resp.ok) {
                 handleResponseStatus(resp.status);
@@ -55,5 +55,5 @@ Sources.add = function (srcType, srcAddr, updFreq, headers) {
         headers: headers,
         body: JSON.stringify(payload),
     })
-        .then(resp => handleCookieExpiration(resp, headers, (h) => Sources.add(srcType, srcAddr, updFreq, h)));
+        .then(resp => handleCookieAuth(resp, headers, (h) => Sources.add(srcType, srcAddr, updFreq, h)));
 }

@@ -1,7 +1,7 @@
 function handleResponseStatus(code) {
     switch (code) {
         case 429:
-            alert("Limit reached. Request to increase.");
+            alert("Limit reached. Request to increase or wait.");
             break;
         default:
             alert(`Operation failed, response status: ${code}`);

@@ -2,38 +2,6 @@ const Events = {
     abortController: new AbortController(),
 }
 
-Events.longPoll = function (subId, deadline) {
-    const headers = getAuthHeaders();
-    let optsReq = {
-        method: "GET",
-        headers: headers,
-    };
-    const timeout = deadline - Date.now();
-    return fetch(`/v1/events/${subId}`, optsReq)
-        .then(resp => {
-            clearTimeout(setTimeout(() => {
-                Events.abortController.abort();
-            }, timeout));
-            if (!resp.ok) {
-                throw new Error(`Fetch events request failed, response status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .catch(e => {
-            console.log(e);
-            return null;
-        })
-        .then(data => {
-            if (data && data.hasOwnProperty("msgs") && data.msgs.length > 0) {
-                console.log(`Read subscription ${subId}: got ${data.msgs.length} new events`);
-                return data.msgs;
-            } else {
-                console.log(`Read subscription ${subId}: no new events`);
-                return null;
-            }
-        });
-};
-
 // uuidv4
 Events.newId = function () {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

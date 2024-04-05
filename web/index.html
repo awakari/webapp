@@ -159,6 +159,7 @@
     <script src="api/response.js"></script>
     <script src="api/subscriptions.js"></script>
     <script src="status.js"></script>
+    <script src="api/past.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -192,7 +193,7 @@
                                    required="required"
                                    type="search"
                                    role="searchbox"
-                                   placeholder="Live Search"
+                                   placeholder="Search..."
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
@@ -254,15 +255,19 @@
 
                 <div class="grid space-x-2">
                     <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
-                        <p id="streaming-results">
-                            Results will appear below for the next 1h.</p>
+                        <p>Up to 10 results from the past.</p>
                         <p id="sign-in-for-full">
                             <a href="login.html" class="text-blue-500">Sign In</a>
-                            for the full-featured mode.</p>
+                            for future results and advanced search.</p>
+                        <div class="absolute w-[320px]" id="wait" style="display: none">
+                            <div class="flex justify-center">
+                                <img src="wait.gif"/>
+                            </div>
+                        </div>
                         <div class="flex">
                             <div class="grow w-full"></div>
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                 onclick="confirm('Stop search and results streaming?') ? queryStop(true) : console.log('query stop cancelled by user')"
+                                 onclick="confirm('Close and clear search results?') ? closeSearchResults() : console.log('close search results cancelled by user')"
                                  class="h-6 w-6 place-self-end sm:place-self-center text-gray-800 dark:text-gray-200"
                                  fill="none"
                                  viewBox="0 0 24 24"

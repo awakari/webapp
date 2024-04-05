@@ -99,7 +99,7 @@ async function requestPublishingSourceDedicated(addr){
 
 async function requestIncreaseSubscriptionsLimit(userId) {
     if (userId) {
-        const msg = "Request to increase the queries limit\nPlease enter the number to add:"
+        const msg = "Request to increase the subscriptions limit\nPlease enter the number to add:"
         const input = prompt(msg, "1");
         if (input) {
             let inc = 0;

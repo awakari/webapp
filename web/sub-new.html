@@ -33,7 +33,7 @@
             <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
-    <span class="pl-1">New Query</span>
+    <span class="pl-1">New Subscription</span>
 </nav>
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
@@ -47,7 +47,7 @@
                     <label for="description" class="w-20" style="margin-top: 0.125rem">
                         <span class="tooltip">
                             Description
-                            <span class="tooltiptext" style="width: 332px">Describe a query to distinguish from others.</span>
+                            <span class="tooltiptext" style="width: 332px">Describe a subscription to distinguish from others.</span>
                         </span>
                     </label>
                     <input type="text" id="description" placeholder="e.g. news, mentions, ..." />
@@ -58,8 +58,8 @@
                         <span class="tooltip">
                             Expires
                             <span class="tooltiptext">
-                                <p>Local time when a query expires.</p>
-                                <p>Leave it empty for a never expiring query.</p>
+                                <p>Local time when a subscription expires.</p>
+                                <p>Leave it empty for a never expiring subscription.</p>
                             </span>
                         </span>
                     </label>
@@ -100,7 +100,7 @@
                         </button>
                     </div>
                     <p>
-                        Query created
+                        Subscription created
                     </p>
                     <p>
                         Id: <span id="new-sub-id"></span>

@@ -45,7 +45,7 @@
 <header>
     <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
         <div class="text-center min-w-[352px] w-[352px] flex">
-            <div class="w-16 justify-self-start text-left hover:text-fuchsia-500">
+            <div class="w-14 justify-self-start text-left hover:text-fuchsia-500">
                 <span id="exit"
                       class="flex"
                       onclick="localStorage.getItem(keyUserName) ? logout() : window.location.assign('index.html')">
@@ -56,7 +56,7 @@
                 </span>
             </div>
             <div class="grow"></div>
-            <div class="w-20 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Queries</div>
+            <div class="w-22 hover:text-indigo-500" onclick="window.location.assign('sub.html')">Subscribe</div>
             <div class="grow"></div>
             <div class="w-18 hover:text-cyan-500" onclick="window.location.assign('pub.html')">Publish</div>
             <div class="grow"></div>
@@ -103,9 +103,18 @@
         <!--                        </div>-->
         <!--                    </div>-->
 
-        <div class="justify-center flex p-1">
+        <div class="justify-center flex-col p-1">
             <p class="text-center text-sm text-neutral-700 dark:text-neutral-400">
-                Sign In is required for full-featured functionality:<br/>
+                Sign In is required for the full-featured functionality:</p>
+            <p class="text-left text-sm text-neutral-700 dark:text-neutral-400 px-20">
+                ✓ Future results notification
+            <p class="text-left text-sm text-neutral-700 dark:text-neutral-400 px-20">
+                ✓ Structured search</p>
+            <p class="text-left text-sm text-neutral-700 dark:text-neutral-400 px-20">
+                ✓ Subscription management</p>
+            <p class="text-left text-sm text-neutral-700 dark:text-neutral-400 px-20">
+                ✓ Publishing management</p>
+            <p class="text-center text-sm text-neutral-700 dark:text-neutral-400 pt-2">
                 <span class="whitespace-nowrap">
                     By signing in, you agree to the
                 </span>

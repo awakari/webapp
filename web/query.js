@@ -2,11 +2,6 @@ document
     .getElementById("form_search")
     .addEventListener("submit", function (evt){
         evt.preventDefault();
-        if (localStorage.getItem(keyUserId)) {
-            document.getElementById("sign-in-for-full").style.display = "none";
-        } else {
-            document.getElementById("sign-in-for-full").style.display = "block"
-        }
         const q = document.getElementById("query").value;
         if (q != null && q !== "") {
             clearSearchResults();
@@ -54,7 +49,7 @@ async function closeSearchResults() {
 }
 
 const templateEvent = (txt, time, src, link, id) => `
-    <div class="p-1 shadow-xs border dark:border-gray-600 h-12 w-86 sm:w-[624px] flex align-middle">
+    <div class="h-10 w-86 sm:w-[624px] flex align-middle">
         <a href="${link}" target="_blank" class="w-80 sm:w-[600px]">
             <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 w-80 sm:w-[600px] truncate">
                 ${txt}

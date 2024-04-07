@@ -67,7 +67,7 @@ const templateEvent = (txt, time, src, link, id) => `
 function displayEvents(evts) {
     let elemEvts = document.getElementById("events");
     for (let evt of evts) {
-        if (elemEvts.childElementCount >= 10) {
+        if (elemEvts.childElementCount >= 12) {
             elemEvts.removeChild(elemEvts.lastElementChild);
         }
         let time;

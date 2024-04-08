@@ -591,7 +591,7 @@ document
                 })
                 .finally(_ => {
                     document.getElementById("wait").style.display = "none";
-                    //displayEvents(evtsTest);
+                    displayEvents(evtsTest);
                 });
         }
     });
@@ -616,7 +616,7 @@ async function closeSearchResults() {
 const templateEvent = (txt, time, src, link, lang, loc, price, more) => `
     <div class="h-[52px] w-86 sm:w-[624px] flex align-middle">
         <a href="${link}" target="_blank" class="w-80 sm:w-[600px]">
-            <p class="text-gray-700 dark:text-gray-300 hover:text-blue-500 w-80 sm:w-[600px] truncate">
+            <p class="text-gray-800 dark:text-gray-300 w-80 sm:w-[600px] hover:text-blue-500 truncate">
                 ${txt}
             </p>
             <p class="font-mono text-xs w-80 sm:w-[600px] truncate">
@@ -625,7 +625,7 @@ const templateEvent = (txt, time, src, link, lang, loc, price, more) => `
                 </span>
                 <span class="text-slate-500">${src}</span>
             </p>
-            <p class="flex text-xs w-80 sm:w-[600px] text-gray-400 dark:text-gray-600 truncate">
+            <p class="flex text-xs w-80 sm:w-[600px] text-zinc-500 truncate">
                 <span> 
                     ${lang}                
                 </span>

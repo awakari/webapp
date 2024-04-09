@@ -591,7 +591,7 @@ document
                 })
                 .finally(_ => {
                     document.getElementById("wait").style.display = "none";
-                    displayEvents(evtsTest);
+                    //displayEvents(evtsTest);
                 });
         }
     });

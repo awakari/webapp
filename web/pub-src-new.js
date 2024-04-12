@@ -40,14 +40,6 @@ function showSrcDetails() {
             document.getElementById("feed").style.display = "block";
             document.getElementById("site").style.display = "none";
             break
-        case "site":
-            btnSubmit.style.display = "flex";
-            document.getElementById("apub").style.display = "none";
-            document.getElementById("tgbc").style.display = "none";
-            document.getElementById("tgch").style.display = "none";
-            document.getElementById("feed").style.display = "none";
-            document.getElementById("site").style.display = "block";
-            break
     }
 }
 
@@ -78,19 +70,8 @@ function addSource() {
                 return;
             }
             break
-        case "site":
-            srcAddr = document.getElementById("site_addr").value;
-            if (srcAddr.startsWith("http://")) {
-                srcAddr = srcAddr.substring("http://".length)
-            }
-            if (srcAddr.startsWith("https://")) {
-                srcAddr = srcAddr.substring("https://".length)
-            }
-            if (srcAddr.length < 4) {
-                alert(`Source address ${srcAddr} is not valid site address`)
-                return;
-            }
-            break
+        default:
+            return;
     }
     const headers = getAuthHeaders();
     const feedUpdFreq = parseInt(document.getElementById("feed_upd_freq").value);

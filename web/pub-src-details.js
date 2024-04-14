@@ -73,11 +73,22 @@ async function loadSource() {
                         document.getElementById("accepted").checked = true;
                         break
                 }
-                if (data.lastUpdate === "0001-01-01T00:00:00Z") {
-                    document.getElementById("last_upd").innerText = "N/A";
+                if (data.hasOwnProperty("created") && data.created.length > 0 && data.created !== "0001-01-01T00:00:00Z") {
+                    document.getElementById("added-date").innerText = data.created;
                 } else {
-                    document.getElementById("last_upd").innerText = data.lastUpdate;
+                    document.getElementById("added-date").innerText = "N/A";
                 }
+                if (data.hasOwnProperty("lastUpdate") && data.lastUpdate.length > 0 && data.lastUpdate !== "0001-01-01T00:00:00Z") {
+                    document.getElementById("last_upd").innerText = data.lastUpdate;
+                } else {
+                    document.getElementById("last_upd").innerText = "N/A";
+                }
+                if (data.query && data.query.length > 0) {
+                    document.getElementById("query").innerText = data.query;
+                } else {
+                    document.getElementById("query").innerText = "N/A";
+                }
+                //
                 const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && headers["X-Awakari-User-Id"] && data.userId === headers["X-Awakari-User-Id"]) {
                     btnDel.removeAttribute("disabled");

@@ -83,11 +83,6 @@ async function loadSource() {
                 } else {
                     document.getElementById("last_upd").innerText = "N/A";
                 }
-                if (data.query && data.query.length > 0) {
-                    document.getElementById("query").innerText = data.query;
-                } else {
-                    document.getElementById("query").innerText = "N/A";
-                }
                 //
                 const btnDel = document.getElementById("button_src_del");
                 if (data.groupId === defaultGroupId && headers["X-Awakari-User-Id"] && data.userId === headers["X-Awakari-User-Id"]) {

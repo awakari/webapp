@@ -180,10 +180,15 @@ div label.required.je-form-input-label {
     font-weight: normal;
     margin-right: 0.5rem;
 }
-div div[data-theme="html"] .je-indented-panel {
-    border: none;
-    margin: 0;
-    padding: 0;
+input[type=checkbox].je-checkbox {
+    margin-top: 0.25rem;
+}
+div.form-group {
+    margin-top: 0.125rem;
+    margin-bottom: 0.125rem;
+}
+div label.control-label {
+    padding-right: 0.5rem;
 }
 div[data-schemaid="cond"] {
     border-width: 1px;
@@ -191,6 +196,15 @@ div[data-schemaid="cond"] {
     padding: 0.25rem;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
+}
+input[type=text].property-selector-input {
+    display: none;
+}
+div.je-modal button[type=button].json-editor-btn-add {
+    display: none;
+}
+p[role=alert].errormsg {
+    color: #ef4444;
 }
 select {
     outline: none;

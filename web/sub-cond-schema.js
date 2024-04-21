@@ -1,6 +1,6 @@
 let subCondSchema = {
     iconlib: "spectre",
-    theme: "html",
+    theme: "bootstrap3",
     // The schema for the editor
     schema: {
         additionalProperties: false,
@@ -25,7 +25,7 @@ let subCondSchema = {
                         required: true,
                     },
                     gc: {
-                        title: "Group",
+                        title: "Group of conditions",
                         type: "object",
                         id: "gc",
                         defaultProperties: ["logic", "group"],
@@ -56,7 +56,7 @@ let subCondSchema = {
                         additionalProperties: false,
                     },
                     nc: {
-                        title: "Number",
+                        title: "Number condition",
                         type: "object",
                         id: "nc",
                         defaultProperties: ["key", "op", "val"],
@@ -103,13 +103,13 @@ let subCondSchema = {
                         additionalProperties: false,
                     },
                     tc: {
-                        title: "Text",
+                        title: "Text condition",
                         type: "object",
                         id: "tc",
                         defaultProperties: ["key", "term", "exact"],
                         properties: {
                             key: {
-                                title: "Attribute",
+                                title: "Attribute (optional)",
                                 id: "key",
                                 type: "string",
                                 required: false,
@@ -124,7 +124,7 @@ let subCondSchema = {
                                 },
                             },
                             term: {
-                                title: "Any of words",
+                                title: "Any of keywords",
                                 id: "term",
                                 type: "string",
                                 required: true,

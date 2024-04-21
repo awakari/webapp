@@ -397,6 +397,9 @@
                     </div>
                     <div class="space-y-4 py-4 text-lg">
                         <p class="align-text-middle px-4 pt-2">
+                            Automatically discovers new sources on every new subscription.
+                        </p>
+                        <p class="align-text-middle px-4">
                             Already available:
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
@@ -442,9 +445,6 @@
                                 </svg>
                             </span>
                             <span>Messages published by others</span>
-                        </p>
-                        <p class="align-text-middle px-4 text-lg">
-                            Automatic new sources discovery on every new subscription.
                         </p>
                     </div>
                 </div>
@@ -573,87 +573,71 @@
                 <h2 class="px-2 capitalize text-2xl">
                     Compare
                 </h2>
-                <div class="flex">
-                    <div class="grid grid-cols-5 space-y-1 space-x-1 sm:space-y-4 sm:space-x-4">
+                <div class="flex justify-center sm:pr-40">
+                    <div class="grid grid-cols-4 space-y-1 space-x-1 sm:space-y-4 sm:space-x-4">
 
-                        <div class="text-right row-span-2 self-center text-xl">
+                        <div></div>
+                        <div class="text-center text-xl">
+                            Feeds
                         </div>
-                        <div class="col-span-2 text-center text-xl">
-                            Polling
+                        <div class="text-center text-xl">
+                            Search
                         </div>
-                        <div class="col-span-2 text-center text-xl">
-                            Pushing
-                        </div>
-
-                        <div class="text-center">
-                            Feeds (RSS, etc)
-                        </div>
-                        <div class="text-center">
-                            <p>Email Subs</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="break-words">Apps Notifications</p>
-                        </div>
-                        <div class="text-center">
+                        <div class="text-center text-xl">
                             Awakari
                         </div>
 
-                        <div class="text-right h-16">
-                            <p>Delay *</p>
+                        <div></div>
+                        <div class="text-sm text-center text-gray-500 dark:text-gray-400">
+                            Feedly, Inoreader, ...
                         </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center h-16">
-                            <p class="pt-4">High</p>
+                        <div class="text-sm text-center text-gray-500 dark:text-gray-400">
+                            Google, Bing, ...
                         </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-4">High</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-4">Low</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-4">Low</p>
+                        <div class="text-sm text-center text-gray-500 dark:text-gray-400">
+                            Real-Time Search
                         </div>
 
-                        <div class="text-right h-16">
-                            <p>Subs Control **</p>
+                        <div class="text-right h-16 pt-4 text-lg">
+                            <p>Delay</p>
                         </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-4">Client</p>
-                        </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-4">Service</p>
+                        <div class="bg-yellow-300 dark:bg-yellow-700 text-center h-16">
+                            <p class="pt-5">Medium</p>
                         </div>
                         <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-4">Service</p>
+                            <p class="pt-5">High</p>
                         </div>
                         <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-4">Client</p>
+                            <p class="pt-5">Low</p>
                         </div>
 
-                        <div class="text-right h-16">
-                            <p>Content Filter ***</p>
+                        <div class="text-right h-16 pt-4 text-lg">
+                            <p>Sources</p>
                         </div>
                         <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-4">Client</p>
-                        </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-4">Client</p>
-                        </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-4">Client</p>
+                            <p class="pt-2">Limited</p><p>to known</p>
                         </div>
                         <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-4">Service</p>
+                            <p class="pt-2">Discovers</p><p>New</p>
+                        </div>
+                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
+                            <p class="pt-2">Discovers</p><p>New</p>
+                        </div>
+
+                        <div class="text-right h-16 text-lg">
+                            <p>Content</p><p>Filtering</p>
+                        </div>
+                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
+                            <p class="pt-5">Client</p>
+                        </div>
+                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
+                            <p class="pt-5">Service</p>
+                        </div>
+                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
+                            <p class="pt-5">Service</p>
                         </div>
 
                     </div>
-                </div>
-                <div class="pt-4">
-                    <p>Explanation:</p>
-                    <p>(*) Delay: lower is simply better.</p>
-                    <p>(**) Subscription Control should be available for the client to avoid spam.</p>
-                    <p>(***) Content Filtering should happen early (on the service side) avoiding flooding the client
-                        with spam.</p>
                 </div>
             </div>
 
@@ -674,6 +658,27 @@
                              style="height: 480px">
                             <div class="p-6 space-y-4">
                                 <div class="flex">
+                                    <img src="share-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
+                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">Media Monitoring</h1>
+                                </div>
+                                <p>
+                                    Connect to a wide range of data sources, including social media platforms, news
+                                    websites, blogs, forums, and other online communities.
+                                </p>
+                                <p>
+                                    Subscribe for specific persons, brands, topics, trends, activities, and events.
+                                </p>
+                                <p>
+                                    Staying informed helps individuals or organizations proactively manage their online
+                                    presence and reputation.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4"
+                             style="height: 480px">
+                            <div class="p-6 space-y-4">
+                                <div class="flex">
                                     <img src="insight-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
                                     <h1 class="text-xl font-medium capitalize lg:text-3xl">Business Insights</h1>
                                 </div>
@@ -689,27 +694,6 @@
                                 <p>
                                     Business leaders can make data-driven decisions faster, responding promptly to
                                     risks, opportunities and trends.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4"
-                             style="height: 480px">
-                            <div class="p-6 space-y-4">
-                                <div class="flex">
-                                    <img src="share-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
-                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">Media Monitoring</h1>
-                                </div>
-                                <p>
-                                    Connect to a wide range of data sources, including social media platforms, news
-                                    websites, blogs, forums, and other online communities.
-                                </p>
-                                <p>
-                                    Subscribe for specific persons, brands, topics, trends, activities, and events.
-                                </p>
-                                <p>
-                                    Staying informed helps individuals or organizations proactively manage their online
-                                    presence and reputation.
                                 </p>
                             </div>
                         </div>
@@ -740,7 +724,7 @@
                             <div class="p-6 space-y-4">
                                 <div class="flex">
                                     <img src="cloud-services-icon.svg" alt="services" class="w-8 h-8 mr-2"/>
-                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">And Much More...</h1>
+                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">And More</h1>
                                 </div>
                                 <p>
                                     <b>Real Estate</b>: subscribe for notifications about new properties that match a

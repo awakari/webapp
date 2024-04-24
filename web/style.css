@@ -2,9 +2,14 @@ input {
     accent-color: dimgrey;
     outline: none;
 }
-input[type=checkbox] {
+input[type="checkbox"] {
     margin-right: 0.625rem;
     margin-left: 0.125rem;
+}
+@media (prefers-color-scheme: dark) {
+    input[type="checkbox"] {
+        filter: brightness(30%);
+    }
 }
 input[type=text] {
     display: flex;
@@ -17,6 +22,13 @@ input[type=text] {
 input[type=number] {
     border-color: #94a3b8;
     border-width: 1px;
+    -moz-appearance: textfield; /* Firefox */
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 input[type=date] {
     border-color: #94a3b8;
@@ -56,7 +68,12 @@ textarea, select, fieldset  {
         border-width: 1px;
         color: #94a3b8;
     }
-    textarea, select, fieldset  {
+    fieldset {
+        border-color: #334155;
+        border-width: 1px;
+        outline: none;
+    }
+    textarea, select  {
         background-color: #1f2937;
         border-color: #334155;
         border-width: 1px;

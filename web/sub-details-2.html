@@ -38,12 +38,12 @@
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
     <div class="flex justify-center m-1">
-        <form class="space-y-2 max-w-[480px] grow">
+        <form class="space-y-3 max-w-[480px] grow">
             <div class="flex">
                 <label for="id" style="margin-top: 0.125rem">Id</label>
                 <input type="text" readonly="readonly" id="id" class="ml-2">
             </div>
-            <div class="flex flex-col space-y-2 pt-1">
+            <div class="flex flex-col space-y-3 pt-1">
 
                 <div class="flex">
                     <label for="description" class="w-20" style="margin-top: 0.125rem">
@@ -77,112 +77,17 @@
                             </span>
                         </span>
                     </span>
-                    <button id="button-add-cond" type="button" class="flex justify-center text-center w-[100px]">
-                        <span class="mt-1">+ Condition</span>
+                    <button id="button-add-cond-txt" type="button" class="flex justify-center text-center w-[100px]">
+                        <span class="mt-1"><b>&#65291;</b> Keywords</span>
+                    </button>
+                    <button id="button-add-cond-num" type="button" class="ml-3 flex justify-center text-center w-[100px]">
+                        <span class="mt-1"><b>&#65291;</b> Number</span>
                     </button>
                 </div>
 
             </div>
 
-            <div class="space-y-3 pt-1">
-
-                <fieldset class="flex p-2">
-                    <legend class="flex space-x-2 px-1">
-                        <div class="justify-center">
-                            <select class="rounded-sm px-1 select-cond-type">
-                                <option selected="selected">Keywords</option>
-                                <option>Numbers</option>
-                            </select>
-                        </div>
-                        <label class="flex align-middle" style="margin-top: 0.125rem">
-                            <input type="checkbox" class="h-4 w-4" style="margin-right: 0.125rem"/>
-                            <span>Not</span>
-                        </label>
-                        <svg
-                                fill="currentColor"
-                                width="20px"
-                                height="20px"
-                                viewBox="-3.5 0 19 19"
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="cf-icon-svg bg-slate-500"
-                                style="display: none">
-                            <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/>
-                        </svg>
-                    </legend>
-                    <div class="flex space-x-2">
-                        <fieldset class="px-1 h-9">
-                            <legend class="px-1">Attribute</legend>
-                            <input type="text" class="border-none w-20 sm:w-32" style="height: 18px; background-color: inherit"/>
-                        </fieldset>
-                        <fieldset class="px-1 h-9">
-                            <legend class="flex px-1 space-x-1">
-                                <span>Any of keywords</span>
-                                <label class="flex">
-                                    <input type="checkbox" class="h-4 w-4" style="margin-right: 0.125rem"/>
-                                    <span>Exact</span>
-                                </label>
-                            </legend>
-                            <input type="text" class="border-none min-w-[216px] sm:w-72" style="height: 18px; background-color: inherit"/>
-                        </fieldset>
-                    </div>
-                </fieldset>
-
-                <fieldset class="flex p-2">
-                    <legend class="flex space-x-2 px-1">
-                        <div class="justify-center">
-                            <select class="rounded-sm px-1 select-cond-type">
-                                <option value="tc">Keywords</option>
-                                <option value="nc" selected="selected">Numbers</option>
-                            </select>
-                        </div>
-                        <label class="flex align-middle" style="margin-top: 0.125rem">
-                            <input type="checkbox" class="h-4 w-4" style="margin-right: 0.125rem"/>
-                            <span>Not</span>
-                        </label>
-                        <svg fill="currentColor"
-                             width="20px"
-                             height="20px"
-                             viewBox="-3.5 0 19 19"
-                             xmlns="http://www.w3.org/2000/svg"
-                             class="cf-icon-svg text-stone-500"
-                             style="display: block">
-                            <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/>
-                        </svg>
-                    </legend>
-                    <div class="flex space-x-2">
-                        <fieldset class="px-1 h-9">
-                            <legend class="px-1">Attribute</legend>
-                            <input type="text" class="border-none w-20 sm:w-32" style="height: 18px; background-color: inherit"/>
-                        </fieldset>
-                        <fieldset class="px-1 h-9 " style="display: none">
-                            <legend class="flex px-1 space-x-1">
-                                <span>Any of keywords</span>
-                                <label class="flex">
-                                    <input type="checkbox" class="h-4 w-4" style="margin-right: 0.125rem"/>
-                                    <span>Exact</span>
-                                </label>
-                            </legend>
-                            <input type="text" class="border-none min-w-[216px] sm:w-72" style="height: 18px; background-color: inherit"/>
-                        </fieldset>
-                        <div class="flex space-x-2" style="display: flex">
-                            <select class="rounded-sm h-5 w-10 mt-3 px-1">
-                                <option>&gt;</option>
-                                <option>&ge;</option>
-                                <option selected="selected">=</option>
-                                <option>&le;</option>
-                                <option>&lt;</option>
-                            </select>
-                            <fieldset class="px-1 h-9">
-                                <legend class="px-1">Number</legend>
-                                <input type="number"
-                                       class="border-none w-[168px]"
-                                       style="height: 18px; background-color: inherit"
-                                       value="0"/>
-                            </fieldset>
-                        </div>
-                    </div>
-                </fieldset>
-
+            <div class="space-y-3 pt-1" id="conditions">
             </div>
 
             <div class="flex items-center justify-center space-x-2 pt-1">

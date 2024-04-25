@@ -5,10 +5,14 @@ input {
 input[type="checkbox"] {
     margin-right: 0.625rem;
     margin-left: 0.125rem;
+    outline: none;
 }
 @media (prefers-color-scheme: dark) {
     input[type="checkbox"] {
         filter: brightness(30%);
+    }
+    input[type="checkbox"]:checked {
+        filter: brightness(100%);
     }
 }
 input[type=text] {
@@ -22,6 +26,7 @@ input[type=text] {
 input[type=number] {
     border-color: #94a3b8;
     border-width: 1px;
+    outline: none;
     -moz-appearance: textfield; /* Firefox */
 }
 /* Chrome, Safari, Edge, Opera */

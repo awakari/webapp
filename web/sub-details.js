@@ -31,7 +31,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                         <fieldset class="px-1 h-9 autocomplete autocomplete-key">
                             <legend class="px-1">Attribute</legend>
                             <input type="text" 
-                                   class="border-none w-20 sm:w-32 autocomplete-input" 
+                                   class="border-none w-24 sm:w-32 autocomplete-input" 
                                    style="height: 18px; background-color: inherit"
                                    ${label === "Keywords"? 'placeholder="empty: all"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
@@ -60,7 +60,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                 </label>
                             </legend>
                             <input type="text" 
-                                   class="border-none min-w-[216px] sm:w-72" 
+                                   class="border-none min-w-[200px] sm:w-68" 
                                    style="height: 18px; background-color: inherit"
                                    oninput="setConditionTextTerms(${idx}, this.value)"
                                    value="${terms}"/>
@@ -81,7 +81,7 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
                             <fieldset class="px-1 h-9">
                                 <legend class="px-1">Number</legend>
                                 <input type="number"
-                                       class="border-none w-[168px]"
+                                       class="border-none w-[152px]"
                                        style="height: 18px; background-color: inherit"
                                        oninput="setConditionNumberValue(${idx}, this.value)"
                                        value="${value}"/>

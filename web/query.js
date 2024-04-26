@@ -779,5 +779,5 @@ function displayEvents(evts) {
 
 function loginAndSubscribe() {
     const q = document.getElementById("query").value;
-    window.location.assign(`login.html?redirect=sub-new.html&args=${q}`);
+    window.location.assign(`login.html?redirect=sub-details.html&q=${q}`);
 }

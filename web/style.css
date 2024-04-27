@@ -258,12 +258,14 @@ body {
     --ripple-end-duration: .3s;
     cursor: default;
 }
-html.dark body {
-    --bg-color: #0f0f0f;
-    --text-color: #fff;
-    --page-hint-color: #9b9ba1;
-    --hint-color: #64666d;
-    --placeholder-color: #5d6163;
+@media (prefers-color-scheme: dark) {
+    body {
+        --bg-color: #0f0f0f;
+        --text-color: #fff;
+        --page-hint-color: #9b9ba1;
+        --hint-color: #64666d;
+        --placeholder-color: #525252;
+    }
 }
 button[type=button].attr {
     width: 40px;

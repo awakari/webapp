@@ -28,15 +28,17 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                         </svg>
                     </legend>
                     <div class="flex space-x-2">
-                        <fieldset class="px-1 h-9 autocomplete autocomplete-key">
+                        <fieldset class="px-1 h-9 autocomplete ${label === "Keywords"? 'autocomplete-key-txt' : 'autocomplete-key-int' }">
                             <legend class="px-1">Attribute</legend>
-                            <input type="text" 
+                            <input type="text"
+                                   list="attrKeys${idx}" 
                                    class="border-none w-24 sm:w-32 autocomplete-input" 
                                    style="height: 18px; background-color: inherit"
                                    ${label === "Keywords"? 'placeholder="empty: all"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    value="${key}"/>
-                              <ul class="autocomplete-result-list"></ul>
+                            <datalist id="attrKeys${idx}">
+                            </datalist>
                         </fieldset>
 `;
 
@@ -272,8 +274,11 @@ function displayConditions() {
                 exact = tc.exact;
             }
             elemConds.innerHTML += templateCondText(not, key, tc.term, exact, i, countConds);
-        }
-        if (cond.hasOwnProperty("nc")) {
+            const attrKeysTxt = document.getElementById(`attrKeys${i}`);
+            for (const attKeyTxt of EventAttrKeysTxt) {
+                attrKeysTxt.innerHTML += `<option>${attKeyTxt}</option>\n`;
+            }
+        } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
             const op = nc.op;
             let key = "";
@@ -285,8 +290,11 @@ function displayConditions() {
                 val = nc.val;
             }
             elemConds.innerHTML += templateCondNumber(not, key, op, val, i, countConds);
+            const attrKeysInt = document.getElementById(`attrKeys${i}`);
+            for (const attKeyInt of EventAttrKeysInt) {
+                attrKeysInt.innerHTML += `<option>${attKeyInt}</option>\n`;
+            }
         }
-
     }
     //
     if (countConds < countCondsMax) {

@@ -1,5 +1,3 @@
-_ = loadAttributeTypes();
-
 let conds = [];
 const countCondsMax = 6;
 
@@ -91,7 +89,8 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
                         </div>` +
     condFooter;
 
-function loadSubDetails() {
+async function loadSubDetails() {
+    await loadAttributeTypes();
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     const q = urlParams.get("q");
@@ -104,7 +103,7 @@ function loadSubDetails() {
     }
 }
 
-loadSubDetails();
+_ = loadSubDetails();
 
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;

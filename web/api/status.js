@@ -4,6 +4,7 @@ Status.fetchAttributeTypes = function () {
     const optsReq = {
         method: "GET",
         cache: "default",
+        headers: getAuthHeaders(),
     };
     return fetch(`/v1/status/attr/types`, optsReq)
         .then(resp => {

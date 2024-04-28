@@ -16,10 +16,11 @@ Status.fetchAttributeTypes = function () {
         });
 }
 
-Status.fetchAttributeValues = function (name) {
+Status.fetchAttributeValues = function (name, headers) {
     return fetch(`/v1/status/attr/values/${name}`, {
         method: "GET",
         cache: "default",
+        headers: headers,
     })
         .then(resp => {
             if (resp.ok) {

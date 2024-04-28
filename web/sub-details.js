@@ -34,6 +34,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    style="height: 18px; background-color: inherit"
                                    ${label === "Keywords"? 'placeholder="empty: all"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
+                                   onchange="setConditionAttrValueOpts(${idx}, this.value)"
                                    value="${key}"/>
                             <datalist id="attrKeys${idx}">
                             </datalist>
@@ -60,10 +61,12 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                 </label>
                             </legend>
                             <input type="text" 
+                                   list="attrValTxt${idx}"
                                    class="border-none min-w-[200px] sm:w-68" 
                                    style="height: 18px; background-color: inherit"
                                    oninput="setConditionTextTerms(${idx}, this.value)"
                                    value="${terms}"/>
+                            <datalist id="attrValTxt${idx}"></datalist>
                         </fieldset>` +
     condFooter;
 
@@ -208,6 +211,23 @@ function setConditionAttrName(idx, name) {
     }
 }
 
+function setConditionAttrValueOpts(idx, key) {
+    if (conds.length > idx) {
+        const cond = conds[idx];
+        if (cond.hasOwnProperty("tc")) {
+            loadAttributeValues(key, "", getAuthHeaders()).then(opts => {
+                const optsElement = document.getElementById(`attrValTxt${idx}`);
+                optsElement.innerHTML = "";
+                if (opts) {
+                    for (const opt of opts) {
+                        optsElement.innerHTML += `<option>${opt}</option>\n`;
+                    }
+                }
+            });
+        }
+    }
+}
+
 function setConditionTextExact(idx, exact) {
     if (conds.length > idx) {
         const cond = conds[idx];
@@ -224,6 +244,15 @@ function setConditionTextTerms(idx, terms) {
         const cond = conds[idx];
         if (cond.hasOwnProperty("tc")) {
             cond.tc.term = terms;
+            loadAttributeValues(cond.tc.key, terms, getAuthHeaders()).then(opts => {
+                if (opts) {
+                    const optsElement = document.getElementById(`attrValTxt${idx}`);
+                    optsElement.innerHTML = "";
+                    for (const opt of opts) {
+                        optsElement.innerHTML += `<option>${opt}</option>\n`;
+                    }
+                }
+            });
         } else {
             console.error(`Target condition #${idx} is not a keywords condition`);
         }

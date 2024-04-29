@@ -33,6 +33,12 @@ async function loadStatus() {
                 } else {
                     document.getElementById("pub-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
                 }
+                const pubRateAvgMonth = data.publishingRate.month;
+                if (pubRateAvgMonth > 0) {
+                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
+                } else {
+                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
+                }
 
                 const evtQueueCurrent = data.queueLength.current;
                 if (evtQueueCurrent > 0) {

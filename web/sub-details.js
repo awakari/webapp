@@ -96,7 +96,7 @@ async function loadSubDetails() {
     await loadAttributeTypes();
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
-    const q = urlParams.get("q");
+    const q = urlParams.get("args");
     if (id) {
         loadSubDetailsById(id);
     } else if (q) {

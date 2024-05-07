@@ -94,13 +94,13 @@ async function loadStatus() {
                     document.getElementById("subscriptions-30d").innerHTML = `${formatNumberShort(subscriptions30dChange)}</span>`;
                 }
 
-                const readersCurrent = data.telegramReaderChats.current;
+                const readersCurrent = data.subscribersActiveTelegram.current;
                 if (readersCurrent > 0) {
                     document.getElementById("readers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(readersCurrent)}</span>`;
                 } else {
                     document.getElementById("readers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readersCurrent)}</span>`;
                 }
-                const readers1hChange = readersCurrent - data.telegramReaderChats.past.hour;
+                const readers1hChange = readersCurrent - data.subscribersActiveTelegram.past.hour;
                 if (readers1hChange < 0) {
                     document.getElementById("readers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1hChange)}</span>`;
                 } else if (readers1hChange > 0) {
@@ -108,7 +108,7 @@ async function loadStatus() {
                 } else {
                     document.getElementById("readers-1h").innerHTML = `${formatNumberShort(readers1hChange)}</span>`;
                 }
-                const readers1dChange = readersCurrent - data.telegramReaderChats.past.day;
+                const readers1dChange = readersCurrent - data.subscribersActiveTelegram.past.day;
                 if (readers1dChange < 0) {
                     document.getElementById("readers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1dChange)}</span>`;
                 } else if (readers1dChange > 0) {
@@ -116,7 +116,7 @@ async function loadStatus() {
                 } else {
                     document.getElementById("readers-1d").innerHTML = `${formatNumberShort(readers1dChange)}</span>`;
                 }
-                const readers30dChange = readersCurrent - data.telegramReaderChats.past.month;
+                const readers30dChange = readersCurrent - data.subscribersActiveTelegram.past.month;
                 if (readers30dChange < 0) {
                     document.getElementById("readers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers30dChange)}</span>`;
                 } else if (readers30dChange > 0) {

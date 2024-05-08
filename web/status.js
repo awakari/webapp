@@ -159,7 +159,7 @@ async function loadStatus() {
                     document.getElementById("publishers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishersCurrent)}</span>`;
                 }
                 const publishers1hChange = publishersCurrent - data.uniquePublishers.past.hour;
-                if (publishers1hChange < 0) {
+                if (publishers1hChange < -10) {
                     document.getElementById("publishers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1hChange)}</span>`;
                 } else if (publishers1hChange > 0) {
                     document.getElementById("publishers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1hChange)}</span>`;
@@ -167,7 +167,7 @@ async function loadStatus() {
                     document.getElementById("publishers-1h").innerHTML = `${formatNumberShort(publishers1hChange)}</span>`;
                 }
                 const publishers1dChange = publishersCurrent - data.uniquePublishers.past.day;
-                if (publishers1dChange < 0) {
+                if (publishers1dChange < -20) {
                     document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1dChange)}</span>`;
                 } else if (publishers1dChange > 0) {
                     document.getElementById("publishers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1dChange)}</span>`;
@@ -175,7 +175,7 @@ async function loadStatus() {
                     document.getElementById("publishers-1d").innerHTML = `${formatNumberShort(publishers1dChange)}</span>`;
                 }
                 const publishers30dChange = publishersCurrent - data.uniquePublishers.past.month;
-                if (publishers30dChange < 0) {
+                if (publishers30dChange < -50) {
                     document.getElementById("publishers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers30dChange)}</span>`;
                 } else if (publishers30dChange > 0) {
                     document.getElementById("publishers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers30dChange)}</span>`;

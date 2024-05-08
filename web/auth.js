@@ -22,7 +22,9 @@ function handleAuthGoogle(response) {
     // Decode the JWT token
     const tokenDecoded = jwt_decode(tokenEncoded);
     localStorage.setItem(keyUserId, `${tokenDecoded.iss}/${tokenDecoded.sub}`);
+    localStorage.setItem(keyUserName, tokenDecoded.name);
     localStorage.setItem(keyAuthToken, tokenEncoded);
+    localStorage.setItem(keyAuthProvider, "Google")
     load();
 }
 

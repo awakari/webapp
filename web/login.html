@@ -34,10 +34,11 @@
     <link rel="stylesheet" href="spectre-icons.min.css">
     <link href="tailwind.output.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="autocomplete.css"/>
 
     <script src="base64.min.js"></script>
+    <script src="jwt-decode.js"></script>
     <script src="auth.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </head>
 <body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300" onload="load()">
@@ -71,37 +72,48 @@
 
     <div class="items-center justify-center flex flex-col space-y-2">
 
-        <!-- Telegram -->
-        <div class="justify-center">
-            <script async
-                    src="https://telegram.org/js/telegram-widget.js?22"
-                    data-telegram-login="AwakariBot"
-                    data-size="medium"
-                    data-onauth="handleAuthTelegram(user)"
-                    data-request-access="write"
-                    data-radius="4"
-                    data-userpic="false">
-            </script>
-        </div>
+        <p>Choose the results delivery method:</p>
 
-        <!-- Google -->
-        <!--                    <div class="justify-center">-->
-        <!--                        <div id="g_id_onload"-->
-        <!--                             data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"-->
-        <!--                             data-context="signin"-->
-        <!--                             data-ux_mode="popup"-->
-        <!--                             data-callback="handleAuthGoogle"-->
-        <!--                             data-auto_prompt="false">-->
-        <!--                        </div>-->
-        <!--                        <div class="g_id_signin"-->
-        <!--                             data-type="standard"-->
-        <!--                             data-shape="rectangular"-->
-        <!--                             data-theme="outline"-->
-        <!--                             data-text="signin_with"-->
-        <!--                             data-size="medium"-->
-        <!--                             data-logo_alignment="left">-->
-        <!--                        </div>-->
-        <!--                    </div>-->
+        <div class="justify-center grid grid-cols-3 items-center space-x-2 space-y-2">
+
+            <!-- Telegram -->
+            <div class="h-8 flex items-center pl-2">
+                <div class="text-right w-full">Telegram</div>
+            </div>
+            <div class="col-span-2">
+                <script async
+                        src="https://telegram.org/js/telegram-widget.js?22"
+                        data-telegram-login="AwakariBot"
+                        data-size="medium"
+                        data-onauth="handleAuthTelegram(user)"
+                        data-request-access="write"
+                        data-radius="4"
+                        data-userpic="false">
+                </script>
+            </div>
+
+            <!-- Google -->
+            <div class="h-8 flex items-center">
+                <div class="text-right w-full">RSS feed</div>
+            </div>
+            <div class="justify-center col-span-2">
+                <div id="g_id_onload"
+                     data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-callback="handleAuthGoogle"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="outline"
+                     data-text="signin_with"
+                     data-size="medium"
+                     data-logo_alignment="left">
+                </div>
+            </div>
+        </div>
 
         <div class="justify-center flex-col p-1">
             <p class="text-center text-sm text-neutral-700 dark:text-neutral-400">
@@ -124,7 +136,7 @@
                     <a href="privacy.html" class="text-blue-700 dark:text-slate-400">Privacy Policy</a>.
                 </span>
             </p>
-        </span>
+        </div>
     </div>
 
     <p class="text-lg p-1 text-center pt-4">

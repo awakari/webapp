@@ -110,6 +110,8 @@ _ = loadSubDetails();
 
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
+    document.getElementById("sub-feed-link").href = `https://awakari.com/v1/sub/feed/${id}`;
+    document.getElementById("sub-feed-link").style.display = "block";
     document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
     const headers = getAuthHeaders();

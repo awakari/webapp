@@ -425,8 +425,15 @@ function createSubscription() {
                 if (id) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";
                     document.getElementById("new-sub-id").innerText = id;
-                    if (userId && userId.startsWith("tg://user?id=")) {
-                        document.getElementById("sub-new-success-btn-tg").style.display = "block";
+                    if (userId) {
+                        if (userId.startsWith("tg://user?id=")) {
+                            document.getElementById("sub-new-success-btn-tg").style.display = "block";
+                        } else {
+                            document.getElementById("sub-new-success-btn-feed").style.display = "block";
+                            document.getElementById("sub-new-success-btn-feed").onclick = () => {
+                                window.open(`https://awakari.com/v1/sub/feed/${id}`, '_blank');
+                            }
+                        }
                     }
                 }
             })

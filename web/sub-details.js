@@ -112,17 +112,9 @@ function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
     document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
+    let subFeedLinkElement = document.getElementById("sub-feed-link");
+    subFeedLinkElement.href = `https://reader.awakari.com/v1/feeds/sub/${id}`;
     const headers = getAuthHeaders();
-    const authProvider = localStorage.getItem(keyAuthProvider);
-    switch (authProvider) {
-        case "Telegram":
-            break;
-        default:
-            let subFeedLinkElement = document.getElementById("sub-feed-link");
-            subFeedLinkElement.href = `https://awakari.com/v1/sub/feed/${id}`;
-            subFeedLinkElement.style.display = "block";
-            break;
-    }
     Subscriptions
         .fetch(id, headers)
         .then(resp => resp ? resp.json() : null)
@@ -441,7 +433,7 @@ function createSubscription() {
                         } else {
                             document.getElementById("sub-new-success-btn-feed").style.display = "block";
                             document.getElementById("sub-new-success-btn-feed").onclick = () => {
-                                window.open(`https://awakari.com/v1/sub/feed/${id}`, '_blank');
+                                window.open(`https://reader.awakari.com/v1/feeds/sub/${id}`, '_blank');
                             }
                         }
                     }

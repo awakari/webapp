@@ -112,9 +112,17 @@ function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
     document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
-    let subFeedLinkElement = document.getElementById("sub-feed-link");
-    subFeedLinkElement.href = `https://reader.awakari.com/v1/feeds/sub/${id}`;
     const headers = getAuthHeaders();
+    const authProvider = localStorage.getItem(keyAuthProvider);
+    switch (authProvider) {
+        case "Telegram":
+            break;
+        default:
+            let subFeedLinkElement = document.getElementById("sub-feed-link");
+            subFeedLinkElement.href = `https://reader.awakari.com/v1/feeds/sub/${id}`;
+            subFeedLinkElement.style.display = "block";
+            break;
+    }
     Subscriptions
         .fetch(id, headers)
         .then(resp => resp ? resp.json() : null)

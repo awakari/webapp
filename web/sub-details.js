@@ -119,7 +119,7 @@ function loadSubDetailsById(id) {
             break;
         default:
             let subFeedLinkElement = document.getElementById("sub-feed-link");
-            subFeedLinkElement.href = `https://reader.awakari.com/v1/feeds/sub/${id}`;
+            subFeedLinkElement.href = `https://reader.awakari.com/v1/sub/rss/${id}`;
             subFeedLinkElement.style.display = "block";
             break;
     }
@@ -441,7 +441,7 @@ function createSubscription() {
                         } else {
                             document.getElementById("sub-new-success-btn-feed").style.display = "block";
                             document.getElementById("sub-new-success-btn-feed").onclick = () => {
-                                window.open(`https://reader.awakari.com/v1/feeds/sub/${id}`, '_blank');
+                                window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
                             }
                         }
                     }

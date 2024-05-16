@@ -40,33 +40,6 @@ async function loadStatus() {
                     document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
                 }
 
-                const deliveryAvgMin1 = Math.floor(data.readRate.min5 * 60);
-                if (deliveryAvgMin1 > 0) {
-                    document.getElementById("delivered-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(deliveryAvgMin1))}</span>`;
-                } else if (deliveryAvgMin1 === 0) {
-                    document.getElementById("delivered-1m").innerHTML = `${formatNumberShort(Math.round(deliveryAvgMin1))}`;
-                } else {
-                    document.getElementById("delivered-1m").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(deliveryAvgMin1))}</span>`;
-                }
-                const deliveryAvgHour = data.readRate.hour;
-                if (deliveryAvgHour > 0) {
-                    document.getElementById("delivered-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(deliveryAvgHour * 3600))}</span>`;
-                } else {
-                    document.getElementById("delivered-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(deliveryAvgHour * 3600))}</span>`;
-                }
-                const deliveryAvgDay = data.readRate.day;
-                if (deliveryAvgDay > 0) {
-                    document.getElementById("delivered-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(deliveryAvgDay * 86400))}</span>`;
-                } else {
-                    document.getElementById("delivered-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(deliveryAvgDay * 86400))}</span>`;
-                }
-                const deliveryAvgMonth = data.readRate.month;
-                if (deliveryAvgMonth > 0) {
-                    document.getElementById("delivered-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(deliveryAvgMonth * 30*86400))}</span>`;
-                } else {
-                    document.getElementById("delivered-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(deliveryAvgMonth * 30*86400))}</span>`;
-                }
-
                 const evtQueueCurrent = data.queueLength.current;
                 if (evtQueueCurrent > 0) {
                     document.getElementById("evt-queue-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtQueueCurrent)}</span>`;
@@ -119,37 +92,6 @@ async function loadStatus() {
                     document.getElementById("subscriptions-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions30dChange)}</span>`;
                 } else {
                     document.getElementById("subscriptions-30d").innerHTML = `${formatNumberShort(subscriptions30dChange)}</span>`;
-                }
-
-                const readersCurrent = data.subscribersActiveTelegram.current;
-                if (readersCurrent > 0) {
-                    document.getElementById("readers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(readersCurrent)}</span>`;
-                } else {
-                    document.getElementById("readers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readersCurrent)}</span>`;
-                }
-                const readers1hChange = readersCurrent - data.subscribersActiveTelegram.past.hour;
-                if (readers1hChange < 0) {
-                    document.getElementById("readers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1hChange)}</span>`;
-                } else if (readers1hChange > 0) {
-                    document.getElementById("readers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers1hChange)}</span>`;
-                } else {
-                    document.getElementById("readers-1h").innerHTML = `${formatNumberShort(readers1hChange)}</span>`;
-                }
-                const readers1dChange = readersCurrent - data.subscribersActiveTelegram.past.day;
-                if (readers1dChange < 0) {
-                    document.getElementById("readers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers1dChange)}</span>`;
-                } else if (readers1dChange > 0) {
-                    document.getElementById("readers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers1dChange)}</span>`;
-                } else {
-                    document.getElementById("readers-1d").innerHTML = `${formatNumberShort(readers1dChange)}</span>`;
-                }
-                const readers30dChange = readersCurrent - data.subscribersActiveTelegram.past.month;
-                if (readers30dChange < 0) {
-                    document.getElementById("readers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(readers30dChange)}</span>`;
-                } else if (readers30dChange > 0) {
-                    document.getElementById("readers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(readers30dChange)}</span>`;
-                } else {
-                    document.getElementById("readers-30d").innerHTML = `${formatNumberShort(readers30dChange)}</span>`;
                 }
 
                 const publishersCurrent = data.uniquePublishers.current;

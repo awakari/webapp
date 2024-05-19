@@ -3,7 +3,14 @@ let EventAttrKeysTxt = [];
 
 async function loadAttributeTypes() {
     return Status
-        .fetchAttributeTypes()
+        .fetchAttributeTypes(getAuthHeaders())
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Request failed ${resp.status}`);
+            }
+            return resp.json();
+        })
         .then(data => {
             let typesByKey = null;
             if (data) {
@@ -63,6 +70,15 @@ function loadAttributeValues(key, input, headers) {
                     return addrs;
                 })
         default:
-            return Status.fetchAttributeValues(key, headers);
+            return Status
+                .fetchAttributeValues(key, headers)
+                .then(resp => {
+                    if (resp.ok) {
+                        return resp.json();
+                    } else {
+                        console.log(`Failed to load sample values for attribute ${name}, response status: ${resp.status}`);
+                    }
+                    return [];
+                });
     }
 }

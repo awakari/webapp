@@ -6,7 +6,6 @@ Usage.fetch = function (subj, headers) {
         headers: headers,
         cache: "no-cache",
     })
-        .then(resp => handleCookieAuth(resp, headers, (h) => Usage.fetch(subj, h)))
         .then(resp => {
             if (resp) {
                 if (resp.ok) {

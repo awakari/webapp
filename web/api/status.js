@@ -1,19 +1,13 @@
 const Status = {};
 
-Status.fetchAttributeTypes = function () {
+Status.fetchAttributeTypes = function (headers) {
     const optsReq = {
         method: "GET",
         cache: "default",
-        headers: getAuthHeaders(),
+        headers: headers,
     };
     return fetch(`/v1/status/attr/types`, optsReq)
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Request failed ${resp.status}`);
-            }
-            return resp.json();
-        });
+        .then(resp => handleCookieAuth(resp, headers, (h) => Status.fetchAttributeTypes(h)));
 }
 
 Status.fetchAttributeValues = function (name, headers) {
@@ -22,12 +16,5 @@ Status.fetchAttributeValues = function (name, headers) {
         cache: "default",
         headers: headers,
     })
-        .then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else {
-                console.log(`Failed to load sample values for attribute ${name}, response status: ${resp.status}`);
-            }
-            return [];
-        });
+        .then(resp => handleCookieAuth(resp, headers, (h) => Status.fetchAttributeValues(name, h)));
 }

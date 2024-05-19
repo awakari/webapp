@@ -45,12 +45,16 @@ function logout() {
     const userName = localStorage.getItem(keyUserName);
     const authProvider = localStorage.getItem(keyAuthProvider);
     if (confirm(`Confirm exit for user ${userName} (${authProvider})?`)) {
-        localStorage.removeItem(keyUserName);
-        localStorage.removeItem(keyUserId);
-        localStorage.removeItem(keyAuthToken);
-        localStorage.removeItem(keyAuthProvider);
-        window.location.assign("index.html");
+        logoutConfirmed();
     }
+}
+
+function logoutConfirmed() {
+    localStorage.removeItem(keyUserName);
+    localStorage.removeItem(keyUserId);
+    localStorage.removeItem(keyAuthToken);
+    localStorage.removeItem(keyAuthProvider);
+    window.location.assign("index.html");
 }
 
 function getAuthHeaders() {

@@ -10,7 +10,11 @@ function load() {
         const redirect = urlParams.get("redirect");
         if (redirect) {
             const args = urlParams.get("args");
-            window.location.assign(`${redirect}?args=${args}`)
+            if (args) {
+                window.location.assign(`${redirect}?args=${args}`)
+            } else {
+                window.location.assign(`${redirect}`)
+            }
         } else {
             window.location.assign('sub.html')
         }

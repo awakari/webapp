@@ -3,6 +3,7 @@ function handleResponseStatus(code) {
         case 401:
             logoutConfirmed();
             window.location.assign(`login.html?redirect=${window.location}`);
+            break;
         case 429:
             alert("Limit reached. Request to increase or wait.");
             break;

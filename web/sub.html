@@ -46,6 +46,7 @@
     <script>
         navigator.serviceWorker.register("sw.js");
     </script>
+    <script src="donation.js"></script>
 
 </head>
 <body class="bg-white dark:bg-gray-900" onload="load()">
@@ -127,7 +128,7 @@
                     </p>
                     <div class="flex justify-center">
                         <button type="button"
-                                onclick="window.open('https://t.me/donateawk/48', '_blank')"
+                                onclick="openDonationPage()"
                                 class="flex justify-center text-center w-25 h-6">
                             <span class="pt-1 px-2">&#10697; Donate</span>
                         </button>

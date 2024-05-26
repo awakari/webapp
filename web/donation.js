@@ -4,6 +4,9 @@ function openDonationPage() {
     if (userId) {
         const customerId = userId.replace(/[^a-zA-Z0-9]/g, '_');
         link += `?prefilled_email=${customerId}%40awakari.com`;
+    } else if (!confirm("You're not signed in. Donate anonymously?")) {
+        window.location.assign("login.html?redirect=donation.html");
+        return
     }
     window.open(link, '_blank');
 }

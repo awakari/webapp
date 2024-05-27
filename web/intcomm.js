@@ -27,7 +27,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
                             ce_integer: inc,
                         },
                         limit: {
-                            ce_integer: parseInt(document.getElementById("limit").value),
+                            ce_integer: parseInt(document.getElementById("limit").innerText),
                         },
                         action: {
                             ce_string: "request",
@@ -71,7 +71,7 @@ async function requestPublishingSourceDedicated(addr){
                         ce_string: reason,
                     },
                     limit: {
-                        ce_integer: parseInt(document.getElementById("limit").value),
+                        ce_integer: parseInt(document.getElementById("limit").innerText),
                     },
                     action: {
                         ce_string: "request",
@@ -119,7 +119,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
                             ce_integer: inc,
                         },
                         limit: {
-                            ce_integer: parseInt(document.getElementById("limit").value),
+                            ce_integer: parseInt(document.getElementById("limit").innerText),
                         },
                         action: {
                             ce_string: "request",

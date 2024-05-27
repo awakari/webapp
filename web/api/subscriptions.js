@@ -35,8 +35,9 @@ Subscriptions.delete = function (id, headers) {
         });
 }
 
-Subscriptions.createResponse = function (descr, enabled, expires, cond, headers) {
+Subscriptions.createResponse = function (descr, enabled, expires, cond, discoverSourcesFlag, headers) {
     const payload = {
+        discover: discoverSourcesFlag,
         description: descr,
         enabled: enabled,
         cond: cond,
@@ -52,9 +53,9 @@ Subscriptions.createResponse = function (descr, enabled, expires, cond, headers)
     return fetch(`/v1/sub`, optsReq);
 }
 
-Subscriptions.create = function (descr, enabled, expires, cond, headers) {
+Subscriptions.create = function (descr, enabled, expires, cond, discoverSourcesFlag, headers) {
     return Subscriptions
-        .createResponse(descr, enabled, expires, cond, headers)
+        .createResponse(descr, enabled, expires, cond, discoverSourcesFlag, headers)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -88,9 +89,10 @@ Subscriptions.fetch = function (id, headers) {
         })
 }
 
-Subscriptions.update = function (id, descr, enabled, expires, cond, headers) {
+Subscriptions.update = function (id, descr, enabled, expires, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: id,
+        discover: discoverSourcesFlag,
         description: descr,
         enabled: enabled,
         cond: cond,

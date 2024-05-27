@@ -395,10 +395,11 @@ function updateSubscription(id) {
         } else {
             expires = null;
         }
+        const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         Subscriptions
-            .update(id, descr, true, expires, cond, headers)
+            .update(id, descr, true, expires, cond, discoverSourcesFlag, headers)
             .then(updated => {
                 if (updated) {
                     alert(`Updated the subscription: ${id}`);
@@ -426,11 +427,12 @@ function createSubscription() {
             alert("Empty subscription description");
             return;
         }
+        const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         const userId = headers["X-Awakari-User-Id"];
         document.getElementById("wait").style.display = "block";
         Subscriptions
-            .create(descr, true, expires, cond, headers)
+            .create(descr, true, expires, cond, discoverSourcesFlag, headers)
             .then(id => {
                 if (id) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";

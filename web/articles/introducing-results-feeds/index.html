@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Introducing Results Feeds</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../tailwind.output.css" rel="stylesheet">
+    <link href="../../style.css" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Introducing Results Feeds",
+            "image": "https://awakari.com/articles/introducing-results-feeds/2.jpeg",
+            "author": "Andrei Kurilov",
+            "keywords": "search alerts feed reader prospective rss websub results",
+            "wordcount": "1400",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Awakari",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://awakari.com/logo-color.svg"
+                }
+            },
+            "url": "https://awakari.com/articles/search-in-the-future",
+            "datePublished": "2024-05-27",
+            "dateCreated": "2024-05-27",
+            "dateModified": "2024-05-27",
+            "description": "Awakari Search Alerts Introducing Results RSS Feeds"
+        }
+    </script>
+</head>
+<body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg dark:bg-gray-800">
+<main class="p-4 space-y-2 max-w-[960px]">
+
+    <div class="flex justify-center align-middle">
+        <h1 class="text-3xl font-semibold text-center place-self-center">Introducing Results Feeds</h1>
+    </div>
+
+    <div>
+        <h2 class="text-2xl font-semibold text-center py-2">Intro</h2>
+    </div>
+    <div>
+        <p class="p-1">&nbsp;&nbsp;
+            Awakari is real-time search alerts service.
+            It consumes updates from a wide variety of sources.
+            A user subscribes for updates defining one or more filters.
+            Then Awakari delivers only what is relevant to user's interests.
+            It's integrated with Telegram for authentication and notification functions.</p>
+    </div>
+
+    <div class="space-y-2">
+
+        <h2 class="text-2xl font-semibold text-center py-2">What's New</h2>
+
+        <h3 class="text-xl font-semibold text-center py-2">Login Methods</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+
+            <div>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    In addition to Telegram authentication, there's a Google authentication option introduced.
+                    Now it should be more convenient for the users who don't use Telegram.</p>
+                <p class="p-1">&nbsp;&nbsp;
+                    Note that the authentication method defines the results delivery method.
+                    When Telegram authentication the only option to receive results is in Telegram.
+                    When user wants to receive results in RSS feed format.</p>
+                <p class="p-1">&nbsp;&nbsp;
+                    Reminder: Awakari doesn't use any personal user data except the third-party identifier and name.
+                    So there is no place in Awakari for any user emails or passwords.</p>
+            </div>
+
+            <div class="justify-center">
+                <img src="0.jpeg" class="border border-slate-500"/>
+            </div>
+
+        </div>
+
+        <h3 class="text-xl font-semibold text-center py-2">Subscription Results Feed</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:space-x-4 space-y-2">
+
+            <div class="flex justify-end">
+                <img src="2024-05-27_16-45.png" class="border border-slate-500"/>
+            </div>
+
+            <div>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    After a user that logged in using Google created a subscription they can see the link to an RSS feed.
+                    This feed will contain the last results for this subscription.
+                    After some time the results are being dropped from the feed (currently the retention period is 24 hours).</p>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    There's still area of improvement, for example, handling the cache.
+                    Nevertheless, RSS-lovers are now able to use Awakari's rich sources discovery and filtering
+                    features for their needs.</p>
+
+            </div>
+
+            <div>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    As far as Awakari is an event-driven system,
+                    the RSS feed response headers always contain a link to WebSub hubs.
+                    So everyone who has an own WebSub-capable webhook can receive the results being pushed directly.</p>
+
+                <p class="p-1">&nbsp;&nbsp;
+                    It's easy to find a link to results feed for existing subscriptions.
+                    Just click on the subscription and find the orange feed icon.
+                    Then open your favorite RSS reader application and paste the feed link there.</p>
+            </div>
+
+            <div class="flex justify-start">
+                <img src="2.jpeg" class="border border-slate-500"/>
+            </div>
+
+
+        </div>
+
+        <h2 class="text-2xl font-semibold text-center py-2">What's Next</h2>
+
+        <p class="p-1">&nbsp;&nbsp;
+            A complete REST API for any third-party client integrations is coming soon.
+            So everyone who wants to integrate own client applications or bridges will be welcome.</p>
+
+        <div class="text-right">
+            <p class="text-slate-500 text-lg text-bottom">- Andrei Kurilov, 2024</p>
+        </div>
+
+    </div>
+
+</main>
+</body>
+</html>

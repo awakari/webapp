@@ -18,6 +18,11 @@
         <priority>0.90</priority>
     </url>
     <url>
+        <loc>https://awakari.com/articles/introducing-results-feeds/index.html</loc>
+        <lastmod>2024-05-27T18:21:38+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
         <loc>https://awakari.com/articles/search-in-the-future/index.html</loc>
         <lastmod>2024-04-22T18:21:38+00:00</lastmod>
         <priority>0.80</priority>

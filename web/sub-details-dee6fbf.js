@@ -162,7 +162,7 @@ function loadSubDetailsByExample(exampleName) {
         case "cat-images": {
             document.getElementById("description").value = "Cat Images";
             addConditionText(false, "","cat gato قطة katze кошка chatte katt kissa köttur", false);
-            addConditionText(false, "imageurl", "http", false)
+            addConditionText(false, "imageurl", "http https", false)
             break;
         }
         case "cheap-iphone-alert": {

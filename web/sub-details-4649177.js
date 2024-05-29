@@ -162,7 +162,8 @@ function loadSubDetailsByExample(exampleName) {
         case "cat-images": {
             document.getElementById("description").value = "Cat Images";
             addConditionText(false, "","cat gato قطة katze кошка chatte katt kissa köttur", false);
-            addConditionText(false, "imageurl", "http https", false)
+            addConditionText(false, "imageurl", "http https", false);
+            document.getElementById("sub-discover-sources").checked = false;
             break;
         }
         case "cheap-iphone-alert": {
@@ -175,6 +176,7 @@ function loadSubDetailsByExample(exampleName) {
         case "deutsch": {
             document.getElementById("description").value = "Deutsch";
             addConditionText(false, "language","de", true);
+            document.getElementById("sub-discover-sources").checked = false;
             break;
         }
         case "exclude-topics": {
@@ -219,6 +221,7 @@ function loadSubDetailsByExample(exampleName) {
         case "specific-source": {
             document.getElementById("description").value = "From r/Science only";
             addConditionText(false, "source", "https://www.reddit.com/r/science/.rss", true);
+            document.getElementById("sub-discover-sources").checked = false;
             break;
         }
     }

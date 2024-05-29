@@ -3,9 +3,9 @@ const countCondsMax = 6;
 
 const templateCondHeader = (label, idx, countConds, isNot, key) => `
                 <fieldset class="flex p-2">
-                    <legend class="flex space-x-2 px-1">
-                        <span class="w-14">${label}</span>
-                        <label class="flex align-middle">
+                    <legend class="flex space-x-1 w-full">
+                        <span class="mx-2">${label}</span>
+                        <label class="flex align-middle space-x-1">
                             <input type="checkbox" 
                                    class="h-4 w-4 sub-cond-not" 
                                    style="margin-right: 0.125rem"
@@ -14,25 +14,26 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    ${isNot ? 'checked="checked"' : ''}/>
                             <span>Not</span>
                         </label>
+                        <hr class="grow mt-2" style="height: 1px"/>
                         <svg fill="currentColor"
                              width="16px"
                              height="16px"
                              viewBox="-3.5 0 19 19"
                              xmlns="http://www.w3.org/2000/svg"
-                             class="cf-icon-svg text-stone-500 sub-cond-delete-button"
+                             class="cf-icon-svg text-stone-500 sub-cond-delete-button place-self-end"
                              style="${countConds > 1 ? 'display: block': 'display: none'}"
                              onclick="deleteCondition(${idx})">
                             <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/>
                         </svg>
                     </legend>
                     <div class="flex space-x-2">
-                        <fieldset class="px-1 h-9 autocomplete ${label === "Keywords"? 'autocomplete-key-txt' : 'autocomplete-key-int' }">
+                        <fieldset class="px-1 h-9 autocomplete ${label === "Text"? 'autocomplete-key-txt' : 'autocomplete-key-int' }">
                             <legend class="px-1">Attribute</legend>
                             <input type="text"
                                    list="attrKeys${idx}" 
                                    class="border-none w-24 sm:w-32 autocomplete-input" 
                                    style="height: 18px; background-color: inherit"
-                                   ${label === "Keywords"? 'placeholder="empty: all"' : 'placeholder="required"'}
+                                   ${label === "Text"? 'placeholder="all"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value)"
                                    value="${key}"/>
@@ -47,11 +48,11 @@ const condFooter= `
 `;
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
-    templateCondHeader("Keywords", idx, countConds, isNot, key) + `
+    templateCondHeader("Text", idx, countConds, isNot, key) + `
                         <fieldset class="px-1 h-9 tc">
-                            <legend class="flex px-1 space-x-1">
+                            <legend class="flex px-1 space-x-2">
                                 <span>Any of keywords</span>
-                                <label class="flex">
+                                <label class="flex space-x-1">
                                     <input type="checkbox" 
                                            class="h-4 w-4" 
                                            style="margin-right: 0.125rem"
@@ -97,8 +98,11 @@ async function loadSubDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     const q = urlParams.get("args");
+    const example = urlParams.get("example");
     if (id) {
         loadSubDetailsById(id);
+    } else if (example) {
+        loadSubDetailsByExample(example);
     } else if (q) {
         loadSubDetailsByQuery(q);
     } else {
@@ -151,32 +155,102 @@ function loadSubDetailsById(id) {
         });
 }
 
+function loadSubDetailsByExample(exampleName) {
+    document.getElementById("area-id").style.display = "none";
+    document.getElementById("button-delete").style.display = "none";
+    switch (exampleName) {
+        case "cat-images": {
+            document.getElementById("description").value = "Cat Images";
+            addConditionText(false, "","cat gato قطة katze кошка chatte katt kissa köttur", false);
+            addConditionText(false, "imageurl", "http", false)
+            break;
+        }
+        case "cheap-iphone-alert": {
+            document.getElementById("description").value = "Cheap iPhone alert";
+            addConditionText(false, "","iphone", false);
+            addConditionNumber(false, "offersprice", 4, 1000);
+            addConditionText(false, "offerspricecurrency","USD", true);
+            break;
+        }
+        case "deutsch": {
+            document.getElementById("description").value = "Deutsch";
+            addConditionText(false, "language","de", true);
+            break;
+        }
+        case "exclude-topics": {
+            document.getElementById("description").value = "Tech News: not Apple neither Microsoft";
+            addConditionText(false, "", "tech news", false);
+            addConditionText(true, "", "apple microsoft", false);
+            break;
+        }
+        case "job-alert": {
+            document.getElementById("description").value = "Javascript Job alert";
+            addConditionText(false, "", "job", false);
+            addConditionText(false, "", "javascript", false);
+            addConditionText(true, "", "java", true);
+            break;
+        }
+        case "mentions-of-me": {
+            document.getElementById("description").value = "Mentions of Me";
+            const userName = localStorage.getItem(keyUserName);
+            let userNameParts = [];
+            if (userName) {
+                userNameParts = userName.split(/\s+/);
+            }
+            switch (userNameParts.length) {
+                case 0: {
+                    addConditionText(false, "", "first name", false);
+                    addConditionText(false, "", "last name", false);
+                    break;
+                }
+                case 1: {
+                    addConditionText(false, "", userNameParts[0], false);
+                    addConditionText(false, "", "last name", false);
+                    break;
+                }
+                default: {
+                    for (const p of userNameParts) {
+                        addConditionText(false, "", p, false);
+                    }
+                }
+            }
+            break;
+        }
+        case "specific-source": {
+            document.getElementById("description").value = "From r/Science only";
+            addConditionText(false, "source", "https://www.reddit.com/r/science/.rss", true);
+            break;
+        }
+    }
+    displayConditions();
+}
+
 function loadSubDetailsByQuery(q) {
     document.getElementById("description").value = q;
     document.getElementById("area-id").style.display = "none";
     document.getElementById("button-delete").style.display = "none";
-    addConditionText(q);
+    addConditionText(false, "", q, false);
     displayConditions();
 }
 
-function addConditionText(q) {
+function addConditionText(not, k, term, exact) {
     conds.push({
-        "not": false,
+        "not": not,
         "tc": {
-            "key": "",
-            "term": q,
-            "exact": false,
+            "key": k,
+            "term": term,
+            "exact": exact,
         }
     });
 }
 
-function addConditionNumber() {
+function addConditionNumber(not, k, op, v) {
     conds.push({
-        "not": false,
+        "not": not,
         "nc": {
-            "key": "offersprice",
-            "op": 3, // =
-            "val": 0,
+            "key": k,
+            "op": op,
+            "val": v,
         }
     });
 }
@@ -216,7 +290,7 @@ function setConditionAttrName(idx, name) {
         } else if (cond.hasOwnProperty("nc")) {
             cond.nc.key = name;
         } else {
-            console.error(`Target condition #${idx} is not a keywords or a number condition`);
+            console.error(`Target condition #${idx} is not a text or a number condition`);
         }
     }
 }
@@ -244,7 +318,7 @@ function setConditionTextExact(idx, exact) {
         if (cond.hasOwnProperty("tc")) {
             cond.tc.exact = exact;
         } else {
-            console.error(`Target condition #${idx} is not a keywords condition`);
+            console.error(`Target condition #${idx} is not a text condition`);
         }
     }
 }
@@ -264,7 +338,7 @@ function setConditionTextTerms(idx, terms) {
                 }
             });
         } else {
-            console.error(`Target condition #${idx} is not a keywords condition`);
+            console.error(`Target condition #${idx} is not a text condition`);
         }
     }
 }
@@ -346,11 +420,11 @@ function displayConditions() {
 
 document
     .getElementById("button-add-cond-txt")
-    .addEventListener("click", (_) => { addConditionText(""); displayConditions(); });
+    .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(); });
 
 document
     .getElementById("button-add-cond-num")
-    .addEventListener("click", (_) => { addConditionNumber(); displayConditions(); });
+    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 3, 0); displayConditions(); });
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;

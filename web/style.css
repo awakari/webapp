@@ -39,10 +39,14 @@ input[type=date] {
     border-color: #94a3b8;
     border-width: 1px;
 }
-textarea, select, fieldset  {
+textarea, select, fieldset {
     border-color: #94a3b8;
     border-width: 1px;
     outline: none;
+}
+hr {
+    border-color: #94a3b8;
+    height: 1px;
 }
 @media (prefers-color-scheme: dark) {
     input[type=text] {
@@ -85,7 +89,9 @@ textarea, select, fieldset  {
         outline: none;
         color: #94a3b8;
     }
-
+    hr {
+        border-color: #334155;
+    }
 }
 button[type=button] {
     border-width: 1px;
@@ -94,6 +100,7 @@ button[type=button] {
     color: #3b82f6;
     height: 1.5rem;
     padding: 0 0.25rem;
+    outline: none;
 }
 button[type=button]:hover {
     background-color: #bfdbfe;
@@ -279,12 +286,6 @@ button[type=button].attr {
     }
 }
 
-/* Dropdown Button */
-button[type=button].dropbtn {
-    height: 2rem;
-    padding-left: 1rem;
-}
-
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
@@ -293,13 +294,22 @@ button[type=button].dropbtn {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    font-size: large;
     display: none;
     position: absolute;
-    background-color: var(--tg-theme-bg-color);
-    min-width: 320px;
-    box-shadow: 0px 8px 16px 0px var(--tg-theme-bg-color);
+    margin-top: -1px;
+    box-shadow: 0px 4px 8px 0px rgba(59,130,246,0.25);
     z-index: 1;
+    border-width: 1px;
+    border-color: #3b82f6;
+    border-radius: 0.25rem;
+    color: #3b82f6;
+    background-color: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+    .dropdown-content {
+        background-color: #111827;
+        box-shadow: 0px 4px 8px 0px rgba(30,58,138,0.25);
+    }
 }
 
 .dropdown-content fieldset {

@@ -35,6 +35,7 @@
 <div class="m-1 flex-1 flex flex-col space-y-1">
     <div class="flex justify-center m-1">
         <form class="max-w-[480px] grow">
+
             <div class="flex mb-4" id="area-id">
                 <label for="id" style="margin-top: 0.125rem">Id</label>
                 <input type="text" readonly="readonly" id="id" class="ml-2">
@@ -42,6 +43,7 @@
                     <img class="ml-2" src="feed-icon.svg" width="20" height="20" alt="Subscription feed link"/>
                 </a>
             </div>
+
             <div class="flex flex-col space-y-3">
 
                 <div class="flex">
@@ -60,7 +62,7 @@
                             Expires
                             <span class="tooltiptext">
                                 <p>Local time when the subscription expires.</p>
-                                <p>Make it empty for a never expiring subscription.</p>
+                                <p>The subscription never expires when it's empty.</p>
                             </span>
                         </span>
                     </span>
@@ -72,13 +74,15 @@
                         <span class="tooltip">
                             Conditions
                             <span class="tooltiptext">
-                                <p>A message should match all.</p>
-                                <p>Please define at least one.</p>
+                                <p>Message matching conditions.</p>
+                                <p>Choose a condition type: text or number.</p>
+                                <p>At least one is required.</p>
+                                <p>A message should match all when multiple.</p>
                             </span>
                         </span>
                     </span>
                     <button id="button-add-cond-txt" type="button" class="flex justify-center text-center w-[100px]">
-                        <span style="font-size: large; margin-top: 0.175rem"><b>+</b></span>&nbsp;<span class="mt-1">Keywords</span>
+                        <span style="font-size: large; margin-top: 0.175rem"><b>+</b></span>&nbsp;<span class="mt-1">Text</span>
                     </button>
                     <button id="button-add-cond-num" type="button" class="ml-3 flex justify-center text-center w-[100px]">
                         <span style="font-size: large; margin-top: 0.175rem"><b>+</b></span>&nbsp;<span class="mt-1">Number</span>

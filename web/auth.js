@@ -34,7 +34,7 @@ function handleAuthGoogle(response) {
 
 function handleAuthTelegram(user) {
     localStorage.setItem(keyUserId, `tg://user?id=${user.id}`);
-    localStorage.setItem(keyUserName, user.first_name);
+    localStorage.setItem(keyUserName, `${user.first_name} ${user.last_name}`);
     localStorage.setItem(keyAuthProvider, "Telegram");
     const token = Base64.encode(JSON.stringify(user));
     localStorage.setItem(keyAuthToken, token);

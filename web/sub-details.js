@@ -26,14 +26,16 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                             <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/>
                         </svg>
                     </legend>
-                    <div class="flex space-x-2">
-                        <fieldset class="px-1 h-9 autocomplete ${label === "Text"? 'autocomplete-key-txt' : 'autocomplete-key-int' }">
-                            <legend class="px-1">Attribute</legend>
+                    <div class="flex space-x-2 w-full">
+                        <fieldset class="px-1 h-10 autocomplete ${label === "Text"? 'autocomplete-key-txt' : 'autocomplete-key-int' }">
+                            <legend class="px-1 h-5">
+                                <div style="margin-top: 2px">Attribute</div>
+                            </legend>
                             <input type="text"
                                    list="attrKeys${idx}" 
                                    class="border-none w-24 sm:w-32 autocomplete-input" 
-                                   style="height: 18px; background-color: inherit"
-                                   ${label === "Text"? 'placeholder="all"' : 'placeholder="required"'}
+                                   style="height: 20px; background-color: inherit"
+                                   ${label === "Text"? 'placeholder="any"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value)"
                                    value="${key}"/>
@@ -49,23 +51,21 @@ const condFooter= `
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
     templateCondHeader("Text", idx, countConds, isNot, key) + `
-                        <fieldset class="px-1 h-9 tc">
-                            <legend class="flex px-1 space-x-2">
-                                <span>Any of keywords</span>
-                                <label class="flex space-x-1">
-                                    <input type="checkbox" 
-                                           class="h-4 w-4" 
-                                           style="margin-right: 0.125rem"
-                                           onchange="setConditionTextExact(${idx}, this.checked)"
-                                           ${isExact ? 'checked="checked"' : '' }/>
-                                    <span>Exact</span>
-                                </label>
+                        <fieldset class="px-1 tc h-10 w-full">
+                            <legend class="flex px-1">
+                                <select class="rounded-sm w-20 h-5 border-none"
+                                        onchange="setConditionTextExact(${idx}, this.value === '2')">
+                                    <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains</option>
+                                    <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals</option>
+                                </select>
                             </legend>
                             <input type="text" 
+                                   id="attrValTxtInput${idx}"
                                    list="attrValTxt${idx}"
-                                   class="border-none min-w-[200px] sm:w-68" 
-                                   style="height: 18px; background-color: inherit"
+                                   class="border-none w-full" 
+                                   style="height: 20px; background-color: inherit"
                                    oninput="setConditionTextTerms(${idx}, this.value)"
+                                   placeholder="${isExact? 'completely and exactly' : 'any of space-separated words'}"
                                    value="${terms}"/>
                             <datalist id="attrValTxt${idx}"></datalist>
                         </fieldset>` +
@@ -73,24 +73,23 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
 
 const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
     templateCondHeader("Number", idx, countConds, isNot, key) + `
-                        <div class="flex space-x-2 nc">
-                            <select class="rounded-sm w-10 px-1 mt-4 h-5 border-none"
-                                    onchange="setConditionNumberOp(${idx}, this.value)">
-                                <option value="1" ${op === 1 ? 'selected="selected"' : ''}>&gt;</option>
-                                <option value="2" ${op === 2 ? 'selected="selected"' : ''}>&ge;</option>
-                                <option value="3" ${op === 3 ? 'selected="selected"' : ''}>=</option>
-                                <option value="4" ${op === 4 ? 'selected="selected"' : ''}>&le;</option>
-                                <option value="5" ${op === 5 ? 'selected="selected"' : ''}>&lt;</option>
-                            </select>
-                            <fieldset class="px-1 h-9">
-                                <legend class="px-1">Number</legend>
-                                <input type="number"
-                                       class="border-none w-[152px]"
-                                       style="height: 18px; background-color: inherit"
-                                       oninput="setConditionNumberValue(${idx}, this.value)"
-                                       value="${value}"/>
-                            </fieldset>
-                        </div>` +
+                        <fieldset class="px-1 nc h-10 w-full">
+                            <legend class="flex px-1">
+                                <select class="rounded-sm w-10 px-1 h-5 border-none"
+                                        onchange="setConditionNumberOp(${idx}, this.value)">
+                                    <option value="1" ${op === 1 ? 'selected="selected"' : ''}>&gt;</option>
+                                    <option value="2" ${op === 2 ? 'selected="selected"' : ''}>&ge;</option>
+                                    <option value="3" ${op === 3 ? 'selected="selected"' : ''}>=</option>
+                                    <option value="4" ${op === 4 ? 'selected="selected"' : ''}>&le;</option>
+                                    <option value="5" ${op === 5 ? 'selected="selected"' : ''}>&lt;</option>
+                                </select>                                        
+                            </legend>
+                            <input type="number"
+                                   class="border-none w-full"
+                                   style="height: 20px; background-color: inherit"
+                                   oninput="setConditionNumberValue(${idx}, this.value)"
+                                   value="${value}"/>
+                        </fieldset>` +
     condFooter;
 
 async function loadSubDetails() {
@@ -189,7 +188,7 @@ function loadSubDetailsByExample(exampleName) {
             document.getElementById("description").value = "Javascript Job alert";
             addConditionText(false, "", "job", false);
             addConditionText(false, "", "javascript", false);
-            addConditionText(true, "", "java", true);
+            addConditionText(true, "", "java", false);
             break;
         }
         case "mentions-of-me": {
@@ -320,6 +319,11 @@ function setConditionTextExact(idx, exact) {
         const cond = conds[idx];
         if (cond.hasOwnProperty("tc")) {
             cond.tc.exact = exact;
+            if (exact) {
+                document.getElementById(`attrValTxtInput${idx}`).placeholder = "completely and exactly";
+            } else {
+                document.getElementById(`attrValTxtInput${idx}`).placeholder = "any of space-separated words";
+            }
         } else {
             console.error(`Target condition #${idx} is not a text condition`);
         }

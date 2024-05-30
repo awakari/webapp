@@ -172,9 +172,9 @@ function loadSubDetailsByExample(exampleName) {
             addConditionText(false, "offerspricecurrency","USD", true);
             break;
         }
-        case "deutsch": {
-            document.getElementById("description").value = "Deutsch";
-            addConditionText(false, "language","de", true);
+        case "japanese": {
+            document.getElementById("description").value = "In Japanese language";
+            addConditionText(false, "language","ja 'ja-JP'", false);
             document.getElementById("sub-discover-sources").checked = false;
             break;
         }

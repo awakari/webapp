@@ -3,6 +3,13 @@ function loadStatusWithRetry(headers) {
         .then(resp => handleCookieAuth(resp, headers, (h) => loadStatusWithRetry(h)))
 }
 
+const templateSrcPopular = (share, url) => `
+    <div class="space-x-1 truncate">
+        <span>${share} %</span>
+        <a href="${url}" class="text-blue-500">${url}</a>
+    </div>
+`
+
 async function loadStatus() {
     return loadStatusWithRetry({})
         .then(resp => {
@@ -125,6 +132,16 @@ async function loadStatus() {
                     document.getElementById("publishers-30d").innerHTML = `${formatNumberShort(publishers30dChange)}</span>`;
                 }
 
+                const elemPopSrcs = document.getElementById("most-popular-sources");
+                Object
+                    .entries(data.sourcesMostRead)
+                    .sort((a, b) => b[1].day - a[1].day)
+                    .slice(0, 5)
+                    .forEach(e => {
+                        const share = (100 * e[1].day).toFixed(1);
+                        elemPopSrcs.innerHTML += templateSrcPopular(share, e[0]);
+                    })
+
             } else {
                 throw new Error("Empty status response");
             }
@@ -133,6 +150,7 @@ async function loadStatus() {
             console.log(err);
             return "";
         });
+
 }
 
 function formatNumberShort(number) {

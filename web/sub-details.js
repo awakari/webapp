@@ -174,7 +174,7 @@ function loadSubDetailsByExample(exampleName) {
         }
         case "japanese": {
             document.getElementById("description").value = "In Japanese language";
-            addConditionText(false, "language","ja 'ja-JP'", false);
+            addConditionText(false, "language","ja ja-JP", false);
             document.getElementById("sub-discover-sources").checked = false;
             break;
         }

@@ -47,6 +47,31 @@ async function loadStatus() {
                     document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
                 }
 
+                const readRateAvgMin1 = Math.floor(data.readRate.min5 * 60);
+                if (readRateAvgMin1 > 0) {
+                    document.getElementById("read-last-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgMin1))}</span>`;
+                } else {
+                    document.getElementById("read-last-1m").innerHTML = `${formatNumberShort(Math.round(readRateAvgMin1))}`;
+                }
+                const readRateAvgHour = data.readRate.hour;
+                if (readRateAvgHour > 0) {
+                    document.getElementById("read-last-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgHour * 3600))}</span>`;
+                } else {
+                    document.getElementById("read-last-1h").innerHTML = `${formatNumberShort(Math.round(readRateAvgHour * 3600))}`;
+                }
+                const readRateAvgDay = data.readRate.day;
+                if (readRateAvgDay > 0) {
+                    document.getElementById("read-last-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgDay * 86400))}</span>`;
+                } else {
+                    document.getElementById("read-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgDay * 86400))}</span>`;
+                }
+                const readRateAvgMonth = data.readRate.month;
+                if (readRateAvgMonth > 0) {
+                    document.getElementById("read-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
+                } else {
+                    document.getElementById("read-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
+                }
+
                 const evtQueueCurrent = data.queueLength.current;
                 if (evtQueueCurrent > 0) {
                     document.getElementById("evt-queue-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtQueueCurrent)}</span>`;

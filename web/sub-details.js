@@ -115,7 +115,7 @@ const srcPageLimitPerType = 10;
 
 const templateDiscoveredSrc = (addr, type) => `
 <p class="w-[334px] sm:w-[624px] truncate">
-    <a class="w-full truncate text-blue-500" target="_blank" href="pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}">${addr}</a>
+    <a class="w-full truncate text-blue-500" href="pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}">${addr}</a>
 </p>`;
 
 function loadSubDetailsById(id) {

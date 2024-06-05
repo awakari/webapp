@@ -113,9 +113,9 @@ _ = loadSubDetails();
 
 const srcPageLimitPerType = 10;
 
-const templateDiscoveredSrc = (name, url) => `
+const templateDiscoveredSrc = (addr, type) => `
 <p class="w-[334px] sm:w-[624px] truncate">
-    <a class="w-full truncate text-blue-500" target="_blank" href="${url}">${name}</a>
+    <a class="w-full truncate text-blue-500" target="_blank" href="pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}">${addr}</a>
 </p>`;
 
 function loadSubDetailsById(id) {
@@ -174,7 +174,7 @@ function loadSubDetailsById(id) {
         .then(data => {
             if (data) {
                 for (const addr of data) {
-                    srcListElement.innerHTML += templateDiscoveredSrc(addr, addr);
+                    srcListElement.innerHTML += templateDiscoveredSrc(addr, "apub");
                 }
             }
         });
@@ -190,7 +190,7 @@ function loadSubDetailsById(id) {
         .then(data => {
             if (data) {
                 for (const addr of data) {
-                    srcListElement.innerHTML += templateDiscoveredSrc(addr, addr);
+                    srcListElement.innerHTML += templateDiscoveredSrc(addr, "feed");
                 }
             }
         });
@@ -206,9 +206,7 @@ function loadSubDetailsById(id) {
         .then(data => {
             if (data) {
                 for (const addr of data) {
-                    const chName = data.addr.slice(1);
-                    const url = `https://t.me/${chName}`;
-                    srcListElement.innerHTML += templateDiscoveredSrc(chName, url);
+                    srcListElement.innerHTML += templateDiscoveredSrc(addr, "tgch");
                 }
             }
         });

@@ -111,10 +111,18 @@ async function loadSubDetails() {
 
 _ = loadSubDetails();
 
+const srcPageLimitPerType = 10;
+
+const templateDiscoveredSrc = (name, url) => `
+<p class="w-[334px] sm:w-[624px] truncate">
+    <a class="w-full truncate text-blue-500" target="_blank" href="${url}">${name}</a>
+</p>`;
+
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
     document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
+    document.getElementById("sub-discovered-sources").style.display = "block";
     const headers = getAuthHeaders();
     const authProvider = localStorage.getItem(keyAuthProvider);
     switch (authProvider) {
@@ -142,7 +150,7 @@ function loadSubDetailsById(id) {
                     conds.push(cond);
                 } else if (cond.hasOwnProperty("gc")) {
                     const children = cond.gc.group;
-                    for (let i = 0; i < children.length; i ++) {
+                    for (let i = 0; i < children.length; i++) {
                         conds.push(children[i]);
                     }
                 }
@@ -151,6 +159,58 @@ function loadSubDetailsById(id) {
         .finally(() => {
             document.getElementById("wait").style.display = "none";
             displayConditions();
+        });
+
+    const srcListElement = document.getElementById("sub-discovered-sources");
+    Sources
+        .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
+        .then(resp => {
+            if (!resp.ok) {
+                handleResponseStatus(resp.status);
+                return null;
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                for (const addr of data) {
+                    srcListElement.innerHTML += templateDiscoveredSrc(addr, addr);
+                }
+            }
+        });
+    Sources
+        .fetchListPageResponse("feed", false, "ASC", srcPageLimitPerType, "", headers, id)
+        .then(resp => {
+            if (!resp.ok) {
+                handleResponseStatus(resp.status);
+                return null;
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                for (const addr of data) {
+                    srcListElement.innerHTML += templateDiscoveredSrc(addr, addr);
+                }
+            }
+        });
+    Sources
+        .fetchListPageResponse("tgch", false, "ASC", srcPageLimitPerType, "", headers, id)
+        .then(resp => {
+            if (!resp.ok) {
+                handleResponseStatus(resp.status);
+                return null;
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                for (const addr of data) {
+                    const chName = data.addr.slice(1);
+                    const url = `https://t.me/${chName}`;
+                    srcListElement.innerHTML += templateDiscoveredSrc(chName, url);
+                }
+            }
         });
 }
 

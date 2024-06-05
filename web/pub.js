@@ -95,7 +95,7 @@ function loadSources(cursor, filter, srcType, own) {
 
     document.getElementById("wait").style.display = "block";
     Sources
-        .fetchListPageResponse(srcType, own, order, pageLimit, encodeURIComponent(filter), headers)
+        .fetchListPageResponse(srcType, own, order, pageLimit, encodeURIComponent(filter), headers, "")
         .then(resp => {
             if (!resp.ok) {
                 handleResponseStatus(resp.status);

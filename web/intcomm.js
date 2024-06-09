@@ -43,8 +43,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
                 }
                 const headers = getAuthHeaders();
                 if (await Events.publishInternal(payload, headers)) {
-                    document.getElementById("request-increase-success-dialog").style.display = "block";
-                    document.getElementById("request-id").innerText = payload.id;
+                    openDonationPage();
                 }
             } else {
                 alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
@@ -87,9 +86,7 @@ async function requestPublishingSourceDedicated(addr){
             }
             const headers = getAuthHeaders();
             if (await Events.publishInternal(payload, headers)) {
-                document.getElementById("request-increase-success-dialog").style.display = "block";
-                document.getElementById("request-id").innerText = payload.id;
-                document.getElementById("pub-src-nominate").disabled = true;
+                openDonationPage();
             }
         }
     } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
@@ -135,8 +132,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
                 }
                 const headers = getAuthHeaders();
                 if (await Events.publishInternal(payload, headers)) {
-                    document.getElementById("request-increase-success-dialog").style.display = "block";
-                    document.getElementById("request-id").innerText = payload.id;
+                    openDonationPage();
                 }
             } else {
                 alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);

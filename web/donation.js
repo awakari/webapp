@@ -8,5 +8,5 @@ function openDonationPage() {
         window.location.assign("login.html?redirect=donation.html");
         return
     }
-    window.open(link, '_blank');
+    window.location.assign(link);
 }

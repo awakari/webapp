@@ -162,22 +162,22 @@ function loadSubDetailsById(id) {
         });
 
     const srcListElement = document.getElementById("sub-discovered-sources");
-    // Sources
-    //     .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
-    //     .then(resp => {
-    //         if (!resp.ok) {
-    //             handleResponseStatus(resp.status);
-    //             return null;
-    //         }
-    //         return resp.json();
-    //     })
-    //     .then(data => {
-    //         if (data) {
-    //             for (const addr of data) {
-    //                 srcListElement.innerHTML += templateDiscoveredSrc(addr, "apub");
-    //             }
-    //         }
-    //     });
+    Sources
+        .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
+        .then(resp => {
+            if (!resp.ok) {
+                handleResponseStatus(resp.status);
+                return null;
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                for (const addr of data) {
+                    srcListElement.innerHTML += templateDiscoveredSrc(addr, "apub");
+                }
+            }
+        });
     Sources
         .fetchListPageResponse("feed", false, "ASC", srcPageLimitPerType, "", headers, id)
         .then(resp => {

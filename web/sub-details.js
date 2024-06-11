@@ -613,7 +613,7 @@ function getRootCondition() {
             }
         }
     } else {
-        alert("Subscription should have at least 1 condition");
+        alert("Interest should have at least 1 condition");
     }
     return cond;
 }

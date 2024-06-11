@@ -120,7 +120,7 @@
                     "@type": "Offer",
                     "availability": "https://schema.org/OnlineOnly",
                     "name": "Public UI",
-                    "description": "Easy way to manage publishing and subscriptions. Best for personal use. Free to use. Adding own sources.",
+                    "description": "Easy way to manage publishing and interests. Best for personal use. Free to use. Adding own sources.",
                     "price": 0,
                     "url": "https://awakari.com"
                 },
@@ -196,7 +196,7 @@
                                    required="required"
                                    type="search"
                                    role="searchbox"
-                                   placeholder="Search..."
+                                   placeholder="Discover..."
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
@@ -228,11 +228,9 @@
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
                        href="#about">About</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
-                       href="#use_cases">Use Cases</a>
+                       href="#status">Status</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
                        href="#solutions">Solutions</a>
-                    <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
-                       href="#status">Status</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
                        href="#resources">Resources</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
@@ -255,10 +253,9 @@
 
                 <div class="grid space-x-2">
                     <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
-                        <p>Recent past results.</p>
-                        <p>
-                            <a onclick="loginAndSubscribe()" style="cursor: pointer" class="text-blue-500">Subscribe</a>
-                            for this search alerts.
+                        <p>Recent past messages.
+                            <a onclick="loginAndSubscribe()" style="cursor: pointer" class="text-blue-500 font-bold">Follow</a>
+                            future results.
                         </p>
                         <div class="absolute w-[320px]" id="wait" style="display: none">
                             <div class="flex justify-center">
@@ -312,9 +309,9 @@
 
         <div class="container mx-auto items-center justify-center">
             <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
-                <div class="py-4 items-center text-center md:pt-20">
-                    <span class="m-1 text-4xl font-semibold text-indigo-600 dark:text-indigo-500">
-                        Capture the most important
+                <div class="py-2 items-center text-center md:pt-20">
+                    <span class="m-2 text-4xl font-semibold text-indigo-600 dark:text-indigo-500">
+                        Follow your interests
                     </span>
                 </div>
                 <div class="items-center justify-center">
@@ -322,9 +319,9 @@
                         <img src="logo-color.svg" width="256" class="items-center justify-center"/>
                     </center>
                 </div>
-                <div class="py-4 align-middle items-center text-center md:pt-20">
-                    <span class="m-1 text-4xl font-semibold text-cyan-600">
-                        Reach everyone interested
+                <div class="py-2 align-middle items-center text-center md:pt-20">
+                    <span class="m-2 text-4xl font-semibold text-cyan-600">
+                        Discover new opportunities
                     </span>
                 </div>
             </div>
@@ -342,65 +339,20 @@
     <div class="bg-white dark:bg-gray-900" id="about">
         <div class="container mx-auto pt-4 px-4">
             <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl text-center">
-                Real-Time Search Alerts
+                Real-Time Discovery
             </h1>
-            <div class="mx-auto max-w-6xl mt-4 text-gray-700 dark:text-gray-300 ">
-                <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-                    <div>
-                        <h2 class="text-2xl px-2 py-2 capitalize">
-                            Get Results As They Occur
-                        </h2>
-                        <div class="space-y-2 text-xl">
-                            <p class="px-2 pt-4 align-text-middle space-x-2 flex">
-                                <span class="h-6 w-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                                <span>No delay</span>
-                            </p>
-                            <p class="px-10 text-lg">Stay informed in real-time</p>
-                            <p class="px-2 pt-4 align-text-middle space-x-2 flex">
-                                <span class="h-6 w-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="h-6 w-6 min-w-max min-h-max text-blue-400" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                                <span>Saves your time</span>
-                            </p>
-                            <p class="px-10 text-lg">No more repeating searches</p>
-                            <p class="px-10 text-lg">No more spam</p>
-                            <p class="px-10 text-lg">Control what to get</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="data-value-vs-time.svg" alt="figure: data value vs time" width="480px"/>
-                    </div>
-                </div>
-            </div>
 
-            <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300 ">
-                <h2 class="px-2 py-4 capitalize text-2xl">
+            <div class="mx-auto max-w-6xl mt-4 text-gray-700 dark:text-gray-300 ">
+                <h2 class="px-2 py-4 capitalize text-2xl text-center">
                     From Unlimited Sources
                 </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-end">
-                        <img src="how-it-works.svg" alt="add own pub src"/>
+                        <img src="how-it-works.svg" alt="how it works"/>
                     </div>
-                    <div class="space-y-4 py-4 text-lg">
+                    <div class="space-y-4 py-4 sm:pt-10 text-lg">
                         <p class="align-text-middle px-4 pt-2">
-                            Automatically discovers new sources on every new subscription.
-                        </p>
-                        <p class="align-text-middle px-4">
-                            Already available:
+                            Thousands of:
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -411,7 +363,7 @@
                                           clip-rule="evenodd"/>
                                 </svg>
                             </span>
-                            <span>1300+ Feeds (RSS/Atom/JSON)</span>
+                            <span>Feeds: RSS, Atom and more</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -422,7 +374,7 @@
                                           clip-rule="evenodd"/>
                                 </svg>
                             </span>
-                            <span>1100+ Fediverse Publishers</span>
+                            <span>Fediverse Publishers</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -433,7 +385,7 @@
                                           clip-rule="evenodd"/>
                                 </svg>
                             </span>
-                            <span>110+ Telegram Channels</span>
+                            <span>Telegram Channels</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -446,16 +398,20 @@
                             </span>
                             <span>Messages published by others</span>
                         </p>
+                        <p class="align-text-middle px-4">
+                            Automatically discovers new sources on every new interest.</p>
+                        <p class="align-text-middle px-4">
+                            Not enough? Just add own source!</p>
                     </div>
                 </div>
             </div>
 
-            <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300">
-                <h2 class="px-2 py-4 capitalize text-2xl">Advanced Filtering</h2>
+            <div class="mx-auto max-w-6xl mt-4 text-gray-700 dark:text-gray-300">
+                <h2 class="px-2 py-4 capitalize text-2xl text-center">Advanced Filtering</h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="space-y-4 py-4 text-lg">
                         <p class="px-2">
-                            Define what is important to match.
+                            No more spam! Define what is important to match.
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -491,7 +447,7 @@
                             <span>Chain multiple filter conditions</span>
                         </p>
                         <p class="px-2">
-                            Structured search in specific attributes:
+                            Structured matching in specific attributes:
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -563,14 +519,14 @@
                             ... and more
                         </p>
                     </div>
-                    <div class="flex justify-start px-2 align-middle">
+                    <div class="flex justify-start px-2 sm:pt-8 align-middle">
                         <img src="2024-06-02_10-20.png" class="w-[320px] sm:w-[360px] sm:h-[440px]" alt="subscription"/>
                     </div>
                 </div>
             </div>
 
             <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300">
-                <h2 class="px-2 capitalize text-2xl">
+                <h2 class="px-2 capitalize text-2xl text-center">
                     Compare
                 </h2>
                 <div class="flex justify-center sm:pr-40">
@@ -644,109 +600,139 @@
         </div>
     </div>
 
-    <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 " id="use_cases">
-        <div class="container mx-auto px-6 pt-8">
-            <div class="mt-6 md:flex justify-center">
-                <h1 class="text-3xl font-semibold capitalize lg:text-4xl">Use Cases</h1>
+    <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center items-center" id="status">
+
+        <div class="container mx-auto pt-4 px-2 space-y-4 justify-center items-center max-w-4xl">
+            <div class="mt-4 px-4 md:flex justify-center items-center">
+                <h1 class="text-3xl font-semibold capitalize lg:text-4xl justify-center text-center">Status</h1>
             </div>
 
-            <div class="xl:-mx-8 xl:flex items-center justify-center">
-                <div class="xl:mx-8 max-w-6xl items-center justify-center">
-                    <div class="mt-8 mt-2 grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 items-center justify-center">
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 justify-center">
 
-                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4"
-                             style="height: 480px">
-                            <div class="p-6 space-y-4">
-                                <div class="flex">
-                                    <img src="share-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
-                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">Media Monitoring</h1>
-                                </div>
-                                <p>
-                                    Connect to a wide range of data sources, including social media platforms, news
-                                    websites, blogs, forums, and other online communities.
-                                </p>
-                                <p>
-                                    Subscribe for specific persons, brands, topics, trends, activities, and events.
-                                </p>
-                                <p>
-                                    Staying informed helps individuals or organizations proactively manage their online
-                                    presence and reputation.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4"
-                             style="height: 480px">
-                            <div class="p-6 space-y-4">
-                                <div class="flex">
-                                    <img src="insight-icon.svg" alt="Real-Time Insights" class="w-8 h-8 mr-2"/>
-                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">Business Insights</h1>
-                                </div>
-                                <p>
-                                    Connect to various data sources relevant to the business, such as social media
-                                    feeds, news sources, industry reports, financial markets, and internal data systems.
-                                </p>
-                                <p>
-                                    Subscribe for specific keywords, topics, and queries related to the business's
-                                    interests, including brand mentions, industry trends, competitor activities, and
-                                    market events.
-                                </p>
-                                <p>
-                                    Business leaders can make data-driven decisions faster, responding promptly to
-                                    risks, opportunities and trends.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4"
-                             style="height: 480px">
-                            <div class="p-6 space-y-4">
-                                <div class="flex">
-                                    <img src="target-icon.svg" alt="Customer Targeting" class="w-8 h-8 mr-2"/>
-                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">Customer Targeting</h1>
-                                </div>
-                                <p>
-                                    Engage actively with potential customers by publishing offers that are received by
-                                    everyone interested.
-                                    This enables businesses to proactively reach out to potential customers with
-                                    relevant information, offers, or content.
-                                </p>
-                                <p>
-                                    Published events have an immediate impact as they are received by users in
-                                    real-time.
-                                    Targeted messages increase the likelihood of conversion and customer acquisition.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="mx-auto max-w-sm rounded-lg border dark:border-gray-700 md:mx-4 my-4"
-                             style="height: 480px">
-                            <div class="p-6 space-y-4">
-                                <div class="flex">
-                                    <img src="cloud-services-icon.svg" alt="services" class="w-8 h-8 mr-2"/>
-                                    <h1 class="text-xl font-medium capitalize lg:text-3xl">And More</h1>
-                                </div>
-                                <p>
-                                    <b>Real Estate</b>: subscribe for notifications about new properties that match a
-                                    criteria, simplifying their search process.
-                                </p>
-                                <p>
-                                    <b>Recruitment</b>: publish a CV or a job description, find a dream job or
-                                    candidate.
-                                </p>
-                                <p>
-                                    <b>Science</b>: researchers can monitor journals and databases for the latest
-                                    publications and developments.
-                                </p>
-                                <p>
-                                    <b>Entertainment</b>: discover and receive notifications about upcoming concerts,
-                                    movie releases, theater shows, etc.
-                                </p>
-                            </div>
-                        </div>
-
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Active Publishers</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Distinct sources and users published recently.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="publishers-curr"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="publishers-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="publishers-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>30 Days</p>
+                        <p class="font-mono" id="publishers-30d"></p>
                     </div>
                 </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Interests</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">All existing, includes expired.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="subscriptions-curr"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="subscriptions-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="subscriptions-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>30 Days</p>
+                        <p class="font-mono" id="subscriptions-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Published Messages</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Min</p>
+                        <p class="font-mono" id="pub-last-1m"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="pub-last-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="pub-last-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>30 Days</p>
+                        <p class="font-mono" id="pub-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Delivered Results</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Message read count over a recent time period.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Min</p>
+                        <p class="font-mono" id="read-last-1m"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="read-last-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="read-last-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>30 Days</p>
+                        <p class="font-mono" id="read-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2 align-top place-content-start">
+                    <div class="col-span-4 text-xl">
+                        <p>Input Queue</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Submitted and waiting messages.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="evt-queue-curr"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="evt-queue-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="evt-queue-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                    </div>
+                </div>
+
+                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Most Popular Sources</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Publishing most read messages recently.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-popular-sources">
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -755,7 +741,7 @@
     <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 " id="solutions">
         <div class="container mx-auto px-6 pt-8 space-y-4">
             <div class="mt-6 md:flex justify-center">
-                <h1 class="text-3xl font-semibold capitalize lg:text-4xl">Solutions</h1>
+                <h1 class="text-3xl font-semibold capitalize lg:text-4xl text-center">Solutions</h1>
             </div>
 
             <h2 class="text-2xl capitalize text-center">Serverless</h2>
@@ -795,7 +781,7 @@
                                       clip-rule="evenodd"/>
                             </svg></span>
                         <span class="mx-2">
-                            1 free subscription per user
+                            Following 1 interest per user
                         </span>
                     </div>
                     <div class="flex items-center py-2">
@@ -817,7 +803,7 @@
                         <h1 class="text-xl font-medium capitalize font-semibold flex items-center justify-center">Public
                             UI</h1>
                         <p class="mt-4">
-                            Easy way to manage publishing and subscriptions.
+                            Easy way to manage interests and publishing.
                         </p>
                         <p class="mt-4">Best for personal use.</p>
                         <button onclick="window.location.assign('login.html')"
@@ -908,7 +894,7 @@
                                   clip-rule="evenodd"/>
                         </svg>
                         <span class="mx-2">
-                        Unlimited subscriptions
+                        Unlimited interests following
                     </span>
                     </div>
                 </div>
@@ -967,144 +953,6 @@
 
                                 <span class="mx-2">Strict privacy</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center items-center" id="status">
-
-        <div class="container mx-auto pt-4 px-2 space-y-4 justify-center items-center max-w-4xl">
-            <div class="mt-4 px-4 md:flex justify-center items-center">
-                <h1 class="text-3xl font-semibold capitalize lg:text-4xl justify-center text-center">Status</h1>
-            </div>
-
-            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 justify-center">
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Active Publishers</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Distinct sources and users published recently.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
-                        <p class="font-mono" id="publishers-curr"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="publishers-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="publishers-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
-                        <p class="font-mono" id="publishers-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Subscriptions</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">All existing, includes expired.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
-                        <p class="font-mono" id="subscriptions-curr"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="subscriptions-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="subscriptions-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
-                        <p class="font-mono" id="subscriptions-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Consumed Messages</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Min</p>
-                        <p class="font-mono" id="pub-last-1m"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="pub-last-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="pub-last-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
-                        <p class="font-mono" id="pub-last-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Delivered Results</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Message read count over a recent time period.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Min</p>
-                        <p class="font-mono" id="read-last-1m"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="read-last-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="read-last-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
-                        <p class="font-mono" id="read-last-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2 align-top place-content-start">
-                    <div class="col-span-4 text-xl">
-                        <p>Input Queue</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Submitted and waiting messages.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
-                        <p class="font-mono" id="evt-queue-curr"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="evt-queue-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="evt-queue-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                    </div>
-                </div>
-
-                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Most Popular Sources</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Publishing most read messages recently.</p>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-popular-sources">
                         </div>
                     </div>
                 </div>

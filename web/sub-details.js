@@ -493,14 +493,14 @@ document
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
-    if (id && confirm(`Delete the subscription ${id}?`)) {
+    if (id && confirm(`Delete the interest ${id}?`)) {
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         Subscriptions
             .delete(id, headers)
             .then(deleted => {
                 if (deleted) {
-                    alert(`Deleted the subscription ${id}`);
+                    alert(`Deleted the interest ${id}`);
                     window.location.assign("sub.html");
                 }
             })
@@ -521,10 +521,10 @@ function submitSubscription() {
 
 function updateSubscription(id) {
     const cond = getRootCondition();
-    if (cond != null && confirm(`Update the subscription ${id}?`)) {
+    if (cond != null && confirm(`Update the interest ${id}?`)) {
         const descr = document.getElementById("description").value;
         if (!descr) {
-            alert("Empty subscription description");
+            alert("Empty interest description");
             return;
         }
         let expires = document.getElementById("expires").value;
@@ -541,7 +541,7 @@ function updateSubscription(id) {
             .update(id, descr, true, expires, cond, discoverSourcesFlag, headers)
             .then(updated => {
                 if (updated) {
-                    alert(`Updated the subscription: ${id}`);
+                    alert(`Updated the interest: ${id}`);
                     window.location.assign("sub.html");
                 }
             })
@@ -563,7 +563,7 @@ function createSubscription() {
         }
         const descr = document.getElementById("description").value;
         if (descr === "") {
-            alert("Empty subscription description");
+            alert("Empty interest description");
             return;
         }
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;

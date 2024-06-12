@@ -50,16 +50,11 @@
   ],
   "theme_color": "#6366f1",
   "categories": [
+    "communication",
+    "events",
+    "finance",
     "news",
-    "reader",
-    "messaging",
-    "messenger",
-    "search",
-    "alerts",
-    "keyword",
-    "feeds",
-    "fediverse",
-    "telegram"
+    "social"
   ],
   "scope": "https://awakari.com",
   "permissions": [

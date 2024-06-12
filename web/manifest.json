@@ -3,12 +3,12 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
-  "name": "Awakari: Follow your interests",
+  "name": "Awakari",
   "background_color": "#ffffff",
   "short_name": "Awakari",
   "start_url": "https://awakari.com/login.html",
   "display": "standalone",
-  "description": "Awakari UI",
+  "description": "Follow Your Interests",
   "icons": [
     {
       "src": "logo-color.svg",

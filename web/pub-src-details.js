@@ -46,11 +46,6 @@ async function loadSource() {
                         document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
                         document.getElementById("name").innerText = data.name;
                         break
-                    case "site":
-                        document.getElementById("type").innerText = "Site";
-                        document.getElementById("upd_period").innerText = "Polling once a day";
-                        document.getElementById("addr").innerHTML = `<a href="${data.addr}" target="_blank" class="text-blue-500">${data.addr}</a>`;
-                        break
                     case "tgch":
                         document.getElementById("type").innerText = "Telegram channel (App)";
                         document.getElementById("upd_period").innerText = "Real-Time";

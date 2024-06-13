@@ -14,7 +14,6 @@ function showSrcDetails() {
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
-            document.getElementById("site").style.display = "none";
             break
         case "tgbc":
             btnSubmit.style.display = "none";
@@ -22,7 +21,6 @@ function showSrcDetails() {
             document.getElementById("tgbc").style.display = "block";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
-            document.getElementById("site").style.display = "none";
             break
         case "tgch":
             btnSubmit.style.display = "flex";
@@ -30,7 +28,6 @@ function showSrcDetails() {
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "block";
             document.getElementById("feed").style.display = "none";
-            document.getElementById("site").style.display = "none";
             break
         case "feed":
             btnSubmit.style.display = "flex";
@@ -38,7 +35,6 @@ function showSrcDetails() {
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "block";
-            document.getElementById("site").style.display = "none";
             break
     }
 }

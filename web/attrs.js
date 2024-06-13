@@ -42,7 +42,6 @@ function loadAttributeValues(key, input, headers) {
                 .all([
                     Sources.fetchListPageResponse("apub", false, "ASC", 3, encodeURIComponent(input), headers, ""),
                     Sources.fetchListPageResponse("feed", false, "ASC", 3, encodeURIComponent(input), headers,""),
-                    Sources.fetchListPageResponse("site", false, "ASC", 3, encodeURIComponent(input), headers, ""),
                     Sources.fetchListPageResponse("tgbc", false, "ASC", 3, encodeURIComponent(input), headers, ""),
                     Sources.fetchListPageResponse("tgch", false, "ASC", 3, encodeURIComponent(input), headers, ""),
                 ])

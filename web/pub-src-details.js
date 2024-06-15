@@ -97,7 +97,7 @@ async function loadSource() {
                         document.getElementById("total").innerText = data.usage.total;
                         document.getElementById("count").innerText = data.usage.count;
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
-                            requestIncreasePublishingDailyLimit(data.addr);
+                            requestIncreasePublishingLimit(data.addr);
                         };
                         break;
                     case 2:
@@ -105,7 +105,7 @@ async function loadSource() {
                         document.getElementById("total").innerText = `${data.usage.total} (all user's publications)`;
                         document.getElementById("count").innerText = `${data.usage.count} (all user's publications)`;
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
-                            requestIncreasePublishingDailyLimit(data.userId);
+                            requestIncreasePublishingLimit(data.userId);
                         };
                         document.getElementById("pub-src-nominate").style.display = "block";
                         document.getElementById("pub-src-nominate").onclick = () => {

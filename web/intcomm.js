@@ -1,11 +1,11 @@
-async function requestIncreasePublishingDailyLimit(objId) {
+async function requestIncreasePublishingLimit(objId) {
     if (objId) {
         const userIdCurrent = localStorage.getItem(keyUserId);
         let msg;
         if (objId === userIdCurrent) {
-            msg = "Request to increase own publishing daily limit.";
+            msg = "Request to increase own publishing limit.";
         } else {
-            msg = "Request to increase the publishing daily limit";
+            msg = "Request to increase the publishing limit";
         }
         msg += "\nPlease enter the number to add:"
         const input = prompt(msg, "1");
@@ -39,7 +39,7 @@ async function requestIncreasePublishingDailyLimit(objId) {
                             ce_string: userIdCurrent,
                         },
                     },
-                    text_data: `User ${userIdCurrent} requests to increase the publishing daily limit for ${objId} by ${inc}`,
+                    text_data: `User ${userIdCurrent} requests to increase the publishing limit for ${objId} by ${inc}`,
                 }
                 const headers = getAuthHeaders();
                 if (await Events.publishInternal(payload, headers)) {

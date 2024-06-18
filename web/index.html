@@ -170,11 +170,13 @@
 <body class="bg-gray-200" onload="loadStatus();">
 
 <main>
-    <header class="bg-white dark:bg-gray-900 h-screen sm:h-full pb-8">
+    <header class="bg-white dark:bg-gray-900">
         <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
             <div class="flex flex-row items-center justify-center max-w-[640px] align-middle mx-auto space-x-1">
 
-                <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">Awakari</a>
+                <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">
+                    Awakari
+                </a>
 
                 <div class="flex space-x-1 sm:space-x-2">
                     <form role="search" id="form_search">
@@ -196,7 +198,7 @@
                                    required="required"
                                    type="search"
                                    role="searchbox"
-                                   placeholder="Discover..."
+                                   placeholder="Search..."
                                    class="ml-1 border-0 outline-none w-52 sm:w-[480px] dark:bg-gray-800 text-md text-lg"
                                    minlength="3"/>
                         </div>
@@ -307,58 +309,29 @@
 
         </nav>
 
-        <div class="container mx-auto items-center justify-center">
-            <div class="mx-auto max-w-4xl grid sm:grid-cols-1 md:grid-cols-3">
-                <div class="py-4 px-8 items-center text-center md:pt-20">
-                    <span class="text-4xl font-semibold text-indigo-600 dark:text-indigo-500 text-center">
-                        Follow Your
-                    </span>
-                    <span class="text-4xl font-semibold text-indigo-600 dark:text-indigo-500 text-center">
-                        Interests
-                    </span>
-                </div>
-                <div class="items-center justify-center">
-                    <center>
-                        <img src="logo-color.svg" width="256" class="items-center justify-center"/>
-                    </center>
-                </div>
-                <div class="p-4 align-middle items-center text-center md:pt-20">
-                    <span class="text-4xl font-semibold text-cyan-600">
-                        Discover New
-                    </span>
-                    <span class="text-4xl font-semibold text-cyan-600">
-                        Opportunities
-                    </span>
-                </div>
-            </div>
-        </div>
+    </header>
 
-        <div class="flex justify-center items-center pt-6 text-xl">
+    <div class="bg-white dark:bg-gray-900 pt-4" id="about">
+
+        <div class="flex justify-center items-center text-2xl font-semibold">
             <button onclick="window.location.assign('login.html')"
-                    class="w-56 h-10 transform rounded-md bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
-                Start Now
+                    class="w-72 h-12 transform rounded-md bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+                Follow Your Interests
             </button>
         </div>
 
-    </header>
-
-    <div class="bg-white dark:bg-gray-900" id="about">
-        <div class="container mx-auto pt-4 px-4">
-            <h1 class="text-3xl font-semibold capitalize text-gray-700 dark:text-white lg:text-4xl text-center">
-                Real-Time Discovery
-            </h1>
-
-            <div class="mx-auto max-w-6xl mt-4 text-gray-700 dark:text-gray-300 ">
-                <h2 class="px-2 py-4 capitalize text-2xl text-center">
+        <div class="container mx-auto px-4 pt-4">
+            <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 ">
+                <h2 class="p-2 capitalize text-2xl text-center">
                     From Unlimited Sources
                 </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-end">
-                        <img src="how-it-works.svg?v=4d399c8" alt="how it works"/>
+                        <img src="how-it-works.svg?v=cc7b4eb" alt="how it works" class="min-w-80 sm:max-w-[512px]"/>
                     </div>
-                    <div class="space-y-4 py-4 sm:pt-10 text-lg">
+                    <div class="space-y-4 py-4 sm:pt-4 text-lg">
                         <p class="align-text-middle px-4 pt-2">
-                            Thousands of:
+                            Aggregates thousands of:
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -393,29 +366,18 @@
                             </span>
                             <span>Telegram Channels</span>
                         </p>
-                        <p class="px-4 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
-                                     viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                          clip-rule="evenodd"/>
-                                </svg>
-                            </span>
-                            <span>Messages published by others</span>
-                        </p>
                         <p class="align-text-middle px-4">
-                            Automatically discovers new sources on every new interest.</p>
+                            Discovers new matching sources on every new interest.</p>
                         <p class="align-text-middle px-4">
-                            Not enough? Just add own source!</p>
+                            Not enough? Add own source!</p>
                     </div>
                 </div>
             </div>
 
-            <div class="mx-auto max-w-6xl mt-4 text-gray-700 dark:text-gray-300">
+            <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300">
                 <h2 class="px-2 py-4 capitalize text-2xl text-center">Advanced Filtering</h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-                    <div class="space-y-4 py-4 text-lg">
+                    <div class="space-y-2 py-2 text-lg">
                         <p class="px-2">
                             No more spam. Define what is important to match.
                         </p>
@@ -525,80 +487,57 @@
                             ... and more
                         </p>
                     </div>
-                    <div class="flex justify-start px-2 align-middle">
-                        <img src="2024-06-02_10-20.png?v=6bb84c8" class="w-[320px] sm:w-[360px] sm:h-[560px]" alt="subscription"/>
+                    <div class="flex justify-start p-2 align-middle">
+                        <picture>
+                            <source srcset="interest-details.png" media="(prefers-color-scheme: light)"/>
+                            <source srcset="interest-details-dark.png"  media="(prefers-color-scheme: dark)"/>
+                            <img src="interest-details.png"/>
+                        </picture>
                     </div>
                 </div>
             </div>
 
-            <div class="mx-auto max-w-6xl mt-8 text-gray-700 dark:text-gray-300">
-                <h2 class="px-2 capitalize text-2xl text-center">
-                    Compare
+            <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 pt-2">
+                <h2 class="p-2 capitalize text-2xl text-center">
+                    Read In Your Favorite App
                 </h2>
-                <div class="flex justify-center sm:pr-40">
-                    <div class="grid grid-cols-4 space-y-1 space-x-1 sm:space-y-4 sm:space-x-4">
-
-                        <div></div>
-                        <div class="text-center text-xl">
-                            Feeds
-                        </div>
-                        <div class="text-center text-xl">
-                            Search
-                        </div>
-                        <div class="text-center text-xl">
-                            Awakari
-                        </div>
-
-                        <div></div>
-                        <div class="text-sm text-center text-gray-500 dark:text-gray-400">
-                            Feedly, Inoreader, ...
-                        </div>
-                        <div class="text-sm text-center text-gray-500 dark:text-gray-400">
-                            Google, Bing, ...
-                        </div>
-                        <div class="text-sm text-center text-gray-500 dark:text-gray-400">
-                            Real-Time Search
-                        </div>
-
-                        <div class="text-right h-16 pt-4 text-lg">
-                            <p>Delay</p>
-                        </div>
-                        <div class="bg-yellow-300 dark:bg-yellow-700 text-center h-16">
-                            <p class="pt-5">Medium</p>
-                        </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-5">High</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-5">Low</p>
-                        </div>
-
-                        <div class="text-right h-16 pt-4 text-lg">
-                            <p>Sources</p>
-                        </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-2">Limited</p><p>to known</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-2">Discovers</p><p>New</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-2">Discovers</p><p>New</p>
-                        </div>
-
-                        <div class="text-right h-16 text-lg">
-                            <p>Content</p><p>Filtering</p>
-                        </div>
-                        <div class="bg-red-300 dark:bg-red-700 text-center self-center h-16">
-                            <p class="pt-5">Client</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-5">Service</p>
-                        </div>
-                        <div class="bg-emerald-300 dark:bg-emerald-700 text-center self-center h-16">
-                            <p class="pt-5">Service</p>
-                        </div>
-
+                <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                    <div class="flex justify-center sm:justify-end pt-2 px-2">
+                        <picture>
+                            <source srcset="photo1718715014.jpeg" media="(prefers-color-scheme: light)"/>
+                            <source srcset="photo1718715014-dark.jpeg"  media="(prefers-color-scheme: dark)"/>
+                            <img src="photo1718715014.jpeg"/>
+                        </picture>
+                    </div>
+                    <div class="space-y-4 py-4 sm:pt-4 text-lg">
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            Choose how to read results:
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span>Any RSS reader</span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-6 w-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span>In Telegram</span>
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            Note the metadata attributes in messages and use those for the filtering fine-tuning.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -256,7 +256,7 @@
                 <div class="grid space-x-2">
                     <span class="col-span-2 text-center text-gray-600 dark:text-gray-400">
                         <p>Recent past messages.
-                            <a onclick="loginAndSubscribe()" style="cursor: pointer" class="text-blue-500 font-bold">Follow</a>
+                            <a onclick="loginAndSubscribe()" style="cursor: pointer" class="text-blue-500 font">Follow</a>
                             future results.
                         </p>
                         <div class="absolute w-[320px]" id="wait" style="display: none">
@@ -313,11 +313,16 @@
 
     <div class="bg-white dark:bg-gray-900 pt-4" id="about">
 
-        <div class="flex justify-center items-center text-2xl font-semibold">
-            <button onclick="window.location.assign('login.html')"
-                    class="w-72 h-12 transform rounded-md bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+        <div class="justify-center text-center items-center space-y-4">
+            <h1 class="capitalize text-3xl text-center">
                 Follow Your Interests
-            </button>
+            </h1>
+            <div class="flex justify-center items-center text-xl font-semibold">
+                <button onclick="window.location.assign('login.html')"
+                        class="w-24 h-10 transform rounded-md bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
+                    Start
+                </button>
+            </div>
         </div>
 
         <div class="container mx-auto px-4 pt-4">
@@ -327,7 +332,7 @@
                 </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-end">
-                        <img src="how-it-works.svg?v=cc7b4eb" alt="how it works" class="min-w-80 sm:max-w-[512px]"/>
+                        <img src="how-it-works.svg?v=0309b0a" alt="how it works" class="min-w-80 sm:max-w-[512px]"/>
                     </div>
                     <div class="space-y-4 py-4 sm:pt-4 text-lg">
                         <p class="align-text-middle px-4 pt-2">
@@ -522,7 +527,7 @@
                                           clip-rule="evenodd"/>
                                 </svg>
                             </span>
-                            <span>Any RSS reader</span>
+                            <span>In any RSS reader</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -536,7 +541,10 @@
                             <span>In Telegram</span>
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
-                            Note the metadata attributes in messages and use those for the filtering fine-tuning.
+                            Use message attributes to fine-tune your filter conditions.
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            Awakari doesn't collect any user data. No cookies, no tracking.
                         </p>
                     </div>
                 </div>
@@ -549,7 +557,7 @@
 
         <div class="container mx-auto pt-4 px-2 space-y-4 justify-center items-center max-w-4xl">
             <div class="mt-4 px-4 md:flex justify-center items-center">
-                <h1 class="text-3xl font-semibold capitalize lg:text-4xl justify-center text-center">Status</h1>
+                <h1 class="text-3xl capitalize lg:text-4xl justify-center text-center">Status</h1>
             </div>
 
             <div class="mt-2 grid grid-cols-1 md:grid-cols-2 justify-center">
@@ -686,7 +694,7 @@
     <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 " id="solutions">
         <div class="container mx-auto px-6 pt-8 space-y-4">
             <div class="mt-6 md:flex justify-center">
-                <h1 class="text-3xl font-semibold capitalize lg:text-4xl text-center">Solutions</h1>
+                <h1 class="text-3xl capitalize lg:text-4xl text-center">Solutions</h1>
             </div>
 
             <h2 class="text-2xl capitalize text-center">Serverless</h2>
@@ -745,7 +753,7 @@
 
                 <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
                     <div class="p-6">
-                        <h1 class="text-xl font-medium capitalize font-semibold flex items-center justify-center">Public
+                        <h1 class="text-xl font-medium capitalize flex items-center justify-center">Public
                             UI</h1>
                         <p class="mt-4">
                             Easy way to manage interests and publishing.
@@ -774,8 +782,7 @@
 
                 <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
                     <div class="p-6">
-                        <h1 class="text-xl font-medium capitalize font-semibold flex items-center justify-center">Public
-                            API</h1>
+                        <h1 class="text-xl font-medium capitalize flex items-center justify-center">Public API</h1>
                         <p class="mt-4">
                             Want to build own service?<br/>
                             Try the Awakari streaming API.
@@ -846,8 +853,7 @@
 
                 <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
                     <div class="p-6">
-                        <h1 class="text-xl font-medium capitalize font-semibold flex items-center justify-center">
-                            Managed</h1>
+                        <h1 class="text-xl font-medium capitalize flex items-center justify-center">Managed</h1>
                         <p class="mt-4">Don't want to publish your events to everyone?</p>
                         <p class="mt-4">Private event sources.</p>
                         <a href="mailto:awakari@awakari.com">
@@ -875,8 +881,7 @@
 
                 <div class="mx-auto max-w-sm rounded-md border dark:border-gray-700 md:mx-4 w-72">
                     <div class="p-6">
-                        <h1 class="text-xl font-medium capitalize font-semibold flex items-center justify-center">On
-                            Premises</h1>
+                        <h1 class="text-xl font-medium capitalize flex items-center justify-center">On Premises</h1>
                         <p class="mt-4">Want all data to remain inside your network?</p>
                         <p class="mt-4">Support is available.</p>
                         <a href="https://github.com/awakari/core#3-deployment">
@@ -911,7 +916,7 @@
         <div class="container mx-auto px-6 pt-8 space-y-4 justify-center">
             <div class="mt-6 md:flex justify-center text-center">
                 <div class="justify-center text-center">
-                    <h1 class="text-3xl lg:text-4xl font-semibold capitalize dark:text-white text-center justify-center">
+                    <h1 class="text-3xl lg:text-4xl capitalize dark:text-white text-center justify-center">
                         Resources</h1>
                 </div>
             </div>

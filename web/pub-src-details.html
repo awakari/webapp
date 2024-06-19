@@ -49,6 +49,29 @@
                 <span id="name" class="ml-2 col-span-2 break-all py-2"></span>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-2">Added:</span>
                 <span id="added-date" class="ml-2 col-span-2 break-all py-2"></span>
+
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">
+                    <span class="tooltip">Limit Owner:
+                        <span class="tooltiptext" style="margin-left: -24px; width: 328px">
+                            <p>User: utilizing owner user's publishing limit.</p>
+                            <p>Dedicated: own dedicated limit.</p>
+                            <p>Click "Nominate" button to request making it Dedicated</p>
+                        </span>
+                    </span>
+                </span>
+                <div class="col-span-2 space-x-2 flex py-1 ml-2">
+
+                    <span id="owner" class="py-1 w-16"></span>
+
+                    <button id="pub-src-nominate"
+                            style="display: none"
+                            type="button"
+                            class="text-blue-500 py-1 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static w-[100px]">
+                        ★ Nominate
+                    </button>
+
+                </div>
+
                 <span class="text-slate-500 dark:text-slate-400 text-right py-2">Hourly Limit:</span>
                 <div class="col-span-2 space-x-2 flex py-1 ml-2">
 
@@ -94,31 +117,10 @@
                     </div>
 
                 </div>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-2">
-                    <span class="tooltip">Limit Owner:
-                        <span class="tooltiptext" style="margin-left: -24px; width: 328px">
-                            <p>User: utilizing owner user's publishing limit.</p>
-                            <p>Dedicated: own dedicated limit.</p>
-                            <p>Click "Nominate" button to request making it Dedicated</p>
-                        </span>
-                    </span>
-                </span>
-                <div class="col-span-2 space-x-2 flex py-1 ml-2">
-
-                    <span id="owner" class="py-1 w-16"></span>
-
-                    <button id="pub-src-nominate"
-                            style="display: none"
-                            type="button"
-                            class="text-blue-500 py-1 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static w-[100px]">
-                        ★ Nominate
-                    </button>
-
-                </div>
-                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Published Total:</span>
-                <span id="total" class="ml-2 col-span-2 py-2"></span>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-2">Published 1h:</span>
                 <span id="count" class="ml-2 col-span-2 py-2"></span>
+                <span class="text-slate-500 dark:text-slate-400 text-right py-2">Published Total:</span>
+                <span id="total" class="ml-2 col-span-2 py-2"></span>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-2">Last Update:</span>
                 <span id="last_upd" class="ml-2 col-span-2 py-2">YYYY-MM-DDThh-mm-ss.SSSZ</span>
                 <span class="text-slate-500 dark:text-slate-400 text-right py-2">Updates:</span>

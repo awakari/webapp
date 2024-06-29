@@ -39,9 +39,6 @@
             <div class="flex mb-4" id="area-id">
                 <label for="id" style="margin-top: 0.125rem">Id:</label>
                 <input type="text" readonly="readonly" id="id" class="ml-2 border-none">
-                <a style="display: none" id="sub-feed-link">
-                    <img class="ml-2" src="feed-icon.svg" width="20" height="20" alt="Subscription feed link"/>
-                </a>
             </div>
 
             <div class="flex flex-col space-y-3">
@@ -56,7 +53,7 @@
                     <input type="text" id="description">
                 </div>
 
-                <div class="flex space-x-4">
+                <div class="flex space-x-4 items-center">
                     <label class="flex space-x-1">
                         <input id="public"
                                type="checkbox" class="h-4 w-4"
@@ -77,8 +74,12 @@
                                 Total followers count.
                             </span>
                         </span>
-                        <input type="text" readonly="readonly" id="followers" class="w-32 border-none">
+                        <input type="text" readonly="readonly" id="followers" class="w-16 border-none">
                     </label>
+
+                    <button id="button-follow" type="button" class="flex justify-center text-center w-[100px]" onclick="followInterest(document.getElementById('id').value)" style="display: none">
+                        <span class="mt-1">&#10697; Follow</span>
+                    </button>
 
                 </div>
 
@@ -110,7 +111,7 @@
                     <button id="button-add-cond-txt" type="button" class="flex justify-center text-center w-[100px]">
                         <span style="font-size: large; margin-top: 0.175rem"><b>+</b></span>&nbsp;<span class="mt-1">Text</span>
                     </button>
-                    <button id="button-add-cond-num" type="button" class="ml-3 flex justify-center text-center w-[100px]">
+                    <button id="button-add-cond-num" type="button" class="ml-2 flex justify-center text-center w-[100px]">
                         <span style="font-size: large; margin-top: 0.175rem"><b>+</b></span>&nbsp;<span class="mt-1">Number</span>
                     </button>
                 </div>
@@ -188,7 +189,7 @@
     </div>
 </div>
 
-<script src="sub-details.js?v=bd49abb-1"></script>
+<script src="sub-details.js?v=5d1a0cd"></script>
 
 </body>
 </html>

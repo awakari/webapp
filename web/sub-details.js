@@ -124,15 +124,17 @@ function loadSubDetailsById(id) {
     document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
     document.getElementById("sub-discovered-sources").style.display = "block";
+    document.getElementById("button-follow").style.display = "block";
     const headers = getAuthHeaders();
     const authProvider = localStorage.getItem(keyAuthProvider);
+    const subFeedLinkElement = document.getElementById("sub-feed-link");
     switch (authProvider) {
-        case "Telegram":
+        case "Telegram": {
+            subFeedLinkElement.href = "https://t.me/AwakariBot";
             break;
+        }
         default:
-            let subFeedLinkElement = document.getElementById("sub-feed-link");
             subFeedLinkElement.href = `https://reader.awakari.com/v1/sub/rss/${id}`;
-            subFeedLinkElement.style.display = "block";
             break;
     }
     Subscriptions
@@ -652,4 +654,14 @@ function validateCondition(cond) {
         return null;
     }
     return cond;
+}
+
+function followInterest(id) {
+    const headers = getAuthHeaders();
+    const userId = headers["X-Awakari-User-Id"];
+    if (userId.startsWith("tg://user?id=")) {
+        window.open(`https://t.me/AwakariBot`, '_blank');
+    } else {
+        window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
+    }
 }

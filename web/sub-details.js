@@ -32,10 +32,11 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                 <div style="margin-top: 2px">Attribute</div>
                             </legend>
                             <input type="text"
+                                   autocapitalize="none"
                                    list="attrKeys${idx}" 
                                    class="border-none w-24 sm:w-32 autocomplete-input" 
                                    style="height: 20px; background-color: inherit"
-                                   ${label === "Text"? 'placeholder="any"' : 'placeholder="required"'}
+                                   ${label === "Text"? 'placeholder="empty: any"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value)"
                                    value="${key}"/>
@@ -624,11 +625,15 @@ function validateCondition(cond) {
             alert("Number condition should have a non-empty attribute name");
             return null;
         }
+        cond.nc.key = cond.nc.key.toLowerCase();
         if (cond.nc.op === 0) {
             alert("Number condition operator is not recognized");
             return null;
         }
     } else if (cond.hasOwnProperty("tc")) {
+        if (cond.tc.key) {
+            cond.tc.key = cond.tc.key.toLowerCase();
+        }
         if (cond.tc.term.length < 3) {
             // TODO check meaningful characters
             alert("Keywords length should be at least 3 symbols");

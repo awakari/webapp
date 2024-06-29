@@ -141,6 +141,12 @@ function loadSubDetailsById(id) {
         .then(data => {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
+                if (data.hasOwnProperty("public")) {
+                    document.getElementById("public").checked = data.public;
+                }
+                if (data.hasOwnProperty("followers")) {
+                    document.getElementById("followers").value = data.followers;
+                }
                 let expires = new Date(data.expires);
                 if (!isNaN(expires) && expires > 0) {
                     expires = new Date(expires.getTime() - 60_000 * expires.getTimezoneOffset());

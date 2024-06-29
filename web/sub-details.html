@@ -38,7 +38,7 @@
 
             <div class="flex mb-4" id="area-id">
                 <label for="id" style="margin-top: 0.125rem">Id</label>
-                <input type="text" readonly="readonly" id="id" class="ml-2">
+                <input type="text" readonly="readonly" id="id" class="ml-2 border-none">
                 <a style="display: none" id="sub-feed-link">
                     <img class="ml-2" src="feed-icon.svg" width="20" height="20" alt="Subscription feed link"/>
                 </a>
@@ -54,6 +54,33 @@
                         </span>
                     </label>
                     <input type="text" id="description">
+                </div>
+
+                <div class="flex space-x-4">
+                    <label class="flex space-x-1">
+                        <input id="public"
+                               checked="checked"
+                               type="checkbox" class="h-4 w-4"
+                               style="margin-right: 0.25rem; margin-top: 0.125rem"/>
+                        <span class="tooltip" style="margin-top: 0.125rem">
+                            Public
+                            <span class="tooltiptext" style="width: 320px">
+                                <p>Public interest is visible to others.</p>
+                                <p>May be followed by non-owner.</p>
+                            </span>
+                        </span>
+                    </label>
+
+                    <label class="flex space-x-1">
+                        <span class="tooltip" style="margin-top: 0.125rem">
+                            Followers
+                            <span class="tooltiptext" style="width: 240px">
+                                Total followers count.
+                            </span>
+                        </span>
+                        <input type="text" readonly="readonly" id="followers" class="w-32 border-none">
+                    </label>
+
                 </div>
 
                 <div class="flex pt-1">

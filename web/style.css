@@ -3,8 +3,7 @@ input {
     outline: none;
 }
 input[type="checkbox"] {
-    margin-right: 0.625rem;
-    margin-left: 0.125rem;
+    margin-right: 0.25rem;
     outline: none;
 }
 @media (prefers-color-scheme: dark) {

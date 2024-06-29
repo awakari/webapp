@@ -1,7 +1,7 @@
 const Subscriptions = {};
 
-Subscriptions.fetchListPage = function (cursor, order, limit, filter, headers) {
-    return fetch(`/v1/sub?limit=${limit}&cursor=${cursor}&order=${order}&filter=${encodeURIComponent(filter)}`, {
+Subscriptions.fetchListPage = function (cursor, followers, order, limit, filter, ownOnly, headers) {
+    return fetch(`/v1/sub?limit=${limit}&cursor=${cursor}&followers=${followers}&sort=FOLLOWERS&order=${order}&filter=${encodeURIComponent(filter)}&public=${!ownOnly}`, {
         method: "GET",
         headers: headers,
         cache: "no-cache",
@@ -16,7 +16,7 @@ Subscriptions.fetchListPage = function (cursor, order, limit, filter, headers) {
             } else {
                 return null;
             }
-        })
+        });
 }
 
 Subscriptions.delete = function (id, headers) {
@@ -35,11 +35,12 @@ Subscriptions.delete = function (id, headers) {
         });
 }
 
-Subscriptions.createResponse = function (descr, enabled, expires, cond, discoverSourcesFlag, headers) {
+Subscriptions.createResponse = function (descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
     const payload = {
         discover: discoverSourcesFlag,
         description: descr,
         enabled: enabled,
+        public: isPublic,
         cond: cond,
     }
     if (expires) {
@@ -53,9 +54,9 @@ Subscriptions.createResponse = function (descr, enabled, expires, cond, discover
     return fetch(`/v1/sub`, optsReq);
 }
 
-Subscriptions.create = function (descr, enabled, expires, cond, discoverSourcesFlag, headers) {
+Subscriptions.create = function (descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
     return Subscriptions
-        .createResponse(descr, enabled, expires, cond, discoverSourcesFlag, headers)
+        .createResponse(descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -89,12 +90,13 @@ Subscriptions.fetch = function (id, headers) {
         })
 }
 
-Subscriptions.update = function (id, descr, enabled, expires, cond, discoverSourcesFlag, headers) {
+Subscriptions.update = function (id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: id,
         discover: discoverSourcesFlag,
         description: descr,
         enabled: enabled,
+        public: isPublic,
         cond: cond,
     }
     if (expires) {

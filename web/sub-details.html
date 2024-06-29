@@ -11,14 +11,14 @@
 
     <link rel="stylesheet" href="spectre-icons.min.css">
     <link href="tailwind.output.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=bd49abb">
 
     <script src="api/response.js"></script>
     <script src="auth.js"></script>
     <script src="api/sources.js"></script>
     <script src="api/status.js"></script>
     <script src="attrs.js"></script>
-    <script src="api/subscriptions.js"></script>
+    <script src="api/subscriptions.js?v=bd49abb-1"></script>
 
 </head>
 <body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300">
@@ -37,7 +37,7 @@
         <form class="max-w-[480px] grow">
 
             <div class="flex mb-4" id="area-id">
-                <label for="id" style="margin-top: 0.125rem">Id</label>
+                <label for="id" style="margin-top: 0.125rem">Id:</label>
                 <input type="text" readonly="readonly" id="id" class="ml-2 border-none">
                 <a style="display: none" id="sub-feed-link">
                     <img class="ml-2" src="feed-icon.svg" width="20" height="20" alt="Subscription feed link"/>
@@ -59,7 +59,6 @@
                 <div class="flex space-x-4">
                     <label class="flex space-x-1">
                         <input id="public"
-                               checked="checked"
                                type="checkbox" class="h-4 w-4"
                                style="margin-right: 0.25rem; margin-top: 0.125rem"/>
                         <span class="tooltip" style="margin-top: 0.125rem">
@@ -73,7 +72,7 @@
 
                     <label class="flex space-x-1">
                         <span class="tooltip" style="margin-top: 0.125rem">
-                            Followers
+                            Followers:
                             <span class="tooltiptext" style="width: 240px">
                                 Total followers count.
                             </span>
@@ -189,7 +188,7 @@
     </div>
 </div>
 
-<script src="sub-details.js?v=4be6219"></script>
+<script src="sub-details.js?v=bd49abb-1"></script>
 
 </body>
 </html>

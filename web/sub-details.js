@@ -126,17 +126,6 @@ function loadSubDetailsById(id) {
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("button-follow").style.display = "block";
     const headers = getAuthHeaders();
-    const authProvider = localStorage.getItem(keyAuthProvider);
-    const subFeedLinkElement = document.getElementById("sub-feed-link");
-    switch (authProvider) {
-        case "Telegram": {
-            subFeedLinkElement.href = "https://t.me/AwakariBot";
-            break;
-        }
-        default:
-            subFeedLinkElement.href = `https://reader.awakari.com/v1/sub/rss/${id}`;
-            break;
-    }
     Subscriptions
         .fetch(id, headers)
         .then(resp => resp ? resp.json() : null)

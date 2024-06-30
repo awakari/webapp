@@ -1,6 +1,10 @@
 const templateSub = (sub) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[320px] sm:w-[400px] space-x-1"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
+                    <span class="pr-1 py-2 text-slate-500">
+                        ${sub.public ? '🔉': ''}
+                        <sup>${sub.hasOwnProperty("followers")? sub.followers : '' }</sup>                     
+                    </span>
                     <span class="truncate py-2 grow">
                         ${sub.description}
                     </span>
@@ -49,7 +53,7 @@ function load() {
         });
 
     const urlParams = new URLSearchParams(window.location.search);
-    loadSubscriptions(urlParams.get("filter"), false);
+    loadSubscriptions(urlParams.get("filter"), urlParams.get("own"));
 }
 
 function loadSubscriptions(filter, ownOnly) {
@@ -89,6 +93,17 @@ function loadSubscriptions(filter, ownOnly) {
     } else {
         document.getElementById("filter").value = filter;
     }
+
+    if (ownOnly == null) {
+        ownOnly = document.getElementById("own").checked;
+    } else if (ownOnly === true || ownOnly === "true") {
+        ownOnly = true;
+        document.getElementById("own").checked = true;
+    } else {
+        ownOnly = false;
+        document.getElementById("own").checked = false;
+    }
+
     document.getElementById("wait").style.display = "block";
 
     const headers = getAuthHeaders();
@@ -117,7 +132,8 @@ function loadSubscriptions(filter, ownOnly) {
                     btnPrev.removeAttribute("disabled");
                     if (subs.length > 0) {
                         btnPrev.onclick = () => {
-                            window.location.assign(`sub.html?cursor=${subs[0].id}&order=ASC&filter=${encodeURIComponent(filter)}`)
+                            const sub = subs[0];
+                            window.location.assign(`sub.html?cursor=${sub.id}&followers=${sub.hasOwnProperty('followers')? sub.followers : '0'}&order=ASC&filter=${encodeURIComponent(filter)}&own=${ownOnly}`)
                         }
                     } else {
                         btnPrev.onclick = () => {
@@ -131,7 +147,8 @@ function loadSubscriptions(filter, ownOnly) {
                 if (subs.length === pageLimit) {
                     btnNext.removeAttribute("disabled");
                     btnNext.onclick = () => {
-                        window.location.assign(`sub.html?cursor=${subs[pageLimit - 1].id}&order=DESC&filter=${encodeURIComponent(filter)}`)
+                        const sub = subs[pageLimit - 1];
+                        window.location.assign(`sub.html?cursor=${sub.id}&followers=${sub.hasOwnProperty('followers')? sub.followers : '0'}&order=DESC&filter=${encodeURIComponent(filter)}&own=${ownOnly}`)
                     }
                 } else {
                     btnNext.disabled = "disabled";
@@ -155,7 +172,7 @@ function loadSubscriptions(filter, ownOnly) {
                         }
                     } else if (order === "ASC") {
                         // back to the beginning
-                        window.location.assign(`sub.html?filter=${encodeURIComponent(filter)}`);
+                        window.location.assign(`sub.html?filter=${encodeURIComponent(filter)}&own=${ownOnly}`);
                     }
                 }
             }

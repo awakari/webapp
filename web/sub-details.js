@@ -579,6 +579,9 @@ function createSubscription() {
                     if (userId) {
                         if (userId.startsWith("tg://user?id=")) {
                             document.getElementById("sub-new-success-btn-tg").style.display = "block";
+                            document.getElementById("sub-new-success-btn-tg").onclick = () => {
+                                window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
+                            }
                         } else {
                             document.getElementById("sub-new-success-btn-feed").style.display = "block";
                             document.getElementById("sub-new-success-btn-feed").onclick = () => {
@@ -649,7 +652,7 @@ function followInterest(id) {
     const headers = getAuthHeaders();
     const userId = headers["X-Awakari-User-Id"];
     if (userId.startsWith("tg://user?id=")) {
-        window.open(`https://t.me/AwakariBot`, '_blank');
+        window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
     } else {
         window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
     }

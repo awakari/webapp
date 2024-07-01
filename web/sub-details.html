@@ -74,7 +74,7 @@
                                 Total followers count.
                             </span>
                         </span>
-                        <input type="text" readonly="readonly" id="followers" class="w-16 border-none">
+                        <input type="text" readonly="readonly" id="followers" class="border-none w-7">
                     </label>
 
                     <button id="button-follow" type="button" class="flex justify-center text-center w-[100px]" onclick="followInterest(document.getElementById('id').value)" style="display: none">
@@ -96,9 +96,9 @@
                     <input type="datetime-local" id="expires" class="h-5 border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
                 </div>
 
-                <div class="flex">
-                    <span class="pt-1 w-20 flex" style="margin-top: 0.125rem">
-                        <span class="tooltip">
+                <div class="flex pt-2">
+                    <span class="w-20 flex" style="margin-top: 0.125rem">
+                        <span class="tooltip mb-1">
                             Conditions
                             <span class="tooltiptext">
                                 <p>Message matching conditions.</p>
@@ -121,7 +121,7 @@
             <div class="space-y-1 pt-2" id="conditions">
             </div>
 
-            <div class="flex items-center justify-center space-x-2 pt-1">
+            <div class="flex items-center justify-center space-x-2 pt-4">
                 <div class="absolute" id="wait" style="display: none">
                     <img src="wait.gif"/>
                 </div>
@@ -175,7 +175,7 @@
                            checked="checked"
                            type="checkbox" class="h-4 w-4"
                            style="margin-right: 0.25rem"/>
-                    <span>Discover relevant sources on submit</span>
+                    <span>Discover relevant sources on Submit</span>
                 </label>
 
                 <div class="py-2 space-y-1" id="sub-discovered-sources" style="display: none">

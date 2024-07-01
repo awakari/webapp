@@ -161,7 +161,7 @@
     <script src="jquery-3.7.1.min.js"></script>
     <script src="api/response.js"></script>
     <script src="api/subscriptions.js"></script>
-    <script src="status.js?v=6f785c9"></script>
+    <script src="status.js?v=7dc5cce"></script>
     <script src="api/past.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -311,7 +311,7 @@
 
     </header>
 
-    <div class="bg-white dark:bg-gray-900 pt-4" id="about">
+    <div class="bg-white dark:bg-gray-900" id="about">
 
         <div class="justify-center text-center items-center space-y-4">
             <h1 class="capitalize text-3xl text-center text-gray-700 dark:text-gray-300">
@@ -325,7 +325,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto px-4 pt-4">
+        <div class="container mx-auto px-4 pt-2">
             <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 ">
                 <h2 class="p-2 capitalize text-2xl text-center">
                     From Unlimited Sources
@@ -380,7 +380,7 @@
             </div>
 
             <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300">
-                <h2 class="px-2 py-4 capitalize text-2xl text-center">Advanced Filtering</h2>
+                <h2 class="px-2 py-2 capitalize text-2xl text-center">Advanced Filtering</h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="space-y-2 py-2 text-lg">
                         <p class="px-2">
@@ -555,12 +555,38 @@
 
     <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center items-center" id="status">
 
-        <div class="container mx-auto pt-4 px-2 space-y-4 justify-center items-center max-w-4xl">
-            <div class="mt-4 px-4 md:flex justify-center items-center">
+        <div class="container mx-auto pt-4 px-2 space-y-4 justify-center items-center max-w-6xl">
+            <div class="mt-2 px-4 md:flex justify-center items-center">
                 <h1 class="text-3xl capitalize lg:text-4xl justify-center text-center">Status</h1>
             </div>
 
-            <div class="mt-2 grid grid-cols-1 md:grid-cols-2 justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 justify-center md:space-x-4 max-w-4xl">
+
+                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Most Popular Sources</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Publishing most read messages recently.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-popular-sources">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Most Followed Interests</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Public interests with most followers.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-followed-interests">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
 
                 <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
                     <div class="col-span-4 text-xl">
@@ -582,6 +608,50 @@
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p>30 Days</p>
                         <p class="font-mono" id="publishers-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
+                        <p>Published Messages</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Min</p>
+                        <p class="font-mono" id="pub-last-1m"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="pub-last-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="pub-last-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>30 Days</p>
+                        <p class="font-mono" id="pub-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2 align-top place-content-start">
+                    <div class="col-span-4 text-xl">
+                        <p>Input Queue</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Submitted and waiting messages.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="evt-queue-curr"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="evt-queue-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="evt-queue-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
                     </div>
                 </div>
 
@@ -610,29 +680,6 @@
 
                 <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
                     <div class="col-span-4 text-xl">
-                        <p>Published Messages</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Min</p>
-                        <p class="font-mono" id="pub-last-1m"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="pub-last-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="pub-last-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
-                        <p class="font-mono" id="pub-last-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
                         <p>Read Messages</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Message read count over a recent time period.</p>
                     </div>
@@ -654,46 +701,14 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2 align-top place-content-start">
-                    <div class="col-span-4 text-xl">
-                        <p>Input Queue</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Submitted and waiting messages.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
-                        <p class="font-mono" id="evt-queue-curr"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="evt-queue-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="evt-queue-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                    </div>
-                </div>
-
-                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Most Popular Sources</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Publishing most read messages recently.</p>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-popular-sources">
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
     </div>
 
     <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 " id="solutions">
-        <div class="container mx-auto px-6 pt-8 space-y-4">
-            <div class="mt-6 md:flex justify-center">
+        <div class="container mx-auto px-4 pt-4 space-y-4">
+            <div class="mt-4 md:flex justify-center">
                 <h1 class="text-3xl capitalize lg:text-4xl text-center">Solutions</h1>
             </div>
 
@@ -913,8 +928,8 @@
     </div>
 
     <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center" id="resources">
-        <div class="container mx-auto px-6 pt-8 space-y-4 justify-center">
-            <div class="mt-6 md:flex justify-center text-center">
+        <div class="container mx-auto px-4 pt-4 space-y-4 justify-center">
+            <div class="mt-4 md:flex justify-center text-center">
                 <div class="justify-center text-center">
                     <h1 class="text-3xl lg:text-4xl capitalize dark:text-white text-center justify-center">
                         Resources</h1>

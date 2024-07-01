@@ -10,6 +10,13 @@ const templateSrcPopular = (share, url) => `
     </div>
 `
 
+const templateIntPopular = (id, data) => `
+    <div class="space-x-1 truncate">
+        <span>${data.hasOwnProperty("followers") ? data.followers : '?'}</span>
+        <a href="/sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
+    </div>
+`
+
 async function loadStatus() {
     return loadStatusWithRetry({})
         .then(resp => {
@@ -166,6 +173,16 @@ async function loadStatus() {
                         const share = (100 * e[1].day).toFixed(1);
                         elemPopSrcs.innerHTML += templateSrcPopular(share, e[0]);
                     })
+
+                const elemPopInts = document.getElementById("most-followed-interests");
+                let count = 0;
+                Object
+                    .entries(data.interestsMostFollowed)
+                    .sort((a, b) => b[1].followers - a[1].followers)
+                    .slice(0, 5)
+                    .forEach(e => {
+                        elemPopInts.innerHTML += templateIntPopular(e[0], e[1]);
+                    });
 
             } else {
                 throw new Error("Empty status response");

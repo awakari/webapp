@@ -560,7 +560,7 @@
                 <h1 class="text-3xl capitalize lg:text-4xl justify-center text-center">Status</h1>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 justify-center md:space-x-4 max-w-4xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 justify-center">
 
                 <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
                     <div class="col-span-4 text-xl">
@@ -584,10 +584,6 @@
                     </div>
                 </div>
 
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-
                 <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
                     <div class="col-span-4 text-xl">
                         <p>Active Publishers</p>
@@ -608,50 +604,6 @@
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p>30 Days</p>
                         <p class="font-mono" id="publishers-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
-                        <p>Published Messages</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Min</p>
-                        <p class="font-mono" id="pub-last-1m"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="pub-last-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="pub-last-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
-                        <p class="font-mono" id="pub-last-30d"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2 align-top place-content-start">
-                    <div class="col-span-4 text-xl">
-                        <p>Input Queue</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Submitted and waiting messages.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
-                        <p class="font-mono" id="evt-queue-curr"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
-                        <p class="font-mono" id="evt-queue-1h"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
-                        <p class="font-mono" id="evt-queue-1d"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
                     </div>
                 </div>
 
@@ -680,6 +632,29 @@
 
                 <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
                     <div class="col-span-4 text-xl">
+                        <p>Published Messages</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Min</p>
+                        <p class="font-mono" id="pub-last-1m"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="pub-last-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="pub-last-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>30 Days</p>
+                        <p class="font-mono" id="pub-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-xl">
                         <p>Read Messages</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Message read count over a recent time period.</p>
                     </div>
@@ -698,6 +673,27 @@
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p>30 Days</p>
                         <p class="font-mono" id="read-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2 align-top place-content-start">
+                    <div class="col-span-4 text-xl">
+                        <p>Input Queue</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">Submitted and waiting messages.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>Current</p>
+                        <p class="font-mono" id="evt-queue-curr"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Hour</p>
+                        <p class="font-mono" id="evt-queue-1h"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p>1 Day</p>
+                        <p class="font-mono" id="evt-queue-1d"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
                     </div>
                 </div>
 

@@ -2,7 +2,7 @@ const templateSub = (sub) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[320px] sm:w-[400px] space-x-1"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
                     <span class="pr-1 py-2 text-slate-500">
-                        ${sub.public ? '🔉': ''}
+                        ${sub.public ? '👁': ''}
                         <sup>${sub.hasOwnProperty("followers")? sub.followers : '' }</sup>                     
                     </span>
                     <span class="truncate py-2 grow">

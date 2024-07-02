@@ -45,7 +45,7 @@
 
 <header>
     <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
-        Welcome to Awakari
+        Login to Awakari
     </nav>
 </header>
 
@@ -54,53 +54,43 @@
 
     <div class="items-center justify-center flex flex-col space-y-2">
 
-        <p class="text-lg">Choose how to read</p>
+        <!-- Telegram -->
+        <div>
+            <script async
+                    src="https://telegram.org/js/telegram-widget.js?22"
+                    data-telegram-login="AwakariBot"
+                    data-size="large"
+                    data-onauth="handleAuthTelegram(user)"
+                    data-request-access="write"
+                    data-radius="4"
+                    data-userpic="false">
+            </script>
+        </div>
 
-        <div class="justify-center grid grid-cols-3 items-center space-x-2 space-y-2">
-
-            <!-- Telegram -->
-            <div class="flex items-center pl-2 pt-2">
-                <div class="text-right w-full">Telegram</div>
+        <!-- Google -->
+        <div class="justify-center">
+            <div id="g_id_onload"
+                 data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleAuthGoogle"
+                 data-auto_prompt="false">
             </div>
-            <div class="col-span-2">
-                <script async
-                        src="https://telegram.org/js/telegram-widget.js?22"
-                        data-telegram-login="AwakariBot"
-                        data-size="large"
-                        data-onauth="handleAuthTelegram(user)"
-                        data-request-access="write"
-                        data-radius="4"
-                        data-userpic="false">
-                </script>
-            </div>
-
-            <!-- Google -->
-            <div class="flex items-center">
-                <div class="text-right w-full">RSS feed</div>
-            </div>
-            <div class="justify-center col-span-2">
-                <div id="g_id_onload"
-                     data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
-                     data-context="signin"
-                     data-ux_mode="popup"
-                     data-callback="handleAuthGoogle"
-                     data-auto_prompt="false">
-                </div>
-                <div class="g_id_signin"
-                     data-type="standard"
-                     data-shape="rectangular"
-                     data-theme="outline"
-                     data-text="signin_with"
-                     data-size="large"
-                     data-width="188"
-                     data-logo_alignment="left">
-                </div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-shape="rectangular"
+                 data-theme="outline"
+                 data-text="signin_with"
+                 data-size="large"
+                 data-width="188"
+                 data-logo_alignment="left">
             </div>
         </div>
+
     </div>
 
     <p class="text-lg p-2 pt-4 text-center">Mobile Application</p>
-    <div class="flex-col mx-auto justify-center space-y-1">
+    <div class="flex-col mx-auto justify-center space-y-1 pr-2">
         <a href="awakari.apk" class="text-blue-500 flex items-center" download="download">
             <!-- android icon from svgrepo.com -->
             <svg class="w-8 h-8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

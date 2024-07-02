@@ -171,7 +171,7 @@
 
 <main>
     <header class="bg-white dark:bg-gray-900">
-        <nav x-data="{ isOpen: false }" class="p-2 sm:p-4 items-center justify-center mx-auto">
+        <nav x-data="{ isOpen: false }" class="p-2 sm:pt-4 items-center justify-center mx-auto">
             <div class="flex flex-row items-center justify-center max-w-[640px] align-middle mx-auto space-x-1">
 
                 <a class="text-xl text-slate-800 dark:text-slate-200 dark:hover:text-gray-300" href="#">
@@ -228,7 +228,7 @@
                 <div id="menu-default"
                      class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
-                       href="#about">About</a>
+                       href="login.html">Login <i class="fa fa-sign-in"></i></a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
                        href="#status">Status</a>
                     <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
@@ -313,26 +313,11 @@
 
     <div class="bg-white dark:bg-gray-900" id="about">
 
-        <div class="justify-center text-center items-center space-y-4">
-            <h1 class="capitalize text-3xl text-center text-gray-700 dark:text-gray-300">
-                Follow Your Interests
-            </h1>
-            <div class="flex justify-center items-center text-xl font-semibold">
-                <button onclick="window.location.assign('login.html')"
-                        class="w-24 h-10 transform rounded-md bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-slate-300 focus:ring-opacity-80">
-                    Start
-                </button>
-            </div>
-        </div>
-
-        <div class="container mx-auto px-4 pt-2">
+        <div class="container mx-auto px-4">
             <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 ">
-                <h2 class="p-2 capitalize text-2xl text-center">
-                    From Unlimited Sources
-                </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-end">
-                        <img src="how-it-works.svg?v=0309b0a" alt="how it works" class="min-w-80 sm:max-w-[512px]"/>
+                        <img src="how-it-works-2024-07-02.svg?v=0309b0a" alt="how it works" class="min-w-80 sm:max-w-[512px]"/>
                     </div>
                     <div class="space-y-4 py-4 sm:pt-4 text-lg">
                         <p class="align-text-middle px-4 pt-2">
@@ -372,7 +357,7 @@
                             <span>Telegram Channels</span>
                         </p>
                         <p class="align-text-middle px-4">
-                            Discovers new matching sources on every new interest.</p>
+                            Discovers new sources matching your interest.</p>
                         <p class="align-text-middle px-4">
                             Not enough? Add own source!</p>
                     </div>
@@ -380,11 +365,11 @@
             </div>
 
             <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300">
-                <h2 class="px-2 py-2 capitalize text-2xl text-center">Advanced Filtering</h2>
+                <h2 class="px-2 py-4 capitalize text-3xl text-center">Advanced Filtering</h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="space-y-2 py-2 text-lg">
                         <p class="px-2">
-                            No more spam. Define what is important to match.
+                            No more spam. Define what is important to you.
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
                             <span class="h-6 w-6">
@@ -502,9 +487,9 @@
                 </div>
             </div>
 
-            <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 pt-2">
-                <h2 class="p-2 capitalize text-2xl text-center">
-                    Read In Your Favorite App
+            <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 pt-4">
+                <h2 class="p-2 py-4 capitalize text-3xl text-center">
+                    <span class="whitespace-nowrap">Read In Your</span> <span class="whitespace-nowrap">Favorite App</span>
                 </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-center sm:justify-end pt-2 px-2">
@@ -542,6 +527,10 @@
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             Use message attributes to fine-tune your filter conditions.
+                        </p>
+                        <p class="px-4 align-text-middle space-x-2 flex">
+                            Follow any existing public interests.
+                            Share your interests to public.
                         </p>
                         <p class="px-4 align-text-middle space-x-2 flex">
                             Awakari doesn't collect any user data. No cookies, no tracking.

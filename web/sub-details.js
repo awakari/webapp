@@ -124,7 +124,9 @@ function loadSubDetailsById(id) {
     document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
     document.getElementById("sub-discovered-sources").style.display = "block";
-    document.getElementById("button-follow").style.display = "block";
+    document.getElementById("area-follow").style.display = "flex";
+    document.getElementById("follow-feed").href = `https://reader.awakari.com/v1/sub/rss/${id}`;
+    document.getElementById("follow-telegram").href = `https://t.me/AwakariBot?start=${id}`;
     const headers = getAuthHeaders();
     Subscriptions
         .fetch(id, headers)
@@ -648,12 +650,22 @@ function validateCondition(cond) {
     return cond;
 }
 
-function followInterest(id) {
-    const headers = getAuthHeaders();
-    const userId = headers["X-Awakari-User-Id"];
-    if (userId.startsWith("tg://user?id=")) {
-        window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
-    } else {
-        window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function followDropdown() {
+    document.getElementById("follow-dropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
 }

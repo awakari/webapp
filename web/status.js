@@ -13,7 +13,7 @@ const templateSrcPopular = (share, url) => `
 const templateIntPopular = (id, data) => `
     <div class="space-x-1 truncate">
         <span>${data.hasOwnProperty("followers") ? data.followers : '?'}</span>
-        <a href="/sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
+        <a href="sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
     </div>
 `
 

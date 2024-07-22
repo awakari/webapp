@@ -177,6 +177,9 @@ function loadSubDetailsById(id) {
                     srcListElement.innerHTML += templateDiscoveredSrc(addr, "apub");
                 }
             }
+        })
+        .catch(e => {
+           console.log(e);
         });
     Sources
         .fetchListPageResponse("feed", false, "ASC", srcPageLimitPerType, "", headers, id)
@@ -193,6 +196,9 @@ function loadSubDetailsById(id) {
                     srcListElement.innerHTML += templateDiscoveredSrc(addr, "feed");
                 }
             }
+        })
+        .catch(e => {
+            console.log(e);
         });
     Sources
         .fetchListPageResponse("tgch", false, "ASC", srcPageLimitPerType, "", headers, id)
@@ -209,6 +215,9 @@ function loadSubDetailsById(id) {
                     srcListElement.innerHTML += templateDiscoveredSrc(addr, "tgch");
                 }
             }
+        })
+        .catch(e => {
+            console.log(e);
         });
 }
 

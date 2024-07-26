@@ -37,8 +37,22 @@
         <form class="max-w-[480px] grow">
 
             <div class="flex mb-4" id="area-id">
-                <label for="id" style="margin-top: 0.125rem">Id:</label>
-                <input type="text" readonly="readonly" id="id" class="ml-2 border-none">
+                <label for="id" style="margin-top: 0.125rem">
+                    <span class="tooltip">
+                        Name
+                        <span class="tooltiptext" style="width: 332px">
+                            <p>A unique short name. Can't be changed once set.</p>
+                            <p>Random name is set when not specified.</p>
+                            <p>Max 36 symbols, ASCII letters, digits or dash ("-").</p>
+                        </span>
+                    </span>
+                </label>
+                <input type="text"
+                       readonly="readonly"
+                       id="id"
+                       maxlength="36"
+                       pattern="[a-zA-Z0-9]+"
+                       class="ml-2">
             </div>
 
             <div class="flex flex-col space-y-3">

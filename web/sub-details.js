@@ -121,7 +121,6 @@ const templateDiscoveredSrc = (addr, type) => `
 
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
-    document.getElementById("area-id").style.display = "flex";
     document.getElementById("button-delete").style.display = "flex";
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("area-follow").style.display = "flex";
@@ -222,8 +221,8 @@ function loadSubDetailsById(id) {
 }
 
 function loadSubDetailsByExample(exampleName) {
-    document.getElementById("area-id").style.display = "none";
     document.getElementById("button-delete").style.display = "none";
+    document.getElementById("id").readOnly = false;
     switch (exampleName) {
         case "cat-images": {
             document.getElementById("description").value = "Cat Images";
@@ -295,8 +294,8 @@ function loadSubDetailsByExample(exampleName) {
 }
 
 function loadSubDetailsByQuery(q) {
+    document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
-    document.getElementById("area-id").style.display = "none";
     document.getElementById("button-delete").style.display = "none";
     addConditionText(false, "", q, false);
     displayConditions();
@@ -520,7 +519,8 @@ function deleteSubscription() {
 }
 
 function submitSubscription() {
-    const id = document.getElementById("id").value;
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
     if (id) {
         updateSubscription(id);
     } else {
@@ -564,6 +564,7 @@ function updateSubscription(id) {
 function createSubscription() {
     const cond = getRootCondition();
     if (cond != null) {
+        const name = document.getElementById("id").value;
         let expires = document.getElementById("expires").value;
         if (expires && expires !== "") {
             const d = new Date(expires);
@@ -582,7 +583,7 @@ function createSubscription() {
         const userId = headers["X-Awakari-User-Id"];
         document.getElementById("wait").style.display = "block";
         Subscriptions
-            .create(descr, true, expires, isPublic, cond, discoverSourcesFlag, headers)
+            .create(name, descr, true, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(id => {
                 if (id) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";

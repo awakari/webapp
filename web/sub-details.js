@@ -135,6 +135,18 @@ function loadSubDetailsById(id) {
                 document.getElementById("description").value = data.description;
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
+                    document.getElementById("follow-fediverse").style.display = "block";
+                    document.getElementById("follow-fediverse").onclick = () => {
+                        const addrFediverse = `@${id}@activitypub.awakari.com`;
+                        navigator
+                            .clipboard
+                            .writeText(addrFediverse)
+                            .then(() => {
+                                alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
+                            })
+                    }
+                } else {
+                    document.getElementById("follow-fediverse").style.display = "none";
                 }
                 if (data.hasOwnProperty("followers")) {
                     document.getElementById("followers").value = data.followers;

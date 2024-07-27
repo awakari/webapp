@@ -144,7 +144,7 @@ function loadSubDetailsById(id) {
                             .writeText(addrFediverse)
                             .then(() => {
                                 alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
-                            })
+                            });
                     }
                 } else {
                     document.getElementById("follow-fediverse").style.display = "none";
@@ -601,17 +601,25 @@ function createSubscription() {
                 if (id) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";
                     document.getElementById("new-sub-id").innerText = id;
-                    if (userId) {
-                        if (userId.startsWith("tg://user?id=")) {
-                            document.getElementById("sub-new-success-btn-tg").style.display = "block";
-                            document.getElementById("sub-new-success-btn-tg").onclick = () => {
-                                window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
-                            }
-                        } else {
-                            document.getElementById("sub-new-success-btn-feed").style.display = "block";
-                            document.getElementById("sub-new-success-btn-feed").onclick = () => {
-                                window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
-                            }
+                    document.getElementById("sub-new-success-btn-tg").onclick = () => {
+                        window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
+                    }
+                    if (isPublic || (userId && !userId.startsWith("tg://user?id="))) {
+                        document.getElementById("sub-new-success-btn-feed").style.display = "block";
+                        document.getElementById("sub-new-success-btn-feed").onclick = () => {
+                            window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
+                        }
+                    }
+                    if (isPublic) {
+                        document.getElementById("sub-new-success-btn-ap").style.display = "block";
+                        document.getElementById("sub-new-success-btn-ap").onclick = () => {
+                            const addrFediverse = `@${id}@activitypub.awakari.com`;
+                            navigator
+                                .clipboard
+                                .writeText(addrFediverse)
+                                .then(() => {
+                                    alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
+                                })
                         }
                     }
                 }

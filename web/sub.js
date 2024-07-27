@@ -1,11 +1,10 @@
 const templateSub = (sub) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[320px] sm:w-[400px] space-x-1"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
-                    <span class="pr-1 py-2 text-slate-500 flex h-8">
-                        ${sub.public ? '<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>': ''}
-                        <span class="text-xs">${sub.hasOwnProperty("followers")? sub.followers : '?' }</span>                     
+                    <span class="pt-1 text-slate-500 flex h-8">
+                        <span class="text-xs">${sub.hasOwnProperty("followers")? sub.followers : '' }</span>                     
                     </span>
-                    <span class="truncate py-2 grow">
+                    ${sub.public ? '<span class="truncate py-2 grow">' : '<span class="truncate py-2 grow text-slate-500 dark:text-gray-400 hover:text-blue-500">'}
                         ${sub.description}
                     </span>
                     <span class="pt-1">

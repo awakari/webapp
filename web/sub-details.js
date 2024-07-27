@@ -121,6 +121,7 @@ const templateDiscoveredSrc = (addr, type) => `
 
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
+    document.getElementById("me").href = `https://activitypub.awakari.com/@${id}`;
     document.getElementById("button-delete").style.display = "flex";
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("area-follow").style.display = "flex";
@@ -238,7 +239,7 @@ function loadSubDetailsByExample(exampleName) {
     switch (exampleName) {
         case "cat-images": {
             document.getElementById("description").value = "Cat Images";
-            addConditionText(false, "","cat gato قطة katze кошка chatte katt kissa köttur", false);
+            addConditionText(false, "","قطة katze кошка chatte katt kissa köttur", false);
             addConditionText(false, "imageurl", "http https", false);
             document.getElementById("sub-discover-sources").checked = false;
             break;

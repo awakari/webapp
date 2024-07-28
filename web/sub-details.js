@@ -121,7 +121,6 @@ const templateDiscoveredSrc = (addr, type) => `
 
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
-    document.getElementById("me").href = `https://activitypub.awakari.com/@${id}`;
     document.getElementById("button-delete").style.display = "flex";
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("area-follow").style.display = "flex";

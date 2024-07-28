@@ -12,7 +12,7 @@ const templateSrcPopular = (share, url) => `
 
 const templateIntPopular = (id, data) => `
     <div class="space-x-1 truncate">
-        <span>${data.hasOwnProperty("followers") ? data.followers : '?'}</span>
+        <span>${data.hasOwnProperty("followers") ? data.followers : '0'}</span>
         <a href="sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
     </div>
 `
@@ -178,6 +178,7 @@ async function loadStatus() {
                 let count = 0;
                 Object
                     .entries(data.interestsMostFollowed)
+                    .filter(e => e[1].hasOwnProperty("followers"))
                     .sort((a, b) => b[1].followers - a[1].followers)
                     .slice(0, 5)
                     .forEach(e => {

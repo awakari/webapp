@@ -27,7 +27,7 @@ metadata:
       more_set_headers "etag: 2f2b4c8";
       sub_filter_once off;
       sub_filter_types *;
-      sub_filter 'https://activitypub.awakari.com@' 'https://activitypub.awakari.com@$arg_id';
+      sub_filter 'https://activitypub.awakari.com/@me' 'https://activitypub.awakari.com/@$arg_id';
 spec:
   {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
   ingressClassName: {{ .Values.ingress.className }}

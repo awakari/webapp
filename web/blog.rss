@@ -11,7 +11,7 @@
         <description>Awakari Blog: updates, news, changelog</description>
         <image>
             <title>Awakari</title>
-            <url>https://awakari.com/logo-color.svg</url>
+            <url>https://awakari.com/logo-color-64.png</url>
             <link>https://awakari.com</link>
         </image>
 
@@ -19,14 +19,9 @@
             <title>Sharing Interests</title>
             <description>Create or follow a public interest.</description>
             <content:encoded>
-                <![CDATA[
-                    <p>
-                        Everyone now can create public interests. A public interest is visible to others. Also everyone
-                        can follow it.
-                    </p>
-                ]]>
+                <![CDATA[ <p>Everyone now can create public interests. A public interest is visible to others. Also everyone can follow it.</p> ]]>
             </content:encoded>
-            <pubDate>Wed, 31 Jul 2024 16:12:00 +0300</pubDate>
+            <pubDate>Wed, 31 Jul 2024 16:13:00 +0300</pubDate>
             <category>introduction interest sharing social awakari</category>
             <enclosure url="https://awakari.com/blog/2024-07-31.jpg"
                        length="66583"
@@ -36,7 +31,7 @@
         <item>
             <title>Awakari Blog</title>
             <description>Launching the Awakari Blog.</description>
-            <pubDate>Wed, 31 Jul 2024 17:48:00 +0300</pubDate>
+            <pubDate>Wed, 31 Jul 2024 17:49:00 +0300</pubDate>
             <category>introduction awakari</category>
         </item>
 

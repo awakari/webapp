@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom"
+     version="2.0">
+
+    <channel>
+
+        <language>en</language>
+        <title>Awakari Blog</title>
+        <link>https://awakari.com/blog.rss</link>
+        <atom:link href="https://awakari.com/blog.rss" rel="self" type="application/rss+xml" />
+        <description>Awakari Blog: updates, news, changelog</description>
+        <image>
+            <title>Awakari</title>
+            <url>https://awakari.com/logo-color.svg</url>
+            <link>https://awakari.com</link>
+        </image>
+
+        <item>
+            <title>Sharing Interests</title>
+            <description>Create or follow a public interest.</description>
+            <content:encoded>
+                <![CDATA[
+                    <p>
+                        Everyone now can create public interests. A public interest is visible to others. Also everyone
+                        can follow it.
+                    </p>
+                ]]>
+            </content:encoded>
+            <pubDate>Wed, 31 Jul 2024 16:12:00 +0300</pubDate>
+            <category>introduction interest sharing social awakari</category>
+            <enclosure url="https://awakari.com/blog/2024-07-31.jpg"
+                       length="66583"
+                       type="image/jpeg"/>
+        </item>
+
+        <item>
+            <title>Awakari Blog</title>
+            <description>Launching the Awakari Blog.</description>
+            <pubDate>Wed, 31 Jul 2024 17:48:00 +0300</pubDate>
+            <category>introduction awakari</category>
+        </item>
+
+    </channel>
+
+</rss>

@@ -3,7 +3,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -59,7 +59,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -115,7 +115,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -171,7 +171,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -227,7 +227,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -283,7 +283,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -339,7 +339,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -395,7 +395,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -451,7 +451,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"
@@ -507,7 +507,7 @@ const evtsTest = [
         "id": "6b7aa6f5-657e-4cb9-9105-bfec617aefdb",
         "source": "https://www.avito.ru",
         "spec_version": "1.0",
-        "type": "com.awakari.feeds.v1",
+        "type": "com_awakari_feeds_v1",
         "attributes": {
             "awakarigroupid": {
                 "ce_string": "default"

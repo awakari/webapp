@@ -1,23 +1,23 @@
-function handleResponseStatus(code) {
+function handleResponseStatus(obj, code) {
     switch (code) {
         case 400:
-            alert("Invalid request.");
+            alert(`Invalid request: ${obj}`);
             break
         case 401:
             logoutConfirmed();
             window.location.assign(`login.html?redirect=${window.location}`);
             break;
         case 404:
-            alert("Not found.");
+            alert(`Not found: ${obj}`);
             break
         case 409:
-            alert("Already exists.");
+            alert(`Already exists: ${obj}`);
             break
         case 429:
             alert("Limit reached. Request to increase.");
             break;
         default:
-            alert(`Operation failed, response status: ${code}`);
+            alert(`${obj} failed, response status: ${code}`);
             break;
     }
 }

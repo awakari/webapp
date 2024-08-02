@@ -12,7 +12,7 @@ Limits.fetch = function (subj, headers) {
                     return resp;
                 }
                 if (subj === "1" || subj === "2") {
-                    handleResponseStatus(resp.status);
+                    handleResponseStatus("Get usage limit", resp.status);
                 } else {
                     alert(`Invalid subject: ${subj}`);
                 }

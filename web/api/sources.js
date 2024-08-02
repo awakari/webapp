@@ -17,7 +17,7 @@ Sources.fetch = function (typ, addrEnc, headers) {
     })
         .then(resp => {
             if (!resp.ok) {
-                handleResponseStatus(resp.status);
+                handleResponseStatus(`Get source ${addrEnc}`, resp.status);
                 return null;
             }
             return resp;
@@ -34,7 +34,7 @@ Sources.delete = function (typ, addrEnc, headers) {
             if (resp.ok) {
                 return resp;
             }
-            handleResponseStatus(resp.status);
+            handleResponseStatus(`Delete source ${addrEnc}`, resp.status);
             return null;
         });
 }

@@ -19,7 +19,7 @@ Events.publishInternal = function (payload, headers) {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                handleResponseStatus(resp.status);
+                handleResponseStatus("Publish internal event", resp.status);
                 return null;
             }
             return resp;
@@ -35,7 +35,7 @@ Events.publish = function (payload, headers) {
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                handleResponseStatus(resp.status);
+                handleResponseStatus("Publish event", resp.status);
                 return null;
             }
             return resp;

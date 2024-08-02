@@ -9,7 +9,7 @@ Subscriptions.fetchListPage = function (cursor, followers, order, limit, filter,
         .then(resp => {
             if (resp) {
                 if (!resp.ok) {
-                    handleResponseStatus(resp.code);
+                    handleResponseStatus(`List interests`, resp.status);
                     return null;
                 }
                 return resp;
@@ -30,7 +30,7 @@ Subscriptions.delete = function (id, headers) {
                 return resp;
             }
             resp.text().then(errMsg => console.error(errMsg));
-            handleResponseStatus(resp.status);
+            handleResponseStatus(`Delete interest ${id}`, resp.status);
             return null;
         });
 }
@@ -61,7 +61,7 @@ Subscriptions.create = function (name, descr, enabled, expires, isPublic, cond, 
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                handleResponseStatus(resp.status);
+                handleResponseStatus(`Create interest ${name}`, resp.status);
                 return null;
             }
             return resp.json();
@@ -84,7 +84,7 @@ Subscriptions.fetch = function (id, headers) {
     return fetch(`/v1/sub/${id}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
-                handleResponseStatus(resp.status);
+                handleResponseStatus(`Get interest ${id}`, resp.status);
                 return null;
             }
             return resp;
@@ -112,7 +112,7 @@ Subscriptions.update = function (id, descr, enabled, expires, isPublic, cond, di
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))
-                handleResponseStatus(resp.status);
+                handleResponseStatus(`Update interest ${id}`, resp.status);
                 return null;
             }
             return resp;

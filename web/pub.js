@@ -98,7 +98,7 @@ function loadSources(cursor, filter, srcType, own) {
         .fetchListPageResponse(srcType, own, order, pageLimit, encodeURIComponent(filter), headers, "")
         .then(resp => {
             if (!resp.ok) {
-                handleResponseStatus(resp.status);
+                handleResponseStatus("List sources", resp.status);
                 return null;
             }
             return resp.json();

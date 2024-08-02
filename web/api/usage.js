@@ -12,7 +12,7 @@ Usage.fetch = function (subj, headers) {
                     return resp;
                 }
                 if (subj === "1" || subj === "2") {
-                    handleResponseStatus(resp.status);
+                    handleResponseStatus(`Get subject ${subj} usage`, resp.status);
                 } else {
                     alert(`Invalid usage subject: ${subj}`);
                 }

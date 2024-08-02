@@ -177,7 +177,7 @@ function loadSubDetailsById(id) {
         .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
         .then(resp => {
             if (!resp.ok) {
-                handleResponseStatus(resp.status);
+                handleResponseStatus("List ActivityPub sources", resp.status);
                 return null;
             }
             return resp.json();
@@ -196,7 +196,7 @@ function loadSubDetailsById(id) {
         .fetchListPageResponse("feed", false, "ASC", srcPageLimitPerType, "", headers, id)
         .then(resp => {
             if (!resp.ok) {
-                handleResponseStatus(resp.status);
+                handleResponseStatus("List Feed sources", resp.status);
                 return null;
             }
             return resp.json();
@@ -215,7 +215,7 @@ function loadSubDetailsById(id) {
         .fetchListPageResponse("tgch", false, "ASC", srcPageLimitPerType, "", headers, id)
         .then(resp => {
             if (!resp.ok) {
-                handleResponseStatus(resp.status);
+                console.log(`List Telegram sources: ${resp.status}, ${resp.statusText}`);
                 return null;
             }
             return resp.json();

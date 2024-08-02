@@ -576,7 +576,7 @@ document
                 .then(resp => {
                     if (resp) {
                         if (!resp.ok) {
-                            handleResponseStatus(resp.code);
+                            handleResponseStatus(`Search [${q}]`, resp.code);
                             return null;
                         }
                         return resp.json();

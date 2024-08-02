@@ -211,7 +211,7 @@ function submitMsg() {
         id: document.getElementById("msg_id").value,
         specVersion: "1.0",
         source: "awakari.com",
-        type: "com.awakari.webapp",
+        type: "com_awakari_webapp",
         attributes: JSON.parse(document.getElementById("msg_attrs").value),
         text_data: document.getElementById("msg_txt_data").value,
     }

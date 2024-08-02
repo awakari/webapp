@@ -21,7 +21,7 @@ async function requestIncreasePublishingLimit(objId) {
                     id: Events.newId(),
                     specVersion: "1.0",
                     source: "awakari.com",
-                    type: "com.awakari.webapp",
+                    type: "com_awakari_webapp",
                     attributes: {
                         increment: {
                             ce_integer: inc,
@@ -64,7 +64,7 @@ async function requestPublishingSourceDedicated(addr){
                 id: Events.newId(),
                 specVersion: "1.0",
                 source: "awakari.com",
-                type: "com.awakari.webapp",
+                type: "com_awakari_webapp",
                 attributes: {
                     reason: {
                         ce_string: reason,
@@ -110,7 +110,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
                     id: Events.newId(),
                     specVersion: "1.0",
                     source: "awakari.com",
-                    type: "com.awakari.webapp",
+                    type: "com_awakari_webapp",
                     attributes: {
                         increment: {
                             ce_integer: inc,
@@ -152,7 +152,7 @@ async function reportPublishingSourceInappropriate(srcAddr) {
                 id: Events.newId(),
                 specVersion: "1.0",
                 source: "awakari.com",
-                type: "com.awakari.webapp",
+                type: "com_awakari_webapp",
                 attributes: {
                     reason: {
                         ce_string: reason,
@@ -189,7 +189,7 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
                 id: Events.newId(),
                 specVersion: "1.0",
                 source: "awakari.com",
-                type: "com.awakari.webapp",
+                type: "com_awakari_webapp",
                 attributes: {
                     reason: {
                         ce_string: reason,

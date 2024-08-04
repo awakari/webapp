@@ -236,13 +236,6 @@ function loadSubDetailsByExample(exampleName) {
     document.getElementById("button-delete").style.display = "none";
     document.getElementById("id").readOnly = false;
     switch (exampleName) {
-        case "cat-images": {
-            document.getElementById("description").value = "Cat Images";
-            addConditionText(false, "","قطة katze кошка chatte katt kissa köttur", false);
-            addConditionText(false, "imageurl", "http https", false);
-            document.getElementById("sub-discover-sources").checked = false;
-            break;
-        }
         case "cheap-iphone-alert": {
             document.getElementById("description").value = "Cheap iPhone alert";
             addConditionText(false, "","iphone", false);

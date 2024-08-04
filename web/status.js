@@ -79,29 +79,6 @@ async function loadStatus() {
                     document.getElementById("read-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
                 }
 
-                const evtQueueCurrent = data.queueLength.current;
-                if (evtQueueCurrent > 0) {
-                    document.getElementById("evt-queue-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtQueueCurrent)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueueCurrent)}</span>`;
-                }
-                const evtQueue1hChange = evtQueueCurrent - data.queueLength.past.hour;
-                if (evtQueue1hChange < 0) {
-                    document.getElementById("evt-queue-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1hChange)}</span>`;
-                } else if (evtQueue1hChange > 0) {
-                    document.getElementById("evt-queue-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1hChange)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-1h").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
-                }
-                const evtQueue1dChange = evtQueueCurrent - data.queueLength.past.day;
-                if (evtQueue1dChange < 0) {
-                    document.getElementById("evt-queue-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1dChange)}</span>`;
-                } else if (evtQueue1dChange > 0) {
-                    document.getElementById("evt-queue-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1dChange)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-1d").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
-                }
-
                 const subscriptionsCurrent = data.subscriptions.current;
                 if (subscriptionsCurrent > 0) {
                     document.getElementById("subscriptions-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(subscriptionsCurrent)}</span>`;

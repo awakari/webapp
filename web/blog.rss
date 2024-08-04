@@ -16,6 +16,20 @@
         </image>
 
         <item>
+            <title>Public Interests in the Fediverse</title>
+            <description>Now everyyone can follow any public interest in the Fediverse.</description>
+            <content:encoded>
+                <![CDATA[ <p>Awakari's public interests are now exposed in the Fediverse as actors publishing the matching content.</p><p>This adds the new way to follow and read in addition to following in Telegram and reading the RSS feed.</p> ]]>
+            </content:encoded>
+            <pubDate>Wed, 31 Jul 2024 16:13:00 +0300</pubDate>
+            <category>introduction interest sharing social awakari</category>
+            <enclosure url="https://awakari.com/blog/2024-08-04_09-00.png"
+                       length="174314"
+                       type="image/png"/>
+        </item>
+
+
+        <item>
             <title>Sharing Interests</title>
             <description>Create or follow a public interest.</description>
             <content:encoded>

@@ -22,6 +22,11 @@ input[type=text] {
     border-width: 1px;
     outline: none;
 }
+input[type=text]:invalid {
+    border-color: #ef4444;
+    border-width: 1px;
+    border-style: solid;
+}
 input[type=number] {
     border-color: #94a3b8;
     border-width: 1px;

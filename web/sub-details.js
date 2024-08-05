@@ -32,6 +32,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                 <div style="margin-top: 2px">Attribute</div>
                             </legend>
                             <input type="text"
+                                   pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
                                    class="border-none w-24 sm:w-32 autocomplete-input" 

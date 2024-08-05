@@ -16,6 +16,23 @@
         </image>
 
         <item>
+            <title>Terms of Service and Privacy Policy updated</title>
+            <description>The change refers to replacing the term "Company" with "Contributors".</description>
+            <pubDate>Mon, 05 Aug 2024 09:30:00 +0300</pubDate>
+            <category>awakari updates free publishing</category>
+        </item>
+
+        <item>
+            <title>Default Publishing Limit Increased</title>
+            <description>Default publishing limit is changed from 2 to 4 messages per hour.</description>
+            <content:encoded>
+                <![CDATA[ <p>Awakari now has more than 7.5K active sources publishing together nearly 1 message every second. Thanks to careful and scalable design it's still pretty far from saturation. Hence there's a room for additional work. </p> ]]>
+            </content:encoded>
+            <pubDate>Wed, 05 Aug 2024 09:00:00 +0300</pubDate>
+            <category>awakari updates free publishing</category>
+        </item>
+
+        <item>
             <title>Public Interests in the Fediverse</title>
             <description>Now everyyone can follow any public interest in the Fediverse.</description>
             <content:encoded>

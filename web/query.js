@@ -657,27 +657,7 @@ function displayEvents(evts) {
             time = new Date();
         }
         //
-        let link = evt.source;
-        if (link.startsWith("@")) {
-            link = `https://t.me/${link.substring(1)}`;
-        }
-        if (evt.attributes.hasOwnProperty("object")) {
-            if (evt.attributes.object.hasOwnProperty("ce_uri")) {
-                link = evt.attributes.object.ce_uri;
-            } else {
-                link = evt.attributes.object.ce_string;
-            }
-        }
-        if (evt.attributes.hasOwnProperty("objecturl")) {
-            if (evt.attributes.objecturl.hasOwnProperty("ce_uri")) {
-                link = evt.attributes.objecturl.ce_uri;
-            } else {
-                link = evt.attributes.objecturl.ce_string;
-            }
-        }
-        if (!link.startsWith("http://") && !link.startsWith("https://")) {
-            link = `https://${link}`;
-        }
+        let link = `pub-msg.html?id=${evt.id}`;
         //
         let txt = evt.text_data;
         if (evt.attributes.hasOwnProperty("description")) {

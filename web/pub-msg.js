@@ -1,7 +1,7 @@
 templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}" class="mt-1 flex w-full text-sm h-[24x] min-h-[24px] items-center space-x-1">
-                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="min-w-[64px] truncate border focus:shadow-md outline-none"/>
-                        <p id="msg_attr_${type}" class="min-w-[64px] truncate">${type}</p>
-                        <input type="text" id="msg_attr_${value}" value="${value}" disabled="disabled" class="${required ? 'min-w-[124px]' : ''} w-full truncate border focus:shadow-md outline-none text-slate-700"/>
+                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="${required ? 'border-none' : 'border'} min-w-[64px] truncate focus:shadow-md outline-none"/>
+                        <p id="msg_attr_type_${name}" class="min-w-[64px] truncate">${type}</p>
+                        <input type="text" id="msg_attr_val_${name}" value="${value}" disabled="disabled" class="${required ? 'min-w-[124px] border-none' : 'border'} w-full truncate focus:shadow-md outline-none text-slate-700"/>
                         <div style="${required ? 'display: none': ''}">
                             <button type="button" title="Add Attribute" onclick="deleteMessageAttribute('${name}');" class="text-2xl focus:outline-none flex items-center justify-center h-[24px] max-h-[24px] font-mono">
                                 -
@@ -10,7 +10,70 @@ templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}"
                     </span>`
 
 async function loadForm() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+    if (id) {
+        await loadEvent(id);
+    } else {
+        await loadFormNew();
+    }
+}
 
+async function loadEvent(id){
+    document.getElementById("msg_id").value = id;
+    document.getElementById("button-submit").style.display = "none";
+    document.getElementById("button-src-report").style.display = "flex";
+    document.getElementById("attr-add").style.display = "none";
+    document.getElementById("wait").style.display = "block";
+    Events
+        .fetch(id)
+        .then(resp => resp ? resp.json() : null)
+        .then(data => {
+            if (data) {
+                document.getElementById("button-src-report").onclick = () => {
+                    reportPublicationInappropriate(data.source, data.objecturl, data.id);
+                };
+                Object
+                    .keys(data)
+                    .forEach(k => {
+                        switch (k) {
+                            case "id": {
+                                break;
+                            }
+                            case "data": {
+                                document.getElementById("msg_txt_data").value = data.data;
+                                break;
+                            }
+                            default: {
+                                const v = data[k];
+                                if (Number.isInteger(v)) {
+                                    document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "integer", data[k], true);
+                                } else if (typeof v === "boolean") {
+                                    document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "boolean", data[k], true);
+                                } else {
+                                    const ts = new Date(v);
+                                    if (isNaN(ts)) {
+                                        let txt = data[k];
+                                        txt = txt.replace(/(<([^>]+)>)/gi, "");
+                                        document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "string", txt, true);
+                                    } else {
+                                        document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "timestamp", data[k], true);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    });
+            }
+        })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
+}
+
+async function loadFormNew() {
+    document.getElementById("button-src-report").style.display = "none";
+    document.getElementById("button-submit").style.display = "flex";
     document.getElementById("msg_attrs").value = "{}";
     document.getElementById("msg_attrs_form").innerHTML = "";
     document.getElementById("msg_id").value = Events.newId();
@@ -207,8 +270,9 @@ function deleteMessageAttribute(name) {
 }
 
 function submitMsg() {
+    const id = document.getElementById("msg_id").value;
     const payload = {
-        id: document.getElementById("msg_id").value,
+        id: id,
         specVersion: "1.0",
         source: "awakari.com",
         type: "com_awakari_webapp",
@@ -221,7 +285,7 @@ function submitMsg() {
         .publish(payload, headers)
         .then(sent => {
             if (sent) {
-                alert("Message has been sent");
+                alert(`Message has been sent, id: ${id}`);
                 loadForm(); // reset
             }
         })

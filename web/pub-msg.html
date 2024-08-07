@@ -18,7 +18,8 @@
     <script src="api/status.js"></script>
     <script src="attrs.js"></script>
     <script src="api/events.js"></script>
-    <script src="pub-msg-new.js"></script>
+    <script src="intcomm.js"></script>
+    <script src="pub-msg.js"></script>
 
 </head>
 <body onload="loadForm()" class="bg-white dark:bg-gray-900">
@@ -29,7 +30,7 @@
             <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
-    <span>New Message</span>
+    <span>Message Details</span>
     <div class="grow"></div>
     <button id="pub-tg"
             type="button"
@@ -54,7 +55,7 @@
             <span>
                 <p class="pt-2">Attributes</p>
                 <div id="msg_attrs_form"></div>
-                <span class="flex w-full text-sm h-[24x] min-h-[24px] items-center mt-1 space-x-1">
+                <span id="attr-add" class="flex w-full text-sm h-[24x] min-h-[24px] items-center mt-1 space-x-1">
                     <input type="text"
                            id="msg_attr_name"
                            class="min-w-[64px] truncate border focus:shadow-md outline-none"
@@ -101,6 +102,31 @@
                     </svg>
                     <span>Submit</span>
                 </button>
+                <button id="button-src-report" type="button" class="flex report justify-center text-center items-center">
+                    <span>⚠ Report</span>
+                </button>
+                <div id="report-success-dialog"
+                     class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1"
+                     style="position: absolute; display: none; margin-left: -1px">
+                    <div class="flex w-full">
+                        <div class="w-full">
+                                <span class="text-lg">
+                                    Report submitted.
+                                </span>
+                        </div>
+                        <button type="button"
+                                class="w-6 h-6"
+                                onclick="document.getElementById('report-success-dialog').style.display = 'none'">
+                            ✕
+                        </button>
+                    </div>
+                    <p>
+                        Report Id: <span id="report-id"></span>
+                    </p>
+                    <p>
+                        We review the report as soon as possible and update.
+                    </p>
+                </div>
                 <div class="absolute" id="wait" style="display: none">
                     <img src="wait.gif"/>
                 </div>

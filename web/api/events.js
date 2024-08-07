@@ -40,5 +40,17 @@ Events.publish = function (payload, headers) {
             }
             return resp;
         });
+}
 
+Events.fetch = function (id) {
+    return fetch(`https://reader.awakari.com/v1/evt/${id}`, {
+        method: "GET",
+    }).then(resp => {
+        if (!resp.ok) {
+            resp.text().then(errMsg => alert(errMsg));
+            handleResponseStatus(`Event id ${id}`, resp.status);
+            return null;
+        }
+        return resp;
+    });
 }

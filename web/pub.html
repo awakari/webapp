@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en" xmlns="http://www.w3.org/1999/html"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -91,9 +91,9 @@
                     </div>
                     <div class="pt-1 w-20" id="count"></div>
                     <div>
-                        <button type="button" class="flex justify-center text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2 w-[100px] items-center"
-                                onclick="localStorage.getItem(keyUserId) ? window.location.assign('pub-msg-new.html') : (confirm('This function is available for signed in users only. Proceed to sign in?') ? window.location.assign('login.html') : console.log('user refused to sign in to continue'))">
-                            <span style="font-size: large;"><b>+</b></span>&nbsp;Message
+                        <button type="button" class="flex justify-center items-center align-middle text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2 w-[100px] items-center"
+                                onclick="localStorage.getItem(keyUserId) ? window.location.assign('pub-msg.html') : (confirm('This function is available for signed in users only. Proceed to sign in?') ? window.location.assign('login.html') : console.log('user refused to sign in to continue'))">
+                            <span style="font-size: large">✉</span>&nbsp;Publish
                         </button>
                     </div>
                 </div>

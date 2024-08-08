@@ -1,3 +1,4 @@
+const Ksuid = {}
 //@ts-check
 
 /**
@@ -11,7 +12,7 @@ const BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
  * @param {DataView} view
  * @returns {string}
  */
-export function base62(view) {
+Ksuid.base62 = function (view) {
     if (view.byteLength !== 20) {
         throw new Error("incorrect buffer size")
     }
@@ -58,7 +59,7 @@ export function base62(view) {
  * @param {string} str
  * @returns {Uint8Array} buffer
  */
-export function debase62(str) {
+Ksuid.debase62 = function (str) {
     if (str.length !== 27) throw new Error('Expected 27 characters long base62 string')
     const srcBase = 62n
     const dstBase = 4294967296n
@@ -120,7 +121,7 @@ export function debase62(str) {
  * @param {boolean|undefined} desc order, `true` indicates xKSUID
  * @returns {number} seconds
  */
-export function toEpoch(timestamp, desc) {
+Ksuid.toEpoch = function (timestamp, desc) {
     if (!desc) {
         return Math.round(timestamp / 1000) - 14e8
     }
@@ -134,7 +135,7 @@ export function toEpoch(timestamp, desc) {
  * @param {boolean|undefined} desc
  * @returns {number} ms
  */
-export function fromEpoch(timestamp, desc) {
+Ksuid.fromEpoch = function (timestamp, desc) {
     if (!desc) {
         return (14e8 + timestamp) * 1000
     }
@@ -145,7 +146,7 @@ export function fromEpoch(timestamp, desc) {
  * Generates cryptographically strong random buffer
  * @returns {Uint8Array} 16 bytes of random binary values
  */
-export function randomBytes() {
+Ksuid.randomBytes = function () {
     return crypto.getRandomValues(new Uint8Array(16))
 }
 
@@ -155,19 +156,19 @@ export function randomBytes() {
  * @param {number} timestamp ms
  * @returns {string} 27 chars KSUID or 28 chars for xKSUID
  */
-export function generate(desc = false, timestamp = Date.now()) {
+Ksuid.generate = function (desc = false, timestamp = Date.now()) {
     const buf = new ArrayBuffer(20)
     const view = new DataView(buf)
-    const ts = toEpoch(timestamp, desc)
+    const ts = Ksuid.toEpoch(timestamp, desc)
     let offset = 0
     view.setUint32(offset, ts, false)
     offset += 4
-    const rnd = randomBytes()
+    const rnd = Ksuid.randomBytes()
     for (const b of rnd) {
         view.setUint8(offset++, b)
     }
-    if (desc) return 'z' + base62(view)
-    return base62(view)
+    if (desc) return 'z' + Ksuid.base62(view)
+    return Ksuid.base62(view)
 }
 
 /**
@@ -175,7 +176,7 @@ export function generate(desc = false, timestamp = Date.now()) {
  * @param {string} ksuid
  * @return {{ts:Date,rnd:ArrayBuffer}} parsed value
  */
-export function parse(ksuid) {
+Ksuid.parse = function (ksuid) {
     if (ksuid.length > 28 || ksuid.length < 27) {
         throw new Error(`Incorrect length: ${ksuid.length}, expected 27 or 28`)
     }
@@ -183,9 +184,9 @@ export function parse(ksuid) {
     if (ksuid.length === 28 && ksuid[0] != 'z') {
         throw new Error(`KSUID is 28 symbol, but first char is not "z"`)
     }
-    const buf = debase62(desc ? ksuid.slice(1, 28) : ksuid)
+    const buf = Ksuid.debase62(desc ? ksuid.slice(1, 28) : ksuid)
     const view = new DataView(buf.buffer)
     const tsValue = view.getUint32(0, false)
-    const ts = new Date(fromEpoch(tsValue, desc))
+    const ts = new Date(Ksuid.fromEpoch(tsValue, desc))
     return { ts, rnd: buf.buffer.slice(4) }
 }

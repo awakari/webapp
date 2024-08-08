@@ -195,19 +195,16 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
                         ce_string: reason,
                     },
                     action: {
-                        ce_string: "report",
+                        ce_string: "Flag", // see for example: https://docs.joinmastodon.org/spec/activitypub/#Flag
                     },
                     object: {
-                        ce_string: evtId,
-                    },
-                    objecturl: {
                         ce_uri: evtLink,
                     },
                     subject: {
                         ce_string: userIdCurrent,
                     },
                 },
-                text_data: `User ${userIdCurrent} reports the inappropriate message from ${srcAddr}, reason: ${reason}`,
+                text_data: `User ${userIdCurrent} reports the inappropriate message ${evtId} from ${srcAddr}, reason: ${reason}`,
             }
             const headers = getAuthHeaders();
             if (await Events.publishInternal(payload, headers)) {

@@ -16,6 +16,22 @@
         </image>
 
         <item>
+            <title>Reading Format Changes</title>
+            <description>All event attributes are now available by the link.</description>
+            <pubDate>Mon, 08 Aug 2024 09:44:00 +0300</pubDate>
+            <category>awakari updates event attributes reading</category>
+            <enclosure url="https://awakari.com/blog/2024-08-08_09-14.png"
+                       length="441550"
+                       type="image/png"/>
+            <enclosure url="https://awakari.com/blog/2024-08-08_09-43.png"
+                      length="70950"
+                      type="image/png"/>
+            <content:encoded>
+                <![CDATA[ <p>While reading results, it's useful to see all <i>event attributes</i> to fine-tune the interest matching conditions. Previously all event attributes had been included in every result. That caused results to be too long and not convenient for reading. Now all event attributes moved to a separate place available by the link in every result.</p> ]]>
+            </content:encoded>
+        </item>
+
+        <item>
             <title>Terms of Service and Privacy Policy updated</title>
             <description>The change refers to replacing the term "Company" with "Contributors".</description>
             <pubDate>Mon, 05 Aug 2024 09:30:00 +0300</pubDate>

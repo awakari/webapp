@@ -62,6 +62,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                 </select>
                             </legend>
                             <input type="text" 
+                                   autocapitalize="none"
                                    id="attrValTxtInput${idx}"
                                    list="attrValTxt${idx}"
                                    class="border-none w-full" 

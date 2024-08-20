@@ -79,60 +79,6 @@ async function loadStatus() {
                     document.getElementById("read-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
                 }
 
-                const evtQueueCurrent = data.queueLength.current;
-                if (evtQueueCurrent > 0) {
-                    document.getElementById("evt-queue-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(evtQueueCurrent)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueueCurrent)}</span>`;
-                }
-                const evtQueue1hChange = evtQueueCurrent - data.queueLength.past.hour;
-                if (evtQueue1hChange < 0) {
-                    document.getElementById("evt-queue-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1hChange)}</span>`;
-                } else if (evtQueue1hChange > 0) {
-                    document.getElementById("evt-queue-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1hChange)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-1h").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
-                }
-                const evtQueue1dChange = evtQueueCurrent - data.queueLength.past.day;
-                if (evtQueue1dChange < 0) {
-                    document.getElementById("evt-queue-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(evtQueue1dChange)}</span>`;
-                } else if (evtQueue1dChange > 0) {
-                    document.getElementById("evt-queue-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">+${formatNumberShort(evtQueue1dChange)}</span>`;
-                } else {
-                    document.getElementById("evt-queue-1d").innerHTML = `${formatNumberShort(evtQueue1hChange)}`;
-                }
-
-                const subscriptionsCurrent = data.subscriptions.current;
-                if (subscriptionsCurrent > 0) {
-                    document.getElementById("subscriptions-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(subscriptionsCurrent)}</span>`;
-                } else {
-                    document.getElementById("subscriptions-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptionsCurrent)}</span>`;
-                }
-                const subscriptions1hChange = subscriptionsCurrent - data.subscriptions.past.hour;
-                if (subscriptions1hChange < 0) {
-                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions1hChange)}</span>`;
-                } else if(subscriptions1hChange > 0) {
-                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions1hChange)}</span>`;
-                } else {
-                    document.getElementById("subscriptions-1h").innerHTML = `${formatNumberShort(subscriptions1hChange)}</span>`;
-                }
-                const subscriptions1dChange = subscriptionsCurrent - data.subscriptions.past.day;
-                if (subscriptions1dChange < 0) {
-                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions1dChange)}</span>`;
-                } else if (subscriptions1dChange > 0) {
-                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions1dChange)}</span>`;
-                } else {
-                    document.getElementById("subscriptions-1d").innerHTML = `${formatNumberShort(subscriptions1dChange)}</span>`;
-                }
-                const subscriptions30dChange = subscriptionsCurrent - data.subscriptions.past.month;
-                if (subscriptions30dChange < 0) {
-                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subscriptions30dChange)}</span>`;
-                } else if (subscriptions30dChange > 0) {
-                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(subscriptions30dChange)}</span>`;
-                } else {
-                    document.getElementById("subscriptions-30d").innerHTML = `${formatNumberShort(subscriptions30dChange)}</span>`;
-                }
-
                 const publishersCurrent = data.uniquePublishers.current;
                 if (publishersCurrent > 0) {
                     document.getElementById("publishers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(publishersCurrent)}</span>`;
@@ -199,7 +145,7 @@ async function loadStatus() {
                 Object
                     .entries(data.sourcesMostRead)
                     .sort((a, b) => b[1].day - a[1].day)
-                    .slice(0, 10)
+                    .slice(0, 3)
                     .forEach(e => {
                         const share = (100 * e[1].day).toFixed(1);
                         elemPopSrcs.innerHTML += templateSrcPopular(share, e[0]);
@@ -211,7 +157,7 @@ async function loadStatus() {
                     .entries(data.interestsMostFollowed)
                     .filter(e => e[1].hasOwnProperty("followers"))
                     .sort((a, b) => b[1].followers - a[1].followers)
-                    .slice(0, 10)
+                    .slice(0, 3)
                     .forEach(e => {
                         elemPopInts.innerHTML += templateIntPopular(e[0], e[1]);
                     });
@@ -229,7 +175,7 @@ async function loadStatus() {
 
 function formatNumberShort(number) {
     const suffixes = ["", "", "K", "M", "B", "T", "P"];
-    let suffixNum = Math.ceil(("" + Math.round(number)).length / 3);
+    let suffixNum = Math.ceil(("" + Math.round(Math.abs(number))).length / 3);
     let shortNumber = parseFloat((suffixNum > 1 ? (number / Math.pow(1000, suffixNum-1)) : number).toPrecision(3));
     if (shortNumber % 1 !== 0) {
         if (shortNumber > 10) {

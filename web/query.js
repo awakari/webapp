@@ -613,7 +613,7 @@ async function closeSearchResults() {
     }
 }
 
-const templateEvent = (txt, time, src, link, lang, loc, price, more) => `
+const templateEvent = (txt, time, src, link, loc, price, more) => `
     <div class="h-[52px] w-86 sm:w-[624px] flex align-middle">
         <a href="${link}" target="_blank" class="w-80 sm:w-[600px]">
             <p class="text-gray-800 dark:text-gray-300 w-80 sm:w-[600px] hover:text-blue-500 truncate">
@@ -621,14 +621,11 @@ const templateEvent = (txt, time, src, link, lang, loc, price, more) => `
             </p>
             <p class="font-mono text-xs w-80 sm:w-[600px] truncate">
                 <span class="text-stone-500">
-                    ${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}
+                    ${formatDateTime(time)}
                 </span>
                 <span class="text-slate-500">${src}</span>
             </p>
             <p class="flex text-xs w-80 sm:w-[600px] text-zinc-500 truncate">
-                <span> 
-                    ${lang}                
-                </span>
                 <span>
                     ${loc}                
                 </span>
@@ -642,6 +639,17 @@ const templateEvent = (txt, time, src, link, lang, loc, price, more) => `
         </a>
     </div>
 `
+
+function formatDateTime(dt) {
+    const now = new Date();
+    if (dt.getDate() === now.getDate()) {
+        return `${dt.getUTCHours().toString().padStart(2, '0')}:${dt.getUTCMinutes().toString().padStart(2, '0')}`;
+    } else if (dt.getUTCFullYear() === now.getUTCFullYear()) {
+        return dt.toLocaleDateString(undefined, {month: "short", day: "numeric"});
+    } else {
+        return dt.getUTCFullYear().toString().padStart(4, '0');
+    }
+}
 
 function displayEvents(evts) {
     let elemEvts = document.getElementById("events");
@@ -677,10 +685,6 @@ function displayEvents(evts) {
         }
         txt = txt.replace(/(<([^>]+)>)/gi, ""); // remove HTML tags
         //
-        let lang = "";
-        if (evt.attributes.hasOwnProperty("language")) {
-            lang = evt.attributes.language.ce_string.toUpperCase() + "&nbsp;";
-        }
         //
         let loc = "";
         if (evt.attributes.hasOwnProperty("latitude") && evt.attributes.hasOwnProperty("longitude")) {
@@ -753,7 +757,7 @@ function displayEvents(evts) {
             more = more.slice(0, 35) + "…"
         }
         //
-        elemEvts.innerHTML = templateEvent(txt, time, evt.source, link, lang, loc, price, more) + elemEvts.innerHTML;
+        elemEvts.innerHTML = templateEvent(txt, time, evt.source, link, loc, price, more) + elemEvts.innerHTML;
     }
 }
 

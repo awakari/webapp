@@ -55,10 +55,10 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
     templateCondHeader("Text", idx, countConds, isNot, key) + `
                         <fieldset class="px-1 tc h-10 w-full">
                             <legend class="flex px-1">
-                                <select class="rounded-sm w-20 h-5 border-none"
+                                <select class="rounded-sm w-32 h-5 border-none"
                                         onchange="setConditionTextExact(${idx}, this.value === '2')">
-                                    <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains</option>
-                                    <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals</option>
+                                    <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains any of</option>
+                                    <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals to</option>
                                 </select>
                             </legend>
                             <input type="text" 
@@ -68,7 +68,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                    class="border-none w-full" 
                                    style="height: 20px; background-color: inherit"
                                    oninput="setConditionTextTerms(${idx}, this.value)"
-                                   placeholder="${isExact? 'completely and exactly' : 'any of space-separated words'}"
+                                   placeholder="${isExact? 'exact complete text' : 'space-separated keywords'}"
                                    value="${terms}"/>
                             <datalist id="attrValTxt${idx}"></datalist>
                         </fieldset>` +
@@ -393,7 +393,7 @@ function setConditionTextExact(idx, exact) {
         if (cond.hasOwnProperty("tc")) {
             cond.tc.exact = exact;
             if (exact) {
-                document.getElementById(`attrValTxtInput${idx}`).placeholder = "completely and exactly";
+                document.getElementById(`attrValTxtInput${idx}`).placeholder = "exact complete text";
             } else {
                 document.getElementById(`attrValTxtInput${idx}`).placeholder = "any of space-separated words";
             }

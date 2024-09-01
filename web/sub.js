@@ -17,11 +17,11 @@ const templateSub = (sub) => `
 
 const pageLimit= 12;
 
-function load() {
+function loadInterests() {
 
     const headers = getAuthHeaders();
     if (!headers["Authorization"]) {
-        document.getElementById("login").style.display = "block";
+        window.location.assign(`login.html?redirect=${window.location}`);
     }
 
     document.getElementById("wait").style.display = "block";

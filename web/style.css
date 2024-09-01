@@ -190,6 +190,18 @@ button[type=button].donate:hover {
     }
 }
 
+button[type=button].menu {
+    border: none;
+    color: unset;
+}
+button[type=button].menu:hover {
+    background-color: unset;
+}
+@media (prefers-color-scheme: dark) {
+    button[type=button].menu:hover {
+        background-color: unset;
+    }
+}
 
 button.json-editor-btn-edit,button.json-editor-btn-movedown,button.json-editor-btn-moveup,button.json-editor-btn-subtract,button.json-editor-btntype-deleteall {
     display: none;

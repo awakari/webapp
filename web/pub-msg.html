@@ -21,25 +21,65 @@
     <script src="xksuid.js"></script>
     <script src="intcomm.js"></script>
     <script src="pub-msg.js"></script>
+    <script src="alpinejs-3.13.0.min.js" defer></script>
 
 </head>
 <body onload="loadForm()" class="bg-white dark:bg-gray-900">
 
-<nav class="text-xl flex p-1 sm:p-4 text-slate-700 dark:text-slate-200">
-    <button onclick="window.location.assign('pub.html')" class="mr-1">
-        <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-    <span>Message Details</span>
-    <div class="grow"></div>
-    <button id="pub-tg"
-            type="button"
-            style="display: none"
-            class="w-36 text-sm text-cyan-500 border border-cyan-500 h-6 hover:bg-cyan-200 dark:hover:bg-cyan-900 static mx-2 my-1"
-            onclick="window.location.assign('https://t.me/AwakariBot')">
-        <span class="text-sm">Publish in Telegram</span>
-    </button>
+<nav x-data="{ isOpen: false }" class="p-1 sm:p-4 items-center justify-center mx-auto">
+
+    <div class="text-xl flex text-slate-700 dark:text-slate-200 max-w-624px">
+        <div class="flex space-x-1 justify-center items-center">
+            <a href="https://awakari.com" class="flex justify-center items-center">
+                <img src="logo-color.svg" alt="home" width="24" height="24"/>
+            </a>
+            <span>Message Details</span>
+        </div>
+        <div class="grow"></div>
+        <div class="flex items-center justify-center">
+            <!-- Mobile menu button -->
+            <button x-cloak @click="isOpen = !isOpen" type="button"
+                    class="menu" aria-label="toggle menu">
+                <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/>
+                </svg>
+
+                <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+    <div id="menu" x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+         class="absolute inset-x-0 z-30 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900">
+        <div id="menu-default"
+             class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="login.html">Login <i class="fa fa-sign-in"></i></a>
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="#status">Status</a>
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="#solutions">Solutions</a>
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="#resources">Resources</a>
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="mailto:awakari@awakari.com"
+               target="_blank">
+                Contact
+                <i class="fa fa-external-link"></i>
+            </a>
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               onclick="openDonationPage()">
+                Donate
+                <i class="fa fa-external-link"></i>
+            </a>
+        </div>
+    </div>
+
 </nav>
 
 <div class="m-1 flex-1 flex flex-col space-y-1">

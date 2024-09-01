@@ -9,7 +9,7 @@ templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}"
                         </div>
                     </span>`
 
-async function loadForm() {
+async function load() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     if (id) {
@@ -286,7 +286,7 @@ function submitMsg() {
         .then(sent => {
             if (sent) {
                 alert(`Message has been sent, id: ${id}`);
-                loadForm(); // reset
+                load(); // reset
             }
         })
         .finally(() => {

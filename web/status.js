@@ -94,7 +94,7 @@ async function loadStatus() {
                     document.getElementById("publishers-1h").innerHTML = `${formatNumberShort(publishers1hChange)}</span>`;
                 }
                 const publishers1dChange = publishersCurrent - data.uniquePublishers.past.day;
-                if (publishers1dChange < -2000) {
+                if (publishers1dChange < -5000) {
                     document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1dChange)}</span>`;
                 } else if (publishers1dChange > 0) {
                     document.getElementById("publishers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1dChange)}</span>`;
@@ -102,7 +102,7 @@ async function loadStatus() {
                     document.getElementById("publishers-1d").innerHTML = `${formatNumberShort(publishers1dChange)}</span>`;
                 }
                 const publishers30dChange = publishersCurrent - data.uniquePublishers.past.month;
-                if (publishers30dChange < -5000) {
+                if (publishers30dChange < -10000) {
                     document.getElementById("publishers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers30dChange)}</span>`;
                 } else if (publishers30dChange > 0) {
                     document.getElementById("publishers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers30dChange)}</span>`;
@@ -117,7 +117,7 @@ async function loadStatus() {
                     document.getElementById("followers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followersCurrent)}</span>`;
                 }
                 const followers1hChange = followersCurrent - data.uniqueFollowers.past.hour;
-                if (followers1hChange < -1) {
+                if (followers1hChange < -5) {
                     document.getElementById("followers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1hChange)}</span>`;
                 } else if (followers1hChange > 0) {
                     document.getElementById("followers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1hChange)}</span>`;
@@ -125,7 +125,7 @@ async function loadStatus() {
                     document.getElementById("followers-1h").innerHTML = `${formatNumberShort(followers1hChange)}</span>`;
                 }
                 const followers1dChange = followersCurrent - data.uniqueFollowers.past.day;
-                if (followers1dChange < -2) {
+                if (followers1dChange < -10) {
                     document.getElementById("followers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1dChange)}</span>`;
                 } else if (followers1dChange > 0) {
                     document.getElementById("followers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1dChange)}</span>`;
@@ -133,7 +133,7 @@ async function loadStatus() {
                     document.getElementById("followers-1d").innerHTML = `${formatNumberShort(followers1dChange)}</span>`;
                 }
                 const followers30dChange = followersCurrent - data.uniqueFollowers.past.month;
-                if (followers30dChange < -5) {
+                if (followers30dChange < -20) {
                     document.getElementById("followers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers30dChange)}</span>`;
                 } else if (followers30dChange > 0) {
                     document.getElementById("followers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers30dChange)}</span>`;

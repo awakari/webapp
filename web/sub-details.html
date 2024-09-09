@@ -84,7 +84,7 @@
                     <span class="tooltip">
                         Name
                         <span class="tooltiptext" style="width: 332px">
-                            <p>A unique short name.</p>
+                            <p>A unique short name useful for public interests.</p>
                             <p>Can't be changed once set.</p>
                             <p>Random name is set when not specified.</p>
                             <p>Max 36 symbols, ASCII letters, digits or dash.</p>
@@ -120,8 +120,8 @@
                             Public
                             <span class="tooltiptext" style="width: 320px">
                                 <p>Public interest is visible to others.</p>
-                                <p>May be followed by non-owner.</p>
-                                <p>Also available in Fediverse as an actor.</p>
+                                <p>May be discovered and followed by non-owner.</p>
+                                <p>Note that making a public interest private doesn't disconnect existing followers.</p>
                             </span>
                         </span>
                     </label>
@@ -131,7 +131,7 @@
                             <span class="tooltip" style="margin-top: 0.125rem">
                                 Followers:
                                 <span class="tooltiptext" style="width: 240px">
-                                    Total followers count.
+                                    Total active followers count.
                                 </span>
                             </span>
                             <input type="text" readonly="readonly" id="followers" class="border-none w-7">
@@ -148,7 +148,7 @@
                                 </svg>
                                 <span class="dropbtn">Follow ⌄</span>
                             </button>
-                            <div id="follow-dropdown" class="dropdown-content p-3 w-[100px]">
+                            <div id="follow-dropdown" class="dropdown-content py-3 px-2 w-[100px]">
                                 <a id="follow-fediverse" class="pb-3">Fediverse</a>
                                 <a target="_blank" id="follow-feed" class="pb-3">Feed (RSS)</a>
                                 <a target="_blank" id="follow-telegram">Telegram</a>
@@ -163,8 +163,8 @@
                         <span class="tooltip">
                             Expires
                             <span class="tooltiptext">
-                                <p>Local time when the following expires.</p>
-                                <p>The following never expires when it's empty.</p>
+                                <p>Local time when the interest expires.</p>
+                                <p>The interest never expires when it's empty.</p>
                             </span>
                         </span>
                     </span>

@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'iA Writer Quattro S';
+    font-style: normal;
+    font-weight: 400;
+    src: local('iA Writer Quattro S'), url('https://fonts.cdnfonts.com/s/63136/iAWriterQuattroSRegular.woff') format('woff');
+}
+
 input {
     accent-color: dimgrey;
     outline: none;
@@ -265,7 +272,7 @@ body {
     width: 1px;
     min-width: 100%;
 
-    --default-font: "IA Writer Quattro S", sans-serif;
+    --default-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bg-color: #ebedf0;
     --animation: .15s ease;
     --page-animation-duration: .3s;
@@ -300,6 +307,12 @@ button[type=button].attr {
         border-color: #1f2937;
         box-shadow: #1f2937;
     }
+}
+
+#menu {
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "IA Writer Quattro S", sans-serif;
 }
 
 /* The container <div> - needed to position the dropdown content */

@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      'sans': ['"IA Writer Quattro S"', 'ui-sans-serif', 'system-ui'],
-      'display': ['"IA Writer Quattro S"', 'ui-sans-serif', 'system-ui'],
-      'body': ['"IA Writer Quattro S"', 'ui-sans-serif', 'system-ui'],
+      'sans': ['"iA Writer Quattro S"', 'ui-sans-serif', 'system-ui'],
+      'display': ['"iA Writer Quattro S"', 'ui-sans-serif', 'system-ui'],
+      'body': ['"iA Writer Quattro S"', 'ui-sans-serif', 'system-ui'],
     }
   },
   plugins: [],

@@ -55,7 +55,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
     templateCondHeader("Text", idx, countConds, isNot, key) + `
                         <fieldset class="px-1 tc h-10 w-full">
                             <legend class="flex px-1">
-                                <select class="rounded-sm w-32 h-5 border-none"
+                                <select class="rounded-sm w-36 h-5 border-none"
                                         onchange="setConditionTextExact(${idx}, this.value === '2')">
                                     <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains any of</option>
                                     <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals to</option>

@@ -3,7 +3,7 @@ templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}"
                         <p id="msg_attr_type_${name}" class="min-w-[64px] truncate">${type}</p>
                         <input type="text" id="msg_attr_val_${name}" value="${value}" disabled="disabled" class="${required ? 'min-w-[124px] border-none' : 'border'} w-full truncate focus:shadow-md outline-none text-slate-700"/>
                         <div style="${required ? 'display: none': ''}">
-                            <button type="button" title="Add Attribute" onclick="deleteMessageAttribute('${name}');" class="text-2xl focus:outline-none flex items-center justify-center h-[24px] max-h-[24px] font-mono">
+                            <button type="button" title="Delete Attribute" onclick="deleteMessageAttribute('${name}');" class="text-lg focus:outline-none flex items-center justify-center h-[24px] max-h-[24px]">
                                 -
                             </button>
                         </div>

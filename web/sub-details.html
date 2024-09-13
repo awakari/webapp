@@ -83,8 +83,9 @@
                 <label for="id" style="margin-top: 0.125rem">
                     <span class="tooltip">
                         Name
-                        <span class="tooltiptext" style="width: 344px">
-                            <p>A unique short name useful for public interests. Can't be changed once set.</p>
+                        <span class="tooltiptext" style="width: 332px">
+                            <p>A unique short name useful for public interests.</p>
+                            <p>Can't be changed once set.</p>
                             <p>Random name is set when not specified.</p>
                             <p>Max 36 symbols, ASCII letters, digits or dash.</p>
                         </span>
@@ -95,16 +96,16 @@
                        id="id"
                        maxlength="36"
                        pattern="[a-zA-Z0-9]+"
-                       class="ml-3">
+                       class="ml-2">
             </div>
 
             <div class="flex flex-col space-y-3">
 
                 <div class="flex">
-                    <label for="description" class="w-24" style="margin-top: 0.125rem">
+                    <label for="description" class="w-20" style="margin-top: 0.125rem">
                         <span class="tooltip">
                             Description
-                            <span class="tooltiptext" style="width: 344px">Describe shortly to distinguish from others.</span>
+                            <span class="tooltiptext" style="width: 332px">Describe your interest to distinguish from others.</span>
                         </span>
                     </label>
                     <input type="text" id="description">
@@ -119,8 +120,8 @@
                             Public
                             <span class="tooltiptext" style="width: 320px">
                                 <p>Public interest is visible to others.</p>
-                                <p>May be discovered and followed by non-owner.
-                                    Note that making a public interest private doesn't disconnect existing followers.</p>
+                                <p>May be discovered and followed by non-owner.</p>
+                                <p>Note that making a public interest private doesn't disconnect existing followers.</p>
                             </span>
                         </span>
                     </label>
@@ -158,12 +159,12 @@
                 </div>
 
                 <div class="flex pt-1">
-                    <span class="w-24 flex" style="margin-top: 0.125rem">
+                    <span class="w-20 flex" style="margin-top: 0.125rem">
                         <span class="tooltip">
                             Expires
                             <span class="tooltiptext">
                                 <p>Local time when the interest expires.</p>
-                                <p>Never expires when the date isn't set.</p>
+                                <p>The interest never expires when it's empty.</p>
                             </span>
                         </span>
                     </span>
@@ -171,7 +172,7 @@
                 </div>
 
                 <div class="flex pt-2">
-                    <span class="w-24 flex" style="margin-top: 0.125rem">
+                    <span class="w-20 flex" style="margin-top: 0.125rem">
                         <span class="tooltip mb-1">
                             Conditions
                             <span class="tooltiptext">
@@ -254,7 +255,7 @@
             </div>
 
             <div class="py-2">
-                <label class="flex align-middle space-x-1">
+                <label class="flex align-middle">
                     <input id="sub-discover-sources"
                            checked="checked"
                            type="checkbox" class="h-4 w-4"

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Telegram Client Login</title>
+    <script src="auth.js"></script>
+    <script src="api/response.js"></script>
+    <script src="api/tgclient.js"></script>
+    <script src="client-tg-login.js"></script>
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadForm()">
+<form id="formTgClientLogin" class="flex-row justify-center items-center m-2">
+    <p class="flex m-2 space-x-2 justify-center">
+        <label for="code" class="w-16">Code:</label>
+        <input type="text" id="code" name="code" minlength="2" maxlength="64" class="h-5 w-40 max-w-40">
+    </p>
+    <p class="flex m-2 space-x-2 justify-center">
+        <label for="replicaIdx" class="w-16">Replica:</label>
+        <input type="number" id="replicaIdx" name="replicaIdx" min="0" class="h-5 w-40">
+    </p>
+    <p class="flex m-2 justify-center">
+        <button type="submit" class="submit border p-2">Submit</button>
+    </p>
+</form>
+</body>
+</html>

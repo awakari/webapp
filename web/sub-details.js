@@ -171,7 +171,7 @@ function loadSubDetailsById(id) {
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
-            displayConditions();
+            displayConditions(false);
         });
 
     const srcListElement = document.getElementById("sub-discovered-sources");
@@ -297,7 +297,7 @@ function loadSubDetailsByExample(exampleName) {
             break;
         }
     }
-    displayConditions();
+    displayConditions(false);
 }
 
 function loadSubDetailsByQuery(q) {
@@ -305,7 +305,7 @@ function loadSubDetailsByQuery(q) {
     document.getElementById("description").value = q;
     document.getElementById("button-delete").style.display = "none";
     addConditionText(false, "", q, false);
-    displayConditions();
+    displayConditions(q === "");
 }
 
 function addConditionText(not, k, term, exact) {
@@ -337,7 +337,7 @@ function deleteCondition(idx) {
     if (conds.length === 1) {
         conds[0].not = false;
     }
-    displayConditions();
+    displayConditions(false);
 }
 
 function setConditionNot(idx, e) {
@@ -445,7 +445,7 @@ function setConditionNumberValue(idx, val) {
     }
 }
 
-function displayConditions() {
+function displayConditions(simple) {
     const elemConds = document.getElementById("conditions");
     elemConds.innerHTML = "";
     const countConds = conds.length;
@@ -500,11 +500,11 @@ function displayConditions() {
 
 document
     .getElementById("button-add-cond-txt")
-    .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(); });
+    .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(false); });
 
 document
     .getElementById("button-add-cond-num")
-    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 3, 0); displayConditions(); });
+    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 3, 0); displayConditions(false); });
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
@@ -679,6 +679,12 @@ function validateCondition(cond) {
 toggle between hiding and showing the dropdown content */
 function followDropdown() {
     document.getElementById("follow-dropdown").classList.toggle("show");
+}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function condNewDropdown() {
+    document.getElementById("cond-new-dropdown").classList.toggle("show");
 }
 
 // Close the dropdown menu if the user clicks outside of it

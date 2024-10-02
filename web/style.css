@@ -9,6 +9,11 @@ input {
     accent-color: dimgrey;
     outline: none;
 }
+@media (prefers-color-scheme: dark) {
+    input::placeholder {
+        opacity: 50%;
+    }
+}
 input[type="checkbox"] {
     margin-right: 0.25rem;
     outline: none;
@@ -364,6 +369,16 @@ button[type=button].attr {
     background-color: var(--tg-theme-secondary-bg-color);
 }
 
+button[type=button].dropdown-option {
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+button[type=button].dropdown-option:hover {
+    background-color: unset;
+}
+
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display:grid;
@@ -373,8 +388,8 @@ button[type=button].attr {
 .switch {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 24px;
+    width: 40px;
+    height: 20px;
 }
 
 /* Hide default HTML checkbox */
@@ -400,8 +415,8 @@ button[type=button].attr {
 .slider:before {
     position: absolute;
     content: "";
-    height: 20px;
-    width: 20px;
+    height: 16px;
+    width: 16px;
     left: 2px;
     bottom: 2px;
     background-color: white;
@@ -416,18 +431,18 @@ button[type=button].attr {
 }
 
 input:checked + .slider {
-    background-color: #06b6d4;
+    background-color: #0ea5e9;
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(24px);
-    -ms-transform: translateX(24px);
-    transform: translateX(24px);
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 24px;
+    border-radius: 20px;
 }
 
 .slider.round:before {
@@ -539,4 +554,54 @@ input:checked + .slider:before {
     .tooltip {
         border-bottom: 1px dotted #aaa; /* If you want dots under the hoverable text */
     }
+}
+
+/* Style the button that is used to open and close the collapsible content */
+button[type="button"].collapsible {
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    border-radius: 0.25rem;
+    background-color: unset;
+    border-color: #94a3b8;
+    color: unset;
+    padding: 0 8px;
+}
+@media (prefers-color-scheme: dark) {
+    button[type="button"].collapsible {
+        border-color: #334155;
+    }
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button[type="button"].collapsible-active {
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.collapsible-content {
+    padding: 8px;
+    display: none;
+    border-width: 1px;
+    border-top: none;
+    border-color: #94a3b8;
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+@media (prefers-color-scheme: dark) {
+    .collapsible-content {
+        border-color: #334155;
+    }
+}
+
+.collapsible:after {
+    content: '+';
+    float: right;
+    margin-left: 4px;
+}
+
+.collapsible-active:after {
+    content: "-";
 }

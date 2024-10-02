@@ -79,27 +79,7 @@
     <div class="flex justify-center m-1">
         <form class="max-w-[480px] grow">
 
-            <div class="flex mb-4" id="area-id">
-                <label for="id" style="margin-top: 0.125rem">
-                    <span class="tooltip">
-                        Name
-                        <span class="tooltiptext" style="width: 332px">
-                            <p>A unique short name useful for public interests.</p>
-                            <p>Can't be changed once set.</p>
-                            <p>Random name is set when not specified.</p>
-                            <p>Max 36 symbols, ASCII letters, digits or dash.</p>
-                        </span>
-                    </span>
-                </label>
-                <input type="text"
-                       readonly="readonly"
-                       id="id"
-                       maxlength="36"
-                       pattern="[a-zA-Z0-9]+"
-                       class="ml-2">
-            </div>
-
-            <div class="flex flex-col space-y-3">
+            <div class="flex flex-col space-y-2">
 
                 <div class="flex">
                     <label for="description" class="w-20" style="margin-top: 0.125rem">
@@ -111,68 +91,38 @@
                     <input type="text" id="description">
                 </div>
 
-                <div class="flex space-x-4 items-center">
-                    <label class="flex space-x-1">
-                        <input id="public"
-                               type="checkbox" class="h-4 w-4"
-                               style="margin-right: 0.25rem; margin-top: 0.125rem"/>
+                <div id="area-follow" class="flex items-center hidden">
+                    <label class="flex w-20" for="followers">
                         <span class="tooltip" style="margin-top: 0.125rem">
-                            Public
-                            <span class="tooltiptext" style="width: 320px">
-                                <p>Public interest is visible to others.</p>
-                                <p>May be discovered and followed by non-owner.</p>
-                                <p>Note that making a public interest private doesn't disconnect existing followers.</p>
+                            Followers
+                            <span class="tooltiptext" style="width: 240px">
+                                Total active followers count.
                             </span>
                         </span>
                     </label>
+                    <input type="text" readonly="readonly" id="followers" class="border-none w-10 grow">
 
-                    <div id="area-follow" class="flex space-x-4 items-center hidden">
-                        <label class="flex space-x-1">
-                            <span class="tooltip" style="margin-top: 0.125rem">
-                                Followers:
-                                <span class="tooltiptext" style="width: 240px">
-                                    Total active followers count.
-                                </span>
-                            </span>
-                            <input type="text" readonly="readonly" id="followers" class="border-none w-7">
-                        </label>
-
-                        <div class="dropdown">
-                            <button id="button-follow" type="button" class="dropbtn flex justify-center text-center w-[100px] items-center space-x-1" onclick="followDropdown()">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" xml:space="preserve" fill="currentColor" width="16px" height="16px" class="dropbtn">
-                                    <style type="text/css">
-                                        .st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-                                    </style>
-                                    <path class="st0" d="M27.8,23.2l-1.1-1.7c-1.9-2.8-2.9-6.1-2.9-9.5c0-3.6-2.4-6.5-5.6-7.5C17.9,3.6,17,3,16,3s-1.9,0.6-2.2,1.5 c-3.2,1-5.6,3.9-5.6,7.5c0,3.4-1,6.7-2.9,9.5l-1.1,1.7C3.7,24,4.2,25,5.2,25h21.6C27.8,25,28.3,24,27.8,23.2z"></path>
-                                    <path class="st0" d="M20,25c0,2.2-1.8,4-4,4s-4-1.8-4-4"></path>
-                                </svg>
-                                <span class="dropbtn">Follow ⌄</span>
-                            </button>
-                            <div id="follow-dropdown" class="dropdown-content py-3 px-2 w-[100px]">
-                                <a id="follow-fediverse" class="pb-3">Fediverse</a>
-                                <a target="_blank" id="follow-feed" class="pb-3">Feed (RSS)</a>
-                                <a target="_blank" id="follow-telegram">Telegram</a>
-                            </div>
+                    <div class="dropdown ml-2">
+                        <button id="button-follow" type="button" class="dropbtn flex justify-center text-center w-[100px] items-center space-x-1" onclick="followDropdown()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" xml:space="preserve" fill="currentColor" width="16px" height="16px" class="dropbtn">
+                                <style type="text/css">
+                                    .st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                                </style>
+                                <path class="st0" d="M27.8,23.2l-1.1-1.7c-1.9-2.8-2.9-6.1-2.9-9.5c0-3.6-2.4-6.5-5.6-7.5C17.9,3.6,17,3,16,3s-1.9,0.6-2.2,1.5 c-3.2,1-5.6,3.9-5.6,7.5c0,3.4-1,6.7-2.9,9.5l-1.1,1.7C3.7,24,4.2,25,5.2,25h21.6C27.8,25,28.3,24,27.8,23.2z"></path>
+                                <path class="st0" d="M20,25c0,2.2-1.8,4-4,4s-4-1.8-4-4"></path>
+                            </svg>
+                            <span class="dropbtn">Follow ⌄</span>
+                        </button>
+                        <div id="follow-dropdown" class="dropdown-content py-3 px-2 w-[100px]">
+                            <a id="follow-fediverse" class="pb-3">Fediverse</a>
+                            <a target="_blank" id="follow-feed" class="pb-3">Feed (RSS)</a>
+                            <a target="_blank" id="follow-telegram">Telegram</a>
                         </div>
                     </div>
-
                 </div>
 
-                <div class="flex pt-1">
-                    <span class="w-20 flex" style="margin-top: 0.125rem">
-                        <span class="tooltip">
-                            Expires
-                            <span class="tooltiptext">
-                                <p>Local time when the interest expires.</p>
-                                <p>The interest never expires when it's empty.</p>
-                            </span>
-                        </span>
-                    </span>
-                    <input type="datetime-local" id="expires" class="h-5 border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
-                </div>
-
-                <div class="flex pt-2">
-                    <span class="w-20 flex" style="margin-top: 0.125rem">
+                <div class="flex">
+                    <div class="w-20 flex grow" style="margin-top: 0.125rem">
                         <span class="tooltip mb-1">
                             Conditions
                             <span class="tooltiptext">
@@ -181,29 +131,81 @@
                                 <p>At least one is required.</p>
                             </span>
                         </span>
-                    </span>
+                    </div>
+                    <div id="add-condition">
+                        <div class="dropdown">
+                            <button type="button"
+                                    onclick="condNewDropdown()"
+                                    class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
+                                + Condition ⌄
+                            </button>
+                            <div id="cond-new-dropdown" class="dropdown-content p-2 w-[100px]">
+                                <button id="button-add-cond-txt" type="button" class="dropdown-option">
+                                    Text
+                                </button>
+                                <button id="button-add-cond-num" type="button" class="dropdown-option">
+                                    Number
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
 
             <div class="space-y-1 pt-2" id="conditions">
             </div>
-            <div id="add-condition" class="flex place-content-end pt-2">
-                <div class="dropdown">
-                    <button type="button"
-                            onclick="condNewDropdown()"
-                            class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
-                        + Condition ⌄
-                    </button>
-                    <div id="cond-new-dropdown" class="dropdown-content space-y-2 p-2 w-[100px]">
-                        <button id="button-add-cond-txt" class="text-left">
-                            Text
-                        </button>
-                        <button id="button-add-cond-num" class="text-left">
-                            Number
-                        </button>
-                    </div>
+
+            <button type="button" class="collapsible mt-2">Advanced</button>
+            <div class="py-2 space-y-2 collapsible-content">
+
+                <label class="flex space-x-1">
+                    <input id="public"
+                           type="checkbox" class="h-4 w-4"
+                           style="margin-right: 0.25rem; margin-top: 0.125rem"/>
+                    <span class="tooltip" style="margin-top: 0.125rem">
+                            Public
+                            <span class="tooltiptext" style="width: 320px">
+                                <p>Public interest is visible to others.</p>
+                                <p>May be discovered and followed by non-owner.</p>
+                                <p>Note that making a public interest private doesn't disconnect existing followers.</p>
+                            </span>
+                        </span>
+                </label>
+
+                <div class="flex" id="area-id">
+                    <label for="id" style="margin-top: 0.125rem">
+                        <span class="tooltip">
+                            ID
+                            <span class="tooltiptext" style="width: 332px">
+                                <p>A unique short name useful for public interests.</p>
+                                <p>Can't be changed once set.</p>
+                                <p>Random name is set when not specified.</p>
+                                <p>Max 36 symbols, ASCII letters, digits or dash.</p>
+                            </span>
+                        </span>
+                    </label>
+                    <input type="text"
+                           readonly="readonly"
+                           id="id"
+                           maxlength="36"
+                           pattern="[a-zA-Z0-9]+"
+                           class="ml-2">
                 </div>
+
+                <div class="flex">
+                    <span class="flex" style="margin-top: 0.125rem">
+                        <span class="tooltip">
+                            Expires
+                            <span class="tooltiptext">
+                                <p>Local time when the interest expires.</p>
+                                <p>The interest never expires when it's empty.</p>
+                            </span>
+                        </span>
+                    </span>
+                    <input type="datetime-local" id="expires" class="ml-2 h-5 border outline-none border-slate-400 dark:border-slate-700 dark:background-gray-800"/>
+                </div>
+
             </div>
 
             <div class="flex items-center justify-center space-x-2 pt-4">

@@ -171,7 +171,7 @@ function loadSubDetailsById(id) {
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";
-            displayConditions(false);
+            displayConditions();
         });
 
     const srcListElement = document.getElementById("sub-discovered-sources");
@@ -297,7 +297,7 @@ function loadSubDetailsByExample(exampleName) {
             break;
         }
     }
-    displayConditions(false);
+    displayConditions();
 }
 
 function loadSubDetailsByQuery(q) {
@@ -305,7 +305,7 @@ function loadSubDetailsByQuery(q) {
     document.getElementById("description").value = q;
     document.getElementById("button-delete").style.display = "none";
     addConditionText(false, "", q, false);
-    displayConditions(q === "");
+    displayConditions();
 }
 
 function addConditionText(not, k, term, exact) {
@@ -337,7 +337,7 @@ function deleteCondition(idx) {
     if (conds.length === 1) {
         conds[0].not = false;
     }
-    displayConditions(false);
+    displayConditions();
 }
 
 function setConditionNot(idx, e) {
@@ -445,7 +445,8 @@ function setConditionNumberValue(idx, val) {
     }
 }
 
-function displayConditions(simple) {
+function displayConditions() {
+    document.getElementById("add-condition").style.display = "flex";
     const elemConds = document.getElementById("conditions");
     elemConds.innerHTML = "";
     const countConds = conds.length;
@@ -500,11 +501,11 @@ function displayConditions(simple) {
 
 document
     .getElementById("button-add-cond-txt")
-    .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(false); });
+    .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(); });
 
 document
     .getElementById("button-add-cond-num")
-    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 3, 0); displayConditions(false); });
+    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 3, 0); displayConditions(); });
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
@@ -699,4 +700,19 @@ window.onclick = function(event) {
             }
         }
     }
+}
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("collapsible-active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
 }

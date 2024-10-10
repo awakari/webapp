@@ -9,7 +9,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                             <input type="checkbox" 
                                    class="h-4 w-4 sub-cond-not" 
                                    style="margin-right: 0.125rem"
-                                   onchange="setConditionNot(${idx}, this)"
+                                   onchange="setConditionNot(${idx}, this); updateDescription()"
                                    ${countConds > 1 ? '' : 'disabled="disabled"'}
                                    ${isNot ? 'checked="checked"' : ''}/>
                             <span>Not</span>
@@ -39,7 +39,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    style="height: 20px; background-color: inherit"
                                    ${label === "Text"? 'placeholder="empty: any"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
-                                   onchange="setConditionAttrValueOpts(${idx}, this.value)"
+                                   onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
                                    value="${key}"/>
                             <datalist id="attrKeys${idx}">
                             </datalist>
@@ -67,7 +67,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                    list="attrValTxt${idx}"
                                    class="border-none w-full" 
                                    style="height: 20px; background-color: inherit"
-                                   oninput="setConditionTextTerms(${idx}, this.value)"
+                                   oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
                                    placeholder="${isExact? 'exact complete text' : 'space-separated keywords'}"
                                    value="${terms}"/>
                             <datalist id="attrValTxt${idx}"></datalist>
@@ -79,7 +79,7 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
                         <fieldset class="px-1 nc h-10 w-full">
                             <legend class="flex px-1">
                                 <select class="rounded-sm w-10 px-1 h-5 border-none"
-                                        onchange="setConditionNumberOp(${idx}, this.value)">
+                                        onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
                                     <option value="1" ${op === 1 ? 'selected="selected"' : ''}>&gt;</option>
                                     <option value="2" ${op === 2 ? 'selected="selected"' : ''}>&ge;</option>
                                     <option value="3" ${op === 3 ? 'selected="selected"' : ''}>=</option>
@@ -90,7 +90,7 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
                             <input type="number"
                                    class="border-none w-full"
                                    style="height: 20px; background-color: inherit"
-                                   oninput="setConditionNumberValue(${idx}, this.value)"
+                                   oninput="setConditionNumberValue(${idx}, this.value); updateDescription()"
                                    value="${value}"/>
                         </fieldset>` +
     condFooter;
@@ -445,6 +445,83 @@ function setConditionNumberValue(idx, val) {
     }
 }
 
+function updateDescription() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+    if (id) {
+        return;
+    }
+    const q = urlParams.get("args");
+    if (q) {
+        return;
+    }
+    const example = urlParams.get("example");
+    if (example) {
+        return;
+    }
+
+    const countConds = conds.length;
+    const descr = document.getElementById("description");
+    let nextDescrTxt = "";
+    for (let i = 0; i < countConds; i ++) {
+        if (nextDescrTxt.length > 0) {
+            nextDescrTxt += " ";
+        }
+        const cond = conds[i];
+        let not = false;
+        if (cond.hasOwnProperty("not")) {
+            not = cond.not;
+            if (not) {
+                nextDescrTxt += "not ";
+            }
+        }
+        if (cond.hasOwnProperty("tc")) {
+            const tc = cond.tc;
+            let key = "";
+            if (tc.hasOwnProperty("key")) {
+                key = tc.key;
+            }
+            let exact = false;
+            if (tc.hasOwnProperty("exact")) {
+                exact = tc.exact;
+            }
+            nextDescrTxt += tc.term
+        } else if (cond.hasOwnProperty("nc")) {
+            const nc = cond.nc;
+            let key = "";
+            if (nc.hasOwnProperty("key")) {
+                key = nc.key;
+            }
+            nextDescrTxt += key
+            const op = nc.op;
+            switch (op) {
+                case 1:
+                    nextDescrTxt += ">";
+                    break;
+                case 2:
+                    nextDescrTxt += "≥";
+                    break;
+                case 3:
+                    nextDescrTxt += "=";
+                    break;
+                case 4:
+                    nextDescrTxt += "≤"
+                    break;
+                case 5:
+                    nextDescrTxt += "<"
+                    break;
+            }
+            let val = 0;
+            if (nc.hasOwnProperty("val")) {
+                val = nc.val;
+                nextDescrTxt += val;
+            }
+        }
+        descr.value = nextDescrTxt;
+    }
+}
+
 function displayConditions() {
     document.getElementById("add-condition").style.display = "flex";
     const elemConds = document.getElementById("conditions");
@@ -473,11 +550,11 @@ function displayConditions() {
             }
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
-            const op = nc.op;
             let key = "";
             if (nc.hasOwnProperty("key")) {
                 key = nc.key;
             }
+            const op = nc.op;
             let val = 0;
             if (nc.hasOwnProperty("val")) {
                 val = nc.val;
@@ -497,6 +574,7 @@ function displayConditions() {
         document.getElementById("button-add-cond-txt").disabled = "disabled";
         document.getElementById("button-add-cond-num").disabled = "disabled";
     }
+    updateDescription();
 }
 
 document

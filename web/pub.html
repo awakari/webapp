@@ -169,7 +169,7 @@
             <div class="flex w-80 pl-2 pt-1">
                 <span class="pt-1 w-[200px]">Sources:</span>
                 <button type="button" class="flex justify-center items-center text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static ml-1 px-2 w-[100px]"
-                        onclick="localStorage.getItem(keyUserId) ? window.location.assign('pub-src-new.html') : (confirm('This function is available for signed in users only. Proceed to sign in?') ? window.location.assign('login.html') : console.log('user refused to sign in to continue'))">
+                        onclick="localStorage.getItem(keyUserId) ? window.location.assign(`pub-src-new.html?type=${document.getElementById('src_type').value}`) : (confirm('This function is available for signed in users only. Proceed to sign in?') ? window.location.assign('login.html') : console.log('user refused to sign in to continue'))">
                     + Source
                 </button>
             </div>

@@ -216,3 +216,35 @@ async function reportPublicationInappropriate(srcAddr, evtLink, evtId) {
         window.location.assign("login.html");
     }
 }
+
+async function requestEmailSub(userId, pageSub) {
+    if (userId) {
+        const payload = {
+            id: Events.newId(),
+            specVersion: "1.0",
+            source: "awakari.com",
+            type: "com_awakari_webapp",
+            attributes: {
+                action: {
+                    ce_string: "subscribe",
+                },
+                object: {
+                    ce_string: "email",
+                },
+                objecturl: {
+                    ce_uri: pageSub,
+                },
+                subject: {
+                    ce_string: userId,
+                },
+            },
+            text_data: `User ${userId} requests to subscribe by email at ${pageSub}`,
+        }
+        const headers = getAuthHeaders();
+        if (await Events.publishInternal(payload, headers)) {
+            alert("Request submitted for a review.");
+        }
+    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
+        window.location.assign("login.html");
+    }
+}

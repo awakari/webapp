@@ -5,11 +5,18 @@ function loadForm() {
     }
     document.getElementById("src_type").onchange = showSrcDetails;
     document.getElementById("feed_url").value = "";
+    const urlParams = new URLSearchParams(window.location.search);
+    const typ = urlParams.get("type");
+    if (typ) {
+        document.getElementById("src_type").value = typ;
+    } else {
+        document.getElementById("src_type").value = "feed";
+    }
     showSrcDetails();
 }
 
 function showSrcDetails() {
-    const opt = document.getElementById("src_type").value
+    const opt = document.getElementById("src_type").value;
     const btnSubmit = document.getElementById("button-submit");
     switch (opt) {
         case "apub":
@@ -18,28 +25,40 @@ function showSrcDetails() {
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
-            break
+            document.getElementById("mail").style.display = "none";
+            break;
         case "tgbc":
             btnSubmit.style.display = "none";
             document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "block";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "none";
-            break
+            document.getElementById("mail").style.display = "none";
+            break;
         case "tgch":
             btnSubmit.style.display = "flex";
             document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "block";
             document.getElementById("feed").style.display = "none";
-            break
+            document.getElementById("mail").style.display = "none";
+            break;
         case "feed":
             btnSubmit.style.display = "flex";
             document.getElementById("apub").style.display = "none";
             document.getElementById("tgbc").style.display = "none";
             document.getElementById("tgch").style.display = "none";
             document.getElementById("feed").style.display = "block";
-            break
+            document.getElementById("mail").style.display = "none";
+            break;
+        case "mail":
+            btnSubmit.style.display = "flex";
+            document.getElementById("apub").style.display = "none";
+            document.getElementById("tgbc").style.display = "none";
+            document.getElementById("tgch").style.display = "none";
+            document.getElementById("feed").style.display = "none";
+            document.getElementById("mail").style.display = "block";
+            break;
     }
 }
 
@@ -70,9 +89,22 @@ function addSource() {
                 return;
             }
             break
+        case "mail":
+            srcAddr = document.getElementById("pagesub").value;
+            if (srcAddr.length < 6) {
+                alert(`Source address ${srcAddr} is not valid actor address`)
+                return;
+            }
+            const userId = localStorage.getItem(keyUserId);
+            requestEmailSub(userId, srcAddr)
+                .finally(() => {
+                    loadForm();
+                })
+            return; // do not proceed
         default:
             return;
     }
+
     const headers = getAuthHeaders();
     const feedUpdFreq = parseInt(document.getElementById("feed_upd_freq").value);
     document.getElementById("wait").style.display = "block";
@@ -83,7 +115,7 @@ function addSource() {
                 if (msg.length === 0) {
                     msg = "success";
                 }
-                alert(`Source added: ${msg}`);
+                alert(`Source submitted: ${msg}`);
             } else {
                 handleResponseStatus(srcAddr, resp.status);
             }

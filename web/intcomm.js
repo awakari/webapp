@@ -243,6 +243,8 @@ async function requestEmailSub(userId, pageSub) {
         const headers = getAuthHeaders();
         if (await Events.publishInternal(payload, headers)) {
             alert("Request submitted for a review.");
+        } else {
+            alert("Something went wrong. Try again later.");
         }
     } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
         window.location.assign("login.html");

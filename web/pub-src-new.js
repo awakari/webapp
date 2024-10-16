@@ -97,9 +97,7 @@ function addSource() {
             }
             const userId = localStorage.getItem(keyUserId);
             requestEmailSub(userId, srcAddr)
-                .finally(() => {
-                    loadForm();
-                })
+                .finally(() => {});
             return; // do not proceed
         default:
             return;

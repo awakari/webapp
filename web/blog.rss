@@ -16,6 +16,19 @@
         </image>
 
         <item>
+            <title>New Source Type</title>
+            <description>Awakari is capable now to consume email digests.</description>
+            <pubDate>Thu, 17 Oct 2024 21:40:00 +0300</pubDate>
+            <category>awakari updates email integration</category>
+            <enclosure url="https://awakari.com/blog/2024-10-17_21-41.png"
+                       length="37956"
+                       type="image/png"/>
+            <content:encoded>
+                <![CDATA[ <p>In addition to other source types (RSS/Atom feeds, ActivityPub, Telegram, SSE, etc) there's a possibility to subscribe Awakari for email digests. Feel free to submit the desired digest page for a review. </p> ]]>
+            </content:encoded>
+        </item>
+
+        <item>
             <title>Reading Format Changes</title>
             <description>All event attributes are now available by the link.</description>
             <pubDate>Mon, 08 Aug 2024 09:44:00 +0300</pubDate>

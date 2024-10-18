@@ -2,8 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <script src="auth.js"></script>
-    <script src="donation.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Follow your interests from unlimited sources">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
+    <link rel="icon" href="logo-color.svg">
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="msapplication-TileColor" content="#22c55e">
+    <meta name="theme-color" content="#22c55e">
+
+    <!-- HTML Meta Tags -->
+    <title>Awakari Donation</title>
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://awakari.com/login.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Awakari App">
+    <meta property="og:description" content="Follow your interests from unlimited sources">
+    <meta property="og:image" content="app-screenshot.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="awakari.com">
+    <meta property="twitter:url" content="https://awakari.com/login.html">
+    <meta name="twitter:title" content="Awakari App">
+    <meta name="twitter:description" content="Follow your interests from unlimited sources">
+    <meta name="twitter:image" content="app-screenshot.png">
+
+    <link rel="stylesheet" href="spectre-icons.min.css">
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
 </head>
-<body onload="openDonationPage()">
+<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300" onload="load()">
+
+<header>
+    <nav class="text-xl flex p-1 sm:p-2 text-neutral-600 dark:text-neutral-400 justify-center">
+        Support Awakari
+    </nav>
+</header>
+
+
+<main class="m-1 mt-2 flex-1 flex flex-col space-y-2">
+
+    <div class="items-center justify-center flex text-lg space-x-1">
+        <span>|</span>
+        <a href="https://boosty.to/awakari/donate" class="text-blue-500">Boosty</a>
+        <span>|</span>
+        <a href="https://ko-fi.com/awakari" class="text-blue-500">Ko-Fi</a>
+        <span>|</span>
+        <a href="https://t.me/tribute/app?startapp=dcS8" class="text-blue-500">Telegram</a>
+        <span>|</span>
+    </div>
+
+    <div class="items-center justify-center flex flex-col pt-1">
+        <p>Offering this free service comes with costs.</p>
+        <p>Help Awakari to remain free and available to everyone.</p>
+        <p>Thank you for making a lasting impact!</p>
+    </div>
+
+</main>
+
 </body>
+</html>

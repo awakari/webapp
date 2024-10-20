@@ -52,38 +52,63 @@
 
 <main class="m-1 mt-2 flex-1 flex flex-col">
 
-    <div class="items-center justify-center flex flex-col space-y-2">
+    <div class="justify-center flex flex-col md:flex-row space-y-4 md:space-y-0">
 
-        <!-- Telegram -->
-        <div>
-            <script async
-                    src="https://telegram.org/js/telegram-widget.js?22"
-                    data-telegram-login="AwakariBot"
-                    data-size="large"
-                    data-onauth="handleAuthTelegram(user)"
-                    data-request-access="write"
-                    data-radius="4"
-                    data-userpic="false">
-            </script>
+        <div class="mx-auto rounded-md border dark:border-gray-700 md:mx-4 w-56">
+            <div class="p-4 pt-2 space-y-1 flex flex-col items-center">
+                <h1 class="text-lg font-medium capitalize flex justify-center">Basic</h1>
+                <p>Default access limits</p>
+            </div>
+            <hr class="border-gray-200 dark:border-gray-700"/>
+            <div class="p-4 flex flex-col items-center justify-center space-y-4">
+
+                <!-- Telegram -->
+                <div>
+                    <script async
+                            src="https://telegram.org/js/telegram-widget.js?22"
+                            data-telegram-login="AwakariBot"
+                            data-size="large"
+                            data-onauth="handleAuthTelegram(user)"
+                            data-request-access="write"
+                            data-radius="4"
+                            data-userpic="false">
+                    </script>
+                </div>
+
+                <!-- Google -->
+                <div class="justify-center">
+                    <div id="g_id_onload"
+                         data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
+                         data-context="signin"
+                         data-ux_mode="popup"
+                         data-callback="handleAuthGoogle"
+                         data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="rectangular"
+                         data-theme="filled_blue"
+                         data-text="signin_with"
+                         data-size="large"
+                         data-width="188"
+                         data-logo_alignment="left">
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-        <!-- Google -->
-        <div class="justify-center">
-            <div id="g_id_onload"
-                 data-client_id="131943559095-6uojftc7uoscij6b4j2jm0ifo4cd6obc"
-                 data-context="signin"
-                 data-ux_mode="popup"
-                 data-callback="handleAuthGoogle"
-                 data-auto_prompt="false">
+        <div class="mx-auto rounded-md border dark:border-gray-700 md:mx-4 w-56">
+            <div class="p-4 pt-2 space-y-1 flex flex-col items-center">
+                <h1 class="text-lg font-medium capitalize flex justify-center">Custom</h1>
+                <p>Premium access for sponsors</p>
             </div>
-            <div class="g_id_signin"
-                 data-type="standard"
-                 data-shape="rectangular"
-                 data-theme="outline"
-                 data-text="signin_with"
-                 data-size="large"
-                 data-width="188"
-                 data-logo_alignment="left">
+            <hr class="border-gray-200 dark:border-gray-700"/>
+            <div class="p-4 flex justify-center">
+                <button id="login-with-patreon" onclick="loginWithPatreon()"
+                        class="w-48 h-10 transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none">
+                    Login with Patreon
+                </button>
             </div>
         </div>
 

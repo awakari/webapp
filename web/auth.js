@@ -5,9 +5,9 @@ const keyAuthProvider = "authProvider";
 const keyAuthToken = "authToken";
 
 function load() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirect = urlParams.get("redirect");
     if (localStorage.getItem(keyUserName)) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirect = urlParams.get("redirect");
         if (redirect) {
             const args = urlParams.get("args");
             if (args) {
@@ -16,7 +16,21 @@ function load() {
                 window.location.assign(`${redirect}`)
             }
         } else {
-            window.location.assign('sub.html')
+            window.location.assign("sub.html");
+        }
+    } else {
+        const userId = urlParams.get(keyUserId);
+        if (userId) {
+            localStorage.setItem(keyUserId, userId);
+            localStorage.setItem(keyUserName, urlParams.get(keyUserName));
+            localStorage.setItem(keyAuthToken, urlParams.get(keyAuthToken));
+            localStorage.setItem(keyAuthProvider, urlParams.get(keyAuthProvider));
+            const state = urlParams.get("state");
+            if (state) {
+                window.location.assign(state);
+            } else {
+                window.location.assign("sub.html");
+            }
         }
     }
 }
@@ -70,4 +84,27 @@ function getAuthHeaders() {
         headers["X-Awakari-User-Id"] = userId;
     }
     return headers;
+}
+
+const patreonClientId = 'y1fnxWXTuBVi8_fkDnt-F4GwG3qz7qVrUvFLbvPTtU3jHHYylQR2Wluyn4EKYpag';
+const patreonRedirectUri = encodeURIComponent('https://awakari.com/v1/patreon/token');
+const patreonScope = 'identity identity.memberships'; // Request scopes (customize as needed)
+
+function loginWithPatreon() {
+    // Define your Patreon client ID and redirect URI
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirect = urlParams.get("redirect");
+    let state = "";
+    if (redirect) {
+        const args = urlParams.get("args");
+        if (args) {
+            state = encodeURIComponent(`${redirect}&args=${args}`);
+        } else {
+            state = encodeURIComponent(`${redirect}`);
+        }
+    }
+    // Construct the OAuth authorization URL
+    const oauthUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${patreonClientId}&redirect_uri=${patreonRedirectUri}&scope=${patreonScope}&state=${state}`;
+    // Redirect the user to Patreon's OAuth page
+    window.location.href = oauthUrl;
 }

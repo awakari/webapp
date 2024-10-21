@@ -26,7 +26,7 @@ function load() {
             localStorage.setItem(keyAuthToken, urlParams.get(keyAuthToken));
             localStorage.setItem(keyAuthProvider, urlParams.get(keyAuthProvider));
             const state = urlParams.get("state");
-            if (state) {
+            if (state && !state.startsWith("groupId=")) {
                 window.location.assign(state);
             } else {
                 window.location.assign("sub.html");
@@ -88,21 +88,20 @@ function getAuthHeaders() {
 
 const patreonClientId = 'y1fnxWXTuBVi8_fkDnt-F4GwG3qz7qVrUvFLbvPTtU3jHHYylQR2Wluyn4EKYpag';
 const patreonRedirectUri = encodeURIComponent('https://awakari.com/v1/patreon/token');
-const patreonScope = 'identity identity.memberships'; // Request scopes (customize as needed)
+const patreonScope = 'identity identity.memberships campaigns.members';
 
 function loginWithPatreon() {
-    // Define your Patreon client ID and redirect URI
+    let state = `groupId=${defaultGroupId}`;
     const urlParams = new URLSearchParams(window.location.search);
     const redirect = urlParams.get("redirect");
-    let state = "";
     if (redirect) {
+        state = `${redirect}&${state}`;
         const args = urlParams.get("args");
         if (args) {
-            state = encodeURIComponent(`${redirect}&args=${args}`);
-        } else {
-            state = encodeURIComponent(`${redirect}`);
+            state = `${state}&args=${args}`;
         }
     }
+    state = encodeURIComponent(state);
     // Construct the OAuth authorization URL
     const oauthUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${patreonClientId}&redirect_uri=${patreonRedirectUri}&scope=${patreonScope}&state=${state}`;
     // Redirect the user to Patreon's OAuth page

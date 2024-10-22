@@ -26,7 +26,7 @@ function load() {
             localStorage.setItem(keyAuthToken, urlParams.get(keyAuthToken));
             localStorage.setItem(keyAuthProvider, urlParams.get(keyAuthProvider));
             const state = urlParams.get("state");
-            if (state && !state.startsWith("groupId=")) {
+            if (state) {
                 window.location.assign(state);
             } else {
                 window.location.assign("sub.html");
@@ -91,11 +91,11 @@ const patreonRedirectUri = encodeURIComponent('https://awakari.com/v1/patreon/to
 const patreonScope = 'identity identity.memberships campaigns.members';
 
 function loginWithPatreon() {
-    let state = `groupId=${defaultGroupId}`;
+    let state = "";
     const urlParams = new URLSearchParams(window.location.search);
     const redirect = urlParams.get("redirect");
     if (redirect) {
-        state = `${redirect}&${state}`;
+        state = redirect;
         const args = urlParams.get("args");
         if (args) {
             state = `${state}&args=${args}`;

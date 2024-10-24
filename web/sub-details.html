@@ -111,34 +111,15 @@
                     </div>
                 </div>
 
-                <div class="flex">
-                    <div class="w-20 flex grow" style="margin-top: 0.125rem">
-                        <span class="tooltip mb-1">
-                            Conditions
-                            <span class="tooltiptext">
-                                <p>Message matching conditions.</p>
-                                <p>A message should match all.</p>
-                                <p>At least one is required.</p>
-                            </span>
+                <div class="w-20 flex grow" style="margin-top: 0.125rem">
+                    <span class="tooltip mb-1">
+                        Conditions
+                        <span class="tooltiptext">
+                            <p>Message matching conditions.</p>
+                            <p>A message should match all.</p>
+                            <p>At least one is required.</p>
                         </span>
-                    </div>
-                    <div id="add-condition">
-                        <div class="dropdown">
-                            <button type="button"
-                                    onclick="condNewDropdown()"
-                                    class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
-                                + Condition ⌄
-                            </button>
-                            <div id="cond-new-dropdown" class="dropdown-content p-2 w-[100px]">
-                                <button id="button-add-cond-txt" type="button" class="dropdown-option">
-                                    Text
-                                </button>
-                                <button id="button-add-cond-num" type="button" class="dropdown-option">
-                                    Number
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    </span>
                 </div>
 
             </div>
@@ -146,14 +127,33 @@
             <div class="space-y-2 pt-2" id="conditions">
             </div>
 
+            <div class="flex pt-2">
+                <div class="grow"></div>
+                <div id="add-condition">
+                    <div class="dropdown">
+                        <button type="button"
+                                onclick="condNewDropdown()"
+                                class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
+                            + Condition ⌄
+                        </button>
+                        <div id="cond-new-dropdown" class="dropdown-content p-2 w-[100px]">
+                            <button id="button-add-cond-txt" type="button" class="dropdown-option">
+                                Text
+                            </button>
+                            <button id="button-add-cond-num" type="button" class="dropdown-option">
+                                Number
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex space-x-2 pt-2">
                 <label for="description" style="margin-top: 0.125rem">
-                        <span class="tooltip">
-                            Description
-                            <span class="tooltiptext" style="width: 332px">Describe your interest to distinguish from others.</span>
-                        </span>
+                    <span>Name</span>
                 </label>
-                <input type="text" id="description">
+                <input type="text" id="description" style="border-top: none; border-left: none; border-right: none"
+                    placeholder="Free-form description">
             </div>
 
             <button type="button" class="collapsible mt-2">Advanced</button>
@@ -190,6 +190,7 @@
                            id="id"
                            maxlength="36"
                            pattern="[a-zA-Z0-9\-]+"
+                           style="border-left: none; border-top: none; border-right: none"
                            class="ml-2">
                 </div>
 

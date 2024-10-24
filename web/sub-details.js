@@ -10,8 +10,8 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
-                                   class="border-none w-24 sm:w-32 autocomplete-input" 
-                                   style="margin-top: -3px; height: 20px"
+                                   class="w-24 sm:w-32 autocomplete-input" 
+                                   style="margin-top: -3px; border-top: none; border-left: none; border-right: none; height: 20px"
                                    ${label === "Text"? 'placeholder="empty: any"' : 'placeholder="required"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
@@ -21,7 +21,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                         </label>
                         <label class="flex align-middle space-x-1 pl-2">
                             <input type="checkbox" 
-                                   class="h-4 w-4 sub-cond-not pt-1" 
+                                   class="h-4 w-4 sub-cond-not pt-1"
                                    onchange="setConditionNot(${idx}, this); updateDescription()"
                                    ${countConds > 1 ? '' : 'disabled="disabled"'}
                                    ${isNot ? 'checked="checked"' : ''}/>
@@ -55,8 +55,8 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                autocapitalize="none"
                                id="attrValTxtInput${idx}"
                                list="attrValTxt${idx}"
-                               class="border-none w-full" 
-                               style="height: 20px"
+                               class="w-full" 
+                               style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
                                placeholder="${isExact? 'exact complete text' : 'space-separated keywords'}"
                                value="${terms}"/>
@@ -78,8 +78,8 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
                             </select>                                        
                         </legend>
                         <input type="number"
-                               class="border-none w-full"
-                               style="height: 20px"
+                               class="w-full"
+                               style="height: 20px; border-left: none; border-right: none; border-top: none"
                                oninput="setConditionNumberValue(${idx}, this.value); updateDescription()"
                                value="${value}"/>
                     </div>

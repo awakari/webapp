@@ -5,6 +5,7 @@ const keyAuthProvider = "authProvider";
 const keyAuthToken = "authToken";
 
 function load() {
+    document.getElementById("wait").style.display = "block";
     const urlParams = new URLSearchParams(window.location.search);
     const redirect = urlParams.get("redirect");
     if (localStorage.getItem(keyUserName)) {
@@ -33,6 +34,7 @@ function load() {
             }
         }
     }
+    document.getElementById("wait").style.display = "none";
 }
 
 function handleAuthGoogle(response) {

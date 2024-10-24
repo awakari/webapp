@@ -3,12 +3,25 @@ const countCondsMax = 6;
 
 const templateCondHeader = (label, idx, countConds, isNot, key) => `
                 <fieldset class="flex p-2">
-                    <legend class="flex space-x-1 w-full">
-                        <span class="mx-2">${label}</span>
-                        <label class="flex align-middle space-x-1">
+                    <legend class="flex space-x-1 w-full px-1">
+                        <label class="flex space-x-1">
+                            <span>${label} Attribute</span>
+                            <input type="text"
+                                   pattern="[a-z0-9]{0,20}"
+                                   autocapitalize="none"
+                                   list="attrKeys${idx}" 
+                                   class="border-none w-24 sm:w-32 autocomplete-input" 
+                                   style="margin-top: -3px; height: 20px"
+                                   ${label === "Text"? 'placeholder="empty: any"' : 'placeholder="required"'}
+                                   oninput="setConditionAttrName(${idx}, this.value)"
+                                   onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
+                                   value="${key}"/>
+                            <datalist id="attrKeys${idx}">
+                            </datalist>
+                        </label>
+                        <label class="flex align-middle space-x-1 pl-2">
                             <input type="checkbox" 
-                                   class="h-4 w-4 sub-cond-not" 
-                                   style="margin-right: 0.125rem"
+                                   class="h-4 w-4 sub-cond-not pt-1" 
                                    onchange="setConditionNot(${idx}, this); updateDescription()"
                                    ${countConds > 1 ? '' : 'disabled="disabled"'}
                                    ${isNot ? 'checked="checked"' : ''}/>
@@ -27,73 +40,51 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                         </svg>
                     </legend>
                     <div class="flex space-x-2 w-full">
-                        <fieldset class="px-1 h-10 autocomplete ${label === "Text"? 'autocomplete-key-txt' : 'autocomplete-key-int' }">
-                            <legend class="px-1 h-5">
-                                <div style="margin-top: 2px">Attribute</div>
-                            </legend>
-                            <input type="text"
-                                   pattern="[a-z0-9]{0,20}"
-                                   autocapitalize="none"
-                                   list="attrKeys${idx}" 
-                                   class="border-none w-24 sm:w-32 autocomplete-input" 
-                                   style="height: 20px; background-color: inherit"
-                                   ${label === "Text"? 'placeholder="empty: any"' : 'placeholder="required"'}
-                                   oninput="setConditionAttrName(${idx}, this.value)"
-                                   onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
-                                   value="${key}"/>
-                            <datalist id="attrKeys${idx}">
-                            </datalist>
-                        </fieldset>
-`;
-
-const condFooter= `
-                    </div>
-                </fieldset>
 `;
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
     templateCondHeader("Text", idx, countConds, isNot, key) + `
-                        <fieldset class="px-1 tc h-10 w-full">
-                            <legend class="flex px-1">
-                                <select class="rounded-sm w-32 h-5 border-none"
-                                        onchange="setConditionTextExact(${idx}, this.value === '2')">
-                                    <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains any of</option>
-                                    <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals to</option>
-                                </select>
-                            </legend>
-                            <input type="text" 
-                                   autocapitalize="none"
-                                   id="attrValTxtInput${idx}"
-                                   list="attrValTxt${idx}"
-                                   class="border-none w-full" 
-                                   style="height: 20px; background-color: inherit"
-                                   oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
-                                   placeholder="${isExact? 'exact complete text' : 'space-separated keywords'}"
-                                   value="${terms}"/>
-                            <datalist id="attrValTxt${idx}"></datalist>
-                        </fieldset>` +
-    condFooter;
+                        <legend class="flex px-1">
+                            <select class="rounded-sm w-32 h-5 border-none"
+                                    onchange="setConditionTextExact(${idx}, this.value === '2')">
+                                <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains any of</option>
+                                <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals to</option>
+                            </select>
+                        </legend>
+                        <input type="text" 
+                               autocapitalize="none"
+                               id="attrValTxtInput${idx}"
+                               list="attrValTxt${idx}"
+                               class="border-none w-full" 
+                               style="height: 20px"
+                               oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
+                               placeholder="${isExact? 'exact complete text' : 'space-separated keywords'}"
+                               value="${terms}"/>
+                        <datalist id="attrValTxt${idx}"></datalist>
+                    </div>
+                </fieldset>
+`;
 
 const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
     templateCondHeader("Number", idx, countConds, isNot, key) + `
-                        <fieldset class="px-1 nc h-10 w-full">
-                            <legend class="flex px-1">
-                                <select class="rounded-sm w-10 px-1 h-5 border-none"
-                                        onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
-                                    <option value="1" ${op === 1 ? 'selected="selected"' : ''}>&gt;</option>
-                                    <option value="2" ${op === 2 ? 'selected="selected"' : ''}>&ge;</option>
-                                    <option value="3" ${op === 3 ? 'selected="selected"' : ''}>=</option>
-                                    <option value="4" ${op === 4 ? 'selected="selected"' : ''}>&le;</option>
-                                    <option value="5" ${op === 5 ? 'selected="selected"' : ''}>&lt;</option>
-                                </select>                                        
-                            </legend>
-                            <input type="number"
-                                   class="border-none w-full"
-                                   style="height: 20px; background-color: inherit"
-                                   oninput="setConditionNumberValue(${idx}, this.value); updateDescription()"
-                                   value="${value}"/>
-                        </fieldset>` +
-    condFooter;
+                        <legend class="flex px-1">
+                            <select class="rounded-sm w-10 px-1 h-5 border-none"
+                                    onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
+                                <option value="1" ${op === 1 ? 'selected="selected"' : ''}>&gt;</option>
+                                <option value="2" ${op === 2 ? 'selected="selected"' : ''}>&ge;</option>
+                                <option value="3" ${op === 3 ? 'selected="selected"' : ''}>=</option>
+                                <option value="4" ${op === 4 ? 'selected="selected"' : ''}>&le;</option>
+                                <option value="5" ${op === 5 ? 'selected="selected"' : ''}>&lt;</option>
+                            </select>                                        
+                        </legend>
+                        <input type="number"
+                               class="border-none w-full"
+                               style="height: 20px"
+                               oninput="setConditionNumberValue(${idx}, this.value); updateDescription()"
+                               value="${value}"/>
+                    </div>
+                </fieldset>
+`;
 
 async function loadSubDetails() {
     await loadAttributeTypes();

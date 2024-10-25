@@ -101,7 +101,7 @@ async function requestIncreaseSubscriptionsLimit(userId) {
             break;
         default:
             if (confirm("Available only when logged in with Patreon. Proceed to login?")) {
-                logout();
+                logoutConfirmed();
             }
             break;
     }

@@ -61,7 +61,16 @@ Subscriptions.create = function (name, descr, enabled, expires, isPublic, cond, 
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
-                handleResponseStatus(`Create interest ${name}`, resp.status);
+                switch (resp.status) {
+                    case 429:
+                        if (confirm("Usage limit reached. Subscribe in Patreon for an extra access?")) {
+                            window.location.open("https://www.patreon.com/c/awakari/membership", "_blank");
+                        }
+                        break;
+                    default:
+                        handleResponseStatus(`Create interest ${name}`, resp.status);
+                        break;
+                }
                 return null;
             }
             return resp.json();

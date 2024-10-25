@@ -95,51 +95,15 @@ async function requestPublishingSourceDedicated(addr){
 }
 
 async function requestIncreaseSubscriptionsLimit(userId) {
-    if (userId) {
-        const msg = "Request to increase the interests limit\nPlease enter the number to add:"
-        const input = prompt(msg, "1");
-        if (input) {
-            let inc = 0;
-            try {
-                inc = parseInt(input);
-            } catch (e) {
-                console.log(e);
+    switch (true) {
+        case userId.startsWith("patreon"):
+            window.open("https://www.patreon.com/c/awakari/membership", "_blank");
+            break;
+        default:
+            if (confirm("Available only when logged in with Patreon. Proceed to login?")) {
+                logout();
             }
-            if (inc > 0) {
-                const payload = {
-                    id: Events.newId(),
-                    specVersion: "1.0",
-                    source: "awakari.com",
-                    type: "com_awakari_webapp",
-                    attributes: {
-                        increment: {
-                            ce_integer: inc,
-                        },
-                        limit: {
-                            ce_integer: parseInt(document.getElementById("limit").innerText),
-                        },
-                        action: {
-                            ce_string: "request",
-                        },
-                        object: {
-                            ce_string: "subscriptions",
-                        },
-                        subject: {
-                            ce_string: userId,
-                        },
-                    },
-                    text_data: `User ${userId} requests to increase the subscriptions limit by ${inc}`,
-                }
-                const headers = getAuthHeaders();
-                if (await Events.publishInternal(payload, headers)) {
-                    openDonationPage();
-                }
-            } else {
-                alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
-            }
-        }
-    } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {
-        window.location.assign("login.html");
+            break;
     }
 }
 

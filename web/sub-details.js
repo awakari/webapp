@@ -730,7 +730,7 @@ function getRootCondition() {
 }
 
 function getNonEmptyConditions() {
-    let nonEmptyConds = {};
+    let nonEmptyConds = [];
     for (let i = 0; i < conds.length; i ++) {
         const cond = conds[i];
         if (cond.hasOwnProperty("nc")) {

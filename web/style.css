@@ -8,6 +8,15 @@
 input {
     accent-color: dimgrey;
     outline: none;
+    background-color: #f5f5f5;
+}
+input[readonly="readonly"] {
+    background-color: inherit;
+    border: none;
+}
+input[disabled="disabled"] {
+    background-color: inherit;
+    border: none;
 }
 @media (prefers-color-scheme: dark) {
     input::placeholder {
@@ -33,6 +42,9 @@ input[type=text] {
     border-color: #94a3b8;
     border-width: 1px;
     outline: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
 }
 input[type=text]:invalid {
     border-color: #ef4444;
@@ -44,6 +56,9 @@ input[type=number] {
     border-width: 1px;
     outline: none;
     -moz-appearance: textfield; /* Firefox */
+    border-left: none;
+    border-top: none;
+    border-right: none;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -54,6 +69,9 @@ input::-webkit-inner-spin-button {
 input[type=date] {
     border-color: #94a3b8;
     border-width: 1px;
+}
+input[type=search] {
+    background-color: inherit;
 }
 textarea, select, fieldset {
     border-color: #94a3b8;
@@ -92,6 +110,12 @@ hr {
         border-color: #334155;
         border-width: 1px;
         color: #94a3b8;
+    }
+    input[readonly="readonly"] {
+        background-color: inherit;
+    }
+    input[disabled="disabled"] {
+        background-color: inherit;
     }
     fieldset {
         border-color: #334155;

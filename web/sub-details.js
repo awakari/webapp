@@ -2,17 +2,18 @@ let conds = [];
 const countCondsMax = 6;
 
 const templateCondHeader = (label, idx, countConds, isNot, key) => `
+                ${idx > 0? '<div class="flex justify-center">And</div>' : ''}
                 <fieldset class="flex p-2">
                     <legend class="flex space-x-1 w-full px-1">
                         <label class="flex space-x-1">
-                            <span>${label} Attribute</span>
+                            <span>${label} where</span>
                             <input type="text"
                                    pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
-                                   class="w-24 sm:w-32 autocomplete-input" 
-                                   style="margin-top: -3px; border-top: none; border-left: none; border-right: none; height: 20px"
-                                   ${label === "Text"? 'placeholder="empty: any"' : 'placeholder="required"'}
+                                   class="w-32 sm:w-32 autocomplete-input" 
+                                   style="margin-top: -2px; border-top: none; border-left: none; border-right: none; height: 20px"
+                                   ${label === "Text"? 'placeholder="empty: anywhere"' : 'placeholder="attribute"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
                                    value="${key}"/>
@@ -27,7 +28,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    ${isNot ? 'checked="checked"' : ''}/>
                             <span>Not</span>
                         </label>
-                        <hr class="grow mt-2" style="height: 1px"/>
+                        <hr class="grow" style="height: 1px; margin-top: 9px; margin-right: -4px;"/>
                         <svg fill="currentColor"
                              width="16px"
                              height="16px"
@@ -45,9 +46,9 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
     templateCondHeader("Text", idx, countConds, isNot, key) + `
                         <legend class="flex px-1">
-                            <select class="rounded-sm w-32 h-5 border-none"
+                            <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
-                                <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains any of</option>
+                                <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains Any</option>
                                 <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals to</option>
                             </select>
                         </legend>
@@ -58,7 +59,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                class="w-full" 
                                style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
-                               placeholder="${isExact? 'exact complete text' : 'space-separated keywords'}"
+                               placeholder="${isExact? 'exact complete text' : 'word1 word2 etc'}"
                                value="${terms}"/>
                         <datalist id="attrValTxt${idx}"></datalist>
                     </div>
@@ -152,10 +153,17 @@ function loadSubDetailsById(id) {
                 const cond = data.cond;
                 if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("tc")) {
                     conds.push(cond);
+                    addConditionText(false, "", "", false);
                 } else if (cond.hasOwnProperty("gc")) {
                     const children = cond.gc.group;
                     for (let i = 0; i < children.length; i++) {
                         conds.push(children[i]);
+                    }
+                    if (children.length < 1) {
+                        addConditionText(false, "", "", false);
+                    }
+                    if (children.length < 2) {
+                        addConditionText(false, "", "", false);
                     }
                 }
             }
@@ -285,6 +293,7 @@ function loadSubDetailsByExample(exampleName) {
             document.getElementById("description").value = "From r/Science only";
             addConditionText(false, "source", "https://www.reddit.com/r/science/.rss", true);
             document.getElementById("sub-discover-sources").checked = false;
+            addConditionText(false, "", "", false);
             break;
         }
     }
@@ -295,7 +304,8 @@ function loadSubDetailsByQuery(q) {
     document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
     document.getElementById("button-delete").style.display = "none";
-    addConditionText(false, "", q, false);
+    addConditionText(false, "", "", false);
+    addConditionText(false, "", "", false);
     displayConditions();
 }
 
@@ -342,7 +352,7 @@ function setConditionNot(idx, e) {
         if (!e.checked || countCondsPositive > 1) {
             conds[idx].not = e.checked;
         } else {
-            alert("At least one non-negative condition is required");
+            alert("At least one inclusive filter is required");
             e.checked = false;
         }
     }
@@ -386,7 +396,7 @@ function setConditionTextExact(idx, exact) {
             if (exact) {
                 document.getElementById(`attrValTxtInput${idx}`).placeholder = "exact complete text";
             } else {
-                document.getElementById(`attrValTxtInput${idx}`).placeholder = "any of space-separated words";
+                document.getElementById(`attrValTxtInput${idx}`).placeholder = "word1 word2 etc";
             }
         } else {
             console.error(`Target condition #${idx} is not a text condition`);
@@ -431,7 +441,7 @@ function setConditionNumberValue(idx, val) {
         if (cond.hasOwnProperty("nc")) {
             cond.nc.val = Number(val);
         } else {
-            console.error(`Target condition #${idx} is not a number condition`);
+            console.error(`Target filter #${idx} is not a number filter`);
         }
     }
 }
@@ -574,7 +584,7 @@ document
 
 document
     .getElementById("button-add-cond-num")
-    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 3, 0); displayConditions(); });
+    .addEventListener("click", (_) => { addConditionNumber(false, "", 3, 0); displayConditions(); });
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
@@ -610,7 +620,7 @@ function updateSubscription(id) {
     if (cond != null && confirm(`Update the interest ${id}?`)) {
         const descr = document.getElementById("description").value;
         if (!descr) {
-            alert("Empty interest description");
+            alert("Empty interest name");
             return;
         }
         let expires = document.getElementById("expires").value;
@@ -651,7 +661,7 @@ function createSubscription() {
         }
         const descr = document.getElementById("description").value;
         if (descr === "") {
-            alert("Empty interest description");
+            alert("Empty interest name");
             return;
         }
         const isPublic = document.getElementById("public").checked;
@@ -695,13 +705,14 @@ function createSubscription() {
 }
 
 function getRootCondition() {
+    const nonEmptyConds = getNonEmptyConditions();
     let cond = null;
-    if (conds.length === 1) {
-        cond = conds[0];
+    if (nonEmptyConds.length === 1) {
+        cond = nonEmptyConds[0];
         cond = validateCondition(cond);
-    } else if (conds.length > 1) {
-        for (let i = 0; i < conds.length; i ++) {
-            if (null == validateCondition(conds[i])) {
+    } else if (nonEmptyConds.length > 1) {
+        for (let i = 0; i < nonEmptyConds.length; i ++) {
+            if (null == validateCondition(nonEmptyConds[i])) {
                 return null;
             }
         }
@@ -709,37 +720,56 @@ function getRootCondition() {
             not: false,
             gc: {
                 logic: 0,
-                group: conds,
+                group: nonEmptyConds,
             }
         }
     } else {
-        alert("Interest should have at least 1 condition");
+        alert("Interest should have at least non-empty 1 filter");
     }
     return cond;
+}
+
+function getNonEmptyConditions() {
+    let nonEmptyConds = {};
+    for (let i = 0; i < conds.length; i ++) {
+        const cond = conds[i];
+        if (cond.hasOwnProperty("nc")) {
+            if (!cond.nc.key || cond.nc.key.trim() === "") {
+                continue;
+            }
+        }
+        if (cond.hasOwnProperty("tc")) {
+            if ((!cond.tc.key || cond.tc.key.trim() === "") && cond.tc.term.trim() === "") {
+                continue;
+            }
+        }
+        nonEmptyConds.push(cond);
+    }
+    return nonEmptyConds;
 }
 
 function validateCondition(cond) {
     if (cond.hasOwnProperty("nc")) {
         if (!cond.nc.key || cond.nc.key === "") {
-            alert("Number condition should have a non-empty attribute name");
+            alert("Number filter should have a non-empty attribute name");
             return null;
         }
         cond.nc.key = cond.nc.key.toLowerCase();
         if (cond.nc.op === 0) {
-            alert("Number condition operator is not recognized");
+            alert("Number filter operator is not recognized");
             return null;
         }
     } else if (cond.hasOwnProperty("tc")) {
         if (cond.tc.key) {
-            cond.tc.key = cond.tc.key.toLowerCase();
+            cond.tc.key = cond.tc.key.trim().toLowerCase();
         }
-        if (cond.tc.term.length < 3) {
+        if ((!cond.tc.key || cond.tc.key.trim() === "") && cond.tc.term.trim().length < 2) {
             // TODO check meaningful characters
-            alert("Keywords length should be at least 3 symbols");
+            alert("Keywords length should be at least 2 non-whitespace symbols");
             return null;
         }
     } else {
-        alert("Unrecognized condition type");
+        alert("Unrecognized filter type");
         return null;
     }
     return cond;

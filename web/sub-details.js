@@ -669,13 +669,17 @@ function createSubscription() {
             return;
         }
         const enabled = document.getElementById("interest-enabled").checked;
+        if (!enabled) {
+            alert("Creating inactive interests is not allowed");
+            return;
+        }
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         const userId = headers["X-Awakari-User-Id"];
         document.getElementById("wait").style.display = "block";
         Subscriptions
-            .create(name, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
+            .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(id => {
                 if (id) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";

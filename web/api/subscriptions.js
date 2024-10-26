@@ -35,12 +35,12 @@ Subscriptions.delete = function (id, headers) {
         });
 }
 
-Subscriptions.createResponse = function (name, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Subscriptions.createResponse = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: name,
         discover: discoverSourcesFlag,
         description: descr,
-        enabled: enabled,
+        enabled: true,
         public: isPublic,
         cond: cond,
     }
@@ -55,9 +55,9 @@ Subscriptions.createResponse = function (name, descr, enabled, expires, isPublic
     return fetch(`/v1/sub`, optsReq);
 }
 
-Subscriptions.create = function (name, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Subscriptions.create = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
     return Subscriptions
-        .createResponse(name, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
+        .createResponse(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

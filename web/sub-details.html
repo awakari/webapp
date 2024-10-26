@@ -183,13 +183,31 @@
                            class="ml-2">
                 </div>
 
+                <label class="flex space-x-1">
+                    <input id="interest-enabled"
+                           type="checkbox" class="h-4 w-4"
+                           style="margin-right: 0.25rem; margin-top: 0.125rem"/>
+                    <span class="tooltip" style="margin-top: 0.125rem">
+                        Active
+                        <span class="tooltiptext">
+                            <p>Active interest filters the input stream.</p>
+                            <p>Inactive interest doesn't get new events.</p>
+                            <p>
+                                Count of simultaneously active user interests is limited.
+                                To create a new active interest or activate an existing one
+                                it may be necessary to increase the current user's limit.
+                            </p>
+                        </span>
+                    </span>
+                </label>
+
                 <div class="flex">
                     <span class="flex" style="margin-top: 0.125rem">
                         <span class="tooltip">
                             Expires
                             <span class="tooltiptext">
-                                <p>Local time when the interest expires.</p>
-                                <p>The interest never expires when it's empty.</p>
+                                A local date when the interest expires and becomes inactive.
+                                An interest never expires when this date is not set.
                             </span>
                         </span>
                     </span>

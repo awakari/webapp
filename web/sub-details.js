@@ -127,6 +127,7 @@ function loadSubDetailsById(id) {
         .then(data => {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
+                document.getElementById("interest-enabled").checked = data.enabled;
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
                     document.getElementById("follow-fediverse").style.display = "block";
@@ -236,6 +237,7 @@ function loadSubDetailsById(id) {
 function loadSubDetailsByExample(exampleName) {
     document.getElementById("button-delete").style.display = "none";
     document.getElementById("id").readOnly = false;
+    document.getElementById("interest-enabled").checked = true;
     switch (exampleName) {
         case "cheap-iphone-alert": {
             document.getElementById("description").value = "Cheap iPhone alert";
@@ -303,6 +305,7 @@ function loadSubDetailsByExample(exampleName) {
 function loadSubDetailsByQuery(q) {
     document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
+    document.getElementById("interest-enabled").checked = true;
     document.getElementById("button-delete").style.display = "none";
     addConditionText(false, "", "", false);
     addConditionText(false, "", "", false);
@@ -623,6 +626,7 @@ function updateSubscription(id) {
             alert("Empty interest name");
             return;
         }
+        const enabled = document.getElementById("interest-enabled").checked;
         let expires = document.getElementById("expires").value;
         if (expires && expires !== "") {
             const d = new Date(expires);
@@ -635,7 +639,7 @@ function updateSubscription(id) {
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         Subscriptions
-            .update(id, descr, true, expires, isPublic, cond, discoverSourcesFlag, headers)
+            .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(updated => {
                 if (updated) {
                     alert(`Updated the interest: ${id}`);
@@ -664,13 +668,14 @@ function createSubscription() {
             alert("Empty interest name");
             return;
         }
+        const enabled = document.getElementById("interest-enabled").checked;
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         const userId = headers["X-Awakari-User-Id"];
         document.getElementById("wait").style.display = "block";
         Subscriptions
-            .create(name, descr, true, expires, isPublic, cond, discoverSourcesFlag, headers)
+            .create(name, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(id => {
                 if (id) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";

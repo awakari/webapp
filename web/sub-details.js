@@ -128,6 +128,7 @@ function loadSubDetailsById(id) {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("interest-enabled").checked = data.enabled;
+                document.getElementById("interest-enabled").disabled = false;
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
                     document.getElementById("follow-fediverse").style.display = "block";

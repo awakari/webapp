@@ -238,6 +238,7 @@ function loadSubDetailsByExample(exampleName) {
     document.getElementById("button-delete").style.display = "none";
     document.getElementById("id").readOnly = false;
     document.getElementById("interest-enabled").checked = true;
+    document.getElementById("interest-enabled").disabled = true;
     switch (exampleName) {
         case "cheap-iphone-alert": {
             document.getElementById("description").value = "Cheap iPhone alert";
@@ -306,6 +307,7 @@ function loadSubDetailsByQuery(q) {
     document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
     document.getElementById("interest-enabled").checked = true;
+    document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
     addConditionText(false, "", "", false);
     addConditionText(false, "", "", false);

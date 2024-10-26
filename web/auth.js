@@ -57,20 +57,22 @@ function handleAuthTelegram(user) {
     load();
 }
 
-function logout() {
+function logout(redirect) {
     const userName = localStorage.getItem(keyUserName);
     const authProvider = localStorage.getItem(keyAuthProvider);
     if (confirm(`Confirm exit for user ${userName} (${authProvider})?`)) {
-        logoutConfirmed();
+        logoutConfirmed(redirect);
     }
 }
 
-function logoutConfirmed() {
+function logoutConfirmed(redirect) {
     localStorage.removeItem(keyUserName);
     localStorage.removeItem(keyUserId);
     localStorage.removeItem(keyAuthToken);
     localStorage.removeItem(keyAuthProvider);
-    window.location.assign("index.html");
+    if (redirect) {
+        window.location.assign(redirect);
+    }
 }
 
 function getAuthHeaders() {

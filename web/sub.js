@@ -17,7 +17,7 @@ const templateSub = (sub) => `
 
 const pageLimit= 12;
 
-function loadInterests() {
+async function loadInterests() {
 
     const headers = getAuthHeaders();
     if (!headers["Authorization"]) {
@@ -52,10 +52,10 @@ function loadInterests() {
         });
 
     const urlParams = new URLSearchParams(window.location.search);
-    loadSubscriptions(urlParams.get("filter"), urlParams.get("own"));
+    return reloadInterests(urlParams.get("filter"), urlParams.get("own"), true);
 }
 
-function loadSubscriptions(filter, ownOnly) {
+async function reloadInterests(filter, ownOnly, initial) {
 
     const urlParams = new URLSearchParams(window.location.search);
     let order = urlParams.get("order");
@@ -93,7 +93,27 @@ function loadSubscriptions(filter, ownOnly) {
         document.getElementById("filter").value = filter;
     }
 
+    const headers = getAuthHeaders();
+
     if (ownOnly == null) {
+        // initially, when user has no own interests, show public interests list, otherwise own interests list
+        if (initial) {
+            const ownInterestCount = await Subscriptions
+                .fetchListPage(cursor, cursorFollowers, order, 1, filter, true, headers)
+                .then(resp => resp ? resp.json() : null)
+                .then(data => {
+                    if (data) {
+                        if (data.hasOwnProperty("subs")) {
+                            return data.subs.length;
+                        }
+                        return 0;
+                    }
+                    return 0;
+                });
+            if (ownInterestCount > 0) {
+                document.getElementById("own").checked = true;
+            }
+        }
         ownOnly = document.getElementById("own").checked;
     } else if (ownOnly === true || ownOnly === "true") {
         ownOnly = true;
@@ -104,8 +124,6 @@ function loadSubscriptions(filter, ownOnly) {
     }
 
     document.getElementById("wait").style.display = "block";
-
-    const headers = getAuthHeaders();
 
     Subscriptions
         .fetchListPage(cursor, cursorFollowers, order, pageLimit, filter, ownOnly, headers)

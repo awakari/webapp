@@ -173,9 +173,8 @@
         <div class="w-16 flex items-center pt-1">
             <input type="checkbox"
                    id="own"
-                   checked="checked"
                    class="w-4 h-4 accent-slate-500"
-                   onchange="loadSubscriptions(document.getElementById('filter').value, this.checked)">
+                   onchange="reloadInterests(document.getElementById('filter').value, this.checked, false)">
             <label for="own">Own</label>
         </div>
 
@@ -186,7 +185,7 @@
             <input id="filter"
                    type="search"
                    class="ml-1 border-0 outline-none w-56 sm:w-72 dark:bg-gray-800"
-                   oninput="loadSubscriptions(this.value, document.getElementById('own').checked)"/>
+                   oninput="reloadInterests(this.value, document.getElementById('own').checked, false)"/>
         </div>
     </div>
     <div class="mt-3 flex flex-col items-center justify-center">

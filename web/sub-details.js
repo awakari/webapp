@@ -130,9 +130,11 @@ function loadSubDetailsById(id) {
                 if (data.hasOwnProperty("own") && data.own) {
                     document.getElementById("interest-enabled").disabled = false;
                     document.getElementById("button-delete").style.display = "flex";
+                    document.getElementById("subm-discover").style.display = "flex";
                 } else {
                     document.getElementById("button-submit").style.display = "none";
                     document.getElementById("button-delete").style.display = "none";
+                    document.getElementById("subm-discover").style.display = "none";
                 }
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;

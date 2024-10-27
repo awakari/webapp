@@ -115,7 +115,6 @@ const templateDiscoveredSrc = (addr, type) => `
 
 function loadSubDetailsById(id) {
     document.getElementById("id").value = id;
-    document.getElementById("button-delete").style.display = "flex";
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("area-follow").style.display = "flex";
     document.getElementById("follow-feed").href = `https://reader.awakari.com/v1/sub/rss/${id}`;
@@ -128,7 +127,13 @@ function loadSubDetailsById(id) {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("interest-enabled").checked = data.enabled;
-                document.getElementById("interest-enabled").disabled = false;
+                if (data.hasOwnProperty("own") && data.own) {
+                    document.getElementById("interest-enabled").disabled = false;
+                    document.getElementById("button-delete").style.display = "flex";
+                } else {
+                    document.getElementById("button-submit").style.display = "none";
+                    document.getElementById("button-delete").style.display = "none";
+                }
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
                     document.getElementById("follow-fediverse").style.display = "block";

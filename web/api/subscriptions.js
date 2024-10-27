@@ -64,7 +64,7 @@ Subscriptions.create = function (name, descr, expires, isPublic, cond, discoverS
                 switch (resp.status) {
                     case 429:
                         if (confirm("Usage limit reached. Subscribe in Patreon for an extra access?")) {
-                            window.location.open("https://www.patreon.com/c/awakari/membership", "_blank");
+                            window.open("https://www.patreon.com/c/awakari/membership", "_blank");
                         }
                         break;
                     default:

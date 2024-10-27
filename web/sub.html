@@ -102,7 +102,7 @@
 <main class="py-1 mx-2 text-slate-700 dark:text-gray-300">
     <div class="flex flex-col sm:flex-row items-center justify-center">
         <div class="flex w-80 sm:w-48 sm:ml-2 pt-1 sm:pt-0">
-            <div class="pt-1 w-28 sm:w-24">Count:</div>
+            <div class="pt-1 w-28 sm:w-24">Active:</div>
             <div class="pt-1 w-12 sm:w-8" id="count"></div>
             <div class="ml-2 dropdown">
                 <button type="button"
@@ -171,11 +171,15 @@
     <div class="flex items-center justify-center pt-2">
 
         <div class="w-16 flex items-center pt-1">
-            <input type="checkbox" id="own" class="w-4 h-4 accent-slate-500" onchange="loadSubscriptions(document.getElementById('filter').value, this.checked)">
+            <input type="checkbox"
+                   id="own"
+                   checked="checked"
+                   class="w-4 h-4 accent-slate-500"
+                   onchange="loadSubscriptions(document.getElementById('filter').value, this.checked)">
             <label for="own">Own</label>
         </div>
 
-        <div class="mx-2 mt-2 border flex text-slate-500 w-60 sm:w-80 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+        <div class="mx-2 mt-1 border flex text-slate-500 w-60 sm:w-80 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
             </svg>

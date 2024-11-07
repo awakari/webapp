@@ -16,6 +16,26 @@
         </image>
 
         <item>
+            <title>Retention Period Change</title>
+            <description>Results retention period changes from 3 days to 2 days.</description>
+            <pubDate>Thu, 11 Nov 2024 22:50:00 +0200</pubDate>
+            <category>awakari updates retention period</category>
+            <content:encoded>
+                <![CDATA[ <p>Given the increasing volume of realtime data, the results retention period decreases from 3 days to 2 days. Expect a further decreasing it down to 1 day.</p> ]]>
+            </content:encoded>
+        </item>
+
+        <item>
+            <title>New Source Type: SSE</title>
+            <description>Introducing new source type: SSE (Server-Sent Events).</description>
+            <pubDate>Thu, 11 Nov 2024 22:40:00 +0200</pubDate>
+            <category>awakari updates sse wikimedia stream integration</category>
+            <content:encoded>
+                <![CDATA[ <p>Awakari now is capable to consume events from SSE sources. The reference sources are mastodon's live streams (existed before) and wikimedia recent changes stream: <a href="https://stream.wikimedia.org/v2/stream/recentchange">https://stream.wikimedia.org/v2/stream/recentchange</a>. If you know an interesting public SSE source, please share it to add!</p> ]]>
+            </content:encoded>
+        </item>
+
+        <item>
             <title>New Source Type</title>
             <description>Awakari is capable now to consume email digests.</description>
             <pubDate>Thu, 17 Oct 2024 21:40:00 +0300</pubDate>

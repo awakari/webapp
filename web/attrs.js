@@ -75,7 +75,7 @@ function loadAttributeValues(key, input, headers) {
                     if (resp.ok) {
                         return resp.json();
                     } else {
-                        console.log(`Failed to load sample values for attribute ${name}, response status: ${resp.status}`);
+                        console.log(`Failed to load sample values for attribute ${key}, response status: ${resp.status}`);
                     }
                     return [];
                 });

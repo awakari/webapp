@@ -1,6 +1,6 @@
-const Subscriptions = {};
+const Interests = {};
 
-Subscriptions.fetchListPage = function (cursor, followers, order, limit, filter, ownOnly, headers) {
+Interests.fetchListPage = function (cursor, followers, order, limit, filter, ownOnly, headers) {
     return fetch(`/v1/sub?limit=${limit}&cursor=${cursor}&followers=${followers}&sort=FOLLOWERS&order=${order}&filter=${encodeURIComponent(filter)}&public=${!ownOnly}`, {
         method: "GET",
         headers: headers,
@@ -19,7 +19,7 @@ Subscriptions.fetchListPage = function (cursor, followers, order, limit, filter,
         });
 }
 
-Subscriptions.delete = function (id, headers) {
+Interests.delete = function (id, headers) {
     let optsReq = {
         method: "DELETE",
         headers: headers,
@@ -35,7 +35,7 @@ Subscriptions.delete = function (id, headers) {
         });
 }
 
-Subscriptions.createResponse = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Interests.createResponse = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: name,
         discover: discoverSourcesFlag,
@@ -55,8 +55,8 @@ Subscriptions.createResponse = function (name, descr, expires, isPublic, cond, d
     return fetch(`/v1/sub`, optsReq);
 }
 
-Subscriptions.create = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
-    return Subscriptions
+Interests.create = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
+    return Interests
         .createResponse(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
         .then(resp => {
             if (!resp.ok) {
@@ -84,7 +84,7 @@ Subscriptions.create = function (name, descr, expires, isPublic, cond, discoverS
         });
 }
 
-Subscriptions.fetch = function (id, headers) {
+Interests.fetch = function (id, headers) {
     const optsReq = {
         method: "GET",
         headers: headers,
@@ -100,7 +100,7 @@ Subscriptions.fetch = function (id, headers) {
         })
 }
 
-Subscriptions.update = function (id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Interests.update = function (id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: id,
         discover: discoverSourcesFlag,

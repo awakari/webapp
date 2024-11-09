@@ -98,7 +98,7 @@ async function reloadInterests(filter, ownOnly, initial) {
     if (ownOnly == null) {
         // initially, when user has no own interests, show public interests list, otherwise own interests list
         if (initial) {
-            const ownInterestCount = await Subscriptions
+            const ownInterestCount = await Interests
                 .fetchListPage(cursor, cursorFollowers, order, 1, filter, true, headers)
                 .then(resp => resp ? resp.json() : null)
                 .then(data => {
@@ -125,7 +125,7 @@ async function reloadInterests(filter, ownOnly, initial) {
 
     document.getElementById("wait").style.display = "block";
 
-    Subscriptions
+    Interests
         .fetchListPage(cursor, cursorFollowers, order, pageLimit, filter, ownOnly, headers)
         .then(resp => resp ? resp.json() : null)
         .then(data => {

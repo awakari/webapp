@@ -120,7 +120,7 @@ function loadSubDetailsById(id) {
     document.getElementById("follow-feed").href = `https://reader.awakari.com/v1/sub/rss/${id}`;
     document.getElementById("follow-telegram").href = `https://t.me/AwakariBot?start=${id}`;
     const headers = getAuthHeaders();
-    Subscriptions
+    Interests
         .fetch(id, headers)
         .then(resp => resp ? resp.json() : null)
         .then(data => {
@@ -385,7 +385,7 @@ function setConditionAttrName(idx, name) {
 }
 
 function setConditionAttrValueOpts(idx, key) {
-    if (conds.length > idx) {
+    if (conds.length > idx && key !== "") {
         const cond = conds[idx];
         if (cond.hasOwnProperty("tc")) {
             loadAttributeValues(key, "", getAuthHeaders()).then(opts => {
@@ -422,15 +422,17 @@ function setConditionTextTerms(idx, terms) {
         const cond = conds[idx];
         if (cond.hasOwnProperty("tc")) {
             cond.tc.term = terms;
-            loadAttributeValues(cond.tc.key, terms, getAuthHeaders()).then(opts => {
-                if (opts) {
-                    const optsElement = document.getElementById(`attrValTxt${idx}`);
-                    optsElement.innerHTML = "";
-                    for (const opt of opts) {
-                        optsElement.innerHTML += `<option>${opt}</option>\n`;
+            if (cond.tc.key !== "") {
+                loadAttributeValues(cond.tc.key, terms, getAuthHeaders()).then(opts => {
+                    if (opts) {
+                        const optsElement = document.getElementById(`attrValTxt${idx}`);
+                        optsElement.innerHTML = "";
+                        for (const opt of opts) {
+                            optsElement.innerHTML += `<option>${opt}</option>\n`;
+                        }
                     }
-                }
-            });
+                });
+            }
         } else {
             console.error(`Target condition #${idx} is not a text condition`);
         }
@@ -604,7 +606,7 @@ function deleteSubscription() {
     if (id && confirm(`Delete the interest ${id}?`)) {
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        Subscriptions
+        Interests
             .delete(id, headers)
             .then(deleted => {
                 if (deleted) {
@@ -618,17 +620,17 @@ function deleteSubscription() {
     }
 }
 
-function submitSubscription() {
+async function submitSubscription() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     if (id) {
-        updateSubscription(id);
+        await updateSubscription(id);
     } else {
-        createSubscription();
+        await createSubscription();
     }
 }
 
-function updateSubscription(id) {
+async function updateSubscription(id) {
     const cond = getRootCondition();
     if (cond != null && confirm(`Update the interest ${id}?`)) {
         const descr = document.getElementById("description").value;
@@ -648,12 +650,11 @@ function updateSubscription(id) {
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        Subscriptions
+        await Interests
             .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(updated => {
                 if (updated) {
-                    alert(`Updated the interest: ${id}`);
-                    window.location.assign("sub.html");
+                    return validateInterest(id, true, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
                 }
             })
             .finally(() => {
@@ -662,7 +663,7 @@ function updateSubscription(id) {
     }
 }
 
-function createSubscription() {
+async function createSubscription() {
     const cond = getRootCondition();
     if (cond != null) {
         const name = document.getElementById("id").value;
@@ -686,22 +687,51 @@ function createSubscription() {
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
-        const userId = headers["X-Awakari-User-Id"];
         document.getElementById("wait").style.display = "block";
-        Subscriptions
+        await Interests
             .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(id => {
                 if (id) {
+                    return validateInterest(id, true, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
+                }
+            })
+            .finally(() => {
+                document.getElementById("wait").style.display = "none";
+            });
+    }
+}
+
+async function validateInterest(id, created, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
+    document.getElementById("sub-wait-check-dialog").style.display = "block";
+    return new Promise(resolve => setTimeout(resolve, 30_000))
+        .then(() => fetch(`https://reader.awakari.com/v1/sub/json/${id}`, {
+            method: "GET",
+            cache: "no-cache",
+        }))
+        .then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            }
+            return 0;
+        })
+        .then(data => {
+            if (data) {
+                return data.length;
+            }
+            return 0;
+        })
+        .then(countResults => {
+            document.getElementById("sub-wait-check-dialog").style.display = "none";
+            if (countResults < 3) {
+                if (created) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";
                     document.getElementById("new-sub-id").innerText = id;
                     document.getElementById("sub-new-success-btn-tg").onclick = () => {
                         window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
                     }
-                    if (isPublic || (userId && !userId.startsWith("tg://user?id="))) {
-                        document.getElementById("sub-new-success-btn-feed").style.display = "block";
-                        document.getElementById("sub-new-success-btn-feed").onclick = () => {
-                            window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
-                        }
+                    document.getElementById("sub-new-success-btn-feed").style.display = "block";
+                    document.getElementById("sub-new-success-btn-feed").onclick = () => {
+                        window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
                     }
                     if (isPublic) {
                         document.getElementById("sub-new-success-btn-ap").style.display = "block";
@@ -715,12 +745,20 @@ function createSubscription() {
                                 })
                         }
                     }
+                } else {
+                    window.location.assign("sub.html");
                 }
-            })
-            .finally(() => {
-                document.getElementById("wait").style.display = "none";
-            });
-    }
+            } else {
+                Interests
+                    .update(id, descr, false, expires, isPublic, cond, discoverSourcesFlag, headers)
+                    .then(resp => {
+                        if (resp && resp.ok) {
+                            alert(`Got ${countResults} matching results in 30 seconds. Interest has been disabled because its filter conditions are too vague. Please review and make it more specific.`);
+                            window.location.assign(`sub-details.html?id=${id}`);
+                        }
+                    })
+            }
+        });
 }
 
 function getRootCondition() {

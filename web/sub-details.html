@@ -18,7 +18,7 @@
     <script src="api/sources.js"></script>
     <script src="api/status.js"></script>
     <script src="attrs.js"></script>
-    <script src="api/subscriptions.js?v=2f2b4c8"></script>
+    <script src="api/interests.js?v=2f2b4c8"></script>
 
     <link rel="me" href="https://activitypub.awakari.com/@me"/>
 
@@ -221,6 +221,7 @@
             </div>
 
             <div class="flex items-center justify-center space-x-2 pt-4">
+
                 <div class="absolute" id="wait" style="display: none">
                     <img src="wait.gif"/>
                 </div>
@@ -234,6 +235,7 @@
                     </svg>
                     <span>Submit</span>
                 </button>
+
                 <div id="sub-new-success-dialog"
                      class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1"
                      style="position: absolute; margin-top: -200px; display: none">
@@ -248,7 +250,7 @@
                         </button>
                     </div>
                     <p>
-                        Interest registered
+                        Interest created
                     </p>
                     <p>
                         Id: <span id="new-sub-id">1234567890abcdefghijklmnopqrstuvwxyz</span>
@@ -277,6 +279,21 @@
                         <span class="pt-1">&#10697; Follow In Telegram</span>
                     </button>
                 </div>
+
+                <div id="sub-wait-check-dialog"
+                     class="border border-gray-500 p-1 rounded-md shadow-lg bg-white dark:bg-gray-900 flex flex-col space-y-1"
+                     style="position: absolute; margin-top: -200px; display: none">
+                    <div class="flex w-full">
+                        <span class="text-lg">Interest validation...</span>
+                    </div>
+                    <p>
+                        Please wait 30 seconds while the interest is being tested.
+                    </p>
+                    <p class="flex items-center justify-center">
+                        <img src="wait.gif" alt="wait"/>
+                    </p>
+                </div>
+
             </div>
 
             <div class="py-2">

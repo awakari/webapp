@@ -650,11 +650,12 @@ async function updateSubscription(id) {
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
+        const since = new Date().toISOString();
         await Interests
             .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(updated => {
                 if (updated) {
-                    return validateInterest(id, true, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
+                    return validateInterest(id, false, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
                 }
             })
             .finally(() => {
@@ -688,11 +689,12 @@ async function createSubscription() {
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
+        const since = new Date().toISOString();
         await Interests
             .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(id => {
                 if (id) {
-                    return validateInterest(id, true, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
+                    return validateInterest(id, true, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
                 }
             })
             .finally(() => {
@@ -701,12 +703,15 @@ async function createSubscription() {
     }
 }
 
-async function validateInterest(id, created, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
+async function validateInterest(id, created, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
     document.getElementById("sub-wait-check-dialog").style.display = "block";
     return new Promise(resolve => setTimeout(resolve, 30_000))
         .then(() => fetch(`https://reader.awakari.com/v1/sub/json/${id}`, {
             method: "GET",
             cache: "no-cache",
+            headers: {
+                "If-None-Match": since,
+            }
         }))
         .then(resp => {
             if (resp.ok) {

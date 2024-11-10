@@ -658,7 +658,7 @@ async function updateSubscription(id) {
         await Interests
             .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(updated => {
-                if (updated) {
+                if (enabled && updated) {
                     return validateInterest(id, false, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
                 }
             })
@@ -731,7 +731,7 @@ async function validateInterest(id, created, since, descr, expires, isPublic, co
         })
         .then(countResults => {
             document.getElementById("sub-wait-check-dialog").style.display = "none";
-            if (countResults < 3) {
+            if (countResults < 2) {
                 if (created) {
                     document.getElementById("sub-new-success-dialog").style.display = "block";
                     document.getElementById("new-sub-id").innerText = id;
@@ -762,7 +762,7 @@ async function validateInterest(id, created, since, descr, expires, isPublic, co
                     .update(id, descr, false, expires, isPublic, cond, discoverSourcesFlag, headers)
                     .then(resp => {
                         if (resp && resp.ok) {
-                            alert(`Got ${countResults} matching results in 30 seconds. Interest has been disabled because its filter conditions are too vague. Please review and make it more specific.`);
+                            alert(`Got ${countResults} matching results in 30 seconds (max is 1). Interest has been deactivated to avoid a flood. Please review the interest filters, make it more specific and set active again.`);
                             window.location.assign(`sub-details.html?id=${id}`);
                         }
                     })

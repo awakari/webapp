@@ -124,6 +124,7 @@ function loadSubDetailsById(id) {
         .fetch(id, headers)
         .then(resp => resp ? resp.json() : null)
         .then(data => {
+            let p;
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("interest-enabled").checked = data.enabled;
@@ -148,8 +149,18 @@ function loadSubDetailsById(id) {
                                 alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
                             });
                     }
+                    if (navigator.share && navigator.canShare) {
+                        document.getElementById("area-button-share").style.display = "block";
+                        document.getElementById("button-share").onclick = () => {
+                            p = navigator.share({
+                                title: `Awakari Interest: ${data.description}`,
+                                url: window.location.href,
+                            });
+                        };
+                    }
                 } else {
                     document.getElementById("follow-fediverse").style.display = "none";
+                    document.getElementById("area-button-share").style.display = "none";
                 }
                 if (data.hasOwnProperty("followers")) {
                     document.getElementById("followers").value = data.followers;
@@ -176,6 +187,7 @@ function loadSubDetailsById(id) {
                     }
                 }
             }
+            return p;
         })
         .finally(() => {
             document.getElementById("wait").style.display = "none";

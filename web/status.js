@@ -18,6 +18,7 @@ const templateIntPopular = (id, data) => `
 `
 
 async function loadStatus() {
+    document.getElementById("wait-status").style.display = "block";
     return loadStatusWithRetry({})
         .then(resp => {
             if (!resp.ok) {
@@ -169,8 +170,10 @@ async function loadStatus() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(() => {
+            document.getElementById("wait-status").style.display = "none";
         });
-
 }
 
 function formatNumberShort(number) {

@@ -665,16 +665,18 @@ async function updateSubscription(id) {
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
+        document.getElementById("sub-wait-check-dialog").style.display = "block";
         document.getElementById("wait").style.display = "block";
         const since = new Date().toISOString();
         await Interests
             .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
-            .then(updated => {
-                if (enabled && updated) {
-                    return validateInterest(id, false, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
+            .then(data => {
+                if (data != null && !data.valid) {
+                    alert("Too many matching results. Interest is deactivated to avoid a flood. Please make interest conditions more specific and set active again.");
                 }
             })
             .finally(() => {
+                document.getElementById("sub-wait-check-dialog").style.display = "none";
                 document.getElementById("wait").style.display = "none";
             });
     }
@@ -704,82 +706,21 @@ async function createSubscription() {
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
+        document.getElementById("sub-wait-check-dialog").style.display = "block";
         document.getElementById("wait").style.display = "block";
         const since = new Date().toISOString();
         await Interests
             .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
-            .then(id => {
-                if (id) {
-                    return validateInterest(id, true, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers);
+            .then(data => {
+                if (data != null && !data.valid) {
+                    alert("Too many matching results. Interest is deactivated to avoid a flood. Please make interest conditions more specific and set active again.");
                 }
             })
             .finally(() => {
+                document.getElementById("sub-wait-check-dialog").style.display = "none";
                 document.getElementById("wait").style.display = "none";
             });
     }
-}
-
-async function validateInterest(id, created, since, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
-    document.getElementById("sub-wait-check-dialog").style.display = "block";
-    return new Promise(resolve => setTimeout(resolve, 30_000))
-        .then(() => fetch(`https://reader.awakari.com/v1/sub/json/${id}`, {
-            method: "GET",
-            cache: "no-cache",
-            headers: {
-                "If-None-Match": since,
-            }
-        }))
-        .then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            }
-            return 0;
-        })
-        .then(data => {
-            if (data) {
-                return data.length;
-            }
-            return 0;
-        })
-        .then(countResults => {
-            document.getElementById("sub-wait-check-dialog").style.display = "none";
-            if (countResults < 2) {
-                if (created) {
-                    document.getElementById("sub-new-success-dialog").style.display = "block";
-                    document.getElementById("new-sub-id").innerText = id;
-                    document.getElementById("sub-new-success-btn-tg").onclick = () => {
-                        window.open(`https://t.me/AwakariBot?start=${id}`, '_blank');
-                    }
-                    document.getElementById("sub-new-success-btn-feed").style.display = "block";
-                    document.getElementById("sub-new-success-btn-feed").onclick = () => {
-                        window.open(`https://reader.awakari.com/v1/sub/rss/${id}`, '_blank');
-                    }
-                    if (isPublic) {
-                        document.getElementById("sub-new-success-btn-ap").style.display = "block";
-                        document.getElementById("sub-new-success-btn-ap").onclick = () => {
-                            const addrFediverse = `@${id}@activitypub.awakari.com`;
-                            navigator
-                                .clipboard
-                                .writeText(addrFediverse)
-                                .then(() => {
-                                    alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
-                                })
-                        }
-                    }
-                } else {
-                    window.location.assign("sub.html");
-                }
-            } else {
-                Interests
-                    .update(id, descr, false, expires, isPublic, cond, discoverSourcesFlag, headers)
-                    .then(resp => {
-                        if (resp && resp.ok) {
-                            alert(`Got ${countResults} matching results in 30 seconds (max is 1). Interest has been deactivated to avoid a flood. Please review the interest filters, make it more specific and set active again.`);
-                            window.location.assign(`sub-details.html?id=${id}`);
-                        }
-                    })
-            }
-        });
 }
 
 function getRootCondition() {

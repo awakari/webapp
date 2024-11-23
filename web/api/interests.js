@@ -74,13 +74,6 @@ Interests.create = function (name, descr, expires, isPublic, cond, discoverSourc
                 return null;
             }
             return resp.json();
-        })
-        .then(data => {
-            if (data) {
-                return data.id;
-            } else {
-                return null;
-            }
         });
 }
 
@@ -124,6 +117,6 @@ Interests.update = function (id, descr, enabled, expires, isPublic, cond, discov
                 handleResponseStatus(`Update interest ${id}`, resp.status);
                 return null;
             }
-            return resp;
+            return resp.json();
         });
 }

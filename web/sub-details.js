@@ -665,18 +665,17 @@ async function updateSubscription(id) {
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
-        document.getElementById("sub-wait-check-dialog").style.display = "block";
         document.getElementById("wait").style.display = "block";
         const since = new Date().toISOString();
         await Interests
             .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(data => {
-                if (data != null && !data.valid) {
-                    alert("Too many matching results. Interest is deactivated to avoid a flood. Please make interest conditions more specific and set active again.");
+                if (data != null) {
+                    alert("Interest updated");
+                    window.location.assign("sub.html");
                 }
             })
             .finally(() => {
-                document.getElementById("sub-wait-check-dialog").style.display = "none";
                 document.getElementById("wait").style.display = "none";
             });
     }
@@ -706,18 +705,17 @@ async function createSubscription() {
         const isPublic = document.getElementById("public").checked;
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
-        document.getElementById("sub-wait-check-dialog").style.display = "block";
         document.getElementById("wait").style.display = "block";
         const since = new Date().toISOString();
         await Interests
             .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(data => {
-                if (data != null && !data.valid) {
-                    alert("Too many matching results. Interest is deactivated to avoid a flood. Please make interest conditions more specific and set active again.");
+                if (data != null) {
+                    alert("Interest created");
+                    window.location.assign("sub.html");
                 }
             })
             .finally(() => {
-                document.getElementById("sub-wait-check-dialog").style.display = "none";
                 document.getElementById("wait").style.display = "none";
             });
     }

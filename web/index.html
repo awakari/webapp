@@ -177,7 +177,7 @@
     </style>
 
 </head>
-<body class="bg-gray-200" onload="loadStatus();">
+<body class="bg-gray-200" onload="loadStatusLoop();">
 
 <main>
     <header class="bg-white dark:bg-gray-900">
@@ -575,7 +575,7 @@
 
     <div class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 justify-center items-center" id="status">
 
-        <div class="container mx-auto pt-4 px-2 space-y-4 justify-center items-center max-w-4xl">
+        <div class="container mx-auto pt-4 px-2 sm:space-y-4 justify-center items-center max-w-4xl">
             <div class="mt-2 px-4 flex justify-center items-center">
                 <h1 class="text-3xl capitalize lg:text-4xl justify-center text-center">Status</h1>
                 <div class="absolute flex justify-center items-center mt-20">
@@ -585,8 +585,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 justify-center">
 
-                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
+                <div class="sm:text-center px-1 sm:p-4 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Popular Sources</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Top relevant sources being read recently.</p>
                     </div>
@@ -596,8 +596,8 @@
                     </div>
                 </div>
 
-                <div class="sm:text-center p-1 sm:p-4 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
+                <div class="sm:text-center px-1 sm:p-4 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Popular Interests</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Public interests with the most known followers.</p>
                     </div>
@@ -607,95 +607,118 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
+                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Active Sources</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Distinct sources and users published recently.</p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
+                        <p class="text-sm">Current</p>
                         <p class="font-mono" id="publishers-curr"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
+                        <p class="text-sm">1 Hour</p>
                         <p class="font-mono" id="publishers-1h"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
+                        <p class="text-sm">1 Day</p>
                         <p class="font-mono" id="publishers-1d"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
+                        <p class="text-sm">30 Days</p>
                         <p class="font-mono" id="publishers-30d"></p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
+                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Active Followers</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Push receivers. Doesn't include pull readers.</p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>Current</p>
+                        <p class="text-sm">Current</p>
                         <p class="font-mono" id="followers-curr"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
+                        <p class="text-sm">1 Hour</p>
                         <p class="font-mono" id="followers-1h"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
+                        <p class="text-sm">1 Day</p>
                         <p class="font-mono" id="followers-1d"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
+                        <p class="text-sm">30 Days</p>
                         <p class="font-mono" id="followers-30d"></p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
+                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Published Messages</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Count over a recent time period.</p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Min</p>
+                        <p class="text-sm">1 Min</p>
                         <p class="font-mono" id="pub-last-1m"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
+                        <p class="text-sm">1 Hour</p>
                         <p class="font-mono" id="pub-last-1h"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
+                        <p class="text-sm">1 Day</p>
                         <p class="font-mono" id="pub-last-1d"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
+                        <p class="text-sm">30 Days</p>
                         <p class="font-mono" id="pub-last-30d"></p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 sm:text-center p-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-xl">
+                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Read Messages</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Message read count over a recent time period.</p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Min</p>
+                        <p class="text-sm">1 Min</p>
                         <p class="font-mono" id="read-last-1m"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Hour</p>
+                        <p class="text-sm">1 Hour</p>
                         <p class="font-mono" id="read-last-1h"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>1 Day</p>
+                        <p class="text-sm">1 Day</p>
                         <p class="font-mono" id="read-last-1d"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p>30 Days</p>
+                        <p class="text-sm">30 Days</p>
                         <p class="font-mono" id="read-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
+                        <p>Core Latency</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">End-to-end message processing duration.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">50 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_5"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">75 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_75"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">95 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_95"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">99 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_99"></p>
                     </div>
                 </div>
 

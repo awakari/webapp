@@ -1,8 +1,3 @@
-function loadStatusWithRetry(headers) {
-    return fetch("/v1/status/public")
-        .then(resp => handleCookieAuth(resp, headers, (h) => loadStatusWithRetry(h)))
-}
-
 const templateSrcPopular = (share, url) => `
     <div class="space-x-1 truncate">
         <span>${share} %</span>
@@ -16,15 +11,6 @@ const templateIntPopular = (id, data) => `
         <a href="sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
     </div>
 `
-
-async function loadStatus() {
-    await loadStatusPublishers();
-    await loadStatusFollowers();
-    await loadStatusPubRate();
-    await loadStatusRead();
-    await loadStatusDuration();
-    await loadStatusTopInterests();
-}
 
 function formatNumberShort(number) {
     const suffixes = ["", "", "K", "M", "B", "T", "P"];
@@ -50,6 +36,8 @@ function loadStatusPartWithRetry(headers, part) {
 }
 
 async function loadStatusPubRate() {
+    document.getElementById("wait-status-pub-rate").style.display = "block";
+    document.getElementById("pub-last-1m").innerHTML = "";
     return loadStatusPartWithRetry({}, "pub-rate")
         .then(resp => {
             if (!resp.ok) {
@@ -89,10 +77,16 @@ async function loadStatusPubRate() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(() => {
+            document.getElementById("wait-status-pub-rate").style.display = "none";
         });
 }
 
 async function loadStatusRead() {
+    document.getElementById("wait-status-read-rate").style.display = "block";
+    document.getElementById("wait-status-top-sources").style.display = "block";
+    document.getElementById("read-last-1m").innerHTML = "";
     return loadStatusPartWithRetry({}, "read")
         .then(resp => {
             if (!resp.ok) {
@@ -144,10 +138,16 @@ async function loadStatusRead() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(() => {
+            document.getElementById("wait-status-read-rate").style.display = "none";
+            document.getElementById("wait-status-top-sources").style.display = "none";
         });
 }
 
 async function loadStatusPublishers() {
+    document.getElementById("wait-status-publishers").style.display = "block";
+    document.getElementById("publishers-curr").innerHTML = "";
     return loadStatusPartWithRetry({}, "publishers")
         .then(resp => {
             if (!resp.ok) {
@@ -193,10 +193,15 @@ async function loadStatusPublishers() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(()=> {
+            document.getElementById("wait-status-publishers").style.display = "none";
         });
 }
 
 async function loadStatusFollowers() {
+    document.getElementById("wait-status-followers").style.display = "block";
+    document.getElementById("followers-curr").innerHTML = "";
     return loadStatusPartWithRetry({}, "followers")
         .then(resp => {
             if (!resp.ok) {
@@ -242,10 +247,15 @@ async function loadStatusFollowers() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(() => {
+            document.getElementById("wait-status-followers").style.display = "none";
         });
 }
 
 async function loadStatusDuration() {
+    document.getElementById("wait-status-duration").style.display = "block";
+    document.getElementById("core-duration-q0_5").innerHTML = "";
     return loadStatusPartWithRetry({}, "duration")
         .then(resp => {
             if (!resp.ok) {
@@ -285,10 +295,16 @@ async function loadStatusDuration() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(() => {
+            document.getElementById("wait-status-duration").style.display = "none";
         });
 }
 
 async function loadStatusTopInterests() {
+    const elemPopInts = document.getElementById("most-followed-interests");
+    elemPopInts.innerHTML = "";
+    document.getElementById("wait-status-top-interests").style.display = "block";
     return loadStatusPartWithRetry({}, "top-interests")
         .then(resp => {
             if (!resp.ok) {
@@ -299,8 +315,6 @@ async function loadStatusTopInterests() {
         })
         .then(data => {
             if (data) {
-                const elemPopInts = document.getElementById("most-followed-interests");
-                elemPopInts.innerHTML = "";
                 let count = 0;
                 Object
                     .entries(data)
@@ -315,10 +329,23 @@ async function loadStatusTopInterests() {
         .catch(err => {
             console.log(err);
             return "";
+        })
+        .finally(() => {
+            document.getElementById("wait-status-top-interests").style.display = "none";
         });
 }
 
 async function loadStatusLoop() {
-    await loadStatus();
-    setInterval(loadStatus, 100_000);
+    await loadStatusPublishers();
+    setInterval(loadStatusPublishers, 3_600_000);
+    await loadStatusTopInterests();
+    setInterval(loadStatusTopInterests, 3_600_000);
+    await loadStatusPubRate();
+    setInterval(loadStatusPubRate, 300_000);
+    await loadStatusRead();
+    setInterval(loadStatusRead, 300_000);
+    await loadStatusFollowers();
+    setInterval(loadStatusFollowers, 900_000);
+    await loadStatusDuration();
+    setInterval(loadStatusDuration, 300_000);
 }

@@ -578,9 +578,6 @@
         <div class="container mx-auto pt-4 px-2 sm:space-y-4 justify-center items-center max-w-4xl">
             <div class="mt-2 px-4 flex justify-center items-center">
                 <h1 class="text-3xl capitalize lg:text-4xl justify-center text-center">Status</h1>
-                <div class="absolute flex justify-center items-center mt-20">
-                    <img id="wait-status" src="wait.gif" alt="wait..." style="display: none"/>
-                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 justify-center">
@@ -591,6 +588,7 @@
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Top relevant sources being read recently.</p>
                     </div>
                     <div class="flex justify-center">
+                        <img id="wait-status-top-sources" src="wait.gif" alt="wait..." style="display: none"/>
                         <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-popular-sources">
                         </div>
                     </div>
@@ -601,7 +599,8 @@
                         <p>Popular Interests</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Public interests with the most known followers.</p>
                     </div>
-                    <div class="flex justify-center">
+                    <div class="flex justify-center align-middle items-center">
+                        <img id="wait-status-top-interests" src="wait.gif" alt="wait..." style="display: none"/>
                         <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-followed-interests">
                         </div>
                     </div>
@@ -614,6 +613,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">Current</p>
+                        <img id="wait-status-publishers" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono" id="publishers-curr"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
@@ -637,6 +637,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">Current</p>
+                        <img id="wait-status-followers" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono" id="followers-curr"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
@@ -660,6 +661,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Min</p>
+                        <img id="wait-status-pub-rate" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono" id="pub-last-1m"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
@@ -683,6 +685,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Min</p>
+                        <img id="wait-status-read-rate" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono" id="read-last-1m"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
@@ -706,6 +709,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">50 %</p>
+                        <img id="wait-status-duration" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_5"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">

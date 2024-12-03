@@ -40,7 +40,7 @@ Events.publish = function (payload, headers) {
 }
 
 Events.fetch = function (id) {
-    return fetch(`https://reader.awakari.com/v1/evt/${id}`, {
+    return fetch(`https://messages.awakari.com/v1/${id}`, {
         method: "GET",
     }).then(resp => {
         if (!resp.ok) {
@@ -49,5 +49,12 @@ Events.fetch = function (id) {
             return null;
         }
         return resp;
+    });
+}
+
+Events.search = function (q) {
+    return fetch(`https://messages.awakari.com/v1/search?q=${encodeURIComponent(q)}`, {
+        method: "GET",
+        cache: "no-cache",
     });
 }

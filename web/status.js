@@ -31,7 +31,7 @@ function formatNumberShort(number) {
 }
 
 function loadStatusPartWithRetry(headers, part) {
-    return fetch(`/v1/status/public/${part}`)
+    return fetch(`https://metrics.awakari.com/v1/public/${part}`)
         .then(resp => handleCookieAuth(resp, headers, (h) => loadStatusPartWithRetry(h, part)))
 }
 

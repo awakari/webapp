@@ -6,12 +6,12 @@ Status.fetchAttributeTypes = function (headers) {
         cache: "default",
         headers: headers,
     };
-    return fetch(`/v1/status/attr/types`, optsReq)
+    return fetch(`https://metrics.awakari.com/v1/attr/types`, optsReq)
         .then(resp => handleCookieAuth(resp, headers, (h) => Status.fetchAttributeTypes(h)));
 }
 
 Status.fetchAttributeValues = function (name, headers) {
-    return fetch(`/v1/status/attr/values/${name}`, {
+    return fetch(`https://metrics.awakari.com/v1/attr/values/${name}`, {
         method: "GET",
         cache: "default",
         headers: headers,

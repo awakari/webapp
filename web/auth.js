@@ -91,7 +91,7 @@ function getAuthHeaders() {
 }
 
 const patreonClientId = 'y1fnxWXTuBVi8_fkDnt-F4GwG3qz7qVrUvFLbvPTtU3jHHYylQR2Wluyn4EKYpag';
-const patreonRedirectUri = encodeURIComponent('https://awakari.com/v1/patreon/token');
+const patreonRedirectUri = encodeURIComponent('https://patreon.awakari.com/v1/token');
 const patreonScope = 'identity identity.memberships campaigns.members';
 
 function loginWithPatreon() {

@@ -1,7 +1,7 @@
 const Usage = {};
 
 Usage.fetch = function (subj, headers) {
-    return fetch(`/v1/usage/${subj}`, {
+    return fetch(`https://usage.awakari.com/v1/usage/${subj}`, {
         method: "GET",
         headers: headers,
         cache: "no-cache",

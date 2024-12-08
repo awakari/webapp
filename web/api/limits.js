@@ -1,7 +1,7 @@
 const Limits = {};
 
 Limits.fetch = function (subj, headers) {
-    return fetch(`/v1/limits/${subj}`, {
+    return fetch(`https://usage.awakari.com/v1/limits/${subj}`, {
         method: "GET",
         headers: headers,
         cache: "no-cache",

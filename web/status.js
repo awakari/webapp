@@ -1,3 +1,5 @@
+import {Metrics} from "./api/metrics";
+
 const templateSrcPopular = (share, url) => `
     <div class="space-x-1 truncate">
         <span>${share} %</span>
@@ -30,15 +32,10 @@ function formatNumberShort(number) {
     return shortNumber + suffixes[suffixNum];
 }
 
-function loadStatusPartWithRetry(headers, part) {
-    return fetch(`https://metrics.awakari.com/v1/public/${part}`)
-        .then(resp => handleCookieAuth(resp, headers, (h) => loadStatusPartWithRetry(h, part)))
-}
-
 async function loadStatusPubRate() {
     document.getElementById("wait-status-pub-rate").style.display = "block";
     document.getElementById("pub-last-1m").innerHTML = "";
-    return loadStatusPartWithRetry({}, "pub-rate")
+    return Metrics.loadStatusPartWithRetry({}, "pub-rate")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -87,7 +84,7 @@ async function loadStatusRead() {
     document.getElementById("wait-status-read-rate").style.display = "block";
     document.getElementById("wait-status-top-sources").style.display = "block";
     document.getElementById("read-last-1m").innerHTML = "";
-    return loadStatusPartWithRetry({}, "read")
+    return Metrics.loadStatusPartWithRetry({}, "read")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -148,7 +145,7 @@ async function loadStatusRead() {
 async function loadStatusPublishers() {
     document.getElementById("wait-status-publishers").style.display = "block";
     document.getElementById("publishers-curr").innerHTML = "";
-    return loadStatusPartWithRetry({}, "publishers")
+    return Metrics.loadStatusPartWithRetry({}, "publishers")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -202,7 +199,7 @@ async function loadStatusPublishers() {
 async function loadStatusFollowers() {
     document.getElementById("wait-status-followers").style.display = "block";
     document.getElementById("followers-curr").innerHTML = "";
-    return loadStatusPartWithRetry({}, "followers")
+    return Metrics.loadStatusPartWithRetry({}, "followers")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -256,7 +253,7 @@ async function loadStatusFollowers() {
 async function loadStatusDuration() {
     document.getElementById("wait-status-duration").style.display = "block";
     document.getElementById("core-duration-q0_5").innerHTML = "";
-    return loadStatusPartWithRetry({}, "duration")
+    return Metrics.loadStatusPartWithRetry({}, "duration")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -305,7 +302,7 @@ async function loadStatusTopInterests() {
     const elemPopInts = document.getElementById("most-followed-interests");
     elemPopInts.innerHTML = "";
     document.getElementById("wait-status-top-interests").style.display = "block";
-    return loadStatusPartWithRetry({}, "top-interests")
+    return Metrics.loadStatusPartWithRetry({}, "top-interests")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));

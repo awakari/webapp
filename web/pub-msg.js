@@ -134,7 +134,7 @@ async function msgAttrNameChanged(evt) {
     }
     //
     const attrVal = document.getElementById("msg_attr_value");
-    return Status
+    return Metrics
         .fetchAttributeValues(k)
         .then(vals => {
             const valsHtml = document.getElementById("msg_attr_val_opts");

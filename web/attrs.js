@@ -2,7 +2,7 @@ let EventAttrKeysInt = [];
 let EventAttrKeysTxt = [];
 
 async function loadAttributeTypes() {
-    return Status
+    return Metrics
         .fetchAttributeTypes(getAuthHeaders())
         .then(resp => {
             if (!resp.ok) {
@@ -69,7 +69,7 @@ function loadAttributeValues(key, input, headers) {
                     return addrs;
                 })
         default:
-            return Status
+            return Metrics
                 .fetchAttributeValues(key, headers)
                 .then(resp => {
                     if (resp.ok) {

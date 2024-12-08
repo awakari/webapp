@@ -1,7 +1,9 @@
-const Interests = {};
+const Interests = {
+    urlBase: "https://interests.awakari.com/v1",
+};
 
 Interests.fetchListPage = function (cursor, followers, order, limit, filter, ownOnly, headers) {
-    return fetch(`/v1/sub?limit=${limit}&cursor=${cursor}&followers=${followers}&sort=FOLLOWERS&order=${order}&filter=${encodeURIComponent(filter)}&public=${!ownOnly}`, {
+    return fetch(`${Interests.urlBase}?limit=${limit}&cursor=${cursor}&followers=${followers}&sort=FOLLOWERS&order=${order}&filter=${encodeURIComponent(filter)}&public=${!ownOnly}`, {
         method: "GET",
         headers: headers,
         cache: "no-cache",
@@ -24,7 +26,7 @@ Interests.delete = function (id, headers) {
         method: "DELETE",
         headers: headers,
     };
-    return fetch(`/v1/sub/${id}`, optsReq)
+    return fetch(`${Interests.urlBase}/${id}`, optsReq)
         .then(resp => {
             if (resp.ok) {
                 return resp;
@@ -52,7 +54,7 @@ Interests.createResponse = function (name, descr, expires, isPublic, cond, disco
         headers: headers,
         body: JSON.stringify(payload)
     };
-    return fetch(`/v1/sub`, optsReq);
+    return fetch(Interests.urlBase, optsReq);
 }
 
 Interests.create = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
@@ -83,7 +85,7 @@ Interests.fetch = function (id, headers) {
         headers: headers,
         cache: "default",
     }
-    return fetch(`/v1/sub/${id}`, optsReq)
+    return fetch(`${Interests.urlBase}/${id}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
                 handleResponseStatus(`Get interest ${id}`, resp.status);
@@ -110,7 +112,7 @@ Interests.update = function (id, descr, enabled, expires, isPublic, cond, discov
         headers: headers,
         body: JSON.stringify(payload)
     }
-    return fetch(`/v1/sub/${id}`, optsReq)
+    return fetch(`${Interests.urlBase}/${id}`, optsReq)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg))

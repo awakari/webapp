@@ -1,4 +1,4 @@
-export const Metrics = {
+const Metrics = {
     urlBase: "https://metrics.awakari.com",
 };
 

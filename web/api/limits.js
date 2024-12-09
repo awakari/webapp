@@ -20,6 +20,5 @@ Limits.fetch = function (subj, headers) {
             } else {
                 return null;
             }
-        })
-
+        });
 }

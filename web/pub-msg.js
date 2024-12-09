@@ -7,7 +7,7 @@ templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}"
                                 <span class="px-1">‒</span>
                             </button>
                         </div>
-                    </span>`
+                    </span>`;
 
 async function load() {
     const urlParams = new URLSearchParams(window.location.search);

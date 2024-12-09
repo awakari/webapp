@@ -1,5 +1,3 @@
-import {Metrics} from "./api/metrics";
-
 const templateSrcPopular = (share, url) => `
     <div class="space-x-1 truncate">
         <span>${share} %</span>
@@ -332,17 +330,17 @@ async function loadStatusTopInterests() {
         });
 }
 
-async function loadStatusLoop() {
-    await loadStatusPublishers();
+function loadStatusLoop() {
+    loadStatusPublishers();
+    loadStatusTopInterests();
+    loadStatusRead();
+    loadStatusFollowers();
+    loadStatusDuration();
+    loadStatusPubRate()
     setInterval(loadStatusPublishers, 3_600_000);
-    await loadStatusTopInterests();
     setInterval(loadStatusTopInterests, 3_600_000);
-    await loadStatusRead();
     setInterval(loadStatusRead, 300_000);
-    await loadStatusFollowers();
     setInterval(loadStatusFollowers, 900_000);
-    await loadStatusDuration();
     setInterval(loadStatusDuration, 300_000);
-    await loadStatusPubRate();
     setInterval(loadStatusPubRate, 300_000);
 }

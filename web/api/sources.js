@@ -1,7 +1,9 @@
-const Sources = {};
+const Sources = {
+    urlBase: "https://pub.awakari.com"
+};
 
 Sources.fetchListPageResponse = function (type, own, order, limit, filter, headers, subId) {
-    return fetch(`/v1/src/${type}/list?&own=${own}&order=${order}&limit=${limit}&filter=${filter}&subId=${subId}`, {
+    return fetch(`${Sources.urlBase}/v1/src/${type}/list?&own=${own}&order=${order}&limit=${limit}&filter=${filter}&subId=${subId}`, {
         method: "GET",
         headers: headers,
         cache: "default",
@@ -10,7 +12,7 @@ Sources.fetchListPageResponse = function (type, own, order, limit, filter, heade
 
 Sources.fetch = function (typ, addrEnc, headers) {
     headers["X-Awakari-Src-Addr"] = addrEnc;
-    return fetch(`/v1/src/${typ}`, {
+    return fetch(`${Sources.urlBase}/v1/src/${typ}`, {
         method: "GET",
         headers: headers,
         cache: "default",
@@ -26,7 +28,7 @@ Sources.fetch = function (typ, addrEnc, headers) {
 
 Sources.delete = function (typ, addrEnc, headers) {
     headers["X-Awakari-Src-Addr"] = addrEnc;
-    return fetch(`/v1/src/${typ}`, {
+    return fetch(`${Sources.urlBase}/v1/src/${typ}`, {
         method: "DELETE",
         headers: headers,
     })
@@ -48,7 +50,7 @@ Sources.add = function (srcType, srcAddr, updFreq, headers) {
             "addr": srcAddr,
         }
     }
-    return fetch(`/v1/src/${srcType}`, {
+    return fetch(`${Sources.urlBase}/v1/src/${srcType}`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(payload),

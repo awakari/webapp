@@ -1,5 +1,7 @@
 const Events = {
     abortController: new AbortController(),
+    urlBasePub: "https://pub.awakari.com",
+    urlBaseMsg: "https://messages.awakari.com"
 }
 
 // uuidv4
@@ -8,7 +10,7 @@ Events.newId = function () {
 }
 
 Events.publishInternal = function (payload, headers) {
-    return fetch("/v1/pub/internal", {
+    return fetch(`${Events.urlBasePub}/v1/internal`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(payload),
@@ -24,7 +26,7 @@ Events.publishInternal = function (payload, headers) {
 }
 
 Events.publish = function (payload, headers) {
-    return fetch("/v1/pub", {
+    return fetch(`${Events.urlBasePub}/v1`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(payload),
@@ -40,7 +42,7 @@ Events.publish = function (payload, headers) {
 }
 
 Events.fetch = function (id) {
-    return fetch(`https://messages.awakari.com/v1/${id}`, {
+    return fetch(`${Events.urlBaseMsg}/v1/${id}`, {
         method: "GET",
     }).then(resp => {
         if (!resp.ok) {
@@ -53,7 +55,7 @@ Events.fetch = function (id) {
 }
 
 Events.search = function (q) {
-    return fetch(`https://messages.awakari.com/v1/search?q=${encodeURIComponent(q)}`, {
+    return fetch(`${Events.urlBaseMsg}/v1/search?q=${encodeURIComponent(q)}`, {
         method: "GET",
         cache: "no-cache",
     });

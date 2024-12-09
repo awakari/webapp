@@ -6,5 +6,5 @@ TgClient.Login = function (formData, headers) {
         headers: headers,
         body: formData,
     };
-    return fetch(`/v1/tg`, optsReq);
+    return fetch(`https://pub.awakari.com/v1/tg`, optsReq);
 }

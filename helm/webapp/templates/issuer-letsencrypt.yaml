@@ -1,4 +1,4 @@
-{{- $fullName := include "reader.fullname" . -}}
+{{- $fullName := include "webapp.fullname" . -}}
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:

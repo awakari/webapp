@@ -8,3 +8,9 @@ ingress:
     - secretName: secret-webapp-tls-server
       hosts:
         - awakari.com
+
+cert:
+  acme:
+    server: "https://acme-v02.api.letsencrypt.org/directory"
+  issuer:
+    name: letsencrypt

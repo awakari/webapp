@@ -79,29 +79,23 @@ async function loadFormNew() {
     document.getElementById("msg_id").value = Events.newId();
     putMessageAttribute("time", "timestamp", new Date().toISOString(), true);
 
-    const authProvider = localStorage.getItem(keyAuthProvider);
-    switch (authProvider) {
-        case "Telegram":
-            document.getElementById("pub-tg").style.display = "block";
-            break
-    }
-
     document.getElementById("msg_attr_name").oninput = msgAttrNameChanged;
 
-    await loadAttributeTypes();
-    let allKeys = [];
-    for (const k of EventAttrKeysTxt) {
-        allKeys.push(k);
-    }
-    for (const k of EventAttrKeysInt) {
-        allKeys.push(k);
-    }
-    allKeys.sort();
-    const keysElement = document.getElementById("msg_attr_name_opts");
-    keysElement.innerHTML = "";
-    for (const k of allKeys) {
-        keysElement.innerHTML += `<option>${k}</option>`
-    }
+    loadAttributeTypes().then(() => {
+        let allKeys = [];
+        for (const k of EventAttrKeysTxt) {
+            allKeys.push(k);
+        }
+        for (const k of EventAttrKeysInt) {
+            allKeys.push(k);
+        }
+        allKeys.sort();
+        const keysElement = document.getElementById("msg_attr_name_opts");
+        keysElement.innerHTML = "";
+        for (const k of allKeys) {
+            keysElement.innerHTML += `<option>${k}</option>`
+        }
+    });
 }
 
 async function msgAttrNameChanged(evt) {

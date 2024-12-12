@@ -1,5 +1,6 @@
 let conds = [];
 const countCondsMax = 6;
+const srcPageLimitPerType = 10;
 
 const templateCondHeader = (label, idx, countConds, isNot, key) => `
                 ${idx > 0? '<div class="flex justify-center">And</div>' : ''}
@@ -88,7 +89,6 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
 `;
 
 async function loadSubDetails() {
-    await loadAttributeTypes();
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     const q = urlParams.get("args");
@@ -105,8 +105,6 @@ async function loadSubDetails() {
 }
 
 _ = loadSubDetails();
-
-const srcPageLimitPerType = 10;
 
 const templateDiscoveredSrc = (addr, type) => `
 <p class="w-[334px] sm:w-[624px] truncate">
@@ -555,6 +553,7 @@ function updateDescription() {
 }
 
 function displayConditions() {
+    let promiseLoadAttrTypes = loadAttributeTypes();
     document.getElementById("add-condition").style.display = "flex";
     const elemConds = document.getElementById("conditions");
     elemConds.innerHTML = "";
@@ -577,9 +576,11 @@ function displayConditions() {
             }
             elemConds.innerHTML += templateCondText(not, key, tc.term, exact, i, countConds);
             const attrKeysTxt = document.getElementById(`attrKeys${i}`);
-            for (const attKeyTxt of EventAttrKeysTxt) {
-                attrKeysTxt.innerHTML += `<option>${attKeyTxt}</option>\n`;
-            }
+            promiseLoadAttrTypes = promiseLoadAttrTypes.then(() => {
+                for (const attKeyTxt of EventAttrKeysTxt) {
+                    attrKeysTxt.innerHTML += `<option>${attKeyTxt}</option>\n`;
+                }
+            });
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
             let key = "";
@@ -593,9 +594,11 @@ function displayConditions() {
             }
             elemConds.innerHTML += templateCondNumber(not, key, op, val, i, countConds);
             const attrKeysInt = document.getElementById(`attrKeys${i}`);
-            for (const attKeyInt of EventAttrKeysInt) {
-                attrKeysInt.innerHTML += `<option>${attKeyInt}</option>\n`;
-            }
+            promiseLoadAttrTypes = promiseLoadAttrTypes.then(() => {
+                for (const attKeyInt of EventAttrKeysInt) {
+                    attrKeysInt.innerHTML += `<option>${attKeyInt}</option>\n`;
+                }
+            });
         }
     }
     //

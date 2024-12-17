@@ -54,7 +54,7 @@ Interests.createResponse = function (name, descr, expires, isPublic, cond, disco
         headers: headers,
         body: JSON.stringify(payload)
     };
-    return fetch(Interests.urlBase, optsReq);
+    return fetch(`${Interests.urlBase}/v1`, optsReq);
 }
 
 Interests.create = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {

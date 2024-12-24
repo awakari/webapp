@@ -324,7 +324,20 @@
             <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 ">
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-center sm:justify-end">
-                        <img src="how-it-works-2024-07-04.svg" alt="how it works" class="w-[344px]"/>
+                        <img id="img-how-it-works" src="how-it-works/0.svg" alt="how it works" class="w-[344px]"/>
+                        <script>
+                            const totalImages = 9; // Total number of images (0-9)
+                            let currentIndex = 0; // Start with the 0th image
+                            const elemImg = document.getElementById("img-how-it-works");
+                            function updateImage() {
+                                elemImg.src = `how-it-works/${currentIndex}.svg`;
+                                currentIndex = (currentIndex + 1) % totalImages; // Loop back to 0 after all
+                            }
+                            // Start the animation
+                            setInterval(updateImage, 1000); // Change image every second
+                            // Initialize the first image
+                            updateImage();
+                        </script>
                     </div>
                     <div class="space-y-4 py-4 sm:pt-4 text-lg">
                         <p class="align-text-middle px-4 pt-2">

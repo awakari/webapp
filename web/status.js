@@ -140,60 +140,6 @@ async function loadStatusRead() {
         });
 }
 
-async function loadStatusPublishers() {
-    document.getElementById("wait-status-publishers").style.display = "block";
-    document.getElementById("publishers-curr").innerHTML = "";
-    return Metrics.loadStatusPartWithRetry({}, "publishers")
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Failed to fetch the status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data) {
-                const publishersCurrent = data.current;
-                if (publishersCurrent > 0) {
-                    document.getElementById("publishers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(publishersCurrent)}</span>`;
-                } else {
-                    document.getElementById("publishers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishersCurrent)}</span>`;
-                }
-                const publishers1hChange = publishersCurrent - data.past.hour;
-                if (publishers1hChange < -1000) {
-                    document.getElementById("publishers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1hChange)}</span>`;
-                } else if (publishers1hChange > 0) {
-                    document.getElementById("publishers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1hChange)}</span>`;
-                } else {
-                    document.getElementById("publishers-1h").innerHTML = `${formatNumberShort(publishers1hChange)}</span>`;
-                }
-                const publishers1dChange = publishersCurrent - data.past.day;
-                if (publishers1dChange < -5000) {
-                    document.getElementById("publishers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers1dChange)}</span>`;
-                } else if (publishers1dChange > 0) {
-                    document.getElementById("publishers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers1dChange)}</span>`;
-                } else {
-                    document.getElementById("publishers-1d").innerHTML = `${formatNumberShort(publishers1dChange)}</span>`;
-                }
-                const publishers30dChange = publishersCurrent - data.past.month;
-                if (publishers30dChange < -10000) {
-                    document.getElementById("publishers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(publishers30dChange)}</span>`;
-                } else if (publishers30dChange > 0) {
-                    document.getElementById("publishers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(publishers30dChange)}</span>`;
-                } else {
-                    document.getElementById("publishers-30d").innerHTML = `${formatNumberShort(publishers30dChange)}</span>`;
-                }
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            return "";
-        })
-        .finally(()=> {
-            document.getElementById("wait-status-publishers").style.display = "none";
-        });
-}
-
 async function loadStatusFollowers() {
     document.getElementById("wait-status-followers").style.display = "block";
     document.getElementById("followers-curr").innerHTML = "";
@@ -331,13 +277,11 @@ async function loadStatusTopInterests() {
 }
 
 function loadStatusLoop() {
-    loadStatusPublishers();
     loadStatusTopInterests();
     loadStatusRead();
     loadStatusFollowers();
     loadStatusDuration();
     loadStatusPubRate()
-    setInterval(loadStatusPublishers, 3_600_000);
     setInterval(loadStatusTopInterests, 3_600_000);
     setInterval(loadStatusRead, 300_000);
     setInterval(loadStatusFollowers, 900_000);

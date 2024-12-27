@@ -579,30 +579,6 @@
 
                 <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
                     <div class="col-span-4 text-lg sm:text-xl">
-                        <p>Core Latency</p>
-                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">End-to-end message processing duration.</p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p class="text-sm">50 %</p>
-                        <img id="wait-status-duration" src="wait.gif" alt="wait..." style="display: none"/>
-                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_5"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p class="text-sm">75 %</p>
-                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_75"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p class="text-sm">95 %</p>
-                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_95"></p>
-                    </div>
-                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
-                        <p class="text-sm">99 %</p>
-                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_99"></p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
-                    <div class="col-span-4 text-lg sm:text-xl">
                         <p>Read Messages</p>
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Message read count over a recent time period.</p>
                     </div>
@@ -622,6 +598,30 @@
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">30 Days</p>
                         <p class="font-mono" id="read-last-30d"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 sm:text-center px-1 sm:p-4 space-x-2 sm:space-y-2">
+                    <div class="col-span-4 text-lg sm:text-xl">
+                        <p>Core Latency</p>
+                        <p class="text-neutral-400 dark:text-neutral-600 text-sm">End-to-end message processing duration.</p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">50 %</p>
+                        <img id="wait-status-duration" src="wait.gif" alt="wait..." style="display: none"/>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_5"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">75 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_75"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">95 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_95"></p>
+                    </div>
+                    <div class="text-neutral-600 dark:text-neutral-400 text-center">
+                        <p class="text-sm">99 %</p>
+                        <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_99"></p>
                     </div>
                 </div>
 

@@ -258,16 +258,16 @@ function loadSubDetailsByExample(exampleName) {
     document.getElementById("interest-enabled").checked = true;
     document.getElementById("interest-enabled").disabled = true;
     switch (exampleName) {
-        case "cheap-iphone-alert": {
-            document.getElementById("description").value = "Cheap iPhone alert";
+        case "cheap-iphone": {
+            document.getElementById("description").value = "Cheap iPhone";
             addConditionText(false, "","iphone", false);
             addConditionNumber(false, "offersprice", 4, 1000);
             addConditionText(false, "offerspricecurrency","USD", true);
             break;
         }
-        case "japanese": {
-            document.getElementById("description").value = "In Japanese language";
-            addConditionText(false, "language","ja jp", false);
+        case "chinese": {
+            document.getElementById("description").value = "In Chinese language";
+            addConditionText(false, "language","zh", false);
             document.getElementById("sub-discover-sources").checked = false;
             break;
         }

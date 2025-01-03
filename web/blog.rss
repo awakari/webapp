@@ -17,6 +17,20 @@
 
         <item>
             <title>New Source Type: Websocket</title>
+            <description>Public interests are now available in Bluesky.</description>
+            <pubDate>Fri, 3 Jan 2025 22:00:00 +0200</pubDate>
+            <category>awakari bluesky</category>
+            <content:encoded>
+                <![CDATA[
+                    <p>Thanks to <a href="https://fed.brid.gy">bridgy-fed</a>, all Awakari public interests are now
+                    available in Bluesky!</p>
+                    <p>The handle looks like <code>@&lt;INTEREST_ID&gt;.activitypub.awakari.com.ap.brid.gy</code>.</p>
+                ]]>
+            </content:encoded>
+        </item>
+
+        <item>
+            <title>New Source Type: Websocket</title>
             <description>Introducing new source type: Websocket.</description>
             <pubDate>Thu, 11 Nov 2024 08:30:00 +0200</pubDate>
             <category>awakari updates sse wikimedia stream integration</category>

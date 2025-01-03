@@ -137,6 +137,16 @@ function loadSubDetailsById(id) {
                 }
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
+                    document.getElementById("follow-bluesky").style.display = "block";
+                    document.getElementById("follow-bluesky").onclick = () => {
+                        const addrFediverse = `@${id}.activitypub.awakari.com.ap.brid.gy`;
+                        navigator
+                            .clipboard
+                            .writeText(addrFediverse)
+                            .then(() => {
+                                alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Bluesky client app, paste to a search field and follow.`);
+                            });
+                    }
                     document.getElementById("follow-fediverse").style.display = "block";
                     document.getElementById("follow-fediverse").onclick = () => {
                         const addrFediverse = `@${id}@activitypub.awakari.com`;
@@ -147,18 +157,18 @@ function loadSubDetailsById(id) {
                                 alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
                             });
                     }
-                    if (navigator.share && navigator.canShare) {
-                        document.getElementById("area-button-share").style.display = "block";
-                        document.getElementById("button-share").onclick = () => {
-                            p = navigator.share({
-                                title: `Awakari Interest: ${data.description}`,
-                                url: window.location.href,
-                            });
-                        };
-                    }
                 } else {
+                    document.getElementById("follow-bluesky").style.display = "none";
                     document.getElementById("follow-fediverse").style.display = "none";
-                    document.getElementById("area-button-share").style.display = "none";
+                }
+                if (navigator.share && navigator.canShare) {
+                    document.getElementById("area-button-share").style.display = "block";
+                    document.getElementById("button-share").onclick = () => {
+                        p = navigator.share({
+                            title: `Awakari Interest: ${data.description}`,
+                            url: window.location.href,
+                        });
+                    };
                 }
                 if (data.hasOwnProperty("followers")) {
                     document.getElementById("followers").value = data.followers;

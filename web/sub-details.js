@@ -728,7 +728,6 @@ async function createSubscription() {
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        const since = new Date().toISOString();
         await Interests
             .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(data => {

@@ -290,6 +290,15 @@ p[role=alert].errormsg {
 select {
     outline: none;
 }
+select.button {
+    border-width: 1px;
+    border-color: #3b82f6;
+    border-radius: 0.25rem;
+    color: #3b82f6;
+    height: 1.5rem;
+    padding: 0 0.5rem;
+    background: none;
+}
 body {
     font-family: var(--default-font);
     font-size: 14px;

@@ -3,18 +3,17 @@ const countCondsMax = 6;
 const srcPageLimitPerType = 10;
 
 const templateCondHeader = (label, idx, countConds, isNot, key) => `
-                ${idx > 0? '<div class="flex justify-center">And</div>' : ''}
                 <fieldset class="flex p-2">
                     <legend class="flex space-x-1 w-full px-1">
                         <label class="flex space-x-1">
-                            <span>${label} where</span>
+                            <span>${label} in</span>
                             <input type="text"
                                    pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
-                                   class="w-32 sm:w-32 autocomplete-input" 
+                                   class="${label === "Text"? "w-32" : "w-28"} autocomplete-input" 
                                    style="margin-top: -2px; border-top: none; border-left: none; border-right: none; height: 20px"
-                                   ${label === "Text"? 'placeholder="empty: anywhere"' : 'placeholder="attribute"'}
+                                   ${label === "Text"? 'placeholder="empty: any attribute"' : 'placeholder="attribute"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
                                    value="${key}"/>
@@ -157,18 +156,18 @@ function loadSubDetailsById(id) {
                                 alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
                             });
                     }
+                    if (navigator.share && navigator.canShare) {
+                        document.getElementById("area-button-share").style.display = "block";
+                        document.getElementById("button-share").onclick = () => {
+                            p = navigator.share({
+                                title: `Awakari Interest: ${data.description}`,
+                                url: window.location.href,
+                            });
+                        };
+                    }
                 } else {
                     document.getElementById("follow-bluesky").style.display = "none";
                     document.getElementById("follow-fediverse").style.display = "none";
-                }
-                if (navigator.share && navigator.canShare) {
-                    document.getElementById("area-button-share").style.display = "block";
-                    document.getElementById("button-share").onclick = () => {
-                        p = navigator.share({
-                            title: `Awakari Interest: ${data.description}`,
-                            url: window.location.href,
-                        });
-                    };
                 }
                 if (data.hasOwnProperty("followers")) {
                     document.getElementById("followers").value = data.followers;
@@ -183,6 +182,7 @@ function loadSubDetailsById(id) {
                     conds.push(cond);
                     addConditionText(false, "", "", false);
                 } else if (cond.hasOwnProperty("gc")) {
+                    document.getElementById("logic-select").value = cond.gc.logic;
                     const children = cond.gc.group;
                     for (let i = 0; i < children.length; i++) {
                         conds.push(children[i]);
@@ -749,7 +749,7 @@ function getRootCondition() {
         cond = {
             not: false,
             gc: {
-                logic: 0,
+                logic: Number(document.getElementById("logic-select").value),
                 group: nonEmptyConds,
             }
         }

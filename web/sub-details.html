@@ -77,7 +77,7 @@
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
     <div class="flex justify-center m-1">
-        <form class="max-w-[480px] grow">
+        <form class="max-w-[480px] grow space-y-1">
 
             <div class="flex flex-col space-y-2">
 
@@ -128,10 +128,34 @@
 
             </div>
 
-            <div class="space-y-2 pt-2" id="conditions">
+            <div>
+                <span class="tooltip">
+                    Filters
+                    <span class="tooltiptext" style="width: 320px">
+                        <p>Define at least one non-empty filter.</p>
+                        <p>Note that empty filters are discarded.</p>
+                    </span>
+                </span>
+                <div class="space-y-2 pt-2" id="conditions">
+                </div>
             </div>
 
-            <div class="pt-2 flex">
+            <div class="pt-2 flex space-x-4">
+                <div>
+                    <label>
+                        <span class="tooltip mr-1">
+                            Logic
+                            <span class="tooltiptext" style="width: 320px">
+                                <p>Defines how to combine multiple filters.</p>
+                            </span>
+                        </span>
+                        <select name="logic" id="logic-select" class="button">
+                            <option value="0" selected="selected">And</option>
+                            <option value="1">Or</option>
+                            <option value="2">Xor</option>
+                        </select>
+                    </label>
+                </div>
                 <div class="grow"></div>
                 <div id="add-condition">
                     <div class="dropdown">
@@ -152,34 +176,36 @@
                 </div>
             </div>
 
-            <div class="flex space-x-2 pt-2">
-                <label for="description" style="margin-top: 0.125rem">
-                    <span>Name</span>
-                </label>
-                <input type="text" id="description" style="border-top: none; border-left: none; border-right: none"
-                    placeholder="Free-form description">
-            </div>
 
-            <button type="button" class="collapsible mt-2">Advanced</button>
-            <div class="py-2 space-y-2 collapsible-content">
+            <div class="pt-4 space-y-1">
 
-                <label class="flex space-x-1">
+                <span>Additional Properties</span>
+
+                <div class="flex space-x-2 pt-1">
+                    <label for="description" style="margin-top: 0.125rem" class="w-10">
+                        <span>Name</span>
+                    </label>
+                    <input type="text" id="description" style="border-top: none; border-left: none; border-right: none"
+                           placeholder="Free-form description">
+                </div>
+
+                <label class="flex space-x-1 mt-2">
                     <input id="public"
                            type="checkbox" class="h-4 w-4"
                            style="margin-right: 0.25rem; margin-top: 0.125rem"/>
                     <span class="tooltip" style="margin-top: 0.125rem">
-                            Public
-                            <span class="tooltiptext" style="width: 320px">
-                                <p>Public interest is visible to others.</p>
-                                <p>May be discovered and followed by non-owner.</p>
-                                <p>Note that making a public interest private doesn't disconnect existing followers.</p>
-                                <p>Create a new private interest if you want to disconnect existing followers.</p>
-                            </span>
+                        Public
+                        <span class="tooltiptext" style="width: 320px">
+                            <p>Public interest is visible to others.</p>
+                            <p>May be discovered and followed by non-owner.</p>
+                            <p>Note that making a public interest private doesn't disconnect existing followers.</p>
+                            <p>Create a new private interest if you want to disconnect existing followers.</p>
                         </span>
+                    </span>
                 </label>
 
-                <div class="flex" id="area-id">
-                    <label for="id" style="margin-top: 0.125rem">
+                <div class="flex mt-2" id="area-id">
+                    <label for="id" style="margin-top: 0.125rem" class="w-10">
                         <span class="tooltip">
                             ID
                             <span class="tooltiptext" style="width: 332px">
@@ -201,7 +227,7 @@
                            class="ml-2">
                 </div>
 
-                <label class="flex space-x-1">
+                <label class="flex space-x-1 mt-2">
                     <input id="interest-enabled"
                            type="checkbox" class="h-4 w-4"
                            disabled="disabled"
@@ -220,10 +246,10 @@
                     </span>
                 </label>
 
-                <div class="flex">
+                <div class="flex mt-2">
                     <span class="flex" style="margin-top: 0.125rem">
-                        <span class="tooltip">
-                            Expires
+                        <span class="tooltip w-10">
+                            Expire
                             <span class="tooltiptext">
                                 A local date when the interest expires and becomes inactive.
                                 An interest never expires when this date is not set.

@@ -90,7 +90,7 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
 async function loadSubDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
-    const q = urlParams.get("args");
+    const q = Base64.decode(urlParams.get("args"));
     const example = urlParams.get("example");
     if (id) {
         loadSubDetailsById(id);
@@ -138,7 +138,7 @@ function loadSubDetailsById(id) {
                     document.getElementById("public").checked = data.public;
                     document.getElementById("follow-bluesky").style.display = "block";
                     document.getElementById("follow-bluesky").onclick = () => {
-                        const addrFediverse = `@${id}.activitypub.awakari.com.ap.brid.gy`;
+                        const addrFediverse = `@${id}.activitypub.awakari.com.ap.brid.gy<`;
                         navigator
                             .clipboard
                             .writeText(addrFediverse)
@@ -341,8 +341,10 @@ function loadSubDetailsByQuery(q) {
     document.getElementById("interest-enabled").checked = true;
     document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
-    addConditionText(false, "", "", false);
-    addConditionText(false, "", "", false);
+    const seg = new Intl.Segmenter(undefined, { granularity: "word" });
+    [...seg.segment(q)]
+        .filter(term => term.isWordLike)
+        .forEach(term => addConditionText(false, "", term.segment, false));
     displayConditions();
 }
 
@@ -640,7 +642,8 @@ function deleteSubscription() {
             .then(deleted => {
                 if (deleted) {
                     alert(`Deleted the interest ${id}`);
-                    window.location.assign("sub.html");
+                    window.history.back();
+                    window.location.reload();
                 }
             })
             .finally(() => {
@@ -685,7 +688,8 @@ async function updateSubscription(id) {
             .then(data => {
                 if (data != null) {
                     alert("Interest updated");
-                    window.location.assign("sub.html");
+                    window.history.back();
+                    window.location.reload();
                 }
             })
             .finally(() => {

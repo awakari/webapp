@@ -90,14 +90,14 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
 async function loadSubDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
-    const q = Base64.decode(urlParams.get("args"));
+    const q = urlParams.get("args");
     const example = urlParams.get("example");
     if (id) {
         loadSubDetailsById(id);
     } else if (example) {
         loadSubDetailsByExample(example);
     } else if (q) {
-        loadSubDetailsByQuery(q);
+        loadSubDetailsByQuery(Base64.decode(q));
     } else {
         loadSubDetailsByQuery("");
     }
@@ -289,7 +289,7 @@ function loadSubDetailsByExample(exampleName) {
         }
         case "job-alert": {
             document.getElementById("description").value = "Javascript Job alert";
-            addConditionText(false, "", "job", false);
+            addConditionText(false, "", "job hiring", false);
             addConditionText(false, "", "javascript", false);
             addConditionText(true, "", "java", false);
             break;
@@ -341,10 +341,15 @@ function loadSubDetailsByQuery(q) {
     document.getElementById("interest-enabled").checked = true;
     document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
-    const seg = new Intl.Segmenter(undefined, { granularity: "word" });
-    [...seg.segment(q)]
-        .filter(term => term.isWordLike)
-        .forEach(term => addConditionText(false, "", term.segment, false));
+    if (q && q.length > 0) {
+        const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+        [...seg.segment(q)]
+            .filter(term => term.isWordLike)
+            .forEach(term => addConditionText(false, "", term.segment, false));
+    } else {
+        addConditionText(false, "", "", false);
+        addConditionText(false, "", "", false)
+    }
     displayConditions();
 }
 

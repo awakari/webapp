@@ -182,7 +182,7 @@ function loadSubDetailsById(id) {
                     conds.push(cond);
                     addConditionText(false, "", "", false);
                 } else if (cond.hasOwnProperty("gc")) {
-                    document.getElementById("logic-select").value = cond.gc.logic;
+                    document.getElementById("logic-select").selectedIndex = cond.gc.logic;
                     const children = cond.gc.group;
                     for (let i = 0; i < children.length; i++) {
                         conds.push(children[i]);

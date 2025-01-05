@@ -11,7 +11,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
-                                   class="${label === "Text"? "w-32" : "w-28"} autocomplete-input" 
+                                   class="${label === "Text"? "w-[144px]" : "w-[120px]"} autocomplete-input" 
                                    style="margin-top: -2px; border-top: none; border-left: none; border-right: none; height: 20px"
                                    ${label === "Text"? 'placeholder="empty: any attribute"' : 'placeholder="attribute"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
@@ -59,7 +59,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                class="w-full" 
                                style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
-                               placeholder="${isExact? 'exact complete text' : 'word1 word2 etc'}"
+                               placeholder="${isExact? 'exact complete text' : 'keyword1 keyword2 ...'}"
                                value="${terms}"/>
                         <datalist id="attrValTxt${idx}"></datalist>
                     </div>
@@ -468,7 +468,7 @@ function setConditionTextExact(idx, exact) {
             if (exact) {
                 document.getElementById(`attrValTxtInput${idx}`).placeholder = "exact complete text";
             } else {
-                document.getElementById(`attrValTxtInput${idx}`).placeholder = "word1 word2 etc";
+                document.getElementById(`attrValTxtInput${idx}`).placeholder = "keyword1 keyword2 ...";
             }
         } else {
             console.error(`Target condition #${idx} is not a text condition`);
@@ -838,6 +838,43 @@ function validateCondition(cond) {
     }
     return cond;
 }
+
+async function submitSimple(){
+    const q = document.getElementById("query").value;
+    const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+    const cond = {
+        not: false,
+        gc: {
+            logic: Number(document.getElementById("logic-select-simple").value),
+            group: [],
+        }
+    };
+    [...seg.segment(q)]
+        .filter(term => term.isWordLike)
+        .forEach(term => cond.gc.group.push({
+            not: false,
+            tc: {
+                key: "",
+                term: term.segment,
+                exact: false,
+            }
+        }));
+    const discoverSourcesFlag = document.getElementById("sub-discover-sources-simple").checked;
+    const headers = getAuthHeaders();
+    document.getElementById("wait").style.display = "block";
+    await Interests
+        .create("", q, undefined, false, cond, discoverSourcesFlag, headers)
+        .then(data => {
+            if (data != null) {
+                alert("Interest created");
+                window.location.assign(`sub-details.html?id=${data.id}`);
+            }
+        })
+        .finally(() => {
+            document.getElementById("wait").style.display = "none";
+        });
+}
+
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */

@@ -93,13 +93,40 @@ async function loadSubDetails() {
     const q = urlParams.get("args");
     const example = urlParams.get("example");
     if (id) {
+        document.getElementById("mode-toggle").style.display = "none";
         loadSubDetailsById(id);
     } else if (example) {
+        document.getElementById("mode-toggle").style.display = "none";
         loadSubDetailsByExample(example);
     } else if (q) {
-        loadSubDetailsByQuery(Base64.decode(q));
+        document.getElementById("mode-toggle").style.display = "flex";
+        try {
+            loadSubDetailsByQuery(Base64.decode(q));
+        } catch (e) {
+            loadSubDetailsByQuery("");
+        }
+        setModeSimple(true, true);
     } else {
+        document.getElementById("mode-toggle").style.display = "flex";
         loadSubDetailsByQuery("");
+        setModeSimple(true, true);
+    }
+}
+
+function setModeSimple(simple, confirmed) {
+    if (!confirmed) {
+        confirmed = confirm("This will drop current changes, if any. Continue?");
+    }
+    if (confirmed) {
+        if (simple && simple !== "false") {
+            document.getElementById("mode-toggle-checkbox").checked = false;
+            document.getElementById("mode-simple").style.display = "block";
+            document.getElementById("mode-expert").style.display = "none";
+        } else {
+            document.getElementById("mode-toggle-checkbox").checked = true;
+            document.getElementById("mode-simple").style.display = "none";
+            document.getElementById("mode-expert").style.display = "block";
+        }
     }
 }
 
@@ -338,6 +365,7 @@ function loadSubDetailsByExample(exampleName) {
 function loadSubDetailsByQuery(q) {
     document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
+    document.getElementById("query").value = q;
     document.getElementById("interest-enabled").checked = true;
     document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
@@ -647,8 +675,7 @@ function deleteSubscription() {
             .then(deleted => {
                 if (deleted) {
                     alert(`Deleted the interest ${id}`);
-                    window.history.back();
-                    window.location.reload();
+                    window.location.assign("sub.html");
                 }
             })
             .finally(() => {
@@ -693,8 +720,7 @@ async function updateSubscription(id) {
             .then(data => {
                 if (data != null) {
                     alert("Interest updated");
-                    window.history.back();
-                    window.location.reload();
+                    window.location.assign("sub.html");
                 }
             })
             .finally(() => {
@@ -728,13 +754,12 @@ async function createSubscription() {
         const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        const since = new Date().toISOString();
         await Interests
             .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
-                    window.location.assign("sub.html");
+                    window.location.assign(`sub-details.html?id=${data.id}`);
                 }
             })
             .finally(() => {

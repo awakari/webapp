@@ -93,34 +93,40 @@ async function loadSubDetails() {
     const q = urlParams.get("args");
     const example = urlParams.get("example");
     if (id) {
-        loadSubDetailsById(id);
         document.getElementById("mode-toggle").style.display = "none";
+        loadSubDetailsById(id);
     } else if (example) {
+        document.getElementById("mode-toggle").style.display = "none";
         loadSubDetailsByExample(example);
     } else if (q) {
+        document.getElementById("mode-toggle").style.display = "flex";
         try {
             loadSubDetailsByQuery(Base64.decode(q));
         } catch (e) {
             loadSubDetailsByQuery("");
         }
-        setModeSimple(true);
-        document.getElementById("mode-toggle").style.display = "flex";
+        setModeSimple(true, true);
     } else {
-        loadSubDetailsByQuery("");
-        setModeSimple(true);
         document.getElementById("mode-toggle").style.display = "flex";
+        loadSubDetailsByQuery("");
+        setModeSimple(true, true);
     }
 }
 
-function setModeSimple(simple) {
-    if (simple && simple !== "false") {
-        document.getElementById("mode-toggle-checkbox").checked = false;
-        document.getElementById("mode-simple").style.display = "block";
-        document.getElementById("mode-expert").style.display = "none";
-    } else {
-        document.getElementById("mode-toggle-checkbox").checked = true;
-        document.getElementById("mode-simple").style.display = "none";
-        document.getElementById("mode-expert").style.display = "block";
+function setModeSimple(simple, confirmed) {
+    if (!confirmed) {
+        confirmed = confirm("This will drop current changes, if any. Continue?");
+    }
+    if (confirmed) {
+        if (simple && simple !== "false") {
+            document.getElementById("mode-toggle-checkbox").checked = false;
+            document.getElementById("mode-simple").style.display = "block";
+            document.getElementById("mode-expert").style.display = "none";
+        } else {
+            document.getElementById("mode-toggle-checkbox").checked = true;
+            document.getElementById("mode-simple").style.display = "none";
+            document.getElementById("mode-expert").style.display = "block";
+        }
     }
 }
 
@@ -669,8 +675,7 @@ function deleteSubscription() {
             .then(deleted => {
                 if (deleted) {
                     alert(`Deleted the interest ${id}`);
-                    window.history.back();
-                    window.location.reload();
+                    window.location.assign("sub.html");
                 }
             })
             .finally(() => {
@@ -715,8 +720,7 @@ async function updateSubscription(id) {
             .then(data => {
                 if (data != null) {
                     alert("Interest updated");
-                    window.history.back();
-                    window.location.reload();
+                    window.location.assign("sub.html");
                 }
             })
             .finally(() => {
@@ -755,7 +759,7 @@ async function createSubscription() {
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
-                    window.location.assign(`sub.html?id=${data.id}`);
+                    window.location.assign(`sub-details.html?id=${data.id}`);
                 }
             })
             .finally(() => {

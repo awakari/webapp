@@ -3,6 +3,24 @@ document
     .addEventListener("submit", async function (evt){
         evt.preventDefault();
         const q = document.getElementById("query").value;
+        const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+        const cond = {
+            not: false,
+            gc: {
+                logic: Number(document.getElementById("logic-select-simple").value),
+                group: [],
+            }
+        };
+        [...seg.segment(q)]
+            .filter(term => term.isWordLike)
+            .forEach(term => cond.gc.group.push({
+                not: false,
+                tc: {
+                    key: "",
+                    term: term.segment,
+                    exact: false,
+                }
+            }));
         const discoverSourcesFlag = document.getElementById("sub-discover-sources-simple").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
@@ -11,7 +29,7 @@ document
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
-                    window.location.assign(`sub.html?id=${data.id}`);
+                    window.location.assign(`sub-details.html?id=${data.id}`);
                 }
             })
             .finally(() => {

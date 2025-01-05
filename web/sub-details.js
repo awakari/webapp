@@ -94,12 +94,33 @@ async function loadSubDetails() {
     const example = urlParams.get("example");
     if (id) {
         loadSubDetailsById(id);
+        document.getElementById("mode-toggle").style.display = "none";
     } else if (example) {
         loadSubDetailsByExample(example);
     } else if (q) {
-        loadSubDetailsByQuery(Base64.decode(q));
+        try {
+            loadSubDetailsByQuery(Base64.decode(q));
+        } catch (e) {
+            loadSubDetailsByQuery("");
+        }
+        setModeSimple(true);
+        document.getElementById("mode-toggle").style.display = "flex";
     } else {
         loadSubDetailsByQuery("");
+        setModeSimple(true);
+        document.getElementById("mode-toggle").style.display = "flex";
+    }
+}
+
+function setModeSimple(simple) {
+    if (simple && simple !== "false") {
+        document.getElementById("mode-toggle-checkbox").checked = false;
+        document.getElementById("mode-simple").style.display = "block";
+        document.getElementById("mode-expert").style.display = "none";
+    } else {
+        document.getElementById("mode-toggle-checkbox").checked = true;
+        document.getElementById("mode-simple").style.display = "none";
+        document.getElementById("mode-expert").style.display = "block";
     }
 }
 
@@ -338,6 +359,7 @@ function loadSubDetailsByExample(exampleName) {
 function loadSubDetailsByQuery(q) {
     document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
+    document.getElementById("query").value = q;
     document.getElementById("interest-enabled").checked = true;
     document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
@@ -733,7 +755,7 @@ async function createSubscription() {
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
-                    window.location.assign("sub.html");
+                    window.location.assign(`sub.html?id=${data.id}`);
                 }
             })
             .finally(() => {

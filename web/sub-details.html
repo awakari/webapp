@@ -39,7 +39,19 @@
                 <a href="index.html" class="flex justify-center items-center">
                     <img src="logo-color.svg" alt="home" width="24" height="24"/>
                 </a>
-                <span>Interest Details</span>
+                <div class="flex space-x-2">
+                    <span>Interest Details</span>
+                    <div id="mode-toggle" class="flex space-x-1 mt-1" style="margin-top: 6px;">
+                        <label class="switch">
+                            <input type="checkbox"
+                                   checked="checked"
+                                   id="mode-toggle-checkbox"
+                                   onchange="setModeSimple(!event.currentTarget.checked);">
+                            <span class="slider round checked"></span>
+                        </label>
+                        <span class="text-sm">Advanced</span>
+                    </div>
+                </div>
             </div>
             <div class="grow"></div>
             <div class="flex items-center justify-center">
@@ -77,6 +89,7 @@
     </nav>
 
 <div class="m-1 flex-1 flex flex-col space-y-1">
+
     <div class="flex justify-center m-1">
 
         <form role="search" id="mode-simple" class="max-w-[480px] grow space-y-2 hidden">
@@ -107,8 +120,8 @@
                     <span class="mt-1">Match</span>
                     <select name="logic" id="logic-select-simple" class="button">
                         <!-- note value should be the same as the index -->
-                        <option value="0" selected="selected">All</option>
-                        <option value="1">Any</option>
+                        <option value="0" selected="selected">All words</option>
+                        <option value="1">Any word</option>
                     </select>
                 </label>
                 <label id="subm-discover-simple" class="flex align-middle space-x-1 mt-1">
@@ -117,6 +130,7 @@
                 </label>
             </div>
         </form>
+        <script src="sub-details-simple.js"></script>
 
         <form id="mode-expert" class="max-w-[480px] grow space-y-2">
 

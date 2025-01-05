@@ -159,6 +159,11 @@ button[type=button].submit {
     color: #10b981;
     width: 100px;
 }
+select[name="submit"].submit {
+    border-color: #10b981;
+    color: #10b981;
+    width: 100px;
+}
 button[type=button].submit:hover {
     background-color: #a7f3d0;
 }

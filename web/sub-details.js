@@ -229,7 +229,7 @@ function loadSubDetailsById(id) {
             displayConditions();
         });
 
-    const srcListElement = document.getElementById("sub-discovered-sources");
+    const srcListElement = document.getElementById("sub-discovered-sources-list");
     Sources
         .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
         .then(resp => {
@@ -684,17 +684,17 @@ function deleteSubscription() {
     }
 }
 
-async function submitSubscription() {
+async function submitSubscription(discoverSources) {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     if (id) {
-        await updateSubscription(id);
+        await updateSubscription(id, discoverSources);
     } else {
-        await createSubscription();
+        await createSubscription(discoverSources);
     }
 }
 
-async function updateSubscription(id) {
+async function updateSubscription(id, discoverSources) {
     const cond = getRootCondition();
     if (cond != null && confirm(`Update the interest ${id}?`)) {
         const descr = document.getElementById("description").value;
@@ -711,12 +711,11 @@ async function updateSubscription(id) {
             expires = null;
         }
         const isPublic = document.getElementById("public").checked;
-        const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         const since = new Date().toISOString();
         await Interests
-            .update(id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers)
+            .update(id, descr, enabled, expires, isPublic, cond, discoverSources, headers)
             .then(data => {
                 if (data != null) {
                     alert("Interest updated");
@@ -729,7 +728,7 @@ async function updateSubscription(id) {
     }
 }
 
-async function createSubscription() {
+async function createSubscription(discoverSources) {
     const cond = getRootCondition();
     if (cond != null) {
         const name = document.getElementById("id").value;
@@ -751,11 +750,10 @@ async function createSubscription() {
             return;
         }
         const isPublic = document.getElementById("public").checked;
-        const discoverSourcesFlag = document.getElementById("sub-discover-sources").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         await Interests
-            .create(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
+            .create(name, descr, expires, isPublic, cond, discoverSources, headers)
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
@@ -839,7 +837,7 @@ function validateCondition(cond) {
     return cond;
 }
 
-async function submitSimple(){
+async function submitSimple(discoverSources){
     const q = document.getElementById("query").value;
     const seg = new Intl.Segmenter(undefined, {granularity: "word"});
     const cond = {
@@ -859,11 +857,10 @@ async function submitSimple(){
                 exact: false,
             }
         }));
-    const discoverSourcesFlag = document.getElementById("sub-discover-sources-simple").checked;
     const headers = getAuthHeaders();
     document.getElementById("wait").style.display = "block";
     await Interests
-        .create("", q, undefined, false, cond, discoverSourcesFlag, headers)
+        .create("", q, undefined, false, cond, discoverSources, headers)
         .then(data => {
             if (data != null) {
                 alert("Interest created");

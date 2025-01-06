@@ -83,7 +83,7 @@ Interests.fetch = function (id, headers) {
     const optsReq = {
         method: "GET",
         headers: headers,
-        cache: "default",
+        cache: "no-cache",
     }
     return fetch(`${Interests.urlBase}/v1/${id}`, optsReq)
         .then(resp => {

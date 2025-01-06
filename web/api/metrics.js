@@ -5,7 +5,7 @@ const Metrics = {
 Metrics.fetchAttributeTypes = function (headers) {
     const optsReq = {
         method: "GET",
-        cache: "default",
+        cache: "force-cache",
         headers: headers,
     };
     return fetch(`${Metrics.urlBase}/v1/attr/types`, optsReq)
@@ -15,7 +15,7 @@ Metrics.fetchAttributeTypes = function (headers) {
 Metrics.fetchAttributeValues = function (name, headers) {
     return fetch(`${Metrics.urlBase}/v1/attr/values/${name}`, {
         method: "GET",
-        cache: "default",
+        cache: "force-cache",
         headers: headers,
     })
         .then(resp => handleCookieAuth(resp, headers, (h) => Metrics.fetchAttributeValues(name, h)));

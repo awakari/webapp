@@ -721,8 +721,11 @@ async function updateSubscription(id, discoverSources) {
                 }
             })
             .finally(() => {
+                document.getElementById("button-submit").selectedIndex = 0;
                 document.getElementById("wait").style.display = "none";
             });
+    } else {
+        document.getElementById("button-submit-simple").selectedIndex = 0;
     }
 }
 
@@ -759,6 +762,7 @@ async function createSubscription(discoverSources) {
                 }
             })
             .finally(() => {
+                document.getElementById("button-submit").selectedIndex = 0;
                 document.getElementById("wait").style.display = "none";
             });
     }
@@ -838,16 +842,10 @@ function validateCondition(cond) {
 async function submitSimple(discoverSources){
     const q = document.getElementById("query").value;
     const seg = new Intl.Segmenter(undefined, {granularity: "word"});
-    const cond = {
-        not: false,
-        gc: {
-            logic: Number(document.getElementById("logic-select-simple").value),
-            group: [],
-        }
-    };
+    let keywordConds = [];
     [...seg.segment(q)]
         .filter(term => term.isWordLike)
-        .forEach(term => cond.gc.group.push({
+        .forEach(term => keywordConds.push({
             not: false,
             tc: {
                 key: "",
@@ -855,6 +853,21 @@ async function submitSimple(discoverSources){
                 exact: false,
             }
         }));
+    let cond;
+    if (keywordConds.length < 1) {
+        alert("Error: at least one keyword is required.");
+        return;
+    } else if (keywordConds.length === 1) {
+        cond = keywordConds[0];
+    } else {
+        cond = {
+            not: false,
+            gc: {
+                logic: Number(document.getElementById("logic-select-simple").value),
+                group: keywordConds,
+            }
+        };
+    }
     const headers = getAuthHeaders();
     document.getElementById("wait").style.display = "block";
     await Interests
@@ -866,6 +879,7 @@ async function submitSimple(discoverSources){
             }
         })
         .finally(() => {
+            document.getElementById("button-submit-simple").selectedIndex = 0;
             document.getElementById("wait").style.display = "none";
         });
 }

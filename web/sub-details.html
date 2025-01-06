@@ -110,7 +110,10 @@
                 </select>
             </div>
             <div class="flex justify-center w-full">
-                <select name="submit" class="button submit text-center" onchange="submitSimple(event.currentTarget.value === 'true')">
+                <select name="submit"
+                        id="button-submit-simple"
+                        class="button submit text-center"
+                        onchange="submitSimple(event.currentTarget.value === 'true')">
                     <option selected="selected" hidden="hidden">Submit</option>
                     <option value="false">Submit</option>
                     <option value="true">Submit and discover relevant sources</option>

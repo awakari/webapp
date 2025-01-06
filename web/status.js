@@ -33,111 +33,211 @@ function formatNumberShort(number) {
 async function loadStatusPubRate() {
     document.getElementById("wait-status-pub-rate").style.display = "block";
     document.getElementById("pub-last-1m").innerHTML = "";
-    return Metrics.loadStatusPartWithRetry({}, "pub-rate")
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Failed to fetch the status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data) {
-                const pubRateAvgMin1 = Math.floor(data.min5 * 60);
-                if (pubRateAvgMin1 > 0) {
-                    document.getElementById("pub-last-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMin1))}</span>`;
-                } else {
-                    document.getElementById("pub-last-1m").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMin1))}</span>`;
+    return Promise.all([
+        Metrics.loadStatusPartWithRetry({}, "pub-rate/5m")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
                 }
-                const pubRateAvgHour = data.hour;
-                if (pubRateAvgHour > 0) {
-                    document.getElementById("pub-last-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgHour * 3600))}</span>`;
-                } else {
-                    document.getElementById("pub-last-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgHour * 3600))}</span>`;
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const pubRateAvgMin1 = Math.floor(data.value * 60);
+                    if (pubRateAvgMin1 > 0) {
+                        document.getElementById("pub-last-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMin1))}</span>`;
+                    } else {
+                        document.getElementById("pub-last-1m").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMin1))}</span>`;
+                    }
                 }
-                const pubRateAvgDay = data.day;
-                if (pubRateAvgDay > 0) {
-                    document.getElementById("pub-last-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
-                } else {
-                    document.getElementById("pub-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+        Metrics.loadStatusPartWithRetry({}, "pub-rate/1h")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
                 }
-                const pubRateAvgMonth = data.month;
-                if (pubRateAvgMonth > 0) {
-                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
-                } else {
-                    document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const pubRateAvgHour = data.value;
+                    if (pubRateAvgHour > 0) {
+                        document.getElementById("pub-last-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgHour * 3600))}</span>`;
+                    } else {
+                        document.getElementById("pub-last-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgHour * 3600))}</span>`;
+                    }
                 }
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            return "";
-        })
-        .finally(() => {
-            document.getElementById("wait-status-pub-rate").style.display = "none";
-        });
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+        Metrics.loadStatusPartWithRetry({}, "pub-rate/1d")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const pubRateAvgDay = data.value;
+                    if (pubRateAvgDay > 0) {
+                        document.getElementById("pub-last-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
+                    } else {
+                        document.getElementById("pub-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgDay * 86400))}</span>`;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+        Metrics.loadStatusPartWithRetry({}, "pub-rate/30d")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const pubRateAvgMonth = data.value;
+                    if (pubRateAvgMonth > 0) {
+                        document.getElementById("pub-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
+                    } else {
+                        document.getElementById("pub-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(pubRateAvgMonth * 30*86400))}</span>`;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+    ]).finally(() => {
+        document.getElementById("wait-status-pub-rate").style.display = "none";
+    });
 }
 
 async function loadStatusRead() {
     document.getElementById("wait-status-read-rate").style.display = "block";
     document.getElementById("wait-status-top-sources").style.display = "block";
     document.getElementById("read-last-1m").innerHTML = "";
-    return Metrics.loadStatusPartWithRetry({}, "read")
-        .then(resp => {
-            if (!resp.ok) {
-                resp.text().then(errMsg => console.error(errMsg));
-                throw new Error(`Failed to fetch the status: ${resp.status}`);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data) {
+    return Promise.all([
+        Metrics.loadStatusPartWithRetry({}, "read/5m")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const readRateAvgMin1 = Math.floor(data.readRate * 60);
+                    if (readRateAvgMin1 > 0) {
+                        document.getElementById("read-last-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgMin1))}</span>`;
+                    } else {
+                        document.getElementById("read-last-1m").innerHTML = `${formatNumberShort(Math.round(readRateAvgMin1))}`;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+        Metrics.loadStatusPartWithRetry({}, "read/1h")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const readRateAvgHour = data.readRate;
+                    if (readRateAvgHour > 0) {
+                        document.getElementById("read-last-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgHour * 3600))}</span>`;
+                    } else {
+                        document.getElementById("read-last-1h").innerHTML = `${formatNumberShort(Math.round(readRateAvgHour * 3600))}`;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+        Metrics.loadStatusPartWithRetry({}, "read/1d")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
 
-                const readRateAvgMin1 = Math.floor(data.readRate.min5 * 60);
-                if (readRateAvgMin1 > 0) {
-                    document.getElementById("read-last-1m").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgMin1))}</span>`;
-                } else {
-                    document.getElementById("read-last-1m").innerHTML = `${formatNumberShort(Math.round(readRateAvgMin1))}`;
-                }
-                const readRateAvgHour = data.readRate.hour;
-                if (readRateAvgHour > 0) {
-                    document.getElementById("read-last-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgHour * 3600))}</span>`;
-                } else {
-                    document.getElementById("read-last-1h").innerHTML = `${formatNumberShort(Math.round(readRateAvgHour * 3600))}`;
-                }
-                const readRateAvgDay = data.readRate.day;
-                if (readRateAvgDay > 0) {
-                    document.getElementById("read-last-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgDay * 86400))}</span>`;
-                } else {
-                    document.getElementById("read-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgDay * 86400))}</span>`;
-                }
-                const readRateAvgMonth = data.readRate.month;
-                if (readRateAvgMonth > 0) {
-                    document.getElementById("read-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
-                } else {
-                    document.getElementById("read-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
-                }
+                    const readRateAvgDay = data.readRate;
+                    if (readRateAvgDay > 0) {
+                        document.getElementById("read-last-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgDay * 86400))}</span>`;
+                    } else {
+                        document.getElementById("read-last-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgDay * 86400))}</span>`;
+                    }
 
-                const elemPopSrcs = document.getElementById("most-popular-sources");
-                elemPopSrcs.innerHTML = "";
-                Object
-                    .entries(data.sourcesMostRead)
-                    .sort((a, b) => b[1].day - a[1].day)
-                    .slice(0, 3)
-                    .forEach(e => {
-                        const share = (100 * e[1].day).toFixed(1);
-                        elemPopSrcs.innerHTML += templateSrcPopular(share, e[0]);
-                    });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            return "";
-        })
-        .finally(() => {
-            document.getElementById("wait-status-read-rate").style.display = "none";
-            document.getElementById("wait-status-top-sources").style.display = "none";
-        });
+                    const elemPopSrcs = document.getElementById("most-popular-sources");
+                    elemPopSrcs.innerHTML = "";
+                    Object
+                        .entries(data.sourcesMostRead)
+                        .sort((a, b) => b[1] - a[1])
+                        .slice(0, 3)
+                        .forEach(e => {
+                            const share = (100 * e[1]).toFixed(1);
+                            elemPopSrcs.innerHTML += templateSrcPopular(share, e[0]);
+                        });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            })
+            .finally(() => {
+                document.getElementById("wait-status-top-sources").style.display = "none";
+            }),
+        Metrics.loadStatusPartWithRetry({}, "read/30d")
+            .then(resp => {
+                if (!resp.ok) {
+                    resp.text().then(errMsg => console.error(errMsg));
+                    throw new Error(`Failed to fetch the status: ${resp.status}`);
+                }
+                return resp.json();
+            })
+            .then(data => {
+                if (data) {
+                    const readRateAvgMonth = data.readRate;
+                    if (readRateAvgMonth > 0) {
+                        document.getElementById("read-last-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
+                    } else {
+                        document.getElementById("read-last-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(Math.round(readRateAvgMonth * 30*86400))}</span>`;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return "";
+            }),
+    ]).finally(() => {
+        document.getElementById("wait-status-read-rate").style.display = "none";
+    });
 }
 
 async function loadStatusFollowers() {
@@ -281,7 +381,7 @@ function loadStatusLoop() {
     loadStatusRead();
     loadStatusFollowers();
     loadStatusDuration();
-    loadStatusPubRate()
+    loadStatusPubRate();
     setInterval(loadStatusTopInterests, 3_600_000);
     setInterval(loadStatusRead, 300_000);
     setInterval(loadStatusFollowers, 900_000);

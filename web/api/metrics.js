@@ -22,6 +22,10 @@ Metrics.fetchAttributeValues = function (name, headers) {
 }
 
 Metrics.loadStatusPartWithRetry = function(headers, part) {
-    return fetch(`${Metrics.urlBase}/v1/public/${part}`)
+    return fetch(`${Metrics.urlBase}/v1/public/${part}`, {
+        method: "GET",
+        cache: "force-cache",
+        headers: headers,
+    })
         .then(resp => handleCookieAuth(resp, headers, (h) => Metrics.loadStatusPartWithRetry(h, part)))
 }

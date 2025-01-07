@@ -31,7 +31,10 @@ function formatNumberShort(number) {
 }
 
 async function loadStatusPubRate() {
-    document.getElementById("wait-status-pub-rate").style.display = "block";
+    document.getElementById("wait-status-pub-rate-1m").style.display = "block";
+    document.getElementById("wait-status-pub-rate-1h").style.display = "block";
+    document.getElementById("wait-status-pub-rate-1d").style.display = "block";
+    document.getElementById("wait-status-pub-rate-30d").style.display = "block";
     document.getElementById("pub-last-1m").innerHTML = "";
     return Promise.all([
         Metrics.loadStatusPartWithRetry({}, "pub-rate/5m")
@@ -55,6 +58,8 @@ async function loadStatusPubRate() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                document.getElementById("wait-status-pub-rate-1m").style.display = "none";
             }),
         Metrics.loadStatusPartWithRetry({}, "pub-rate/1h")
             .then(resp => {
@@ -77,6 +82,8 @@ async function loadStatusPubRate() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                document.getElementById("wait-status-pub-rate-1h").style.display = "none";
             }),
         Metrics.loadStatusPartWithRetry({}, "pub-rate/1d")
             .then(resp => {
@@ -99,6 +106,8 @@ async function loadStatusPubRate() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                document.getElementById("wait-status-pub-rate-1d").style.display = "none";
             }),
         Metrics.loadStatusPartWithRetry({}, "pub-rate/30d")
             .then(resp => {
@@ -121,14 +130,17 @@ async function loadStatusPubRate() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                 document.getElementById("wait-status-pub-rate-30d").style.display = "none";
             }),
-    ]).finally(() => {
-        document.getElementById("wait-status-pub-rate").style.display = "none";
-    });
+    ]);
 }
 
 async function loadStatusRead() {
-    document.getElementById("wait-status-read-rate").style.display = "block";
+    document.getElementById("wait-status-read-rate-1m").style.display = "block";
+    document.getElementById("wait-status-read-rate-1h").style.display = "block";
+    document.getElementById("wait-status-read-rate-1d").style.display = "block";
+    document.getElementById("wait-status-read-rate-30d").style.display = "block";
     document.getElementById("wait-status-top-sources").style.display = "block";
     document.getElementById("read-last-1m").innerHTML = "";
     return Promise.all([
@@ -153,6 +165,8 @@ async function loadStatusRead() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                document.getElementById("wait-status-read-rate-1m").style.display = "none";
             }),
         Metrics.loadStatusPartWithRetry({}, "read/1h")
             .then(resp => {
@@ -175,6 +189,8 @@ async function loadStatusRead() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                document.getElementById("wait-status-read-rate-1h").style.display = "none";
             }),
         Metrics.loadStatusPartWithRetry({}, "read/1d")
             .then(resp => {
@@ -212,6 +228,8 @@ async function loadStatusRead() {
             })
             .finally(() => {
                 document.getElementById("wait-status-top-sources").style.display = "none";
+            }).finally(() => {
+                document.getElementById("wait-status-read-rate-1d").style.display = "none";
             }),
         Metrics.loadStatusPartWithRetry({}, "read/30d")
             .then(resp => {
@@ -234,10 +252,10 @@ async function loadStatusRead() {
             .catch(err => {
                 console.log(err);
                 return "";
+            }).finally(() => {
+                document.getElementById("wait-status-read-rate-30d").style.display = "none";
             }),
-    ]).finally(() => {
-        document.getElementById("wait-status-read-rate").style.display = "none";
-    });
+    ]);
 }
 
 async function loadStatusFollowers() {

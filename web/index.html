@@ -539,7 +539,7 @@
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Top relevant sources being read recently.</p>
                     </div>
                     <div class="flex justify-center">
-                        <img id="wait-status-top-sources" src="wait.gif" alt="wait..." style="display: none"/>
+                        <img width="24px" height="24px" id="wait-status-top-sources" src="wait.gif" alt="wait..." style="display: none"/>
                         <div class="text-left w-[320px] sm:w-[480px] flex-row" id="most-popular-sources">
                         </div>
                     </div>
@@ -551,7 +551,7 @@
                         <p class="text-neutral-400 dark:text-neutral-600 text-sm">Public interests with the most known followers.</p>
                     </div>
                     <div class="flex justify-center align-middle items-center">
-                        <img id="wait-status-top-interests" src="wait.gif" alt="wait..." style="display: none"/>
+                        <img width="24px" height="24px" id="wait-status-top-interests" src="wait.gif" alt="wait..." style="display: none"/>
                         <div class="text-left w-[320px] sm:w-[600px] flex-row" id="most-followed-interests">
                         </div>
                     </div>
@@ -564,20 +564,31 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Min</p>
-                        <img id="wait-status-pub-rate" src="wait.gif" alt="wait..." style="display: none"/>
-                        <p class="font-mono" id="pub-last-1m"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-pub-rate-1m" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="pub-last-1m"></p>
+                        </div>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Hour</p>
-                        <p class="font-mono" id="pub-last-1h"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-pub-rate-1h" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="pub-last-1h"></p>
+                        </div>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Day</p>
-                        <p class="font-mono" id="pub-last-1d"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-pub-rate-1d" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="pub-last-1d"></p>
+                        </div>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">30 Days</p>
-                        <p class="font-mono" id="pub-last-30d"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-pub-rate-30d" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="pub-last-30d"></p>
+                        </div>
                     </div>
                 </div>
 
@@ -588,7 +599,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">Current</p>
-                        <img id="wait-status-followers" src="wait.gif" alt="wait..." style="display: none"/>
+                        <img width="24px" height="24px" id="wait-status-followers" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono" id="followers-curr"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
@@ -612,20 +623,31 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Min</p>
-                        <img id="wait-status-read-rate" src="wait.gif" alt="wait..." style="display: none"/>
-                        <p class="font-mono" id="read-last-1m"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-read-rate-1m" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="read-last-1m"></p>
+                        </div>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Hour</p>
-                        <p class="font-mono" id="read-last-1h"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-read-rate-1h" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="read-last-1h"></p>
+                        </div>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">1 Day</p>
-                        <p class="font-mono" id="read-last-1d"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-read-rate-1d" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="read-last-1d"></p>
+                        </div>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">30 Days</p>
-                        <p class="font-mono" id="read-last-30d"></p>
+                        <div class="flex justify-center">
+                            <img width="24px" height="24px" id="wait-status-read-rate-30d" src="wait.gif" alt="wait..." style="position: absolute; display: none"/>
+                            <p class="font-mono" id="read-last-30d"></p>
+                        </div>
                     </div>
                 </div>
 
@@ -636,7 +658,7 @@
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">
                         <p class="text-sm">50 %</p>
-                        <img id="wait-status-duration" src="wait.gif" alt="wait..." style="display: none"/>
+                        <img width="24px" height="24px" id="wait-status-duration" src="wait.gif" alt="wait..." style="display: none"/>
                         <p class="font-mono text-neutral-400 dark:text-neutral-600" id="core-duration-q0_5"></p>
                     </div>
                     <div class="text-neutral-600 dark:text-neutral-400 text-center">

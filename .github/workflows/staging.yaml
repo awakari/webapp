@@ -65,4 +65,4 @@ jobs:
         run: |
           helm upgrade --install ${COMPONENT} helm/package/${COMPONENT}-0.0.0.tgz \
             --values helm/webapp/values-demo-0.yaml \
-            --set podAnnotations.commit=$(git rev-parse --short HEAD)
+            --set-string podAnnotations.commit=$(git rev-parse --short HEAD)

@@ -306,10 +306,11 @@ function loadSubDetailsByExample(exampleName) {
             document.getElementById("sub-discover-sources").checked = false;
             break;
         }
-        case "exclude-topics": {
-            document.getElementById("description").value = "Tech News: not Apple neither Microsoft";
-            addConditionText(false, "", "tech news", false);
-            addConditionText(true, "", "apple microsoft", false);
+        case "exclude-words": {
+            document.getElementById("description").value = "Cloud: not Amazon neither Microsoft";
+            addConditionText(false, "", "cloud", false);
+            addConditionText(false, "", "compute service storage", false);
+            addConditionText(true, "", "amazon aws microsoft", false);
             break;
         }
         case "job-alert": {

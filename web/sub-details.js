@@ -357,6 +357,13 @@ function loadSubDetailsByExample(exampleName) {
             addConditionNumber(false, "magnitude", 2, 3)
             break;
         }
+        case "sentiment": {
+            document.getElementById("description").value = "AI: negative sentiment";
+            addConditionText(false, "","artificial", false);
+            addConditionText(false, "","intelligence", false);
+            addConditionNumber(false, "sentiment", 5, 0);
+            break;
+        }
     }
     displayConditions();
 }

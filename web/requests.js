@@ -7,46 +7,36 @@ async function requestIncreasePublishingLimit(objId) {
         } else {
             msg = "Request to increase the publishing limit";
         }
-        msg += "\nPlease enter the number to add:"
-        const input = prompt(msg, "1");
+        msg += "\nPlease enter the numbers to add (hourly/daily):"
+        const input = prompt(msg, "1/10");
         if (input) {
-            let inc = 0;
-            try {
-                inc = parseInt(input);
-            } catch (e) {
-                console.log(e);
-            }
-            if (inc > 0) {
-                const payload = {
-                    id: Events.newId(),
-                    specVersion: "1.0",
-                    source: "awakari.com",
-                    type: "com_awakari_webapp",
-                    attributes: {
-                        increment: {
-                            ce_integer: inc,
-                        },
-                        limit: {
-                            ce_integer: parseInt(document.getElementById("limit").innerText),
-                        },
-                        action: {
-                            ce_string: "request",
-                        },
-                        object: {
-                            ce_string: objId,
-                        },
-                        subject: {
-                            ce_string: userIdCurrent,
-                        },
+            const payload = {
+                id: Events.newId(),
+                specVersion: "1.0",
+                source: "awakari.com",
+                type: "com_awakari_webapp",
+                attributes: {
+                    increment: {
+                        ce_string: input,
                     },
-                    text_data: `User ${userIdCurrent} requests to increase the publishing limit for ${objId} by ${inc}`,
-                }
-                const headers = getAuthHeaders();
-                if (await Events.publishInternal(payload, headers)) {
-                    openDonationPage();
-                }
-            } else {
-                alert(`Invalid increment value: ${inc}\nShould be a positive integer.`);
+                    limit: {
+                        ce_integer: parseInt(document.getElementById("limit").innerText),
+                    },
+                    action: {
+                        ce_string: "request",
+                    },
+                    object: {
+                        ce_string: objId,
+                    },
+                    subject: {
+                        ce_string: userIdCurrent,
+                    },
+                },
+                text_data: `User ${userIdCurrent} requests to increase the publishing limit for ${objId} by ${inc}`,
+            }
+            const headers = getAuthHeaders();
+            if (await Events.publishInternal(payload, headers)) {
+                openDonationPage();
             }
         }
     } else if (confirm("This function is available for signed in users only. Proceed to sign in?")) {

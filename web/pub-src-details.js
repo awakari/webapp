@@ -95,7 +95,7 @@ async function loadSource() {
                     case 1:
                         document.getElementById("owner").innerText = "Dedicated";
                         document.getElementById("total").innerText = data.usage.total;
-                        document.getElementById("count").innerText = data.usage.count;
+                        document.getElementById("count").innerText = `${data.usage.countHourly}/${data.usage.countDaily}`;
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
                             requestIncreasePublishingLimit(data.addr);
                         };
@@ -103,7 +103,7 @@ async function loadSource() {
                     case 2:
                         document.getElementById("owner").innerText = "User";
                         document.getElementById("total").innerText = `${data.usage.total} (all user's publications)`;
-                        document.getElementById("count").innerText = `${data.usage.count} (all user's publications)`;
+                        document.getElementById("count").innerText = `${data.usage.countHourly}/${data.usage.countDaily} (all user's publications)`;
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
                             requestIncreasePublishingLimit(data.userId);
                         };
@@ -113,7 +113,7 @@ async function loadSource() {
                         }
                         break;
                 }
-                document.getElementById("limit").innerText = data.usage.limit;
+                document.getElementById("limit").innerText = `${data.usage.limitHourly}/${data.usage.limitDaily}`;
                 return data.counts;
             }
             return null;

@@ -22,31 +22,48 @@ function loadPublishing() {
     }
 
     document.getElementById("wait").style.display = "block";
-    Usage
-        .fetch("2", headers)
-        .then(resp => resp ? resp.json() : null)
-        .then(data => {
-            if (data && data.hasOwnProperty("count")) {
-                document.getElementById("count").innerText = data.count;
-            }
-        })
-        .finally(() => {
-            document.getElementById("wait").style.display = "none";
-        });
-
-    document.getElementById("wait").style.display = "block";
-    Limits
-        .fetch("2", headers)
-        .then(resp => resp ? resp.json() : null)
-        .then(data => {
-            if (data && data.hasOwnProperty("count")) {
-                document.getElementById("limit").innerText = data.count;
-            }
-            return data;
-        })
-        .finally(() => {
-            document.getElementById("wait").style.display = "none";
-        });
+    Promise
+        .all([
+            Usage
+                .fetch("2", headers)
+                .then(resp => resp ? resp.json() : null)
+                .then(data => {
+                    if (data && data.hasOwnProperty("count")) {
+                        document.getElementById("count").innerText = data.count;
+                    }
+                })
+                .then(() => {
+                    return Usage
+                        .fetch("3", headers)
+                        .then(resp => resp ? resp.json() : null)
+                        .then(data => {
+                            if (data && data.hasOwnProperty("count")) {
+                                document.getElementById("count").innerText += `/${data.count}`;
+                            }
+                        });
+                }),
+            Limits
+                .fetch("2", headers)
+                .then(resp => resp ? resp.json() : null)
+                .then(data => {
+                    if (data && data.hasOwnProperty("count")) {
+                        document.getElementById("limit").innerText = data.count;
+                    }
+                    return data;
+                })
+                .then(() => {
+                    return Limits
+                        .fetch("3", headers)
+                        .then(resp => resp ? resp.json() : null)
+                        .then(data => {
+                            if (data && data.hasOwnProperty("count")) {
+                                document.getElementById("limit").innerText += `/${data.count}`;
+                            }
+                            return data;
+                        });
+                }),
+        ])
+        .finally(() => document.getElementById("wait").style.display = "none");
 
     const urlParams = new URLSearchParams(window.location.search);
     loadSources(urlParams.get("cursor"), urlParams.get("filter"), urlParams.get("srcType"), urlParams.get("own"));

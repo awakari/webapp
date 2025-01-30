@@ -286,45 +286,36 @@
                             updateImage();
                         </script>
                     </div>
-                    <div class="space-y-4 py-4 pt-0 sm:pt-4 text-lg">
+                    <div class="space-y-2 py-4 pt-0 sm:pt-4 text-lg">
                         <h1 class="hidden sm:block px-4 pt-2 capitalize text-3xl text-gray-800 dark:text-gray-200">
                             Awakari</h1>
                         <p class="align-text-middle px-4">
                             Great public source aggregator:
                         </p>
-                        <p class="px-4 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
-                                     viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                          clip-rule="evenodd"/>
-                                </svg>
+                        <div class="px-4 align-text-middle flex ml-4">
+                            <span class="w-20">
+                                <span id="src-count-feeds"></span>
+                                <img id="src-count-feeds-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
                             </span>
                             <span>News Feeds</span>
-                        </p>
-                        <p class="px-4 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
-                                     viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                          clip-rule="evenodd"/>
-                                </svg>
+                        </div>
+                        <div class="px-4 align-text-middle flex ml-4">
+                            <span class="w-20">
+                                <span id="src-count-socials"></span>
+                                <img id="src-count-socials-wait"  src="wait.gif" height="24" width="24" alt="loading..."/>
                             </span>
                             <span>Social Channels</span>
-                        </p>
-                        <p class="px-4 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
-                                     viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                          clip-rule="evenodd"/>
-                                </svg>
+                        </div>
+                        <div class="px-4 align-text-middle flex ml-4">
+                            <span class="w-20">
+                                <span id="src-count-realtime"></span>
+                                <img id="src-count-realtime-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
                             </span>
                             <span>Realtime Data Streams</span>
-                        </p>
+                        </div>
+                        <div class="px-4 align-text-middle flex ml-4">
+                            <span>And many others</span>
+                        </div>
                         <p class="align-text-middle px-4">
                             To never miss what is important.</p>
                     </div>
@@ -723,7 +714,7 @@
                                       clip-rule="evenodd"/>
                             </svg></span>
                         <span class="mx-2">
-                            1 own interest per user
+                            1 free active interest per user
                         </span>
                     </div>
                     <div class="flex items-center py-2">
@@ -735,7 +726,20 @@
                                       clip-rule="evenodd"/>
                             </svg></span>
                         <span class="mx-2">
-                            Publish up to 4 messages per hour
+                            10 free publications per hour
+                        </span>
+                    </div>
+
+                    <div class="flex items-center py-2">
+                        <span class="h-6 w-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400"
+                                                   viewBox="0 0 20 20"
+                                                   fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                      clip-rule="evenodd"/>
+                            </svg></span>
+                        <span class="mx-2">
+                            100 free publications per day
                         </span>
                     </div>
                 </div>

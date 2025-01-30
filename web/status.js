@@ -394,15 +394,93 @@ async function loadStatusTopInterests() {
         });
 }
 
+async function loadSrcCountFeeds() {
+    document.getElementById("src-count-feeds-wait").style.display = "block";
+    return Metrics.fetchSourceCount({}, "feeds")
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Failed to fetch the status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                document.getElementById("src-count-feeds").innerText = data.current;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            return "";
+        })
+        .finally(() => {
+            document.getElementById("src-count-feeds-wait").style.display = "none";
+        });
+}
+
+async function loadSrcCountSocials() {
+    document.getElementById("src-count-socials-wait").style.display = "block";
+    return Metrics.fetchSourceCount({}, "socials")
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Failed to fetch the status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                document.getElementById("src-count-socials").innerText = data.current;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            return "";
+        })
+        .finally(() => {
+            document.getElementById("src-count-socials-wait").style.display = "none";
+        });
+}
+
+async function loadSrcCountRealtime() {
+    document.getElementById("src-count-realtime-wait").style.display = "block";
+    return Metrics.fetchSourceCount({}, "realtime")
+        .then(resp => {
+            if (!resp.ok) {
+                resp.text().then(errMsg => console.error(errMsg));
+                throw new Error(`Failed to fetch the status: ${resp.status}`);
+            }
+            return resp.json();
+        })
+        .then(data => {
+            if (data) {
+                document.getElementById("src-count-realtime").innerText = data.current;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            return "";
+        })
+        .finally(() => {
+            document.getElementById("src-count-realtime-wait").style.display = "none";
+        });
+}
+
 function loadStatusLoop() {
     loadStatusTopInterests();
     loadStatusRead();
     loadStatusFollowers();
     loadStatusDuration();
-    loadStatusPubRate();
+    loadStatusPubRate()
+    loadSrcCountFeeds();
+    loadSrcCountSocials();
+    loadSrcCountRealtime();
     setInterval(loadStatusTopInterests, 3_600_000);
     setInterval(loadStatusRead, 300_000);
     setInterval(loadStatusFollowers, 900_000);
     setInterval(loadStatusDuration, 300_000);
     setInterval(loadStatusPubRate, 300_000);
+    setInterval(loadSrcCountFeeds, 3_600_000);
+    setInterval(loadSrcCountSocials, 3_600_000);
+    setInterval(loadSrcCountRealtime, 3_600_000);
 }

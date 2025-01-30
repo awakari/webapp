@@ -29,3 +29,12 @@ Metrics.loadStatusPartWithRetry = function(headers, part) {
     })
         .then(resp => handleCookieAuth(resp, headers, (h) => Metrics.loadStatusPartWithRetry(h, part)))
 }
+
+Metrics.fetchSourceCount = function (headers, type){
+    return fetch(`${Metrics.urlBase}/v1/src/${type}`, {
+        method: "GET",
+        cache: "default",
+        headers: headers,
+    })
+        .then(resp => handleCookieAuth(resp, headers, (h) => Metrics.fetchSourceCount(h, type)))
+}

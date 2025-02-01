@@ -152,6 +152,12 @@ function loadSubDetailsById(id) {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("interest-enabled").checked = data.enabled;
+                if (data.hasOwnProperty("enabledSince")) {
+                    document.getElementById("suspended-until").style.display = "block";
+                    document.getElementById("suspended-until").innerText = `Suspended until ${data.enabledSince}`;
+                } else {
+                    document.getElementById("suspended-until").style.display = "none";
+                }
                 if (data.hasOwnProperty("own") && data.own) {
                     document.getElementById("interest-enabled").disabled = false;
                     document.getElementById("button-delete").style.display = "flex";

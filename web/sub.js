@@ -1,10 +1,10 @@
-const templateSub = (sub) => `
+const templateSub = (sub, active) => `
                 <div class="hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex w-[320px] sm:w-[400px] space-x-1"
                      onclick="window.location.assign('sub-details.html?id=${sub.id}')">
                     <span class="pt-1 text-slate-500 flex h-8">
                         <span class="text-xs">${sub.hasOwnProperty("followers")? sub.followers : '' }</span>                     
                     </span>
-                    ${sub.public ? '<span class="truncate py-2 grow">' : '<span class="truncate py-2 grow text-slate-500 dark:text-gray-400 hover:text-blue-500">'}
+                    <span class="truncate py-2 grow ${sub.public ? '' : 'italic'} ${active? '' : 'line-through' }">
                         ${sub.description}
                     </span>
                     <span class="pt-1">
@@ -175,7 +175,15 @@ async function reloadInterests(filter, ownOnly, initial) {
                 let listHtml = document.getElementById("subs_list");
                 listHtml.innerHTML = "";
                 for (const sub of subs) {
-                    listHtml.innerHTML += templateSub(sub);
+                    if (sub.enabled) {
+                        if (sub.enabledSince && (new Date(sub.enabledSince)) > (new Date())) {
+                            listHtml.innerHTML += templateSub(sub, false);
+                        } else {
+                            listHtml.innerHTML += templateSub(sub, true);
+                        }
+                    } else {
+                        listHtml.innerHTML += templateSub(sub, false);
+                    }
                 }
 
                 if (subs.length === 0) {

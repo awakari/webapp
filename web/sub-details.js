@@ -152,7 +152,7 @@ function loadSubDetailsById(id) {
             if (data && data.hasOwnProperty("description")) {
                 document.getElementById("description").value = data.description;
                 document.getElementById("interest-enabled").checked = data.enabled;
-                if (data.hasOwnProperty("enabledSince")) {
+                if (data.hasOwnProperty("enabledSince") && ((new Date(data.enabledSince)) > (new Date()))) {
                     document.getElementById("suspended-until").style.display = "block";
                     let enabledSince = new Date(data.enabledSince);
                     enabledSince.setSeconds(0, 0);

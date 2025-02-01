@@ -154,7 +154,12 @@ function loadSubDetailsById(id) {
                 document.getElementById("interest-enabled").checked = data.enabled;
                 if (data.hasOwnProperty("enabledSince")) {
                     document.getElementById("suspended-until").style.display = "block";
-                    document.getElementById("suspended-until").innerText = `Suspended until ${data.enabledSince}`;
+                    let enabledSince = new Date(data.enabledSince);
+                    enabledSince.setSeconds(0, 0);
+                    document.getElementById("suspended-until").innerHTML = `
+<p>Suspended until ${enabledSince.toISOString().slice(0, 16)} UTC.</p>
+<p>This might happen due to high matching rate.</p>
+<p>Review interest filters and make it more specific.</p>`;
                 } else {
                     document.getElementById("suspended-until").style.display = "none";
                 }

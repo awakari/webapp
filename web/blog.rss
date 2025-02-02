@@ -16,6 +16,27 @@
         </image>
 
         <item>
+            <title>Celebrating more than 200 direct followers</title>
+            <description>Awakari reaches 200 users in Telegram and Fediverse.</description>
+            <pubDate>Sun, 2 Feb 2025 10:20:00 +0200</pubDate>
+            <category>awakari followers</category>
+            <content:encoded>
+                <![CDATA[
+                    <p>Direct followers are Awakari users who follow their interests in Telegram or Fediverse.</p>
+                    <p>There are also much more users who use feed reader and periodically pull results and Bluesky followers.</p>
+                    <p>Additionally, Awakari's source collection grows and now contains more than 10K feeds.</p>
+                    <p>Stay tuned!</p>
+                ]]>
+            </content:encoded>
+            <enclosure url="https://awakari.com/blog/2025-02-02_10-04.png"
+               length="40531"
+               type="image/png"/>
+           <enclosure url="https://awakari.com/blog/2025-02-02_10-06.png"
+              length="34192"
+              type="image/png"/>
+        </item>
+
+        <item>
             <title>Public API documentation</title>
             <description>Public API documentation for interests and reader.</description>
             <pubDate>Fri, 18 Jan 2025 07:20:00 +0200</pubDate>

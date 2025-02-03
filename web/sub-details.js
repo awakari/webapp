@@ -466,12 +466,13 @@ function setConditionAttrValueOpts(idx, key) {
         if (cond.hasOwnProperty("tc")) {
             loadAttributeValues(key, "", getAuthHeaders()).then(opts => {
                 const optsElement = document.getElementById(`attrValTxt${idx}`);
-                optsElement.innerHTML = "";
+                let newContent = "";
                 if (opts) {
                     for (const opt of opts) {
-                        optsElement.innerHTML += `<option>${opt}</option>\n`;
+                        newContent += `<option>${opt}</option>\n`;
                     }
                 }
+                optsElement.innerHTML = newContent;
             });
         }
     }
@@ -639,9 +640,13 @@ function displayConditions() {
             elemConds.innerHTML += templateCondText(not, key, tc.term, exact, i, countConds);
             const attrKeysTxt = document.getElementById(`attrKeys${i}`);
             promiseLoadAttrTypes = promiseLoadAttrTypes.then(() => {
+                const fragmentOpts = document.createDocumentFragment();
                 for (const attKeyTxt of EventAttrKeysTxt) {
-                    attrKeysTxt.innerHTML += `<option>${attKeyTxt}</option>\n`;
+                    let elemOpt = document.createElement("option");
+                    elemOpt.textContent = attKeyTxt;
+                    fragmentOpts.appendChild(elemOpt);
                 }
+                attrKeysTxt.appendChild(fragmentOpts);
             });
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
@@ -657,9 +662,13 @@ function displayConditions() {
             elemConds.innerHTML += templateCondNumber(not, key, op, val, i, countConds);
             const attrKeysInt = document.getElementById(`attrKeys${i}`);
             promiseLoadAttrTypes = promiseLoadAttrTypes.then(() => {
+                const fragmentOpts = document.createDocumentFragment();
                 for (const attKeyInt of EventAttrKeysInt) {
-                    attrKeysInt.innerHTML += `<option>${attKeyInt}</option>\n`;
+                    let elemOpt = document.createElement("option");
+                    elemOpt.textContent = attKeyInt;
+                    fragmentOpts.appendChild(elemOpt);
                 }
+                attrKeysInt.appendChild(fragmentOpts);
             });
         }
     }

@@ -24,10 +24,14 @@
     <link rel="me" href="https://activitypub.awakari.com/@me"/>
 
     <script src="alpinejs-3.13.0.min.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="multiple-select.min.css">
+    <script src="multiple-select.min.js"></script>
 
 </head>
-<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300 h-full grow">
+<body class="bg-white dark:bg-gray-900 text-slate-700 dark:text-gray-300 h-screen grow">
     <div class="hidden">
         <a rel="me" href="https://activitypub.awakari.com/@me">Me</a>
     </div>
@@ -88,38 +92,94 @@
 
     </nav>
 
-<div class="m-1 flex-1 flex flex-col space-y-1 h-full grow">
+<div class="m-1 flex-1 flex flex-col space-y-1 h-5/6 grow">
 
     <div class="flex justify-center m-1 h-full grow">
 
-        <form id="mode-simple"
-              class="max-w-[480px] space-y-4 hidden grow">
-            <div class="grow h-full"></div>
-            <input type="text"
-                   autocapitalize="none"
-                   id="query"
-                   class="w-full text-lg px-1"
-                   style="height: 24px"
-                   placeholder="keyword1 keyword2 ..."/>
-            <div class="flex space-x-2 items-center justify-center">
-                <span class="text-right align-middle">Match</span>
-                <select name="logic" id="logic-select-simple" class="button w-16 align-middle">
-                    <!-- note value should be the same as the index -->
-                    <option value="0" selected="selected">All</option>
-                    <option value="1">Any</option>
-                </select>
+        <form id="mode-simple" class="max-w-[480px] w-full">
+
+            <div id="mode-simple-step-0" class="flex flex-col space-y-6 justify-center h-full w-full">
+                <div class="w-full px-4">
+                    <input type="text"
+                           autofocus="autofocus"
+                           autocapitalize="none"
+                           id="simple-query"
+                           minlength="2"
+                           class="w-full text-xl"
+                           style="height: 28px"
+                           placeholder="keyword1 keyword2 ..."/>
+                </div>
+                <div class="flex space-x-2 items-center justify-center">
+                    <span class="text-right align-middle text-lg">Match</span>
+                    <select name="logic" id="logic-select-simple" class="button w-16 align-middle">
+                        <!-- note value should be the same as the index -->
+                        <option value="0" selected="selected">All</option>
+                        <option value="1">Any</option>
+                    </select>
+                </div>
+                <div class="flex justify-center w-full space-x-4 mt-6">
+                    <button id="mode-simple-0-next" type="button" class="flex justify-center text-center w-[100px] h-6 items-center">
+                        <span>Next</span>
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <div class="flex justify-center w-full">
-                <select name="submit"
-                        id="button-submit-simple"
-                        class="button submit text-center"
-                        onchange="submitSimple(event.currentTarget.value === 'true')">
-                    <option selected="selected" hidden="hidden">Submit</option>
-                    <option value="false">Submit</option>
-                    <option value="true">Submit and discover relevant sources</option>
-                </select>
+
+            <div id="mode-simple-step-1" class="flex flex-col justify-center h-full w-full hidden">
+                <div class="w-full px-2 text-center text-xl">
+                    <p>Additional Filters</p>
+                </div>
+                <div class="justify-center grid grid-cols-3 w-80 mx-auto">
+                    <span class="text-lg text-right justify-end pr-4 mt-6">Language</span>
+                    <div class="w-full mt-6 col-span-2">
+                        <div class="absolute" id="mode-simple-wait-lang" style="display: none">
+                            <img src="wait.gif"/>
+                        </div>
+                        <select name="mode-simple-lang" id="mode-simple-lang" class="button multiselect" multiple="multiple">
+                        </select>
+                    </div>
+                    <span class="text-lg text-right justify-end pr-4 mt-4">Sources</span>
+                    <div class="w-full mt-4 col-span-2">
+                        <select name="mode-simple-source-types" id="mode-simple-source-types" class="button multiselect" multiple="multiple">
+                            <option value="com_awakari_feeds_v1" selected="selected">News Feeds</option>
+                            <optgroup label="Social Channels">
+                                <option value="com_awakari_activitypub_v1 com_awakari_mastodon_v1" class="ml-4">Fediverse</option>
+                                <option value="com_awakari_source_telegram_v1_0 com_awakari_source_telegram_v1_0" class="ml-4">Telegram</option>
+                            </optgroup>
+                            <optgroup label="Realtime Streams">
+                                <option value="com_awakari_websocket_v1" class="ml-4">WebSocket</option>
+                                <option value="com_awakari_sse_v1" class="ml-4">SSE</option>
+                            </optgroup>
+                            <option value="com_awakari_email_v1">Email Digests</option>
+                            <option value="com_awakari_source_sites_v1">Site Updates</option>
+                        </select>
+                    </div>
+                    <script>
+                        $(function () {
+                            $('.multiselect').multipleSelect();
+                        })
+                    </script>
+                </div>
+                <div class="flex justify-center w-full space-x-4 mt-6">
+                    <button id="mode-simple-1-prev" type="button" class="flex justify-center text-center w-[100px] h-6 items-center">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Back</span>
+                    </button>
+                    <select name="submit"
+                            id="button-submit-simple"
+                            class="button submit text-center"
+                            onchange="submitSimple(event.currentTarget.value === 'true')">
+                        <option selected="selected" hidden="hidden">Submit</option>
+                        <option value="false">Submit</option>
+                        <option value="true">Submit and discover relevant sources</option>
+                    </select>
+                </div>
             </div>
-            <div class="grow h-full"></div>
+
         </form>
 
         <form id="mode-expert" class="max-w-[480px] grow space-y-2">

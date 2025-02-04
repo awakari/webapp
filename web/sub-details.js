@@ -987,7 +987,7 @@ async function submitSimple(discoverSources){
         }
     } else {
         alert("At least one language should be selected.");
-        //return;
+        return;
     }
 
     const typeChoice = document.getElementById("mode-simple-source-types");

@@ -96,7 +96,7 @@
 
     <div class="flex justify-center m-1 h-full grow">
 
-        <form id="mode-simple" class="max-w-[480px] w-full">
+        <form id="mode-simple" class="max-w-[480px] w-full hidden">
 
             <div id="mode-simple-step-0" class="flex flex-col space-y-6 justify-center h-full w-full">
                 <div class="w-full px-4">
@@ -173,9 +173,9 @@
                             id="button-submit-simple"
                             class="button submit text-center"
                             onchange="submitSimple(event.currentTarget.value === 'true')">
-                        <option selected="selected" hidden="hidden">Submit</option>
-                        <option value="false">Submit</option>
-                        <option value="true">Submit and discover relevant sources</option>
+                        <option selected="selected" hidden="hidden">Create</option>
+                        <option value="false">Create</option>
+                        <option value="true">Create and discover relevant sources</option>
                     </select>
                 </div>
             </div>

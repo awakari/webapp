@@ -56,7 +56,8 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                                autocapitalize="none"
                                id="attrValTxtInput${idx}"
                                list="attrValTxt${idx}"
-                               class="w-full" 
+                               class="w-full"
+                               minlength="2"
                                style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionTextTerms(${idx}, this.value); updateDescription()"
                                placeholder="${isExact? 'exact complete text' : 'keyword1 keyword2 ...'}"
@@ -96,11 +97,13 @@ async function loadSubDetails() {
                 const optsElement = document.getElementById("mode-simple-lang");
                 let languages = [];
                 for (const opt of opts) {
-                    let l = opt.toLowerCase();
+                    let l = opt.trim().toLowerCase();
                     if (l.length > 2) {
                         l = l.slice(0, 2);
                     }
-                    languages.push(l);
+                    if (l.length > 1) {
+                        languages.push(l);
+                    }
                 }
                 const uniqLangs = [...new Set(languages)];
                 uniqLangs.sort((a, b) => a.localeCompare(b));

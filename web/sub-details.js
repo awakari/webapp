@@ -959,6 +959,10 @@ async function submitSimple(discoverSources){
     const langChoice = document.getElementById("mode-simple-lang");
     if (langChoice.selectedOptions.length > 0) {
         if (langChoice.options.length > langChoice.selectedOptions.length) { // not all selected
+            if (langChoice.selectedOptions.length > 10) {
+                alert("Max 10 languages allowed to choose.");
+                return;
+            }
             if (!cond.hasOwnProperty("gc") || cond.gc.logic !== 0) {
                 const prevCond = cond;
                 cond = {

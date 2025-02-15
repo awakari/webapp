@@ -7,8 +7,8 @@ const templateSrcPopular = (share, url) => `
 
 const templateIntNew = (id, data) => `
     <div class="space-x-1 truncate">
-        <span class="w-24">${data.hasOwnProperty("created") ? timeAgo(data.created.seconds) : '0'}</span>
-        <a href="sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
+        <span><a href="sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>:</span>
+        <span>${data.hasOwnProperty("created") ? timeAgo(data.created.seconds) : '0'}</span>
     </div>
 `
 

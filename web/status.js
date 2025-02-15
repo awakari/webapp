@@ -5,12 +5,36 @@ const templateSrcPopular = (share, url) => `
     </div>
 `
 
-const templateIntPopular = (id, data) => `
+const templateIntNew = (id, data) => `
     <div class="space-x-1 truncate">
-        <span>${data.hasOwnProperty("followers") ? data.followers : '0'}</span>
+        <span class="w-24">${data.hasOwnProperty("created") ? timeAgo(data.created.seconds) : '0'}</span>
         <a href="sub-details.html?id=${id}" class="text-blue-500">${data.description}</a>
     </div>
 `
+
+function timeAgo(seconds) {
+    const now = Math.floor(Date.now() / 1000);
+    const diff = now - seconds;
+
+    const units = [
+        { name: 'year', seconds: 31536000 },
+        { name: 'month', seconds: 2592000 },
+        { name: 'week', seconds: 604800 },
+        { name: 'day', seconds: 86400 },
+        { name: 'hour', seconds: 3600 },
+        { name: 'minute', seconds: 60 },
+        { name: 'second', seconds: 1 }
+    ];
+
+    for (const unit of units) {
+        if (diff >= unit.seconds) {
+            const value = Math.floor(diff / unit.seconds);
+            return new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(-value, unit.name);
+        }
+    }
+
+    return 'just now';
+}
 
 function formatNumberShort(number) {
     const suffixes = ["", "", "K", "M", "B", "T", "P"];
@@ -360,11 +384,11 @@ async function loadStatusDuration() {
         });
 }
 
-async function loadStatusTopInterests() {
+async function loadStatusNewInterests() {
     const elemPopInts = document.getElementById("most-followed-interests");
     elemPopInts.innerHTML = "";
     document.getElementById("wait-status-top-interests").style.display = "block";
-    return Metrics.loadStatusPartWithRetry({}, "top-interests")
+    return Metrics.loadStatusPartWithRetry({}, "new-interests")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -377,11 +401,11 @@ async function loadStatusTopInterests() {
                 let count = 0;
                 Object
                     .entries(data)
-                    .filter(e => e[1].hasOwnProperty("followers"))
-                    .sort((a, b) => b[1].followers - a[1].followers)
+                    .filter(e => e[1].hasOwnProperty("created"))
+                    .sort((a, b) => b[1].created.seconds - a[1].created.seconds)
                     .slice(0, 3)
                     .forEach(e => {
-                        elemPopInts.innerHTML += templateIntPopular(e[0], e[1]);
+                        elemPopInts.innerHTML += templateIntNew(e[0], e[1]);
                     });
             }
         })
@@ -467,7 +491,7 @@ async function loadSrcCountRealtime() {
 }
 
 function loadStatusLoop() {
-    loadStatusTopInterests();
+    loadStatusNewInterests();
     loadStatusRead();
     loadStatusFollowers();
     loadStatusDuration();
@@ -475,7 +499,7 @@ function loadStatusLoop() {
     loadSrcCountFeeds();
     loadSrcCountSocials();
     loadSrcCountRealtime();
-    setInterval(loadStatusTopInterests, 3_600_000);
+    setInterval(loadStatusNewInterests, 3_600_000);
     setInterval(loadStatusRead, 300_000);
     setInterval(loadStatusFollowers, 900_000);
     setInterval(loadStatusDuration, 300_000);

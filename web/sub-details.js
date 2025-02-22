@@ -1118,14 +1118,20 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
-document.getElementById("mode-simple-0-next").onclick = function () {
+function modeSimpleStepNext() {
     const q = document.getElementById("simple-query").value.trim();
     if (validateTextCondition(q, false)) {
         $('div.ms-parent').each((i, e) => e.style.width = "100%");
         document.getElementById("mode-simple-step-0").style.display = "none";
         document.getElementById("mode-simple-step-1").style.display = "flex";
     }
-};
+}
+
+document.getElementById("simple-query-form").onsubmit = function (evt) {
+    evt.preventDefault();
+    modeSimpleStepNext();
+}
+document.getElementById("mode-simple-0-next").onclick = modeSimpleStepNext;
 
 document.getElementById("mode-simple-1-prev").onclick = function () {
     $('div.ms-parent').each((i, e) => e.style.width = "100%");

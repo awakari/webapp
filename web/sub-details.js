@@ -888,9 +888,7 @@ function validateCondition(cond) {
         if (cond.tc.key) {
             cond.tc.key = cond.tc.key.trim().toLowerCase();
         }
-        if ((!cond.tc.key || cond.tc.key.trim() === "") && cond.tc.term.trim().length < 2) {
-            // TODO check meaningful characters
-            alert("Keywords length should be at least 2 non-whitespace symbols");
+        if (!validateTextCondition(cond.tc.term, cond.tc.exact)) {
             return null;
         }
     } else {
@@ -898,6 +896,41 @@ function validateCondition(cond) {
         return null;
     }
     return cond;
+}
+
+function validateTextCondition(q, isExact) {
+    let ok = true;
+    if (isExact) {
+        ok = q.length > 1;
+    } else {
+        const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+        const terms = [...seg.segment(q)];
+        let keywordCount = 0;
+        for (const i in terms) {
+            const term = terms[i];
+            const txt = term.segment;
+            if (term.isWordLike) {
+                const txtByteLen = new TextEncoder().encode(txt).length;
+                if (txtByteLen < 3) {
+                    alert(`Keyword "${txt}" is too short. Please fix the filter condition.`);
+                    ok = false;
+                    break;
+                }
+                keywordCount ++;
+            } else {
+                if (txt !== " ") {
+                    alert(`"${txt}" is not allowed keyword. Please specify space-separated keywords only.`);
+                    ok = false;
+                    break;
+                }
+            }
+        }
+        if (ok && keywordCount < 1) {
+            alert(`Text "${q}" doesn't contain valid keywords. Please fix the filter condition.`);
+            ok = false;
+        }
+    }
+    return ok;
 }
 
 async function submitSimple(discoverSources){
@@ -1087,13 +1120,11 @@ for (i = 0; i < coll.length; i++) {
 
 document.getElementById("mode-simple-0-next").onclick = function () {
     const q = document.getElementById("simple-query").value.trim();
-    if (q.length < 2) {
-        alert("Keywords should contain at least 2 non-space symbols");
-        return;
+    if (validateTextCondition(q, false)) {
+        $('div.ms-parent').each((i, e) => e.style.width = "100%");
+        document.getElementById("mode-simple-step-0").style.display = "none";
+        document.getElementById("mode-simple-step-1").style.display = "flex";
     }
-    $('div.ms-parent').each((i, e) => e.style.width = "100%");
-    document.getElementById("mode-simple-step-0").style.display = "none";
-    document.getElementById("mode-simple-step-1").style.display = "flex";
 };
 
 document.getElementById("mode-simple-1-prev").onclick = function () {

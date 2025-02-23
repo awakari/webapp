@@ -109,7 +109,7 @@ async function loadSubDetails() {
                 uniqLangs.sort((a, b) => a.localeCompare(b));
                 let newContent = "";
                 for (const l of uniqLangs) {
-                        newContent += `<option value=${l} selected="selected">${l}</option>\n`;
+                    newContent += `<option value=${l} selected="selected">${l}</option>\n`;
                 }
                 optsElement.innerHTML = newContent;
             }

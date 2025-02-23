@@ -13,9 +13,13 @@ Metrics.fetchAttributeTypes = function (headers) {
 }
 
 Metrics.fetchAttributeValues = function (name, headers) {
+    let cache = "force-cache";
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') === -1 && name === "language") {
+        cache = "no-cache"; // workaround for chrome
+    }
     return fetch(`${Metrics.urlBase}/v1/attr/values/${name}`, {
         method: "GET",
-        cache: "default",
+        cache: cache,
         headers: headers,
     })
         .then(resp => handleCookieAuth(resp, headers, (h) => Metrics.fetchAttributeValues(name, h)));

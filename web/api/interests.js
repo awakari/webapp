@@ -37,13 +37,14 @@ Interests.delete = function (id, headers) {
         });
 }
 
-Interests.createResponse = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Interests.createResponse = function (name, descr, expires, isPublic, rateLimit, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: name,
         discover: discoverSourcesFlag,
         description: descr,
         enabled: true,
         public: isPublic,
+        rateLimit: rateLimit,
         cond: cond,
     }
     if (expires) {
@@ -57,9 +58,9 @@ Interests.createResponse = function (name, descr, expires, isPublic, cond, disco
     return fetch(`${Interests.urlBase}/v1`, optsReq);
 }
 
-Interests.create = function (name, descr, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Interests.create = function (name, descr, expires, isPublic, rateLimit, cond, discoverSourcesFlag, headers) {
     return Interests
-        .createResponse(name, descr, expires, isPublic, cond, discoverSourcesFlag, headers)
+        .createResponse(name, descr, expires, isPublic, rateLimit, cond, discoverSourcesFlag, headers)
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -95,13 +96,14 @@ Interests.fetch = function (id, headers) {
         })
 }
 
-Interests.update = function (id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
+Interests.update = function (id, descr, enabled, expires, isPublic, rateLimit, cond, discoverSourcesFlag, headers) {
     const payload = {
         id: id,
         discover: discoverSourcesFlag,
         description: descr,
         enabled: enabled,
         public: isPublic,
+        rateLimit: rateLimit,
         cond: cond,
     }
     if (expires) {

@@ -246,12 +246,6 @@ function loadSubDetailsById(id) {
                     expires = new Date(expires.getTime() - 60_000 * expires.getTimezoneOffset());
                     document.getElementById("expires").value = expires.toISOString().substring(0, 16); // YYYY-MM-DDTHH:mm
                 }
-                let rateLimit = 0;
-                if (data.hasOwnProperty("rateLimit") && data.rateLimit > 0) {
-                    rateLimit = data.rateLimit;
-                }
-                document.getElementById("rateLimit").value = rateLimit;
-
                 const cond = data.cond;
                 if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("tc")) {
                     conds.push(cond);
@@ -776,15 +770,11 @@ async function updateSubscription(id, discoverSources) {
             expires = null;
         }
         const isPublic = document.getElementById("public").checked;
-        let rateLimit = Number(document.getElementById("rateLimit").value);
-        if (!Number.isInteger(rateLimit) || rateLimit < 0) {
-            rateLimit = 0;
-        }
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         const since = new Date().toISOString();
         await Interests
-            .update(id, descr, enabled, expires, isPublic, rateLimit, cond, discoverSources, headers)
+            .update(id, descr, enabled, expires, isPublic, cond, discoverSources, headers)
             .then(data => {
                 if (data != null) {
                     alert("Interest updated");
@@ -822,14 +812,10 @@ async function createSubscription(discoverSources) {
             return;
         }
         const isPublic = document.getElementById("public").checked;
-        let rateLimit = Number(document.getElementById("rateLimit").value);
-        if (!Number.isInteger(rateLimit) || rateLimit < 0) {
-            rateLimit = 0;
-        }
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
         await Interests
-            .create(name, descr, expires, isPublic, rateLimit, cond, discoverSources, headers)
+            .create(name, descr, expires, isPublic, cond, discoverSources, headers)
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
@@ -1077,7 +1063,7 @@ async function submitSimple(discoverSources){
     const headers = getAuthHeaders();
     document.getElementById("wait").style.display = "block";
     await Interests
-        .create("", q, undefined, false, 0, cond, discoverSources, headers)
+        .create("", q, undefined, false, cond, discoverSources, headers)
         .then(data => {
             if (data != null) {
                 alert("Interest created");

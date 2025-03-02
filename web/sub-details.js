@@ -834,10 +834,10 @@ function getRootCondition() {
     let cond = null;
     if (nonEmptyConds.length === 1) {
         cond = nonEmptyConds[0];
-        cond = validateCondition(cond);
+        cond = validateCondition(cond, 1);
     } else if (nonEmptyConds.length > 1) {
         for (let i = 0; i < nonEmptyConds.length; i ++) {
-            if (null == validateCondition(nonEmptyConds[i])) {
+            if (null == validateCondition(nonEmptyConds[i], nonEmptyConds.length)) {
                 return null;
             }
         }
@@ -873,7 +873,7 @@ function getNonEmptyConditions() {
     return nonEmptyConds;
 }
 
-function validateCondition(cond) {
+function validateCondition(cond, nConds) {
     if (cond.hasOwnProperty("nc")) {
         if (!cond.nc.key || cond.nc.key === "") {
             alert("Number filter should have a non-empty attribute name");
@@ -888,7 +888,7 @@ function validateCondition(cond) {
         if (cond.tc.key) {
             cond.tc.key = cond.tc.key.trim().toLowerCase();
         }
-        if (!validateTextCondition(cond.tc.term, cond.tc.exact)) {
+        if (!validateTextCondition(cond.tc.term, nConds, cond.tc.exact)) {
             return null;
         }
     } else {
@@ -898,7 +898,7 @@ function validateCondition(cond) {
     return cond;
 }
 
-function validateTextCondition(q, isExact) {
+function validateTextCondition(q, nConds, isExact) {
     let ok = true;
     if (isExact) {
         ok = q.length > 1;
@@ -911,7 +911,7 @@ function validateTextCondition(q, isExact) {
             const txt = term.segment;
             if (term.isWordLike) {
                 const txtByteLen = new TextEncoder().encode(txt).length;
-                if ((terms.length < 2 && txtByteLen < 3) || txtByteLen < 2) {
+                if ((nConds < 2 && txtByteLen < 3) || txtByteLen < 2) {
                     alert(`Keyword "${txt}" is too short. Please fix the filter condition.`);
                     ok = false;
                     break;
@@ -1120,7 +1120,7 @@ for (i = 0; i < coll.length; i++) {
 
 function modeSimpleStepNext() {
     const q = document.getElementById("simple-query").value.trim();
-    if (validateTextCondition(q, false)) {
+    if (validateTextCondition(q, 1,false)) {
         $('div.ms-parent').each((i, e) => e.style.width = "100%");
         document.getElementById("mode-simple-step-0").style.display = "none";
         document.getElementById("mode-simple-step-1").style.display = "flex";

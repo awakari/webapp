@@ -836,15 +836,16 @@ function getRootCondition() {
         cond = nonEmptyConds[0];
         cond = validateCondition(cond, 1);
     } else if (nonEmptyConds.length > 1) {
+        const logic = Number(document.getElementById("logic-select").value);
         for (let i = 0; i < nonEmptyConds.length; i ++) {
-            if (null == validateCondition(nonEmptyConds[i], nonEmptyConds.length)) {
+            if (null == validateCondition(nonEmptyConds[i], logic === 0 ? nonEmptyConds.length : 1)) {
                 return null;
             }
         }
         cond = {
             not: false,
             gc: {
-                logic: Number(document.getElementById("logic-select").value),
+                logic: logic,
                 group: nonEmptyConds,
             }
         }

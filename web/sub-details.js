@@ -911,7 +911,7 @@ function validateTextCondition(q, isExact) {
             const txt = term.segment;
             if (term.isWordLike) {
                 const txtByteLen = new TextEncoder().encode(txt).length;
-                if (txtByteLen < 3) {
+                if ((terms.length < 2 && txtByteLen < 3) || txtByteLen < 2) {
                     alert(`Keyword "${txt}" is too short. Please fix the filter condition.`);
                     ok = false;
                     break;

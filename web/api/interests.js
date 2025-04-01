@@ -97,7 +97,6 @@ Interests.fetch = function (id, headers) {
 
 Interests.update = function (id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {
     const payload = {
-        id: id,
         discover: discoverSourcesFlag,
         description: descr,
         enabled: enabled,

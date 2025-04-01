@@ -20,6 +20,7 @@
     <script src="api/metrics.js"></script>
     <script src="attrs.js"></script>
     <script src="api/interests.js"></script>
+    <script src="api/limits.js"></script>
 
     <link rel="me" href="https://activitypub.awakari.com/@me"/>
 
@@ -296,29 +297,28 @@
                                placeholder="Free-form description">
                     </div>
 
-                    <label class="flex space-x-1 mt-2">
+                    <label class="flex space-x-1 mt-2 hidden" id="area-public">
                         <input id="public"
                                type="checkbox" class="h-4 w-4"
                                style="margin-right: 0.25rem; margin-top: 0.125rem"/>
                         <span class="tooltip" style="margin-top: 0.125rem">
                             Public
                             <span class="tooltiptext" style="width: 320px">
-                                <p>Public interest is visible to others.</p>
-                                <p>May be discovered and followed by non-owner.</p>
+                                <p>May be discovered and followed by other users.</p>
                                 <p>Note that making a public interest private doesn't disconnect existing followers.</p>
-                                <p>Create a new private interest if you want to disconnect existing followers.</p>
+                                <p>Create a new private interest for this.</p>
                             </span>
                         </span>
                     </label>
 
-                    <div class="flex mt-2" id="area-id">
+                    <div class="flex mt-2 hidden" id="area-id">
                         <label for="id" style="margin-top: 0.125rem" class="w-10">
                             <span class="tooltip">
                                 ID
                                 <span class="tooltiptext" style="width: 332px">
                                     <p>A unique short name useful for public interests.</p>
                                     <p>Can't be changed once set.</p>
-                                    <p>Random name is set when not specified.</p>
+                                    <p>A random name is set when not specified.</p>
                                     <p>Max 36 symbols, ASCII letters, digits or dash.</p>
                                     <p>Keep it secret for a private interest.</p>
                                     <p>Create a new interest when id is compromised.</p>

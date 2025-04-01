@@ -121,6 +121,18 @@ async function loadSubDetails() {
             document.getElementById("mode-simple-wait-lang").display = "none";
         });
 
+    const headers = getAuthHeaders();
+    Limits
+        .fetch("4", headers)
+        .then(resp => resp ? resp.json() : null)
+        .then(data => {
+            if (data && data.hasOwnProperty("count") && data.count > 0) {
+                document.getElementById("area-public").style.display = "flex";
+                document.getElementById("area-id").style.display = "flex";
+            }
+            return data;
+        });
+
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     const q = urlParams.get("args");

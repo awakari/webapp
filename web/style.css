@@ -8,11 +8,10 @@
 input {
     accent-color: dimgrey;
     outline: none;
-    background-color: #f5f5f5;
 }
 input[readonly="readonly"] {
-    background-color: inherit;
     border: none;
+    background-color: #f5f5f5;
 }
 input[disabled="disabled"] {
     background-color: inherit;
@@ -29,10 +28,7 @@ input[type="checkbox"] {
 }
 @media (prefers-color-scheme: dark) {
     input[type="checkbox"] {
-        filter: brightness(30%);
-    }
-    input[type="checkbox"]:checked {
-        filter: brightness(100%);
+        filter: brightness(50%);
     }
 }
 input[type=text] {
@@ -71,18 +67,24 @@ input[type=date] {
     border-width: 1px;
 }
 input[type=search] {
-    background-color: inherit;
+    //background-color: inherit;
 }
 textarea, select, fieldset {
     border-color: #94a3b8;
     border-width: 1px;
     outline: none;
 }
+fieldset {
+    border-radius: 0.25rem;
+}
 hr {
     border-color: #94a3b8;
     height: 1px;
 }
 @media (prefers-color-scheme: dark) {
+    input {
+        background-color: var(--block-bg-color);
+    }
     input[type=text] {
         display: flex;
         flex-grow: 1;
@@ -90,40 +92,28 @@ hr {
         border-color: #334155;
         border-width: 1px;
         outline: none;
-        background-color: #1f2937;
         color: #94a3b8;
     }
     input[type=number] {
-        background-color: #1f2937;
         border-color: #334155;
         border-width: 1px;
         color: #94a3b8;
     }
     input[type=date] {
-        background-color: #1f2937;
         border-color: #334155;
         border-width: 1px;
         color: #94a3b8;
     }
     input[type=datetime-local] {
-        background-color: #1f2937;
         border-color: #334155;
         border-width: 1px;
         color: #94a3b8;
     }
-    input[readonly="readonly"] {
-        background-color: inherit;
-    }
-    input[disabled="disabled"] {
-        background-color: inherit;
-    }
     fieldset {
         border-color: #334155;
-        border-width: 1px;
-        outline: none;
     }
     textarea, select  {
-        background-color: #1f2937;
+        background-color: var(--block-bg-color);
         border-color: #334155;
         border-width: 1px;
         outline: none;
@@ -325,15 +315,8 @@ p[role=alert].errormsg {
 }
 select {
     outline: none;
-}
-select.button {
-    border-width: 1px;
-    border-color: #3b82f6;
-    border-radius: 0.25rem;
-    color: #3b82f6;
-    height: 1.5rem;
-    padding: 0 0.5rem;
     background: none;
+    border: none;
 }
 body {
     font-family: var(--default-font);
@@ -406,6 +389,12 @@ button[type=button].attr {
         background-color: #111827;
         box-shadow: 0px 4px 8px 0px rgba(30,58,138,0.25);
     }
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content-submit {
+    border-color: #10b981;
+    color: #10b981;
 }
 
 .dropdown-content fieldset {

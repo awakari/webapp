@@ -114,10 +114,10 @@
                 </div>
                 <div class="flex space-x-2 items-center justify-center">
                     <span class="text-right align-middle text-lg">Match</span>
-                    <select name="logic" id="logic-select-simple" class="button w-16 align-middle">
+                    <select name="logic" id="logic-select-simple" class="w-12 align-middle text-lg">
                         <!-- note value should be the same as the index -->
-                        <option value="0" selected="selected">All</option>
-                        <option value="1">Any</option>
+                        <option value="0" selected="selected" class="text-right">All&nbsp;</option>
+                        <option value="1" class="text-right">Any&nbsp;</option>
                     </select>
                 </div>
                 <div class="flex justify-center w-full space-x-4 mt-6">
@@ -172,14 +172,17 @@
                         </svg>
                         <span>Back</span>
                     </button>
-                    <select name="submit"
-                            id="button-submit-simple"
-                            class="button submit text-center"
-                            onchange="submitSimple(event.currentTarget.value === 'true')">
-                        <option selected="selected" hidden="hidden">Create</option>
-                        <option value="false">Create</option>
-                        <option value="true">Create and discover relevant sources</option>
-                    </select>
+                    <div class="ml-2 dropdown">
+                        <button type="button"
+                                onclick="createDropdown()"
+                                class="dropbtn submit static px-1">
+                            Create ⌄
+                        </button>
+                        <div id="create-dropdown" class="dropdown-content dropdown-content-submit space-y-3 p-3 -ml-[140px] w-[240px]">
+                            <span onclick="submitSimple(false)">Create</span>
+                            <span onclick="submitSimple(true)">Create and discover new sources</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -381,14 +384,17 @@
                     <svg fill="currentColor" width="21px" height="21px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
                     <span>Delete</span>
                 </button>
-                <select name="submit"
-                        id="button-submit"
-                        class="button submit text-center"
-                        onchange="submitSubscription(event.currentTarget.value === 'true')">
-                    <option selected="selected" hidden="hidden">Submit</option>
-                    <option value="false">Submit</option>
-                    <option value="true">Submit and discover relevant sources</option>
-                </select>
+                <div class="ml-2 dropdown">
+                    <button type="button"
+                            onclick="submitDropdown()"
+                            class="dropbtn submit static px-1">
+                        Submit ⌄
+                    </button>
+                    <div id="submit-dropdown" class="dropdown-content dropdown-content-submit space-y-3 p-3 -ml-[140px] w-[240px]">
+                        <span onclick="submitSubscription(false)">Submit</span>
+                        <span onclick="submitSubscription(true)">Submit and discover new sources</span>
+                    </div>
+                </div>
 
             </div>
 

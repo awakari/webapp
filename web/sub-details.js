@@ -48,8 +48,8 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                         <legend class="flex px-1">
                             <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
-                                <option value="1" ${isExact===false? 'selected="selected"' : ''}>Contains Any</option>
-                                <option value="2" ${isExact===true ? 'selected="selected"' : ''}>Equals to</option>
+                                <option value="1" class="text-right" ${isExact===false? 'selected="selected"' : ''}>Contains Any&nbsp;</option>
+                                <option value="2" class="text-right" ${isExact===true ? 'selected="selected"' : ''}>Equals to&nbsp;</option>
                             </select>
                         </legend>
                         <input type="text" 
@@ -1151,3 +1151,11 @@ document.getElementById("mode-simple-1-prev").onclick = function () {
     document.getElementById("mode-simple-step-0").style.display = "flex";
     document.getElementById("mode-simple-step-1").style.display = "none";
 };
+
+function createDropdown() {
+    document.getElementById("create-dropdown").classList.toggle("show");
+}
+
+function submitDropdown() {
+    document.getElementById("submit-dropdown").classList.toggle("show");
+}

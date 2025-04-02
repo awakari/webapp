@@ -78,12 +78,12 @@
             <div class="flex flex-col space-y-2">
                 <div class="flex">
                     <label for="src_type" class="text-md w-24">Type</label>
-                    <select id="src_type">
-                        <option value="apub">ActivityPub</option>
-                        <option value="feed" selected="selected">Feed, WebSub</option>
-                        <option value="mail">Email Subscription</option>
-                        <option value="tgch">Telegram Channel (App)</option>
-                        <option value="tgbc">Telegram Channel (Bot)</option>
+                    <select id="src_type" class="w-[184px]">
+                        <option value="feed" class="text-center" selected="selected">Feed, WebSub</option>
+                        <option value="apub" class="text-center">ActivityPub</option>
+                        <option value="tgch" class="text-center">Telegram Channel (App)</option>
+                        <option value="tgbc"class="text-center">Telegram Channel (Bot)</option>
+                        <option value="mail" class="text-center">Email Subscription</option>
                     </select>
                 </div>
                 <div id="apub" hidden="hidden" class="mt-2 space-y-2">

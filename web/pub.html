@@ -184,21 +184,21 @@
                         <div class="w-10">
                             <label>Type</label>
                         </div>
-                        <select id="src_type" class="w-[184px] h-5 dark:bg-gray-800 dark:border-gray-700" onchange="loadSources('', document.getElementById('filter').value, this.value, document.getElementById('own').checked)">
-                            <option value="apub">ActivityPub</option>
-                            <option value="feed" selected="selected">Feed, WebSub</option>
-                            <option value="tgch">Telegram channel (App)</option>
-                            <option value="tgbc">Telegram channel (Bot)</option>
+                        <select id="src_type" class="w-[184px] h-5" onchange="loadSources('', document.getElementById('filter').value, this.value, document.getElementById('own').checked)">
+                            <option value="feed" selected="selected" class="text-center">Feed, WebSub&nbsp;</option>
+                            <option value="apub" class="text-center">ActivityPub&nbsp;</option>
+                            <option value="tgch" class="text-center">Telegram channel (App)&nbsp;</option>
+                            <option value="tgbc" class="text-center">Telegram channel (Bot)&nbsp;</option>
                         </select>
                     </div>
                 </div>
-                <div class="mx-2 mt-2 border flex text-slate-500 w-78 dark:bg-gray-800 dark:text-slate-400 dark:border-gray-700">
+                <div class="mx-2 mt-2 border-b flex text-slate-500 w-78 dark:text-slate-400 dark:border-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                     </svg>
                     <input id="filter"
                            type="search"
-                           class="ml-1 border-0 outline-none w-70 dark:bg-gray-800"
+                           class="ml-1 border-0 outline-none w-[280px]"
                            oninput="loadSources('', this.value, document.getElementById('src_type').value, document.getElementById('own').checked)"/>
                 </div>
             </div>

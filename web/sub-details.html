@@ -114,7 +114,7 @@
                 </div>
                 <div class="flex space-x-2 items-center justify-center">
                     <span class="text-right align-middle text-lg">Match</span>
-                    <select name="logic" id="logic-select-simple" class="w-12 align-middle text-lg">
+                    <select name="logic" id="logic-select-simple" class="w-14 align-middle text-lg">
                         <!-- note value should be the same as the index -->
                         <option value="0" selected="selected" class="text-right">All&nbsp;</option>
                         <option value="1" class="text-right">Any&nbsp;</option>
@@ -172,7 +172,10 @@
                         </svg>
                         <span>Back</span>
                     </button>
-                    <div class="ml-2 dropdown">
+                    <div class="absolute" id="wait-simple" style="display: none">
+                        <img src="wait.gif"/>
+                    </div>
+                    <div class="ml-2 dropdown" id="button-submit-simple">
                         <button type="button"
                                 onclick="createDropdown()"
                                 class="dropbtn submit static px-1">
@@ -384,7 +387,7 @@
                     <svg fill="currentColor" width="21px" height="21px" viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
                     <span>Delete</span>
                 </button>
-                <div class="ml-2 dropdown">
+                <div class="ml-2 dropdown" id="button-submit">
                     <button type="button"
                             onclick="submitDropdown()"
                             class="dropbtn submit static px-1">

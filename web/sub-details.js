@@ -794,11 +794,8 @@ async function updateSubscription(id, discoverSources) {
                 }
             })
             .finally(() => {
-                document.getElementById("button-submit").selectedIndex = 0;
                 document.getElementById("wait").style.display = "none";
             });
-    } else {
-        document.getElementById("button-submit-simple").selectedIndex = 0;
     }
 }
 
@@ -835,7 +832,6 @@ async function createSubscription(discoverSources) {
                 }
             })
             .finally(() => {
-                document.getElementById("button-submit").selectedIndex = 0;
                 document.getElementById("wait").style.display = "none";
             });
     }
@@ -1074,7 +1070,7 @@ async function submitSimple(discoverSources){
     }
 
     const headers = getAuthHeaders();
-    document.getElementById("wait").style.display = "block";
+    document.getElementById("wait-simple").style.display = "block";
     await Interests
         .create("", q, undefined, false, cond, discoverSources, headers)
         .then(data => {
@@ -1085,7 +1081,7 @@ async function submitSimple(discoverSources){
         })
         .finally(() => {
             document.getElementById("button-submit-simple").selectedIndex = 0;
-            document.getElementById("wait").style.display = "none";
+            document.getElementById("wait-simple").style.display = "none";
         });
 }
 

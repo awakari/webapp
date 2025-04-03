@@ -359,7 +359,6 @@ function loadSubDetailsByExample(exampleName) {
         case "chinese": {
             document.getElementById("description").value = "In Chinese language";
             addConditionText(false, "language","zh", false);
-            document.getElementById("sub-discover-sources").checked = false;
             break;
         }
         case "exclude-words": {
@@ -405,7 +404,6 @@ function loadSubDetailsByExample(exampleName) {
         case "quake-greece": {
             document.getElementById("description").value = "Earthquakes: Greece";
             addConditionText(false, "source", "wss://www.seismicportal.eu/standing_order/websocket", true);
-            document.getElementById("sub-discover-sources").checked = false;
             addConditionNumber(false, "latitude", 1, 34)
             addConditionNumber(false, "longitude", 1, 19.8)
             addConditionNumber(false, "latitude", 5, 42)

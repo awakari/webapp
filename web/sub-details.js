@@ -942,7 +942,7 @@ function validateTextCondition(q, nConds, isExact) {
     return ok;
 }
 
-async function submitSimple(discoverSources){
+async function submitSimple(){
 
     const q = document.getElementById("simple-query").value;
     const logic = Number(document.getElementById("logic-select-simple").value);
@@ -1072,7 +1072,7 @@ async function submitSimple(discoverSources){
     const headers = getAuthHeaders();
     document.getElementById("wait-simple").style.display = "block";
     await Interests
-        .create("", q, undefined, false, cond, discoverSources, headers)
+        .create("", q, undefined, false, cond, false, headers)
         .then(data => {
             if (data != null) {
                 alert("Interest created");
@@ -1080,7 +1080,6 @@ async function submitSimple(discoverSources){
             }
         })
         .finally(() => {
-            document.getElementById("button-submit-simple").selectedIndex = 0;
             document.getElementById("wait-simple").style.display = "none";
         });
 }

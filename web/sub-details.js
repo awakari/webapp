@@ -681,15 +681,16 @@ function displayConditions() {
                 exact = tc.exact;
             }
             elemConds.innerHTML += templateCondText(not, key, tc.term, exact, i, countConds);
-            const attrKeysTxt = document.getElementById(`attrKeys${i}`);
             promiseLoadAttrTypes = promiseLoadAttrTypes.then(() => {
                 const fragmentOpts = document.createDocumentFragment();
-                for (const attKeyTxt of EventAttrKeysTxt) {
+                for (const attrKeyTxt of EventAttrKeysTxt) {
                     let elemOpt = document.createElement("option");
-                    elemOpt.textContent = attKeyTxt;
+                    elemOpt.textContent = attrKeyTxt;
                     fragmentOpts.appendChild(elemOpt);
                 }
-                attrKeysTxt.appendChild(fragmentOpts);
+                document
+                    .getElementById(`attrKeys${i}`)
+                    .appendChild(fragmentOpts);
             });
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;

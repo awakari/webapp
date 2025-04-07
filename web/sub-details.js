@@ -88,73 +88,81 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
                 </fieldset>
 `;
 
-async function loadSubDetails() {
+async function loadInterestDetails() {
 
-    document.getElementById("mode-simple-wait-lang").display = "block";
-    loadAttributeValues("language", "", getAuthHeaders())
-        .then(opts => {
-            if (opts) {
-                const optsElement = document.getElementById("mode-simple-lang");
-                let languages = [];
-                for (const opt of opts) {
-                    let l = opt.trim().toLowerCase();
-                    if (l.length > 2) {
-                        l = l.slice(0, 2);
+    document.getElementById("wait-load").style.display = "block";
+
+    try {
+
+        document.getElementById("mode-simple-wait-lang").style.display = "block";
+        await loadAttributeValues("language", "", getAuthHeaders())
+            .then(opts => {
+                if (opts) {
+                    const optsElement = document.getElementById("mode-simple-lang");
+                    let languages = [];
+                    for (const opt of opts) {
+                        let l = opt.trim().toLowerCase();
+                        if (l.length > 2) {
+                            l = l.slice(0, 2);
+                        }
+                        if (l.length > 1) {
+                            languages.push(l);
+                        }
                     }
-                    if (l.length > 1) {
-                        languages.push(l);
+                    const uniqLangs = [...new Set(languages)];
+                    uniqLangs.sort((a, b) => a.localeCompare(b));
+                    let newContent = "";
+                    for (const l of uniqLangs) {
+                        newContent += `<option value=${l} selected="selected">${l}</option>\n`;
                     }
+                    optsElement.innerHTML = newContent;
                 }
-                const uniqLangs = [...new Set(languages)];
-                uniqLangs.sort((a, b) => a.localeCompare(b));
-                let newContent = "";
-                for (const l of uniqLangs) {
-                    newContent += `<option value=${l} selected="selected">${l}</option>\n`;
+            })
+            .then(() => {
+                $('.multiselect').multipleSelect("refresh");
+            })
+            .finally(() => {
+                document.getElementById("mode-simple-wait-lang").style.display = "none";
+            });
+
+        const headers = getAuthHeaders();
+        Limits
+            .fetch("4", headers)
+            .then(resp => resp ? resp.json() : null)
+            .then(data => {
+                if (data && data.hasOwnProperty("count") && data.count > 0) {
+                    document.getElementById("area-public").style.display = "flex";
+                    document.getElementById("area-id").style.display = "flex";
                 }
-                optsElement.innerHTML = newContent;
-            }
-        })
-        .then(() => {
-            $('.multiselect').multipleSelect("refresh");
-        })
-        .finally(() => {
-            document.getElementById("mode-simple-wait-lang").display = "none";
-        });
+                return data;
+            });
 
-    const headers = getAuthHeaders();
-    Limits
-        .fetch("4", headers)
-        .then(resp => resp ? resp.json() : null)
-        .then(data => {
-            if (data && data.hasOwnProperty("count") && data.count > 0) {
-                document.getElementById("area-public").style.display = "flex";
-                document.getElementById("area-id").style.display = "flex";
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+        const q = urlParams.get("args");
+        const example = urlParams.get("example");
+        if (id) {
+            document.getElementById("mode-toggle").style.display = "none";
+            loadInterestDetailsById(id);
+        } else if (example) {
+            document.getElementById("mode-toggle").style.display = "none";
+            loadInterestDetailsByExample(example);
+        } else if (q) {
+            document.getElementById("mode-toggle").style.display = "flex";
+            try {
+                loadInterestDetailsByQuery(Base64.decode(q));
+            } catch (e) {
+                loadInterestDetailsByQuery("");
             }
-            return data;
-        });
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-    const q = urlParams.get("args");
-    const example = urlParams.get("example");
-    if (id) {
-        document.getElementById("mode-toggle").style.display = "none";
-        loadSubDetailsById(id);
-    } else if (example) {
-        document.getElementById("mode-toggle").style.display = "none";
-        loadSubDetailsByExample(example);
-    } else if (q) {
-        document.getElementById("mode-toggle").style.display = "flex";
-        try {
-            loadSubDetailsByQuery(Base64.decode(q));
-        } catch (e) {
-            loadSubDetailsByQuery("");
+            setModeSimple(true, true);
+        } else {
+            document.getElementById("mode-toggle").style.display = "flex";
+            loadInterestDetailsByQuery("");
+            setModeSimple(true, true);
         }
-        setModeSimple(true, true);
-    } else {
-        document.getElementById("mode-toggle").style.display = "flex";
-        loadSubDetailsByQuery("");
-        setModeSimple(true, true);
+
+    } finally {
+        document.getElementById("wait-load").style.display = "none";
     }
 }
 
@@ -175,19 +183,20 @@ function setModeSimple(simple, confirmed) {
     }
 }
 
-_ = loadSubDetails();
+_ = loadInterestDetails();
 
 const templateDiscoveredSrc = (addr, type) => `
 <p class="w-[334px] sm:w-[624px] truncate">
     <a class="w-full truncate text-blue-500" href="pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}">${addr}</a>
 </p>`;
 
-function loadSubDetailsById(id) {
+function loadInterestDetailsById(id) {
     document.getElementById("id").value = id;
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("area-follow").style.display = "flex";
     document.getElementById("follow-feed").href = `https://reader.awakari.com/v1/sub/rss/${id}`;
     document.getElementById("follow-telegram").href = `https://t.me/AwakariBot?start=${id}`;
+    document.getElementById("wait").style.display = "block";
     const headers = getAuthHeaders();
     Interests
         .fetch(id, headers)
@@ -212,7 +221,6 @@ function loadSubDetailsById(id) {
                     document.getElementById("interest-enabled").disabled = false;
                     document.getElementById("button-delete").style.display = "flex";
                 } else {
-                    document.getElementById("button-submit").style.display = "none";
                     document.getElementById("button-delete").style.display = "none";
                 }
                 if (data.hasOwnProperty("public")) {
@@ -279,8 +287,8 @@ function loadSubDetailsById(id) {
             return p;
         })
         .finally(() => {
-            document.getElementById("wait").style.display = "none";
             displayConditions();
+            document.getElementById("wait").style.display = "none";
         });
 
     const srcListElement = document.getElementById("sub-discovered-sources-list");
@@ -343,7 +351,7 @@ function loadSubDetailsById(id) {
         });
 }
 
-function loadSubDetailsByExample(exampleName) {
+function loadInterestDetailsByExample(exampleName) {
     document.getElementById("button-delete").style.display = "none";
     document.getElementById("id").readOnly = false;
     document.getElementById("interest-enabled").checked = true;
@@ -371,7 +379,7 @@ function loadSubDetailsByExample(exampleName) {
         case "job-alert": {
             document.getElementById("description").value = "Javascript Job alert";
             addConditionText(false, "", "job hiring", false);
-            addConditionText(false, "", "javascript", false);
+            addConditionText(false, "awksnippet", "javascript", false);
             addConditionText(true, "", "java", false);
             break;
         }
@@ -422,7 +430,7 @@ function loadSubDetailsByExample(exampleName) {
     displayConditions();
 }
 
-function loadSubDetailsByQuery(q) {
+function loadInterestDetailsByQuery(q) {
     document.getElementById("id").readOnly = false;
     document.getElementById("description").value = q;
     document.getElementById("simple-query").value = q;
@@ -754,17 +762,34 @@ function deleteSubscription() {
     }
 }
 
-async function submitSubscription(discoverSources) {
+async function submitInterest(discoverSources) {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     if (id) {
-        await updateSubscription(id, discoverSources);
+        const headers = getAuthHeaders();
+        const existsAndOwn = await Interests
+            .fetchResponse(id, headers)
+            .then(resp => {
+                if (resp.status < 300) {
+                    return resp
+                        .json()
+                        .then(data => data.hasOwnProperty("own") && data.own === true);
+                }
+                return Promise.resolve(false);
+            });
+        if (existsAndOwn) {
+            await updateInterest(id, discoverSources);
+        } else if (confirm("Couldn't update non-own interest. Create a new private interest instead?")) {
+            document.getElementById("id").value = "";
+            document.getElementById("public").checked = false;
+            await createInterest(discoverSources);
+        }
     } else {
-        await createSubscription(discoverSources);
+        await createInterest(discoverSources);
     }
 }
 
-async function updateSubscription(id, discoverSources) {
+async function updateInterest(id, discoverSources) {
     const cond = getRootCondition();
     if (cond != null && confirm(`Update the interest ${id}?`)) {
         const descr = document.getElementById("description").value;
@@ -783,7 +808,6 @@ async function updateSubscription(id, discoverSources) {
         const isPublic = document.getElementById("public").checked;
         const headers = getAuthHeaders();
         document.getElementById("wait").style.display = "block";
-        const since = new Date().toISOString();
         await Interests
             .update(id, descr, enabled, expires, isPublic, cond, discoverSources, headers)
             .then(data => {
@@ -798,7 +822,7 @@ async function updateSubscription(id, discoverSources) {
     }
 }
 
-async function createSubscription(discoverSources) {
+async function createInterest(discoverSources) {
     const cond = getRootCondition();
     if (cond != null) {
         const name = document.getElementById("id").value;

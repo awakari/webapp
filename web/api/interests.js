@@ -79,13 +79,19 @@ Interests.create = function (name, descr, expires, isPublic, cond, discoverSourc
         });
 }
 
-Interests.fetch = function (id, headers) {
+Interests.fetchResponse = function (id, headers) {
     const optsReq = {
         method: "GET",
         headers: headers,
         cache: "no-cache",
     }
-    return fetch(`${Interests.urlBase}/v1/${id}`, optsReq)
+    return fetch(`${Interests.urlBase}/v1/${id}`, optsReq);
+}
+
+
+Interests.fetch = function (id, headers) {
+    return Interests
+        .fetchResponse(id, headers)
         .then(resp => {
             if (!resp.ok) {
                 handleResponseStatus(`Get interest ${id}`, resp.status);

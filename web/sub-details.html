@@ -97,6 +97,10 @@
 
     <div class="flex justify-center m-1 h-full grow">
 
+        <div class="absolute" id="wait-load" style="display: none">
+            <img src="wait.gif"/>
+        </div>
+
         <div id="mode-simple" class="max-w-[480px] w-full hidden">
 
             <div id="mode-simple-step-0" class="flex flex-col space-y-6 justify-center h-full w-full">
@@ -386,8 +390,8 @@
                         Submit ⌄
                     </button>
                     <div id="submit-dropdown" class="dropdown-content dropdown-content-submit space-y-3 p-3 -ml-[50px] w-[200px] max-w-[200px]">
-                        <span class="text-center" onclick="submitSubscription(false)">Submit</span>
-                        <span class="text-center" onclick="submitSubscription(true)">Submit and discover new sources</span>
+                        <span class="text-center" onclick="submitInterest(false)">Submit</span>
+                        <span class="text-center" onclick="submitInterest(true)">Submit and discover new sources</span>
                     </div>
                 </div>
 

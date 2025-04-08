@@ -113,7 +113,7 @@ async function loadInterestDetails() {
     try {
 
         document.getElementById("mode-simple-wait-lang").style.display = "block";
-        await loadAttributeValues("language", "", getAuthHeaders())
+        const langPromise = loadAttributeValues("language", "", getAuthHeaders())
             .then(opts => {
                 if (opts) {
                     const optsElement = document.getElementById("mode-simple-lang");
@@ -178,6 +178,8 @@ async function loadInterestDetails() {
             loadInterestDetailsByQuery("");
             setModeSimple(true, true);
         }
+
+        await langPromise;
 
     } finally {
         document.getElementById("wait-load").style.display = "none";

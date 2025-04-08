@@ -182,6 +182,7 @@ async function loadInterestDetails() {
         await langPromise;
 
     } finally {
+        document.getElementById("mode-simple-0-next").style.display = "flex";
         document.getElementById("wait-load").style.display = "none";
     }
 }

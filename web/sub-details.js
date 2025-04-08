@@ -6,22 +6,21 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
                 <fieldset class="flex p-2">
                     <legend class="flex space-x-1 w-full px-1">
                         <label class="flex space-x-1">
-                            <span>${label} in</span>
+                            <span>${label}${isSemantic? '' : " in"}</span>
                             <input type="text"
                                    pattern="[a-z0-9]{0,20}"
-                                   ${isSemantic ? 'readonly="readonly"' : ''}
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
                                    class="${label === "Text"? "w-[144px]" : "w-[120px]"} autocomplete-input" 
-                                   style="margin-top: -2px; border-top: none; border-left: none; border-right: none; height: 20px"
+                                   style="margin-top: -2px; height: 20px; ${isSemantic ? 'display: none' : ''}"
                                    ${label === "Text"? 'placeholder="empty: any attribute"' : 'placeholder="attribute"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
-                                   value="${isSemantic ? 'snippet' : key}"/>
+                                   value="${key}"/>
                             <datalist id="attrKeys${idx}">
                             </datalist>
                         </label>
-                        <label class="flex align-middle space-x-1 pl-2">
+                        <label class="flex align-middle space-x-1 pl-1">
                             <input type="checkbox" 
                                    class="h-4 w-4 sub-cond-not pt-1"
                                    onchange="setConditionNot(${idx}, this); updateDescription()"
@@ -50,7 +49,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                             <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
                                 <option value="1" class="text-right" ${isExact===false? 'selected="selected"' : ''}>Contains Any&nbsp;</option>
-                                <option value="2" class="text-right" ${isExact===true ? 'selected="selected"' : ''}>Equals to&nbsp;</option>
+                                <option value="2" class="text-right" ${isExact===true ? 'selected="selected"' : ''}>Equals To&nbsp;</option>
                             </select>
                         </legend>
                         <input type="text" 
@@ -69,9 +68,9 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
 `;
 
 const templateCondSemantic = (isNot, query, idx, countConds) =>
-    templateCondHeader("Text", idx, countConds, isNot, true,"snippet") + `
+    templateCondHeader("Idea is", idx, countConds, isNot, true,"") + `
                         <legend class="flex pl-1">
-                            <span class="text-nowrap pt-0.5">Related to&nbsp;</span>
+                            <span class="text-nowrap pt-0.5">About</span>
                         </legend>
                         <input type="text" 
                                autocapitalize="none"
@@ -80,7 +79,7 @@ const templateCondSemantic = (isNot, query, idx, countConds) =>
                                minlength="3"
                                style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionSemanticQuery(${idx}, this.value); updateDescription()"
-                               placeholder="sample text..."
+                               placeholder="something specific..."
                                value="${query}"/>
                     </div>
                 </fieldset>

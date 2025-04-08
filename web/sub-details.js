@@ -1,14 +1,15 @@
 let conds = [];
-const countCondsMax = 6;
+const countCondsMax = 5;
 const srcPageLimitPerType = 10;
 
-const templateCondHeader = (label, idx, countConds, isNot, key) => `
+const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
                 <fieldset class="flex p-2">
                     <legend class="flex space-x-1 w-full px-1">
                         <label class="flex space-x-1">
                             <span>${label} in</span>
                             <input type="text"
                                    pattern="[a-z0-9]{0,20}"
+                                   ${isSemantic ? 'readonly="readonly"' : ''}
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
                                    class="${label === "Text"? "w-[144px]" : "w-[120px]"} autocomplete-input" 
@@ -16,7 +17,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
                                    ${label === "Text"? 'placeholder="empty: any attribute"' : 'placeholder="attribute"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
                                    onchange="setConditionAttrValueOpts(${idx}, this.value); updateDescription()"
-                                   value="${key}"/>
+                                   value="${isSemantic ? 'snippet' : key}"/>
                             <datalist id="attrKeys${idx}">
                             </datalist>
                         </label>
@@ -44,7 +45,7 @@ const templateCondHeader = (label, idx, countConds, isNot, key) => `
 `;
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
-    templateCondHeader("Text", idx, countConds, isNot, key) + `
+    templateCondHeader("Text", idx, countConds, isNot, false, key) + `
                         <legend class="flex px-1">
                             <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
@@ -67,8 +68,26 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                 </fieldset>
 `;
 
+const templateCondSemantic = (isNot, query, idx, countConds) =>
+    templateCondHeader("Text", idx, countConds, isNot, true,"snippet") + `
+                        <legend class="flex pl-1">
+                            <span class="text-nowrap pt-0.5">Related to&nbsp;</span>
+                        </legend>
+                        <input type="text" 
+                               autocapitalize="none"
+                               id="attrValSemInput${idx}"
+                               class="w-full"
+                               minlength="3"
+                               style="height: 20px; border-right: none; border-left: none; border-top: none"
+                               oninput="setConditionSemanticQuery(${idx}, this.value); updateDescription()"
+                               placeholder="sample text..."
+                               value="${query}"/>
+                    </div>
+                </fieldset>
+`;
+
 const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
-    templateCondHeader("Number", idx, countConds, isNot, key) + `
+    templateCondHeader("Number", idx, countConds, isNot, false, key) + `
                         <legend class="flex px-1">
                             <select class="rounded-sm w-10 px-1 h-5 border-none"
                                     onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
@@ -267,7 +286,7 @@ function loadInterestDetailsById(id) {
                     document.getElementById("expires").value = expires.toISOString().substring(0, 16); // YYYY-MM-DDTHH:mm
                 }
                 const cond = data.cond;
-                if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("tc")) {
+                if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("sc") || cond.hasOwnProperty("tc")) {
                     conds.push(cond);
                     addConditionText(false, "", "", false);
                 } else if (cond.hasOwnProperty("gc")) {
@@ -379,7 +398,7 @@ function loadInterestDetailsByExample(exampleName) {
         case "job-alert": {
             document.getElementById("description").value = "Javascript Job alert";
             addConditionText(false, "", "job hiring", false);
-            addConditionText(false, "awksnippet", "javascript", false);
+            addConditionText(false, "snippet", "javascript", false);
             addConditionText(true, "", "java", false);
             break;
         }
@@ -456,6 +475,15 @@ function addConditionText(not, k, term, exact) {
             "key": k,
             "term": term,
             "exact": exact,
+        }
+    });
+}
+
+function addConditionSemantic(not, query) {
+    conds.push({
+        "not": not,
+        "sc": {
+            "query": query,
         }
     });
 }
@@ -567,6 +595,17 @@ function setConditionTextTerms(idx, terms) {
     }
 }
 
+function setConditionSemanticQuery(idx, query) {
+    if (conds.length > idx) {
+        const cond = conds[idx];
+        if (cond.hasOwnProperty("sc")) {
+            cond.sc.query = query;
+        } else {
+            console.error(`Target condition #${idx} is not a text condition`);
+        }
+    }
+}
+
 function setConditionNumberOp(idx, op) {
     if (conds.length > idx) {
         const cond = conds[idx];
@@ -630,7 +669,10 @@ function updateDescription() {
             if (tc.hasOwnProperty("exact")) {
                 exact = tc.exact;
             }
-            nextDescrTxt += tc.term
+            nextDescrTxt += tc.term;
+        } else if (cond.hasOwnProperty("sc")) {
+            const sc = cond.sc;
+            nextDescrTxt += sc.query;
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
             let key = "";
@@ -700,6 +742,9 @@ function displayConditions() {
                     .getElementById(`attrKeys${i}`)
                     .appendChild(fragmentOpts);
             });
+        } else if (cond.hasOwnProperty("sc")) {
+            const sc = cond.sc;
+            elemConds.innerHTML += templateCondSemantic(not, sc.query, i, countConds);
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
             let key = "";
@@ -727,9 +772,11 @@ function displayConditions() {
     //
     if (countConds < countCondsMax) {
         document.getElementById("button-add-cond-txt").removeAttribute("disabled");
+        document.getElementById("button-add-cond-sem").removeAttribute("disabled");
         document.getElementById("button-add-cond-num").removeAttribute("disabled");
     } else {
         document.getElementById("button-add-cond-txt").disabled = "disabled";
+        document.getElementById("button-add-cond-sem").disabled = "disabled";
         document.getElementById("button-add-cond-num").disabled = "disabled";
     }
     updateDescription();
@@ -738,6 +785,10 @@ function displayConditions() {
 document
     .getElementById("button-add-cond-txt")
     .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(); });
+
+document
+    .getElementById("button-add-cond-sem")
+    .addEventListener("click", (_) => { addConditionSemantic(false, ""); displayConditions(); });
 
 document
     .getElementById("button-add-cond-num")
@@ -895,6 +946,11 @@ function getNonEmptyConditions() {
                 continue;
             }
         }
+        if (cond.hasOwnProperty("sc")) {
+            if (cond.sc.query.trim() === "") {
+                continue;
+            }
+        }
         if (cond.hasOwnProperty("tc")) {
             if ((!cond.tc.key || cond.tc.key.trim() === "") && cond.tc.term.trim() === "") {
                 continue;
@@ -914,6 +970,11 @@ function validateCondition(cond, nConds) {
         cond.nc.key = cond.nc.key.toLowerCase();
         if (cond.nc.op === 0) {
             alert("Number filter operator is not recognized");
+            return null;
+        }
+    } else if (cond.hasOwnProperty("sc")) {
+        if (!cond.sc.query || cond.sc.query.trim().length < 3) {
+            alert("Semantic filter text query is too short");
             return null;
         }
     } else if (cond.hasOwnProperty("tc")) {

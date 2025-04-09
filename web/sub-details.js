@@ -4,14 +4,15 @@ const srcPageLimitPerType = 10;
 
 const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
                 <fieldset class="flex p-2">
-                    <legend class="flex space-x-1 w-full px-1">
+                    <legend class="flex space-x-2 w-full px-1 h-5 pt-1">
                         <label class="flex space-x-1">
                             <span>${label}${isSemantic? '' : " in"}</span>
+                            <hr class="ml-1 w-[128px] ${isSemantic ? '' : 'hidden'}" style="height: 1px; margin-top: 6px"/>
                             <input type="text"
                                    pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
                                    list="attrKeys${idx}" 
-                                   class="${label === "Text"? "w-[144px]" : "w-[120px]"} autocomplete-input" 
+                                   class="${label === "Text"? "w-[146px]" : "w-[122px]"} autocomplete-input" 
                                    style="margin-top: -2px; height: 20px; ${isSemantic ? 'display: none' : ''}"
                                    ${label === "Text"? 'placeholder="empty: any attribute"' : 'placeholder="attribute"'}
                                    oninput="setConditionAttrName(${idx}, this.value)"
@@ -20,7 +21,7 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
                             <datalist id="attrKeys${idx}">
                             </datalist>
                         </label>
-                        <label class="flex align-middle space-x-1 pl-1">
+                        <label class="flex align-middle space-x-1">
                             <input type="checkbox" 
                                    class="h-4 w-4 sub-cond-not pt-1"
                                    onchange="setConditionNot(${idx}, this); updateDescription()"
@@ -28,7 +29,7 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
                                    ${isNot ? 'checked="checked"' : ''}/>
                             <span>Not</span>
                         </label>
-                        <hr class="grow" style="height: 1px; margin-top: 9px; margin-right: -4px;"/>
+                        <hr class="grow" style="height: 1px; margin-top: 6px; margin-right: -4px;"/>
                         <svg fill="currentColor"
                              width="16px"
                              height="16px"
@@ -45,7 +46,7 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
     templateCondHeader("Text", idx, countConds, isNot, false, key) + `
-                        <legend class="flex px-1">
+                        <legend class="flex pr-1">
                             <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
                                 <option value="1" class="text-right" ${isExact===false? 'selected="selected"' : ''}>Contains Any&nbsp;</option>
@@ -68,7 +69,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
 `;
 
 const templateCondSemantic = (isNot, query, idx, countConds) =>
-    templateCondHeader("Idea is", idx, countConds, isNot, true,"") + `
+    templateCondHeader("Semantic", idx, countConds, isNot, true,"") + `
                         <legend class="flex pl-1">
                             <span class="text-nowrap pt-0.5">About</span>
                         </legend>
@@ -79,7 +80,7 @@ const templateCondSemantic = (isNot, query, idx, countConds) =>
                                minlength="3"
                                style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionSemanticQuery(${idx}, this.value); updateDescription()"
-                               placeholder="something specific..."
+                               placeholder="something in natural language"
                                value="${query}"/>
                     </div>
                 </fieldset>
@@ -87,8 +88,8 @@ const templateCondSemantic = (isNot, query, idx, countConds) =>
 
 const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
     templateCondHeader("Number", idx, countConds, isNot, false, key) + `
-                        <legend class="flex px-1">
-                            <select class="rounded-sm w-10 px-1 h-5 border-none"
+                        <legend class="flex pr-1">
+                            <select class="rounded-sm w-10 pr-1 h-5 border-none"
                                     onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
                                 <option value="1" ${op === 1 ? 'selected="selected"' : ''}>&gt;</option>
                                 <option value="2" ${op === 2 ? 'selected="selected"' : ''}>&ge;</option>
@@ -290,7 +291,7 @@ function loadInterestDetailsById(id) {
                 const cond = data.cond;
                 if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("sc") || cond.hasOwnProperty("tc")) {
                     conds.push(cond);
-                    addConditionText(false, "", "", false);
+                    addConditionSemantic(false, "");
                 } else if (cond.hasOwnProperty("gc")) {
                     document.getElementById("logic-select").selectedIndex = cond.gc.logic;
                     const children = cond.gc.group;
@@ -298,7 +299,7 @@ function loadInterestDetailsById(id) {
                         conds.push(children[i]);
                     }
                     if (children.length < 1) {
-                        addConditionText(false, "", "", false);
+                        addConditionSemantic(false, "");
                     }
                     if (children.length < 2) {
                         addConditionText(false, "", "", false);
@@ -442,8 +443,7 @@ function loadInterestDetailsByExample(exampleName) {
         }
         case "sentiment": {
             document.getElementById("description").value = "AI: negative sentiment";
-            addConditionText(false, "","artificial", false);
-            addConditionText(false, "","intelligence", false);
+            addConditionSemantic(false, "artificial intelligence");
             addConditionNumber(false, "sentiment", 5, 0);
             break;
         }
@@ -459,14 +459,11 @@ function loadInterestDetailsByQuery(q) {
     document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
     if (q && q.length > 0) {
-        const seg = new Intl.Segmenter(undefined, {granularity: "word"});
-        [...seg.segment(q)]
-            .filter(term => term.isWordLike)
-            .forEach(term => addConditionText(false, "", term.segment, false));
+        addConditionSemantic(false, q);
     } else {
-        addConditionText(false, "", "", false);
-        addConditionText(false, "", "", false)
+        addConditionSemantic(false, "");
     }
+    addConditionText(false, "", "", false);
     displayConditions();
 }
 
@@ -773,19 +770,19 @@ function displayConditions() {
     }
     //
     if (countConds < countCondsMax) {
-        document.getElementById("button-add-cond-txt").removeAttribute("disabled");
-        document.getElementById("button-add-cond-sem").removeAttribute("disabled");
-        document.getElementById("button-add-cond-num").removeAttribute("disabled");
+        document.getElementById("add-condition").style.display = "block";
     } else {
-        document.getElementById("button-add-cond-txt").disabled = "disabled";
-        document.getElementById("button-add-cond-sem").disabled = "disabled";
-        document.getElementById("button-add-cond-num").disabled = "disabled";
+        document.getElementById("add-condition").style.display = "none";
     }
     updateDescription();
 }
 
 document
-    .getElementById("button-add-cond-txt")
+    .getElementById("button-add-cond-txt-exact")
+    .addEventListener("click", (_) => { addConditionText(false, "", "", true); displayConditions(); });
+
+document
+    .getElementById("button-add-cond-txt-keywords")
     .addEventListener("click", (_) => { addConditionText(false, "", "", false); displayConditions(); });
 
 document
@@ -795,6 +792,10 @@ document
 document
     .getElementById("button-add-cond-num")
     .addEventListener("click", (_) => { addConditionNumber(false, "", 3, 0); displayConditions(); });
+
+document
+    .getElementById("button-add-cond-example-exclude-wikimedia")
+    .addEventListener("click", (_) => { addConditionText(true, "source", "https://stream.wikimedia.org/v2/stream/recentchange", true); displayConditions(); });
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;
@@ -934,7 +935,7 @@ function getRootCondition() {
             }
         }
     } else {
-        alert("Interest should have at least non-empty 1 filter");
+        alert("Interest should have at least 1 non-empty and inclusive filter");
     }
     return cond;
 }

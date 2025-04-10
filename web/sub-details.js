@@ -183,7 +183,6 @@ async function loadInterestDetails() {
         await langPromise;
 
     } finally {
-        document.getElementById("mode-simple-0-next").style.display = "flex";
         document.getElementById("wait-load").style.display = "none";
     }
 }
@@ -1213,29 +1212,10 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
-function modeSimpleStepNext() {
-    const q = document.getElementById("simple-query").value.trim();
-    if (validateTextCondition(q, 1,false)) {
-        $('div.ms-parent').each((i, e) => e.style.width = "100%");
-        document.getElementById("mode-simple-step-0").style.display = "none";
-        document.getElementById("mode-simple-step-1").style.display = "flex";
-    }
-}
-
 document.getElementById("simple-query-form").onsubmit = function (evt) {
     evt.preventDefault();
-    modeSimpleStepNext();
-}
-document.getElementById("mode-simple-0-next").onclick = modeSimpleStepNext;
-
-document.getElementById("mode-simple-1-prev").onclick = function () {
-    $('div.ms-parent').each((i, e) => e.style.width = "100%");
-    document.getElementById("mode-simple-step-0").style.display = "flex";
-    document.getElementById("mode-simple-step-1").style.display = "none";
-};
-
-function createDropdown() {
-    document.getElementById("create-dropdown").classList.toggle("show");
+    // TODO submit simple search
+    alert("yohoho");
 }
 
 function submitDropdown() {

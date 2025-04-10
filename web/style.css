@@ -49,6 +49,22 @@ input[type=text]:invalid {
     border-width: 1px;
     border-style: solid;
 }
+input[type=search] {
+    display: flex;
+    flex-grow: 1;
+    height: 20px;
+    border-color: #94a3b8;
+    border-width: 1px;
+    outline: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+input[type=search]:invalid {
+    border-color: #ef4444;
+    border-width: 1px;
+    border-style: solid;
+}
 input[type=number] {
     border-color: #94a3b8;
     border-width: 1px;
@@ -88,6 +104,15 @@ hr {
         background-color: var(--block-bg-color);
     }
     input[type=text] {
+        display: flex;
+        flex-grow: 1;
+        height: 20px;
+        border-color: #334155;
+        border-width: 1px;
+        outline: none;
+        color: #94a3b8;
+    }
+    input[type=search] {
         display: flex;
         flex-grow: 1;
         height: 20px;

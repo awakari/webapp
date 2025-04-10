@@ -69,7 +69,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
 `;
 
 const templateCondSemantic = (isNot, query, idx, countConds) =>
-    templateCondHeader("Semantic", idx, countConds, isNot, true,"") + `
+    templateCondHeader("Similarity", idx, countConds, isNot, true,"") + `
                         <legend class="flex pl-1">
                             <span class="text-nowrap pt-0.5">About</span>
                         </legend>
@@ -975,7 +975,7 @@ function validateCondition(cond, nConds) {
         }
     } else if (cond.hasOwnProperty("sc")) {
         if (!cond.sc.query || cond.sc.query.trim().length < 3) {
-            alert("Semantic filter text query is too short");
+            alert("Similarity filter text is too short");
             return null;
         }
     } else if (cond.hasOwnProperty("tc")) {

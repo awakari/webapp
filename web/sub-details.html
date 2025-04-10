@@ -103,52 +103,30 @@
 
         <div id="mode-simple" class="max-w-[480px] w-full hidden">
 
-            <div id="mode-simple-step-0" class="flex flex-col space-y-6 justify-center h-full w-full">
+            <div id="mode-simple-step-0" class="flex flex-col space-y-8 justify-center h-full w-full">
                 <div class="w-full px-4">
                     <form id="simple-query-form">
                         <input type="text"
                                autofocus="autofocus"
                                autocapitalize="none"
                                id="simple-query"
-                               minlength="2"
-                               class="w-full text-xl"
+                               minlength="3"
+                               class="w-full text-xl text-center"
                                style="height: 28px"
-                               placeholder="keyword1 keyword2 ..."/>
+                               placeholder="Get updates about..."/>
                     </form>
                 </div>
-                <div class="flex space-x-2 items-center justify-center">
-                    <span class="text-right align-middle text-lg">Match</span>
-                    <select name="logic" id="logic-select-simple" class="w-14 align-middle text-lg">
-                        <!-- note value should be the same as the index -->
-                        <option value="0" selected="selected" class="text-right">All&nbsp;</option>
-                        <option value="1" class="text-right">Any&nbsp;</option>
-                    </select>
-                </div>
-                <div class="flex justify-center w-full space-x-4 mt-6">
-                    <button id="mode-simple-0-next" type="button" class="flex justify-center text-center w-[100px] h-6 items-center hidden">
-                        <span>Next</span>
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <div id="mode-simple-step-1" class="flex flex-col justify-center h-full w-full hidden">
-                <div class="w-full px-2 text-center text-xl">
-                    <p>Additional Filters</p>
-                </div>
                 <div class="justify-center grid grid-cols-3 w-80 mx-auto">
-                    <span class="text-lg text-right justify-end pr-4 mt-6">Language</span>
-                    <div class="w-full mt-6 col-span-2">
+                    <span class="text-right justify-end mt-1 px-2">Language</span>
+                    <div class="w-48 col-span-2 px-1">
                         <div class="absolute" id="mode-simple-wait-lang" style="display: none">
                             <img src="wait.gif"/>
                         </div>
                         <select name="mode-simple-lang" id="mode-simple-lang" class="button multiselect" multiple="multiple">
                         </select>
                     </div>
-                    <span class="text-lg text-right justify-end pr-4 mt-4">Sources</span>
-                    <div class="w-full mt-4 col-span-2">
+                    <span class="text-right justify-end mt-5 px-2">Sources</span>
+                    <div class="w-48 mt-4 col-span-2 px-1">
                         <select name="mode-simple-source-types" id="mode-simple-source-types" class="button multiselect" multiple="multiple">
                             <option value="com_awakari_feeds_v1" selected="selected">News Feeds</option>
                             <optgroup label="Social Channels">
@@ -169,17 +147,11 @@
                         })
                     </script>
                 </div>
-                <div class="flex justify-center w-full space-x-4 mt-6">
-                    <button id="mode-simple-1-prev" type="button" class="flex justify-center text-center w-[100px] h-6 items-center">
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>Back</span>
-                    </button>
+                <div class="flex justify-center w-full mt-6">
                     <div class="absolute" id="wait-simple" style="display: none">
                         <img src="wait.gif"/>
                     </div>
-                    <button type="button" onclick="submitSimple()" class="submit">
+                    <button id="button-submit-simple" type="button" onclick="submitSimple()" class="submit" style="display: none">
                         Create
                     </button>
                 </div>
@@ -275,18 +247,18 @@
                                 class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
                             + Filter ⌄
                         </button>
-                        <div id="cond-new-dropdown" class="dropdown-content p-2 w-[280px] -ml-[180px]">
+                        <div id="cond-new-dropdown" class="dropdown-content p-2 w-[220px] -ml-[120px]">
                             <button id="button-add-cond-sem" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Semantic&nbsp;</span>
+                                <span class="w-full text-right">Semantic</span>
                             </button>
                             <button id="button-add-cond-txt-keywords" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Keywords&nbsp;</span>
+                                <span class="w-full text-right">Keywords</span>
                             </button>
                             <button id="button-add-cond-txt-exact" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Exact text&nbsp;</span>
+                                <span class="w-full text-right">Exact text</span>
                             </button>
                             <button id="button-add-cond-num" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Number&nbsp;</span>
+                                <span class="w-full text-right">Number</span>
                             </button>
                             <button id="button-add-cond-example-exclude-wikimedia" type="button" class="dropdown-option flex">
                                 <span class="w-full text-right">Example: exclude Wikimedia</span>

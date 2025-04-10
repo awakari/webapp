@@ -109,41 +109,39 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
 
 async function loadInterestDetails() {
 
-    document.getElementById("wait-load").style.display = "block";
+    document.getElementById("mode-simple-wait-lang").style.display = "block";
+    const langPromise = loadAttributeValues("language", "", getAuthHeaders())
+        .then(opts => {
+            if (opts) {
+                const optsElement = document.getElementById("mode-simple-lang");
+                let languages = [];
+                for (const opt of opts) {
+                    let l = opt.trim().toLowerCase();
+                    if (l.length > 2) {
+                        l = l.slice(0, 2);
+                    }
+                    if (l.length > 1) {
+                        languages.push(l);
+                    }
+                }
+                const uniqLangs = [...new Set(languages)];
+                uniqLangs.sort((a, b) => a.localeCompare(b));
+                let newContent = "";
+                for (const l of uniqLangs) {
+                    newContent += `<option value=${l} selected="selected">${l}</option>\n`;
+                }
+                optsElement.innerHTML = newContent;
+            }
+        })
+        .then(() => {
+            $('.multiselect').multipleSelect("refresh");
+        })
+        .finally(() => {
+            document.getElementById("mode-simple-wait-lang").style.display = "none";
+        });
 
     try {
-
-        document.getElementById("mode-simple-wait-lang").style.display = "block";
-        const langPromise = loadAttributeValues("language", "", getAuthHeaders())
-            .then(opts => {
-                if (opts) {
-                    const optsElement = document.getElementById("mode-simple-lang");
-                    let languages = [];
-                    for (const opt of opts) {
-                        let l = opt.trim().toLowerCase();
-                        if (l.length > 2) {
-                            l = l.slice(0, 2);
-                        }
-                        if (l.length > 1) {
-                            languages.push(l);
-                        }
-                    }
-                    const uniqLangs = [...new Set(languages)];
-                    uniqLangs.sort((a, b) => a.localeCompare(b));
-                    let newContent = "";
-                    for (const l of uniqLangs) {
-                        newContent += `<option value=${l} selected="selected">${l}</option>\n`;
-                    }
-                    optsElement.innerHTML = newContent;
-                }
-            })
-            .then(() => {
-                $('.multiselect').multipleSelect("refresh");
-            })
-            .finally(() => {
-                document.getElementById("mode-simple-wait-lang").style.display = "none";
-            });
-
+        document.getElementById("wait-load").style.display = "block";
         const headers = getAuthHeaders();
         Limits
             .fetch("4", headers)
@@ -183,8 +181,8 @@ async function loadInterestDetails() {
         await langPromise;
 
     } finally {
-        document.getElementById("mode-simple-0-next").style.display = "flex";
         document.getElementById("wait-load").style.display = "none";
+        document.getElementById("button-submit-simple").style.display = "block";
     }
 }
 
@@ -1032,58 +1030,16 @@ function validateTextCondition(q, nConds, isExact) {
 async function submitSimple(){
 
     const q = document.getElementById("simple-query").value;
-    const logic = Number(document.getElementById("logic-select-simple").value);
-    const seg = new Intl.Segmenter(undefined, {granularity: "word"});
-    let cond;
-    switch (logic) {
-        case 0: { // and
-            let keywordConds = [];
-            [...seg.segment(q)]
-                .filter(term => term.isWordLike)
-                .forEach(term => keywordConds.push({
-                    not: false,
-                    tc: {
-                        key: "",
-                        term: term.segment,
-                        exact: false,
-                    }
-                }));
-            if (keywordConds.length < 1) {
-                alert("At least one keyword is required.");
-                return;
-            } else if (keywordConds.length === 1) {
-                cond = keywordConds[0];
-            } else {
-                cond = {
-                    not: false,
-                    gc: {
-                        logic: 0, // and
-                        group: keywordConds,
-                    }
-                };
-            }
-            break;
-        }
-        case 1: { // or
-            const terms = [...seg.segment(q)]
-                .filter(term => term.isWordLike)
-                .map(term => term.segment)
-                .join(" ");
-            if (terms.length < 2) {
-                alert("At least one word-like keyword is required.");
-                return;
-            }
-            cond = {
-                not: false,
-                tc: {
-                    key: "",
-                    exact: false,
-                    term: terms,
-                }
-            }
-            break;
-        }
+    if (q.trim().length < 3) {
+        alert("Query is too short");
+        return;
     }
+    let cond = {
+        not: false,
+        sc: {
+            query: q,
+        },
+    };
 
     const langChoice = document.getElementById("mode-simple-lang");
     if (langChoice.selectedOptions.length > 0) {
@@ -1092,17 +1048,14 @@ async function submitSimple(){
                 alert("Max 10 languages allowed to choose.");
                 return;
             }
-            if (!cond.hasOwnProperty("gc") || cond.gc.logic !== 0) {
-                const prevCond = cond;
-                cond = {
-                    not: false,
-                    gc: {
-                        logic: 0, // and
-                        group: [prevCond],
-                    }
-                };
-            }
-
+            const prevCond = cond;
+            cond = {
+                not: false,
+                gc: {
+                    logic: 0, // and
+                    group: [prevCond],
+                }
+            };
             let languages = [];
             Array
                 .from(langChoice.selectedOptions)
@@ -1213,29 +1166,9 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
-function modeSimpleStepNext() {
-    const q = document.getElementById("simple-query").value.trim();
-    if (validateTextCondition(q, 1,false)) {
-        $('div.ms-parent').each((i, e) => e.style.width = "100%");
-        document.getElementById("mode-simple-step-0").style.display = "none";
-        document.getElementById("mode-simple-step-1").style.display = "flex";
-    }
-}
-
 document.getElementById("simple-query-form").onsubmit = function (evt) {
     evt.preventDefault();
-    modeSimpleStepNext();
-}
-document.getElementById("mode-simple-0-next").onclick = modeSimpleStepNext;
-
-document.getElementById("mode-simple-1-prev").onclick = function () {
-    $('div.ms-parent').each((i, e) => e.style.width = "100%");
-    document.getElementById("mode-simple-step-0").style.display = "flex";
-    document.getElementById("mode-simple-step-1").style.display = "none";
-};
-
-function createDropdown() {
-    document.getElementById("create-dropdown").classList.toggle("show");
+    return submitSimple();
 }
 
 function submitDropdown() {

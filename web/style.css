@@ -140,6 +140,9 @@ button[type=button].ms-choice {
 button[type=button].ms-choice:hover {
     background-color: inherit;
 }
+div.ms-parent {
+    display: flex;
+}
 div.ms-drop {
     border-top: none;
     border-color: #3b82f6;

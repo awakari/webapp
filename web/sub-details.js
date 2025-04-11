@@ -2,12 +2,19 @@ let conds = [];
 const countCondsMax = 5;
 const srcPageLimitPerType = 10;
 
-const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
+const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key, similarityMin) => `
                 <fieldset class="flex p-2">
                     <legend class="flex space-x-2 w-full px-1 h-5 pt-1">
                         <label class="flex space-x-1">
                             <span>${label}${isSemantic? '' : " in"}</span>
-                            <hr class="ml-1 w-[128px] ${isSemantic ? '' : 'hidden'}" style="height: 1px; margin-top: 6px"/>
+                            <input type="range"
+                                   min="0.75"
+                                   max="0.95"
+                                   step="0.1"
+                                   class="mx-1 w-[128px] ${isSemantic ? '' : 'hidden'}"
+                                   style="height: 3px; margin-top: 6px;"
+                                   value="${similarityMin}"
+                                   onchange="setSimilarity(${idx}, this.value)"/>
                             <input type="text"
                                    pattern="[a-z0-9]{0,20}"
                                    autocapitalize="none"
@@ -45,7 +52,7 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key) => `
 `;
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
-    templateCondHeader("Text", idx, countConds, isNot, false, key) + `
+    templateCondHeader("Text", idx, countConds, isNot, false, key, 0) + `
                         <legend class="flex pr-1">
                             <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
@@ -68,10 +75,12 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
                 </fieldset>
 `;
 
-const templateCondSemantic = (isNot, query, idx, countConds) =>
-    templateCondHeader("Similarity", idx, countConds, isNot, true,"") + `
-                        <legend class="flex pl-1">
-                            <span class="text-nowrap pt-0.5">About</span>
+const templateCondSemantic = (isNot, query, similarityMin, idx, countConds) =>
+    templateCondHeader("Similarity", idx, countConds, isNot, true,"", similarityMin) + `
+                        <legend class="flex pl-1 w-20">
+                            <span class="text-nowrap pt-0.5 w-full text-center" id="labelSimilarity${idx}">
+                                ${similarityMin === 0.75 ? 'Weak' : (similarityMin === 0.85 ? 'Medium' : 'Strong')}
+                            </span>
                         </legend>
                         <input type="text" 
                                autocapitalize="none"
@@ -80,14 +89,14 @@ const templateCondSemantic = (isNot, query, idx, countConds) =>
                                minlength="3"
                                style="height: 20px; border-right: none; border-left: none; border-top: none"
                                oninput="setConditionSemanticQuery(${idx}, this.value); updateDescription()"
-                               placeholder="something in natural language"
+                               placeholder="natural language query"
                                value="${query}"/>
                     </div>
                 </fieldset>
 `;
 
 const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
-    templateCondHeader("Number", idx, countConds, isNot, false, key) + `
+    templateCondHeader("Number", idx, countConds, isNot, false, key, 0) + `
                         <legend class="flex pr-1">
                             <select class="rounded-sm w-10 pr-1 h-5 border-none"
                                     onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
@@ -289,7 +298,7 @@ function loadInterestDetailsById(id) {
                 const cond = data.cond;
                 if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("sc") || cond.hasOwnProperty("tc")) {
                     conds.push(cond);
-                    addConditionSemantic(false, "");
+                    addConditionSemantic(false, "", 0.85);
                 } else if (cond.hasOwnProperty("gc")) {
                     document.getElementById("logic-select").selectedIndex = cond.gc.logic;
                     const children = cond.gc.group;
@@ -297,7 +306,7 @@ function loadInterestDetailsById(id) {
                         conds.push(children[i]);
                     }
                     if (children.length < 1) {
-                        addConditionSemantic(false, "");
+                        addConditionSemantic(false, "", 0.85);
                     }
                     if (children.length < 2) {
                         addConditionText(false, "", "", false);
@@ -441,7 +450,7 @@ function loadInterestDetailsByExample(exampleName) {
         }
         case "sentiment": {
             document.getElementById("description").value = "AI: negative sentiment";
-            addConditionSemantic(false, "artificial intelligence");
+            addConditionSemantic(false, "artificial intelligence", 0.85);
             addConditionNumber(false, "sentiment", 5, 0);
             break;
         }
@@ -457,9 +466,9 @@ function loadInterestDetailsByQuery(q) {
     document.getElementById("interest-enabled").disabled = true;
     document.getElementById("button-delete").style.display = "none";
     if (q && q.length > 0) {
-        addConditionSemantic(false, q);
+        addConditionSemantic(false, q, 0.85);
     } else {
-        addConditionSemantic(false, "");
+        addConditionSemantic(false, "", 0.85);
     }
     addConditionText(false, "", "", false);
     displayConditions();
@@ -476,11 +485,12 @@ function addConditionText(not, k, term, exact) {
     });
 }
 
-function addConditionSemantic(not, query) {
+function addConditionSemantic(not, query, similarityMin) {
     conds.push({
         "not": not,
         "sc": {
             "query": query,
+            "similarityMin": similarityMin,
         }
     });
 }
@@ -550,6 +560,31 @@ function setConditionAttrValueOpts(idx, key) {
                 }
                 optsElement.innerHTML = newContent;
             });
+        }
+    }
+}
+
+function setSimilarity(idx, similarity) {
+    switch (similarity) {
+        case "0.75": {
+            document.getElementById(`labelSimilarity${idx}`).innerText = "Weak";
+            break;
+        }
+        case "0.85": {
+            document.getElementById(`labelSimilarity${idx}`).innerText = "Medium";
+            break;
+        }
+        case "0.95": {
+            document.getElementById(`labelSimilarity${idx}`).innerText = "Strong";
+            break;
+        }
+    }
+    if (conds.length > idx) {
+        const cond = conds[idx];
+        if (cond.hasOwnProperty("sc")) {
+            cond.sc.similarityMin = parseFloat(similarity);
+        } else {
+            console.error(`Target condition #${idx} is not a semantic condition`);
         }
     }
 }
@@ -741,7 +776,7 @@ function displayConditions() {
             });
         } else if (cond.hasOwnProperty("sc")) {
             const sc = cond.sc;
-            elemConds.innerHTML += templateCondSemantic(not, sc.query, i, countConds);
+            elemConds.innerHTML += templateCondSemantic(not, sc.query, sc.similarityMin, i, countConds);
         } else if (cond.hasOwnProperty("nc")) {
             const nc = cond.nc;
             let key = "";
@@ -785,7 +820,7 @@ document
 
 document
     .getElementById("button-add-cond-sem")
-    .addEventListener("click", (_) => { addConditionSemantic(false, ""); displayConditions(); });
+    .addEventListener("click", (_) => { addConditionSemantic(false, "", 0.85); displayConditions(); });
 
 document
     .getElementById("button-add-cond-num")

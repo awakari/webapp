@@ -209,6 +209,9 @@ function setModeSimple(simple, confirmed) {
             document.getElementById("mode-simple").style.display = "none";
             document.getElementById("mode-expert").style.display = "block";
         }
+    } else {
+        // reset
+        document.getElementById("mode-toggle-checkbox").checked = simple;
     }
 }
 
@@ -827,8 +830,12 @@ document
     .addEventListener("click", (_) => { addConditionNumber(false, "", 3, 0); displayConditions(); });
 
 document
-    .getElementById("button-add-cond-example-exclude-wikimedia")
+    .getElementById("button-add-cond-example-exclude-wiki")
     .addEventListener("click", (_) => { addConditionText(true, "source", "https://stream.wikimedia.org/v2/stream/recentchange", true); displayConditions(); });
+
+document
+    .getElementById("button-add-cond-example-price")
+    .addEventListener("click", (_) => { addConditionNumber(false, "offersprice", 4, 12.34); displayConditions(); });
 
 function deleteSubscription() {
     const id = document.getElementById("id").value;

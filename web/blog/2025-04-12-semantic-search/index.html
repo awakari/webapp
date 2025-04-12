@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Semantic Search in Awakari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://awakari.com/blog/2025-04-12-semantic-search">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Semantic Search in Awakari">
+    <meta property="og:description" content="Awakari introduces the semantic similarity search">
+    <meta property="og:image" content="https://awakari.com/blog/2025-04-12-semantic-search/header.jpg">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="https://awakari.com/blog/2025-04-12-semantic-search">
+    <meta property="twitter:domain" content="https://awakari.com/blog/2025-04-12-semantic-search">
+    <meta property="twitter:url" content="https://awakari.com">
+    <meta name="twitter:title" content="Semantic Search in Awakari">
+    <meta name="twitter:description" content="Awakari introduces the semantic similarity search">
+    <meta name="twitter:image" content="https://awakari.com/blog/2025-04-12-semantic-search/header.jpg">
+
+    <link rel="icon" href="../../logo-color.svg">
+    <link href="../../tailwind.output.css" rel="stylesheet">
+    <link href="../../style.css" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Semantic Search in Awakari",
+            "image": "https://awakari.com/blog/2025-04-12-semantic-search/header.jpg",
+            "author": "Andrei Kurilov",
+            "keywords": "vector similarity semantic search alert",
+            "wordcount": "1234",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Awakari",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://awakari.com/logo-color.svg"
+                }
+            },
+            "url": "https://awakari.com/blog/2025-04-12-semantic-search",
+            "datePublished": "2025-04-12",
+            "dateCreated": "2025-04-12",
+            "dateModified": "2025-04-12",
+            "description": "Awakari introduces the semantic similarity search"
+        }
+    </script>
+</head>
+<body class="flex justify-center text-gray-700 dark:text-gray-300 text-lg dark:bg-gray-800">
+<main class="p-4 space-y-2 max-w-[640px]">
+
+    <div class="relative text-center justify-center flex">
+        <div>
+            <img alt="TODO alt" src="header.jpg" class="w-full max-w-[640px]"/>
+        </div>
+        <div class="w-full absolute text-center" style="top: 10pt;">
+            <h1 class="text-4xl font-semibold text-white"
+                style="text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;">
+                <span class="text-nowrap">Semantic Search</span>
+                <span class="text-nowrap">in Awakari</span>
+            </h1>
+        </div>
+    </div>
+
+    <div>
+        <p class="p-1">&nbsp;&nbsp;
+            Vector similarity search is a crucial in modern applications,
+            enabling efficient retrieval of information based on semantic meaning rather than exact matches.
+            By representing data as high-dimensional vectors, this method allows systems to find the most relevant results through proximity in vector space.
+            </p>
+        <p class="p-1">&nbsp;&nbsp;
+            Today is April 12th, 2025 also known as International Cosmonautics Day. I'm proud to announce that
+            Awakari now supports vector similarity search — a powerful new way to filter content based on meaning, not just keywords.
+            <a class="text-blue-500" href="https://awakari.com/login.html?redirect=https://awakari.com/sub-details.html">Let's go!</a>
+            </p>
+    </div>
+
+    <div>
+        <div class="flex justify-center text-center">
+            <img alt="screenshot" src="screenshot1.jpg" width="310" height="370"/>
+        </div>
+
+        <p class="p-1">&nbsp;&nbsp;
+            The new feature is used by default in the simple interest creation mode.
+            In the advanced mode, there's a new  type of condition is available: "Similarity".
+            It's also possible to make a <i>hybrid search</i> by combining similarity filters with keyword ones.
+            </p>
+
+        <p class="p-1">&nbsp;&nbsp;
+            Under the hood, Awakari extracts a text snippet for every incoming event and converts it to a 384-dimension
+            vector using the
+            <a class="text-blue-500" href="https://huggingface.co/intfloat/multilingual-e5-small" target="_blank">
+                language model</a>
+            that supports about 100 languages.
+            There's a choice of several similarity levels available:
+            </p>
+
+        <p class="p-1">&nbsp;&nbsp;
+            <b>Weak</b> corresponds to cosine similarity of vectors &ge; 0.75. Good for broader results filtering.</p>
+        <p class="p-1">&nbsp;&nbsp;
+            <b>Medium</b>: cosine &ge; 0.85. This is recommended level that works good enough in most cases. </p>
+        <p class="p-1">&nbsp;&nbsp;
+            <b>Strong</b>: cosine &ge; 0.95. Use it to get strictly matching results only.</p>
+
+        <div class="text-right">
+            <p class="text-slate-500 text-lg text-bottom">- Andrei Kurilov, April 12th, 2025</p>
+        </div>
+
+    </div>
+
+</main>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -268,25 +268,17 @@
     <div class="bg-white dark:bg-gray-900" id="about">
 
         <div class="container mx-auto px-2">
-            <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 ">
-                <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-                    <div class="flex justify-center sm:justify-end">
-                        <img id="img-how-it-works" src="how-it-works/0.svg" alt="how it works" class="w-[344px]"/>
-                        <script>
-                            const totalImages = 10; // Total number of images (0-9)
-                            let currentIndex = 0; // Start with the 0th image
-                            const elemImg = document.getElementById("img-how-it-works");
-                            function updateImage() {
-                                elemImg.src = `how-it-works/${currentIndex}.svg`;
-                                currentIndex = (currentIndex + 1) % totalImages; // Loop back to 0 after all
-                            }
-                            // Start the animation
-                            setInterval(updateImage, 1000); // Change image every second
-                            // Initialize the first image
-                            updateImage();
-                        </script>
+            <div class="mx-auto max-w-3xl text-gray-700 dark:text-gray-300 ">
+                <div class="grid grid-cols-3 justify-center space-x-1 px-1 text-center text-2xl sm:text-5xl">
+                    <div class="flex justify-center text-indigo-600 dark:text-indigo-400 sm:my-auto">Follow Your Interest</div>
+                    <div class="flex justify-center">
+                        <img src="logo-color.svg" alt="logo"/>
                     </div>
-                    <div class="space-y-2 sm:space-y-4 py-4 pt-0 sm:pt-16 text-lg sm:pl-8">
+                    <div class="flex justify-center text-cyan-600 dark:text-cyan-500 sm:my-auto">From Unlimited Sources</div>
+                </div>
+                <div class="mx-auto max-w-2xl grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+
+                    <div class="space-y-2 sm:space-y-4 py-4 text-lg sm:pl-8">
                         <p class="align-text-middle px-4">
                             Get filtered updates from:
                         </p>
@@ -319,6 +311,16 @@
                         </div>
                         <p class="align-text-middle px-4">
                             To never miss what is important.</p>
+                    </div>
+                    <div class="flex justify-center sm:justify-end">
+                        <picture>
+                            <!-- User prefers light mode: -->
+                            <source srcset="how-it-works/header-light.png" media="(prefers-color-scheme: light)"/>
+                            <!-- User prefers dark mode: -->
+                            <source srcset="how-it-works/header-dark.png"  media="(prefers-color-scheme: dark)"/>
+                            <!-- User has no color preference: -->
+                            <img src="how-it-works/header-light.png" alt="how it works"/>
+                        </picture>
                     </div>
                 </div>
             </div>

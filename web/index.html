@@ -175,6 +175,20 @@
             font-weight: 400;
             src: local('iA Writer Quattro S'), url('https://fonts.cdnfonts.com/s/63136/iAWriterQuattroSRegular.woff') format('woff');
         }
+        .logo-left {
+            text-shadow: 0 0 1px #6366f1, 0 0 2px #818cf8, 0 0 4px #a5b4fc, 0 0 8px #c7d2fe, 0 0 16px #e0e7ff;
+        }
+        .logo-right {
+            text-shadow: 0 0 1px #06b6d4, 0 0 2px #22d3ee, 0 0 4px #67e8f9, 0 0 8px #a5f3fc, 0 0 16px #cffafe;
+        }
+        @media (prefers-color-scheme: dark) {
+            .logo-left {
+                text-shadow: 0 0 1px #6366f1, 0 0 2px #4f46e5, 0 0 4px #4338ca, 0 0 8px #3730a3, 0 0 16px #312e81;
+            }
+            .logo-right {
+                text-shadow: 0 0 1px #0891b2, 0 0 2px #0e7490, 0 0 4px #155e75, 0 0 8px #164e63, 0 0 16px #083344;
+            }
+        }
     </style>
 
     <meta name="yandex-verification" content="e7bdc7f7eaa34e0b" />
@@ -270,11 +284,13 @@
         <div class="container mx-auto px-2">
             <div class="mx-auto max-w-3xl text-gray-700 dark:text-gray-300 ">
                 <div class="grid grid-cols-3 justify-center space-x-2 pr-2 sm:px-2 text-center max-w-2xl text-2xl sm:text-5xl">
-                    <div class="flex text-indigo-600 dark:text-indigo-400 sm:my-auto text-right">Follow Your Interest</div>
+                    <div class="logo-left flex text-indigo-600 dark:text-indigo-400 sm:my-auto text-right">
+                        Follow Your Interest</div>
                     <div class="flex justify-center">
                         <img src="logo-color.svg" alt="logo"/>
                     </div>
-                    <div class="flex text-cyan-600 dark:text-cyan-500 sm:my-auto text-left">From Unlimited Sources</div>
+                    <div class="logo-right flex text-cyan-600 dark:text-cyan-500 sm:my-auto text-left">
+                        From Unlimited Sources</div>
                 </div>
                 <div class="mx-auto max-w-2xl grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 

@@ -10,7 +10,7 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key, simi
                             <input type="range"
                                    min="0.75"
                                    max="0.95"
-                                   step="0.1"
+                                   step="0.05"
                                    class="mx-1 w-[128px] ${isSemantic ? '' : 'hidden'}"
                                    style="height: 3px; margin-top: 6px;"
                                    value="${similarityMin}"
@@ -77,9 +77,9 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
 
 const templateCondSemantic = (isNot, query, similarityMin, idx, countConds) =>
     templateCondHeader("Similarity", idx, countConds, isNot, true,"", similarityMin) + `
-                        <legend class="flex pl-1 w-20">
+                        <legend class="flex pl-1 w-12">
                             <span class="text-nowrap pt-0.5 w-full text-center" id="labelSimilarity${idx}">
-                                ${similarityMin === 0.75 ? 'Weak' : (similarityMin === 0.85 ? 'Medium' : 'Strong')}
+                                ${similarityMin}
                             </span>
                         </legend>
                         <input type="text" 
@@ -568,24 +568,12 @@ function setConditionAttrValueOpts(idx, key) {
 }
 
 function setSimilarity(idx, similarity) {
-    switch (similarity) {
-        case "0.75": {
-            document.getElementById(`labelSimilarity${idx}`).innerText = "Weak";
-            break;
-        }
-        case "0.85": {
-            document.getElementById(`labelSimilarity${idx}`).innerText = "Medium";
-            break;
-        }
-        case "0.95": {
-            document.getElementById(`labelSimilarity${idx}`).innerText = "Strong";
-            break;
-        }
-    }
+    similarity = parseFloat(similarity)
+    document.getElementById(`labelSimilarity${idx}`).innerText = similarity.toFixed(2);
     if (conds.length > idx) {
         const cond = conds[idx];
         if (cond.hasOwnProperty("sc")) {
-            cond.sc.similarityMin = parseFloat(similarity);
+            cond.sc.similarityMin = similarity;
         } else {
             console.error(`Target condition #${idx} is not a semantic condition`);
         }

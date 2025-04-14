@@ -1064,10 +1064,37 @@ async function submitSimple(){
         alert("Query is too short");
         return;
     }
+    const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+    const terms = [...seg.segment(q)]
+        .filter(term => term.isWordLike)
+        .map(term => term.segment)
+        .filter(word => word.length > 1)
+        .join(" ");
+    if (terms.length < 2) {
+        alert("At least one word in query is required.");
+        return;
+    }
     let cond = {
         not: false,
-        sc: {
-            query: q,
+        gc: {
+            logic: 0, // and
+            group: [
+                {
+                    not: false,
+                    sc: {
+                        query: q,
+                        similarityMin: 0.75,
+                    },
+                },
+                {
+                    not: false,
+                    tc: {
+                        key: "",
+                        exact: false,
+                        term: terms,
+                    },
+                }
+            ],
         },
     };
 
@@ -1075,17 +1102,9 @@ async function submitSimple(){
     if (langChoice.selectedOptions.length > 0) {
         if (langChoice.options.length > langChoice.selectedOptions.length) { // not all selected
             if (langChoice.selectedOptions.length > 10) {
-                alert("Max 10 languages allowed to choose.");
+                alert("Choose max 10 languages");
                 return;
             }
-            const prevCond = cond;
-            cond = {
-                not: false,
-                gc: {
-                    logic: 0, // and
-                    group: [prevCond],
-                }
-            };
             let languages = [];
             Array
                 .from(langChoice.selectedOptions)
@@ -1109,16 +1128,6 @@ async function submitSimple(){
     const typeChoice = document.getElementById("mode-simple-source-types");
     if (typeChoice.selectedOptions.length > 0) {
         if (typeChoice.options.length > typeChoice.selectedOptions.length) { // not all selected
-            if (!cond.hasOwnProperty("gc") || cond.gc.logic !== 0) {
-                const prevCond = cond;
-                cond = {
-                    not: false,
-                    gc: {
-                        logic: 0, // and
-                        group: [prevCond],
-                    }
-                };
-            }
             let types = [];
             Array
                 .from(typeChoice.selectedOptions)

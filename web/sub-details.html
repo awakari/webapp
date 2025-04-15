@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -193,19 +193,6 @@
                         </div>
                     </div>
 
-                    <div class="pl-2" id="area-button-share" style="display: none">
-                        <button id="button-share" type="button" class="flex justify-center text-center w-[100px] items-center">
-                            <svg width="21px" height="21px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding-top: 2px">
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="Icon-Set" transform="translate(-312.000000, -726.000000)" fill="currentColor">
-                                        <path d="M331,750 C329.343,750 328,748.657 328,747 C328,745.343 329.343,744 331,744 C332.657,744 334,745.343 334,747 C334,748.657 332.657,750 331,750 L331,750 Z M317,742 C315.343,742 314,740.657 314,739 C314,737.344 315.343,736 317,736 C318.657,736 320,737.344 320,739 C320,740.657 318.657,742 317,742 L317,742 Z M331,728 C332.657,728 334,729.343 334,731 C334,732.657 332.657,734 331,734 C329.343,734 328,732.657 328,731 C328,729.343 329.343,728 331,728 L331,728 Z M331,742 C329.23,742 327.685,742.925 326.796,744.312 L321.441,741.252 C321.787,740.572 322,739.814 322,739 C322,738.497 321.903,738.021 321.765,737.563 L327.336,734.38 C328.249,735.37 329.547,736 331,736 C333.762,736 336,733.762 336,731 C336,728.238 333.762,726 331,726 C328.238,726 326,728.238 326,731 C326,731.503 326.097,731.979 326.235,732.438 L320.664,735.62 C319.751,734.631 318.453,734 317,734 C314.238,734 312,736.238 312,739 C312,741.762 314.238,744 317,744 C318.14,744 319.179,743.604 320.02,742.962 L320,743 L326.055,746.46 C326.035,746.64 326,746.814 326,747 C326,749.762 328.238,752 331,752 C333.762,752 336,749.762 336,747 C336,744.238 333.762,742 331,742 L331,742 Z"/>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span>Share</span>
-                        </button>
-                    </div>
-
                 </div>
 
             </div>
@@ -374,13 +361,28 @@
                 <div class="ml-2 dropdown" id="button-submit">
                     <button type="button"
                             onclick="submitDropdown()"
-                            class="dropbtn submit static px-1">
-                        Submit ⌄
+                            class="submit static flex justify-center items-center">
+                        <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.6097 5.20743C21.0475 5.54416 21.1294 6.17201 20.7926 6.60976L10.7926 19.6098C10.6172 19.8378 10.352 19.9793 10.0648 19.9979C9.77765 20.0166 9.49637 19.9106 9.29289 19.7072L4.29289 14.7072C3.90237 14.3166 3.90237 13.6835 4.29289 13.2929C4.68342 12.9024 5.31658 12.9024 5.70711 13.2929L9.90178 17.4876L19.2074 5.39034C19.5441 4.95258 20.172 4.87069 20.6097 5.20743Z" fill="currentColor"/>
+                        </svg>
+                        <span class="dropbtn">Submit ⌄</span>
                     </button>
                     <div id="submit-dropdown" class="dropdown-content dropdown-content-submit space-y-3 p-3 -ml-[50px] w-[200px] max-w-[200px]">
                         <span class="text-center" onclick="submitInterest(false)">Submit</span>
                         <span class="text-center" onclick="submitInterest(true)">Submit and discover new sources</span>
                     </div>
+                </div>
+                <div id="area-button-share" style="display: none">
+                    <button id="button-share" type="button" class="flex justify-center text-center w-[100px] items-center">
+                        <svg width="21px" height="21px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding-top: 2px">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Icon-Set" transform="translate(-312.000000, -726.000000)" fill="currentColor">
+                                    <path d="M331,750 C329.343,750 328,748.657 328,747 C328,745.343 329.343,744 331,744 C332.657,744 334,745.343 334,747 C334,748.657 332.657,750 331,750 L331,750 Z M317,742 C315.343,742 314,740.657 314,739 C314,737.344 315.343,736 317,736 C318.657,736 320,737.344 320,739 C320,740.657 318.657,742 317,742 L317,742 Z M331,728 C332.657,728 334,729.343 334,731 C334,732.657 332.657,734 331,734 C329.343,734 328,732.657 328,731 C328,729.343 329.343,728 331,728 L331,728 Z M331,742 C329.23,742 327.685,742.925 326.796,744.312 L321.441,741.252 C321.787,740.572 322,739.814 322,739 C322,738.497 321.903,738.021 321.765,737.563 L327.336,734.38 C328.249,735.37 329.547,736 331,736 C333.762,736 336,733.762 336,731 C336,728.238 333.762,726 331,726 C328.238,726 326,728.238 326,731 C326,731.503 326.097,731.979 326.235,732.438 L320.664,735.62 C319.751,734.631 318.453,734 317,734 C314.238,734 312,736.238 312,739 C312,741.762 314.238,744 317,744 C318.14,744 319.179,743.604 320.02,742.962 L320,743 L326.055,746.46 C326.035,746.64 326,746.814 326,747 C326,749.762 328.238,752 331,752 C333.762,752 336,749.762 336,747 C336,744.238 333.762,742 331,742 L331,742 Z"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <span>Share</span>
+                    </button>
                 </div>
 
             </div>

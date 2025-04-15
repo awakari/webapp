@@ -301,18 +301,11 @@ function loadInterestDetailsById(id) {
                 const cond = data.cond;
                 if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("sc") || cond.hasOwnProperty("tc")) {
                     conds.push(cond);
-                    addConditionSemantic(false, "", 0.85);
                 } else if (cond.hasOwnProperty("gc")) {
                     document.getElementById("logic-select").selectedIndex = cond.gc.logic;
                     const children = cond.gc.group;
                     for (let i = 0; i < children.length; i++) {
                         conds.push(children[i]);
-                    }
-                    if (children.length < 1) {
-                        addConditionSemantic(false, "", 0.85);
-                    }
-                    if (children.length < 2) {
-                        addConditionText(false, "", "", false);
                     }
                 }
             }
@@ -470,10 +463,8 @@ function loadInterestDetailsByQuery(q) {
     document.getElementById("button-delete").style.display = "none";
     if (q && q.length > 0) {
         addConditionSemantic(false, q, 0.85);
-    } else {
-        addConditionSemantic(false, "", 0.85);
+        addConditionText(false, "", q, false);
     }
-    addConditionText(false, "", "", false);
     displayConditions();
 }
 
@@ -792,7 +783,15 @@ function displayConditions() {
             });
         }
     }
-    //
+
+    if (countConds < 1) {
+        elemConds.innerHTML = '<i>(No filters defined)</i>';
+    }
+    if (countConds > 1) {
+        document.getElementById("multiple-filters-logic").style.display = "flex";
+    } else {
+        document.getElementById("multiple-filters-logic").style.display = "none";
+    }
     if (countConds < countCondsMax) {
         document.getElementById("add-condition").style.display = "block";
     } else {

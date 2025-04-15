@@ -113,7 +113,7 @@
                                minlength="3"
                                class="w-full text-xl text-center"
                                style="height: 28px"
-                               placeholder="Get updates about..."/>
+                               placeholder="Get relevant updates about..."/>
                     </form>
                 </div>
                 <div class="justify-center grid grid-cols-3 w-80 mx-auto">
@@ -211,64 +211,67 @@
             </div>
 
             <div>
-                <span class="tooltip">
-                    Filters:
-                    <span class="tooltiptext" style="width: 320px">
-                        <p>Filters are necessary to capture new events.</p>
-                        <p>Define 1-5 meaningful filters.</p>
-                        <p>Note that empty filters are discarded.</p>
-                    </span>
-                </span>
+                <div class="flex">
+                    <div class="flex items-center align-middle">
+                        <span class="tooltip">
+                            Filters:
+                            <span class="tooltiptext" style="width: 320px">
+                                <p>Filters are necessary to capture new events.</p>
+                                <p>Define 1-5 meaningful filters.</p>
+                                <p>Note that empty filters are discarded.</p>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="grow"></div>
+                    <div id="add-condition">
+                        <div class="dropdown">
+                            <button type="button"
+                                    onclick="condNewDropdown()"
+                                    class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
+                                + Filter ⌄
+                            </button>
+                            <div id="cond-new-dropdown" class="dropdown-content p-2 w-[180px] -ml-[80px]">
+                                <button id="button-add-cond-sem" type="button" class="dropdown-option flex">
+                                    <span class="w-full text-right">Similarity</span>
+                                </button>
+                                <button id="button-add-cond-txt-keywords" type="button" class="dropdown-option flex">
+                                    <span class="w-full text-right">Keywords</span>
+                                </button>
+                                <button id="button-add-cond-txt-exact" type="button" class="dropdown-option flex">
+                                    <span class="w-full text-right">Exact text</span>
+                                </button>
+                                <button id="button-add-cond-num" type="button" class="dropdown-option flex">
+                                    <span class="w-full text-right">Number</span>
+                                </button>
+                                <button id="button-add-cond-example-exclude-wiki" type="button" class="dropdown-option flex">
+                                    <span class="w-full">Example: exclude Wiki</span>
+                                </button>
+                                <button id="button-add-cond-example-price" type="button" class="dropdown-option flex">
+                                    <span class="w-full">Example: price</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="space-y-2 pt-2" id="conditions">
                 </div>
             </div>
 
-            <div class="pt-2 flex space-x-4">
-                <div>
-                    <label class="space-x-1">
-                        <span class="tooltip">
-                            Match
-                            <span class="tooltiptext" style="width: 320px">
-                                <p>Defines how to match multiple filters.</p>
-                            </span>
+            <div id="multiple-filters-logic" class="flex justify-center hidden">
+                <label class="space-x-1">
+                    <span class="tooltip">
+                        Match
+                        <span class="tooltiptext" style="width: 200px">
+                            <p>Defines how to match multiple filters.</p>
                         </span>
-                        <select name="logic" id="logic-select" class="button">
-                            <!-- note value should be the same as the index -->
-                            <option value="0" selected="selected">All</option>
-                            <option value="1">Any</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="grow"></div>
-                <div id="add-condition">
-                    <div class="dropdown">
-                        <button type="button"
-                                onclick="condNewDropdown()"
-                                class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static">
-                            + Filter ⌄
-                        </button>
-                        <div id="cond-new-dropdown" class="dropdown-content p-2 w-[180px] -ml-[80px]">
-                            <button id="button-add-cond-sem" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Similarity</span>
-                            </button>
-                            <button id="button-add-cond-txt-keywords" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Keywords</span>
-                            </button>
-                            <button id="button-add-cond-txt-exact" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Exact text</span>
-                            </button>
-                            <button id="button-add-cond-num" type="button" class="dropdown-option flex">
-                                <span class="w-full text-right">Number</span>
-                            </button>
-                            <button id="button-add-cond-example-exclude-wiki" type="button" class="dropdown-option flex">
-                                <span class="w-full">Example: exclude Wiki</span>
-                            </button>
-                            <button id="button-add-cond-example-price" type="button" class="dropdown-option flex">
-                                <span class="w-full">Example: price</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    </span>
+                    <select name="logic" id="logic-select" class="button">
+                        <!-- note value should be the same as the index -->
+                        <option value="0" selected="selected">All</option>
+                        <option value="1">Any</option>
+                        <option value="2">One</option>
+                    </select>
+                </label>
             </div>
 
 

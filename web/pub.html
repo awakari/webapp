@@ -168,27 +168,27 @@
         </div>
         <div class="flex flex-col sm:flex-row">
             <div class="flex w-80 pl-2 pt-1">
-                <span class="pt-1 w-[200px]">Sources:</span>
-                <button type="button" class="flex justify-center items-center text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static ml-1 px-2 w-[100px]"
+                <span class="pt-1 w-[206px]">Sources:</span>
+                <button type="button" class="flex justify-center items-center text-blue-500 border border-blue-500 h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static w-[100px]"
                         onclick="localStorage.getItem(keyUserId) ? window.location.assign(`pub-src-new.html?type=${document.getElementById('src_type').value}`) : (confirm('This function is available for signed in users only. Proceed to sign in?') ? window.location.assign('login.html') : console.log('user refused to sign in to continue'))">
                     + Source
                 </button>
             </div>
             <div class="flex flex-col">
-                <div class="w-80 pl-2 flex mt-2 sm:mt-1">
-                    <div class="w-20 flex items-center">
-                        <input type="checkbox" id="own" class="w-4 h-4 accent-slate-500" onchange="loadSources(new URLSearchParams(window.location.search).get('cursor'), document.getElementById('filter').value, document.getElementById('src_type').value, this.checked)">
+                <div class="w-80 pl-2 flex space-x-2 mt-2 sm:mt-1 h-6 items-center">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="own" class="w-4 h-4 accent-slate-500"
+                               onchange="loadSources(new URLSearchParams(window.location.search).get('cursor'), document.getElementById('filter').value, document.getElementById('src_type').value, this.checked)">
                         <label for="own">Own</label>
                     </div>
                     <div class="flex items-center">
-                        <div class="w-10">
-                            <label>Type</label>
-                        </div>
-                        <select id="src_type" class="w-[184px] h-5" onchange="loadSources('', document.getElementById('filter').value, this.value, document.getElementById('own').checked)">
-                            <option value="feed" selected="selected" class="text-center">Feed, WebSub&nbsp;</option>
-                            <option value="apub" class="text-center">ActivityPub&nbsp;</option>
-                            <option value="tgch" class="text-center">Telegram channel (App)&nbsp;</option>
-                            <option value="tgbc" class="text-center">Telegram channel (Bot)&nbsp;</option>
+                        <select id="src_type" class="h-6"
+                                style="margin-bottom: 2px"
+                                onchange="loadSources('', document.getElementById('filter').value, this.value, document.getElementById('own').checked)">
+                            <option value="feed" selected="selected" class="text-right">Feed, WebSub&nbsp;</option>
+                            <option value="apub" class="text-right">ActivityPub&nbsp;</option>
+                            <option value="tgch" class="text-right">Telegram channel (App)&nbsp;</option>
+                            <option value="tgbc" class="text-right">Telegram channel (Bot)&nbsp;</option>
                         </select>
                     </div>
                 </div>

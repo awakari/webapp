@@ -817,6 +817,10 @@ document
     .addEventListener("click", (_) => { addConditionNumber(false, "", 3, 0); displayConditions(); });
 
 document
+    .getElementById("button-add-cond-example-exact-text-fragment")
+    .addEventListener("click", (_) => { addConditionText(true, "", "'John Doe'", false); displayConditions(); });
+
+document
     .getElementById("button-add-cond-example-exclude-wiki")
     .addEventListener("click", (_) => { addConditionText(true, "source", "https://stream.wikimedia.org/v2/stream/recentchange", true); displayConditions(); });
 
@@ -1029,22 +1033,32 @@ function validateTextCondition(q, nConds, isExact) {
         const seg = new Intl.Segmenter(undefined, {granularity: "word"});
         const terms = [...seg.segment(q)];
         let keywordCount = 0;
+        let inExactPhrase = false;
         for (const i in terms) {
             const term = terms[i];
             const txt = term.segment;
-            if (term.isWordLike) {
-                const txtByteLen = new TextEncoder().encode(txt).length;
-                if ((nConds < 2 && txtByteLen < 3) || txtByteLen < 2) {
-                    alert(`Keyword "${txt}" is too short. Please fix the filter condition.`);
-                    ok = false;
-                    break;
+            if (txt === "'") {
+                if (inExactPhrase) {
+                    keywordCount ++;
                 }
-                keywordCount ++;
-            } else {
-                if (txt !== " ") {
-                    alert(`"${txt}" is not allowed keyword. Please specify space-separated keywords only.`);
-                    ok = false;
-                    break;
+                inExactPhrase = !inExactPhrase;
+                continue;
+            }
+            if (!inExactPhrase) {
+                if (term.isWordLike) {
+                    const txtByteLen = new TextEncoder().encode(txt).length;
+                    if ((nConds < 2 && txtByteLen < 3) || txtByteLen < 2) {
+                        alert(`Keyword "${txt}" is too short. Please fix the filter condition.`);
+                        ok = false;
+                        break;
+                    }
+                    keywordCount ++;
+                } else {
+                    if (txt !== " ") {
+                        alert(`"${txt}" is not allowed keyword. Please specify space-separated keywords only.`);
+                        ok = false;
+                        break;
+                    }
                 }
             }
         }

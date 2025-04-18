@@ -281,6 +281,11 @@
 
         <div class="container mx-auto px-2 pt-4 sm:pt-0">
             <div class="mx-auto max-w-3xl text-gray-700 dark:text-gray-300 space-y-4 sm:space-y-0">
+                <div class="flex justify-center mx-auto">
+                    <canvas id="matrix" class="w-80 h-32">
+                        <script src="matrix.js"></script>
+                    </canvas>
+                </div>
                 <div class="grid grid-cols-3 justify-center space-x-2 mr-8 sm:mx-auto text-center max-w-xl text-2xl sm:text-5xl">
                     <div class="logo-left flex text-indigo-600 dark:text-indigo-400 sm:my-auto text-right">
                         Follow Your Interest</div>
@@ -290,48 +295,124 @@
                     <div class="logo-right flex text-cyan-600 dark:text-cyan-500 sm:my-auto text-left">
                         From Unlimited Sources</div>
                 </div>
-                <div class="mx-auto max-w-2xl grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-
-                    <div class="flex flex-col py-2 space-y-2 text-lg sm:pl-8 justify-center">
-                        <div class="flex justify-center">
-                            To never miss what is important.</div>
-                        <div class="grid grid-cols-3 space-x-2">
-                            <span class="text-right">
-                                <span id="src-count-feeds"></span>
-                                <img id="src-count-feeds-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
-                            </span>
-                            <span class="col-span-2">News Feeds</span>
-                        </div>
-                        <div class="grid grid-cols-3 space-x-2">
-                            <span class="text-right">
-                                <span id="src-count-socials"></span>
-                                <img id="src-count-socials-wait"  src="wait.gif" height="24" width="24" alt="loading..."/>
-                            </span>
-                            <span class="col-span-2">Social Channels</span>
-                        </div>
-                        <div class="grid grid-cols-3 space-x-2">
-                            <span class="text-right">
-                                <span id="src-count-realtime"></span>
-                                <img id="src-count-realtime-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
-                            </span>
-                            <span class="col-span-2">Realtime Streams</span>
-                        </div>
-                        <div class="grid grid-cols-3 space-x-2">
-                            <span class="text-right">
-                                <b>＋</b>
-                            </span>
-                            <span class="col-span-2">More other sources</span>
-                        </div>
+                <div class="grid grid-cols-3 justify-center space-x-2 mr-8 sm:mx-auto text-center max-w-sm text-lg pt-1 sm:pt-4 text-violet-700 dark:text-violet-400">
+                    <div class="flex justify-end">
+                        <svg width="32px" height="32px" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L7.81066 17.25L15 17.25C15.4142 17.25 15.75 17.5858 15.75 18C15.75 18.4142 15.4142 18.75 15 18.75L6 18.75C5.58579 18.75 5.25 18.4142 5.25 18L5.25 9C5.25 8.58579 5.58579 8.25 6 8.25C6.41421 8.25 6.75 8.58579 6.75 9L6.75 16.1893L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967Z" fill="currentColor"/>
+                        </svg>
                     </div>
-                    <div class="flex justify-center sm:justify-end">
-                        <picture>
-                            <!-- User prefers light mode: -->
-                            <source srcset="how-it-works/header-light.png" media="(prefers-color-scheme: light)"/>
-                            <!-- User prefers dark mode: -->
-                            <source srcset="how-it-works/header-dark.png"  media="(prefers-color-scheme: dark)"/>
-                            <!-- User has no color preference: -->
-                            <img src="how-it-works/header-light.png" alt="how it works"/>
-                        </picture>
+                    <div class="flex justify-center">
+                        <svg width="32px" height="32px" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.25C12.4142 3.25 12.75 3.58579 12.75 4L12.75 18.1893L17.4697 13.4697C17.7626 13.1768 18.2374 13.1768 18.5303 13.4697C18.8232 13.7626 18.8232 14.2374 18.5303 14.5303L12.5303 20.5303C12.3897 20.671 12.1989 20.75 12 20.75C11.8011 20.75 11.6103 20.671 11.4697 20.5303L5.46967 14.5303C5.17678 14.2374 5.17678 13.7626 5.46967 13.4697C5.76256 13.1768 6.23744 13.1768 6.53033 13.4697L11.25 18.1893L11.25 4C11.25 3.58579 11.5858 3.25 12 3.25Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="flex justify-start">
+                        <svg width="32px" height="32px" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L17.25 16.1893L17.25 9C17.25 8.58579 17.5858 8.25 18 8.25C18.4142 8.25 18.75 8.58579 18.75 9L18.75 18C18.75 18.4142 18.4142 18.75 18 18.75L9 18.75C8.58579 18.75 8.25 18.4142 8.25 18C8.25 17.5858 8.58579 17.25 9 17.25L16.1893 17.25L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="flex justify-center pt-2">
+                        <svg fill="currentColor" height="48px" width="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             viewBox="50 -200 600 300" xml:space="preserve">
+                            <g transform="rotate(-45)">
+                                <path d="M478.264,14.017c-18.692-18.683-49.106-18.678-67.798,0.005c-8.885,8.885-13.409,20.428-13.847,32.093
+                                    c-23.535-14.52-50.612-22.434-78.961-22.434c-40.317,0-78.221,15.702-106.731,44.212l-52.673,52.668
+                                    c-30.702,30.697-83.798,50.457-138.587,51.562c-8.173,0.168-15.154,4.986-18.202,12.577c-3.029,7.519-1.279,16.087,4.462,21.817
+                                    l83.54,83.54c-24.62,31.514-22.497,77.277,6.489,106.263c15.673,15.673,36.26,23.505,56.846,23.505
+                                    c17.486,0,34.941-5.71,49.416-17.017l83.546,83.546c3.865,3.865,9.019,5.923,14.269,5.923c2.538,0,5.096-0.481,7.548-1.462
+                                    c7.586-3.058,12.413-10.034,12.577-18.212c1.106-54.788,20.865-107.889,51.558-138.582l52.673-52.668
+                                    c50.312-50.316,57.459-127.547,21.739-185.688c11.68-0.429,23.24-4.95,32.136-13.841V81.82
+                                    C496.956,63.127,496.956,32.714,478.264,14.017z M109.879,382.396c-21.281-21.285-23.25-54.48-6.255-78.183l84.436,84.436
+                                    C164.355,405.636,131.168,403.681,109.879,382.396z M410.466,267.43l-52.673,52.668c-34.154,34.144-56.115,92.428-58.106,152.332
+                                    L19.85,192.594l0.221-0.779c59.663-1.212,117.952-23.178,152.106-57.332l52.673-52.668c24.788-24.788,57.75-38.442,92.808-38.442
+                                    c35.051,0,68.005,13.65,92.793,38.428c0.006,0.006,0.009,0.013,0.015,0.019c0.005,0.005,0.011,0.008,0.017,0.013
+                                    C461.638,133.007,461.633,216.263,410.466,267.43z M464.341,67.892c-11.004,11.009-28.906,11.016-39.936,0.018
+                                    c-0.006-0.006-0.01-0.012-0.016-0.018c-0.005-0.005-0.01-0.009-0.015-0.014c-10.992-11.016-10.989-28.925,0.015-39.933
+                                    c5.51-5.505,12.74-8.255,19.971-8.255c7.24,0,14.471,2.75,19.981,8.255C475.351,38.959,475.351,56.877,464.341,67.892z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="flex justify-center pt-2">
+                        <svg fill="currentColor" height="48px" width="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             viewBox="50 -200 600 300" xml:space="preserve">
+                            <g transform="rotate(-45)">
+                                <path d="M478.264,14.017c-18.692-18.683-49.106-18.678-67.798,0.005c-8.885,8.885-13.409,20.428-13.847,32.093
+                                    c-23.535-14.52-50.612-22.434-78.961-22.434c-40.317,0-78.221,15.702-106.731,44.212l-52.673,52.668
+                                    c-30.702,30.697-83.798,50.457-138.587,51.562c-8.173,0.168-15.154,4.986-18.202,12.577c-3.029,7.519-1.279,16.087,4.462,21.817
+                                    l83.54,83.54c-24.62,31.514-22.497,77.277,6.489,106.263c15.673,15.673,36.26,23.505,56.846,23.505
+                                    c17.486,0,34.941-5.71,49.416-17.017l83.546,83.546c3.865,3.865,9.019,5.923,14.269,5.923c2.538,0,5.096-0.481,7.548-1.462
+                                    c7.586-3.058,12.413-10.034,12.577-18.212c1.106-54.788,20.865-107.889,51.558-138.582l52.673-52.668
+                                    c50.312-50.316,57.459-127.547,21.739-185.688c11.68-0.429,23.24-4.95,32.136-13.841V81.82
+                                    C496.956,63.127,496.956,32.714,478.264,14.017z M109.879,382.396c-21.281-21.285-23.25-54.48-6.255-78.183l84.436,84.436
+                                    C164.355,405.636,131.168,403.681,109.879,382.396z M410.466,267.43l-52.673,52.668c-34.154,34.144-56.115,92.428-58.106,152.332
+                                    L19.85,192.594l0.221-0.779c59.663-1.212,117.952-23.178,152.106-57.332l52.673-52.668c24.788-24.788,57.75-38.442,92.808-38.442
+                                    c35.051,0,68.005,13.65,92.793,38.428c0.006,0.006,0.009,0.013,0.015,0.019c0.005,0.005,0.011,0.008,0.017,0.013
+                                    C461.638,133.007,461.633,216.263,410.466,267.43z M464.341,67.892c-11.004,11.009-28.906,11.016-39.936,0.018
+                                    c-0.006-0.006-0.01-0.012-0.016-0.018c-0.005-0.005-0.01-0.009-0.015-0.014c-10.992-11.016-10.989-28.925,0.015-39.933
+                                    c5.51-5.505,12.74-8.255,19.971-8.255c7.24,0,14.471,2.75,19.981,8.255C475.351,38.959,475.351,56.877,464.341,67.892z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="flex justify-center pt-2">
+                        <svg fill="currentColor" height="48px" width="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             viewBox="50 -200 600 300" xml:space="preserve">
+                            <g transform="rotate(-45)">
+                                <path d="M478.264,14.017c-18.692-18.683-49.106-18.678-67.798,0.005c-8.885,8.885-13.409,20.428-13.847,32.093
+                                    c-23.535-14.52-50.612-22.434-78.961-22.434c-40.317,0-78.221,15.702-106.731,44.212l-52.673,52.668
+                                    c-30.702,30.697-83.798,50.457-138.587,51.562c-8.173,0.168-15.154,4.986-18.202,12.577c-3.029,7.519-1.279,16.087,4.462,21.817
+                                    l83.54,83.54c-24.62,31.514-22.497,77.277,6.489,106.263c15.673,15.673,36.26,23.505,56.846,23.505
+                                    c17.486,0,34.941-5.71,49.416-17.017l83.546,83.546c3.865,3.865,9.019,5.923,14.269,5.923c2.538,0,5.096-0.481,7.548-1.462
+                                    c7.586-3.058,12.413-10.034,12.577-18.212c1.106-54.788,20.865-107.889,51.558-138.582l52.673-52.668
+                                    c50.312-50.316,57.459-127.547,21.739-185.688c11.68-0.429,23.24-4.95,32.136-13.841V81.82
+                                    C496.956,63.127,496.956,32.714,478.264,14.017z M109.879,382.396c-21.281-21.285-23.25-54.48-6.255-78.183l84.436,84.436
+                                    C164.355,405.636,131.168,403.681,109.879,382.396z M410.466,267.43l-52.673,52.668c-34.154,34.144-56.115,92.428-58.106,152.332
+                                    L19.85,192.594l0.221-0.779c59.663-1.212,117.952-23.178,152.106-57.332l52.673-52.668c24.788-24.788,57.75-38.442,92.808-38.442
+                                    c35.051,0,68.005,13.65,92.793,38.428c0.006,0.006,0.009,0.013,0.015,0.019c0.005,0.005,0.011,0.008,0.017,0.013
+                                    C461.638,133.007,461.633,216.263,410.466,267.43z M464.341,67.892c-11.004,11.009-28.906,11.016-39.936,0.018
+                                    c-0.006-0.006-0.01-0.012-0.016-0.018c-0.005-0.005-0.01-0.009-0.015-0.014c-10.992-11.016-10.989-28.925,0.015-39.933
+                                    c5.51-5.505,12.74-8.255,19.971-8.255c7.24,0,14.471,2.75,19.981,8.255C475.351,38.959,475.351,56.877,464.341,67.892z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="flex justify-center">
+                        JOB
+                    </div>
+                    <div class="flex justify-center">
+                        HOBBY
+                    </div>
+                    <div class="flex justify-center">
+                        MENTION
+                    </div>
+                </div>
+                <div class="flex flex-col py-4 space-y-2 text-lg sm:pl-8 justify-center">
+                    <div class="flex justify-center">
+                        Never miss what is important.</div>
+                    <div class="grid grid-cols-3 space-x-2">
+                        <span class="text-right">
+                            <span id="src-count-feeds"></span>
+                            <img id="src-count-feeds-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
+                        </span>
+                        <span class="col-span-2">News Feeds</span>
+                    </div>
+                    <div class="grid grid-cols-3 space-x-2">
+                        <span class="text-right">
+                            <span id="src-count-socials"></span>
+                            <img id="src-count-socials-wait"  src="wait.gif" height="24" width="24" alt="loading..."/>
+                        </span>
+                        <span class="col-span-2">Social Channels</span>
+                    </div>
+                    <div class="grid grid-cols-3 space-x-2">
+                        <span class="text-right">
+                            <span id="src-count-realtime"></span>
+                            <img id="src-count-realtime-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
+                        </span>
+                        <span class="col-span-2">Realtime Streams</span>
+                    </div>
+                    <div class="grid grid-cols-3 space-x-2">
+                        <span class="text-right">
+                            <b>＋</b>
+                        </span>
+                        <span class="col-span-2">More other sources</span>
                     </div>
                 </div>
             </div>

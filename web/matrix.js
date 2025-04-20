@@ -1,8 +1,7 @@
 const canvas = document.getElementById("matrix");
 const context = canvas.getContext('2d');
 
-const alphabet = '0123456789aBcDeFgHiJkLmQRsTUvWXyZ▶@@@@@@@@@@$$$$$#ᕔᘎᘕᚦᚠᚱᛜᛝᛟ☑אقڜ✓±∑£₿₿₿₿₿₿₿₿₿₿∀∈¥¥∞∫≈≤≥⊃⊳Ⅺ¾½⅔㊷ðöëЫЙЯЮαβγδεζηθλμπρσω©༜?!⌲⌧⌧⌧⌧⌧℃⎈⏵⏯⏾▱▽◇◆◊○☀☂☆♙♡♡♡♡♡♪♪♫♫♬♬♥♥⚙⚠⚛⛁⛭✈✻➤§';
-
+const alphabet = '0123456789aBcDeFgHiJkLmQRsTUvWXyZ▶@$#ᕔᘎᘕᚦᚠᚱᛜᛝᛟ☑אقڜ✓±∑£₿∀∈¥¥∞∫≈≤≥⊃⊳Ⅺ¾㊷ðöëЫЙЯЮαβγδεζηθλμπρσω©༜?!⌲⌧℃⎈⏵⏯⏾▱▽◇◆◊○☀☂☆♙♡♪♫♫♬♥⚙⚠⚛⛁⛭✈✻➤§⎆₽€℀⍾☀☊☏☭♮⚖⛗⛿⛱⚿⚳⚹⏎⏚⻚㒵㓁丹书人仿体凡ꯃ¢¤µÅÄ¿æईऄसशऋॠஇౙༀ࿑ཨཀྵཛྷ༗ᤈᤞᤁᤃᵠ☯☾☈☽♯▷◺◹ⰅⰁⱍⱇⰮⰡⰐⰒ⼥⾯㒵㔹👁½⅔∰∯∮∗∑𖹃𖹕꧱ꩾ';
 const fontSize = 20;
 const columns = canvas.width/fontSize;
 

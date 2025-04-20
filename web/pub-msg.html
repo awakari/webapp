@@ -18,6 +18,7 @@
     <script src="auth.js"></script>
     <script src="api/response.js"></script>
     <script src="api/metrics.js"></script>
+    <script src="api/interests.js"></script>
     <script src="attrs.js"></script>
     <script src="api/events.js"></script>
     <script src="xksuid.js"></script>
@@ -36,7 +37,7 @@
             <a href="index.html" class="flex justify-center items-center">
                 <img src="logo-color.svg" alt="home" width="24" height="24"/>
             </a>
-            <span>Message Details</span>
+            <span id="title">Message Details</span>
         </div>
         <div class="grow"></div>
         <div class="flex items-center justify-center">
@@ -76,25 +77,29 @@
 <div class="m-1 flex-1 flex flex-col space-y-1">
     <div class="flex justify-center dark:text-gray-300 m-1">
         <form class="space-y-2 min-w-[264px] sm:w-[624px] max-w-[1024px]">
-            <label for="msg_txt_data">
-                Text
-            </label>
-            <textarea
-                    id="msg_txt_data"
-                    rows="5"
-                    class="border text-sm w-full focus:shadow-md outline-none"
-                    placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..."></textarea>
+            <fieldset id="msg_txt_data_area" class="p-1" style="border-radius: 0">
+                <legend class="px-1">
+                    Text
+                </legend>
+                <pre id="msg_txt_data"
+                     style="white-space: pre-wrap; word-wrap: break-word; border: none; outline: none"
+                     contenteditable="true"
+                     autofocus="autofocus"
+                     class="border text-sm w-full outline-none"></pre>
+            </fieldset>
             <span>
                 <p class="pt-2">Attributes</p>
                 <div id="msg_attrs_form"></div>
                 <span id="attr-add" class="flex w-full text-sm h-[24x] min-h-[24px] items-center mt-1 space-x-1">
                     <input type="text"
                            id="msg_attr_name"
-                           class="min-w-[64px] truncate border focus:shadow-md outline-none"
+                           class="w-20 border focus:shadow-md outline-none"
                            style="text-transform: lowercase"
+                           placeholder="key"
                            list="msg_attr_name_opts"/>
                     <datalist id="msg_attr_name_opts"></datalist>
-                    <select id="msg_attr_type" class="min-w-[64px] truncate focus:shadow-md outline-none h-5 px-1">
+                    <select id="msg_attr_type"
+                            class="w-20 focus:shadow-md outline-none h-5 px-1">
                         <option>boolean</option>
                         <option>bytes</option>
                         <option>integer</option>
@@ -103,11 +108,11 @@
                         <option>uri</option>
                         <option>uri_ref</option>
                     </select>
-                    <input type="text"
-                           placeholder="value"
-                           id="msg_attr_value"
-                           class="w-full truncate border focus:shadow-md outline-none"
-                           list="msg_attr_val_opts"/>
+                    <textarea rows="1"
+                              placeholder="value"
+                              id="msg_attr_value"
+                              class="w-full border focus:shadow-md outline-none"
+                              list="msg_attr_val_opts"></textarea>
                     <datalist id="msg_attr_val_opts"></datalist>
                     <button type="button" title="Add Attribute" onclick="addMessageAttribute();" class="ml-1 text-md focus:outline-none flex items-center justify-center h-[24x] max-h-[24px]">
                         <span class="px-1">+</span>
@@ -115,9 +120,13 @@
                 </span>
                 <textarea id="msg_attrs" rows="10" disabled="disabled" hidden="hidden" class="border text-sm w-full focus:shadow-md outline-none"></textarea>
             </span>
-            <span class="flex space-x-2 pt-1">
-                <label for="msg_id" class="pt-1">Id</label>
+            <span class="flex space-x-2 pt-1 items-center">
+                <label for="msg_id" class="min-w-16 w-16">Id</label>
                 <input type="text" id="msg_id" disabled="disabled" value="" class="border w-full focus:shadow-md outline-none text-sm text-slate-700"/>
+            </span>
+            <span class="flex space-x-2 pt-1 items-center" id="interestIdArea" style="display: none">
+                <label class="min-w-16 w-16">Interest</label>
+                <a id="interestId" class="text-blue-500">yohoho</a>
             </span>
             <p class="text-stone-500 flex flex-row space-x-1">
                 <span>

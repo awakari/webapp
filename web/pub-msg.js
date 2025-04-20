@@ -1,25 +1,83 @@
-templateMsgAttr = (name, type, value, required) => ` <span id="msg_attr_${name}" class="mt-1 flex w-full text-sm h-[24x] min-h-[24px] items-center space-x-1">
-                        <input type="text" id="msg_attr_${name}_" value="${name}" disabled="disabled" class="${required ? 'border-none' : 'border'} min-w-[64px] truncate focus:shadow-md outline-none"/>
-                        <p id="msg_attr_type_${name}" class="min-w-[64px] truncate">${type}</p>
-                        <input type="text" id="msg_attr_val_${name}" value="${value}" disabled="disabled" class="${required ? 'min-w-[124px] border-none' : 'border'} w-full truncate focus:shadow-md outline-none text-slate-700"/>
-                        <div style="${required ? 'display: none': ''}">
-                            <button type="button" title="Delete Attribute" onclick="deleteMessageAttribute('${name}');" class="text-md focus:outline-none flex items-center justify-center h-[24px] max-h-[24px]">
-                                <span class="px-1">‒</span>
-                            </button>
-                        </div>
-                    </span>`;
+templateEventAttr = (name, nameFmt, type, value, required) => `
+                <fieldset class="p-2" id="msg_attr_${name}" >
+                    <legend class="flex space-x-1 w-full px-1 h-5 pt-1 font-monospace">
+                        <span id="msg_attr_${name}_" class="w-40">${nameFmt}</span>
+                        <span class="text-slate-500 w-20" id="msg_attr_type_${name}">${type}</span>
+                        <hr class="grow" style="height: 1px; margin-top: 6px; margin-right: -4px;"/>
+                        <svg fill="currentColor"
+                             width="16px"
+                             height="16px"
+                             viewBox="-3.5 0 19 19"
+                             xmlns="http://www.w3.org/2000/svg"
+                             class="cf-icon-svg text-stone-500 sub-cond-delete-button place-self-end"
+                             style="${required ? 'display: none' : 'display: block'}"
+                             onclick="deleteMessageAttribute('${name}')">
+                            <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/>
+                        </svg>
+                    </legend>
+                    <pre id="msg_attr_val_${name}"
+                         style="white-space: pre-wrap; word-wrap: break-word"
+                         class="max-w-80 text-slate-700 dark:text-slate-400">${value}</pre>
+                </fieldset>
+`;
+
+function autoResize(txtArea) {
+    txtArea.style.height = 'auto'; // Reset height
+    txtArea.style.height = txtArea.scrollHeight + 'px'; // Set new height
+}
 
 async function load() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
+    const interestId = urlParams.get("interestId");
     if (id) {
-        await loadEvent(id);
+        document.getElementById("msg_txt_data_area").style.display = "none";
+        if (interestId && interestId.length > 0) {
+            await loadMatch(id, interestId);
+        } else {
+            await loadEvent(id);
+        }
     } else {
         await loadFormNew();
     }
 }
 
-async function loadEvent(id){
+async function loadMatch(id, interestId){
+    document.getElementById("interestIdArea").style.display = "flex";
+    document.getElementById("interestId").href = `sub-details.html?id=${interestId}`;
+    document.getElementById("interestId").innerText = interestId;
+    document.getElementById("title").innerText = "Result Details";
+    const headers = getAuthHeaders();
+    try {
+        return Interests
+            .fetch(interestId, headers)
+            .then(resp => resp ? resp.json() : null)
+            .then(data => {
+                let conds = [];
+                if (data) {
+                    const cond = data.cond;
+                    if (cond.hasOwnProperty("nc") || cond.hasOwnProperty("sc") || cond.hasOwnProperty("tc")) {
+                        conds.push(cond);
+                    } else if (cond.hasOwnProperty("gc")) {
+                        const children = cond.gc.group;
+                        for (let i = 0; i < children.length; i++) {
+                            conds.push(children[i]);
+                        }
+                    }
+                }
+                return conds;
+            })
+            .then(conds => loadEventAndHighlight(id, conds));
+    } catch (e) {
+        return loadEvent(id);
+    }
+}
+
+async function loadEvent(id) {
+    return loadEventAndHighlight(id, []);
+}
+
+async function loadEventAndHighlight(id, conds){
     document.getElementById("msg_id").value = id;
     document.getElementById("button-submit").style.display = "none";
     document.getElementById("button-src-report").style.display = "flex";
@@ -40,24 +98,29 @@ async function loadEvent(id){
                             case "id": {
                                 break;
                             }
-                            case "data": {
-                                document.getElementById("msg_txt_data").value = data.data;
-                                break;
-                            }
                             default: {
-                                const v = data[k];
+                                let v = data[k];
                                 if (Number.isInteger(v)) {
-                                    document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "integer", data[k], true);
+                                    const [lbl, v] = highlightNumberMatch(k, v, conds);
+                                    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, lbl,"integer", v, true);
                                 } else if (typeof v === "boolean") {
-                                    document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "boolean", data[k], true);
+                                    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, k, "boolean", v, true);
                                 } else {
                                     const ts = new Date(v);
+                                    let lbl = k;
                                     if (isNaN(ts)) {
-                                        let txt = data[k];
-                                        txt = txt.replace(/(<([^>]+)>)/gi, "");
-                                        document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "string", txt, true);
+                                        const num = Number.parseFloat(v);
+                                        if (isNaN(num)) {
+                                            let txt = v;
+                                            txt = txt.replace(/(<([^>]+)>)/gi, "");
+                                            [lbl, v] = highlightTextMatches(k, txt, conds);
+                                        } else {
+                                            [lbl, v] = highlightNumberMatch(k, num, conds);
+                                        }
+                                        document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, lbl,"string", v, true);
+                                        autoResize(document.getElementById(`msg_attr_val_${k}`));
                                     } else {
-                                        document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(k, "timestamp", data[k], true);
+                                        document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, k,"timestamp", v, true);
                                     }
                                 }
                                 break;
@@ -71,6 +134,124 @@ async function loadEvent(id){
         });
 }
 
+function highlightNumberMatch(k, v, conds) {
+    for (let i = 0; i < conds.length; i++) {
+        const cond = conds[i];
+        if (cond.hasOwnProperty("nc")) {
+            const nc = cond.nc;
+            if (nc.key === k) {
+                switch (nc.op) {
+                    case 1: {
+                        if (v > nc.val) {
+                            k = `<mark>${k}</mark>`;
+                            v = `<mark>${v}</mark>`;
+                        }
+                        break;
+                    }
+                    case 2: {
+                        if (v >= nc.val) {
+                            k = `<mark>${k}</mark>`;
+                            v = `<mark>${v}</mark>`;
+                        }
+                        break;
+                    }
+                    case 3: {
+                        if (v === nc.val) {
+                            k = `<mark>${k}</mark>`;
+                            v = `<mark>${v}</mark>`;
+                        }
+                        break;
+                    }
+                    case 4: {
+                        if (v <= nc.val) {
+                            k = `<mark>${k}</mark>`;
+                            v = `<mark>${v}</mark>`;
+                        }
+                        break;
+                    }
+                    case 5: {
+                        if (v < nc.val) {
+                            k = `<mark>${k}</mark>`;
+                            v = `<mark>${v}</mark>`;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return [k, v];
+}
+
+function highlightTextMatches(k, v, conds) {
+    for (let i = 0; i < conds.length; i++) {
+        const cond = conds[i];
+        if (cond.hasOwnProperty("sc") && k === "snippet") {
+            v = highlightSemanticConditionMatches(v, cond.sc);
+        }
+        if (cond.hasOwnProperty("tc")) {
+            const tc = cond.tc;
+            if (!tc.hasOwnProperty("key") || tc.key === "") {
+                v = highlightTextConditionMatches(v, cond.tc);
+            } else if(tc.key === k) {
+                k = `<mark>${k}</mark>`;
+                v = highlightTextConditionMatches(v, cond.tc);
+            }
+        }
+    }
+    return [k, v];
+}
+
+function highlightSemanticConditionMatches(v, sc) {
+    const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+    const terms = [...seg.segment(sc.query)];
+    for (const i in terms) {
+        const term = terms[i];
+        if (term.isWordLike) {
+            const kw = term.segment;
+            const regex = new RegExp(`(${kw})`, 'gi');
+            try {
+                v = v.replace(regex, '<mark>$1</mark>');
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    return v;
+}
+
+function highlightTextConditionMatches(v, tc) {
+    if (tc.exact) {
+        if (tc.term === v) {
+            v = `<mark>${v}</mark>`;
+        }
+    } else {
+        const seg = new Intl.Segmenter(undefined, {granularity: "word"});
+        const terms = [...seg.segment(tc.term)];
+        for (const i in terms) {
+            const term = terms[i];
+            if (term.isWordLike) {
+                const kw = term.segment;
+                const regex = new RegExp(`(${kw})`, 'gi');
+                try {
+                    v = v.replace(regex, '<mark>$1</mark>');
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        }
+    }
+    return v;
+}
+
+function escapeHTML(str) {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 async function loadFormNew() {
     document.getElementById("button-src-report").style.display = "none";
     document.getElementById("button-submit").style.display = "flex";
@@ -239,7 +420,7 @@ function addMessageAttribute() {
         putMessageAttribute(name, type, value, false);
         // reset
         document.getElementById("msg_attr_name").value = "";
-        document.getElementById("msg_attr_type").value = "";
+        document.getElementById("msg_attr_type").value = "string";
         document.getElementById("msg_attr_value").value = "";
     }
 }
@@ -253,7 +434,8 @@ function putMessageAttribute(name, type, value, required) {
     if (replace) {
         document.getElementById(`msg_attr_${name}`).remove();
     }
-    document.getElementById("msg_attrs_form").innerHTML += templateMsgAttr(name, type, value, required);
+    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(name, name, type, value, required);
+    autoResize(document.getElementById(`msg_attr_val_${name}`));
 }
 
 function deleteMessageAttribute(name) {
@@ -271,7 +453,7 @@ function submitMsg() {
         source: "https://awakari.com/pub-msg.html",
         type: "com_awakari_webapp",
         attributes: JSON.parse(document.getElementById("msg_attrs").value),
-        text_data: document.getElementById("msg_txt_data").value,
+        text_data: document.getElementById("msg_txt_data").innerText,
     }
     document.getElementById("wait").style.display = "block";
     const headers = getAuthHeaders();

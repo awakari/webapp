@@ -100,27 +100,28 @@ async function loadEventAndHighlight(id, conds){
                             }
                             default: {
                                 let v = data[k];
+                                let lbl = k;
+                                let val = v;
                                 if (Number.isInteger(v)) {
-                                    const [lbl, v] = highlightNumberMatch(k, v, conds);
-                                    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, lbl,"integer", v, true);
+                                    const [lbl, val] = highlightNumberMatch(k, v, conds);
+                                    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, lbl,"integer", val, true);
                                 } else if (typeof v === "boolean") {
-                                    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, k, "boolean", v, true);
+                                    document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, k, "boolean", val, true);
                                 } else {
                                     const ts = new Date(v);
-                                    let lbl = k;
                                     if (isNaN(ts)) {
                                         const num = Number.parseFloat(v);
                                         if (isNaN(num)) {
                                             let txt = v;
                                             txt = txt.replace(/(<([^>]+)>)/gi, "");
-                                            [lbl, v] = highlightTextMatches(k, txt, conds);
+                                            [lbl, val] = highlightTextMatches(k, txt, conds);
                                         } else {
-                                            [lbl, v] = highlightNumberMatch(k, num, conds);
+                                            [lbl, val] = highlightNumberMatch(k, num, conds);
                                         }
-                                        document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, lbl,"string", v, true);
+                                        document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, lbl,"string", val, true);
                                         autoResize(document.getElementById(`msg_attr_val_${k}`));
                                     } else {
-                                        document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, k,"timestamp", v, true);
+                                        document.getElementById("msg_attrs_form").innerHTML += templateEventAttr(k, k,"timestamp", val, true);
                                     }
                                 }
                                 break;

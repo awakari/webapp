@@ -210,7 +210,7 @@ function highlightSemanticConditionMatches(v, sc) {
         const term = terms[i];
         if (term.isWordLike) {
             const kw = term.segment;
-            const regex = new RegExp(`(${kw})`, 'gi');
+            const regex = new RegExp(`(${kw})`, 'giu');
             try {
                 v = v.replace(regex, '<mark>$1</mark>');
             } catch (e) {
@@ -233,7 +233,7 @@ function highlightTextConditionMatches(v, tc) {
             const term = terms[i];
             if (term.isWordLike) {
                 const kw = term.segment;
-                const regex = new RegExp(`(${kw})`, 'gi');
+                const regex = new RegExp(`(${kw})`, 'giu');
                 try {
                     v = v.replace(regex, '<mark>$1</mark>');
                 } catch (e) {

@@ -32,7 +32,7 @@ async function requestIncreasePublishingLimit(objId) {
                         ce_string: userIdCurrent,
                     },
                 },
-                text_data: `User ${userIdCurrent} requests to increase the publishing limit for ${objId} by ${inc}`,
+                text_data: `User ${userIdCurrent} requests to increase the publishing limit for ${objId} by ${input}`,
             }
             const headers = getAuthHeaders();
             if (await Events.publishInternal(payload, headers)) {

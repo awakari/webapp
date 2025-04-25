@@ -97,7 +97,22 @@
     </div>
 
     <fieldset class="m-2 flex items-center p-2">
-        <legend class="px-1">Access</legend>
+        <legend class="px-1">
+            <span class="tooltip">
+                Access
+                <span class="tooltiptext">
+                    <p>
+                        Basic access has default limits.
+                        To customize it's necessary to upgrade an account.
+                        Upgrade has few steps:</p>
+                    <p>1. Login to the new account.</p>
+                    <p>2. Transfer user data (optional).</p>
+                    <p>3. Choose a support tier.</p>
+                    <p>4. Refresh this page to see changes.</p>
+                    <p>Access limits are applied automatically.</p>
+                </span>
+            </span>
+        </legend>
         <div class="p-1 flex flex-col space-y-2 w-full">
             <pre id="user-status" class="mx-auto">Basic</pre>
             <button class="w-50 h-10 mx-auto transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none flex space-x-2 items-center"

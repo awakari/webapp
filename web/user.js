@@ -82,10 +82,68 @@ function moveUserData(userIdSrc, authTokenSrc) {
             if (resp.ok) {
                 alert("Your data have been successfully moved to the new account");
             } else {
+
+                const userId = localStorage.getItem(keyUserId);
+                const payload = {
+                    id: Events.newId(),
+                    specVersion: "1.0",
+                    source: "awakari.com",
+                    type: "com_awakari_webapp",
+                    attributes: {
+                        action: {
+                            ce_string: "chown",
+                        },
+                        cause: {
+                            ce_string: `response: ${resp.status}, ${resp.body}`,
+                        },
+                        object: {
+                            ce_string: userIdSrc,
+                        },
+                        objecturl: {
+                            ce_uri: userIdSrc,
+                        },
+                        subject: {
+                            ce_string: userId,
+                        },
+                    },
+                    text_data: `User ${userId} failed to transfer its data from ${userIdSrc}`,
+                }
+                const headers = getAuthHeaders();
+                Events.publishInternal(payload, headers);
+
                 console.log(`Failed to import the user data: ${resp.status}, ${resp.body}`);
                 alert("Failed to import the user data");
             }
         }).catch(e => {
+
+            const userId = localStorage.getItem(keyUserId);
+            const payload = {
+                id: Events.newId(),
+                specVersion: "1.0",
+                source: "awakari.com",
+                type: "com_awakari_webapp",
+                attributes: {
+                    action: {
+                        ce_string: "chown",
+                    },
+                    cause: {
+                        ce_string: `${e}`,
+                    },
+                    object: {
+                        ce_string: userIdSrc,
+                    },
+                    objecturl: {
+                        ce_uri: userIdSrc,
+                    },
+                    subject: {
+                        ce_string: userId,
+                    },
+                },
+                text_data: `User ${userId} failed to transfer its data from ${userIdSrc}`,
+            }
+            const headers = getAuthHeaders();
+            Events.publishInternal(payload, headers);
+
             console.log(e);
             alert("Failed to import the user data");
         });

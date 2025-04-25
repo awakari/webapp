@@ -16,7 +16,7 @@ templateEventAttr = (name, nameFmt, type, value, required) => `
                         </svg>
                     </legend>
                     <pre id="msg_attr_val_${name}"
-                         style="white-space: pre-wrap; word-wrap: break-word"
+                         style="white-space: pre-wrap; word-wrap: break-word; word-break: break-all"
                          class="text-slate-700 dark:text-slate-400">${value}</pre>
                 </fieldset>
 `;

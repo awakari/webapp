@@ -85,8 +85,15 @@ async function requestPublishingSourceDedicated(addr){
 }
 
 async function requestIncreaseSubscriptionsLimit(userId) {
-    if (confirm("Please upgrade your account")) {
-        window.location.assign("user.html");
+    switch (userId.startsWith("patreon")) {
+        case true:
+            window.open("https://www.patreon.com/c/awakari/membership", "_blank");
+            break;
+        default:
+            if (confirm("Please upgrade your account")) {
+                window.location.assign("user.html");
+            }
+            break;
     }
 }
 

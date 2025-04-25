@@ -21,7 +21,7 @@ async function loadInterests() {
 
     const headers = getAuthHeaders();
     if (!headers["Authorization"]) {
-        window.location.assign(`login.html?redirect=${window.location}`);
+        window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
     }
 
     document.getElementById("wait").style.display = "block";

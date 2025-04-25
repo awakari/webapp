@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="msapplication-TileColor" content="#06b6d4">
+    <meta name="theme-color" content="#06b6d4">
+
+    <title>Awakari App</title>
+
+    <link rel="stylesheet" href="spectre-icons.min.css">
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="base64.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="api/response.js"></script>
+    <script src="requests.js"></script>
+    <script src="user.js"></script>
+
+    <script src="alpinejs-3.13.0.min.js" defer></script>
+
+</head>
+
+<body onload="loadUser()" class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 h-dvh">
+
+<nav x-data="{ isOpen: false }" class="p-1 sm:p-4 items-center justify-center mx-auto">
+
+    <div class="text-xl flex text-slate-700 dark:text-slate-200 max-w-[624px] mx-auto">
+        <div class="flex space-x-1 justify-center items-center">
+            <a href="index.html" class="flex justify-center items-center">
+                <img src="logo-color.svg" alt="home" width="24" height="24"/>
+            </a>
+            <span id="title">User Details</span>
+        </div>
+        <div class="grow"></div>
+        <div class="flex items-center justify-center">
+            <!-- Mobile menu button -->
+            <button x-cloak @click="isOpen = !isOpen" type="button"
+                    class="menu" aria-label="toggle menu">
+                <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/>
+                </svg>
+
+                <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+    <div id="menu" x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+         class="absolute inset-x-0 z-30 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900">
+        <div id="menu-default"
+             class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
+            <a class="flex items-center justify-end text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="sub.html">Interests</a>
+            <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="pub.html">Publishing</a>
+            <a class="flex items-center justify-end text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+               href="user.html">
+                <span id="menu-user-text">(none)</span>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+</nav>
+
+<div class="p-2 flex-col space-y-4 h-5/6 sm:h-fit mx-auto max-w-sm">
+
+    <div class="m-2 grid grid-cols-2 items-center p-2">
+        <span class="px-1">Name</span>
+        <pre class="p-1" id="user-name">user-name</pre>
+        <span class="px-1">Logged in with</span>
+        <pre class="p-1" id="user-login">user-login</pre>
+    </div>
+
+    <div class="flex justify-center mx-auto">
+        <button type="button" class="col-span-2 w-[100px]"
+                onclick="localStorage.getItem(keyUserName) ? logout('index.html') : window.location.assign('index.html')">
+            Exit <i class="fa fa-sign-out"></i>
+        </button>
+    </div>
+
+    <fieldset class="m-2 flex items-center p-2">
+        <legend class="px-1">Access</legend>
+        <div class="p-1 flex flex-col space-y-2 w-full">
+            <pre id="user-status" class="mx-auto">Basic</pre>
+            <button class="w-50 h-10 mx-auto transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none flex space-x-2 items-center"
+                    id="button-upgrade"
+                    onclick="upgrade()">
+                <img src="logo-patreon.svg" width="20px" height="20px">
+                <span>Upgrade with Patreon</span>
+            </button>
+        </div>
+    </fieldset>
+
+    <div class="h-1/4"></div>
+    <div class="flex mx-auto justify-center">
+
+    </div>
+</div>
+
+</body>
+</html>

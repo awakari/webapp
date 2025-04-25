@@ -6,7 +6,10 @@ const keyAuthToken = "authToken";
 
 function load() {
     const urlParams = new URLSearchParams(window.location.search);
-    const redirect = urlParams.get("redirect");
+    let redirect = urlParams.get("redirect");
+    if (redirect) {
+        redirect = decodeURIComponent(redirect);
+    }
     if (localStorage.getItem(keyUserName)) {
         if (redirect) {
             const args = urlParams.get("args");
@@ -27,7 +30,8 @@ function load() {
             localStorage.setItem(keyAuthProvider, urlParams.get(keyAuthProvider));
             const state = urlParams.get("state");
             if (state) {
-                window.location.assign(state);
+                const redirect = Base64.decode(state);
+                window.location.assign(redirect);
             } else {
                 window.location.assign("sub.html");
             }
@@ -103,7 +107,9 @@ function loginWithPatreon() {
             state = `${state}&args=${args}`;
         }
     }
-    state = encodeURIComponent(state);
+    if (state) {
+        state = Base64.encodeURI(state);
+    }
     // Construct the OAuth authorization URL
     const oauthUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${patreonClientId}&redirect_uri=${patreonRedirectUri}&scope=${patreonScope}&state=${state}`;
     // Redirect the user to Patreon's OAuth page

@@ -85,16 +85,8 @@ async function requestPublishingSourceDedicated(addr){
 }
 
 async function requestIncreaseSubscriptionsLimit(userId) {
-    switch (true) {
-        case userId.startsWith("patreon"):
-            window.open("https://www.patreon.com/c/awakari/membership", "_blank");
-            break;
-        default:
-            if (confirm("Available only when logged in with Patreon. Proceed to login?")) {
-                logoutConfirmed();
-                loginWithPatreon();
-            }
-            break;
+    if (confirm("Please upgrade your account")) {
+        window.location.assign("user.html");
     }
 }
 

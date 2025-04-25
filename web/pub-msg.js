@@ -17,7 +17,7 @@ templateEventAttr = (name, nameFmt, type, value, required) => `
                     </legend>
                     <pre id="msg_attr_val_${name}"
                          style="white-space: pre-wrap; word-wrap: break-word"
-                         class="max-w-80 text-slate-700 dark:text-slate-400">${value}</pre>
+                         class="text-slate-700 dark:text-slate-400">${value}</pre>
                 </fieldset>
 `;
 
@@ -27,6 +27,12 @@ function autoResize(txtArea) {
 }
 
 async function load() {
+
+    const headers = getAuthHeaders();
+    if (!headers["Authorization"]) {
+        window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     const interestId = urlParams.get("interestId");
@@ -245,14 +251,6 @@ function highlightTextConditionMatches(v, tc) {
     return v;
 }
 
-function escapeHTML(str) {
-    return str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
 async function loadFormNew() {
     document.getElementById("button-src-report").style.display = "none";
     document.getElementById("button-submit").style.display = "flex";

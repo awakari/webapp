@@ -4,7 +4,7 @@ function handleResponseStatus(obj, code) {
             alert(`Invalid request: ${obj}`);
             break
         case 401:
-            logoutConfirmed(`login.html?redirect=${window.location}`);
+            logoutConfirmed(`login.html?redirect=${encodeURIComponent(window.location)}`);
             break;
         case 404:
             alert(`Not found: ${obj}`);

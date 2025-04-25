@@ -118,6 +118,11 @@ const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
 
 async function loadInterestDetails() {
 
+    const headers = getAuthHeaders();
+    if (!headers["Authorization"]) {
+        window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
+    }
+
     document.getElementById("mode-simple-wait-lang").style.display = "block";
     const langPromise = loadAttributeValues("language", "", getAuthHeaders())
         .then(opts => {

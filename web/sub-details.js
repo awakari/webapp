@@ -264,7 +264,7 @@ function loadInterestDetailsById(id) {
                     document.getElementById("public").checked = data.public;
                     document.getElementById("follow-bluesky").style.display = "block";
                     document.getElementById("follow-bluesky").onclick = () => {
-                        const addrFediverse = `@${id}.activitypub.awakari.com.ap.brid.gy`;
+                        const addrFediverse = `https://bsky.app/profile/did:plc:i53e6y3liw2oaw4s6e6odw5m/feed/${id}`;
                         navigator
                             .clipboard
                             .writeText(addrFediverse)

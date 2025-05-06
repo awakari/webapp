@@ -263,15 +263,7 @@ function loadInterestDetailsById(id) {
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
                     document.getElementById("follow-bluesky").style.display = "block";
-                    document.getElementById("follow-bluesky").onclick = () => {
-                        const addrFediverse = `https://bsky.app/profile/did:plc:i53e6y3liw2oaw4s6e6odw5m/feed/${id}`;
-                        navigator
-                            .clipboard
-                            .writeText(addrFediverse)
-                            .then(() => {
-                                alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Bluesky client app, paste to a search field and follow.`);
-                            });
-                    }
+                    document.getElementById("follow-bluesky").href = `https://bsky.app/profile/did:plc:i53e6y3liw2oaw4s6e6odw5m/feed/${id}`;
                     document.getElementById("follow-fediverse").style.display = "block";
                     document.getElementById("follow-fediverse").onclick = () => {
                         const addrFediverse = `@${id}@activitypub.awakari.com`;

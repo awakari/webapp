@@ -2,11 +2,19 @@ let conds = [];
 const countCondsMax = 5;
 const srcPageLimitPerType = 10;
 
-const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key, similarityMin) => `
+const templateCondHeader = (label, tooltip, idx, countConds, isNot, isSemantic, key, similarityMin) => `
                 <fieldset class="flex p-2">
                     <legend class="flex space-x-2 w-full px-1 h-5 pt-1">
                         <label class="flex space-x-1">
-                            <span>${label}${isSemantic? '' : " in"}</span>
+                            <span>
+                                <span class="tooltip">
+                                    ${label}
+                                    <span class="tooltiptext" style="width: 320px">
+                                        <p>${tooltip}</p>
+                                    </span>
+                                </span>
+                                ${isSemantic? '' : " in"}
+                            </span>
                             <input type="range"
                                    min="0.75"
                                    max="0.95"
@@ -34,7 +42,12 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key, simi
                                    onchange="setConditionNot(${idx}, this); updateDescription()"
                                    ${countConds > 1 ? '' : 'disabled="disabled"'}
                                    ${isNot ? 'checked="checked"' : ''}/>
-                            <span>Not</span>
+                            <span class="tooltip">
+                                Not
+                                <span class="tooltiptext" style="width: 100px">
+                                    <p>When checked: matching this filter excludes from the results.</p>
+                                </span>
+                            </span>
                         </label>
                         <hr class="grow" style="height: 1px; margin-top: 6px; margin-right: -4px;"/>
                         <svg fill="currentColor"
@@ -52,7 +65,7 @@ const templateCondHeader = (label, idx, countConds, isNot, isSemantic, key, simi
 `;
 
 const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
-    templateCondHeader("Text", idx, countConds, isNot, false, key, 0) + `
+    templateCondHeader("Text", "Keywords or exact text matching. Applicable to all content or a specific attribute, e.g. \"source\", \"language\", etc.", idx, countConds, isNot, false, key, 0) + `
                         <legend class="flex pr-1">
                             <select class="rounded-sm w-28 h-5 border-none"
                                     onchange="setConditionTextExact(${idx}, this.value === '2')">
@@ -76,7 +89,7 @@ const templateCondText = (isNot, key, terms, isExact, idx, countConds) =>
 `;
 
 const templateCondSemantic = (isNot, query, similarityMin, idx, countConds) =>
-    templateCondHeader("Similarity", idx, countConds, isNot, true,"", similarityMin) + `
+    templateCondHeader("Similarity", "Semantic text similarity. Calculated as cosine between vectors inferred from the input texts using the natural language model.", idx, countConds, isNot, true,"", similarityMin) + `
                         <legend class="flex pl-1 w-12">
                             <span class="text-nowrap pt-0.5 w-full text-center" id="labelSimilarity${idx}">
                                 ${similarityMin}
@@ -96,7 +109,7 @@ const templateCondSemantic = (isNot, query, similarityMin, idx, countConds) =>
 `;
 
 const templateCondNumber = (isNot, key, op, value, idx, countConds) =>
-    templateCondHeader("Number", idx, countConds, isNot, false, key, 0) + `
+    templateCondHeader("Number", "Numeric comparison filter. Applicable to specific attributes only, e.g. \"offersprice\", \"longitude\", \"magnitude\", etc", idx, countConds, isNot, false, key, 0) + `
                         <legend class="flex pr-1">
                             <select class="rounded-sm w-10 pr-1 h-5 border-none"
                                     onchange="setConditionNumberOp(${idx}, this.value); updateDescription()">
@@ -861,7 +874,7 @@ async function submitInterest(discoverSources) {
             });
         if (existsAndOwn) {
             await updateInterest(id, discoverSources);
-        } else if (confirm("Couldn't update non-own interest. Create a new private interest instead?")) {
+        } else if (confirm("Cannot modify non-own interest. Clone to a new interest instead?")) {
             document.getElementById("id").value = "";
             document.getElementById("public").checked = false;
             await createInterest(discoverSources);

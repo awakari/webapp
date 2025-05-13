@@ -418,16 +418,23 @@
                 </div>
             </div>
 
-            <div class="mx-auto max-w-3xl text-gray-700 dark:text-gray-300">
+            <div class="mx-auto max-w-3xl text-gray-700 dark:text-gray-300 pt-4">
                 <h2 class="px-2 py-2 capitalize text-3xl text-center">Define Your Interest</h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                    <div class="flex justify-start p-2 sm:justify-end">
+                        <picture class="w-[320px]">
+                            <source srcset="interest-details-light.png" media="(prefers-color-scheme: light)"/>
+                            <source srcset="interest-details-dark.png"  media="(prefers-color-scheme: dark)"/>
+                            <img src="interest-details-light.png"/>
+                        </picture>
+                    </div>
                     <div class="space-y-2 py-2 text-lg">
                         <p class="px-2">
-                            No more noise. Leverage advanced filtering capabilities.
+                            Advanced filters to get relevant results:
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -437,8 +444,8 @@
                             <span>Semantic</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -448,8 +455,8 @@
                             <span>Keywords</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -459,8 +466,8 @@
                             <span>Numbers: <i>Price</i>, <i>Location</i>, ...</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -469,20 +476,94 @@
                             </span>
                             <span>Group filters to match <i>All</i> or <i>Any</i></span>
                         </p>
-                    </div>
-                    <div class="flex justify-start p-2 align-middle">
-                        <picture class="w-[320px]">
-                            <source srcset="interest-details-light.png" media="(prefers-color-scheme: light)"/>
-                            <source srcset="interest-details-dark.png"  media="(prefers-color-scheme: dark)"/>
-                            <img src="interest-details-light.png"/>
-                        </picture>
+                        <p class="px-2">
+                            Best for monitoring and alerting.
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a class="text-blue-500" href="https://awakari.com/sub-details.html?example=job-alert">Jobs</a></span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a href="https://awakari.com/sub-details.html?id=Raspberry-Pi" class="text-blue-500">Hobbies</a></span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a href="https://awakari.com/sub-details.html?id=TikTok" class="text-blue-500">Brands</a></span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a href="https://awakari.com/sub-details.html?id=Crete" class="text-blue-500">Local news</a></span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a href="https://awakari.com/sub-details.html?id=Fortnite" class="text-blue-500">Entertainment</a></span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a href="https://awakari.com/sub-details.html?id=Bitcoin-Reaches-100K-USD" class="text-blue-500">Currency rates</a></span>
+                        </p>
+                        <p class="px-2 align-text-middle space-x-2 flex">
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                            <span><a class="text-blue-500" href="https://awakari.com/sub-details.html?example=quake-greece">Earthquakes</a></span>
+                        </p>
+                        <p class="px-2">... or whatever you are interested in.</p>
                     </div>
                 </div>
             </div>
 
             <div class="mx-auto max-w-4xl text-gray-700 dark:text-gray-300 pt-4">
                 <h2 class="p-2 py-4 capitalize text-3xl text-center">
-                    <span class="whitespace-nowrap">Follow In Your</span> <span class="whitespace-nowrap">Favorite Reader</span>
+                    <span class="whitespace-nowrap">In Your</span> <span class="whitespace-nowrap">Favorite Reader</span>
                 </h2>
                 <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div class="flex justify-center sm:justify-end pt-2 px-2">
@@ -497,8 +578,8 @@
                             Choose how to read results:
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -508,8 +589,8 @@
                             <span>In any RSS reader</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -519,8 +600,8 @@
                             <span>In Telegram</span>
                         </p>
                         <p class="px-2 align-text-middle space-x-2 flex">
-                            <span class="h-6 w-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-max text-blue-400"
+                            <span class="h-5 w-5 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -717,62 +798,55 @@
 
                 <div class="w-72">
                     <div class="flex items-center py-2">
-                        <span class="h-6 w-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
-                             fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                   clip-rule="evenodd"/>
-                        </svg></span>
-                        <span class="mx-2">
-                        No deployment required
-                    </span>
+                        </svg>
+                        <span class="mx-2">No deployment required</span>
                     </div>
                     <div class="flex items-center py-2">
-                        <span class="h-6 w-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
-                             fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                   clip-rule="evenodd"/>
-                        </svg></span>
+                        </svg>
                         <span class="mx-2">
                             Ready to use public event sources
                         </span>
                     </div>
                     <div class="flex items-center py-2">
-                        <span class="h-6 w-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400"
-                                                   viewBox="0 0 20 20"
-                                                   fill="currentColor">
-                                <path fill-rule="evenodd"
-                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                      clip-rule="evenodd"/>
-                            </svg></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg>
                         <span class="mx-2">
                             1 free active interest per user
                         </span>
                     </div>
                     <div class="flex items-center py-2">
-                        <span class="h-6 w-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400"
-                                                   viewBox="0 0 20 20"
-                                                   fill="currentColor">
-                                <path fill-rule="evenodd"
-                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                      clip-rule="evenodd"/>
-                            </svg></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg>
                         <span class="mx-2">
                             10 free publications per hour
                         </span>
                     </div>
 
                     <div class="flex items-center py-2">
-                        <span class="h-6 w-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400"
-                                                   viewBox="0 0 20 20"
-                                                   fill="currentColor">
-                                <path fill-rule="evenodd"
-                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                      clip-rule="evenodd"/>
-                            </svg></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  clip-rule="evenodd"/>
+                        </svg>
                         <span class="mx-2">
                             100 free publications per day
                         </span>
@@ -796,7 +870,7 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -826,7 +900,7 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -845,8 +919,8 @@
 
                 <div class="w-72">
                     <div class="flex items-center py-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
-                             fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                   clip-rule="evenodd"/>
@@ -856,25 +930,14 @@
                     </span>
                     </div>
                     <div class="flex items-center py-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
-                             fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
+                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                   clip-rule="evenodd"/>
                         </svg>
                         <span class="mx-2">
-                        Unlimited message publications
-                    </span>
-                    </div>
-                    <div class="flex items-center py-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" viewBox="0 0 20 20"
-                             fill="currentColor">
-                            <path fill-rule="evenodd"
-                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                  clip-rule="evenodd"/>
-                        </svg>
-                        <span class="mx-2">
-                        Unlimited interests following
+                        Unlimited usage
                     </span>
                     </div>
                 </div>
@@ -894,7 +957,7 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -922,7 +985,7 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 min-w-max text-gray-500"
                                      viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"

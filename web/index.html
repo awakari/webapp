@@ -282,41 +282,11 @@
 
         <div class="container mx-auto px-2 pt-2">
             <div class="mx-auto max-w-3xl text-gray-700 dark:text-gray-300 space-y-4 sm:space-y-0">
-                <div class="flex flex-col text-lg sm:pl-8 justify-center space-y-1 pb-2 mx-auto">
-                    <p class="justify-center mx-auto">Great collection of sources in one place:</p>
-                    <div class="grid grid-cols-3 space-x-2">
-                        <span class="text-right">
-                            <span id="src-count-feeds"></span>
-                            <img id="src-count-feeds-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
-                        </span>
-                        <span class="col-span-2">News Feeds</span>
-                    </div>
-                    <div class="grid grid-cols-3 space-x-2">
-                        <span class="text-right">
-                            <span id="src-count-socials"></span>
-                            <img id="src-count-socials-wait"  src="wait.gif" height="24" width="24" alt="loading..."/>
-                        </span>
-                        <span class="col-span-2">Social Channels</span>
-                    </div>
-                    <div class="grid grid-cols-3 space-x-2">
-                        <span class="text-right">
-                            <span id="src-count-realtime"></span>
-                            <img id="src-count-realtime-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
-                        </span>
-                        <span class="col-span-2">Realtime Streams</span>
-                    </div>
-                    <div class="grid grid-cols-3 space-x-2">
-                        <span class="text-right">
-                            <b>＋</b>
-                        </span>
-                        <span class="col-span-2">More other sources</span>
-                    </div>
+                <div class="flex justify-center mx-auto">
+                    <canvas id="matrix" width="320px" height="160px">
+                        <script src="matrix.js"></script>
+                    </canvas>
                 </div>
-<!--                <div class="flex justify-center mx-auto">-->
-<!--                    <canvas id="matrix" width="320px" height="160px">-->
-<!--                        <script src="matrix.js"></script>-->
-<!--                    </canvas>-->
-<!--                </div>-->
                 <div class="grid grid-cols-3 justify-center space-x-2 mr-8 sm:mx-auto text-center max-w-xl text-2xl sm:text-5xl">
                     <div class="logo-left flex text-indigo-600 dark:text-indigo-400 sm:my-auto text-right">
                         Follow Your Interest</div>
@@ -413,6 +383,36 @@
                     </div>
                     <div class="flex justify-center">
                         MENTION
+                    </div>
+                </div>
+                <div class="flex flex-col py-2 space-y-1 text-lg sm:pl-8 justify-center mx-auto max-w-sm">
+                    <p class="text-center">Everything in one place:</p>
+                    <div class="grid grid-cols-4 space-x-2">
+                        <span class="text-right">
+                            <span id="src-count-feeds"></span>
+                            <img id="src-count-feeds-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
+                        </span>
+                        <span class="col-span-3">News Feeds</span>
+                    </div>
+                    <div class="grid grid-cols-4 space-x-2">
+                        <span class="text-right">
+                            <span id="src-count-socials"></span>
+                            <img id="src-count-socials-wait"  src="wait.gif" height="24" width="24" alt="loading..."/>
+                        </span>
+                        <span class="col-span-3">Social Channels</span>
+                    </div>
+                    <div class="grid grid-cols-4 space-x-2">
+                        <span class="text-right">
+                            <span id="src-count-realtime"></span>
+                            <img id="src-count-realtime-wait" src="wait.gif" height="24" width="24" alt="loading..."/>
+                        </span>
+                        <span class="col-span-3">Realtime Streams</span>
+                    </div>
+                    <div class="grid grid-cols-4 space-x-2">
+                        <span class="text-right">
+                            <b>＋</b>
+                        </span>
+                        <span class="col-span-3">More other sources</span>
                     </div>
                 </div>
             </div>

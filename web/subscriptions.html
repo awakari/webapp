@@ -43,7 +43,8 @@
     <script src="api/interests.js"></script>
     <script src="api/usage.js"></script>
     <script src="api/limits.js"></script>
-    <script src="sub.js"></script>
+    <script src="api/subscriptions.js"></script>
+    <script src="subscriptions.js"></script>
     <script>
         navigator.serviceWorker.register("sw.js");
     </script>
@@ -53,7 +54,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body class="bg-white dark:bg-gray-900" onload="loadInterests()">
+<body class="bg-white dark:bg-gray-900" onload="loadSubscriptions()">
 <header>
     <nav x-data="{ isOpen: false }" class="p-1 sm:p-4 items-center justify-center mx-auto">
 
@@ -62,7 +63,7 @@
                 <a href="index.html" class="flex justify-center items-center">
                     <img src="logo-color.svg" alt="home" width="24" height="24"/>
                 </a>
-                <span>Interests</span>
+                <span>Subscriptions</span>
             </div>
             <div class="grow"></div>
             <div class="flex items-center justify-center">
@@ -115,76 +116,27 @@
     <div class="flex flex-col sm:flex-row items-center justify-center">
         <div class="flex w-80 sm:w-48 sm:ml-2 pt-1 sm:pt-0">
             <div class="pt-1 w-28 sm:w-24">Active:</div>
-            <div class="pt-1 w-12 sm:w-8" id="count"></div>
-            <div class="ml-2 dropdown">
-                <button type="button"
-                        onclick="subNewDropdown()"
-                        class="dropbtn text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-1">
-                    + Interest ⌄
-                </button>
-                <div id="sub-new-dropdown" class="dropdown-content space-y-3 p-3 -ml-[140px] w-[240px]">
-                    <a href="sub-details.html">Custom...</a>
-                    <a href="sub-details.html?example=job-alert">Example: Job Alert</a>
-                    <a href="sub-details.html?example=mentions-of-me">Example: Mentions of Me</a>
-                    <a href="sub-details.html?example=exclude-words">Example: Exclude Words</a>
-                    <a href="sub-details.html?example=chinese">Example: In Chinese Language</a>
-                    <a href="sub-details.html?example=sentiment">Example: Sentiment Analysis</a>
-                    <a href="sub-details.html?example=quake-greece">Example: Quakes in Greece live</a>
-                    <a href="sub-details.html?example=cheap-iphone">Example: Cheap iPhone</a>
-                </div>
-            </div>
+            <div class="pt-1 grow" id="count"></div>
         </div>
         <div class="flex w-80 mt-2 sm:mt-0 sm:ml-6 sm:w-48">
             <div class="pt-1 w-28 sm:w-10">Limit:</div>
             <div class="pt-1 w-12 sm:w-8" id="limit"></div>
             <div class="ml-2">
+
                 <button type="button"
                         onclick="requestIncreaseSubscriptionsLimit(localStorage.getItem(keyUserId))"
                         class="text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
                     Increase
                 </button>
+
             </div>
-        </div>
-    </div>
-    <div class="flex items-center justify-center pt-2">
-
-        <div class="w-16 flex items-center pt-1">
-            <input type="checkbox"
-                   id="own"
-                   class="w-4 h-4 accent-slate-500"
-                   onchange="reloadInterests(document.getElementById('filter').value, this.checked, false)">
-            <label for="own">Own</label>
-        </div>
-
-        <div class="mx-2 mt-1 border-b flex text-slate-500 w-60 sm:w-80 dark:text-slate-400 dark:border-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-            </svg>
-            <input id="filter"
-                   type="search"
-                   class="ml-1 border-0 outline-none w-56 sm:w-72"
-                   oninput="reloadInterests(this.value, document.getElementById('own').checked, false)"/>
         </div>
     </div>
     <div class="mt-3 flex flex-col items-center justify-center">
         <div class="absolute" id="wait" style="display: none">
             <img src="wait.gif"/>
         </div>
-        <div id="subs_list" class="flex flex-col items-center justify-center"></div>
-    </div>
-    <div class="flex items-center justify-center space-x-4 mt-2">
-        <button id="button-prev" type="button" class="flex justify-center text-center w-[100px] h-6 items-center">
-            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span>Back</span>
-        </button>
-        <button id="button-next" type="button" class="flex justify-center text-center w-[100px] h-6 items-center">
-            <span>Next</span>
-            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
+        <div id="subscriptions_list" class="flex flex-col items-center justify-center"></div>
     </div>
 </main>
 

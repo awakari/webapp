@@ -14,7 +14,7 @@ Usage.fetch = function (subj, headers) {
                 if (subj === "1" || subj === "2") {
                     handleResponseStatus(`Get subject ${subj} usage`, resp.status);
                 } else {
-                    alert(`Invalid usage subject: ${subj}`);
+                    console.log(`Invalid usage subject: ${subj}`);
                 }
                 return null;
             } else {

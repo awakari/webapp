@@ -3,7 +3,6 @@ const templateSubscription = (sub, interestName, interestPublic, interestActive)
                     <span class="w-5 h-5 mt-1.5">
                         ${sub.url.startsWith("http://bot-telegram") ? '<img src="telegram-logo.svg" width="20" height="20" alt="Telegram"/>' : '?'}                                         
                     </span>
-                    <span class="py-2">←</span>
                     <span class="truncate py-2 grow ${interestPublic ? '' : 'italic'} ${interestActive? '' : 'line-through' }">
                         ${interestName}
                     </span>

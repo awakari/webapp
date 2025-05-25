@@ -23,6 +23,17 @@
     <script src="api/limits.js"></script>
 
     <link rel="me" href="https://activitypub.awakari.com/@me"/>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const interestId = urlParams.get("id");
+        if (interestId) {
+            const link = document.createElement('link');
+            link.rel = "alternate";
+            link.type = "application/rss+xml";
+            link.href = `https://reader.awakari.com/v1/sub/rss/${interestId}`;
+            document.head.appendChild(link);
+        }
+    </script>
 
     <script src="alpinejs-3.13.0.min.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

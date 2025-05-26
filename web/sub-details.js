@@ -133,7 +133,7 @@ async function loadInterestDetails() {
 
     const headers = getAuthHeaders();
     if (!headers["Authorization"]) {
-        window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
+        //window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
     }
 
     document.getElementById("mode-simple-wait-lang").style.display = "block";
@@ -275,9 +275,9 @@ function loadInterestDetailsById(id) {
                 }
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
-                    document.getElementById("follow-bluesky").style.display = "block";
+                    document.getElementById("follow-bluesky").style.display = "flex";
                     document.getElementById("follow-bluesky").href = `https://bsky.app/profile/did:plc:i53e6y3liw2oaw4s6e6odw5m/feed/${id}`;
-                    document.getElementById("follow-fediverse").style.display = "block";
+                    document.getElementById("follow-fediverse").style.display = "flex";
                     document.getElementById("follow-fediverse").onclick = () => {
                         const addrFediverse = `@${id}@activitypub.awakari.com`;
                         navigator

@@ -570,12 +570,12 @@ input:checked + .slider:before {
     display: inline-block;
     text-decoration-line: underline;
     text-decoration-style: dotted;
-    color: #0f766e;
+    color: #308090;
 }
 
 @media (prefers-color-scheme: dark) {
     .tooltip {
-        color: #88bbbb;
+        color: #70b0c0;
     }
 }
 

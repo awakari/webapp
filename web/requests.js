@@ -204,3 +204,31 @@ async function requestEmailSub(userId, pageSub) {
         window.location.assign("login.html");
     }
 }
+
+async function submitFeedback() {
+    const userIdCurrent = localStorage.getItem(keyUserId);
+    const feedback = prompt(`Please tell how Awakari can be improved:`)
+    if (feedback) {
+        const payload = {
+            id: Events.newId(),
+            specVersion: "1.0",
+            source: "awakari.com",
+            type: "com_awakari_webapp",
+            attributes: {
+                action: {
+                    ce_string: "create",
+                },
+                object: {
+                    ce_string: feedback,
+                },
+                subject: {
+                    ce_string: userIdCurrent,
+                },
+            },
+            text_data: `User ${userIdCurrent} has submitted feedback: ${feedback}`,
+        }
+        const headers = getAuthHeaders();
+        await Events.publishInternal(payload, headers);
+        alert("Thank you very much for your feedback!");
+    }
+}

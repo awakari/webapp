@@ -568,7 +568,15 @@ input:checked + .slider:before {
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted #666; /* If you want dots under the hoverable text */
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    color: #0f766e;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tooltip {
+        color: #88bbbb;
+    }
 }
 
 /* Tooltip text */
@@ -604,12 +612,6 @@ input:checked + .slider:before {
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #444 transparent;
-}
-
-@media (prefers-color-scheme: dark) {
-    .tooltip {
-        border-bottom: 1px dotted #aaa; /* If you want dots under the hoverable text */
-    }
 }
 
 /* Style the button that is used to open and close the collapsible content */

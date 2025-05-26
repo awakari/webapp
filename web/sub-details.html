@@ -21,6 +21,9 @@
     <script src="attrs.js"></script>
     <script src="api/interests.js"></script>
     <script src="api/limits.js"></script>
+    <script src="xksuid.js"></script>
+    <script src="api/events.js"></script>
+    <script src="requests.js"></script>
 
     <link rel="me" href="https://activitypub.awakari.com/@me"/>
     <script>
@@ -102,12 +105,25 @@
                    href="user.html">
                     <span id="menu-user-text">(none)</span>
                     <script src="user.js"></script>
+                    &nbsp;
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
-                            <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                    </svg>
+                </a>
+                <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6 flex items-center justify-end"
+                   onclick="submitFeedback()">
+                    Leave Feedback&nbsp;
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill="none" d="M0 0h24v24H0z"></path>
+                            <path d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zM4 18.385L5.763 17H20V5H4v13.385zM11 13h2v2h-2v-2zm0-6h2v5h-2V7z"></path>
                         </g>
                     </svg>
                 </a>
@@ -198,7 +214,7 @@
                     <input type="text" readonly="readonly" id="followers" class="ml-1 border-none w-10 grow">
 
                     <div class="dropdown ml-2">
-                        <button id="button-follow" type="button" class="dropbtn flex justify-center text-center w-[100px] items-center space-x-1" onclick="followDropdown()">
+                        <button id="button-follow" type="button" class="dropbtn flex justify-center text-center w-[120px] items-center space-x-1" onclick="followDropdown()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" xml:space="preserve" fill="currentColor" width="16px" height="16px" class="dropbtn">
                                 <style type="text/css">
                                     .st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
@@ -206,13 +222,37 @@
                                 <path class="st0" d="M27.8,23.2l-1.1-1.7c-1.9-2.8-2.9-6.1-2.9-9.5c0-3.6-2.4-6.5-5.6-7.5C17.9,3.6,17,3,16,3s-1.9,0.6-2.2,1.5 c-3.2,1-5.6,3.9-5.6,7.5c0,3.4-1,6.7-2.9,9.5l-1.1,1.7C3.7,24,4.2,25,5.2,25h21.6C27.8,25,28.3,24,27.8,23.2z"></path>
                                 <path class="st0" d="M20,25c0,2.2-1.8,4-4,4s-4-1.8-4-4"></path>
                             </svg>
-                            <span class="dropbtn">Read ⌄</span>
+                            <span class="dropbtn">Subscribe ⌄</span>
                         </button>
-                        <div id="follow-dropdown" class="dropdown-content py-3 px-2 w-[100px]">
-                            <a target="_blank" id="follow-bluesky" class="pb-3">Bluesky</a>
-                            <a id="follow-fediverse" class="pb-3">Fediverse</a>
-                            <a target="_blank" id="follow-feed" class="pb-3">Feed (RSS)</a>
-                            <a target="_blank" id="follow-telegram">Telegram</a>
+                        <div id="follow-dropdown" class="dropdown-content py-3 px-2 w-[120px] space-y-3">
+                            <a target="_blank" id="follow-telegram" class="flex">
+                                <svg height="20" width="20" fill="currentColor" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M228.646,34.7676a11.96514,11.96514,0,0,0-12.21778-2.0752L31.87109,105.19729a11.99915,11.99915,0,0,0,2.03467,22.93457L84,138.15139v61.833a11.8137,11.8137,0,0,0,7.40771,11.08593,12.17148,12.17148,0,0,0,4.66846.94434,11.83219,11.83219,0,0,0,8.40918-3.5459l28.59619-28.59619L175.2749,217.003a11.89844,11.89844,0,0,0,7.88819,3.00195,12.112,12.112,0,0,0,3.72265-.59082,11.89762,11.89762,0,0,0,8.01319-8.73925L232.5127,46.542A11.97177,11.97177,0,0,0,228.646,34.7676ZM32.2749,116.71877a3.86572,3.86572,0,0,1,2.522-4.07617L203.97217,46.18044,87.07227,130.60769,35.47461,120.28811A3.86618,3.86618,0,0,1,32.2749,116.71877Zm66.55322,86.09375A3.99976,3.99976,0,0,1,92,199.9844V143.72048l35.064,30.85669ZM224.71484,44.7549,187.10107,208.88772a4.0003,4.0003,0,0,1-6.5415,2.10937l-86.1543-75.8164,129.66309-93.645A3.80732,3.80732,0,0,1,224.71484,44.7549Z"></path> </g></svg>
+                                <span class="pt-1">&nbsp;Telegram</span>
+                            </a>
+                            <a target="_blank" id="follow-feed" class="flex">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"></path><path d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"></path><circle cx="6" cy="18" r="2"></circle></g></svg>
+                                <span class="pt-1">&nbsp;Feed</span>
+                            </a>
+                            <a target="_blank" id="follow-bluesky" class="flex">
+                                <svg width="20" height="20" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M179.222 296.039C171.929 321.836 117.118 349.829 100.868 317.327C83.9601 283.513 128.707 258.291 155.272 253.461" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M154.089 255.235C140.063 256.692 126.178 245.826 114.468 239.268C74.9513 217.139 49.2305 174.06 54.7419 127.208C60.5666 77.6967 120.975 104.935 142.262 123.068C160.693 138.769 174.617 160.101 184.839 181.908C193.152 199.64 200.112 214.666 205.536 233.651" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M211.746 221.528C216.22 203.929 220.6 185.643 227.417 168.602C234.927 149.827 243.612 130.546 256.097 114.494C267.281 100.115 309.676 53.8821 331.79 73.9865C338.609 80.1856 341.437 92.7089 343.321 101.189C355.43 155.676 303.486 234.412 246.044 240.156" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M249.001 238.972C282.8 227.116 321.478 272.606 305.179 305.204C286.258 343.046 248.409 334.476 215.589 283.62" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M205.537 171.56C213.34 215.845 203.3 268.936 199.919 312.892" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                                </svg>
+                                <span class="pt-1">&nbsp;Bluesky</span>
+                            </a>
+                            <a id="follow-fediverse" class="flex">
+                                <svg width="20" height="20" viewBox="-10 -5 1034 1034" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" fill="currentColor">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                                    <path fill="currentColor" d="M539 176q-32 0 -55 22t-25 55t20.5 58t56 27t58.5 -20.5t27 -56t-20.5 -59t-56.5 -26.5h-5zM452 271l-232 118q20 20 25 48l231 -118q-19 -20 -24 -48zM619 298q-13 25 -38 38l183 184q13 -25 39 -38zM477 320l-135 265l40 40l143 -280q-28 -5 -48 -25zM581 336 q-22 11 -46 10l-8 -1l21 132l56 9zM155 370q-32 0 -55 22.5t-25 55t20.5 58t56.5 27t59 -21t26.5 -56t-21 -58.5t-55.5 -27h-6zM245 438q1 9 1 18q-1 19 -10 35l132 21l26 -50zM470 474l-26 51l311 49q-1 -8 -1 -17q1 -19 10 -36zM842 480q-32 1 -55 23t-24.5 55t21 58 t56 27t58.5 -20.5t27 -56.5t-20.5 -59t-56.5 -27h-6zM236 493q-13 25 -39 38l210 210l51 -25zM196 531q-21 11 -44 10l-9 -1l40 256q21 -10 45 -9l8 1zM560 553l48 311q21 -10 44 -9l10 1l-46 -294zM755 576l-118 60l8 56l135 -68q-20 -20 -25 -48zM781 625l-119 231 q28 5 48 25l119 -231q-28 -5 -48 -25zM306 654l-68 134q28 5 48 25l60 -119zM568 671l-281 143q19 20 24 48l265 -135zM513 771l-51 25l106 107q13 -25 39 -38zM222 795q-32 0 -55.5 22.5t-25 55t21 57.5t56 27t58.5 -20.5t27 -56t-20.5 -58.5t-56.5 -27h-5zM311 863 q2 9 1 18q-1 19 -9 35l256 41q-1 -9 -1 -18q1 -18 10 -35zM646 863q-32 0 -55 22.5t-24.5 55t20.5 58t56 27t59 -21t27 -56t-20.5 -58.5t-56.5 -27h-6z"></path> </g>
+                                </svg>
+                                <span class="pt-1">&nbsp;Fediverse</span>
+                            </a>
                         </div>
                     </div>
 

@@ -236,7 +236,7 @@ function setModeSimple(simple, confirmed) {
 _ = loadInterestDetails();
 
 const templateDiscoveredSrc = (addr, type) => `
-<p class="w-[334px] sm:w-[624px] truncate">
+<p class="w-[324px] sm:w-[624px] truncate">
     <a class="w-full truncate text-blue-500" href="pub-src-details.html?type=${type}&addr=${encodeURIComponent(addr)}">${addr}</a>
 </p>`;
 

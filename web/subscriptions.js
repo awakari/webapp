@@ -17,38 +17,38 @@ async function loadSubscriptions() {
         window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
     }
 
-    document.getElementById("wait").style.display = "block";
-    Usage
-        .fetch("5", headers)
-        .then(resp => resp ? resp.json() : null)
-        .then(data => {
-            if (data && data.hasOwnProperty("count")) {
-                document.getElementById("count").innerText = data.count;
-            }
-        })
-        .catch(e => {
-            console.log(e);
-        })
-        .finally(() => {
-            document.getElementById("wait").style.display = "none";
-        });
-
-    document.getElementById("wait").style.display = "block";
-    Limits
-        .fetch("5", headers)
-        .then(resp => resp ? resp.json() : null)
-        .then(data => {
-            if (data && data.hasOwnProperty("count")) {
-                document.getElementById("limit").innerText = data.count;
-            }
-            return data;
-        })
-        .catch(e => {
-            console.log(e);
-        })
-        .finally(() => {
-            document.getElementById("wait").style.display = "none";
-        });
+    // document.getElementById("wait").style.display = "block";
+    // Usage
+    //     .fetch("5", headers)
+    //     .then(resp => resp ? resp.json() : null)
+    //     .then(data => {
+    //         if (data && data.hasOwnProperty("count")) {
+    //             document.getElementById("count").innerText = data.count;
+    //         }
+    //     })
+    //     .catch(e => {
+    //         console.log(e);
+    //     })
+    //     .finally(() => {
+    //         document.getElementById("wait").style.display = "none";
+    //     });
+    //
+    // document.getElementById("wait").style.display = "block";
+    // Limits
+    //     .fetch("5", headers)
+    //     .then(resp => resp ? resp.json() : null)
+    //     .then(data => {
+    //         if (data && data.hasOwnProperty("count")) {
+    //             document.getElementById("limit").innerText = data.count;
+    //         }
+    //         return data;
+    //     })
+    //     .catch(e => {
+    //         console.log(e);
+    //     })
+    //     .finally(() => {
+    //         document.getElementById("wait").style.display = "none";
+    //     });
 
     document.getElementById("wait").style.display = "block";
     return Subscriptions

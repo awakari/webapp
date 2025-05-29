@@ -85,16 +85,7 @@ async function requestPublishingSourceDedicated(addr){
 }
 
 async function requestIncreaseSubscriptionsLimit(userId) {
-    switch (userId.startsWith("patreon")) {
-        case true:
-            window.open("https://www.patreon.com/c/awakari/membership", "_blank");
-            break;
-        default:
-            if (confirm("Please upgrade your account")) {
-                window.location.assign("user.html");
-            }
-            break;
-    }
+    window.open("https://web.tribute.tg/s/v5Q", "_blank");
 }
 
 async function reportPublishingSourceInappropriate(srcAddr) {

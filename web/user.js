@@ -38,7 +38,7 @@ function loadUser() {
                 headers: headers,
             }).then(resp => {
                 if (resp && resp.ok) {
-                     document.getElementById("user-status").innerText = "★ Customized for the Supporter";
+                    document.getElementById("user-status").innerText = "★ Customized for the Supporter";
                     document.getElementById("button-upgrade").style.display = "none";
                 }
             });

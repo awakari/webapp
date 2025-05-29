@@ -84,6 +84,19 @@ async function requestPublishingSourceDedicated(addr){
     }
 }
 
+async function requestIncreaseInterestsLimit(userId) {
+    switch (userId.startsWith("patreon")) {
+        case true:
+            window.open("https://web.tribute.tg/s/v5Q", "_blank");
+            break;
+        default:
+            if (confirm("Please upgrade your account")) {
+                window.location.assign("user.html");
+            }
+            break;
+    }
+}
+
 async function requestIncreaseSubscriptionsLimit(userId) {
     window.open("https://web.tribute.tg/s/v5Q", "_blank");
 }

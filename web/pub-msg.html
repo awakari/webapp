@@ -66,7 +66,15 @@
             <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
                href="sub.html">Interests</a>
             <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
-               href="subscriptions.html">Subscriptions</a>
+               href="subscriptions.html" style="display: none">
+                Subscriptions
+                <script>
+                    const userId = localStorage.getItem(keyUserId);
+                    if (userId && userId.startsWith("tg://user?id=")) {
+                        document.currentScript.parentElement.style.display = "block";
+                    }
+                </script>
+            </a>
             <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
                href="pub.html">Publishing</a>
             <a class="flex items-center justify-end text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"

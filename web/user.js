@@ -9,7 +9,7 @@ if (userName) {
     }
 }
 
-function loadUser() {
+async function loadUser() {
 
     const headers = getAuthHeaders();
     if (!headers["Authorization"]) {
@@ -22,12 +22,10 @@ function loadUser() {
     const authProvider = localStorage.getItem(keyAuthProvider);
     document.getElementById("user-login").innerText = authProvider;
 
-    if (authProvider && authProvider === "Patreon") {
-
+    if (authProvider === "Patreon") {
         const urlParams = new URLSearchParams(window.location.search);
         const userIdSrc = urlParams.get(keyUserIdSrc);
         const authTokenSrc = urlParams.get(keyAuthTokenSrc);
-
         if (userIdSrc && authTokenSrc) {
             alert(`Successfully switched to the new account: ${userName} (${authProvider})`);
             moveUserData(userIdSrc, authTokenSrc).then(_ => {
@@ -43,10 +41,44 @@ function loadUser() {
                 }
             });
         }
+    } else if (authProvider === "Telegram") {
+        document.getElementById("access-tier").style.display = "none";
+        document.getElementById("access-limits").style.display = "flex";
+        await Promise.all(
+            Limits
+                .fetch("1", headers)
+                .then(resp => resp ? resp.json() : null)
+                .then(data => {
+                    if (data && data.hasOwnProperty("count")) {
+                        document.getElementById("limits-interests").innerText += `${data.count}`;
+                    }
+                }),
+            Limits
+                .fetch("4", headers)
+                .then(resp => resp ? resp.json() : null)
+                .then(data => {
+                    if (data && data.hasOwnProperty("count")) {
+                        if (data.count > 0) {
+                            document.getElementById("limits-interests-public").innerText += "Allowed";
+                            document.getElementById("button-limits-interests-public").style.display = "none";
+                        } else {
+                            document.getElementById("limits-interests-public").innerText += "Disabled";
+                        }
+                    }
+                }),
+            Limits
+                .fetch("5", headers)
+                .then(resp => resp ? resp.json() : null)
+                .then(data => {
+                    if (data && data.hasOwnProperty("count")) {
+                        document.getElementById("limits-subscriptions").innerText += `${data.count}`;
+                    }
+                }),
+         )
     }
 }
 
-function upgrade() {
+function upgradeWithPatreon() {
     const authProvider = localStorage.getItem(keyAuthProvider);
     switch (authProvider) {
         case "Patreon": {
@@ -54,7 +86,7 @@ function upgrade() {
             break;
         }
         default: {
-            const state = Base64.encodeURI(`https://awakari.com/user.html?userIdSrc=${localStorage.getItem(keyUserId)}&authTokenSrc=${localStorage.getItem(keyAuthToken)}`);
+            const state = Base64.encodeURI(`https://awakari.com/user.html?${keyUserIdSrc}=${localStorage.getItem(keyUserId)}&authTokenSrc=${localStorage.getItem(keyAuthToken)}`);
             // Construct the OAuth authorization URL
             const oauthUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${patreonClientId}&redirect_uri=${patreonRedirectUri}&scope=${patreonScope}&state=${state}`;
             // Redirect the user to Patreon's OAuth page

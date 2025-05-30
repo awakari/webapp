@@ -20,6 +20,7 @@
     <script src="api/response.js"></script>
     <script src="xksuid.js"></script>
     <script src="api/events.js"></script>
+    <script src="api/limits.js"></script>
     <script src="requests.js"></script>
     <script src="user.js"></script>
 
@@ -113,7 +114,7 @@
         </button>
     </div>
 
-    <fieldset class="m-2 flex items-center p-2">
+    <fieldset id="access-tier" class="m-2 flex items-center p-2">
         <legend class="px-1">
             <span class="tooltip">
                 Access
@@ -134,10 +135,41 @@
             <pre id="user-status" class="mx-auto">Basic</pre>
             <button class="w-50 h-10 mx-auto transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none flex space-x-2 items-center"
                     id="button-upgrade"
-                    onclick="upgrade()">
+                    onclick="upgradeWithPatreon()">
                 <img src="logo-patreon.svg" width="20px" height="20px">
                 <span>Upgrade with Patreon</span>
             </button>
+        </div>
+    </fieldset>
+
+    <fieldset id="access-limits" class="m-2 flex items-center p-2" style="display: none">
+        <legend class="px-1">Usage Limits</legend>
+        <div class="p-1 grid grid-cols-3 w-full">
+
+            <span class="pt-2">Subscriptions</span>
+            <span id="limits-subscriptions" class="pt-2"></span>
+            <button type="button"
+                    onclick="requestIncreaseSubscriptionsLimit(localStorage.getItem(keyUserId))"
+                    class="text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
+                Increase
+            </button>
+
+            <span class="pt-2 mt-2">Own Interests</span>
+            <span id="limits-interests" class="pt-2 mt-2"></span>
+            <button type="button"
+                    onclick="requestIncreaseInterestsLimit(localStorage.getItem(keyUserId))"
+                    class="mt-2 text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
+                Increase
+            </button>
+
+            <span class="pt-2 mt-2">Public Interests</span>
+            <span id="limits-interests-public" class="pt-2 mt-2"></span>
+            <button id="button-limits-interests-public" type="button"
+                    onclick="window.open('https://web.tribute.tg/s/vaM', '_blank');"
+                    class="mt-2 text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
+                Enable
+            </button>
+
         </div>
     </fieldset>
 

@@ -85,20 +85,103 @@ async function requestPublishingSourceDedicated(addr){
 }
 
 async function requestIncreaseInterestsLimit(userId) {
-    switch (userId.startsWith("patreon")) {
-        case true:
-            window.open("https://web.tribute.tg/s/v5Q", "_blank");
-            break;
-        default:
-            if (confirm("Please upgrade your account")) {
-                window.location.assign("user.html");
-            }
-            break;
+    const authHeaders = getAuthHeaders();
+    if (userId.startsWith("tg://user?id=")) {
+        await Limits
+            .fetch("1", authHeaders)
+            .then(resp => resp ? resp.json() : null)
+            .then(data => {
+                if (data && data.hasOwnProperty("count")) {
+                    if (data.count < 5) {
+                        window.open("https://web.tribute.tg/s/vaN", "_blank");
+                    } else if (data.count < 10) {
+                        window.open("https://web.tribute.tg/s/vaQ", "_blank");
+                    } else {
+                        const input = prompt("Request to increase own interests limit. Please enter the number to add:", "1");
+                        if (input) {
+                            const payload = {
+                                id: Events.newId(),
+                                specVersion: "1.0",
+                                source: "awakari.com",
+                                type: "com_awakari_webapp",
+                                attributes: {
+                                    increment: {
+                                        ce_string: input,
+                                    },
+                                    limit: {
+                                        ce_integer: data.count,
+                                    },
+                                    action: {
+                                        ce_string: "request",
+                                    },
+                                    object: {
+                                        ce_string: userId,
+                                    },
+                                    subject: {
+                                        ce_string: userId,
+                                    },
+                                },
+                                text_data: `User ${userId} requests to increase the own interests limit by ${input}`,
+                            }
+                            Events
+                                .publishInternal(payload, authHeaders)
+                                .then(_ => openDonationPage());
+                        }
+                    }
+                }
+            });
+    } else if (userId.startsWith("patreon")) {
+        window.open("https://www.patreon.com/c/awakari/membership", "_blank");
+    } else if (confirm("Please upgrade your account")) {
+        window.location.assign("user.html");
     }
 }
 
 async function requestIncreaseSubscriptionsLimit(userId) {
-    window.open("https://web.tribute.tg/s/v5Q", "_blank");
+    const authHeaders = getAuthHeaders();
+    await Limits
+        .fetch("5", authHeaders)
+        .then(resp => resp ? resp.json() : null)
+        .then(data => {
+            if (data && data.hasOwnProperty("count")) {
+                if (data.count < 10) {
+                    window.open("https://web.tribute.tg/s/v5Q", "_blank");
+                } else if (data.count < 20) {
+                    window.open("https://web.tribute.tg/s/vaR", "_blank");
+                } else {
+                    const input = prompt("Request to increase subscriptions limit. Please enter the number to add:", "1");
+                    if (input) {
+                        const payload = {
+                            id: Events.newId(),
+                            specVersion: "1.0",
+                            source: "awakari.com",
+                            type: "com_awakari_webapp",
+                            attributes: {
+                                increment: {
+                                    ce_string: input,
+                                },
+                                limit: {
+                                    ce_integer: data.count,
+                                },
+                                action: {
+                                    ce_string: "request",
+                                },
+                                object: {
+                                    ce_string: userId,
+                                },
+                                subject: {
+                                    ce_string: userId,
+                                },
+                            },
+                            text_data: `User ${userId} requests to increase the subscriptions limit by ${input}`,
+                        }
+                        Events
+                            .publishInternal(payload, authHeaders)
+                            .then(_ => openDonationPage());
+                    }
+                }
+            }
+        });
 }
 
 async function reportPublishingSourceInappropriate(srcAddr) {

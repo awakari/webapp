@@ -62,24 +62,42 @@
 
         <div class="mx-2 rounded-md border dark:border-gray-700 w-full sm:w-80">
             <div class="p-4 pt-2 space-y-1 flex flex-col items-center">
+                <h1 class="text-lg font-medium capitalize flex justify-center">Customize</h1>
+                <p>Extra access for Supporters</p>
+            </div>
+            <hr class="border-gray-200 dark:border-gray-700"/>
+
+            <!-- Telegram -->
+            <div>
+                <script async
+                        src="https://telegram.org/js/telegram-widget.js?22"
+                        data-telegram-login="AwakariBot"
+                        data-size="large"
+                        data-onauth="handleAuthTelegram(user)"
+                        data-request-access="write"
+                        data-radius="4"
+                        data-userpic="false">
+                </script>
+            </div>
+
+            <!-- Patreon -->
+            <div class="p-4 flex justify-center">
+                <button id="login-with-patreon" onclick="loginWithPatreon()"
+                        class="w-[200px] h-10 transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none flex space-x-2 items-center">
+                    <img src="logo-patreon.svg" width="20px" height="20px">
+                    <span>Login with Patreon</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="mx-2 rounded-md border dark:border-gray-700 w-full sm:w-80">
+            <div class="p-4 pt-2 space-y-1 flex flex-col items-center">
                 <h1 class="text-lg font-medium capitalize flex justify-center">Basic</h1>
                 <p>Default access limits</p>
             </div>
             <hr class="border-gray-200 dark:border-gray-700"/>
             <div class="p-4 flex flex-col items-center justify-center space-y-4">
-
-                <!-- Telegram -->
-                <div>
-                    <script async
-                            src="https://telegram.org/js/telegram-widget.js?22"
-                            data-telegram-login="AwakariBot"
-                            data-size="large"
-                            data-onauth="handleAuthTelegram(user)"
-                            data-request-access="write"
-                            data-radius="4"
-                            data-userpic="false">
-                    </script>
-                </div>
 
                 <!-- Google -->
                 <div class="justify-center">
@@ -101,21 +119,6 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
-
-        <div class="mx-2 rounded-md border dark:border-gray-700 w-full sm:w-80">
-            <div class="p-4 pt-2 space-y-1 flex flex-col items-center">
-                <h1 class="text-lg font-medium capitalize flex justify-center">Customize</h1>
-                <p>Extra access for Supporters</p>
-            </div>
-            <hr class="border-gray-200 dark:border-gray-700"/>
-            <div class="p-4 flex justify-center">
-                <button id="login-with-patreon" onclick="loginWithPatreon()"
-                        class="w-[200px] h-10 transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none flex space-x-2 items-center">
-                    <img src="logo-patreon.svg" width="20px" height="20px">
-                    <span>Login with Patreon</span>
-                </button>
             </div>
         </div>
 

@@ -132,7 +132,9 @@
             </span>
         </legend>
         <div class="p-1 flex flex-col space-y-2 w-full">
+
             <pre id="user-status" class="mx-auto">Basic</pre>
+
             <button class="w-50 h-10 mx-auto transform rounded-[4px] bg-indigo-500 px-4 py-2 tracking-wide text-white transition-colors duration-300 hover:bg-indigo-600 focus:bg-indigo-500 outline-none flex space-x-2 items-center"
                     id="button-upgrade"
                     onclick="upgradeWithPatreon()">
@@ -147,7 +149,7 @@
         <div class="p-1 grid grid-cols-3 w-full">
 
             <span class="pt-2">Subscriptions</span>
-            <span id="limits-subscriptions" class="pt-2"></span>
+            <span id="limits-subscriptions" class="p-2"></span>
             <button type="button"
                     onclick="requestIncreaseSubscriptionsLimit(localStorage.getItem(keyUserId))"
                     class="text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
@@ -155,7 +157,7 @@
             </button>
 
             <span class="pt-2 mt-2">Own Interests</span>
-            <span id="limits-interests" class="pt-2 mt-2"></span>
+            <span id="limits-interests" class="p-2 mt-2"></span>
             <button type="button"
                     onclick="requestIncreaseInterestsLimit(localStorage.getItem(keyUserId))"
                     class="mt-2 text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">
@@ -163,7 +165,7 @@
             </button>
 
             <span class="pt-2 mt-2">Public Interests</span>
-            <span id="limits-interests-public" class="pt-2 mt-2"></span>
+            <span id="limits-interests-public" class="p-2 mt-2"></span>
             <button id="button-limits-interests-public" type="button"
                     onclick="window.open('https://web.tribute.tg/s/vaM', '_blank');"
                     class="mt-2 text-blue-500 border border-blue-500 w-[100px] h-6 hover:bg-blue-200 dark:hover:bg-blue-900 static px-2">

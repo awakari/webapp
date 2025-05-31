@@ -92,7 +92,9 @@ async function requestIncreaseInterestsLimit(userId) {
             .then(resp => resp ? resp.json() : null)
             .then(data => {
                 if (data && data.hasOwnProperty("count")) {
-                    if (data.count < 5) {
+                    if (data.count < 2) {
+                        window.open("https://web.tribute.tg/s/vd7", "_blank");
+                    } else if (data.count < 5) {
                         window.open("https://web.tribute.tg/s/vaN", "_blank");
                     } else if (data.count < 10) {
                         window.open("https://web.tribute.tg/s/vaQ", "_blank");
@@ -144,7 +146,9 @@ async function requestIncreaseSubscriptionsLimit(userId) {
         .then(resp => resp ? resp.json() : null)
         .then(data => {
             if (data && data.hasOwnProperty("count")) {
-                if (data.count < 10) {
+                if (data.count < 5) {
+                    window.open("https://web.tribute.tg/s/vd8", "_blank");
+                } else if (data.count < 10) {
                     window.open("https://web.tribute.tg/s/v5Q", "_blank");
                 } else if (data.count < 20) {
                     window.open("https://web.tribute.tg/s/vaR", "_blank");

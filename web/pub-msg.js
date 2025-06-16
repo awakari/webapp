@@ -27,19 +27,14 @@ function autoResize(txtArea) {
 }
 
 async function load() {
-
-    const headers = getAuthHeaders();
-    if (!headers["Authorization"]) {
-        window.location.assign(`login.html?redirect=${encodeURIComponent(window.location)}`);
-    }
-
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
     const interestId = urlParams.get("interestId");
     if (id) {
         document.getElementById("msg_txt_data_area").style.display = "none";
-        if (interestId && interestId.length > 0) {
-            await loadMatch(id, interestId);
+        const headersAuth = getAuthHeaders();
+        if (interestId && interestId.length > 0 && headersAuth["Authorization"] && headersAuth["X-Awakari-User-Id"]) {
+            await loadMatch(id, interestId, headersAuth);
         } else {
             await loadEvent(id);
         }
@@ -48,15 +43,14 @@ async function load() {
     }
 }
 
-async function loadMatch(id, interestId){
+async function loadMatch(id, interestId, headersAuth){
     document.getElementById("interestIdArea").style.display = "flex";
     document.getElementById("interestId").href = `sub-details.html?id=${interestId}`;
     document.getElementById("interestId").innerText = interestId;
     document.getElementById("title").innerText = "Result Details";
-    const headers = getAuthHeaders();
     try {
         return Interests
-            .fetch(interestId, headers)
+            .fetch(interestId, headersAuth)
             .then(resp => resp ? resp.json() : null)
             .then(data => {
                 let conds = [];

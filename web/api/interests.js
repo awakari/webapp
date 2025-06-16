@@ -92,13 +92,15 @@ Interests.fetchResponse = function (id, headers) {
 Interests.fetch = function (id, headers) {
     return Interests
         .fetchResponse(id, headers)
-        .then(resp => {
+        .then(resp => handleCookieAuth(resp, headers, (headers) => Interests.fetchResponse(id, headers)))
+        .then(
+            resp => {
             if (!resp.ok) {
                 handleResponseStatus(`Get interest ${id}`, resp.status);
                 return null;
             }
-            return resp;
-        })
+            return Promise.resolve(resp);
+        });
 }
 
 Interests.update = function (id, descr, enabled, expires, isPublic, cond, discoverSourcesFlag, headers) {

@@ -1087,39 +1087,69 @@ async function submitSimple(){
         alert("Query is too short");
         return;
     }
+    if (looksLikeURL(q)) {
+        if (!prompt("Query looks like URL. Expected keywords or text sample. Are you sure you want to proceed?")) {
+            return;
+        }
+    }
+
     const seg = new Intl.Segmenter(undefined, {granularity: "word"});
-    const terms = [...seg.segment(q)]
+    let terms = [];
+    [...seg.segment(q)]
         .filter(term => term.isWordLike)
         .map(term => term.segment)
         .filter(word => word.length > 1)
-        .join(" ");
-    if (terms.length < 2) {
+        .forEach(kw => terms.push(kw));
+    if (terms.length < 1) {
         alert("At least one word in query is required.");
         return;
     }
+
     let cond = {
         not: false,
         gc: {
             logic: 0, // and
-            group: [
-                {
-                    not: false,
-                    sc: {
-                        query: q,
-                        similarityMin: 0.75,
-                    },
-                },
-                {
+            group: [],
+        },
+    };
+
+    const filterKeywords = document.getElementById("mode-simple-filter-keywords").checked;
+    const filterSimilarity = document.getElementById("mode-simple-filter-similarity").checked;
+
+    if (filterKeywords) {
+        const mode = document.getElementById("mode-simple-keywords-mode").selectedOptions[0].value;
+        if (mode === "any") {
+            cond.gc.group.push({
+                not: false,
+                tc: {
+                    key: "",
+                    exact: false,
+                    term: terms.join(" "),
+                }
+            });
+        } else if (mode === "all") {
+            for (const kw of terms) {
+                cond.gc.group.push({
                     not: false,
                     tc: {
                         key: "",
                         exact: false,
-                        term: terms,
-                    },
-                }
-            ],
-        },
-    };
+                        term: kw,
+                    }
+                });
+            }
+        }
+    }
+
+    if (filterSimilarity) {
+        cond.gc.group.push({
+            not: false,
+            sc: {
+                query: q,
+                similarityMin: 0.75,
+            },
+        });
+    }
 
     const langChoice = document.getElementById("mode-simple-lang");
     if (langChoice.selectedOptions.length > 0) {
@@ -1169,6 +1199,11 @@ async function submitSimple(){
     } else {
         alert("At least one source type should be selected.");
         return;
+    }
+
+    // replace the group if there is only 1 condition
+    if (cond.gc.group.length === 1) {
+        cond = cond.gc.group[0];
     }
 
     const headers = getAuthHeaders();
@@ -1235,4 +1270,27 @@ document.getElementById("simple-query-form").onsubmit = function (evt) {
 
 function submitDropdown() {
     document.getElementById("submit-dropdown").classList.toggle("show");
+}
+
+document.getElementById("mode-simple-filter-keywords").addEventListener("click", modeSimpleFilterChange);
+document.getElementById("mode-simple-filter-similarity").addEventListener("click", modeSimpleFilterChange);
+
+function modeSimpleFilterChange(evt) {
+    const filterKeywords = document.getElementById("mode-simple-filter-keywords").checked;
+    const filterSimilarity = document.getElementById("mode-simple-filter-similarity").checked;
+    if (!filterKeywords && !filterSimilarity) {
+        alert("At least one filter type is required");
+        evt.target.checked = !evt.target.checked;
+    } else {
+        const filterKeywordsModeForm = document.getElementById("mode-simple-keywords-mode-form");
+        if (filterKeywords) {
+            filterKeywordsModeForm.style.display = "grid";
+        } else {
+            filterKeywordsModeForm.style.display = "none";
+        }
+    }
+}
+
+function looksLikeURL(str) {
+    return /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/.test(str);
 }

@@ -283,9 +283,9 @@ async function loadStatusRead() {
 }
 
 async function loadStatusFollowers() {
-    document.getElementById("wait-status-followers").style.display = "block";
-    document.getElementById("followers-curr").innerHTML = "";
-    return Metrics.loadStatusPartWithRetry({}, "followers")
+    document.getElementById("wait-status-subs").style.display = "block";
+    document.getElementById("subscriptions-curr").innerHTML = "";
+    return Metrics.loadStatusPartWithRetry({}, "subscriptions")
         .then(resp => {
             if (!resp.ok) {
                 resp.text().then(errMsg => console.error(errMsg));
@@ -295,35 +295,35 @@ async function loadStatusFollowers() {
         })
         .then(data => {
             if (data) {
-                const followersCurrent = data.current;
-                if (followersCurrent > 0) {
-                    document.getElementById("followers-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(followersCurrent)}</span>`;
+                const subsCurrent = data.current;
+                if (subsCurrent > 0) {
+                    document.getElementById("subscriptions-curr").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(subsCurrent)}</span>`;
                 } else {
-                    document.getElementById("followers-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followersCurrent)}</span>`;
+                    document.getElementById("subscriptions-curr").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(subsCurrent)}</span>`;
                 }
-                const followers1hChange = followersCurrent - data.past.hour;
+                const followers1hChange = subsCurrent - data.past.hour;
                 if (followers1hChange < -5) {
-                    document.getElementById("followers-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1hChange)}</span>`;
+                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1hChange)}</span>`;
                 } else if (followers1hChange > 0) {
-                    document.getElementById("followers-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1hChange)}</span>`;
+                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1hChange)}</span>`;
                 } else {
-                    document.getElementById("followers-1h").innerHTML = `${formatNumberShort(followers1hChange)}</span>`;
+                    document.getElementById("subscriptions-1h").innerHTML = `${formatNumberShort(followers1hChange)}</span>`;
                 }
-                const followers1dChange = followersCurrent - data.past.day;
+                const followers1dChange = subsCurrent - data.past.day;
                 if (followers1dChange < -10) {
-                    document.getElementById("followers-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1dChange)}</span>`;
+                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1dChange)}</span>`;
                 } else if (followers1dChange > 0) {
-                    document.getElementById("followers-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1dChange)}</span>`;
+                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1dChange)}</span>`;
                 } else {
-                    document.getElementById("followers-1d").innerHTML = `${formatNumberShort(followers1dChange)}</span>`;
+                    document.getElementById("subscriptions-1d").innerHTML = `${formatNumberShort(followers1dChange)}</span>`;
                 }
-                const followers30dChange = followersCurrent - data.past.month;
+                const followers30dChange = subsCurrent - data.past.month;
                 if (followers30dChange < -20) {
-                    document.getElementById("followers-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers30dChange)}</span>`;
+                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers30dChange)}</span>`;
                 } else if (followers30dChange > 0) {
-                    document.getElementById("followers-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers30dChange)}</span>`;
+                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers30dChange)}</span>`;
                 } else {
-                    document.getElementById("followers-30d").innerHTML = `${formatNumberShort(followers30dChange)}</span>`;
+                    document.getElementById("subscriptions-30d").innerHTML = `${formatNumberShort(followers30dChange)}</span>`;
                 }
             }
         })
@@ -332,7 +332,7 @@ async function loadStatusFollowers() {
             return "";
         })
         .finally(() => {
-            document.getElementById("wait-status-followers").style.display = "none";
+            document.getElementById("wait-status-subs").style.display = "none";
         });
 }
 

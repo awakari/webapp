@@ -141,7 +141,7 @@
 
         <div id="mode-simple" class="max-w-[480px] w-full hidden">
 
-            <div id="mode-simple-step-0" class="flex flex-col space-y-8 justify-center h-full w-full">
+            <div id="mode-simple-step-0" class="flex flex-col space-y-4 justify-center h-full w-full">
                 <div class="w-full px-4">
                     <form id="simple-query-form">
                         <input type="text"
@@ -153,6 +153,33 @@
                                style="height: 28px"
                                placeholder="Get relevant updates about..."/>
                     </form>
+                </div>
+                <div class="justify-center grid grid-cols-2 w-80 mx-auto space-x-8">
+                    <label class="flex justify-end h-6 space-x-1 align-middle">
+                        <input type="checkbox" class="h-5 w-5" checked="checked" id="mode-simple-filter-keywords">
+                        <span class="mt-0.5 tooltip">Keywords
+                            <span class="tooltiptext" style="width: 160px; margin-left: -40px">
+                                Filter by keywords
+                            </span>
+                        </span>
+                    </label>
+                    <label class="flex justify-start h-6 space-x-1 align-middle">
+                        <input type="checkbox" class="h-5 w-5" id="mode-simple-filter-similarity">
+                        <span class="mt-0.5 tooltip">Similarity
+                            <span class="tooltiptext" style="width: 160px; margin-left: -60px">
+                                Semantic text similarity filter
+                            </span>
+                        </span>
+                    </label>
+                </div>
+                <div class="justify-center grid grid-cols-3 w-80 mx-auto" id="mode-simple-keywords-mode-form">
+                    <span class="text-right justify-end mt-1 px-2">Keywords</span>
+                    <div class="w-48 col-span-2 px-1">
+                        <select name="mode-simple-lang" id="mode-simple-keywords-mode" class="button multiselect">
+                            <option value="any" selected="selected">Match Any</option>
+                            <option value="all" selected="selected">Match All</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="justify-center grid grid-cols-3 w-80 mx-auto">
                     <span class="text-right justify-end mt-1 px-2">Language</span>
@@ -166,17 +193,34 @@
                     <span class="text-right justify-end mt-5 px-2">Sources</span>
                     <div class="w-48 mt-4 col-span-2 px-1">
                         <select name="mode-simple-source-types" id="mode-simple-source-types" class="button multiselect" multiple="multiple">
-                            <option value="com_awakari_feeds_v1" selected="selected">News Feeds</option>
+                            <option value="com_awakari_feeds_v1"
+                                    selected="selected">
+                                News Feeds</option>
                             <optgroup label="Social Channels">
-                                <option value="com_awakari_activitypub_v1 com_awakari_mastodon_v1" class="ml-4">Fediverse</option>
-                                <option value="com_awakari_source_telegram_v1_0 com_awakari_source_telegram_v1_0" class="ml-4">Telegram</option>
+                                <option value="com_awakari_activitypub_v1 com_awakari_mastodon_v1"
+                                        selected="selected"
+                                        class="ml-4">
+                                    Fediverse</option>
+                                <option value="com_awakari_source_telegram_v1_0 com_awakari_source_telegram_v1_0"
+                                        selected="selected"
+                                        class="ml-4">
+                                    Telegram</option>
                             </optgroup>
                             <optgroup label="Realtime Streams">
-                                <option value="com_awakari_websocket_v1" class="ml-4">WebSocket</option>
-                                <option value="com_awakari_sse_v1" class="ml-4">SSE</option>
+                                <option value="com_awakari_websocket_v1"
+                                        class="ml-4"
+                                        selected="selected">WebSocket</option>
+                                <option value="com_awakari_sse_v1"
+                                        selected="selected"
+                                        class="ml-4">
+                                    SSE</option>
                             </optgroup>
-                            <option value="com_awakari_email_v1">Email Digests</option>
-                            <option value="com_awakari_source_sites_v1">Site Updates</option>
+                            <option value="com_awakari_email_v1"
+                                    selected="selected">
+                                Email Digests</option>
+                            <option value="com_awakari_source_sites_v1"
+                                    selected="selected">
+                                Site Updates</option>
                         </select>
                     </div>
                     <script>
@@ -185,7 +229,7 @@
                         })
                     </script>
                 </div>
-                <div class="flex justify-center w-full mt-6">
+                <div class="flex justify-center w-full pt-4">
                     <div class="absolute" id="wait-simple" style="display: none">
                         <img src="wait.gif"/>
                     </div>
@@ -253,8 +297,8 @@
 
             <div>
                 <div class="flex">
-                    <div class="flex items-center align-middle">
-                        <span class="tooltip">
+                    <div class="flex items-center align-middle space-x-2">
+                        <span class="tooltip" style="padding-top: 1px">
                             Filters:
                             <span class="tooltiptext" style="width: 320px">
                                 <p>Filters are necessary to capture new events.</p>
@@ -262,6 +306,22 @@
                                 <p>Note that empty filters are discarded.</p>
                             </span>
                         </span>
+                        <label class="space-x-1 hidden flex" id="multiple-filters-logic">
+                            <span class="tooltip" style="padding-top: 2px">
+                                Match
+                                <span class="tooltiptext" style="width: 280px">
+                                    <p>Defines how to match multiple filters.</p>
+                                    <p>Choose "All" for the "and" logic.</p>
+                                    <p>Choose "Any" for the "or" logic.</p>
+                                </span>
+                            </span>
+                            <select name="logic" id="logic-select" class="button">
+                                <!-- note value should be the same as the index -->
+                                <option value="0" selected="selected">All</option>
+                                <option value="1">Any</option>
+                                <option value="2">One</option>
+                            </select>
+                        </label>
                     </div>
                     <div class="grow"></div>
                     <div id="add-condition">
@@ -300,24 +360,6 @@
                 <div class="space-y-2 pt-2" id="conditions">
                 </div>
             </div>
-
-            <div id="multiple-filters-logic" class="flex justify-center hidden">
-                <label class="space-x-1">
-                    <span class="tooltip">
-                        Match
-                        <span class="tooltiptext" style="width: 200px">
-                            <p>Defines how to match multiple filters.</p>
-                        </span>
-                    </span>
-                    <select name="logic" id="logic-select" class="button">
-                        <!-- note value should be the same as the index -->
-                        <option value="0" selected="selected">All</option>
-                        <option value="1">Any</option>
-                        <option value="2">One</option>
-                    </select>
-                </label>
-            </div>
-
 
             <div>
                 <button type="button" class="collapsible mt-2">Additional Properties</button>

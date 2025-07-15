@@ -1073,10 +1073,8 @@ async function submitSimple(){
         alert("Query is too short");
         return;
     }
-    if (looksLikeURL(q)) {
-        if (!prompt("Query looks like URL. Expected keywords or text sample. Are you sure you want to proceed?")) {
-            return;
-        }
+    if (looksLikeURL(q) && !confirm("Query looks like URL. Expected keywords or text sample. Are you sure you want to proceed?")) {
+        return;
     }
 
     const seg = new Intl.Segmenter(undefined, {granularity: "word"});

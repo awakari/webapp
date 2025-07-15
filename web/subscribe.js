@@ -27,7 +27,7 @@ async function loadSubscribeForm() {
                         window.open(`https://bsky.app/profile/did:plc:i53e6y3liw2oaw4s6e6odw5m/feed/${id}`, "_blank");
                     };
                     document.getElementById("button-subscribe-fediverse").style.display = "flex";
-                    document.getElementById("button-subscribe-bluesky").onclick = () => {
+                    document.getElementById("button-subscribe-fediverse").onclick = () => {
                         const addrFediverse = `@${id}@activitypub.awakari.com`;
                         navigator
                             .clipboard

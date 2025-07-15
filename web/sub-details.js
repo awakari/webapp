@@ -244,8 +244,9 @@ function loadInterestDetailsById(id) {
     document.getElementById("id").value = id;
     document.getElementById("sub-discovered-sources").style.display = "block";
     document.getElementById("area-follow").style.display = "flex";
-    document.getElementById("follow-feed").href = `https://reader.awakari.com/v1/sub/rss/${id}`;
-    document.getElementById("follow-telegram").href = `https://t.me/AwakariBot?start=${id}`;
+    document.getElementById("button-follow").onclick = () => {
+        window.location.assign(`subscribe.html?id=${id}`);
+    };
     document.getElementById("wait").style.display = "block";
     const headers = getAuthHeaders();
     Interests
@@ -275,18 +276,6 @@ function loadInterestDetailsById(id) {
                 }
                 if (data.hasOwnProperty("public")) {
                     document.getElementById("public").checked = data.public;
-                    document.getElementById("follow-bluesky").style.display = "flex";
-                    document.getElementById("follow-bluesky").href = `https://bsky.app/profile/did:plc:i53e6y3liw2oaw4s6e6odw5m/feed/${id}`;
-                    document.getElementById("follow-fediverse").style.display = "flex";
-                    document.getElementById("follow-fediverse").onclick = () => {
-                        const addrFediverse = `@${id}@activitypub.awakari.com`;
-                        navigator
-                            .clipboard
-                            .writeText(addrFediverse)
-                            .then(() => {
-                                alert(`Copied the address to the clipboard:\n\n${addrFediverse}\n\nOpen your Fediverse client, paste to a search field and follow.`);
-                            });
-                    }
                     if (navigator.share && navigator.canShare) {
                         document.getElementById("area-button-share").style.display = "block";
                         document.getElementById("button-share").onclick = () => {
@@ -296,9 +285,6 @@ function loadInterestDetailsById(id) {
                             });
                         };
                     }
-                } else {
-                    document.getElementById("follow-bluesky").style.display = "none";
-                    document.getElementById("follow-fediverse").style.display = "none";
                 }
                 if (data.hasOwnProperty("followers")) {
                     document.getElementById("followers").value = data.followers;
@@ -946,7 +932,7 @@ async function createInterest(discoverSources) {
             .then(data => {
                 if (data != null) {
                     alert("Interest created");
-                    window.location.assign(`sub-details.html?id=${data.id}`);
+                    window.location.assign(`subscribe.html?id=${data.id}`);
                 }
             })
             .finally(() => {
@@ -1213,19 +1199,12 @@ async function submitSimple(){
         .then(data => {
             if (data != null) {
                 alert("Interest created");
-                window.location.assign(`sub-details.html?id=${data.id}`);
+                window.location.assign(`subscribe.html?id=${data.id}`);
             }
         })
         .finally(() => {
             document.getElementById("wait-simple").style.display = "none";
         });
-}
-
-
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function followDropdown() {
-    document.getElementById("follow-dropdown").classList.toggle("show");
 }
 
 /* When the user clicks on the button,

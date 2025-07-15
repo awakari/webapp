@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-color.svg">
+    <link rel="icon" type="image/svg" sizes="32x32" href="logo-color.svg">
+    <link rel="icon" type="image/svg" sizes="16x16" href="logo-color.svg">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="logo-color.svg" color="#0ed3cf">
+
+    <meta name="msapplication-TileColor" content="#6366f1">
+    <meta name="theme-color" content="#6366f1">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://awakari.com/login.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Awakari App">
+    <meta property="og:description" content="Follow your interests from unlimited sources">
+    <meta property="og:image" content="app-screenshot.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="awakari.com">
+    <meta property="twitter:url" content="https://awakari.com/login.html">
+    <meta name="twitter:title" content="Awakari App">
+    <meta name="twitter:description" content="Follow your interests from unlimited sources">
+    <meta name="twitter:image" content="app-screenshot.png">
+
+    <link rel="canonical" href="https://awakari.com/sub.html" itemprop="URL">
+
+    <title>Awakari</title>
+
+    <link href="tailwind.output.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <script src="auth.js"></script>
+    <script src="api/response.js"></script>
+    <script src="xksuid.js"></script>
+    <script src="api/events.js"></script>
+    <script src="requests.js"></script>
+    <script src="api/interests.js"></script>
+    <script src="api/subscriptions.js"></script>
+    <script src="subscribe.js"></script>
+    <script>
+        navigator.serviceWorker.register("sw.js");
+    </script>
+    <script src="donation.js"></script>
+
+    <script src="alpinejs-3.13.0.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body class="bg-white dark:bg-gray-900 h-screen" onload="loadSubscribeForm()">
+<header>
+    <nav x-data="{ isOpen: false }" class="p-1 sm:p-4 items-center justify-center mx-auto">
+
+        <div class="text-xl flex text-slate-700 dark:text-slate-200 max-w-[400px] mx-auto">
+            <div class="flex space-x-1 justify-center items-center">
+                <a href="index.html" class="flex justify-center items-center">
+                    <img src="logo-color.svg" alt="home" width="24" height="24"/>
+                </a>
+                <span>Subscribe</span>
+            </div>
+            <div class="grow"></div>
+            <div class="flex items-center justify-center">
+                <!-- Mobile menu button -->
+                <button x-cloak @click="isOpen = !isOpen" type="button"
+                        class="menu" aria-label="toggle menu">
+                    <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/>
+                    </svg>
+
+                    <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+        <div id="menu" x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+             class="absolute inset-x-0 z-30 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900">
+            <div id="menu-default"
+                 class="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0 text-right md:text-center md:justify-center">
+                <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+                   href="sub.html">Interests</a>
+                <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+                   href="subscriptions.html" style="display: none">
+                    Subscriptions
+                    <script>
+                        const userId = localStorage.getItem(keyUserId);
+                        if (userId && userId.startsWith("tg://user?id=")) {
+                            document.currentScript.parentElement.style.display = "block";
+                        }
+                    </script>
+                </a>
+                <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+                   href="pub.html">Publishing</a>
+                <a class="flex items-center justify-end text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6"
+                   href="user.html">
+                    <span id="menu-user-text">(none)</span>&nbsp;
+                    <script src="user.js"></script>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+                <a class="text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 lg:mx-6 flex items-center justify-end"
+                   onclick="submitFeedback()">
+                    Leave Feedback&nbsp;
+                    <svg width="24" height="24" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <path d="M415.808 755.2L512 851.392 608.192 755.2H883.2V204.8H704V128h256v704h-320l-128 128-128-128H64V128h256v76.8H140.8v550.4h275.008zM473.6 64h76.8v448H473.6V64z m0 512h76.8v76.8H473.6V576z" fill="currentColor"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+    </nav>
+</header>
+<main class="py-1 mx-2 text-slate-700 dark:text-gray-300 h-5/6">
+    <div class="flex flex-col justify-center h-full w-full grow align-middle space-y-2">
+        <div class="flex grow"></div>
+        <div class="flex justify-center text-lg">Subscribe to the Interest</div>
+        <div class="flex justify-center w-80 mx-auto"><span class="w-16 text-right">ID:&nbsp;</span><span class="w-64" id="subscribe-interest-id"></span></div>
+        <div class="flex justify-center w-80 mx-auto"><span class="w-16 text-right">Name:&nbsp;</span><span class="w-64" id="subscribe-interest-name"></span></div>
+        <div class="grid grid-cols-2 justify-center w-64 mx-auto">
+            <button type="button"
+                    id="button-subscribe-telegram"
+                    class="flex my-4 mx-auto justify-center w-[100px] align-middle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12.3583 9.38244C11.3857 9.787 9.44177 10.6243 6.52657 11.8944C6.05318 12.0827 5.8052 12.2669 5.78263 12.4469C5.74448 12.7513 6.12559 12.8711 6.64455 13.0343C6.71515 13.0565 6.78829 13.0795 6.86327 13.1038C7.37385 13.2698 8.06068 13.464 8.41773 13.4717C8.74161 13.4787 9.1031 13.3452 9.50219 13.0711C12.226 11.2325 13.632 10.3032 13.7202 10.2831C13.7825 10.269 13.8688 10.2512 13.9273 10.3032C13.9858 10.3552 13.98 10.4536 13.9738 10.48C13.9361 10.641 12.4401 12.0318 11.6659 12.7515C11.4246 12.9759 11.2534 13.135 11.2184 13.1714C11.14 13.2528 11.0601 13.3298 10.9833 13.4038C10.509 13.8611 10.1532 14.204 11.003 14.764C11.4114 15.0331 11.7381 15.2556 12.0641 15.4776C12.4201 15.7201 12.7752 15.9619 13.2347 16.2631C13.3517 16.3398 13.4635 16.4195 13.5724 16.4971C13.9867 16.7925 14.3589 17.0579 14.8188 17.0155C15.086 16.991 15.362 16.7397 15.5022 15.9903C15.8335 14.2193 16.4847 10.382 16.6352 8.80081C16.6484 8.66228 16.6318 8.48498 16.6185 8.40715C16.6051 8.32932 16.5773 8.21842 16.4761 8.13633C16.3563 8.03911 16.1714 8.01861 16.0886 8.02C15.7125 8.0267 15.1354 8.22735 12.3583 9.38244Z" fill="currentColor"></path> </g></svg>
+                <span class="pt-1">&nbsp;Telegram</span>
+            </button>
+            <button type="button"
+                    id="button-subscribe-feed"
+                    class="flex my-4 mx-auto justify-center w-[100px] align-middle">
+                <svg fill="currentColor" width="20" height="20" viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.417 9.579A7.917 7.917 0 1 1 8.5 1.662a7.917 7.917 0 0 1 7.917 7.917zM6.22 11.842a1.041 1.041 0 1 0 0 1.472 1.04 1.04 0 0 0 0-1.472zm7.137.985a8.109 8.109 0 0 0-8.115-8.115.792.792 0 0 0 0 1.583 6.525 6.525 0 0 1 6.533 6.533.791.791 0 1 0 1.582-.001zm-3.368 0A4.747 4.747 0 0 0 5.243 8.08a.792.792 0 0 0 0 1.583 3.17 3.17 0 0 1 3.165 3.165.79.79 0 1 0 1.582-.001z"></path></g></svg>
+                <span class="pt-1">&nbsp;Feed (RSS)</span>
+            </button>
+            <button type="button"
+                    id="button-subscribe-bluesky"
+                    class="flex my-4 mx-auto justify-center w-[100px] align-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3.268 64 68.414" width="20" height="20"><path fill="currentColor" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"/></svg>
+                <span class="pt-1">&nbsp;Bluesky</span>
+            </button>
+            <button type="button"
+                    id="button-subscribe-fediverse"
+                    class="flex my-4 mx-auto justify-center w-[100px] align-middle">
+                <svg width="20" height="20" viewBox="-10 -5 1034 1034" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" fill="currentColor">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                    <path fill="currentColor" d="M539 176q-32 0 -55 22t-25 55t20.5 58t56 27t58.5 -20.5t27 -56t-20.5 -59t-56.5 -26.5h-5zM452 271l-232 118q20 20 25 48l231 -118q-19 -20 -24 -48zM619 298q-13 25 -38 38l183 184q13 -25 39 -38zM477 320l-135 265l40 40l143 -280q-28 -5 -48 -25zM581 336 q-22 11 -46 10l-8 -1l21 132l56 9zM155 370q-32 0 -55 22.5t-25 55t20.5 58t56.5 27t59 -21t26.5 -56t-21 -58.5t-55.5 -27h-6zM245 438q1 9 1 18q-1 19 -10 35l132 21l26 -50zM470 474l-26 51l311 49q-1 -8 -1 -17q1 -19 10 -36zM842 480q-32 1 -55 23t-24.5 55t21 58 t56 27t58.5 -20.5t27 -56.5t-20.5 -59t-56.5 -27h-6zM236 493q-13 25 -39 38l210 210l51 -25zM196 531q-21 11 -44 10l-9 -1l40 256q21 -10 45 -9l8 1zM560 553l48 311q21 -10 44 -9l10 1l-46 -294zM755 576l-118 60l8 56l135 -68q-20 -20 -25 -48zM781 625l-119 231 q28 5 48 25l119 -231q-28 -5 -48 -25zM306 654l-68 134q28 5 48 25l60 -119zM568 671l-281 143q19 20 24 48l265 -135zM513 771l-51 25l106 107q13 -25 39 -38zM222 795q-32 0 -55.5 22.5t-25 55t21 57.5t56 27t58.5 -20.5t27 -56t-20.5 -58.5t-56.5 -27h-5zM311 863 q2 9 1 18q-1 19 -9 35l256 41q-1 -9 -1 -18q1 -18 10 -35zM646 863q-32 0 -55 22.5t-24.5 55t20.5 58t56 27t59 -21t27 -56t-20.5 -58.5t-56.5 -27h-6z"></path> </g>
+                </svg>
+                <span class="pt-1">&nbsp;Fediverse</span>
+            </button>
+        </div>
+        <div class="flex justify-center pt-4">
+            <button type="button"
+                    id="button-subscribe-skip"
+                    class="border w-[100px] h-6 report static px-2">
+                Skip
+            </button>
+        </div>
+        <div class="flex grow"></div>
+    </div>
+</main>
+
+</body></html>

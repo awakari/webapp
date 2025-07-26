@@ -257,6 +257,25 @@ button[type=button].donate:hover {
     }
 }
 
+button[type=button].grayed {
+    border-color: #64748b;
+    color: #64748b;
+    width: 100px;
+}
+select[name="submit"].grayed {
+    border-color: #64748b;
+    color: #64748b;
+    width: 100px;
+}
+button[type=button].grayed:hover {
+    background-color: #e2e8f0;
+}
+@media (prefers-color-scheme: dark) {
+    button[type=button].grayed:hover {
+        background-color: #334155;
+    }
+}
+
 button[type=button].menu {
     border: none;
     color: unset;

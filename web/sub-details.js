@@ -1,5 +1,5 @@
 let conds = [];
-const countCondsMax = 6;
+const countCondsMax = 7;
 const srcPageLimitPerType = 10;
 
 const templateCondHeader = (label, tooltip, idx, countConds, isNot, isSemantic, key, similarityMin) => `

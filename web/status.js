@@ -305,7 +305,7 @@ async function loadStatusFollowers() {
                 if (followers1hChange < -10) {
                     document.getElementById("subscriptions-1h").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1hChange)}</span>`;
                 } else if (followers1hChange < 0) {
-                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">+${formatNumberShort(followers1hChange)}</span>`;
+                    document.getElementById("subscriptions-1h").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(followers1hChange)}</span>`;
                 } else if (followers1hChange > 0) {
                     document.getElementById("subscriptions-1h").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1hChange)}</span>`;
                 } else {
@@ -315,7 +315,7 @@ async function loadStatusFollowers() {
                 if (followers1dChange < -20) {
                     document.getElementById("subscriptions-1d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers1dChange)}</span>`;
                 } else if (followers1dChange < 0) {
-                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">+${formatNumberShort(followers1dChange)}</span>`;
+                    document.getElementById("subscriptions-1d").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(followers1dChange)}</span>`;
                 } else if (followers1dChange > 0) {
                     document.getElementById("subscriptions-1d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers1dChange)}</span>`;
                 } else {
@@ -325,7 +325,7 @@ async function loadStatusFollowers() {
                 if (followers30dChange < -50) {
                     document.getElementById("subscriptions-30d").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(followers30dChange)}</span>`;
                 } else if (followers30dChange < 0) {
-                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">+${formatNumberShort(followers30dChange)}</span>`;
+                    document.getElementById("subscriptions-30d").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(followers30dChange)}</span>`;
                 } else if (followers30dChange > 0) {
                     document.getElementById("subscriptions-30d").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">+${formatNumberShort(followers30dChange)}</span>`;
                 } else {
@@ -376,7 +376,7 @@ async function loadStatusDuration() {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ095)}</span> s`;
                 } else if (durationQ095 < 900) {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(durationQ095)}</span> s`;
-                } {
+                } else {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ095)}</span> s`;
                 }
                 const durationQ099 = data.q0_99;

@@ -813,10 +813,6 @@ document
     .addEventListener("click", (_) => { addConditionNumber(false, "", 3, 0); displayConditions(); });
 
 document
-    .getElementById("button-add-cond-example-exact-text-fragment")
-    .addEventListener("click", (_) => { addConditionText(true, "", "'John Doe'", false); displayConditions(); });
-
-document
     .getElementById("button-add-cond-example-exclude-wiki")
     .addEventListener("click", (_) => { addConditionText(true, "source", "https://stream.wikimedia.org/v2/stream/recentchange", true); displayConditions(); });
 

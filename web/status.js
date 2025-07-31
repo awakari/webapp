@@ -362,13 +362,13 @@ async function loadStatusDuration() {
                     document.getElementById("core-duration-q0_75").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ075)}</span> s`;
                 }
                 const durationQ095 = data.q0_95;
-                if (durationQ095 < 900) {
+                if (durationQ095 < 600) {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ095)}</span> s`;
                 } else {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ095)}</span> s`;
                 }
                 const durationQ099 = data.q0_99;
-                if (durationQ099 < 3600) {
+                if (durationQ099 < 900) {
                     document.getElementById("core-duration-q0_99").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ099)}</span> s`;
                 } else {
                     document.getElementById("core-duration-q0_99").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ099)}</span> s`;

@@ -1,6 +1,6 @@
 # webapp
 
-Reference Web Applicatin UI
+Reference Web Application UI
 
 ## 1. Usage
 

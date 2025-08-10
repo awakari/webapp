@@ -1,5 +1,5 @@
 const Subscriptions = {
-    urlBase: "https://reader.awakari.com/v2",
+    urlBase: "https://subscriptions.awakari.com/v2",
 }
 
 Subscriptions.fetchOwn = function (limit, headers) {

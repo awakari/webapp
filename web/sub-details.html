@@ -30,11 +30,16 @@
         const urlParams = new URLSearchParams(window.location.search);
         const interestId = urlParams.get("id");
         if (interestId) {
-            const link = document.createElement('link');
-            link.rel = "alternate";
-            link.type = "application/rss+xml";
-            link.href = `https://reader.awakari.com/v1/sub/rss/${interestId}`;
-            document.head.appendChild(link);
+            const linkRss = document.createElement('link');
+            linkRss.rel = "alternate";
+            linkRss.type = "application/rss+xml";
+            linkRss.href = `https://reader.awakari.com/v1/sub/rss/${interestId}`;
+            document.head.appendChild(linkRss);
+            const linkHtml = document.createElement('link');
+            linkHtml.rel = "alternate";
+            linkHtml.type = "text/html";
+            linkHtml.href = `https://reader.awakari.com/v1/sub/html/${interestId}`;
+            document.head.appendChild(linkHtml);
         }
     </script>
 

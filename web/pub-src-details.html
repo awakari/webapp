@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="spectre-icons.min.css">
     <link href="tailwind.output.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+        const canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        canonical.setAttribute('href', window.location.href);
+        document.head.appendChild(canonical);
+    </script>
 
     <script src="api/response.js"></script>
     <script src="auth.js"></script>

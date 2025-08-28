@@ -94,7 +94,6 @@ async function loadSource() {
                 switch (data.usage.type) {
                     case 1:
                         document.getElementById("owner").innerText = "Dedicated";
-                        document.getElementById("total").innerText = data.usage.total;
                         document.getElementById("count").innerText = `${data.usage.countHourly}/${data.usage.countDaily}`;
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
                             requestIncreasePublishingLimit(data.addr);
@@ -102,7 +101,6 @@ async function loadSource() {
                         break;
                     case 2:
                         document.getElementById("owner").innerText = "User";
-                        document.getElementById("total").innerText = `${data.usage.total} (all user's publications)`;
                         document.getElementById("count").innerText = `${data.usage.countHourly}/${data.usage.countDaily} (all user's publications)`;
                         document.getElementById("pub-src-lim-incr-btn").onclick = () => {
                             requestIncreasePublishingLimit(data.userId);

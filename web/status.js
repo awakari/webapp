@@ -356,33 +356,33 @@ async function loadStatusDuration() {
         .then(data => {
             if (data) {
                 const durationQ05 = data.q0_5 / 60;
-                if (durationQ05 < 300) {
+                if (durationQ05 < 5) {
                     document.getElementById("core-duration-q0_5").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ05)}</span> m`;
-                } else if (durationQ05 < 600) {
+                } else if (durationQ05 < 15) {
                     document.getElementById("core-duration-q0_5").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(durationQ05)}</span> m`;
                 } else {
                     document.getElementById("core-duration-q0_5").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ05)}</span> m`;
                 }
-                const durationQ075 = data.q0_75;
-                if (durationQ075 < 600) {
+                const durationQ075 = data.q0_75 / 60;
+                if (durationQ075 < 10) {
                     document.getElementById("core-duration-q0_75").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ075)}</span> m`;
-                } else if (durationQ075 < 900) {
+                } else if (durationQ075 < 20) {
                     document.getElementById("core-duration-q0_75").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(durationQ075)}</span> m`;
                 } else    {
                     document.getElementById("core-duration-q0_75").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ075)}</span> m`;
                 }
-                const durationQ095 = data.q0_95;
-                if (durationQ095 < 900) {
+                const durationQ095 = data.q0_95 / 60;
+                if (durationQ095 < 15) {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ095)}</span> m`;
-                } else if (durationQ095 < 1200) {
+                } else if (durationQ095 < 30) {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(durationQ095)}</span> m`;
                 } else {
                     document.getElementById("core-duration-q0_95").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ095)}</span> m`;
                 }
-                const durationQ099 = data.q0_99;
-                if (durationQ099 < 1200) {
+                const durationQ099 = data.q0_99 / 60;
+                if (durationQ099 < 30) {
                     document.getElementById("core-duration-q0_99").innerHTML = `<span class="text-emerald-600 dark:text-emerald-400">${formatNumberShort(durationQ099)}</span> m`;
-                } else if (durationQ099 < 1800) {
+                } else if (durationQ099 < 60) {
                     document.getElementById("core-duration-q0_99").innerHTML = `<span class="text-yellow-600 dark:text-yellow-400">${formatNumberShort(durationQ099)}</span> m`;
                 } else {
                     document.getElementById("core-duration-q0_99").innerHTML = `<span class="text-red-600 dark:text-red-400">${formatNumberShort(durationQ099)}</span> m`;

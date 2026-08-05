@@ -313,25 +313,25 @@ function loadInterestDetailsById(id) {
         });
 
     const srcListElement = document.getElementById("sub-discovered-sources-list");
-    Sources
-        .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
-        .then(resp => {
-            if (!resp.ok) {
-                handleResponseStatus("List ActivityPub sources", resp.status);
-                return null;
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data) {
-                for (const addr of data) {
-                    srcListElement.innerHTML += templateDiscoveredSrc(addr, "apub");
-                }
-            }
-        })
-        .catch(e => {
-           console.log(e);
-        });
+    // Sources
+    //     .fetchListPageResponse("apub", false, "ASC", srcPageLimitPerType, "", headers, id)
+    //     .then(resp => {
+    //         if (!resp.ok) {
+    //             handleResponseStatus("List ActivityPub sources", resp.status);
+    //             return null;
+    //         }
+    //         return resp.json();
+    //     })
+    //     .then(data => {
+    //         if (data) {
+    //             for (const addr of data) {
+    //                 srcListElement.innerHTML += templateDiscoveredSrc(addr, "apub");
+    //             }
+    //         }
+    //     })
+    //     .catch(e => {
+    //        console.log(e);
+    //     });
     Sources
         .fetchListPageResponse("feed", false, "ASC", srcPageLimitPerType, "", headers, id)
         .then(resp => {
